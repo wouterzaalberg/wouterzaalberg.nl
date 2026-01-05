@@ -1,39 +1,152 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="nl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wouter Zaalberg</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-        }
-        .container {
-            text-align: center;
-            padding: 2rem;
-        }
-        h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-        }
-        p {
-            font-size: 1.2rem;
-            opacity: 0.9;
-        }
-    </style>
+    <meta name="description" content="Wouter Zaalberg - Fotograaf die Nederland fotografeert in grote en kleine verhalen">
+    <title>Wouter Zaalberg - Fotograaf</title>
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Coming Soon</h1>
-        <p>This site is under construction.</p>
-    </div>
+    <!-- Hero Section: Full Screen Image with Menu Overlay -->
+    <section class="hero-section">
+        <div class="hero-image">
+            <img id="heroImage" src="images/534A4588-bewerkt.jpg" alt="Wouter Zaalberg">
+
+            <!-- All content overlay on right side -->
+            <div class="hero-overlay-content">
+                <!-- Title -->
+                <h1 class="hero-name">Wouter Zaalberg</h1>
+                <p class="hero-tagline">Ik fotografeer Nederland</p>
+                <p class="hero-tagline-italic">in grote en kleine verhalen</p>
+
+                <!-- Grote Series Menu -->
+                <nav class="menu-section">
+                    <h2 class="menu-heading">Grote series</h2>
+                    <ul class="menu-list">
+                        <li><a href="#wat-kost-een-stad" data-image="images/534A4588-bewerkt.jpg" data-color="#000000">Wat kost een stad</a></li>
+                        <li><a href="#de-exoten" class="highlight" data-image="images/534A9199.jpg" data-color="#cd9854">De Exoten</a></li>
+                        <li><a href="#mijn-tatoeages" data-image="images/mijn tatoeages.jpg" data-color="#000000">Mijn Tatoeages</a></li>
+                        <li><a href="#a-better-port" data-image="images/a better port.jpg" data-color="#2c5f7d">A Better Port</a></li>
+                        <li><a href="#in-blauw-licht" data-image="images/In blauw licht.jpg" data-color="#4a90e2">In Blauw Licht</a></li>
+                        <li><a href="#toen-de-mijnen-verdwenen" data-image="images/Toen de Mijnen verdwenen.jpg" data-color="#ff4500">Toen de Mijnen verdwenen</a></li>
+                    </ul>
+                </nav>
+
+                <!-- Kleine Series Menu -->
+                <nav class="menu-section">
+                    <h2 class="menu-heading">Kleine series</h2>
+                    <ul class="menu-list">
+                        <li><a href="#de-buik">De buik van de stadzz</a></li>
+                        <li><a href="#noordzeekanaal">Het noordzeekanaal gebied</a></li>
+                        <li><a href="#onmisbaren">De Onmisbaren</a></li>
+                    </ul>
+                </nav>
+
+                <!-- Werk in opdracht -->
+                <nav class="menu-section">
+                    <h2 class="menu-heading"><a href="#opdracht">Werk in opdracht</a></h2>
+                </nav>
+
+                <!-- Contact -->
+                <nav class="menu-section">
+                    <h2 class="menu-heading"><a href="#contact">Contact</a></h2>
+                </nav>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section: Text Left, Image Right -->
+    <section class="about-section">
+        <div class="about-text">
+            <h2>Dit land is mijn werkterrein</h2>
+            <p>Hij werkt graag aan grotere projecten die de kijker meeneemt naar een wereld die ze niet kennen. Naast de lange termijn projecten, zoals Toen de Mijnen verdwenen, In blauw licht en De exoten (ergens klaar in 2024) werkt hij in opdracht voor een diverse groep opdrachtgevers, van FNV tot DeGoedeZaak, van woningcorporaties tot de PvdA.</p>
+            <p>Wouter studeerde geschiedenis en werkte eerder in de politiek. Hij woont samen en is vader van Otto (2019) en Jonathan (2021).</p>
+            <p>Momenteel werkt hij aan een serie over invasieve exoten, maakt hij voor het Stadsarchief Amsterdam de fotodocumentaire-opdracht over de Amsterdamse haven en vanaf februari 2024 werkt hij aan een serie over mensen met een tattoo van Limburgse mijnbouw</p>
+        </div>
+        <div class="about-image">
+            <img src="images/534A9199.jpg" alt="Dit land is mijn werkterrein">
+        </div>
+    </section>
+
+    <!-- Work Section: Text Left, Logos Right -->
+    <section class="work-section">
+        <div class="work-text">
+            <h2>Werk in opdracht</h2>
+            <p>Hij werkt graag aan grotere projecten die de kijker meeneemt naar een wereld die ze niet kennen. Naast de lange termijn projecten werkt hij in opdracht voor een diverse groep opdrachtgevers.</p>
+        </div>
+        <div class="work-logos">
+            <div class="logo-grid">
+                <div class="logo-item"><img src="images/send.png" alt="Client logo"></div>
+                <div class="logo-item"><img src="images/nzkg.png" alt="NZKG"></div>
+                <div class="logo-item"><img src="images/fnv.png" alt="FNV"></div>
+                <div class="logo-item"><img src="images/cordaan.png" alt="Cordaan"></div>
+                <div class="logo-item"><img src="images/welwonen.png" alt="Welwonen"></div>
+                <div class="logo-item"><img src="images/politie.png" alt="Politie"></div>
+                <div class="logo-item"><img src="images/glpvda.png" alt="PvdA"></div>
+                <div class="logo-item"><img src="images/pggm.png" alt="PGGM"></div>
+                <div class="logo-item"><img src="images/foto_11.jpg" alt="Client"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section: Dark Background -->
+    <section class="contact-section">
+        <div class="contact-content">
+            <h2>Contact</h2>
+            <p>Je kan mij bereiken op</p>
+            <p class="phone">06 45 788 180</p>
+            <p>of mailen naar</p>
+            <p class="email">wouterzaalberg@gmail.com</p>
+        </div>
+    </section>
+
+    <script>
+        // Hero image hover functionaliteit met smooth transitie en kleurverandering
+        const heroImage = document.getElementById('heroImage');
+        const menuLinks = document.querySelectorAll('.menu-list a[data-image]');
+        const heroName = document.querySelector('.hero-name');
+        const heroTagline = document.querySelector('.hero-tagline');
+        const heroTaglineItalic = document.querySelector('.hero-tagline-italic');
+        const menuHeadings = document.querySelectorAll('.menu-heading');
+        const allMenuLinks = document.querySelectorAll('.menu-list a');
+
+        menuLinks.forEach(link => {
+            link.addEventListener('mouseenter', function() {
+                const newImage = this.getAttribute('data-image');
+                const newColor = this.getAttribute('data-color');
+
+                if (newImage && heroImage.src !== newImage) {
+                    // Fade out image
+                    heroImage.style.opacity = '0';
+
+                    // Wacht op fade out, verander dan de image
+                    setTimeout(() => {
+                        heroImage.src = newImage;
+                        // Fade in
+                        heroImage.style.opacity = '1';
+                    }, 500);
+                }
+
+                // Verander tekstkleuren
+                if (newColor) {
+                    heroName.style.color = newColor;
+                    heroTagline.style.color = newColor;
+                    heroTaglineItalic.style.color = newColor;
+
+                    // Verander ook menu kleuren
+                    menuHeadings.forEach(heading => {
+                        heading.style.color = newColor;
+                    });
+
+                    allMenuLinks.forEach(menuLink => {
+                        if (!menuLink.classList.contains('highlight')) {
+                            menuLink.style.color = newColor;
+                        }
+                    });
+                }
+            });
+        });
+    </script>
 </body>
 </html>
