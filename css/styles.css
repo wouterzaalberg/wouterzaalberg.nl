@@ -713,10 +713,10 @@ img {
 .work-info-btn {
     position: absolute;
     bottom: 2rem;
-    left: 2rem;
+    left: 5rem;
     width: 32px;
     height: 32px;
-    background: rgba(255, 255, 255, 0.9);
+    background: rgba(180, 180, 180, 0.85);
     border: none;
     border-radius: 50%;
     cursor: pointer;
@@ -745,7 +745,7 @@ img {
 .work-info-caption {
     position: absolute;
     bottom: 2rem;
-    left: calc(2rem + 50px);
+    left: calc(5rem + 50px);
     background: rgba(30, 40, 50, 0.85);
     padding: 1rem 1.5rem;
     max-width: 400px;
