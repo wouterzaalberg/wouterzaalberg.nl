@@ -91,7 +91,6 @@
                 <video class="grid-video" muted loop playsinline></video>
                 <video class="grid-video" muted loop playsinline></video>
             </div>
-            <p class="work-caption" id="workCaption">Khadija, schoonmaakster. Voor een campagne van FNV</p>
         </div>
         <div class="work-text-overlay fade-in-text">
             <h2>Werk in opdracht</h2>
@@ -180,6 +179,7 @@
                     <img src="logo's/kleur/waternet.jpg" alt="Waternet" class="logo-color">
                 </div>
             </div>
+            <p class="work-caption" id="workCaption">Khadija, schoonmaakster. Voor een campagne van FNV</p>
         </div>
     </section>
 
@@ -343,21 +343,6 @@
             workCaption.style.color = defaultCaptionColor;
         }
 
-        // Functie om caption positie te updaten gebaseerd op grid/image
-        function updateCaptionPosition(gridCols) {
-            if (!workCaption) return;
-
-            // Vaste posities per grid type
-            if (gridCols === '3') {
-                workCaption.style.left = '5%';
-            } else if (gridCols === '2' || gridCols === '1') {
-                workCaption.style.left = '8%';
-            } else {
-                // Default positie voor single images
-                workCaption.style.left = '12%';
-            }
-        }
-
         function hideGrid() {
             workGrid.classList.remove('visible');
             workGrid.classList.add('left');
@@ -428,10 +413,9 @@
                 // Update caption en fade in
                 setTimeout(() => {
                     if (workCaption) {
-                        // Update tekst, kleur en positie terwijl caption verborgen is
+                        // Update tekst en kleur terwijl caption verborgen is
                         if (caption) workCaption.textContent = caption;
                         if (captionColor) workCaption.style.color = captionColor;
-                        updateCaptionPosition(cols || '2');
 
                         // Fade in
                         workCaption.classList.remove('fade-out');
@@ -526,10 +510,9 @@
                     // Update caption en fade in
                     setTimeout(() => {
                         if (workCaption) {
-                            // Update tekst, kleur en positie terwijl caption verborgen is
+                            // Update tekst en kleur terwijl caption verborgen is
                             if (newCaption) workCaption.textContent = newCaption;
                             if (captionColor) workCaption.style.color = captionColor;
-                            updateCaptionPosition(null);
 
                             // Fade in
                             workCaption.classList.remove('fade-out');

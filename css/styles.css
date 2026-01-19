@@ -705,14 +705,12 @@ img {
 }
 
 .work-caption {
-    position: absolute;
-    bottom: 2rem;
-    left: 12%;
     font-family: 'Scala Sans', sans-serif;
     font-style: italic;
-    font-size: 1rem;
-    color: var(--color-white);
-    transition: color 0.3s ease, left 0.3s ease, opacity 0.4s ease;
+    font-size: 0.9rem;
+    margin-top: 1rem;
+    text-align: left;
+    transition: color 0.3s ease, opacity 0.4s ease;
     opacity: 1;
 }
 
