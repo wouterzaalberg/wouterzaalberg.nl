@@ -794,11 +794,7 @@ img {
 .work-text-overlay .logo-item:hover .logo-color,
 .work-text-overlay .logo-item.active .logo-color {
     opacity: 1 !important;
-}
-
-/* Debug: rode rand om te testen of active class werkt */
-.work-text-overlay .logo-item.active {
-    outline: 3px solid red;
+    filter: grayscale(0%) !important;
 }
 
 /* Grote schermen 1400-1600px */
