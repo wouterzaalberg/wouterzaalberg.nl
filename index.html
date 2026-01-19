@@ -370,9 +370,9 @@
         }
 
         function showGrid(images, caption, cols, captionColor) {
-            // Slide caption uit
+            // Fade caption uit
             if (workCaption) {
-                workCaption.classList.add('slide-out');
+                workCaption.classList.add('fade-out');
             }
 
             // Functie om nieuwe grid te laden en in te sliden
@@ -422,29 +422,21 @@
                 // Slide in grid
                 requestAnimationFrame(() => {
                     workGrid.classList.add('visible');
-                    // Update caption positie voor grid
-                    updateCaptionPosition(cols || '2');
                 });
                 gridMode = true;
 
-                // Update caption en slide in
+                // Update caption en fade in
                 setTimeout(() => {
                     if (workCaption) {
-                        // Update tekst en kleur terwijl caption verborgen is
+                        // Update tekst, kleur en positie terwijl caption verborgen is
                         if (caption) workCaption.textContent = caption;
                         if (captionColor) workCaption.style.color = captionColor;
+                        updateCaptionPosition(cols || '2');
 
-                        // Zet naar rechts (voor slide-in)
-                        workCaption.classList.remove('slide-out');
-                        workCaption.classList.add('slide-in');
-                        workCaption.offsetHeight; // Force reflow
-
-                        // Slide in
-                        requestAnimationFrame(() => {
-                            workCaption.classList.remove('slide-in');
-                        });
+                        // Fade in
+                        workCaption.classList.remove('fade-out');
                     }
-                }, 150);
+                }, 400);
             }
 
             // Als er al een grid zichtbaar is, eerst uitsliden
@@ -470,9 +462,9 @@
         function slideToImage(newImageSrc, newCaption, isHorizontal, position, captionColor) {
             if (isSliding) return;
 
-            // Slide caption uit
+            // Fade caption uit
             if (workCaption) {
-                workCaption.classList.add('slide-out');
+                workCaption.classList.add('fade-out');
             }
 
             // Check of we van grid komen
@@ -531,27 +523,18 @@
                     // Wissel actieve afbeelding
                     activeWorkImage = inactiveImage;
 
-                    // Reset caption positie voor single image
-                    updateCaptionPosition(null);
-
-                    // Update caption en slide in
+                    // Update caption en fade in
                     setTimeout(() => {
                         if (workCaption) {
-                            // Update tekst en kleur terwijl caption verborgen is
+                            // Update tekst, kleur en positie terwijl caption verborgen is
                             if (newCaption) workCaption.textContent = newCaption;
                             if (captionColor) workCaption.style.color = captionColor;
+                            updateCaptionPosition(null);
 
-                            // Zet naar rechts (voor slide-in)
-                            workCaption.classList.remove('slide-out');
-                            workCaption.classList.add('slide-in');
-                            workCaption.offsetHeight; // Force reflow
-
-                            // Slide in
-                            requestAnimationFrame(() => {
-                                workCaption.classList.remove('slide-in');
-                            });
+                            // Fade in
+                            workCaption.classList.remove('fade-out');
                         }
-                    }, 150);
+                    }, 400);
 
                     // Reset outgoing na animatie
                     setTimeout(() => {
