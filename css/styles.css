@@ -796,6 +796,11 @@ img {
     opacity: 1 !important;
 }
 
+/* Debug: rode rand om te testen of active class werkt */
+.work-text-overlay .logo-item.active {
+    outline: 3px solid red;
+}
+
 /* Grote schermen 1400-1600px */
 @media (max-width: 1600px) and (min-width: 1401px) {
     .work-text-overlay {
