@@ -786,11 +786,13 @@ img {
     width: auto;
 }
 
-.work-text-overlay .logo-item:hover .logo-grey {
+.work-text-overlay .logo-item:hover .logo-grey,
+.work-text-overlay .logo-item.active .logo-grey {
     opacity: 0;
 }
 
-.work-text-overlay .logo-item:hover .logo-color {
+.work-text-overlay .logo-item:hover .logo-color,
+.work-text-overlay .logo-item.active .logo-color {
     opacity: 1;
 }
 
