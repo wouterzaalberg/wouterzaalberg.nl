@@ -710,7 +710,19 @@ img {
     font-style: italic;
     font-size: 1rem;
     color: var(--color-white);
-    transition: color 0.3s ease, left 0.5s ease;
+    transition: color 0.3s ease, left 0.5s ease, transform 0.65s ease, opacity 0.65s ease;
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.work-caption.slide-out {
+    transform: translateX(-100vw);
+    opacity: 0;
+}
+
+.work-caption.slide-in {
+    transform: translateX(100vw);
+    opacity: 0;
 }
 
 .work-text-overlay {
