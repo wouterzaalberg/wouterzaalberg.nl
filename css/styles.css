@@ -501,6 +501,26 @@ img {
     grid-template-columns: 1fr;
 }
 
+.work-grid.cols-3 {
+    grid-template-columns: repeat(3, auto);
+    justify-content: start;
+    left: 5%;
+    transform: translateY(-50%) translateX(100vw);
+}
+
+.work-grid.cols-3.visible {
+    transform: translateY(-50%) translateX(0);
+}
+
+.work-grid.cols-3.left {
+    transform: translateY(-50%) translateX(-100vw);
+}
+
+.work-grid.cols-3 .grid-img {
+    object-position: left top;
+    max-width: 25vw;
+}
+
 .work-grid .grid-img {
     width: 100%;
     height: 100%;
