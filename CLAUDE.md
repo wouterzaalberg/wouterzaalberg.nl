@@ -483,10 +483,32 @@ Dynamische overlay die de achtergrond donkerder/lichter maakt:
 - Foto 42-44: geleidelijk donkerder (0 → 0.8)
 - Foto 44+: donker (opacity 0.8)
 
-### Achtergrond afbeeldingen
+### Achtergrond systeem (dual background)
+Bij foto 1 (intro) wordt een Leaflet kaart met scheepvaartanimatie getoond. Na scrollen naar foto 2+ verschijnt de originele rotating background.
+
+**Leaflet kaart achtergrond (alleen bij intro):**
+- CartoDB dark tiles met grayscale filter
+- Gecentreerd op Port of Amsterdam: `[52.413, 4.82]`, zoom 13
+- Non-interactief (geen zoom/pan)
+- CSS: `filter: grayscale(100%) brightness(0.25) contrast(1.2)`
+
+**Scheepvaart animatie:**
+- Canvas overlay met bewegende bootjes
+- Routes gebaseerd op echte havencoördinaten:
+  - Noordzeekanaal (hoofdvaarweg, oost-west)
+  - Afrikahaven (52.4173, 4.7654)
+  - Amerikahaven (52.4167, 4.7667)
+  - Westhaven (52.4141, 4.8158)
+  - Petroleumhaven, Coenhaven, IJ
+- Bootjes: grijs (`rgba(180, 190, 200, 0.7)`), langzaam varend
+- Collision detection: max 2 bootjes per route, houden afstand
+- Pauzeert automatisch na scrollen voorbij intro (performance)
+
+**Originele rotating background (na intro):**
 - Locatie: `a-better-port/achtergrond 1.jpg`, `achtergrond 2.jpg`, `achtergrond 3.jpg`
-- Opaciteit: 0.4
+- Opaciteit: 0.15
 - Breedte: 300% (voor scroll effect)
+- Verschijnt met fade transitie bij scroll naar foto 2+
 
 ### Info button (caption toggle)
 ```html

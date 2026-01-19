@@ -269,17 +269,29 @@
         }
 
         .scroll-arrow {
-            position: absolute;
-            bottom: 2rem;
-            right: 2rem;
-            font-size: 1.5rem;
+            position: fixed;
+            bottom: 3rem;
+            right: 3rem;
+            font-size: 2rem;
             color: rgba(255, 255, 255, 0.6);
             animation: arrowPulse 1.5s ease-in-out infinite;
             cursor: pointer;
+            z-index: 100;
+            transition: opacity 0.3s ease;
         }
 
         .scroll-arrow:hover {
             color: rgba(255, 255, 255, 1);
+        }
+
+        .scroll-arrow.hidden {
+            opacity: 0 !important;
+            pointer-events: none;
+        }
+
+        /* Hide individual arrows inside story panels */
+        .story-text-panel .scroll-arrow {
+            display: none;
         }
 
         @keyframes arrowPulse {
@@ -1178,12 +1190,15 @@
         </div>
     </div>
 
+    <!-- Global scroll arrow -->
+    <span class="scroll-arrow" id="globalScrollArrow">→</span>
+
     <!-- Tattoo line canvas -->
     <canvas id="tattooCanvas" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 50;"></canvas>
 
     <!-- Tattoo hint text -->
-    <div id="tattooHint" style="position: fixed; bottom: 2rem; left: 2rem; z-index: 51; pointer-events: none; opacity: 0; transition: opacity 1.5s ease-in-out;">
-        <p style="font-family: 'Scala Sans', sans-serif; font-size: 0.7rem; color: rgba(255,255,255,0.35); font-style: italic; margin: 0; max-width: 200px; line-height: 1.5;">
+    <div id="tattooHint" style="position: fixed; bottom: 2.5rem; left: 2.5rem; z-index: 51; pointer-events: none; opacity: 0; transition: opacity 1.5s ease-in-out;">
+        <p style="font-family: 'Scala Sans', sans-serif; font-size: 0.95rem; color: rgba(255,255,255,0.5); font-style: italic; margin: 0; max-width: 280px; line-height: 1.6;">
             Terwijl jij de foto's bekijkt, wordt deze pagina ondergetatoeëerd
         </p>
     </div>
@@ -1201,112 +1216,135 @@
             resizeCanvas();
             window.addEventListener('resize', resizeCanvas);
 
-            // Mining symbol paths (normalized 0-1 coordinates) - accurate designs
+            // Mining symbol paths (normalized 0-1 coordinates) - based on reference images
             const symbols = {
                 // Mijnlamp (Davy safety lamp) - haak, gaaskorf, basis
                 lamp: [
-                    // Haak bovenaan
-                    [0.4, 0.08], [0.45, 0.02], [0.5, 0], [0.55, 0.02], [0.6, 0.08],
-                    // Bovenstuk/kap
-                    null, [0.35, 0.08], [0.65, 0.08],
-                    null, [0.35, 0.08], [0.35, 0.15], [0.3, 0.18], [0.3, 0.22], [0.35, 0.25],
-                    null, [0.65, 0.08], [0.65, 0.15], [0.7, 0.18], [0.7, 0.22], [0.65, 0.25],
-                    null, [0.35, 0.25], [0.65, 0.25],
-                    // Gaaskorf (mesh cage)
-                    null, [0.3, 0.25], [0.28, 0.4], [0.28, 0.6], [0.32, 0.72],
-                    null, [0.7, 0.25], [0.72, 0.4], [0.72, 0.6], [0.68, 0.72],
-                    // Horizontale gaaslijnen
-                    null, [0.3, 0.35], [0.7, 0.35],
-                    null, [0.28, 0.48], [0.72, 0.48],
-                    null, [0.3, 0.6], [0.7, 0.6],
-                    // Verticale gaaslijnen
-                    null, [0.4, 0.25], [0.38, 0.72],
-                    null, [0.5, 0.25], [0.5, 0.72],
-                    null, [0.6, 0.25], [0.62, 0.72],
-                    // Basis/brandstoftank
-                    null, [0.32, 0.72], [0.25, 0.78], [0.25, 0.92], [0.3, 1], [0.7, 1], [0.75, 0.92], [0.75, 0.78], [0.68, 0.72],
-                    null, [0.32, 0.72], [0.68, 0.72],
-                    // Vlammetje in het midden
-                    null, [0.45, 0.55], [0.5, 0.4], [0.55, 0.55]
+                    // Haak bovenaan (curved hook to the left)
+                    [0.5, 0.12], [0.48, 0.08], [0.44, 0.05], [0.38, 0.04], [0.32, 0.06], [0.28, 0.1], [0.26, 0.16], [0.28, 0.2], [0.35, 0.18],
+                    // Bovenkap
+                    null, [0.35, 0.12], [0.35, 0.18], [0.65, 0.18], [0.65, 0.12], [0.35, 0.12],
+                    // Gaaskorf buitenkant (cilinder)
+                    null, [0.32, 0.18], [0.32, 0.58],
+                    null, [0.68, 0.18], [0.68, 0.58],
+                    // Gaaskorf horizontale lijnen
+                    null, [0.32, 0.28], [0.68, 0.28],
+                    null, [0.32, 0.38], [0.68, 0.38],
+                    null, [0.32, 0.48], [0.68, 0.48],
+                    // Gaaskorf verticale lijnen
+                    null, [0.42, 0.18], [0.42, 0.58],
+                    null, [0.5, 0.18], [0.5, 0.58],
+                    null, [0.58, 0.18], [0.58, 0.58],
+                    // Middenring
+                    null, [0.28, 0.58], [0.28, 0.64], [0.72, 0.64], [0.72, 0.58], [0.28, 0.58],
+                    // Basis/brandstoftank (cilinder, breder)
+                    null, [0.25, 0.64], [0.25, 0.95], [0.75, 0.95], [0.75, 0.64],
+                    null, [0.25, 0.78], [0.75, 0.78],
+                    // Vlammetje
+                    null, [0.46, 0.42], [0.5, 0.32], [0.54, 0.42]
                 ],
 
-                // Hamer en beitel ⚒️ - gekruist, klassieke mijnbouw stijl
+                // Hamer en beitel (gekruist) - klassiek mijnbouwsymbool
                 hammerPick: [
-                    // Pikhouweelsteel (links-onder naar rechts-boven)
-                    [0.1, 0.9], [0.75, 0.25],
-                    // Pikhouweelkop (punt rechts)
-                    null, [0.65, 0.15], [0.75, 0.25], [0.95, 0.2],
-                    null, [0.65, 0.35], [0.75, 0.25],
-                    // Hamersteel (rechts-onder naar links-boven)
-                    null, [0.9, 0.9], [0.25, 0.25],
-                    // Hamerkop (vierkant, links)
-                    null, [0.12, 0.12], [0.18, 0.08], [0.32, 0.22], [0.26, 0.26],
-                    null, [0.18, 0.08], [0.32, 0.22],
-                    null, [0.12, 0.12], [0.05, 0.18],
-                    null, [0.26, 0.26], [0.19, 0.32],
-                    // Steel uitsteeksel boven hamerkop
-                    null, [0.22, 0.15], [0.18, 0.05]
+                    // Pikhouweel steel (linksboven naar rechtsonder)
+                    [0.15, 0.15], [0.85, 0.85],
+                    // Pikhouweel kop (punt links)
+                    null, [0.08, 0.22], [0.15, 0.15], [0.22, 0.08],
+                    null, [0.08, 0.22], [0.04, 0.35],
+                    null, [0.22, 0.08], [0.35, 0.04],
+                    // Hamer steel (rechtsboven naar linksonder)
+                    null, [0.85, 0.15], [0.15, 0.85],
+                    // Hamerkop (rechthoek rechtsboven)
+                    null, [0.78, 0.08], [0.72, 0.02], [0.92, 0.22], [0.98, 0.16], [0.78, 0.08],
+                    null, [0.78, 0.08], [0.92, 0.22],
+                    // Kleine slagvlak
+                    null, [0.92, 0.22], [0.96, 0.26],
+                    null, [0.72, 0.02], [0.68, 0.06]
                 ],
 
-                // Steenkool - hoekig brok met facetten
+                // Steenkool - hoekig brok met glanzende facetten
                 coal: [
-                    // Buitenomtrek - hoekig, onregelmatig
-                    [0.15, 0.35], [0.05, 0.55], [0.1, 0.75], [0.25, 0.9], [0.45, 0.98],
-                    [0.65, 0.95], [0.85, 0.8], [0.95, 0.6], [0.92, 0.4], [0.8, 0.2],
-                    [0.6, 0.08], [0.4, 0.05], [0.2, 0.15], [0.15, 0.35],
-                    // Facetten/breukvlakken
-                    null, [0.3, 0.25], [0.5, 0.45], [0.35, 0.65],
-                    null, [0.5, 0.45], [0.7, 0.35],
-                    null, [0.5, 0.45], [0.55, 0.7], [0.75, 0.6],
-                    null, [0.4, 0.5], [0.25, 0.7]
+                    // Buitenomtrek - karakteristieke hoekige vorm
+                    [0.1, 0.4], [0.05, 0.55], [0.08, 0.72], [0.2, 0.85], [0.35, 0.92],
+                    [0.55, 0.95], [0.75, 0.88], [0.88, 0.75], [0.95, 0.55], [0.9, 0.38],
+                    [0.78, 0.22], [0.6, 0.1], [0.4, 0.08], [0.22, 0.18], [0.1, 0.4],
+                    // Glanzende facetten/breukvlakken
+                    null, [0.25, 0.3], [0.45, 0.45], [0.3, 0.6],
+                    null, [0.45, 0.45], [0.65, 0.3], [0.75, 0.45],
+                    null, [0.45, 0.45], [0.5, 0.65], [0.4, 0.75],
+                    null, [0.5, 0.65], [0.7, 0.6],
+                    null, [0.55, 0.35], [0.68, 0.5]
                 ],
 
-                // Schachtbok - stalen A-frame met schijfwielen
+                // Schachtbok - mijnschacht toren zoals in referentie
                 schacht: [
-                    // Linker been
-                    [0.15, 1], [0.35, 0.15],
-                    // Rechter been
-                    null, [0.85, 1], [0.65, 0.15],
-                    // Top verbinding
-                    null, [0.35, 0.15], [0.5, 0.05], [0.65, 0.15],
-                    // Dwarsbalk onder
-                    null, [0.25, 0.7], [0.75, 0.7],
-                    // Dwarsbalk midden
-                    null, [0.3, 0.5], [0.7, 0.5],
-                    // Dwarsbalk boven
-                    null, [0.38, 0.25], [0.62, 0.25],
-                    // Schijfwiel links (grote cirkel)
-                    null, [0.35, 0.08], [0.32, 0.12], [0.32, 0.18], [0.35, 0.22], [0.42, 0.22], [0.45, 0.18], [0.45, 0.12], [0.42, 0.08], [0.35, 0.08],
-                    // Schijfwiel rechts
-                    null, [0.58, 0.08], [0.55, 0.12], [0.55, 0.18], [0.58, 0.22], [0.65, 0.22], [0.68, 0.18], [0.68, 0.12], [0.65, 0.08], [0.58, 0.08],
-                    // Kruisverstevigingen
-                    null, [0.25, 0.7], [0.38, 0.5],
-                    null, [0.3, 0.5], [0.42, 0.7],
-                    null, [0.75, 0.7], [0.62, 0.5],
-                    null, [0.7, 0.5], [0.58, 0.7],
-                    // Liftkooi aanduiding
-                    null, [0.42, 0.5], [0.42, 0.85], [0.58, 0.85], [0.58, 0.5]
+                    // Linker A-been
+                    [0.1, 1], [0.38, 0.15],
+                    // Rechter A-been
+                    null, [0.9, 1], [0.62, 0.15],
+                    // Topverbinding (platform)
+                    null, [0.32, 0.15], [0.32, 0.08], [0.68, 0.08], [0.68, 0.15], [0.32, 0.15],
+                    // Schijfwielen bovenop
+                    null, [0.38, 0.08], [0.36, 0.02], [0.44, 0.02], [0.42, 0.08],
+                    null, [0.56, 0.08], [0.58, 0.02], [0.66, 0.02], [0.64, 0.08],
+                    // Dwarsbalken
+                    null, [0.18, 0.8], [0.82, 0.8],
+                    null, [0.24, 0.6], [0.76, 0.6],
+                    null, [0.3, 0.4], [0.7, 0.4],
+                    null, [0.35, 0.25], [0.65, 0.25],
+                    // Kruisversterkingen links
+                    null, [0.18, 0.8], [0.3, 0.6],
+                    null, [0.24, 0.8], [0.18, 0.6],
+                    // Kruisversterkingen rechts
+                    null, [0.82, 0.8], [0.7, 0.6],
+                    null, [0.76, 0.8], [0.82, 0.6],
+                    // Centrale schacht
+                    null, [0.4, 0.4], [0.4, 0.95], [0.6, 0.95], [0.6, 0.4]
                 ],
 
-                // Penning (mijnwerkerspenning) - ronde schijf met nummer
+                // Mijnkar - kar met wielen gevuld met kolen
+                kar: [
+                    // Kar bak (trapezium, breder bovenaan)
+                    [0.1, 0.35], [0.05, 0.7], [0.95, 0.7], [0.9, 0.35], [0.1, 0.35],
+                    // Verticale verstevigingen
+                    null, [0.3, 0.35], [0.28, 0.7],
+                    null, [0.7, 0.35], [0.72, 0.7],
+                    // Onderstel
+                    null, [0.1, 0.7], [0.1, 0.78], [0.9, 0.78], [0.9, 0.7],
+                    // Linker wiel
+                    null, [0.22, 0.78], [0.18, 0.82], [0.16, 0.88], [0.18, 0.94], [0.24, 0.98], [0.32, 0.98], [0.38, 0.94], [0.4, 0.88], [0.38, 0.82], [0.34, 0.78],
+                    null, [0.28, 0.85], [0.28, 0.92],
+                    null, [0.24, 0.88], [0.32, 0.88],
+                    // Rechter wiel
+                    null, [0.66, 0.78], [0.62, 0.82], [0.6, 0.88], [0.62, 0.94], [0.68, 0.98], [0.76, 0.98], [0.82, 0.94], [0.84, 0.88], [0.82, 0.82], [0.78, 0.78],
+                    null, [0.72, 0.85], [0.72, 0.92],
+                    null, [0.68, 0.88], [0.76, 0.88],
+                    // Kolen bovenop (hobbelige lijn)
+                    null, [0.12, 0.35], [0.2, 0.28], [0.3, 0.32], [0.4, 0.25], [0.5, 0.3], [0.6, 0.22], [0.7, 0.28], [0.8, 0.25], [0.88, 0.35]
+                ],
+
+                // Penning (mijnwerkerspenning) - ronde messing schijf
                 penning: [
-                    // Buitenste cirkel
-                    [0.5, 0.02], [0.65, 0.06], [0.78, 0.15], [0.88, 0.28], [0.95, 0.42],
-                    [0.98, 0.5], [0.95, 0.58], [0.88, 0.72], [0.78, 0.85], [0.65, 0.94],
-                    [0.5, 0.98], [0.35, 0.94], [0.22, 0.85], [0.12, 0.72], [0.05, 0.58],
-                    [0.02, 0.5], [0.05, 0.42], [0.12, 0.28], [0.22, 0.15], [0.35, 0.06], [0.5, 0.02],
-                    // Binnenste cirkel
-                    null, [0.5, 0.2], [0.62, 0.24], [0.72, 0.32], [0.78, 0.44],
-                    [0.8, 0.5], [0.78, 0.56], [0.72, 0.68], [0.62, 0.76], [0.5, 0.8],
-                    [0.38, 0.76], [0.28, 0.68], [0.22, 0.56], [0.2, 0.5], [0.22, 0.44],
-                    [0.28, 0.32], [0.38, 0.24], [0.5, 0.2],
-                    // Nummer "45" (simpele weergave)
-                    null, [0.38, 0.42], [0.38, 0.58], [0.32, 0.58],
-                    null, [0.38, 0.42], [0.44, 0.42],
-                    null, [0.38, 0.5], [0.44, 0.5],
-                    null, [0.52, 0.42], [0.58, 0.42], [0.58, 0.5], [0.52, 0.5], [0.52, 0.58], [0.58, 0.58],
-                    // Gaatje bovenaan voor ketting
-                    null, [0.47, 0.08], [0.47, 0.12], [0.53, 0.12], [0.53, 0.08], [0.47, 0.08]
+                    // Buitenste cirkel (gladder)
+                    [0.5, 0.05], [0.68, 0.1], [0.82, 0.22], [0.92, 0.38], [0.95, 0.5],
+                    [0.92, 0.62], [0.82, 0.78], [0.68, 0.9], [0.5, 0.95],
+                    [0.32, 0.9], [0.18, 0.78], [0.08, 0.62], [0.05, 0.5],
+                    [0.08, 0.38], [0.18, 0.22], [0.32, 0.1], [0.5, 0.05],
+                    // Gaatje bovenaan
+                    null, [0.46, 0.12], [0.44, 0.16], [0.46, 0.2], [0.54, 0.2], [0.56, 0.16], [0.54, 0.12], [0.46, 0.12],
+                    // Nummer "976" - 9
+                    null, [0.28, 0.42], [0.28, 0.38], [0.35, 0.35], [0.38, 0.42], [0.35, 0.48], [0.28, 0.48], [0.35, 0.48], [0.38, 0.55], [0.35, 0.6], [0.28, 0.58],
+                    // Nummer "976" - 7
+                    null, [0.44, 0.38], [0.54, 0.38], [0.48, 0.6],
+                    // Nummer "976" - 6
+                    null, [0.62, 0.4], [0.68, 0.38], [0.72, 0.42], [0.72, 0.48], [0.68, 0.52], [0.62, 0.52], [0.62, 0.58], [0.68, 0.6], [0.72, 0.56],
+                    // "O.N." tekst onderaan
+                    null, [0.35, 0.7], [0.35, 0.78], [0.42, 0.78], [0.42, 0.7], [0.35, 0.7],
+                    null, [0.48, 0.7], [0.48, 0.78], [0.52, 0.7], [0.52, 0.78],
+                    null, [0.56, 0.74], [0.58, 0.74],
+                    null, [0.62, 0.7], [0.62, 0.78],
+                    null, [0.66, 0.7], [0.66, 0.78],
+                    null, [0.7, 0.7], [0.7, 0.78]
                 ]
             };
 
@@ -1318,6 +1356,7 @@
             let progress = 0;
             let sparkles = [];
             let x = 0, y = 0;
+            let lastSymbolName = null; // Track last symbol to avoid repeats
 
             // Fixed starting position (bottom-left corner)
             let symbolCount = 0;
@@ -1333,13 +1372,13 @@
             // Get position for symbols - first one fixed, then random in margins
             function getRandomPosition() {
                 const margin = 80;
-                const size = 35 + Math.random() * 30;
+                const size = 55 + Math.random() * 35; // Larger symbols (55-90px)
                 let posX, posY;
 
                 // First symbol starts at fixed position
                 if (symbolCount === 0) {
                     symbolCount++;
-                    return { x: startX, y: startY, size: 45 };
+                    return { x: startX, y: startY, size: 70 }; // Larger first symbol
                 }
 
                 symbolCount++;
@@ -1370,7 +1409,19 @@
             // Start drawing a new symbol
             function startNewSymbol() {
                 const pos = getRandomPosition();
-                const symbolName = symbolNames[Math.floor(Math.random() * symbolNames.length)];
+
+                // First symbol is always the mining logo (hamer en beitel)
+                let symbolName;
+                if (symbolCount === 1) {
+                    symbolName = 'hammerPick';
+                } else {
+                    // Pick a random symbol that's different from the last one
+                    do {
+                        symbolName = symbolNames[Math.floor(Math.random() * symbolNames.length)];
+                    } while (symbolName === lastSymbolName && symbolNames.length > 1);
+                }
+                lastSymbolName = symbolName;
+
                 currentPath = symbols[symbolName];
                 currentSymbol = {
                     name: symbolName,
@@ -1402,7 +1453,7 @@
 
                 // Draw all completed symbols
                 ctx.strokeStyle = 'rgba(255, 255, 255, 0.12)';
-                ctx.lineWidth = 0.8;
+                ctx.lineWidth = 1;
                 ctx.lineCap = 'round';
                 ctx.lineJoin = 'round';
 
@@ -1510,12 +1561,12 @@
 
                 // Draw pen glow
                 if (currentSymbol) {
-                    const gradient = ctx.createRadialGradient(x, y, 0, x, y, 5);
-                    gradient.addColorStop(0, 'rgba(255, 255, 255, 0.2)');
+                    const gradient = ctx.createRadialGradient(x, y, 0, x, y, 8);
+                    gradient.addColorStop(0, 'rgba(255, 255, 255, 0.35)');
                     gradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
                     ctx.fillStyle = gradient;
                     ctx.beginPath();
-                    ctx.arc(x, y, 5, 0, Math.PI * 2);
+                    ctx.arc(x, y, 8, 0, Math.PI * 2);
                     ctx.fill();
                 }
 
@@ -1528,9 +1579,21 @@
         const container = document.querySelector('.tattoo-scroll-container');
         const allItems = document.querySelectorAll('.tattoo-title-intro, .tattoo-story, .end-panel');
         const titleIntro = document.querySelector('.tattoo-title-intro');
+        const globalArrow = document.getElementById('globalScrollArrow');
         let currentIndex = 0;
         let isAnimating = false;
         let scrollQueue = 0;
+
+        // Update arrow visibility
+        function updateArrowVisibility() {
+            if (!globalArrow) return;
+            // Hide on first page (title intro has own arrow) and last page (end panel)
+            if (currentIndex === 0 || currentIndex >= allItems.length - 1) {
+                globalArrow.classList.add('hidden');
+            } else {
+                globalArrow.classList.remove('hidden');
+            }
+        }
 
         // Scroll to target index
         function scrollToIndex(index) {
@@ -1546,6 +1609,7 @@
             }
 
             currentIndex = index;
+            updateArrowVisibility();
 
             allItems[currentIndex].scrollIntoView({
                 behavior: 'smooth',
@@ -1553,6 +1617,9 @@
                 inline: 'start'
             });
         }
+
+        // Initial arrow state
+        updateArrowVisibility();
 
         // Process scroll queue
         function processScrollQueue() {

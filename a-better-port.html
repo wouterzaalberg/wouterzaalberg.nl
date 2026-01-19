@@ -7,6 +7,7 @@
     <title>A Better Port - Wouter Zaalberg</title>
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/a-better-port.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 </head>
 <body class="abp-page">
     <div class="horizontal-nav">
@@ -19,8 +20,8 @@
     <!-- Dark Overlay - opacity controlled via JS -->
     <div class="abp-dark-overlay" id="darkOverlay"></div>
 
-    <!-- Rotating Background -->
-    <div class="abp-background">
+    <!-- Original Rotating Background (visible after intro) -->
+    <div class="abp-background" id="originalBackground">
         <img src="a-better-port/achtergrond 1.jpg" alt="">
         <img src="a-better-port/achtergrond 2.jpg" alt="">
         <img src="a-better-port/achtergrond 3.jpg" alt="">
@@ -28,6 +29,12 @@
         <img src="a-better-port/achtergrond 2.jpg" alt="">
         <img src="a-better-port/achtergrond 3.jpg" alt="">
     </div>
+
+    <!-- Leaflet Map Background (only visible at intro/photo 1) -->
+    <div id="harborMap" class="abp-map-background"></div>
+
+    <!-- Ship Animation Canvas (only visible at intro/photo 1) -->
+    <canvas id="shipCanvas" class="abp-ship-canvas"></canvas>
 
     <div class="horizontal-scroll-container" id="scrollContainer">
         <div class="horizontal-scroll-content">
@@ -338,8 +345,8 @@
                 <img src="a-better-port/18.jpg" alt="A Better Port" class="photo" loading="lazy">
                 <button class="abp-info-btn" aria-label="Toon informatie">i</button>
                 <div class="abp-caption">
-                    <div class="abp-caption-header">EVOS terminal</div>
-                    <div class="abp-caption-text">Een medewerker van EVOS controleert de brandstoftanks op de terminal. In iedere tank kan zo'n 50 miljoen liter benzine opslaan. De tanks van EVOS zijn klaar voor bio-brandstoffen, maar ze merken dat er geen vraag is vanuit de markt.</div>
+                    <div class="abp-caption-header">Leon Rasser, havendominee</div>
+                    <div class="abp-caption-text">Per fiets bezoekt Leon de zeemannen op de schepen, om met ze te praten, samen te bidden of er simpelweg voor te zorgen dat het internet het doet, zodat het thuisfront gebeld kan worden. Leon komt al jaren op de schepen en kent de haven als geen ander, al blijft hij tegelijkertijd een buitenstaander door de aard van zijn werk. Hij heeft de haven in de loop van tijd zien veranderen, zegt hij, tot de plek die het nu is: een afgesloten plek met de nadruk op hyperefficiëntie. Het heeft het werkplezier en de gemeenschapszin kapot gemaakt. 'Een belangrijke reden om zeevarende te worden is om iets van de wereld te zien. In Amsterdam komt daar meestal weinig van terecht. De werkdruk is te hoog en een substantieel aantal havenbedrijven verbiedt hen overpad naar de openbare weg.' Hij vindt het zijn plicht om de mannen (en een enkele vrouw) te bezoeken.</div>
                 </div>
             </div>
 
@@ -358,8 +365,8 @@
                 <img src="a-better-port/19.jpg" alt="A Better Port" class="photo" loading="lazy">
                 <button class="abp-info-btn" aria-label="Toon informatie">i</button>
                 <div class="abp-caption">
-                    <div class="abp-caption-header">Leon Rasser, havendominee</div>
-                    <div class="abp-caption-text">Per fiets bezoekt Leon de zeemannen op de schepen, om met ze te praten, samen te bidden of er simpelweg voor te zorgen dat het internet het doet, zodat het thuisfront gebeld kan worden. Leon komt al jaren op de schepen en kent de haven als geen ander, al blijft hij tegelijkertijd een buitenstaander door de aard van zijn werk. Hij heeft de haven in de loop van tijd zien veranderen, zegt hij, tot de plek die het nu is: een afgesloten plek met de nadruk op hyperefficiëntie. Het heeft het werkplezier en de gemeenschapszin kapot gemaakt. 'Een belangrijke reden om zeevarende te worden is om iets van de wereld te zien. In Amsterdam komt daar meestal weinig van terecht. De werkdruk is te hoog en een substantieel aantal havenbedrijven verbiedt hen overpad naar de openbare weg.' Hij vindt het zijn plicht om de mannen (en een enkele vrouw) te bezoeken.</div>
+                    <div class="abp-caption-header">EVOS terminal</div>
+                    <div class="abp-caption-text">Een medewerker van EVOS controleert de brandstoftanks op de terminal. In iedere tank kan zo'n 50 miljoen liter benzine opslaan. De tanks van EVOS zijn klaar voor bio-brandstoffen, maar ze merken dat er geen vraag is vanuit de markt.</div>
                 </div>
             </div>
 
@@ -805,6 +812,9 @@
             </div>
         </div>
     </div>
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
     <script>
         const container = document.getElementById('scrollContainer');
@@ -1292,10 +1302,46 @@
         scrollToIndex = function(index) {
             originalScrollToIndex(index);
             updateDarkOverlay();
+            updateYellowPanelsFade(index);
         };
+
+        // Fade out yellow panels when scrolled past them
+        const textPhotoCombo = document.querySelector('.abp-text-photo-combo');
+        const infographicPanelFirst = document.querySelector('.abp-infographic-panel:not(.abp-sustainability-panel)');
+        const sustainabilityPanel = document.querySelector('.abp-sustainability-panel');
+
+        function updateYellowPanelsFade(index) {
+            // First infographic panel ("4,4 miljard") is at allItems index 4, fade when past it (index > 4)
+            if (infographicPanelFirst) {
+                if (index > 4) {
+                    infographicPanelFirst.classList.add('faded-out');
+                } else {
+                    infographicPanelFirst.classList.remove('faded-out');
+                }
+            }
+
+            // text-photo-combo is at allItems index 11, fade when past it (index > 11)
+            if (textPhotoCombo) {
+                if (index > 11) {
+                    textPhotoCombo.classList.add('faded-out');
+                } else {
+                    textPhotoCombo.classList.remove('faded-out');
+                }
+            }
+
+            // sustainability panel is at allItems index 18, fade when past it (index > 18)
+            if (sustainabilityPanel) {
+                if (index > 18) {
+                    sustainabilityPanel.classList.add('faded-out');
+                } else {
+                    sustainabilityPanel.classList.remove('faded-out');
+                }
+            }
+        }
 
         // Initial update
         updateDarkOverlay();
+        updateYellowPanelsFade(currentIndex);
 
         // Run on load and resize
         const introPhotos = document.querySelectorAll('.abp-intro-photo img, .abp-intro-photo2 img');
@@ -1307,6 +1353,308 @@
             }
         });
         window.addEventListener('resize', syncIntroLayout);
+
+        // ========================================
+        // Leaflet Map Background + Ship Animation
+        // ========================================
+
+        // Initialize harbor map with Leaflet
+        const harborMap = L.map('harborMap', {
+            zoomControl: false,
+            attributionControl: false,
+            scrollWheelZoom: false,
+            dragging: false,
+            doubleClickZoom: false,
+            touchZoom: false,
+            keyboard: false
+        }).setView([52.413, 4.82], 13); // Port of Amsterdam - centered on harbor basins
+
+        // CartoDB dark tiles (made darker via CSS filter)
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+            maxZoom: 19,
+            subdomains: 'abcd'
+        }).addTo(harborMap);
+
+        // Ensure map renders correctly
+        setTimeout(() => harborMap.invalidateSize(), 100);
+        console.log('Harbor map initialized');
+
+        // Ship Animation on Canvas overlay
+        (function() {
+            const canvas = document.getElementById('shipCanvas');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+
+            // Resize canvas to match viewport
+            function resizeCanvas() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+            resizeCanvas();
+            window.addEventListener('resize', () => {
+                resizeCanvas();
+                harborMap.invalidateSize();
+            });
+
+            // Ship class using lat/lng coordinates
+            class Ship {
+                constructor(route, routeIndex, speed, size) {
+                    this.route = route; // Array of {lat, lng}
+                    this.routeIndex = routeIndex; // Which route this ship is on
+                    this.speed = speed;
+                    this.size = size;
+                    this.progress = Math.random();
+                    this.direction = Math.random() > 0.5 ? 1 : -1;
+                }
+
+                update(allShips) {
+                    // Check for collision with ships ahead on same route
+                    const minDistance = 0.08; // Minimum progress distance between ships
+
+                    for (const other of allShips) {
+                        if (other === this) continue;
+                        if (other.routeIndex !== this.routeIndex) continue;
+
+                        // Check if other ship is ahead in our direction
+                        const diff = other.progress - this.progress;
+
+                        if (this.direction > 0 && diff > 0 && diff < minDistance) {
+                            // Ship ahead going forward - slow down or stop
+                            return;
+                        }
+                        if (this.direction < 0 && diff < 0 && diff > -minDistance) {
+                            // Ship ahead going backward - slow down or stop
+                            return;
+                        }
+                    }
+
+                    this.progress += this.speed * this.direction;
+                    if (this.progress >= 1) {
+                        this.progress = 1;
+                        this.direction = -1;
+                    } else if (this.progress <= 0) {
+                        this.progress = 0;
+                        this.direction = 1;
+                    }
+                }
+
+                getPosition() {
+                    const routeLen = this.route.length;
+                    const totalDist = routeLen - 1;
+                    const exactIdx = this.progress * totalDist;
+                    const idx = Math.floor(exactIdx);
+                    const t = exactIdx - idx;
+
+                    if (idx >= routeLen - 1) {
+                        const lastPt = this.route[routeLen - 1];
+                        return { lat: lastPt.lat, lng: lastPt.lng, angle: 0 };
+                    }
+
+                    const p1 = this.route[idx];
+                    const p2 = this.route[idx + 1];
+                    const lat = p1.lat + (p2.lat - p1.lat) * t;
+                    const lng = p1.lng + (p2.lng - p1.lng) * t;
+
+                    // Calculate angle based on pixel positions for correct rotation
+                    const pt1 = harborMap.latLngToContainerPoint([p1.lat, p1.lng]);
+                    const pt2 = harborMap.latLngToContainerPoint([p2.lat, p2.lng]);
+                    const angle = Math.atan2(pt2.y - pt1.y, pt2.x - pt1.x);
+
+                    return { lat, lng, angle: this.direction > 0 ? angle : angle + Math.PI };
+                }
+
+                draw(ctx) {
+                    const pos = this.getPosition();
+                    const point = harborMap.latLngToContainerPoint([pos.lat, pos.lng]);
+                    const x = point.x;
+                    const y = point.y;
+                    const angle = pos.angle;
+                    const size = this.size;
+
+                    ctx.save();
+                    ctx.translate(x, y);
+                    ctx.rotate(angle);
+
+                    // Draw ship shape - subtle gray ships
+                    ctx.fillStyle = 'rgba(180, 190, 200, 0.7)';
+                    ctx.strokeStyle = 'rgba(120, 130, 140, 0.5)';
+                    ctx.lineWidth = 0.8;
+                    ctx.beginPath();
+
+                    const length = size * 3;
+                    const width = size * 1.2;
+
+                    ctx.moveTo(-length / 2, -width / 2);
+                    ctx.lineTo(-length / 2, width / 2);
+                    ctx.lineTo(length / 3, width / 2);
+                    ctx.lineTo(length / 2, 0);
+                    ctx.lineTo(length / 3, -width / 2);
+                    ctx.closePath();
+                    ctx.fill();
+                    ctx.stroke();
+
+                    ctx.restore();
+                }
+            }
+
+            // Ship routes using ACTUAL lat/lng coordinates of Port of Amsterdam waterways
+            // Based on: Amerikahaven 52.4167/4.7667, Afrikahaven 52.4173/4.7654, Westhaven 52.4141/4.8158
+            // Noordzeekanaal runs at ~52.418-52.420 latitude
+            const routes = [
+                // Noordzeekanaal - main shipping channel (west to east)
+                // This is the main waterway connecting to the North Sea
+                [
+                    { lat: 52.4195, lng: 4.75 },
+                    { lat: 52.4200, lng: 4.78 },
+                    { lat: 52.4195, lng: 4.81 },
+                    { lat: 52.4190, lng: 4.84 },
+                    { lat: 52.4185, lng: 4.87 }
+                ],
+                // Afrikahaven - harbor basin south of Noordzeekanaal (west side)
+                // Coordinates: 52.4173, 4.7654
+                [
+                    { lat: 52.4180, lng: 4.765 },
+                    { lat: 52.4140, lng: 4.766 },
+                    { lat: 52.4100, lng: 4.767 }
+                ],
+                // Amerikahaven - harbor basin (west side, near Afrikahaven)
+                // Coordinates: 52.4167, 4.7667
+                [
+                    { lat: 52.4175, lng: 4.770 },
+                    { lat: 52.4130, lng: 4.772 },
+                    { lat: 52.4085, lng: 4.774 }
+                ],
+                // Westhaven - central harbor area
+                // Coordinates: 52.4141, 4.8158
+                [
+                    { lat: 52.4180, lng: 4.815 },
+                    { lat: 52.4140, lng: 4.816 },
+                    { lat: 52.4100, lng: 4.817 }
+                ],
+                // Petroleumhaven - east of Westhaven
+                [
+                    { lat: 52.4175, lng: 4.845 },
+                    { lat: 52.4130, lng: 4.847 },
+                    { lat: 52.4085, lng: 4.849 }
+                ],
+                // Coenhaven - between Afrikahaven and Westhaven
+                [
+                    { lat: 52.4180, lng: 4.790 },
+                    { lat: 52.4135, lng: 4.792 },
+                    { lat: 52.4090, lng: 4.794 }
+                ],
+                // IJ - eastern waterway toward Amsterdam center
+                [
+                    { lat: 52.4185, lng: 4.870 },
+                    { lat: 52.4180, lng: 4.890 },
+                    { lat: 52.4175, lng: 4.910 }
+                ]
+            ];
+
+            // Create ships - spread them across routes, max 2 per route
+            const ships = [];
+            const shipsPerRoute = {};
+
+            // Initialize counter for each route
+            routes.forEach((_, idx) => shipsPerRoute[idx] = 0);
+
+            // Create 10 ships, distributed across routes
+            for (let i = 0; i < 12; i++) {
+                // Find a route with fewer than 2 ships
+                let routeIdx;
+                let attempts = 0;
+                do {
+                    routeIdx = Math.floor(Math.random() * routes.length);
+                    attempts++;
+                } while (shipsPerRoute[routeIdx] >= 2 && attempts < 20);
+
+                if (shipsPerRoute[routeIdx] < 2) {
+                    const speed = 0.00003 + Math.random() * 0.00004; // Much slower
+                    const size = 6 + Math.random() * 5;
+                    // Spread ships apart on same route
+                    const ship = new Ship(routes[routeIdx], routeIdx, speed, size);
+                    if (shipsPerRoute[routeIdx] === 1) {
+                        // Second ship on route - start at different position
+                        ship.progress = (ship.progress + 0.5) % 1;
+                    }
+                    ships.push(ship);
+                    shipsPerRoute[routeIdx]++;
+                }
+            }
+
+            // Animation state
+            let animationActive = true;
+            let animationFrame = null;
+
+            function animate() {
+                if (!animationActive) {
+                    animationFrame = null;
+                    return;
+                }
+
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                ships.forEach(ship => {
+                    ship.update(ships); // Pass all ships for collision detection
+                    ship.draw(ctx);
+                });
+
+                animationFrame = requestAnimationFrame(animate);
+            }
+
+            // Pause animation when scrolled past intro
+            function checkAnimationVisibility() {
+                const shouldAnimate = currentIndex < 5;
+                if (shouldAnimate && !animationActive) {
+                    animationActive = true;
+                    if (!animationFrame) animate();
+                } else if (!shouldAnimate && animationActive) {
+                    animationActive = false;
+                }
+            }
+
+            const originalScrollFn = scrollToIndex;
+            scrollToIndex = function(index) {
+                originalScrollFn(index);
+                checkAnimationVisibility();
+            };
+
+            animate();
+        })();
+
+        // ========================================
+        // Toggle Map/Ships vs Original Background
+        // ========================================
+        (function() {
+            const mapBg = document.getElementById('harborMap');
+            const originalBg = document.getElementById('originalBackground');
+            const shipCanvas = document.getElementById('shipCanvas');
+
+            function updateBackgroundVisibility(index) {
+                // Show map + ships only at intro (index 0 and states within intro)
+                const atIntro = index === 0;
+
+                if (atIntro) {
+                    mapBg.classList.remove('hidden');
+                    shipCanvas.classList.remove('hidden');
+                    originalBg.classList.remove('visible');
+                } else {
+                    mapBg.classList.add('hidden');
+                    shipCanvas.classList.add('hidden');
+                    originalBg.classList.add('visible');
+                }
+            }
+
+            // Initial state
+            updateBackgroundVisibility(currentIndex);
+
+            // Hook into scroll updates
+            const origScrollToIndex = scrollToIndex;
+            scrollToIndex = function(index) {
+                origScrollToIndex(index);
+                updateBackgroundVisibility(index);
+            };
+        })();
     </script>
 </body>
 </html>
