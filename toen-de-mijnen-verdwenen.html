@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Toen de Mijnen verdwenen - Wouter Zaalberg">
+    <title>Toen de Mijnen verdwenen - Wouter Zaalberg</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,400;1,500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.typekit.net/qwc4lnx.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="css/toen-de-mijnen.css">
+</head>
+<body class="tdmv-page">
+    <div class="horizontal-nav">
+        <div>
+            <a href="index.html" class="back-link">← Terug</a>
+            <span class="nav-title">Toen de Mijnen verdwenen</span>
+        </div>
+    </div>
+
+    <div class="tdmv-bg-layer"></div>
+    <div class="tdmv-mine-bg" id="mineBg"></div>
+    <div class="tdmv-dust-overlay" id="dustOverlay"></div>
+
+    <div class="horizontal-scroll-container" id="scrollContainer">
+        <div class="horizontal-scroll-content">
+
+            <!-- ============================================
+                 INTRO SECTION: Vertical descent into the mine
+                 ============================================ -->
+            <div class="tdmv-intro-section" id="introSection" data-section="intro">
+                <div class="tdmv-descent">
+                    <!-- Top: Hero with title + text -->
+                    <div class="tdmv-hero-panel">
+                        <div class="tdmv-dust-container" id="dustContainer"></div>
+                        <div class="tdmv-hero-content">
+                            <h1 class="tdmv-title">
+                                <span>Toen</span>
+                                <span>de Mijnen</span>
+                                <span>verdwenen</span>
+                            </h1>
+                            <div class="tdmv-hero-text">
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
+                                <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.</p>
+                            </div>
+                        </div>
+                        <span class="tdmv-descent-arrow">↓</span>
+                    </div>
+
+                    <!-- Bottom: Photo 1 (revealed on descent) -->
+                    <div class="tdmv-intro-photo part-1">
+                        <div class="tdmv-dust-container dust-photo1"></div>
+                        <div class="tdmv-intro-photo-wrapper">
+                            <picture>
+                                <source srcset="toen-de-mijnen-verdwenen/Foto 1.webp" type="image/webp">
+                                <img src="toen-de-mijnen-verdwenen/Foto 1.jpg" alt="Oranje-Nassau I" loading="eager">
+                            </picture>
+                        </div>
+                        <div class="tdmv-caption">
+                            <div class="tdmv-caption-header">Oranje-Nassau I</div>
+                            <div class="tdmv-caption-text">De eerste staatsmijn van Nederland, geopend in 1899. Het begin van een industriële revolutie die de Limburgse mijnstreek zou vormen.</div>
+                        </div>
+                    </div>
+
+                    <!-- Chapter 1 panel (third level of descent) -->
+                    <div class="tdmv-intro-chapter chapter-1">
+                        <div class="tdmv-dust-container dust-chapter1"></div>
+                        <div class="tdmv-chapter-content">
+                            <div class="tdmv-chapter-number">Deel 1</div>
+                            <h2 class="tdmv-chapter-title">De wereld die verdween</h2>
+                            <div class="tdmv-chapter-period">1965 — 1974</div>
+                            <p class="tdmv-chapter-intro">Wie vóór 1974 door de Oostelijke Mijnstreek reisde, zou een wereld ervaren waar alles draaide om een ding: steenkool. Overal zag je schachten, schoorstenen en koeltorens. Je hoorde het geluid van schachtwielen en het lossen van kolenwagens.</p>
+                        </div>
+                        <span class="tdmv-chapter-arrow">→</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Photo 2 - Steenkool -->
+            <div class="tdmv-photo-block part-1 " data-parallax="0.5" data-section="photo">
+                <picture>
+                    <source srcset="toen-de-mijnen-verdwenen/Foto 2.webp" type="image/webp">
+                    <img src="toen-de-mijnen-verdwenen/Foto 2.jpg" alt="Steenkool" loading="eager">
+                </picture>
+                <div class="tdmv-caption">
+                    <div class="tdmv-caption-header">Steenkool</div>
+                    <div class="tdmv-caption-text">De elf mijnen in deze regio hebben in totaal zo'n 472 miljoen ton kolen aan de aarde onttrokken. Genoeg steenkool om de gehele gemeente Heerlen met een laag van acht meter te bedekken.</div>
+                </div>
+            </div>
+
+            <!-- Photo 3 - Johan Heesbeen -->
+            <div class="tdmv-photo-block part-1 " data-parallax="1.2" data-section="photo">
+                <picture>
+                    <source srcset="toen-de-mijnen-verdwenen/foto 3.webp" type="image/webp">
+                    <img src="toen-de-mijnen-verdwenen/foto 3.jpg" alt="Johan Heesbeen" loading="eager">
+                </picture>
+                <div class="tdmv-caption">
+                    <div class="tdmv-caption-header">Johan Heesbeen, oud-mijnwerker Staatsmijn Emma</div>
+                    <div class="tdmv-caption-text">"We waren bovengronds soms eenlingen, maar zodra je in de lift stapte veranderde dat. Je keek naar elkaar om en je vertrouwde op elkaar. Het moest wel."</div>
+                </div>
+            </div>
+
+            <!-- Photo 4 - Oefenmijn -->
+            <div class="tdmv-photo-block part-1" data-parallax="0.8" data-section="photo">
+                <picture>
+                    <source srcset="toen-de-mijnen-verdwenen/foto 4.webp" type="image/webp">
+                    <img src="toen-de-mijnen-verdwenen/foto 4.jpg" alt="Oefenmijn" loading="lazy">
+                </picture>
+                <div class="tdmv-caption">
+                    <div class="tdmv-caption-header">Oefenmijn op de oude steenberg van de Oranje-Nassau IV</div>
+                    <div class="tdmv-caption-text">Voor een stabiele instroom van mijnwerkers werden minstens elf Ondergrondse Vakscholen opgericht. Dit waren plekken waar jongens vanaf 14-jarige leeftijd werden klaargestoomd voor een leven als houwer.</div>
+                </div>
+            </div>
+
+            <!-- Photo 5 - Jan -->
+            <div class="tdmv-photo-block part-1 " data-parallax="0.6" data-section="photo">
+                <picture>
+                    <source srcset="toen-de-mijnen-verdwenen/foto 5.webp" type="image/webp">
+                    <img src="toen-de-mijnen-verdwenen/foto 5.jpg" alt="Jan" loading="lazy">
+                </picture>
+                <div class="tdmv-caption">
+                    <div class="tdmv-caption-header">Jan, oud-mijnwerker Staatsmijn Wilhelmina</div>
+                    <div class="tdmv-caption-text">De pijler stortte in en Jan belandde onder het puin. Vier jaar lag hij in talloze ziekenhuizen. Hij herstelde en keerde terug naar de mijn, een keuze die hij als vanzelfsprekend beschouwde. Er moest brood op de plank.</div>
+                </div>
+            </div>
+
+            <!-- Insert: Kaart van de Mijnstreek -->
+            <div class="tdmv-insert part-1" data-section="insert">
+                <div class="tdmv-insert-content tdmv-map-content">
+                    <h2 class="tdmv-insert-title">De mijnstreek</h2>
+                    <div class="tdmv-leaflet-map" id="mineMap"></div>
+                    <div class="tdmv-mine-stats" id="mineStats"></div>
+                </div>
+            </div>
+
+            <!-- Photo 6 - Handen van Deddo -->
+            <div class="tdmv-photo-block part-1 " data-parallax="1.1" data-section="photo">
+                <picture>
+                    <source srcset="toen-de-mijnen-verdwenen/foto 6.webp" type="image/webp">
+                    <img src="toen-de-mijnen-verdwenen/foto 6.jpg" alt="De handen van Deddo" loading="lazy">
+                </picture>
+                <div class="tdmv-caption">
+                    <div class="tdmv-caption-header">De handen van Deddo, oud-mijnwerker Julia</div>
+                    <div class="tdmv-caption-text">Iedere oud-mijnwerker heeft ongelukken gezien of meegemaakt, van relatief klein tot dodelijk. Tijdens één moment van onoplettendheid van een collega verloor Deddo zijn vinger bij de transportband.</div>
+                </div>
+            </div>
+
+            <!-- Photo 7 - Piet Bernaards (highlighted) -->
+            <div class="tdmv-photo-highlight part-1 size-large" data-section="photo">
+                <picture>
+                    <source srcset="toen-de-mijnen-verdwenen/foto 7.webp" type="image/webp">
+                    <img src="toen-de-mijnen-verdwenen/foto 7.jpg" alt="Piet Bernaards" loading="lazy">
+                </picture>
+                <div class="tdmv-highlight-panel">
+                    <div class="tdmv-highlight-header">Piet Bernaards, oud-mijnwerker Staatsmijn Emma</div>
+                    <div class="tdmv-highlight-text">"Wij tilden de stijlen zelf, met twee man. Soms meer dan 80 kilo per stijl. Kun je het je voorstellen? Ik zou nu nooit meer de mijn ingaan, maar toen was het normaal."</div>
+                </div>
+            </div>
+
+            <!-- Photo 8 - Stoflong -->
+            <div class="tdmv-photo-block part-1" data-parallax="0.5" data-section="photo">
+                <picture>
+                    <source srcset="toen-de-mijnen-verdwenen/foto 8.webp" type="image/webp">
+                    <img src="toen-de-mijnen-verdwenen/foto 8.jpg" alt="Stoflong" loading="lazy">
+                </picture>
+                <div class="tdmv-caption">
+                    <div class="tdmv-caption-header">Stoflong</div>
+                    <div class="tdmv-caption-text">In officiële statistieken overleed gemiddeld 1 mijnwerker per jaar aan silicose. In de praktijk waren het er waarschijnlijk meer dan 100. Geschat wordt dat 20 tot 30% van alle mijnwerkers een vorm van stoflongen had.</div>
+                </div>
+            </div>
+
+            <!-- Photo 9 - Oude luchtschacht -->
+            <div class="tdmv-photo-block part-1 " data-parallax="0.9" data-section="photo">
+                <img src="toen-de-mijnen-verdwenen/foto 9.jpg" alt="Oude luchtschacht" loading="lazy">
+                <div class="tdmv-caption">
+                    <div class="tdmv-caption-header">Oude luchtschacht</div>
+                    <div class="tdmv-caption-text">De mijnbouw maakte littekens in de aarde: tunnels, schachten en instortingen die nog steeds te zien zijn, zoals deze oude luchtschacht in een weiland bij Kerkrade.</div>
+                </div>
+            </div>
+
+            <!-- Photo 10 - Productiebossen -->
+            <div class="tdmv-photo-block part-1 " data-parallax="1.3" data-section="photo">
+                <img src="toen-de-mijnen-verdwenen/foto 10.jpg" alt="Productiebossen" loading="lazy">
+                <div class="tdmv-caption">
+                    <div class="tdmv-caption-header">Productiebossen van de Brunssummerheide</div>
+                    <div class="tdmv-caption-text">Dennenhout was geliefd onder de mijnwerkers omdat het 'spreekt voordat het breekt' en ze daarmee gewaarschuwd werden als een gang dreigde in te storten.</div>
+                </div>
+            </div>
+
+            <!-- Photo 11 - Wilhelminaberg -->
+            <div class="tdmv-photo-block part-1" data-parallax="0.6" data-section="photo">
+                <img src="toen-de-mijnen-verdwenen/foto 11.jpg" alt="Wilhelminaberg" loading="lazy">
+                <div class="tdmv-caption">
+                    <div class="tdmv-caption-header">Wilhelminaberg</div>
+                    <div class="tdmv-caption-text">De Staatsmijn Wilhelmina produceerde in 63 jaar zo'n 36 miljoen ton afval, goed voor een 95 meter hoge berg. Het bleek te duur om deze na de sluiting helemaal af te graven.</div>
+                </div>
+            </div>
+
+            <!-- Photo 12 - Martin (highlighted) -->
+            <div class="tdmv-photo-highlight part-1 size-large" data-section="photo">
+                <img src="toen-de-mijnen-verdwenen/foto 12.jpg" alt="Martin" loading="lazy">
+                <div class="tdmv-highlight-panel">
+                    <div class="tdmv-highlight-header">Martin, oud-mijnwerker Staatsmijn Wilhelmina</div>
+                    <div class="tdmv-highlight-text">"Op de Emma genoot ik door mijn kennis groot aanzien. Dat verdween van de ene op de andere dag." Martin realiseerde de Gedachteniskapel ter nagedachtenis aan gevallen koempels.</div>
+                </div>
+            </div>
+
+            <!-- Photo 13 - Yvonne Olynietsak -->
+            <div class="tdmv-photo-block part-1" data-parallax="1.0" data-section="photo">
+                <img src="toen-de-mijnen-verdwenen/Foto 13.jpg" alt="Yvonne Olynietsak" loading="lazy">
+                <div class="tdmv-caption">
+                    <div class="tdmv-caption-header">Yvonne Olynietsak, dansgroep Podlasie</div>
+                    <div class="tdmv-caption-text">Met de instroom van buitenlandse arbeiders deden nieuwe tradities hun intrede, zoals Poolse volksdansen die nog steeds worden uitgevoerd door de Brunssumse dansgroep Podlasie.</div>
+                </div>
+            </div>
+
+            <!-- Photo 14 - Bontjas -->
+            <div class="tdmv-photo-block part-1 " data-parallax="0.8" data-section="photo">
+                <img src="toen-de-mijnen-verdwenen/Foto 14.jpg" alt="Bontjas" loading="lazy">
+                <div class="tdmv-caption">
+                    <div class="tdmv-caption-header">Bontjas</div>
+                    <div class="tdmv-caption-text">De bontjas was in Heerlen hét symbool van de gouden tijd. Het is een hardnekkige urban myth dat Heerlen de hoogste dichtheid bontjassen van Nederland had.</div>
+                </div>
+            </div>
+
+            <!-- Photo 15 - Villa Pierre -->
+            <div class="tdmv-photo-block part-1 " data-parallax="0.7" data-section="photo">
+                <img src="toen-de-mijnen-verdwenen/foto 15.jpg" alt="Villa Pierre" loading="lazy">
+                <div class="tdmv-caption">
+                    <div class="tdmv-caption-header">Villa Pierre</div>
+                    <div class="tdmv-caption-text">De rijkdom die de mijnbouw bracht, was te zien in de luxe villa's die in het landschap verrezen. Doorgaans gold: hoe hoger in functie, hoe dichter men bij de mijn woonde.</div>
+                </div>
+            </div>
+
+            <!-- Photo 16 - Kolonie Versiliënbosch -->
+            <div class="tdmv-photo-block part-1" data-parallax="0.5" data-section="photo">
+                <img src="toen-de-mijnen-verdwenen/foto 16.jpg" alt="Mijnwerkerskolonie" loading="lazy">
+                <div class="tdmv-caption">
+                    <div class="tdmv-caption-header">Mijnwerkerskolonie Versiliënbosch</div>
+                    <div class="tdmv-caption-text">Koloniën waren hechte gemeenschappen waar iedereen elkaar kende. In Heerlen lagen de meeste koloniën ten noorden van het spoor, het hoger opgeleid personeel woonden ten zuiden ervan.</div>
+                </div>
+            </div>
+
+            <!-- Photo 17 - Voetbalshirt -->
+            <div class="tdmv-photo-block part-1 " data-parallax="1.2" data-section="photo">
+                <img src="toen-de-mijnen-verdwenen/foto 17.jpg" alt="Voetbalshirt Roda JC" loading="lazy">
+                <div class="tdmv-caption">
+                    <div class="tdmv-caption-header">Voetbalshirt van Roda JC Kerkrade</div>
+                    <div class="tdmv-caption-text">In de Mijnstreek speelde men betaald voetbal voordat de rest van Nederland dat deed. De mijnen steunden voetbalclubs waar getalenteerde mijnwerkers voetbalden voor een groot publiek.</div>
+                </div>
+            </div>
+
+            <!-- Photo 18 - Duifjes van Jos -->
+            <div class="tdmv-photo-block part-1 size-large" data-parallax="0.9" data-section="photo">
+                <img src="toen-de-mijnen-verdwenen/Foto 18.jpg" alt="De duifjes van Jos" loading="lazy">
+                <div class="tdmv-caption">
+                    <div class="tdmv-caption-header">De duifjes van Jos</div>
+                    <div class="tdmv-caption-text">Duivenmelken was een populaire hobby onder mijnwerkers. Jos is een van de weinigen die nog actief is en staat iedere dag om vijf uur op om 'zijn duifjes' te verzorgen.</div>
+                </div>
+            </div>
+
+            <!-- Photo 19 - Sint Barbara -->
+            <div class="tdmv-photo-block part-1" data-parallax="0.6" data-section="photo">
+                <img src="toen-de-mijnen-verdwenen/Foto 19.jpg" alt="Sint Barbara" loading="lazy">
+                <div class="tdmv-caption">
+                    <div class="tdmv-caption-header">Sint Barbara - beschermheilige van de mijnwerker</div>
+                    <div class="tdmv-caption-text">De innige band tussen de kerk en de mijn werd gesymboliseerd door Sint Barbara. De kerk speelde een grote rol bij de vorming van de traditionele, hiërarchische maatschappij.</div>
+                </div>
+            </div>
+
+
+            <!-- ============================================
+                 CHAPTER 2: Verweesd, verwaarloosd en in verzet (1974-2000)
+                 ============================================ -->
+            <div class="tdmv-chapter chapter-2" data-section="chapter">
+                <div class="tdmv-chapter-content">
+                    <div class="tdmv-chapter-number">Deel 2</div>
+                    <h2 class="tdmv-chapter-title">Verweesd, verwaarloosd en in verzet</h2>
+                    <div class="tdmv-chapter-period">1974 — 2000</div>
+                    <p class="tdmv-chapter-intro">Zo abrupt als de verbinding tussen de streek en mijnbouw zich had aangediend, zo abrupt werd deze weer doorbroken. Zo'n 45.000 mijnwerkers en 30.000 werknemers van toeleveringsbedrijven waren werkloos.</p>
+                </div>
+                <span class="tdmv-chapter-arrow">→</span>
+            </div>
+
+            <!-- Photo 22 - Laatste gebouwen Hendrik -->
+            <div class="tdmv-photo-block part-2 " data-parallax="0.5" data-section="photo">
+                <img src="toen-de-mijnen-verdwenen/Foto 22.jpg" alt="Staatsmijn Hendrik" loading="lazy">
+                <div class="tdmv-caption">
+                    <div class="tdmv-caption-header">De laatste gebouwen van Staatsmijn Hendrik</div>
+                    <div class="tdmv-caption-text">Met veel energie en één miljard gulden ging de overheid aan de slag om de mijnterreinen te saneren, de operatie 'Van zwart naar groen'.</div>
+                </div>
+            </div>
+
+            <!-- Photo 23 - Afgraving steenberg -->
+            <div class="tdmv-photo-block part-2 " data-parallax="1.1" data-section="photo">
+                <img src="toen-de-mijnen-verdwenen/foto 23.jpg" alt="Afgraving steenberg" loading="lazy">
+                <div class="tdmv-caption">
+                    <div class="tdmv-caption-header">De afgraving van de steenberg</div>
+                    <div class="tdmv-caption-text">Zelfs de landschappen die de mijnen hadden geschapen, verdwenen. Vrijwel alle steenbergen werden afgegraven, een proces dat nog altijd bezig is.</div>
+                </div>
+            </div>
+
+            <!-- Photo 24 - Kaldeborn -->
+            <div class="tdmv-photo-block part-2 size-large" data-parallax="0.5" data-section="photo">
+                <img src="toen-de-mijnen-verdwenen/foto 24.jpg" alt="Kaldeborn" loading="lazy">
+                <div class="tdmv-caption">
+                    <div class="tdmv-caption-header">Kaldeborn</div>
+                    <div class="tdmv-caption-text">Stadion Kaldeborn moest de kathedraal van het Limburgs voetbal worden. In plaats daarvan werd het een symbool van het abrupte einde van de welvaart.</div>
+                </div>
+            </div>
+
+            <!-- Quote Panel 2 -->
+            <div class="tdmv-quote-panel part-2" data-section="quote">
+                <div class="tdmv-quote-text">"Wat was Heerlen nu het geen mijnstad meer was? Voor veel oud-mijnwerkers werd het een plek die hen dagelijks herinnerde aan hun eigen overbodigheid."</div>
+                <div class="tdmv-quote-author">Uit de inleiding</div>
+            </div>
+
+            <!-- Photo 26 - Zakia -->
+            <div class="tdmv-photo-block part-2 " data-parallax="1.2" data-section="photo">
+                <img src="toen-de-mijnen-verdwenen/foto 26.jpg" alt="Zakia" loading="lazy">
+                <div class="tdmv-caption">
+                    <div class="tdmv-caption-header">Zakia, dochter van een mijnwerker</div>
+                    <div class="tdmv-caption-text">Het verdwijnen van de mijnen betekende het verdwijnen van de werkgelegenheid. Mensen trokken weg. De meesten richting Randstad. Enkelen, waaronder de familie van Zakia, bleven.</div>
+                </div>
+            </div>
+
+            <!-- Photo 27 - Verdwijnen kerk -->
+            <div class="tdmv-photo-block part-2" data-parallax="0.6" data-section="photo">
+                <img src="toen-de-mijnen-verdwenen/foto 27.jpg" alt="Verdwijnen van de kerk" loading="lazy">
+                <div class="tdmv-caption">
+                    <div class="tdmv-caption-header">Het verdwijnen van de kerk</div>
+                    <div class="tdmv-caption-text">Kerk en mijn hadden deze regio vormgegeven, via een rijk verenigingsleven en strenge mores. Maar de invloed van de kerk op de streek was snel tanende.</div>
+                </div>
+            </div>
+
+            <!-- Photo 28 - Bern -->
+            <div class="tdmv-photo-block part-2 " data-parallax="0.5" data-section="photo">
+                <img src="toen-de-mijnen-verdwenen/Foto 28.jpg" alt="Bern" loading="lazy">
+                <div class="tdmv-caption">
+                    <div class="tdmv-caption-header">Bern, oud-mijnwerker Staatsmijnen Wilhelmina en Emma</div>
+                    <div class="tdmv-caption-text">"De snelheid en grondigheid waarmee alles werd weggehaald, het was alsof we ons schaamden voor ons verleden."</div>
+                </div>
+            </div>
+
+            <!-- Photo 29 - Longinstituut -->
+            <div class="tdmv-photo-block part-2 " data-parallax="0.9" data-section="photo">
+                <img src="toen-de-mijnen-verdwenen/Foto 29.jpg" alt="Longinstituut" loading="lazy">
+                <div class="tdmv-caption">
+                    <div class="tdmv-caption-header">Het oude longinstituut van Treebeek</div>
+                    <div class="tdmv-caption-text">Toen de mijnen verdwenen, bleven de mijnwerkers achter met versteende longen. Pas na jaren actievoeren kregen ongeveer 2000 mijnwerkers een schadevergoeding en excuses.</div>
+                </div>
+            </div>
+
+            <!-- Photo 30 - Terworm -->
+            <div class="tdmv-photo-block part-2" data-parallax="1.0" data-section="photo">
+                <img src="toen-de-mijnen-verdwenen/foto 30.jpg" alt="Terworm" loading="lazy">
+                <div class="tdmv-caption">
+                    <div class="tdmv-caption-header">Terworm</div>
+                    <div class="tdmv-caption-text">De verwaarlozing van Terworm was exemplarisch voor hoe private mijnbedrijven de regio waar ze zoveel aan hadden verdiend achterlieten.</div>
+                </div>
+            </div>
+
+            <!-- Photo 31 - Winkelcentrum -->
+            <div class="tdmv-photo-block part-2 " data-parallax="0.7" data-section="photo">
+                <img src="toen-de-mijnen-verdwenen/Foto 31.jpg" alt="Winkelcentrum" loading="lazy">
+                <div class="tdmv-caption">
+                    <div class="tdmv-caption-header">Winkelcentrum</div>
+                    <div class="tdmv-caption-text">In 1985 week het karakteristieke hoofdkantoor van de Staatsmijnen voor het winkelcentrum Corio Center. 'Een historische vergissing', schreef Maurice Hermans.</div>
+                </div>
+            </div>
+
+            <!-- Quote Panel 3 -->
+            <div class="tdmv-quote-panel part-2" data-section="quote">
+                <div class="tdmv-quote-text">"Om het tij te keren was verzet nodig, tegen megalomane bouwplannen en tegen onwillige bestuurders. Het waren de bewoners, van wie ooit werd verwacht dat ze gezagsgetrouw waren, die de handschoen oppakte."</div>
+                <div class="tdmv-quote-author">Uit de inleiding</div>
+            </div>
+
+            <!-- Photo 39 - Garrelt -->
+            <div class="tdmv-photo-block part-2" data-parallax="0.5" data-section="photo">
+                <img src="toen-de-mijnen-verdwenen/foto 39.jpg" alt="Garrelt" loading="lazy">
+                <div class="tdmv-caption">
+                    <div class="tdmv-caption-header">Garrelt</div>
+                    <div class="tdmv-caption-text">"In de jaren tachtig en negentig zijn meerdere gebruikers vermoord. Ik heb verslaafden zien rennen met hun darmen uit hun buik. Voor mij was leven op straat vooral overleven."</div>
+                </div>
+            </div>
+
+            <!-- Photo 40 - Shantal -->
+            <div class="tdmv-photo-block part-2 size-large" data-parallax="0.8" data-section="photo">
+                <img src="toen-de-mijnen-verdwenen/Foto 40.jpg" alt="Shantal" loading="lazy">
+                <div class="tdmv-caption">
+                    <div class="tdmv-caption-header">Shantal</div>
+                    <div class="tdmv-caption-text">Shantal tippelde in de jaren tachtig op de Willemstraat. Ze is een van de weinige vrouwen die deze tijd heeft overleefd en er nu nog over kan vertellen.</div>
+                </div>
+            </div>
+
+
+            <!-- ============================================
+                 CHAPTER 3: Nieuwe trots en oude wonden (2000-heden)
+                 ============================================ -->
+            <div class="tdmv-chapter chapter-3" data-section="chapter">
+                <div class="tdmv-chapter-content">
+                    <div class="tdmv-chapter-number">Deel 3</div>
+                    <h2 class="tdmv-chapter-title">Nieuwe trots en oude wonden</h2>
+                    <div class="tdmv-chapter-period">2000 — heden</div>
+                    <p class="tdmv-chapter-intro">Inmiddels lijkt Heerlen een stad te zijn geworden waar heden en verleden een nieuwe balans hebben gevonden. De mijnbouw mag weer nadrukkelijk onderdeel zijn van de identiteit van de regio.</p>
+                </div>
+                <span class="tdmv-chapter-arrow">→</span>
+            </div>
+
+            <!-- Photo 46 - Portret van Heerlen -->
+            <div class="tdmv-photo-block part-3 " data-parallax="0.6" data-section="photo">
+                <img src="toen-de-mijnen-verdwenen/foto 46.jpg" alt="Portret van Heerlen" loading="lazy">
+                <div class="tdmv-caption">
+                    <div class="tdmv-caption-header">Portret van Heerlen</div>
+                    <div class="tdmv-caption-text">Een wilde iris in de ochtendzon op de Heksenberg, de voormalige steenberg van de Oranje-Nassau IV.</div>
+                </div>
+            </div>
+
+            <!-- Photo 47 - Lindsay en dochter -->
+            <div class="tdmv-photo-block part-3 " data-parallax="0.5" data-section="photo">
+                <img src="toen-de-mijnen-verdwenen/Foto 47.jpg" alt="Lindsay en haar dochter" loading="lazy">
+                <div class="tdmv-caption">
+                    <div class="tdmv-caption-header">Lindsay en haar dochter</div>
+                    <div class="tdmv-caption-text">"Mijn opa was een stille man, maar leefde op als hij over de mijnen vertelde. Die trots greep mij aan. Uren en uren heb ik naar zijn verhalen geluisterd."</div>
+                </div>
+            </div>
+
+            <!-- Photo 48 - Mijnmuseum -->
+            <div class="tdmv-photo-block part-3" data-parallax="0.9" data-section="photo">
+                <img src="toen-de-mijnen-verdwenen/Foto 48.jpg" alt="Mijnmuseum Brunssum" loading="lazy">
+                <div class="tdmv-caption">
+                    <div class="tdmv-caption-header">Mijnmuseum Brunssum</div>
+                    <div class="tdmv-caption-text">Iedere woensdagmiddag komen de oud-mijnwerkers samen. Zittend tussen de spullen die ze liefdevol hebben verzameld, praten ze urenlang over het leven van vroeger.</div>
+                </div>
+            </div>
+
+            <!-- Photo 49 - Hans koempelmis -->
+            <div class="tdmv-photo-block part-3 " data-parallax="1.0" data-section="photo">
+                <img src="toen-de-mijnen-verdwenen/Foto 49.jpg" alt="Hans op de koempelmis" loading="lazy">
+                <div class="tdmv-caption">
+                    <div class="tdmv-caption-header">Hans op de koempelmis</div>
+                    <div class="tdmv-caption-text">Hans Jacobs (75) bezoekt maandelijks de koempelmis, waarin de gevallen mijnwerkers van alle mijnen uit de regio worden herdacht.</div>
+                </div>
+            </div>
+
+            <!-- Quote Panel 4 -->
+            <div class="tdmv-quote-panel part-3" data-section="quote">
+                <div class="tdmv-quote-text">"Het verleden voelt voor mij als een litteken. Geen litteken om je voor te schamen, maar slechts een teken dat je leeft. Dat je durft te springen en te vallen en op te staan."</div>
+                <div class="tdmv-quote-author">Een bewoner</div>
+            </div>
+
+            <!-- Photo 50 - Bart tattoo -->
+            <div class="tdmv-photo-block part-3 " data-parallax="0.7" data-section="photo">
+                <img src="toen-de-mijnen-verdwenen/Foto 50.jpg" alt="Bart en zijn tattoo" loading="lazy">
+                <div class="tdmv-caption">
+                    <div class="tdmv-caption-header">Bart en zijn tattoo</div>
+                    <div class="tdmv-caption-text">"Wanneer je nu ziet hoe Heerlen weer aan het bloeien is, nadat het ooit een troosteloze stad was waar drugsproblematiek hoogtij vierde, dan kun je daar met recht trots op zijn."</div>
+                </div>
+            </div>
+
+            <!-- Photo 51 - James Jetlag -->
+            <div class="tdmv-photo-block part-3 size-large" data-parallax="0.5" data-section="photo">
+                <img src="toen-de-mijnen-verdwenen/Foto 51.jpg" alt="James Jetlag" loading="lazy">
+                <div class="tdmv-caption">
+                    <div class="tdmv-caption-header">James Jetlag, muralist</div>
+                    <div class="tdmv-caption-text">James Jetlag, een van Heerlens bekendste muralisten en grondlegger van de muralcultuur, maakte in 2012 een serie werken waar het mijnverleden voor het eerst was te zien.</div>
+                </div>
+            </div>
+
+            <!-- Photo 56 - John motorclub -->
+            <div class="tdmv-photo-block part-3 " data-parallax="1.2" data-section="photo">
+                <img src="toen-de-mijnen-verdwenen/Foto 56.jpg" alt="John" loading="lazy">
+                <div class="tdmv-caption">
+                    <div class="tdmv-caption-header">John, lid van de motorclub</div>
+                    <div class="tdmv-caption-text">Op de plek waar ooit de Oranje-Nassau IV stond, staat nu het clubhuis van de Limbury Roadstars.</div>
+                </div>
+            </div>
+
+            <!-- Photo 57 - Emeli -->
+            <div class="tdmv-photo-block part-3 " data-parallax="0.9" data-section="photo">
+                <img src="toen-de-mijnen-verdwenen/Foto 57.jpg" alt="Emeli" loading="lazy">
+                <div class="tdmv-caption">
+                    <div class="tdmv-caption-header">Emeli (9), trompettist van het Toekomst Orkest Laura</div>
+                    <div class="tdmv-caption-text">Emeli, kleindochter van een mijnwerker, speelt trompet in het Toekomst Orkest Laura. Harmonie Laura bloeit met 90 muzikanten en een 75-jarig jubileum in het vooruitzicht.</div>
+                </div>
+            </div>
+
+            <!-- Photo 58 - Marcel kolen -->
+            <div class="tdmv-photo-block part-3" data-parallax="1.0" data-section="photo">
+                <img src="toen-de-mijnen-verdwenen/Foto 58.jpg" alt="Marcel en de kolen" loading="lazy">
+                <div class="tdmv-caption">
+                    <div class="tdmv-caption-header">Marcel en de kolen</div>
+                    <div class="tdmv-caption-text">Als een van de laatste plaatsen in de Mijnstreek vindt hier, op een kolenveredelingsbedrijf in Eygelshoven, nog economische activiteit rondom steenkool plaats.</div>
+                </div>
+            </div>
+
+            <!-- Photo 60 - Zilverzand -->
+            <div class="tdmv-photo-block part-3 " data-parallax="0.7" data-section="photo">
+                <img src="toen-de-mijnen-verdwenen/foto 60.jpg" alt="Zilverzand" loading="lazy">
+                <div class="tdmv-caption">
+                    <div class="tdmv-caption-header">Zilverzand en Heksenberg</div>
+                    <div class="tdmv-caption-text">Op de locatie van de Oranje-Nassau IV wordt nu zilverzand gewonnen. Zilverzand wordt gebruikt voor onder andere de productie van glas en silicium.</div>
+                </div>
+            </div>
+
+            <!-- Photo 61 - Windmolens -->
+            <div class="tdmv-photo-block part-3 size-large" data-parallax="0.5" data-section="photo">
+                <img src="toen-de-mijnen-verdwenen/foto 61.jpg" alt="Windmolens" loading="lazy">
+                <div class="tdmv-caption">
+                    <div class="tdmv-caption-header">Windmolens</div>
+                    <div class="tdmv-caption-text">De voormalige Mijnstreek wordt in 2040 energieneutraal, dat is althans het streven. Hier wordt onderhoud gepleegd aan een windturbine over de grens in Duitsland.</div>
+                </div>
+            </div>
+
+            <!-- Photo 64 - Mesy -->
+            <div class="tdmv-photo-block part-3 " data-parallax="0.8" data-section="photo">
+                <img src="toen-de-mijnen-verdwenen/foto 64.jpg" alt="Mesy" loading="lazy">
+                <div class="tdmv-caption">
+                    <div class="tdmv-caption-header">Mesy</div>
+                    <div class="tdmv-caption-text">Mesy (20), een opkomende rapper die onlangs een platencontract tekende. Mesy is in veel opzichten een product van het nieuwe Heerlen: uitgesproken, talentvol en rauw.</div>
+                </div>
+            </div>
+
+            <!-- Photo 65 - Inaya -->
+            <div class="tdmv-photo-block part-3" data-parallax="0.6" data-section="photo">
+                <img src="toen-de-mijnen-verdwenen/Foto 65.jpg" alt="Inaya" loading="lazy">
+                <div class="tdmv-caption">
+                    <div class="tdmv-caption-header">Inaya, kinderburgemeester Heerlen</div>
+                    <div class="tdmv-caption-text">Inaya was elf jaar oud toen ze in het kindercollege van Heerlen kwam. De opa van Inaya werkte als mijnwerker in een Oranje-Nassau mijn.</div>
+                </div>
+            </div>
+
+            <!-- End Panel -->
+            <div class="end-panel" data-section="end" style="flex-shrink: 0; height: 100vh; min-width: 800px; background: linear-gradient(135deg, #2d1f1a 0%, #1a1816 100%); display: flex; flex-direction: column; justify-content: center; padding: 3rem;">
+                <p style="font-family: 'Scala Sans SC', sans-serif; font-size: 1.2rem; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 3rem;">Einde van deze serie</p>
+                <p style="font-family: 'Scala Sans', sans-serif; font-size: 0.85rem; color: rgba(255,255,255,0.4); margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.05em;">Bekijk ook</p>
+                <nav style="display: flex; flex-direction: column; gap: 0.6rem;">
+                    <a href="index.html" style="font-family: 'Scala Sans', sans-serif; font-size: 0.95rem; color: #ffffff; text-decoration: none; transition: color 0.3s;">Home</a>
+                    <a href="de-exoten.html" style="font-family: 'Scala Sans', sans-serif; font-size: 0.95rem; color: #ffffff; text-decoration: none; transition: color 0.3s;">De Exoten</a>
+                    <a href="mijn-tatoeages.html" style="font-family: 'Scala Sans', sans-serif; font-size: 0.95rem; color: #ffffff; text-decoration: none; transition: color 0.3s;">Mijn Tatoeages</a>
+                    <a href="a-better-port.html" style="font-family: 'Scala Sans', sans-serif; font-size: 0.95rem; color: #ffffff; text-decoration: none; transition: color 0.3s;">A Better Port</a>
+                    <a href="in-blauw-licht.html" style="font-family: 'Scala Sans', sans-serif; font-size: 0.95rem; color: #ffffff; text-decoration: none; transition: color 0.3s;">In Blauw Licht</a>
+                    <a href="het-noordzeekanaal-gebied.html" style="font-family: 'Scala Sans', sans-serif; font-size: 0.95rem; color: #ffffff; text-decoration: none; transition: color 0.3s;">Het Noordzeekanaal Gebied</a>
+                    <a href="de-onmisbaren.html" style="font-family: 'Scala Sans', sans-serif; font-size: 0.95rem; color: #ffffff; text-decoration: none; transition: color 0.3s;">De Onmisbaren</a>
+                    <a href="een-plek-onder-de-zon.html" style="font-family: 'Scala Sans', sans-serif; font-size: 0.95rem; color: #ffffff; text-decoration: none; transition: color 0.3s;">Een Plek Onder de Zon</a>
+                </nav>
+                <div style="margin-top: 3rem;">
+                    <p style="font-family: 'Scala Sans', sans-serif; font-size: 0.85rem; color: rgba(255,255,255,0.4); margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.05em;">Contact</p>
+                    <p style="font-family: 'Scala Sans', sans-serif; font-size: 0.95rem; color: #ffffff; margin-bottom: 0.3rem;">wouterzaalberg@gmail.com</p>
+                    <p style="font-family: 'Scala Sans', sans-serif; font-size: 0.95rem; color: #ffffff; margin-bottom: 1.5rem;">06 45 788 180</p>
+                    <a href="https://instagram.com/wouterzaalberg" target="_blank" style="display: inline-block; color: #ffffff; transition: opacity 0.3s;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const container = document.getElementById('scrollContainer');
+        const allItems = document.querySelectorAll('[data-section]');
+        const chapterArrows = document.querySelectorAll('.tdmv-chapter-arrow');
+        const introSection = document.getElementById('introSection');
+        let currentIndex = 0;
+        let isAnimating = false;
+        let scrollQueue = 0;
+        let introState = 0; // 0 = hero, 1 = photo 1, 2 = chapter 1
+
+        // Check if current item is the intro section
+        function isAtIntroSection(index) {
+            return allItems[index] && allItems[index].id === 'introSection';
+        }
+
+        // Toggle intro section state (descent into mine - 3 levels)
+        function setIntroState(state) {
+            introState = state;
+            introSection.classList.remove('descended', 'descended-2');
+
+            if (state === 1) {
+                introSection.classList.add('descended');
+            } else if (state === 2) {
+                introSection.classList.add('descended', 'descended-2');
+            }
+        }
+
+        // Descent arrow click handlers (multiple arrows now)
+        const descentArrows = document.querySelectorAll('.tdmv-descent-arrow');
+        descentArrows.forEach(arrow => {
+            arrow.addEventListener('click', () => {
+                if (introState < 2) {
+                    setIntroState(introState + 1);
+                } else {
+                    // At state 2, go to next section
+                    handleScroll(1);
+                }
+            });
+        });
+
+        // Scroll to target index
+        function scrollToIndex(index) {
+            if (index < 0) index = 0;
+            if (index >= allItems.length) index = allItems.length - 1;
+
+            currentIndex = index;
+
+            allItems[currentIndex].scrollIntoView({
+                behavior: 'smooth',
+                block: 'center',
+                inline: 'center'
+            });
+        }
+
+        // Process scroll with intro state handling
+        function handleScroll(direction) {
+            // If at intro section, handle state transitions (3 levels)
+            if (isAtIntroSection(currentIndex)) {
+                if (direction > 0) {
+                    // Forward: hero → photo → chapter → next
+                    if (introState < 2) {
+                        setIntroState(introState + 1);
+                        return;
+                    }
+                    // introState === 2: continue to next item
+                } else if (direction < 0) {
+                    // Backward: chapter → photo → hero → stay
+                    if (introState > 0) {
+                        setIntroState(introState - 1);
+                        return;
+                    }
+                    // introState === 0: stay at beginning
+                    return;
+                }
+            }
+
+            // Normal scrolling
+            const newIndex = currentIndex + direction;
+
+            // If moving to intro section, set appropriate state
+            if (isAtIntroSection(newIndex)) {
+                if (direction > 0) {
+                    setIntroState(0); // Coming from before: start at hero
+                } else {
+                    setIntroState(2); // Coming from after: start at chapter
+                }
+            }
+
+            scrollToIndex(newIndex);
+        }
+
+        // Process scroll queue
+        function processScrollQueue() {
+            if (scrollQueue !== 0) {
+                const direction = scrollQueue > 0 ? 1 : -1;
+                scrollQueue = 0;
+                handleScroll(direction);
+
+                setTimeout(() => {
+                    isAnimating = false;
+                    if (scrollQueue !== 0) {
+                        processScrollQueue();
+                    }
+                }, 500);
+            } else {
+                isAnimating = false;
+            }
+        }
+
+        // Smooth scroll handling (desktop only)
+        if (window.innerWidth > 767) {
+            container.addEventListener('wheel', (e) => {
+                e.preventDefault();
+
+                if (e.deltaY > 0) {
+                    scrollQueue++;
+                } else if (e.deltaY < 0) {
+                    scrollQueue--;
+                }
+
+                if (!isAnimating) {
+                    isAnimating = true;
+                    processScrollQueue();
+                }
+
+            }, { passive: false });
+        }
+
+        // Chapter arrow click handlers
+        chapterArrows.forEach(arrow => {
+            arrow.addEventListener('click', () => {
+                handleScroll(1);
+            });
+        });
+
+        // Fade in images when loaded
+        const images = document.querySelectorAll('.tdmv-photo-block img, .tdmv-intro-photo img, .tdmv-photo-highlight img, .tdmv-insert-image img');
+
+        images.forEach(img => {
+            if (img.complete) {
+                img.classList.add('loaded');
+            } else {
+                img.addEventListener('load', () => {
+                    img.classList.add('loaded');
+                });
+            }
+        });
+
+        // Insert panels reveal effect
+        const insertPanels = document.querySelectorAll('.tdmv-insert');
+
+        const insertObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('in-view');
+                } else {
+                    entry.target.classList.remove('in-view');
+                }
+            });
+        }, {
+            threshold: 0.3
+        });
+
+        insertPanels.forEach(panel => {
+            insertObserver.observe(panel);
+        });
+
+
+        // Dust particles effect - optimized for performance
+        const dustConfigs = [
+            { container: document.getElementById('dustContainer'), active: false, parent: document.querySelector('.tdmv-hero-panel') },
+            { container: document.querySelector('.dust-photo1'), active: false, parent: document.querySelector('.tdmv-intro-photo') },
+            { container: document.querySelector('.dust-chapter1'), active: false, parent: document.querySelector('.tdmv-intro-chapter') },
+            { container: document.getElementById('dustOverlay'), active: false, parent: null, isOverlay: true }
+        ].filter(c => c.container);
+
+        // Mobile detection and limits
+        const isMobile = window.innerWidth <= 767;
+        const maxParticles = isMobile ? 40 : 100;
+        const overlayMaxParticles = isMobile ? 60 : 150;
+        const initialParticles = isMobile ? 30 : 80;
+        const overlayInitialParticles = isMobile ? 40 : 100;
+        const createInterval = isMobile ? 500 : 250;
+
+        function createDustParticle(container, isOverlay = false) {
+            const max = isOverlay ? overlayMaxParticles : maxParticles;
+            if (container.children.length >= max) return;
+
+            const particle = document.createElement('div');
+            particle.className = 'tdmv-dust-particle';
+
+            // Random size (2-12px, with occasional larger particles)
+            const sizeRandom = Math.random();
+            const size = sizeRandom < 0.85 ? (Math.random() * 5 + 2) : (Math.random() * 6 + 8);
+            particle.style.width = size + 'px';
+            particle.style.height = size + 'px';
+
+            // Random starting position
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.top = Math.random() * 100 + '%';
+
+            // Random drift direction
+            const driftX = (Math.random() - 0.5) * 150;
+            const driftY = (Math.random() - 0.5) * 150 - 50;
+            particle.style.setProperty('--dust-drift-x', driftX + 'px');
+            particle.style.setProperty('--dust-drift-y', driftY + 'px');
+
+            // Random opacity (0.15-0.4)
+            const opacity = Math.random() * 0.25 + 0.15;
+            particle.style.setProperty('--dust-opacity', opacity);
+
+            // Random duration (12-25s)
+            const duration = Math.random() * 13 + 12;
+            particle.style.animation = `dustFloat ${duration}s ease-in-out forwards`;
+
+            container.appendChild(particle);
+
+            // Remove particle after animation
+            setTimeout(() => {
+                particle.remove();
+            }, duration * 1000);
+        }
+
+        // Initialize particles for a container (lazy)
+        function initializeParticles(config) {
+            if (config.initialized) return;
+            config.initialized = true;
+
+            const count = config.isOverlay ? overlayInitialParticles : initialParticles;
+            for (let i = 0; i < count; i++) {
+                setTimeout(() => {
+                    if (config.active) createDustParticle(config.container, config.isOverlay);
+                }, Math.random() * 4000);
+            }
+        }
+
+        // Observe visibility of dust containers (for intro sections only)
+        const dustObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                const config = dustConfigs.find(c => c.parent === entry.target);
+                if (config) {
+                    config.active = entry.isIntersecting;
+                    if (entry.isIntersecting) {
+                        initializeParticles(config);
+                    }
+                }
+            });
+        }, { threshold: 0.1 });
+
+        dustConfigs.forEach(config => {
+            if (config.parent) {
+                dustObserver.observe(config.parent);
+            }
+        });
+
+        // Part 1 dust overlay - track when in part 1 photos (2-19)
+        const dustOverlay = document.getElementById('dustOverlay');
+        const dustOverlayConfig = dustConfigs.find(c => c.isOverlay);
+        const part1Photos = document.querySelectorAll('.tdmv-photo-block.part-1, .tdmv-photo-highlight.part-1, .tdmv-insert.part-1');
+        let part1PhotosVisible = 0;
+
+        const part1Observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    part1PhotosVisible++;
+                } else {
+                    part1PhotosVisible--;
+                }
+            });
+
+            // Activate dust overlay when any part 1 photo is visible
+            if (part1PhotosVisible > 0) {
+                dustOverlay.classList.add('active');
+                if (dustOverlayConfig) {
+                    dustOverlayConfig.active = true;
+                    initializeParticles(dustOverlayConfig);
+                }
+            } else {
+                dustOverlay.classList.remove('active');
+                if (dustOverlayConfig) {
+                    dustOverlayConfig.active = false;
+                }
+            }
+        }, { threshold: 0.1 });
+
+        part1Photos.forEach(photo => {
+            part1Observer.observe(photo);
+        });
+
+        // Continuously create particles using requestAnimationFrame
+        let lastParticleTime = 0;
+        function particleLoop(timestamp) {
+            if (timestamp - lastParticleTime >= createInterval) {
+                dustConfigs.forEach(config => {
+                    const max = config.isOverlay ? overlayMaxParticles : maxParticles;
+                    if (config.active && config.container.children.length < max) {
+                        createDustParticle(config.container, config.isOverlay);
+                    }
+                });
+                lastParticleTime = timestamp;
+            }
+            requestAnimationFrame(particleLoop);
+        }
+        requestAnimationFrame(particleLoop);
+
+        // Position intro photo caption based on actual photo width
+        function positionIntroCaption() {
+            const introPhoto = document.querySelector('.tdmv-intro-photo img');
+            const introCaption = document.querySelector('.tdmv-intro-photo > .tdmv-caption');
+
+            if (introPhoto && introCaption) {
+                const photoWidth = introPhoto.offsetWidth;
+                const containerWidth = window.innerWidth;
+                const photoLeft = (containerWidth - photoWidth) / 2;
+                const captionLeft = photoLeft + photoWidth + 12; // 12px gap
+                introCaption.style.left = captionLeft + 'px';
+            }
+        }
+
+        // Position caption when image loads and on resize
+        const introPhotoImg = document.querySelector('.tdmv-intro-photo img');
+        if (introPhotoImg) {
+            if (introPhotoImg.complete) {
+                positionIntroCaption();
+            } else {
+                introPhotoImg.addEventListener('load', positionIntroCaption);
+            }
+            window.addEventListener('resize', positionIntroCaption);
+        }
+
+        // Chapter backgrounds - fade out when leaving
+        const introChapter = document.querySelector('.tdmv-intro-chapter');
+        if (introChapter) {
+            const firstPhotoBlock = document.querySelector('.tdmv-photo-block.part-1');
+            if (firstPhotoBlock) {
+                const bgObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            introChapter.classList.add('bg-hidden');
+                        }
+                    });
+                }, { threshold: 0.1 });
+                bgObserver.observe(firstPhotoBlock);
+
+                // Restore when back at intro
+                const introObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting && entry.intersectionRatio > 0.5) {
+                            introChapter.classList.remove('bg-hidden');
+                        }
+                    });
+                }, { threshold: 0.5 });
+                introObserver.observe(introSection);
+            }
+        }
+
+        // Chapter 2 and 3 background fade
+        const chapter2 = document.querySelector('.tdmv-chapter.chapter-2');
+        const chapter3 = document.querySelector('.tdmv-chapter.chapter-3');
+
+        // Find first photo after each chapter
+        function getNextPhoto(chapter) {
+            let sibling = chapter.nextElementSibling;
+            while (sibling) {
+                if (sibling.classList.contains('tdmv-photo-block') ||
+                    sibling.classList.contains('tdmv-photo-highlight')) {
+                    return sibling;
+                }
+                sibling = sibling.nextElementSibling;
+            }
+            return null;
+        }
+
+        // Setup chapter fade observers
+        [chapter2, chapter3].forEach(chapter => {
+            if (!chapter) return;
+
+            const nextPhoto = getNextPhoto(chapter);
+            if (!nextPhoto) return;
+
+            // Fade out when next photo is visible
+            const fadeOutObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        chapter.classList.add('bg-hidden');
+                    }
+                });
+            }, { threshold: 0.1 });
+            fadeOutObserver.observe(nextPhoto);
+
+            // Restore when chapter is fully visible again
+            const restoreObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting && entry.intersectionRatio > 0.5) {
+                        chapter.classList.remove('bg-hidden');
+                    }
+                });
+            }, { threshold: 0.5 });
+            restoreObserver.observe(chapter);
+        });
+    </script>
+
+    <!-- Leaflet Map -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        // Initialize mine map
+        const mineMap = L.map('mineMap', {
+            zoomControl: true,
+            attributionControl: false,
+            scrollWheelZoom: false
+        }).setView([50.895, 5.98], 12);
+
+        // Grayscale map tiles (Stamen Toner Lite or CartoDB)
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+            maxZoom: 19
+        }).addTo(mineMap);
+
+        // Custom marker icon
+        const mineIcon = L.divIcon({
+            className: 'mine-marker',
+            iconSize: [32, 32]
+        });
+
+        // Mine locations with coordinates, production and workers data
+        const mines = [
+            { name: 'Staatsmijn Wilhelmina', coords: [50.875, 6.021], years: '1906-1969', peakTons: 1.2, peakYear: 1957, workers: 4200 },
+            { name: 'Staatsmijn Emma', coords: [50.905, 5.948], years: '1911-1973', peakTons: 2.1, peakYear: 1956, workers: 6800 },
+            { name: 'Staatsmijn Hendrik', coords: [50.928, 5.970], years: '1915-1963', peakTons: 1.0, peakYear: 1952, workers: 3500 },
+            { name: 'Staatsmijn Maurits', coords: [50.958, 5.827], years: '1915-1967', peakTons: 2.4, peakYear: 1957, workers: 7200 },
+            { name: 'Oranje-Nassau I', coords: [50.877, 5.973], years: '1899-1974', peakTons: 0.8, peakYear: 1954, workers: 2900 },
+            { name: 'Oranje-Nassau II', coords: [50.865, 5.960], years: '1904-1971', peakTons: 0.6, peakYear: 1953, workers: 2100 },
+            { name: 'Oranje-Nassau III', coords: [50.885, 5.957], years: '1917-1973', peakTons: 1.1, peakYear: 1955, workers: 3800 },
+            { name: 'Oranje-Nassau IV', coords: [50.912, 5.932], years: '1927-1966', peakTons: 0.9, peakYear: 1956, workers: 3100 },
+            { name: 'Laura', coords: [50.898, 6.045], years: '1905-1968', peakTons: 0.7, peakYear: 1954, workers: 2400 },
+            { name: 'Julia', coords: [50.894, 6.055], years: '1926-1974', peakTons: 0.8, peakYear: 1958, workers: 2600 },
+            { name: 'Willem-Sophia', coords: [50.855, 6.028], years: '1902-1970', peakTons: 0.5, peakYear: 1951, workers: 1800 },
+            { name: 'Domaniale Mijn', coords: [50.867, 6.065], years: '1917-1969', peakTons: 0.6, peakYear: 1955, workers: 2200 }
+        ];
+
+        // Find max tonnage for bar chart scaling
+        const maxTons = Math.max(...mines.map(m => m.peakTons));
+
+        // Add markers to map
+        mines.forEach(mine => {
+            const marker = L.marker(mine.coords, { icon: mineIcon }).addTo(mineMap);
+            marker.bindPopup(`<strong>${mine.name}</strong><br>${mine.years}<br>${mine.peakTons} mln ton (${mine.peakYear})`);
+        });
+
+        // Generate mine statistics HTML with bar charts
+        const mineStatsContainer = document.getElementById('mineStats');
+        if (mineStatsContainer) {
+            const statsHTML = mines.map(mine => {
+                const barWidth = (mine.peakTons / maxTons) * 100;
+                return `
+                <div class="tdmv-mine-stat">
+                    <div class="tdmv-mine-stat-name">${mine.name}</div>
+                    <div class="tdmv-mine-stat-bar">
+                        <div class="tdmv-mine-stat-bar-fill" style="width: 0%" data-width="${barWidth}%"></div>
+                    </div>
+                    <div class="tdmv-mine-stat-data">${mine.peakTons} mln ton <span>(${mine.peakYear})</span> · ${mine.workers.toLocaleString('nl-NL')} werknemers</div>
+                </div>
+            `}).join('');
+            mineStatsContainer.innerHTML = statsHTML;
+
+            // Animate bars when in view
+            const statsObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const bars = entry.target.querySelectorAll('.tdmv-mine-stat-bar-fill');
+                        bars.forEach(bar => {
+                            bar.style.width = bar.dataset.width;
+                        });
+                        statsObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.3 });
+            statsObserver.observe(mineStatsContainer);
+        }
+
+        // Invalidate size when map becomes visible (for proper rendering)
+        const mapObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    mineMap.invalidateSize();
+                }
+            });
+        }, { threshold: 0.1 });
+
+        mapObserver.observe(document.getElementById('mineMap'));
+    </script>
+</body>
+</html>

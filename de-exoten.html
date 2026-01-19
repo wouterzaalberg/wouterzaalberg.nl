@@ -1,0 +1,1248 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>De Exoten - Wouter Zaalberg</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        body.horizontal-scroll-page {
+            background: #ffffff;
+        }
+
+        .horizontal-nav {
+            color: #1a1a1a;
+        }
+
+        .horizontal-nav .back-link,
+        .horizontal-nav .nav-title {
+            color: #1a1a1a;
+        }
+
+        .horizontal-scroll-content {
+            gap: 4rem;
+        }
+
+        .photo-item {
+            flex-shrink: 0;
+        }
+
+        .photo-item img {
+            height: 70vh;
+            width: auto;
+            display: block;
+            opacity: 1;
+        }
+
+        .photo-item.photo-small img {
+            height: 35vh;
+        }
+
+        /* Cluster - align bottom */
+        .photo-cluster {
+            display: flex;
+            gap: 0.4rem;
+            align-items: flex-end;
+            flex-shrink: 0;
+        }
+
+        .photo-cluster img {
+            display: block;
+        }
+
+        /* Linker kolom: foto 2 (vol) */
+        .cluster-left {
+            flex-shrink: 0;
+        }
+
+        .cluster-left img {
+            height: 45vh;
+            width: auto;
+        }
+
+        /* Rechter sectie: foto 3 bovenaan, foto 5+6 onderaan */
+        .cluster-right {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.4rem;
+        }
+
+        /* Foto 3 - niet croppen, kan uitsteken */
+        .cluster-right > img {
+            height: 30vh;
+            width: auto;
+            object-fit: contain;
+        }
+
+        /* Onderste rij: foto 5 en 6 */
+        .cluster-bottom {
+            display: flex;
+            gap: 0.4rem;
+        }
+
+        .cluster-bottom img {
+            height: 20vh;
+            width: auto;
+        }
+
+        /* Ruimte na cluster */
+        .photo-cluster {
+            margin-right: 8rem;
+        }
+
+        /* Grijze achtergrond sectie */
+        .gray-section {
+            display: flex;
+            align-items: flex-end;
+            background: #f0f0f0;
+            padding: 0 4rem;
+            padding-left: 6rem;
+            padding-right: 8rem;
+            gap: 12rem;
+            flex-shrink: 0;
+            min-height: 100vh;
+            margin-top: -80px;
+            margin-left: 0;
+            padding-top: calc(80px + 8rem);
+            padding-bottom: calc((100vh - 70vh) / 2);
+            box-sizing: border-box;
+            position: relative;
+        }
+
+        /* Hoofdstuk titel */
+        .chapter-title {
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            text-align: right;
+            padding: 2rem;
+            height: 70vh;
+            justify-content: flex-start;
+            padding-top: 4rem;
+        }
+
+        .chapter-number {
+            font-family: 'Scala Sans', sans-serif;
+            font-size: 0.9rem;
+            letter-spacing: 0.1em;
+            color: #1a1a1a;
+            margin-bottom: 0.3rem;
+        }
+
+        .chapter-name {
+            font-family: 'Scala Sans', sans-serif;
+            font-size: 2.5rem;
+            font-style: italic;
+            font-weight: 700;
+            color: #1a1a1a;
+            line-height: 1.2;
+        }
+
+        /* Foto met verticale label */
+        .labeled-photo {
+            position: relative;
+            flex-shrink: 0;
+            display: flex;
+            align-items: flex-end;
+            height: 70vh;
+        }
+
+        .vertical-label {
+            position: absolute;
+            bottom: 100%;
+            left: 0;
+            margin-bottom: 0.5rem;
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            transform: rotate(180deg);
+            font-family: 'Scala Sans', sans-serif;
+            font-weight: 700;
+            font-size: 1.6rem;
+            letter-spacing: 0.15em;
+            line-height: 1.1;
+            color: #1a1a1a;
+            white-space: nowrap;
+        }
+
+        .vertical-label .accent {
+            font-family: 'Minion Pro', 'Times New Roman', serif;
+            font-style: italic;
+        }
+
+        .labeled-photo img {
+            height: 70vh;
+            width: auto;
+        }
+
+        /* Foto formaten: groot (70vh), midden (45vh), klein (35vh), extra-klein (17vh) */
+        .labeled-photo.size-medium {
+            height: 45vh;
+        }
+        .labeled-photo.size-medium img {
+            height: 45vh;
+        }
+
+        .labeled-photo.size-small {
+            height: 35vh;
+        }
+        .labeled-photo.size-small img {
+            height: 35vh;
+        }
+
+        .labeled-photo.size-xs {
+            height: 17vh;
+        }
+        .labeled-photo.size-xs img {
+            height: 17vh;
+        }
+
+        /* Hemelboom paar: foto 18 + info 2 */
+        .hemelboom-pair {
+            display: flex;
+            gap: 0.4rem;
+            align-items: flex-end;
+            flex-shrink: 0;
+            height: 70vh;
+        }
+
+        .info-column {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            align-self: flex-start;
+            gap: 0.4rem;
+            padding-top: 15vh;
+            box-sizing: border-box;
+            width: 200px;
+        }
+
+        .info-column img {
+            height: 35vh;
+            width: auto;
+            display: block;
+        }
+
+        .info-column .photo-caption-box {
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        /* Foto 19-20 cluster: versprongen foto's */
+        .photo-cluster-19-20 {
+            display: flex;
+            gap: 1.5rem;
+            flex-shrink: 0;
+            height: 70vh;
+            align-items: flex-start;
+        }
+
+        .photo-cluster-19-20 .photos-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+            overflow: visible;
+        }
+
+        .photo-cluster-19-20 .photo-top {
+            position: relative;
+            z-index: 2;
+        }
+
+        .photo-cluster-19-20 .photo-top .vertical-label {
+            position: absolute;
+            bottom: 100%;
+            left: 0;
+            margin-bottom: 0.5rem;
+        }
+
+        .photo-cluster-19-20 .photo-top img {
+            height: 33vh;
+            width: auto;
+            display: block;
+        }
+
+        .photo-cluster-19-20 .photo-bottom {
+            margin-left: 50%;
+            z-index: 1;
+            flex-shrink: 0;
+        }
+
+        .photo-cluster-19-20 .photo-bottom img {
+            height: 36vh;
+            width: auto;
+            max-width: none;
+            display: block;
+        }
+
+        .photo-cluster-19-20 .caption-column {
+            align-self: flex-start;
+        }
+
+        .photo-cluster-19-20 .caption-column .photo-caption-box {
+            max-width: 280px;
+        }
+
+        /* Aziatische hoornaar cluster: foto 21-24 */
+        .hoornaar-cluster {
+            display: flex;
+            gap: 0.4rem;
+            align-items: flex-end;
+            flex-shrink: 0;
+            height: 70vh;
+        }
+
+        .hoornaar-cluster .photo-klein {
+            align-self: flex-start;
+            position: relative;
+        }
+
+        .hoornaar-cluster .photo-klein img {
+            height: 35vh;
+            width: auto;
+            display: block;
+        }
+
+        .hoornaar-cluster .photo-klein .vertical-label {
+            position: absolute;
+            bottom: 100%;
+            left: 0;
+            margin-bottom: 0.5rem;
+        }
+
+        .hoornaar-cluster .col-22-23 {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+            align-items: stretch;
+        }
+
+        .hoornaar-cluster .row-caption-23 {
+            display: flex;
+            gap: 0.4rem;
+            justify-content: space-between;
+            align-items: stretch;
+        }
+
+        .hoornaar-cluster .row-caption-23 .photo-caption-box {
+            height: 17vh;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .hoornaar-cluster .col-22-23 .photo-xs img {
+            height: 17vh;
+            width: auto;
+            display: block;
+        }
+
+        .hoornaar-cluster .photo-24 {
+            align-self: flex-start;
+            padding-top: 12vh;
+        }
+
+        .hoornaar-cluster .photo-24 img {
+            height: 35vh;
+            width: auto;
+            display: block;
+        }
+
+        .hoornaar-cluster .photo-medium img {
+            height: 45vh;
+            width: auto;
+            display: block;
+        }
+
+        /* Aziatische hoornaar boog: foto 25-31 in boogvorm */
+        .hoornaar-boog {
+            display: flex;
+            gap: 0.4rem;
+            align-items: flex-end;
+            flex-shrink: 0;
+            height: 70vh;
+            position: relative;
+        }
+
+        .hoornaar-boog img {
+            width: auto;
+            display: block;
+        }
+
+        .hoornaar-boog .boog-foto {
+            position: relative;
+        }
+
+        .hoornaar-boog .vertical-label {
+            position: absolute;
+            top: 0;
+            left: 0;
+            margin-left: -3rem;
+        }
+
+        /* Boog posities met margin-bottom voor hoogte */
+        .hoornaar-boog .foto-25 {
+            margin-bottom: 0;
+        }
+        .hoornaar-boog .foto-25 img {
+            height: 20vh;
+        }
+
+        .hoornaar-boog .foto-26 {
+            margin-bottom: 12vh;
+            margin-left: -8vh;
+        }
+        .hoornaar-boog .foto-26 img {
+            height: 22vh;
+        }
+
+        .hoornaar-boog .foto-28 {
+            margin-bottom: 12vh;
+        }
+        .hoornaar-boog .foto-28 img {
+            height: 22vh;
+        }
+
+        .hoornaar-boog .foto-27 {
+            margin-bottom: 45vh;
+            margin-left: -22vh;
+        }
+        .hoornaar-boog .foto-27 img {
+            height: 25vh;
+        }
+
+        .hoornaar-boog .foto-29 {
+            margin-bottom: 45vh;
+            margin-left: 0;
+            position: relative;
+        }
+        .hoornaar-boog .foto-29 img {
+            height: 25vh;
+        }
+        .hoornaar-boog .foto-29 .info-3 {
+            position: absolute;
+            top: calc(100% + 0.4rem);
+            left: 0;
+            height: 25vh;
+        }
+
+        .hoornaar-boog .foto-30 {
+            margin-bottom: 23vh;
+        }
+        .hoornaar-boog .foto-30 img {
+            height: 20vh;
+        }
+
+        .hoornaar-boog .foto-31 {
+            margin-bottom: 0;
+        }
+        .hoornaar-boog .foto-31 img {
+            height: 25vh;
+        }
+
+        .hoornaar-boog .foto-placeholder {
+            margin-bottom: 0;
+        }
+        .hoornaar-boog .placeholder-box {
+            height: 25vh;
+            width: 20vh;
+            background: #d0d0d0;
+            border: 2px dashed #999;
+        }
+
+        /* Foto 35 sectie met tekstkader en grid */
+        .foto-35-section {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+            flex-shrink: 0;
+            height: 70vh;
+        }
+
+        .foto-35-section .labeled-photo img {
+            height: 70vh;
+        }
+
+        .foto-35-section .section-caption {
+            align-self: center;
+            max-width: 280px;
+        }
+
+        .foto-grid-36-39 {
+            display: flex;
+            gap: 0.4rem;
+            align-items: flex-start;
+        }
+
+        .foto-grid-36-39 .grid-column {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+
+        .foto-grid-36-39 .grid-column:first-child {
+            margin-top: 8vh;
+        }
+
+        .foto-grid-36-39 img {
+            height: 24vh;
+            width: auto;
+            display: block;
+        }
+
+        /* Amerikaanse rivierkreeft sectie */
+        .rivierkreeft-section {
+            display: flex;
+            gap: 1.5rem;
+            align-items: flex-start;
+            flex-shrink: 0;
+            height: 70vh;
+            margin-left: 8rem;
+        }
+
+        .rivierkreeft-section .labeled-photo img {
+            height: 70vh;
+        }
+
+        .rivierkreeft-section .rivierkreeft-caption {
+            margin-top: 17vh;
+            max-width: 280px;
+        }
+
+        /* Bol van placeholders */
+        .placeholder-ball {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            align-self: center;
+            height: 70vh;
+        }
+
+        .ball-row {
+            display: flex;
+            gap: 0.5rem;
+            justify-content: center;
+        }
+
+        .ball-placeholder {
+            width: 13vh;
+            height: 13vh;
+            background: #d0d0d0;
+            border: 2px dashed #999;
+        }
+
+        /* Foto 41 wrapper */
+        .foto-41-wrapper {
+            display: flex;
+            gap: 1.5rem;
+            align-items: flex-start;
+        }
+
+        .foto-41-wrapper img {
+            height: 70vh;
+            width: auto;
+        }
+
+        .foto-41-wrapper .foto-41-caption {
+            margin-top: 17vh;
+            max-width: 280px;
+        }
+
+        /* Ongelijkbladig vederkruid sectie */
+        .vederkruid-section {
+            display: flex;
+            gap: 1.5rem;
+            align-items: flex-start;
+            flex-shrink: 0;
+            height: 70vh;
+        }
+
+        .vederkruid-section .labeled-photo img {
+            height: 70vh;
+        }
+
+        /* Bijschrift styling */
+        .photo-with-caption {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.5rem;
+            flex-shrink: 0;
+            position: relative;
+            height: 70vh;
+        }
+
+        .photo-with-caption.caption-right {
+            flex-direction: row;
+        }
+
+        .photo-with-caption.caption-left {
+            flex-direction: row-reverse;
+        }
+
+        .photo-with-caption.caption-top {
+            flex-direction: column-reverse;
+            align-items: flex-start;
+        }
+
+        .photo-with-caption.caption-bottom {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .photo-caption-box {
+            background: transparent;
+            border: 2px solid #a8c8e8;
+            padding: 1.5rem;
+            max-width: 320px;
+            box-sizing: border-box;
+        }
+
+        .photo-caption-box .caption-title {
+            font-family: 'Scala Sans', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: #1a1a1a;
+            margin: 0 0 0.8rem 0;
+        }
+
+        .photo-caption-box .caption-text {
+            font-family: 'Scala Sans', sans-serif;
+            font-size: 0.85rem;
+            line-height: 1.6;
+            color: #1a1a1a;
+            margin: 0;
+        }
+
+        /* Beverrat cluster sectie */
+        .beverrat-cluster {
+            display: flex;
+            gap: 0.4rem;
+            align-items: center;
+            flex-shrink: 0;
+            position: relative;
+            height: 70vh;
+        }
+
+        .beverrat-cluster img {
+            display: block;
+        }
+
+        /* Alle kolommen niet laten krimpen */
+        .beverrat-col1,
+        .beverrat-col23,
+        .beverrat-col45,
+        .beverrat-col6 {
+            flex-shrink: 0;
+        }
+
+        /* Kolom 1: diana airbug met blauwe achtergrond */
+        .beverrat-col1 {
+            position: relative;
+        }
+
+        .beverrat-col1-inner {
+            background: #a8c8e8;
+            padding: 1.5rem;
+        }
+
+        .beverrat-col1 img {
+            height: 12vh;
+            width: auto;
+        }
+
+        /* Kolom 2-3: 9+10 boven, 11 onder */
+        .beverrat-col23 {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+
+        .beverrat-col23-top {
+            display: flex;
+            gap: 0.4rem;
+        }
+
+        .beverrat-col23-top img {
+            height: 12vh;
+            width: auto;
+        }
+
+        .beverrat-col23-bottom {
+            display: flex;
+        }
+
+        .beverrat-col23-bottom img {
+            height: 28vh;
+            width: auto;
+        }
+
+        /* Kolom 4-5: 12 boven, 13+14 onder */
+        .beverrat-col45 {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+
+        .beverrat-col45-top {
+            display: flex;
+        }
+
+        .beverrat-col45-top img {
+            height: 32vh;
+            width: auto;
+        }
+
+        .beverrat-col45-bottom {
+            display: flex;
+            gap: 0.4rem;
+        }
+
+        .beverrat-col45-bottom img {
+            height: 14vh;
+            width: auto;
+        }
+
+        /* Kolom 6: caption + 15 */
+        .beverrat-col6 {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.4rem;
+        }
+
+        .beverrat-col6 img {
+            height: 17vh;
+            width: auto;
+        }
+
+        .beverrat-col6 .photo-caption-box {
+            width: 120%;
+        }
+
+        /* Wolhandkrab cluster: foto 16 + 17 */
+        .wolhandkrab-cluster {
+            position: relative;
+            flex-shrink: 0;
+            min-width: 100vw;
+            height: 70vh;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            box-sizing: border-box;
+            padding-left: 4rem;
+            padding-right: 4rem;
+        }
+
+        .wolhandkrab-inner {
+            display: flex;
+            gap: 0.4rem;
+            align-items: flex-end;
+            position: relative;
+            height: 70vh;
+        }
+
+        .wolhandkrab-photo-large {
+            height: 70vh;
+            width: auto;
+            display: block;
+        }
+
+        .wolhandkrab-right {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.4rem;
+            align-self: flex-end;
+        }
+
+        .wolhandkrab-photo-small {
+            height: 35vh;
+            width: auto;
+            display: block;
+            margin-bottom: 8vh;
+        }
+
+        .wolhandkrab-right .photo-caption-box {
+            max-width: 250px;
+        }
+
+        /* Intro sectie: foto 1 + tekstvak gecentreerd */
+        .intro-section {
+            display: flex;
+            align-items: flex-end;
+            gap: 4rem;
+            flex-shrink: 0;
+            min-width: 100vw;
+            justify-content: center;
+            padding: 0 4rem;
+            box-sizing: border-box;
+        }
+
+        .intro-section .photo-item {
+            margin-right: 0;
+        }
+
+        /* Intro wrapper: titel + plaatje + tekstvak = 70vh */
+        .intro-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex-shrink: 0;
+            height: 70vh;
+        }
+
+        .intro-title {
+            font-family: 'Scala Sans', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 400;
+            color: #1a1a1a;
+            margin: 0;
+            line-height: 1;
+            text-align: center;
+        }
+
+        .intro-title span {
+            font-style: italic;
+        }
+
+        .intro-image {
+            flex-shrink: 0;
+        }
+
+        .intro-image img {
+            height: 15vh;
+            width: auto;
+            display: block;
+        }
+
+        /* Tekstvak */
+        .intro-panel {
+            flex: 1;
+            width: 100%;
+            background: #e8e8e8;
+            padding: 2rem;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            overflow-y: auto;
+        }
+
+        .intro-panel p {
+            font-family: 'Scala Sans', sans-serif;
+            font-size: 0.9rem;
+            line-height: 1.7;
+            color: rgba(0,0,0,0.75);
+            margin: 0 0 0.8rem 0;
+        }
+
+        .intro-panel p:last-child {
+            margin-bottom: 0;
+        }
+    </style>
+</head>
+<body class="horizontal-scroll-page">
+    <nav class="horizontal-nav" style="padding-left: 4rem;">
+        <div>
+            <a href="index.html" class="back-link">← Terug</a>
+            <span class="nav-title">De Exoten</span>
+        </div>
+    </nav>
+
+    <div class="horizontal-scroll-container" id="scrollContainer">
+        <div class="horizontal-scroll-content">
+            <!-- Intro sectie: foto 1 + tekstvak gecentreerd -->
+            <div class="intro-section" id="introSection">
+                <div class="photo-item"><img src="de-exoten/1.jpg" alt="1" loading="eager" id="photo1"></div>
+                <div class="intro-wrapper" id="introWrapper">
+                <h1 class="intro-title">De Exo<span>ten</span></h1>
+                <div class="intro-image">
+                    <img src="de-exoten/beverrat.jpg" alt="Beverrat">
+                </div>
+                <div class="intro-panel" id="introPanel">
+                    <p>Er woedt een onzichtbare oorlog in Nederland. Een oorlog tussen invasieve exoten, de inheemse natuur en de mens. De slagvelden zijn de vennen en de volkstuinen, de beken en de bossen, de rivierbekken en de postzegelparkjes. Hier vestigen zich de Amerikaanse rivierkreeft en de Japanse duizendknoop, de watercrassula en de wasbeerhond, de stierkikker en de Chinese wolhandkrab.</p>
+                    <p>De oorlog draait om de simpele vraag: wie domineert? Is dat de inheemse Nederlandse natuur, de door Jac. P. Thijsse zo wonderschoon gedefinieerde sloten bossen en ander groen? Is het de mens, die eeuwenlang strijd heeft geleverd tegen de natuurlijke wereld, totdat zij eindelijk, met spierkracht, kennismacht en machines, haar kon bedwingen en boetseren naar eigen inzicht? Of zijn het al die invasieve exoten, die zich maar weinig aantrekken van dit menselijk privilege en op hun eigen wijze de natuur onherkenbaar veranderen?</p>
+                    <p>Deze serie gaat over deze invasieve exoten. Maar eigenlijk gaat het over de mens. De mens die planten en dieren over de aardbol versleept. De mens die soms gedreven door winst, soms vanwege onwetendheid de planten en dieren in vreemde ecosystemen introduceert. En de mens die vervolgens wanhopige pogingen doet om de exoten te vernietigen voordat ze dat met onze natuur doen.</p>
+                </div>
+            </div></div>
+
+            <!-- Cluster 1 -->
+            <div class="photo-cluster">
+                <!-- Linker kolom: foto 2 -->
+                <div class="cluster-left">
+                    <img src="de-exoten/cluster 1 foto 2.jpg" alt="cluster 1 foto 2" loading="eager">
+                </div>
+                <!-- Rechter sectie: foto 3 boven, foto 5+6 onder -->
+                <div class="cluster-right">
+                    <img src="de-exoten/cluster 1 foto 3.jpg" alt="cluster 1 foto 3" loading="eager">
+                    <div class="cluster-bottom">
+                        <img src="de-exoten/cluster 1 foto 5.jpg" alt="cluster 1 foto 5" loading="lazy">
+                        <img src="de-exoten/cluster 1 foto 6.jpg" alt="cluster 1 foto 6" loading="lazy">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hoofdstuk titel in wit vlak -->
+            <div class="chapter-title">
+                <span class="chapter-number">hoofdstuk 1</span>
+                <span class="chapter-name">de slag<br>om de<br>grenzen</span>
+            </div>
+
+            <!-- Grijze sectie vanaf foto 8 -->
+            <div class="gray-section">
+                <div class="photo-with-caption caption-right">
+                    <div class="labeled-photo">
+                        <span class="vertical-label">wasb<span class="accent">e</span>er</span>
+                        <img src="de-exoten/8.jpg" alt="8" loading="lazy">
+                    </div>
+                    <div class="photo-caption-box" style="margin-top: 23vh;">
+                        <h4 class="caption-title">Ontsnapt</h4>
+                        <p class="caption-text">In het Wildpark in Gangelt, net over de grens van Zuid-Limburg, is een deel van de wasberen enkele jaren geleden ontsnapt. Sindsdien hebben ze zich razend snel genesteld en voortgeplant in de heuvels van Limburg.</p>
+                    </div>
+                </div>
+                <!-- Beverrat cluster sectie -->
+                <div class="beverrat-cluster">
+                    <span class="vertical-label">bev<span class="accent">e</span>rrat</span>
+                    <!-- Kolom 1: diana airbug -->
+                    <div class="beverrat-col1">
+                        <div class="beverrat-col1-inner">
+                            <img src="de-exoten/diana airbug a.jpg" alt="diana airbug" loading="lazy">
+                        </div>
+                    </div>
+                    <!-- Kolom 2-3: 9+10 boven, 11 onder -->
+                    <div class="beverrat-col23">
+                        <div class="beverrat-col23-top">
+                            <img src="de-exoten/9.jpg" alt="9" loading="lazy">
+                            <img src="de-exoten/10.jpg" alt="10" loading="lazy">
+                        </div>
+                        <div class="beverrat-col23-bottom">
+                            <img src="de-exoten/11.jpg" alt="11" loading="lazy">
+                        </div>
+                    </div>
+                    <!-- Kolom 4-5: 12 boven, 13+14 onder -->
+                    <div class="beverrat-col45">
+                        <div class="beverrat-col45-top">
+                            <img src="de-exoten/12.jpg" alt="12" loading="lazy">
+                        </div>
+                        <div class="beverrat-col45-bottom">
+                            <img src="de-exoten/13.jpg" alt="13" loading="lazy">
+                            <img src="de-exoten/14.jpg" alt="14" loading="lazy">
+                        </div>
+                    </div>
+                    <!-- Kolom 6: caption + 15 -->
+                    <div class="beverrat-col6">
+                        <div class="photo-caption-box">
+                            <h4 class="caption-title">Via de Roer</h4>
+                            <p class="caption-text">De Roer, een kleine rivier die vanuit Duitsland richting Roermond stroomt, fungeert als de snelweg voor beverratten om ons land binnen te komen. In Duitsland wordt het dier niet bejaagd, waardoor iedere week tientallen exemplaren de trek westwaarts maken op zoek naar ongeclaimd territorium. In Nederland, echter, kunnen ze forse schade aan dijken veroorzaken. Bestrijders, zoals Hennie (rode jas) en Ruud van het waterschap varen dagelijks de Roer af om de beesten te vangen en te doden.</p>
+                        </div>
+                        <img src="de-exoten/15.jpg" alt="15" loading="lazy">
+                    </div>
+                </div>
+
+                <!-- Foto 16 + 17 cluster met verticale tekst -->
+                <div class="wolhandkrab-cluster">
+                    <div class="wolhandkrab-inner">
+                        <span class="vertical-label">Chin<span class="accent">e</span>se<br>Wolhandkrab</span>
+                        <img src="de-exoten/16.jpg" alt="16" loading="lazy" class="wolhandkrab-photo-large">
+                        <div class="wolhandkrab-right">
+                            <div class="photo-caption-box">
+                                <h4 class="caption-title">Dummy titel</h4>
+                                <p class="caption-text">Dit is een dummy bijschrift voor foto 17. De tekst wordt later aangevuld.</p>
+                            </div>
+                            <img src="de-exoten/17.jpg" alt="17" loading="lazy" class="wolhandkrab-photo-small">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hemelboom sectie -->
+                <div class="hemelboom-pair">
+                    <div class="labeled-photo">
+                        <span class="vertical-label">H<span class="accent">e</span>melboom</span>
+                        <img src="de-exoten/18.jpg" alt="18" loading="lazy">
+                    </div>
+                    <div class="info-column">
+                        <div class="photo-caption-box">
+                            <h4 class="caption-title">Woekeraar</h4>
+                            <p class="caption-text">De hemelboom werd in de achttiende eeuw als sierboom naar Europa gehaald. De soort verspreidt zich via worteluitlopers en zaden, groeit tot tien meter per jaar en is nauwelijks uit te roeien. In steden breekt hij het asfalt open en ondermijnt hij fundamenten.</p>
+                        </div>
+                        <img src="de-exoten/info 2.jpg" alt="info 2" loading="lazy">
+                    </div>
+                </div>
+
+                <!-- Foto 19-20 cluster -->
+                <div class="photo-cluster-19-20">
+                    <div class="photos-stack">
+                        <div class="photo-top">
+                            <span class="vertical-label">micro<br><span class="accent">e</span>xoten</span>
+                            <img src="de-exoten/19.jpg" alt="19" loading="lazy">
+                        </div>
+                        <div class="photo-bottom">
+                            <img src="de-exoten/20.jpg" alt="20" loading="lazy">
+                        </div>
+                    </div>
+                    <div class="caption-column">
+                        <div class="photo-caption-box">
+                            <h4 class="caption-title">Onzichtbare indringers</h4>
+                            <p class="caption-text">In het water leven talloze micro-organismen die grote schade aanrichten. De watercrassula verstikt sloten, het kroos overwoekert vijvers en de Japanse duizendknoop ondermijnt oevers. Vaak worden ze pas opgemerkt als het te laat is.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Aziatische hoornaar cluster: foto 21-24 -->
+                <div class="hoornaar-cluster">
+                    <div class="photo-klein">
+                        <span class="vertical-label">Aziatische<br>hoorn<span class="accent">a</span>ar</span>
+                        <img src="de-exoten/21.jpg" alt="21" loading="lazy">
+                    </div>
+                    <div class="col-22-23">
+                        <div class="row-caption-23">
+                            <div class="photo-caption-box">
+                                <h4 class="caption-title">Eerste signalering</h4>
+                                <p class="caption-text">De eerste Aziatische hoornaar werd in 2004 in Zuid-Frankrijk gesignaleerd, verstopt in een lading aardewerk uit China. Sindsdien verspreidt het insect zich gestaag noordwaarts.</p>
+                            </div>
+                            <div class="photo-xs">
+                                <img src="de-exoten/23.jpg" alt="23" loading="lazy">
+                            </div>
+                        </div>
+                        <div class="photo-medium">
+                            <img src="de-exoten/22.jpg" alt="22" loading="lazy">
+                        </div>
+                    </div>
+                    <div class="photo-24">
+                        <img src="de-exoten/24.jpg" alt="24" loading="lazy">
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Hoofdstuk 2 titel -->
+            <div class="chapter-title">
+                <span class="chapter-number">hoofdstuk 2</span>
+                <span class="chapter-name">de strijd<br>om<br>hegemonie</span>
+            </div>
+
+            <!-- Aziatische hoornaar boog: foto 25-31 -->
+            <div class="hoornaar-boog">
+                <span class="vertical-label">Aziatische<br>hoorn<span class="accent">a</span>ar</span>
+                <div class="boog-foto foto-25">
+                    <img src="de-exoten/25.jpg" alt="25" loading="lazy">
+                </div>
+                <div class="boog-foto foto-26">
+                    <img src="de-exoten/26.jpg" alt="26" loading="lazy">
+                </div>
+                <div class="boog-foto foto-28">
+                    <img src="de-exoten/28.jpg" alt="28" loading="lazy">
+                </div>
+                <div class="boog-foto foto-27">
+                    <img src="de-exoten/27.jpg" alt="27" loading="lazy">
+                </div>
+                <div class="boog-foto foto-29">
+                    <img src="de-exoten/29.jpg" alt="29" loading="lazy">
+                    <img src="de-exoten/info 3.jpg" alt="info 3" loading="lazy" class="info-3">
+                </div>
+                <div class="boog-foto foto-30">
+                    <img src="de-exoten/30.jpg" alt="30" loading="lazy">
+                </div>
+                <div class="boog-foto foto-31">
+                    <img src="de-exoten/31.jpg" alt="31" loading="lazy">
+                </div>
+                <div class="boog-foto foto-placeholder">
+                    <div class="placeholder-box"></div>
+                </div>
+            </div>
+
+            <!-- Foto 35 + tekstkader + grid 36-39 -->
+            <div class="foto-35-section">
+                <div class="labeled-photo">
+                    <img src="de-exoten/35.jpg" alt="35" loading="lazy">
+                </div>
+                <div class="photo-caption-box section-caption">
+                    <h4 class="caption-title">Invasieroutes</h4>
+                    <p class="caption-text">De verspreiding van invasieve exoten volgt vaak voorspelbare routes: havens, rivieren en snelwegen. Vanuit deze knooppunten verspreiden de soorten zich over het land. De kaart toont de belangrijkste invasieroutes in Nederland.</p>
+                </div>
+                <div class="foto-grid-36-39">
+                    <div class="grid-column">
+                        <img src="de-exoten/36.jpg" alt="36" loading="lazy">
+                        <img src="de-exoten/37.jpg" alt="37" loading="lazy">
+                    </div>
+                    <div class="grid-column">
+                        <img src="de-exoten/38.jpg" alt="38" loading="lazy">
+                        <img src="de-exoten/39.jpg" alt="39" loading="lazy">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Amerikaanse rivierkreeft sectie -->
+            <div class="rivierkreeft-section">
+                <div class="labeled-photo">
+                    <span class="vertical-label">Amerikaanse<br>rivier<span class="accent">k</span>reeft</span>
+                    <img src="de-exoten/40.jpg" alt="40" loading="lazy">
+                </div>
+                <div class="photo-caption-box rivierkreeft-caption">
+                    <h4 class="caption-title">Een Amerikaan in Nederland</h4>
+                    <p class="caption-text">De Amerikaanse rivierkreeft werd in de jaren zeventig geïntroduceerd voor de aquacultuur. Het dier bleek een explosieve groeier en heeft zich inmiddels door heel Nederland verspreid. De kreeft graaft diepe gangen in oevers en dijken.</p>
+                </div>
+                <!-- Bol van 11 placeholders -->
+                <div class="placeholder-ball">
+                    <div class="ball-row row-1">
+                        <div class="ball-placeholder"></div>
+                        <div class="ball-placeholder"></div>
+                    </div>
+                    <div class="ball-row row-2">
+                        <div class="ball-placeholder"></div>
+                        <div class="ball-placeholder"></div>
+                        <div class="ball-placeholder"></div>
+                    </div>
+                    <div class="ball-row row-3">
+                        <div class="ball-placeholder"></div>
+                        <div class="ball-placeholder"></div>
+                        <div class="ball-placeholder"></div>
+                    </div>
+                    <div class="ball-row row-4">
+                        <div class="ball-placeholder"></div>
+                        <div class="ball-placeholder"></div>
+                    </div>
+                    <div class="ball-row row-5">
+                        <div class="ball-placeholder"></div>
+                    </div>
+                </div>
+                <!-- Foto 41 met tekstkader -->
+                <div class="foto-41-wrapper">
+                    <div class="photo-caption-box foto-41-caption">
+                        <h4 class="caption-title">Ondermijning</h4>
+                        <p class="caption-text">De kreeft graaft gangen tot een meter diep in oevers en dijken, wat kan leiden tot verzakking en erosie. Daarnaast eet het dier alles wat los en vast zit: waterplanten, vissen, amfibieën en zelfs jonge watervogels.</p>
+                    </div>
+                    <img src="de-exoten/41.jpg" alt="41" loading="lazy">
+                </div>
+            </div>
+
+            <!-- Ongelijkbladig vederkruid sectie -->
+            <div class="vederkruid-section">
+                <div class="labeled-photo">
+                    <span class="vertical-label">Ongelijkbladig<br>veder<span class="accent">k</span>ruid</span>
+                    <img src="de-exoten/42.jpg" alt="42" loading="lazy">
+                </div>
+            </div>
+
+            <!-- End panel -->
+            <div class="end-panel" style="flex-shrink: 0; height: 70vh; min-width: 800px; background: #1a3d1a; display: flex; flex-direction: column; justify-content: center; padding: 3rem;">
+                <p style="font-family: 'Scala Sans SC', sans-serif; font-size: 1.2rem; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 3rem;">Einde van deze serie</p>
+                <p style="font-family: 'Scala Sans', sans-serif; font-size: 0.85rem; color: rgba(255,255,255,0.4); margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.05em;">Bekijk ook</p>
+                <nav style="display: flex; flex-direction: column; gap: 0.6rem;">
+                    <a href="index.html" style="font-family: 'Scala Sans', sans-serif; font-size: 0.95rem; color: #ffffff; text-decoration: none;">Home</a>
+                    <a href="mijn-tatoeages.html" style="font-family: 'Scala Sans', sans-serif; font-size: 0.95rem; color: #ffffff; text-decoration: none;">Mijn Tatoeages</a>
+                    <a href="a-better-port.html" style="font-family: 'Scala Sans', sans-serif; font-size: 0.95rem; color: #ffffff; text-decoration: none;">A Better Port</a>
+                    <a href="in-blauw-licht.html" style="font-family: 'Scala Sans', sans-serif; font-size: 0.95rem; color: #ffffff; text-decoration: none;">In Blauw Licht</a>
+                    <a href="toen-de-mijnen-verdwenen.html" style="font-family: 'Scala Sans', sans-serif; font-size: 0.95rem; color: #ffffff; text-decoration: none;">Toen de Mijnen Verdwenen</a>
+                    <a href="het-noordzeekanaal-gebied.html" style="font-family: 'Scala Sans', sans-serif; font-size: 0.95rem; color: #ffffff; text-decoration: none;">Het Noordzeekanaal Gebied</a>
+                    <a href="de-onmisbaren.html" style="font-family: 'Scala Sans', sans-serif; font-size: 0.95rem; color: #ffffff; text-decoration: none;">De Onmisbaren</a>
+                    <a href="een-plek-onder-de-zon.html" style="font-family: 'Scala Sans', sans-serif; font-size: 0.95rem; color: #ffffff; text-decoration: none;">Een Plek Onder de Zon</a>
+                </nav>
+                <div style="margin-top: 3rem;">
+                    <p style="font-family: 'Scala Sans', sans-serif; font-size: 0.85rem; color: rgba(255,255,255,0.4); margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.05em;">Contact</p>
+                    <p style="font-family: 'Scala Sans', sans-serif; font-size: 0.95rem; color: #ffffff; margin-bottom: 0.3rem;">wouterzaalberg@gmail.com</p>
+                    <p style="font-family: 'Scala Sans', sans-serif; font-size: 0.95rem; color: #ffffff; margin-bottom: 1.5rem;">06 45 788 180</p>
+                    <a href="https://instagram.com/wouterzaalberg" target="_blank" style="display: inline-block; color: #ffffff; transition: opacity 0.3s;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const container = document.getElementById('scrollContainer');
+        const allItems = document.querySelectorAll('.intro-section, .photo-cluster, .chapter-title, .photo-with-caption, .beverrat-cluster, .wolhandkrab-cluster, .gray-section > .photo-item, .gray-section > .labeled-photo, .hemelboom-pair, .photo-cluster-19-20, .hoornaar-cluster, .hoornaar-boog, .foto-35-section, .rivierkreeft-section, .vederkruid-section, .end-panel');
+
+        // Stel intro-wrapper breedte in op basis van foto 1
+        function setDynamicWidths() {
+            const photo1 = document.getElementById('photo1');
+            const introWrapper = document.getElementById('introWrapper');
+
+            if (photo1 && photo1.complete && photo1.naturalWidth) {
+                const aspectRatio = photo1.naturalWidth / photo1.naturalHeight;
+                const width = 70 * aspectRatio; // 70vh * aspect ratio
+                introWrapper.style.width = width + 'vh';
+            }
+        }
+
+        document.getElementById('photo1').addEventListener('load', setDynamicWidths);
+        window.addEventListener('load', setDynamicWidths);
+
+        let currentIndex = 0;
+        let isAnimating = false;
+        let scrollQueue = 0;
+
+        // Scroll to target index
+        function scrollToIndex(index) {
+            if (index < 0) index = 0;
+            if (index >= allItems.length) index = allItems.length - 1;
+
+            currentIndex = index;
+
+            allItems[currentIndex].scrollIntoView({
+                behavior: 'smooth',
+                block: 'center',
+                inline: 'center'
+            });
+        }
+
+        // Process scroll queue
+        function processScrollQueue() {
+            if (scrollQueue !== 0) {
+                const newIndex = currentIndex + scrollQueue;
+                scrollQueue = 0;
+                scrollToIndex(newIndex);
+
+                setTimeout(() => {
+                    isAnimating = false;
+                    if (scrollQueue !== 0) {
+                        processScrollQueue();
+                    }
+                }, 500);
+            } else {
+                isAnimating = false;
+            }
+        }
+
+        // Smooth scroll handling (desktop only)
+        if (window.innerWidth > 767) {
+            container.addEventListener('wheel', (e) => {
+                e.preventDefault();
+
+                if (e.deltaY > 0) {
+                    scrollQueue++;
+                } else if (e.deltaY < 0) {
+                    scrollQueue--;
+                }
+
+                if (!isAnimating) {
+                    isAnimating = true;
+                    processScrollQueue();
+                }
+
+            }, { passive: false });
+        }
+
+        // Fade in images when loaded
+        const images = document.querySelectorAll('.photo-item img');
+        images.forEach(img => {
+            if (img.complete) {
+                img.classList.add('loaded');
+            } else {
+                img.addEventListener('load', () => {
+                    img.classList.add('loaded');
+                });
+            }
+        });
+    </script>
+</body>
+</html>

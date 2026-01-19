@@ -1,0 +1,3 @@
+font-family chloe, sans-serif;
+font-style normal;
+font-weight 400;

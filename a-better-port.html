@@ -1,0 +1,1312 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A Better Port - Wouter Zaalberg">
+    <title>A Better Port - Wouter Zaalberg</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/a-better-port.css">
+</head>
+<body class="abp-page">
+    <div class="horizontal-nav">
+        <div>
+            <a href="index.html" class="back-link">← Terug</a>
+            <span class="nav-title">A Better Port</span>
+        </div>
+    </div>
+
+    <!-- Dark Overlay - opacity controlled via JS -->
+    <div class="abp-dark-overlay" id="darkOverlay"></div>
+
+    <!-- Rotating Background -->
+    <div class="abp-background">
+        <img src="a-better-port/achtergrond 1.jpg" alt="">
+        <img src="a-better-port/achtergrond 2.jpg" alt="">
+        <img src="a-better-port/achtergrond 3.jpg" alt="">
+        <img src="a-better-port/achtergrond 1.jpg" alt="">
+        <img src="a-better-port/achtergrond 2.jpg" alt="">
+        <img src="a-better-port/achtergrond 3.jpg" alt="">
+    </div>
+
+    <div class="horizontal-scroll-container" id="scrollContainer">
+        <div class="horizontal-scroll-content">
+            <!-- Intro Section - Photo transforms into Text Panel -->
+            <div class="abp-intro-section" id="introSection">
+                <!-- Title - links naast de foto, rechts uitgelijnd -->
+                <h1 class="abp-hero-title" id="introTitle">
+                    <span>A</span>
+                    <span>Better</span>
+                    <span>Port</span>
+                </h1>
+
+                <!-- Photo 1 - Visible initially -->
+                <div class="abp-intro-photo active">
+                    <div class="abp-intro-photo-wrapper">
+                        <img src="a-better-port/1.jpg" alt="A Better Port" loading="eager">
+                    </div>
+                    <button class="abp-info-btn" aria-label="Toon informatie">i</button>
+                    <div class="abp-caption">
+                        <div class="abp-caption-header">Carlos, Port Officier</div>
+                        <div class="abp-caption-text">Op dek tijdens een storm</div>
+                    </div>
+                </div>
+
+                <!-- Intro Text Panel - Hidden initially, appears on first scroll -->
+                <div class="abp-intro-panel">
+                    <div class="abp-intro-content">
+                        <div class="abp-intro-text">
+                            <p>Het is het minst bekende en meest onbeminde stuk Amsterdam: de haven. Anders dan in Rotterdam is het geen onderdeel van het DNA van de stad. Dat wil niet zeggen dat het gebied niet belangrijk is: vanaf hier wordt de Nederlandse en Europese economie gevoed met grondstoffen en, vooral, energie. Amsterdam is de grootste benzinehaven ter wereld. Daarmee is het ook een spiegel van onze samenleving: de mate waarin de haven verandert, geeft inzicht in de snelheid van de energietransitie.</p>
+                            <p>Zelf is de Port of Amsterdam er hard mee bezig. Steenkool eruit, bio-fuels erin. Het moet duurzaam, circulair, draaiend op waterstof en stroom uit de parken op zee. Zoals het havenbedrijf zelf zegt: be part of a better port. Maar hoe verander je een haven die geknipt is voor fossiele overslag, voor een samenleving die gebouwd is op fossiele energie?</p>
+                            <p>Tegen de achtergrond van een haven in transitie, waarin de fossiele bulk beetje bij beetje plaatsmaakt voor de economie van de toekomst, legt fotograaf Wouter Zaalberg de mensen, het werk en de plekken vast.</p>
+                            <p>Dit tijdsbeeld laat het begin van verandering zien, maar toont ook hoe weerbarstig de realiteit is van een haven, en een land, dat ondanks alles, nog steeds bijna volledig afhankelijk is van fossiele energie.</p>
+                            <p class="abp-intro-credit">Wouter Zaalberg, Amsterdam, maart 2024</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Photo 2 - Hidden initially, appears after text panel -->
+                <div class="abp-intro-photo2">
+                    <div class="abp-intro-photo-wrapper">
+                        <img src="a-better-port/2.jpg" alt="A Better Port" loading="eager">
+                    </div>
+                    <button class="abp-info-btn" aria-label="Toon informatie">i</button>
+                    <div class="abp-caption">
+                        <div class="abp-caption-header">Rietlanden terminal</div>
+                        <div class="abp-caption-text">De kolenbergen van de Rietlanden terminal. Voor 2030 zal de steenkool hier plaatsmaken voor andere bulkgoederen.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Photo pair 3+4 -->
+            <div class="abp-photo-pair">
+                <div class="abp-photo-block">
+                    <img src="a-better-port/3.jpg" alt="A Better Port" class="photo" loading="eager">
+                    <button class="abp-info-btn" aria-label="Toon informatie">i</button>
+                    <div class="abp-caption">
+                        <div class="abp-caption-header">HES kolenterminal</div>
+                        <div class="abp-caption-text">Op de enige andere kolenterminal, de HES, laadt een gigantische kraan een schip vol steenkool. 14,1 miljoen ton kolen werd er in Amsterdam overgeslagen. Dat is een kolentrein zo lang als de afstand Groningen - Lissabon.</div>
+                    </div>
+                </div>
+                <div class="abp-photo-block">
+                    <img src="a-better-port/4.jpg" alt="A Better Port" class="photo" loading="lazy">
+                    <button class="abp-info-btn" aria-label="Toon informatie">i</button>
+                    <div class="abp-caption">
+                        <div class="abp-caption-header">Patricia, HES terminal</div>
+                        <div class="abp-caption-text">Patricia werkt al 25 jaar 'in de buitendienst' op de HES terminal. Ze is verantwoordelijk voor het laden en lossen van steenkool. Haar werk gaat veranderen, want ook de HES heeft besloten om voor 2030 afscheid te nemen van kolen. Op het terrein zullen andere bulkgoederen komen te liggen, zoals veevoer. Hiermee komt er een einde aan de overslag van steenkool in de Amsterdamse haven.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Photo 5 -->
+            <div class="abp-photo-block">
+                <img src="a-better-port/5.jpg" alt="A Better Port" class="photo" loading="lazy">
+                <button class="abp-info-btn" aria-label="Toon informatie">i</button>
+                <div class="abp-caption">
+                    <div class="abp-caption-header">Benzolweg</div>
+                    <div class="abp-caption-text">Een benzineterminal aan de Benzolweg. Amsterdam is de grootste benzinehaven ter wereld, met meer dan 34 miljoen ton aan olieproducten.</div>
+                </div>
+            </div>
+
+            <!-- Photo 6 -->
+            <div class="abp-photo-block">
+                <img src="a-better-port/6.jpg" alt="A Better Port" class="photo" loading="lazy">
+                <button class="abp-info-btn" aria-label="Toon informatie">i</button>
+                <div class="abp-caption">
+                    <div class="abp-caption-header">Cor (75)</div>
+                    <div class="abp-caption-text">Hoewel hij eigenlijk al 10 jaar met pensioen had moeten zijn, bedient Cor (75 jaar) nog bijna iedere dag de tankwagen. Dat doet hij al sinds zijn allereerste werkdag, op 1 januari 1977. Toen bracht hij nog huisbrandolie rond, later werd dat benzine, diesel en andere brandstoffen. Zojuist heeft Cor 40.000 liter diesel afgeleverd in de Amsterdamse haven.</div>
+                </div>
+            </div>
+
+            <!-- Infographic Panel after photo 6 -->
+            <div class="abp-infographic-panel">
+                <!-- Background image with overlay -->
+                <div class="abp-infographic-bg">
+                    <img src="a-better-port/olietanker.jpg" alt="">
+                    <div class="abp-infographic-overlay"></div>
+                </div>
+
+                <!-- Content -->
+                <div class="abp-infographic-content">
+                    <div class="abp-infographic-intro">
+                        <h2 class="abp-infographic-title">Een haven ter waarde van 4,4 miljard euro</h2>
+                        <p>Amsterdam is de grootste benzinehaven ter wereld. Maar wil dat niet blijven. Het aandeel van fossiele brandstoffen wordt langzaam afgebouwd. In plaats daarvan komen duurzame brandstoffen, andere bulkproducten zoals veevoer en graniet.</p>
+                    </div>
+
+                    <div class="abp-infographic-chart">
+                        <h3 class="abp-chart-title">De Amsterdamse haven in cijfers <span>(2024)</span></h3>
+
+                        <div class="abp-chart-bars">
+                            <!-- Olieproducten - 29.1 = 100% -->
+                            <div class="abp-bar-item">
+                                <div class="abp-bar-label">
+                                    <span class="abp-bar-name">Olieproducten</span>
+                                    <span class="abp-bar-change positive">+0,6%</span>
+                                </div>
+                                <div class="abp-bar-track">
+                                    <div class="abp-bar-fill" style="--bar-width: 100%;"></div>
+                                </div>
+                                <span class="abp-bar-value">29,1 mln ton</span>
+                            </div>
+
+                            <!-- Overige droge bulk - 11.5 = 39.5% -->
+                            <div class="abp-bar-item">
+                                <div class="abp-bar-label">
+                                    <span class="abp-bar-name">Overige droge bulk</span>
+                                    <span class="abp-bar-change positive">+5,1%</span>
+                                </div>
+                                <div class="abp-bar-track">
+                                    <div class="abp-bar-fill" style="--bar-width: 39.5%;"></div>
+                                </div>
+                                <span class="abp-bar-value">11,5 mln ton</span>
+                            </div>
+
+                            <!-- Agribulk - 7.1 = 24.4% -->
+                            <div class="abp-bar-item">
+                                <div class="abp-bar-label">
+                                    <span class="abp-bar-name">Agribulk</span>
+                                    <span class="abp-bar-change positive">+12%</span>
+                                </div>
+                                <div class="abp-bar-track">
+                                    <div class="abp-bar-fill" style="--bar-width: 24.4%;"></div>
+                                </div>
+                                <span class="abp-bar-value">7,1 mln ton</span>
+                            </div>
+
+                            <!-- Steenkool - 6.6 = 22.7% -->
+                            <div class="abp-bar-item">
+                                <div class="abp-bar-label">
+                                    <span class="abp-bar-name">Steenkool</span>
+                                    <span class="abp-bar-change negative">-10,9%</span>
+                                </div>
+                                <div class="abp-bar-track">
+                                    <div class="abp-bar-fill coal" style="--bar-width: 22.7%;"></div>
+                                </div>
+                                <span class="abp-bar-value">6,6 mln ton</span>
+                            </div>
+
+                            <!-- Overige natte bulk - 5.5 = 18.9% -->
+                            <div class="abp-bar-item">
+                                <div class="abp-bar-label">
+                                    <span class="abp-bar-name">Overige natte bulk</span>
+                                    <span class="abp-bar-change negative">-19,2%</span>
+                                </div>
+                                <div class="abp-bar-track">
+                                    <div class="abp-bar-fill" style="--bar-width: 18.9%;"></div>
+                                </div>
+                                <span class="abp-bar-value">5,5 mln ton</span>
+                            </div>
+
+                            <!-- Ro/Ro - 1.6 = 5.5% -->
+                            <div class="abp-bar-item">
+                                <div class="abp-bar-label">
+                                    <span class="abp-bar-name">Ro/Ro</span>
+                                    <span class="abp-bar-change positive">+1,3%</span>
+                                </div>
+                                <div class="abp-bar-track">
+                                    <div class="abp-bar-fill" style="--bar-width: 5.5%;"></div>
+                                </div>
+                                <span class="abp-bar-value">1,6 mln ton</span>
+                            </div>
+
+                            <!-- Containers - 0.8 = 2.7% -->
+                            <div class="abp-bar-item">
+                                <div class="abp-bar-label">
+                                    <span class="abp-bar-name">Containers</span>
+                                    <span class="abp-bar-change negative">-18,2%</span>
+                                </div>
+                                <div class="abp-bar-track">
+                                    <div class="abp-bar-fill" style="--bar-width: 2.7%;"></div>
+                                </div>
+                                <span class="abp-bar-value">0,8 mln ton</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Photo 8 -->
+            <div class="abp-photo-block">
+                <img src="a-better-port/8.jpg" alt="A Better Port" class="photo" loading="lazy">
+                <button class="abp-info-btn" aria-label="Toon informatie">i</button>
+                <div class="abp-caption">
+                    <div class="abp-caption-header">Anton, oliehandelaar</div>
+                    <div class="abp-caption-text">Anton is oliehandelaar, met een bescheiden vloot van bunkerschepen. Hij levert zowel diesel als bio-brandstoffen, maar 95% van zijn klanten wil nog gewoon fossiele energie. Hij verwacht niet dat de vraag naar duurzame maar duurdere alternatieven snel zal aantrekken.</div>
+                </div>
+            </div>
+
+            <!-- Photo 9 -->
+            <div class="abp-photo-block">
+                <img src="a-better-port/9.jpg" alt="A Better Port" class="photo" loading="lazy">
+                <button class="abp-info-btn" aria-label="Toon informatie">i</button>
+                <div class="abp-caption">
+                    <div class="abp-caption-header">Wilco</div>
+                    <div class="abp-caption-text">Wilco op weg naar IJmuiden, om een lading steenkoolteer bij Tata op te halen. Koolteer is een restproduct van de productie van kooks en wordt in de haven opgeslagen. Het is een grondstof voor onder andere medische producten.</div>
+                </div>
+            </div>
+
+            <!-- Photo 10 - Full height -->
+            <div class="abp-photo-block size-full">
+                <img src="a-better-port/10.jpg" alt="A Better Port" class="photo" loading="lazy">
+                <button class="abp-info-btn" aria-label="Toon informatie">i</button>
+                <div class="abp-caption">
+                    <div class="abp-caption-header">Petroleumhaven</div>
+                    <div class="abp-caption-text">Benzinetanks in de Petroleumhaven. Na de oliecrisis van 1973 hield Nederland lang strategische oliereserves aan, onder andere in de Amsterdamse haven. Met het uitdoven van de koude oorlog ontstond ruimte voor commerciële opslag.</div>
+                </div>
+            </div>
+
+            <!-- Photo pair 11+12 -->
+            <div class="abp-photo-pair">
+                <div class="abp-photo-block">
+                    <img src="a-better-port/11.jpg" alt="A Better Port" class="photo" loading="lazy">
+                    <button class="abp-info-btn" aria-label="Toon informatie">i</button>
+                    <div class="abp-caption">
+                        <div class="abp-caption-header">Kees-Jan, AEB</div>
+                        <div class="abp-caption-text">Kees-Jan bedient de kraan in de bunker van het Afval Energie Bedrijf (AEB), dat afval via verbranding omzet in stroom en warmte voor ongeveer 300.000 huishoudens.</div>
+                    </div>
+                </div>
+                <div class="abp-photo-block">
+                    <img src="a-better-port/12.jpg" alt="A Better Port" class="photo" loading="lazy">
+                    <button class="abp-info-btn" aria-label="Toon informatie">i</button>
+                    <div class="abp-caption">
+                        <div class="abp-caption-header">Afval Energie Bedrijf</div>
+                        <div class="abp-caption-text">Het AEB, met haar iconische schoorstenen, is enerzijds een traditioneel afvalverbrandingsbedrijf, waar gigantische hoeveelheden huisvuil in de oven verdwijnen. Anderzijds wordt het een van de belangrijkste schakels in de circulaire haven van morgen, door meer en meer afval te scheiden waardoor het gerecycled kan worden.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Photo pair 13+14 -->
+            <div class="abp-photo-pair">
+                <div class="abp-photo-block">
+                    <img src="a-better-port/13.jpg" alt="A Better Port" class="photo" loading="lazy">
+                    <button class="abp-info-btn" aria-label="Toon informatie">i</button>
+                    <div class="abp-caption">
+                        <div class="abp-caption-header">Olietanker</div>
+                        <div class="abp-caption-text">Uitzicht op het dek van een olietanker. In Amsterdam doen honderden olietankers per jaar de haven aan.</div>
+                    </div>
+                </div>
+                <div class="abp-photo-block">
+                    <img src="a-better-port/14.jpg" alt="A Better Port" class="photo" loading="lazy">
+                    <button class="abp-info-btn" aria-label="Toon informatie">i</button>
+                    <div class="abp-caption">
+                        <div class="abp-caption-header">Operator</div>
+                        <div class="abp-caption-text">Een operator regelt het laden van brandstof. Een nauwkeurig karwei, omdat bij verkeerd laden het schip kan breken. In Amsterdam werd tot voor kort giftige brandstof gemengd en elders ter wereld, meestal Afrika, verkocht. Dat is sinds 2023 verboden.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Photo pair 15+16 -->
+            <div class="abp-photo-pair">
+                <div class="abp-photo-block">
+                    <img src="a-better-port/15.jpg" alt="A Better Port" class="photo" loading="lazy">
+                    <button class="abp-info-btn" aria-label="Toon informatie">i</button>
+                    <div class="abp-caption">
+                        <div class="abp-caption-header">Zeeman</div>
+                        <div class="abp-caption-text">Een zeeman op een olietanker.</div>
+                    </div>
+                </div>
+                <div class="abp-photo-block">
+                    <img src="a-better-port/16.jpg" alt="A Better Port" class="photo" loading="lazy">
+                    <button class="abp-info-btn" aria-label="Toon informatie">i</button>
+                    <div class="abp-caption">
+                        <div class="abp-caption-header">Kombuis</div>
+                        <div class="abp-caption-text">Kombuis van een olietanker. Afhankelijk van het type schip en de rederij zijn zeemannen 6 tot 9 maanden van huis, en leven ze in de kleine ruimtes van het schip.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Text panel + Photo 17 side by side -->
+            <div class="abp-text-photo-combo">
+                <div class="abp-combo-text">
+                    <h3 class="abp-combo-title">9 maanden van huis</h3>
+                    <p>Veel zeelieden komen uit de Filipijnen of andere Aziatische landen. Ze werken zo'n 8 à 9 maanden onafgebroken op het schip, en keren dan terug naar huis. Het leven aan boord beschrijven ze als monotoon. Als ze aanmeren in havens is er vaak geen mogelijkheid om de stad in te gaan.</p>
+                </div>
+                <div class="abp-combo-photo">
+                    <div class="abp-combo-photo-wrapper">
+                        <img src="a-better-port/17.jpg" alt="A Better Port" class="photo" loading="lazy">
+                    </div>
+                    <button class="abp-info-btn" aria-label="Toon informatie">i</button>
+                    <div class="abp-caption">
+                        <div class="abp-caption-header">Ocean Blue</div>
+                        <div class="abp-caption-text">Zeeman op de Ocean Blue, vlak voor aanvang van zijn dienst.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Photo 18 -->
+            <div class="abp-photo-block">
+                <img src="a-better-port/18.jpg" alt="A Better Port" class="photo" loading="lazy">
+                <button class="abp-info-btn" aria-label="Toon informatie">i</button>
+                <div class="abp-caption">
+                    <div class="abp-caption-header">EVOS terminal</div>
+                    <div class="abp-caption-text">Een medewerker van EVOS controleert de brandstoftanks op de terminal. In iedere tank kan zo'n 50 miljoen liter benzine opslaan. De tanks van EVOS zijn klaar voor bio-brandstoffen, maar ze merken dat er geen vraag is vanuit de markt.</div>
+                </div>
+            </div>
+
+            <!-- Photo 20 -->
+            <div class="abp-photo-block">
+                <img src="a-better-port/20.jpg" alt="A Better Port" class="photo" loading="lazy">
+                <button class="abp-info-btn" aria-label="Toon informatie">i</button>
+                <div class="abp-caption">
+                    <div class="abp-caption-header">Michiel, machinist</div>
+                    <div class="abp-caption-text">Michiel rijdt een lading volle wagons, gevuld met bio-ethanol, naar het rangeerterrein in de haven. Vanaf daar worden ze verder per spoor vervoerd.</div>
+                </div>
+            </div>
+
+            <!-- Photo 19 - Full height -->
+            <div class="abp-photo-block size-full">
+                <img src="a-better-port/19.jpg" alt="A Better Port" class="photo" loading="lazy">
+                <button class="abp-info-btn" aria-label="Toon informatie">i</button>
+                <div class="abp-caption">
+                    <div class="abp-caption-header">Leon Rasser, havendominee</div>
+                    <div class="abp-caption-text">Per fiets bezoekt Leon de zeemannen op de schepen, om met ze te praten, samen te bidden of er simpelweg voor te zorgen dat het internet het doet, zodat het thuisfront gebeld kan worden. Leon komt al jaren op de schepen en kent de haven als geen ander, al blijft hij tegelijkertijd een buitenstaander door de aard van zijn werk. Hij heeft de haven in de loop van tijd zien veranderen, zegt hij, tot de plek die het nu is: een afgesloten plek met de nadruk op hyperefficiëntie. Het heeft het werkplezier en de gemeenschapszin kapot gemaakt. 'Een belangrijke reden om zeevarende te worden is om iets van de wereld te zien. In Amsterdam komt daar meestal weinig van terecht. De werkdruk is te hoog en een substantieel aantal havenbedrijven verbiedt hen overpad naar de openbare weg.' Hij vindt het zijn plicht om de mannen (en een enkele vrouw) te bezoeken.</div>
+                </div>
+            </div>
+
+            <!-- Photo pair 21+22 -->
+            <div class="abp-photo-pair">
+                <div class="abp-photo-block">
+                    <img src="a-better-port/21.jpg" alt="A Better Port" class="photo" loading="lazy">
+                    <button class="abp-info-btn" aria-label="Toon informatie">i</button>
+                    <div class="abp-caption">
+                        <div class="abp-caption-header">Frits, dominee</div>
+                        <div class="abp-caption-text">Frits, dominee, leidt een gebed tegen het vertrek van een kolentrein uit de haven. Bijna maandelijks wordt het spoor bezet door tientallen activisten, die de kolentrein soms uren ophouden.</div>
+                    </div>
+                </div>
+                <div class="abp-photo-block">
+                    <img src="a-better-port/22.jpg" alt="A Better Port" class="photo" loading="lazy">
+                    <button class="abp-info-btn" aria-label="Toon informatie">i</button>
+                    <div class="abp-caption">
+                        <div class="abp-caption-header">Actievoerder</div>
+                        <div class="abp-caption-text">Oudere actievoerder op het spoor, met op de achtergrond de kolentrein op de HES terminal. De Amsterdamse politie heeft de actievoerder uiteindelijk van het spoor afgehaald en opgepakt.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Photo 23 -->
+            <div class="abp-photo-block">
+                <img src="a-better-port/23.jpg" alt="A Better Port" class="photo" loading="lazy">
+                <button class="abp-info-btn" aria-label="Toon informatie">i</button>
+                <div class="abp-caption">
+                    <div class="abp-caption-header">Hemwegcentrale</div>
+                    <div class="abp-caption-text">De Hemwegcentrale, de oude kolencentrale die aan 300.000 huishoudens energie leverde, is gesloten en wordt gesloopt. Toen de centrale nog draaide verbrandde het 60 kilo kolen per seconde.</div>
+                </div>
+            </div>
+
+            <!-- Photo 24 -->
+            <div class="abp-photo-block">
+                <img src="a-better-port/24.jpg" alt="A Better Port" class="photo" loading="lazy">
+                <button class="abp-info-btn" aria-label="Toon informatie">i</button>
+                <div class="abp-caption">
+                    <div class="abp-caption-header">Hemwegcentrale</div>
+                    <div class="abp-caption-text">Binnenin de Hemwegcentrale, op de plek waar de oven zat, sloopt een werknemer een van de kolenmaalmolens – het apparaat dat de kolen fijnmaalt tot poedervorm voordat het de oven ingaat.</div>
+                </div>
+            </div>
+
+            <!-- Sustainability Infographic Panel -->
+            <div class="abp-infographic-panel abp-sustainability-panel">
+                <!-- Background image with overlay -->
+                <div class="abp-infographic-bg">
+                    <div class="abp-infographic-overlay"></div>
+                </div>
+
+                <!-- Content -->
+                <div class="abp-infographic-content">
+                    <!-- Titel bovenaan over volle breedte -->
+                    <h2 class="abp-infographic-title abp-sustainability-title">Een haven in verandering</h2>
+
+                    <!-- Drie kolommen eronder -->
+                    <div class="abp-sustainability-row">
+                        <div class="abp-infographic-intro">
+                            <p>Er moet veel veranderen in de Amsterdamse haven. Zoals de economie moet verduurzamen, zo moet de haven dat ook. Eruit gaan de fossiele brandstoffen, erin komen nieuwe vormen van energie: waterstof, biobrandstoffen, windmolens en bedrijven die werken aan de circulaire economie, zoals metaalrecycling. In 2050 wil de haven volledig klimaatneutraal zijn.</p>
+                        </div>
+
+                    <!-- Main Chart: Transition timeline (groot, bovenaan) -->
+                    <div class="abp-transition-chart abp-main-chart">
+                            <h4 class="abp-donut-title">Bedrijven in de haven: van fossiel naar duurzaam</h4>
+                            <div class="abp-transition-legend">
+                                <span class="abp-legend-item sustainable"><span class="abp-legend-dot"></span>Duurzame economie</span>
+                                <span class="abp-legend-item fossil"><span class="abp-legend-dot"></span>Fossiele brandstof</span>
+                            </div>
+                            <div class="abp-transition-bars">
+                                <div class="abp-transition-row" data-year="2015">
+                                    <span class="abp-transition-year">2015</span>
+                                    <div class="abp-transition-bar-container">
+                                        <div class="abp-transition-bar sustainable" style="--value: 10; --max: 72;"></div>
+                                        <div class="abp-transition-bar fossil" style="--value: 55; --max: 72;"></div>
+                                    </div>
+                                </div>
+                                <div class="abp-transition-row" data-year="2016">
+                                    <span class="abp-transition-year">2016</span>
+                                    <div class="abp-transition-bar-container">
+                                        <div class="abp-transition-bar sustainable" style="--value: 12; --max: 72;"></div>
+                                        <div class="abp-transition-bar fossil" style="--value: 55; --max: 72;"></div>
+                                    </div>
+                                </div>
+                                <div class="abp-transition-row" data-year="2017">
+                                    <span class="abp-transition-year">2017</span>
+                                    <div class="abp-transition-bar-container">
+                                        <div class="abp-transition-bar sustainable" style="--value: 15; --max: 72;"></div>
+                                        <div class="abp-transition-bar fossil" style="--value: 55; --max: 72;"></div>
+                                    </div>
+                                </div>
+                                <div class="abp-transition-row" data-year="2018">
+                                    <span class="abp-transition-year">2018</span>
+                                    <div class="abp-transition-bar-container">
+                                        <div class="abp-transition-bar sustainable" style="--value: 20; --max: 72;"></div>
+                                        <div class="abp-transition-bar fossil" style="--value: 55; --max: 72;"></div>
+                                    </div>
+                                </div>
+                                <div class="abp-transition-row" data-year="2019">
+                                    <span class="abp-transition-year">2019</span>
+                                    <div class="abp-transition-bar-container">
+                                        <div class="abp-transition-bar sustainable" style="--value: 25; --max: 72;"></div>
+                                        <div class="abp-transition-bar fossil" style="--value: 50; --max: 72;"></div>
+                                    </div>
+                                </div>
+                                <div class="abp-transition-row" data-year="2020">
+                                    <span class="abp-transition-year">2020</span>
+                                    <div class="abp-transition-bar-container">
+                                        <div class="abp-transition-bar sustainable" style="--value: 30; --max: 72;"></div>
+                                        <div class="abp-transition-bar fossil" style="--value: 50; --max: 72;"></div>
+                                    </div>
+                                </div>
+                                <div class="abp-transition-row" data-year="2021">
+                                    <span class="abp-transition-year">2021</span>
+                                    <div class="abp-transition-bar-container">
+                                        <div class="abp-transition-bar sustainable" style="--value: 40; --max: 72;"></div>
+                                        <div class="abp-transition-bar fossil" style="--value: 48; --max: 72;"></div>
+                                    </div>
+                                </div>
+                                <div class="abp-transition-row crossover" data-year="2022">
+                                    <span class="abp-transition-year">2022</span>
+                                    <div class="abp-transition-bar-container">
+                                        <div class="abp-transition-bar sustainable" style="--value: 50; --max: 72;"></div>
+                                        <div class="abp-transition-bar fossil" style="--value: 45; --max: 72;"></div>
+                                    </div>
+                                </div>
+                                <div class="abp-transition-row" data-year="2023">
+                                    <span class="abp-transition-year">2023</span>
+                                    <div class="abp-transition-bar-container">
+                                        <div class="abp-transition-bar sustainable" style="--value: 65; --max: 72;"></div>
+                                        <div class="abp-transition-bar fossil" style="--value: 40; --max: 72;"></div>
+                                    </div>
+                                </div>
+                                <div class="abp-transition-row" data-year="2024">
+                                    <span class="abp-transition-year">2024</span>
+                                    <div class="abp-transition-bar-container">
+                                        <div class="abp-transition-bar sustainable" style="--value: 70; --max: 72;"></div>
+                                        <div class="abp-transition-bar fossil" style="--value: 38; --max: 72;"></div>
+                                    </div>
+                                </div>
+                                <div class="abp-transition-row" data-year="2025">
+                                    <span class="abp-transition-year">2025</span>
+                                    <div class="abp-transition-bar-container">
+                                        <div class="abp-transition-bar sustainable" style="--value: 72; --max: 72;"></div>
+                                        <div class="abp-transition-bar fossil" style="--value: 35; --max: 72;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="abp-transition-source">Bron: Port of Amsterdam jaarverslagen, MyPort bedrijvenlijst</p>
+                        </div>
+
+                    <!-- Secondary Charts (kleiner, onderaan) -->
+                    <div class="abp-sustainability-charts">
+                        <!-- Chart: Alternative fuels storage -->
+                        <div class="abp-donut-chart-container">
+                            <h4 class="abp-donut-title">Opslagcapaciteit alternatieve brandstoffen</h4>
+                            <div class="abp-donut-comparison">
+                                <div class="abp-donut-item">
+                                    <div class="abp-donut" style="--percentage: 5.4; --color: #6a7d8a;">
+                                        <span class="abp-donut-value">5,4%</span>
+                                    </div>
+                                    <span class="abp-donut-label">2020</span>
+                                </div>
+                                <div class="abp-donut-arrow">→</div>
+                                <div class="abp-donut-item">
+                                    <div class="abp-donut" style="--percentage: 10.1; --color: #6a7d8a;">
+                                        <span class="abp-donut-value">10,1%</span>
+                                    </div>
+                                    <span class="abp-donut-label">2024</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Chart: Solar panels -->
+                        <div class="abp-donut-chart-container">
+                            <h4 class="abp-donut-title">Zonnepanelen op haventerreinen</h4>
+                            <div class="abp-donut-comparison">
+                                <div class="abp-donut-item">
+                                    <div class="abp-bar-progress" style="--progress: 74;">
+                                        <div class="abp-bar-progress-fill"></div>
+                                        <span class="abp-bar-progress-value">260.000 m²</span>
+                                    </div>
+                                    <span class="abp-donut-label">Huidig</span>
+                                </div>
+                                <div class="abp-donut-arrow">→</div>
+                                <div class="abp-donut-item">
+                                    <div class="abp-bar-progress target" style="--progress: 100;">
+                                        <div class="abp-bar-progress-fill"></div>
+                                        <span class="abp-bar-progress-value">350.000 m²</span>
+                                    </div>
+                                    <span class="abp-donut-label">Doel 2024</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </div><!-- Einde sustainability-row -->
+                </div>
+            </div>
+
+            <!-- Photo set 25-28: 25 | 27+26 stacked | 28 -->
+            <div class="abp-photo-set">
+                <!-- Photo 25 -->
+                <div class="abp-photo-block">
+                    <img src="a-better-port/25.jpg" alt="A Better Port" class="photo" loading="lazy">
+                    <button class="abp-info-btn" aria-label="Toon informatie">i</button>
+                    <div class="abp-caption">
+                        <div class="abp-caption-header">Biomassacentrale</div>
+                        <div class="abp-caption-text">Stoom stijgt op uit de gloednieuwe biomassacentrale, direct naast de oude kolencentrale. Het levert aan 40.000 huishoudens stroom en aan 20.000 huishoudens warmte.</div>
+                    </div>
+                </div>
+                <!-- Photo 27 + 26 stacked -->
+                <div class="abp-photo-stack">
+                    <div class="abp-stack-item">
+                        <img src="a-better-port/27.jpg" alt="A Better Port" class="photo" loading="lazy">
+                        <button class="abp-info-btn" aria-label="Toon informatie">i</button>
+                        <div class="abp-caption">
+                            <div class="abp-caption-header">Biomassacentrale</div>
+                            <div class="abp-caption-text">Een grijper tilt de houtsnippers van de kerstbomen in de bunker, van waaruit ze naar de oven worden getransporteerd.</div>
+                        </div>
+                    </div>
+                    <div class="abp-stack-item">
+                        <img src="a-better-port/26.jpg" alt="A Better Port" class="photo" loading="lazy">
+                        <button class="abp-info-btn" aria-label="Toon informatie">i</button>
+                        <div class="abp-caption">
+                            <div class="abp-caption-header">Biomassacentrale</div>
+                            <div class="abp-caption-text">In de oven werden op het moment van fotograferen de kerstbomen van Amsterdam verbrand.</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Photo 28 -->
+                <div class="abp-photo-block">
+                    <img src="a-better-port/28.jpg" alt="A Better Port" class="photo" loading="lazy">
+                    <button class="abp-info-btn" aria-label="Toon informatie">i</button>
+                    <div class="abp-caption">
+                        <div class="abp-caption-header">Bio Energy Netherlands</div>
+                        <div class="abp-caption-text">Bij Bio Energy Netherlands worden houtsnippers niet verbrand maar vergast, om er waterstof van te maken. Hier worden de houtsnippers ontdaan van eventuele metaalresten.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Photo 29 - Full height -->
+            <div class="abp-photo-block size-full">
+                <img src="a-better-port/29.jpg" alt="A Better Port" class="photo" loading="lazy">
+                <button class="abp-info-btn" aria-label="Toon informatie">i</button>
+                <div class="abp-caption">
+                    <div class="abp-caption-header">Neo Orbis</div>
+                    <div class="abp-caption-text">De Neo Orbis krijgt haar laatste, marineblauwe verflaag. De nieuwe boot (het zogenaamde representatieschip) van de Port of Amsterdam gaat op waterstof in poedervorm varen, een techniek waarmee havenbedrijf en scheepsbouwer pionieren. De Neo Orbis is daarmee een van de eerste schepen dat op waterstof vaart.</div>
+                </div>
+            </div>
+
+            <!-- Photo pair 30+31 -->
+            <div class="abp-photo-pair">
+                <div class="abp-photo-block">
+                    <img src="a-better-port/30.jpg" alt="A Better Port" class="photo" loading="lazy">
+                    <button class="abp-info-btn" aria-label="Toon informatie">i</button>
+                    <div class="abp-caption">
+                        <div class="abp-caption-header">Renewi</div>
+                        <div class="abp-caption-text">Bij Renewi rijden vrachtwagens vol sinaasappelresten, groente en fruit dat over datum of rot is, en ander zogenaamd organisch afval, af en aan. Het afval, eenmaal gescheiden van het plastic, gaat in bioreactoren, waar bacteriën het omzetten in gas.</div>
+                    </div>
+                </div>
+                <div class="abp-photo-block">
+                    <img src="a-better-port/31.jpg" alt="A Better Port" class="photo" loading="lazy">
+                    <button class="abp-info-btn" aria-label="Toon informatie">i</button>
+                    <div class="abp-caption">
+                        <div class="abp-caption-header">Bioreactoren</div>
+                        <div class="abp-caption-text">De bioreactoren. Van sinaasappelschil tot gas duurt ongeveer 3 weken.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Photo pair 32+33 -->
+            <div class="abp-photo-pair">
+                <div class="abp-photo-block">
+                    <img src="a-better-port/32.jpg" alt="A Better Port" class="photo" loading="lazy">
+                    <button class="abp-info-btn" aria-label="Toon informatie">i</button>
+                    <div class="abp-caption">
+                        <div class="abp-caption-header">Alexa, ingenieur bij Nordsol</div>
+                        <div class="abp-caption-text">Alexa, sinds twee jaar werkzaam als ingenieur bij Nordsol. Nordsol verandert het biogas uit de reactoren in bio-LNG, een brandstof voor schepen en vrachtwagens. 'Al sinds mijn studie werktuigbouwkunde besef ik dat je op individueel niveau iets zinvols kan bijdragen. Ik heb daarom bewust gekozen om mijn passie voor technische onderwerpen in te zetten voor milieu- en klimaatkwesties.'</div>
+                    </div>
+                </div>
+                <div class="abp-photo-block">
+                    <img src="a-better-port/33.jpg" alt="A Better Port" class="photo" loading="lazy">
+                    <button class="abp-info-btn" aria-label="Toon informatie">i</button>
+                    <div class="abp-caption">
+                        <div class="abp-caption-header">Nordsol, bio-LNG</div>
+                        <div class="abp-caption-text">Zoals veel duurzame technieken, staat ook de productie van bio-LNG nog in de kinderschoenen. De huidige installatie kan drie keer per week een tankwagen vullen, een kleine hoeveelheid vergeleken met de continue af- en aanvoer van fossiele brandstoffen. Maar Nordsol is deze techniek snel aan het uitrollen.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Photo 34 - Full height -->
+            <div class="abp-photo-block size-full">
+                <img src="a-better-port/34.jpg" alt="A Better Port" class="photo" loading="lazy">
+                <button class="abp-info-btn" aria-label="Toon informatie">i</button>
+                <div class="abp-caption">
+                    <div class="abp-caption-header">Schrootmetalen terminal</div>
+                    <div class="abp-caption-text">Tot vorig jaar lagen hier kolen, maar nu worden schrootmetalen in de zeeschepen geladen. Vanaf daar gaat het de wereld over om gerecycled te worden.</div>
+                </div>
+            </div>
+
+            <!-- Photo 35 -->
+            <div class="abp-photo-block">
+                <img src="a-better-port/35.jpg" alt="A Better Port" class="photo" loading="lazy">
+                <button class="abp-info-btn" aria-label="Toon informatie">i</button>
+                <div class="abp-caption">
+                    <div class="abp-caption-header">Schrootmetalen</div>
+                    <div class="abp-caption-text">Het laden van schroot.</div>
+                </div>
+            </div>
+
+            <!-- Photo 36 -->
+            <div class="abp-photo-block">
+                <img src="a-better-port/36.jpg" alt="A Better Port" class="photo" loading="lazy">
+                <button class="abp-info-btn" aria-label="Toon informatie">i</button>
+                <div class="abp-caption">
+                    <div class="abp-caption-header">Windmolenbladen</div>
+                    <div class="abp-caption-text">Drie windmolenbladen van meer dan 80 meter lang worden klaargemaakt voor transport naar het IJsselmeer, waar gigantische kranen ze aan de turbine zullen bevestigen. In Nederland worden nog steeds veel nieuwe windparken ontwikkeld, waar steeds grotere windturbines worden geplaatst. Op plekken als de haven van IJmuiden en de haven van Amsterdam worden de onderdelen van de parken verzameld en vervoerd.</div>
+                </div>
+            </div>
+
+            <!-- Photo 37 -->
+            <div class="abp-photo-block">
+                <img src="a-better-port/37.jpg" alt="A Better Port" class="photo" loading="lazy">
+                <button class="abp-info-btn" aria-label="Toon informatie">i</button>
+                <div class="abp-caption">
+                    <div class="abp-caption-header">Lucy</div>
+                    <div class="abp-caption-text">Lucy pleegt onderhoud aan een bunkerboot.</div>
+                </div>
+            </div>
+
+            <!-- Photo pair 38+39 -->
+            <div class="abp-photo-pair">
+                <div class="abp-photo-block">
+                    <img src="a-better-port/38.jpg" alt="A Better Port" class="photo" loading="lazy">
+                    <button class="abp-info-btn" aria-label="Toon informatie">i</button>
+                    <div class="abp-caption">
+                        <div class="abp-caption-header">Plastic Recycle Fabriek</div>
+                        <div class="abp-caption-text">Medewerkers sorteren plastic in de Plastic Recycle Fabriek in de haven.</div>
+                    </div>
+                </div>
+                <div class="abp-photo-block">
+                    <img src="a-better-port/39.jpg" alt="A Better Port" class="photo" loading="lazy">
+                    <button class="abp-info-btn" aria-label="Toon informatie">i</button>
+                    <div class="abp-caption">
+                        <div class="abp-caption-header">Plastic Recycle Fabriek</div>
+                        <div class="abp-caption-text">Sinds de foto's gemaakt zijn, is de fabriek failliet gegaan. Ze konden niet op tegen de vloedgolf van goedkoop, nieuw plastic dat de wereld momenteel overspoelt. Gerecycled plastic kan voorlopig alleen bestaan als de overheid het verplicht stelt – iets wat in de toekomst overigens gaat gebeuren.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Photo 40 -->
+            <div class="abp-photo-block">
+                <img src="a-better-port/40.jpg" alt="A Better Port" class="photo" loading="lazy">
+                <button class="abp-info-btn" aria-label="Toon informatie">i</button>
+                <div class="abp-caption">
+                    <div class="abp-caption-header">Argent Energy</div>
+                    <div class="abp-caption-text">Gebruikt frituurvet wordt gelost uit een tankwagen. Bij Argent Energy, veruit de grootste bio-brandstofproducent van de haven, wordt frituurvet omgetoverd tot bio-diesel.</div>
+                </div>
+            </div>
+
+            <!-- Photo 41 -->
+            <div class="abp-photo-block">
+                <img src="a-better-port/41.jpg" alt="A Better Port" class="photo" loading="lazy">
+                <button class="abp-info-btn" aria-label="Toon informatie">i</button>
+                <div class="abp-caption">
+                    <div class="abp-caption-header">Marie Antony, Argent Energy</div>
+                    <div class="abp-caption-text">Marie Antony aan het werk in het lab van Argent Energy. Hij controleert samples frituurvet en dierlijk vet op hun zuiverheidsgraad.</div>
+                </div>
+            </div>
+
+            <!-- Photo 42 -->
+            <div class="abp-photo-block">
+                <img src="a-better-port/42.jpg" alt="A Better Port" class="photo" loading="lazy">
+                <button class="abp-info-btn" aria-label="Toon informatie">i</button>
+                <div class="abp-caption">
+                    <div class="abp-caption-header">Distributiecentrum van de toekomst</div>
+                    <div class="abp-caption-text">Het 'distributiecentrum van de toekomst', een CO2-neutraal complex, inclusief aanlegsteiger voor boten die de stad per water kunnen bevoorraden. Voorlopig staan de meeste hallen nog leeg.</div>
+                </div>
+            </div>
+
+            <!-- Photo 43 -->
+            <div class="abp-photo-block">
+                <img src="a-better-port/43.jpg" alt="A Better Port" class="photo" loading="lazy">
+                <button class="abp-info-btn" aria-label="Toon informatie">i</button>
+                <div class="abp-caption">
+                    <div class="abp-caption-header">Kolentrein</div>
+                    <div class="abp-caption-text">Een kolentrein rijdt door de haven.</div>
+                </div>
+            </div>
+
+            <!-- Photo 44 -->
+            <div class="abp-photo-block">
+                <img src="a-better-port/44.jpg" alt="A Better Port" class="photo" loading="lazy">
+                <button class="abp-info-btn" aria-label="Toon informatie">i</button>
+                <div class="abp-caption">
+                    <div class="abp-caption-header">Bato, rangeerder</div>
+                    <div class="abp-caption-text">Bij het vallen van de avond maakt hij een lading ethanol klaar voor vertrek.</div>
+                </div>
+            </div>
+
+            <!-- Photo 45 - Full height -->
+            <div class="abp-photo-block size-full">
+                <img src="a-better-port/45.jpg" alt="A Better Port" class="photo" loading="lazy">
+                <button class="abp-info-btn" aria-label="Toon informatie">i</button>
+                <div class="abp-caption">
+                    <div class="abp-caption-header">EVOS terminal</div>
+                    <div class="abp-caption-text">Binnenvaartschepen wachten totdat ze bij EVOS brandstof kunnen inladen. Het vervoer van benzine, diesel en andere brandstoffen gaat dag en nacht door.</div>
+                </div>
+            </div>
+
+            <!-- Photo 46 - Last -->
+            <div class="abp-photo-block">
+                <img src="a-better-port/46.jpg" alt="A Better Port" class="photo" loading="lazy">
+                <button class="abp-info-btn" aria-label="Toon informatie">i</button>
+                <div class="abp-caption">
+                    <div class="abp-caption-header">Virginia Holt, Young Board</div>
+                    <div class="abp-caption-text">Virginia Holt vormt samen met 4 anderen de Young Board van de Port of Amsterdam. Zij beoordelen beleid van de directie op de impact op volgende generaties. Ze maakt zich enorm zorgen over de toekomst, maar ziet ook dat de haven de plek is op bij te dragen aan een duurzamere samenleving. 'Als internationale zeehaven spelen we een centrale rol in de energietransitie. Hoewel de uitdagingen enorm zijn blijf ik toch optimistisch: "It always seems impossible until it's done"'</div>
+                </div>
+            </div>
+
+            <div class="end-panel" style="flex-shrink: 0; height: 70vh; min-width: 800px; background: #1e3a4f; display: flex; flex-direction: column; justify-content: center; padding: 3rem;">
+                <p style="font-family: 'Scala Sans SC', sans-serif; font-size: 1.2rem; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 3rem;">Einde van deze serie</p>
+                <p style="font-family: 'Scala Sans', sans-serif; font-size: 0.85rem; color: rgba(255,255,255,0.4); margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.05em;">Bekijk ook</p>
+                <nav style="display: flex; flex-direction: column; gap: 0.6rem;">
+                    <a href="index.html" style="font-family: 'Scala Sans', sans-serif; font-size: 0.95rem; color: #ffffff; text-decoration: none; transition: color 0.3s;">Home</a>
+                    <a href="de-exoten.html" style="font-family: 'Scala Sans', sans-serif; font-size: 0.95rem; color: #ffffff; text-decoration: none; transition: color 0.3s;">De Exoten</a>
+                    <a href="mijn-tatoeages.html" style="font-family: 'Scala Sans', sans-serif; font-size: 0.95rem; color: #ffffff; text-decoration: none; transition: color 0.3s;">Mijn Tatoeages</a>
+                    <a href="in-blauw-licht.html" style="font-family: 'Scala Sans', sans-serif; font-size: 0.95rem; color: #ffffff; text-decoration: none; transition: color 0.3s;">In Blauw Licht</a>
+                    <a href="toen-de-mijnen-verdwenen.html" style="font-family: 'Scala Sans', sans-serif; font-size: 0.95rem; color: #ffffff; text-decoration: none; transition: color 0.3s;">Toen de Mijnen Verdwenen</a>
+                    <a href="het-noordzeekanaal-gebied.html" style="font-family: 'Scala Sans', sans-serif; font-size: 0.95rem; color: #ffffff; text-decoration: none; transition: color 0.3s;">Het Noordzeekanaal Gebied</a>
+                    <a href="de-onmisbaren.html" style="font-family: 'Scala Sans', sans-serif; font-size: 0.95rem; color: #ffffff; text-decoration: none; transition: color 0.3s;">De Onmisbaren</a>
+                    <a href="een-plek-onder-de-zon.html" style="font-family: 'Scala Sans', sans-serif; font-size: 0.95rem; color: #ffffff; text-decoration: none; transition: color 0.3s;">Een Plek Onder de Zon</a>
+                </nav>
+                <div style="margin-top: 3rem;">
+                    <p style="font-family: 'Scala Sans', sans-serif; font-size: 0.85rem; color: rgba(255,255,255,0.4); margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.05em;">Contact</p>
+                    <p style="font-family: 'Scala Sans', sans-serif; font-size: 0.95rem; color: #ffffff; margin-bottom: 0.3rem;">wouterzaalberg@gmail.com</p>
+                    <p style="font-family: 'Scala Sans', sans-serif; font-size: 0.95rem; color: #ffffff; margin-bottom: 1.5rem;">06 45 788 180</p>
+                    <a href="https://instagram.com/wouterzaalberg" target="_blank" style="display: inline-block; color: #ffffff; transition: opacity 0.3s;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const container = document.getElementById('scrollContainer');
+        const introSection = document.getElementById('introSection');
+        const allItems = document.querySelectorAll('.abp-intro-section, .abp-photo-block:not(.abp-photo-pair .abp-photo-block):not(.abp-combo-photo .abp-photo-block):not(.abp-photo-set .abp-photo-block), .abp-photo-pair, .abp-infographic-panel, .abp-text-photo-combo, .abp-photo-set, .abp-quote-panel, .end-panel');
+        const infoButtons = document.querySelectorAll('.abp-info-btn');
+        const quotePanels = document.querySelectorAll('.abp-quote-panel');
+        let currentIndex = 0;
+        let isAnimating = false;
+        let scrollQueue = 0;
+        let introState = 0; // 0 = photo 1, 1 = text panel, 2 = photo 2
+
+        // Info button toggle
+        infoButtons.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const photoBlock = btn.closest('.abp-photo-block') || btn.closest('.abp-intro-photo') || btn.closest('.abp-intro-photo2');
+
+                // Close other open captions
+                document.querySelectorAll('.abp-photo-block.info-active, .abp-intro-photo.info-active, .abp-intro-photo2.info-active').forEach(block => {
+                    if (block !== photoBlock) {
+                        block.classList.remove('info-active');
+                    }
+                });
+
+                // Toggle current
+                if (photoBlock) {
+                    photoBlock.classList.toggle('info-active');
+                }
+            });
+        });
+
+        // Close caption when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.abp-photo-block') && !e.target.closest('.abp-intro-photo') && !e.target.closest('.abp-intro-photo2') && !e.target.closest('.abp-combo-photo') && !e.target.closest('.abp-grid-item') && !e.target.closest('.abp-stack-item')) {
+                document.querySelectorAll('.abp-photo-block.info-active, .abp-intro-photo.info-active, .abp-intro-photo2.info-active, .abp-combo-photo.info-active, .abp-grid-item.info-active, .abp-stack-item.info-active').forEach(block => {
+                    block.classList.remove('info-active');
+                });
+            }
+        });
+
+        // Quote panel reveal effect using Intersection Observer
+        const quoteObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('revealed');
+                }
+            });
+        }, {
+            root: container,
+            rootMargin: '0px',
+            threshold: 0.3
+        });
+
+        quotePanels.forEach(panel => {
+            quoteObserver.observe(panel);
+        });
+
+        // Combo section: text fade + photo zoom using Intersection Observer
+        const comboPhoto = document.querySelector('.abp-combo-photo-wrapper img');
+        const comboPhotoContainer = document.querySelector('.abp-text-photo-combo');
+
+        if (comboPhoto && comboPhotoContainer) {
+            const comboObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('revealed');
+                        comboPhoto.classList.add('zoomed');
+                    }
+                });
+            }, {
+                root: container,
+                rootMargin: '0px',
+                threshold: 0.3
+            });
+
+            comboObserver.observe(comboPhotoContainer);
+        }
+
+        // Infographic panels fade-in animation
+        const infographicPanels = document.querySelectorAll('.abp-infographic-panel');
+        if (infographicPanels.length > 0) {
+            const infographicObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('revealed');
+                    }
+                });
+            }, {
+                root: container,
+                rootMargin: '0px',
+                threshold: 0.3
+            });
+
+            infographicPanels.forEach(panel => {
+                infographicObserver.observe(panel);
+            });
+        }
+
+        // Combo photo info button functionality
+        const comboPhotoBlock = document.querySelector('.abp-combo-photo');
+        if (comboPhotoBlock) {
+            const comboInfoBtn = comboPhotoBlock.querySelector('.abp-info-btn');
+            if (comboInfoBtn) {
+                comboInfoBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    // Close other captions
+                    document.querySelectorAll('.abp-photo-block.info-active, .abp-intro-photo.info-active, .abp-intro-photo2.info-active, .abp-combo-photo.info-active, .abp-grid-item.info-active').forEach(block => {
+                        if (block !== comboPhotoBlock) {
+                            block.classList.remove('info-active');
+                        }
+                    });
+                    comboPhotoBlock.classList.toggle('info-active');
+                });
+            }
+        }
+
+        // Grid item info button functionality
+        const gridItems = document.querySelectorAll('.abp-grid-item');
+        gridItems.forEach(gridItem => {
+            const infoBtn = gridItem.querySelector('.abp-info-btn');
+            if (infoBtn) {
+                infoBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    // Close other captions
+                    document.querySelectorAll('.abp-photo-block.info-active, .abp-intro-photo.info-active, .abp-intro-photo2.info-active, .abp-combo-photo.info-active, .abp-grid-item.info-active').forEach(block => {
+                        if (block !== gridItem) {
+                            block.classList.remove('info-active');
+                        }
+                    });
+                    gridItem.classList.toggle('info-active');
+                });
+            }
+        });
+
+        // Stack item info button functionality (for photo set 25-28)
+        const stackItems = document.querySelectorAll('.abp-stack-item');
+        stackItems.forEach(stackItem => {
+            const infoBtn = stackItem.querySelector('.abp-info-btn');
+            if (infoBtn) {
+                infoBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    // Close other captions
+                    document.querySelectorAll('.abp-photo-block.info-active, .abp-intro-photo.info-active, .abp-intro-photo2.info-active, .abp-combo-photo.info-active, .abp-grid-item.info-active, .abp-stack-item.info-active').forEach(block => {
+                        if (block !== stackItem) {
+                            block.classList.remove('info-active');
+                        }
+                    });
+                    stackItem.classList.toggle('info-active');
+                });
+            }
+        });
+
+        // Toggle intro section between states: 0 = photo 1, 1 = text panel, 2 = photo 2
+        function setIntroState(state) {
+            introState = state;
+            introSection.classList.remove('show-text', 'show-photo2');
+
+            if (state === 1) {
+                introSection.classList.add('show-text');
+            } else if (state === 2) {
+                introSection.classList.add('show-photo2');
+            }
+        }
+
+        // Check if at intro section
+        function isAtIntroSection(index) {
+            return allItems[index] === introSection;
+        }
+
+        // Scroll to target index
+        function scrollToIndex(index) {
+            if (index < 0) index = 0;
+            if (index >= allItems.length) index = allItems.length - 1;
+
+            currentIndex = index;
+
+            allItems[currentIndex].scrollIntoView({
+                behavior: 'smooth',
+                block: 'center',
+                inline: 'center'
+            });
+        }
+
+        // Process scroll with intro section logic (3 states)
+        function handleScroll(direction) {
+            // direction: 1 = forward, -1 = backward
+
+            // If at intro section
+            if (isAtIntroSection(currentIndex)) {
+                if (direction > 0) {
+                    // Forward: photo 1 → text → photo 2 → next
+                    if (introState === 0) {
+                        setIntroState(1);
+                        return;
+                    } else if (introState === 1) {
+                        setIntroState(2);
+                        return;
+                    }
+                    // introState === 2: continue to next item
+                } else if (direction < 0) {
+                    // Backward: photo 2 → text → photo 1 → prev
+                    if (introState === 2) {
+                        setIntroState(1);
+                        return;
+                    } else if (introState === 1) {
+                        setIntroState(0);
+                        return;
+                    }
+                    // introState === 0: continue to previous item (if any)
+                }
+            }
+
+            // Normal scrolling
+            const newIndex = currentIndex + direction;
+            if (newIndex >= 0 && newIndex < allItems.length) {
+                scrollToIndex(newIndex);
+                // Reset intro state when coming back to intro section
+                if (isAtIntroSection(newIndex) && direction < 0) {
+                    setIntroState(2); // Coming back from next item, show photo 2
+                }
+            }
+        }
+
+        // Process scroll queue
+        function processScrollQueue() {
+            if (scrollQueue !== 0) {
+                const direction = scrollQueue > 0 ? 1 : -1;
+                scrollQueue = 0;
+                handleScroll(direction);
+
+                setTimeout(() => {
+                    isAnimating = false;
+                    if (scrollQueue !== 0) {
+                        processScrollQueue();
+                    }
+                }, 500);
+            } else {
+                isAnimating = false;
+            }
+        }
+
+        // Smooth scroll handling (desktop only)
+        if (window.innerWidth > 767) {
+            container.addEventListener('wheel', (e) => {
+                e.preventDefault();
+
+                if (e.deltaY > 0) {
+                    scrollQueue++;
+                } else if (e.deltaY < 0) {
+                    scrollQueue--;
+                }
+
+                if (!isAnimating) {
+                    isAnimating = true;
+                    processScrollQueue();
+                }
+
+            }, { passive: false });
+        }
+
+        // Fade in images when loaded and position buttons/captions
+        const images = document.querySelectorAll('.abp-photo-block img.photo, .abp-hero-image img, .abp-grid-item img.photo, .abp-stack-item img.photo');
+
+        function positionPhotoElements(img) {
+            const photoBlock = img.closest('.abp-photo-block');
+            if (!photoBlock) return;
+
+            const infoBtn = photoBlock.querySelector('.abp-info-btn');
+            const caption = photoBlock.querySelector('.abp-caption');
+            const photoRect = img.getBoundingClientRect();
+            const blockRect = photoBlock.getBoundingClientRect();
+
+            // Calculate photo position within block
+            const photoBottom = blockRect.bottom - photoRect.bottom;
+            const photoRight = blockRect.right - photoRect.right;
+
+            // Position info button inside photo (1rem from bottom-right)
+            if (infoBtn) {
+                infoBtn.style.bottom = (photoBottom + 16) + 'px'; // 1rem = 16px
+                infoBtn.style.right = (photoRight + 16) + 'px';
+            }
+
+            // Position caption with same width as photo, bottom aligned with photo bottom
+            if (caption) {
+                const photoLeft = photoRect.left - blockRect.left;
+                caption.style.left = photoLeft + 'px';
+                caption.style.width = photoRect.width + 'px';
+                caption.style.right = 'auto';
+                caption.style.bottom = photoBottom + 'px'; // Onderkant caption gelijk aan onderkant foto
+            }
+        }
+
+        images.forEach(img => {
+            if (img.complete) {
+                img.classList.add('loaded');
+                positionPhotoElements(img);
+            } else {
+                img.addEventListener('load', () => {
+                    img.classList.add('loaded');
+                    positionPhotoElements(img);
+                });
+            }
+        });
+
+        // Reposition on resize
+        window.addEventListener('resize', () => {
+            images.forEach(img => {
+                if (img.complete) {
+                    positionPhotoElements(img);
+                }
+            });
+        });
+
+        // Sync intro panel width and title positions with photo 1
+        function syncIntroLayout() {
+            // First intro section - use wrapper for dimensions (stable, no zoom scaling)
+            const introPhotoWrapper = document.querySelector('#introSection .abp-intro-photo-wrapper');
+            const introPhoto = document.querySelector('#introSection .abp-intro-photo img');
+            const introContent = document.querySelector('#introSection .abp-intro-content');
+            const introTitle = document.getElementById('introTitle');
+            const introInfoBtn = document.querySelector('#introSection .abp-intro-photo .abp-info-btn');
+            const introCaption = document.querySelector('#introSection .abp-intro-photo .abp-caption');
+
+            // Photo 2 elements
+            const photo2Wrapper = document.querySelector('#introSection .abp-intro-photo2 .abp-intro-photo-wrapper');
+            const photo2Img = document.querySelector('#introSection .abp-intro-photo2 img');
+            const photo2InfoBtn = document.querySelector('#introSection .abp-intro-photo2 .abp-info-btn');
+            const photo2Caption = document.querySelector('#introSection .abp-intro-photo2 .abp-caption');
+
+            if (introPhoto && introPhoto.complete && introPhotoWrapper) {
+                const wrapperRect = introPhotoWrapper.getBoundingClientRect();
+                const photoWidth = wrapperRect.width;
+                const photoLeft = wrapperRect.left;
+                const photoRight = wrapperRect.right;
+                const viewportWidth = window.innerWidth;
+
+                // Tekstkader 90% van foto breedte
+                if (introContent) {
+                    const textWidth = photoWidth * 0.9;
+                    introContent.style.maxWidth = textWidth + 'px';
+                    introContent.style.width = textWidth + 'px';
+                }
+
+                // Titel positioneren LINKS van de foto (rechts uitgelijnd)
+                // De rechterrand van de titel zit tegen de linkerrand van de foto met een kleine gap
+                if (introTitle) {
+                    const gap = 40; // 2.5rem gap tussen titel en foto
+                    const titleRight = viewportWidth - photoLeft + gap;
+                    introTitle.style.right = titleRight + 'px';
+                    introTitle.style.left = 'auto';
+                }
+
+                // Info button rechtsonder naast de foto
+                if (introInfoBtn) {
+                    introInfoBtn.style.left = (photoRight - 40) + 'px';
+                }
+
+                // Caption onder de foto, zelfde breedte
+                if (introCaption) {
+                    introCaption.style.width = photoWidth + 'px';
+                }
+            }
+
+            // Position photo 2 elements
+            if (photo2Img && photo2Img.complete && photo2Wrapper) {
+                const wrapper2Rect = photo2Wrapper.getBoundingClientRect();
+                const introRect = introSection.getBoundingClientRect();
+                const photo2Width = wrapper2Rect.width;
+                const photo2Left = wrapper2Rect.left - introRect.left;
+                const photo2Bottom = introRect.bottom - wrapper2Rect.bottom;
+                const photo2Right = introRect.right - wrapper2Rect.right;
+
+                // Info button rechtsonder in de foto
+                if (photo2InfoBtn) {
+                    photo2InfoBtn.style.bottom = (photo2Bottom + 16) + 'px';
+                    photo2InfoBtn.style.right = (photo2Right + 16) + 'px';
+                    photo2InfoBtn.style.left = 'auto';
+                }
+
+                // Caption zelfde breedte als foto, onderkant gelijk aan onderkant foto
+                if (photo2Caption) {
+                    photo2Caption.style.left = photo2Left + 'px';
+                    photo2Caption.style.width = photo2Width + 'px';
+                    photo2Caption.style.bottom = photo2Bottom + 'px';
+                    photo2Caption.style.right = 'auto';
+                    photo2Caption.style.transform = 'none';
+                }
+            }
+        }
+
+        // Dark overlay control based on current photo index
+        const darkOverlay = document.getElementById('darkOverlay');
+
+        function updateDarkOverlay() {
+            let opacity = 0;
+            let bgOpacity = 0.8;
+
+            // Photo 1-2: heel donker (0.9)
+            // Photo 3-19: gradually lighter (0.9 -> 0)
+            // Photo 19-40: light (0)
+            // Photo 41-46: gradually darker (0 -> 0.9) - helemaal donker
+            // Photo 46+: maintain at 0.9
+
+            const photoNum = getApproximatePhotoNumber(currentIndex);
+
+            if (photoNum <= 2) {
+                opacity = 0.9;
+                bgOpacity = 0.9;
+            } else if (photoNum <= 19) {
+                // Geleidelijk van 0.9 naar 0 over foto's 3-19 (17 foto's)
+                const progress = (photoNum - 2) / 17;
+                opacity = 0.9 * (1 - progress);
+                bgOpacity = 0.9 * (1 - progress);
+            } else if (photoNum <= 40) {
+                opacity = 0;
+                bgOpacity = 0;
+            } else if (photoNum <= 46) {
+                // Foto 41-46: geleidelijk naar helemaal donker (0.9)
+                const progress = (photoNum - 40) / 6;
+                opacity = 0.9 * progress;
+                bgOpacity = 0.9 * progress;
+            } else {
+                opacity = 0.9;
+                bgOpacity = 0.9;
+            }
+
+            if (darkOverlay) {
+                darkOverlay.style.opacity = opacity;
+            }
+
+            // Update CSS variable voor photo block backgrounds
+            document.documentElement.style.setProperty('--photo-bg-opacity', bgOpacity);
+        }
+
+        // Helper to map scroll index to photo number
+        // Exacte mapping van scroll index naar fotonummer
+        function getApproximatePhotoNumber(index) {
+            const mapping = [
+                2,   // 0: intro section (photo 1-2)
+                4,   // 1: photo pair 3+4
+                5,   // 2: photo 5
+                6,   // 3: photo 6
+                7,   // 4: infographic panel 1
+                8,   // 5: photo 8
+                9,   // 6: photo 9
+                10,  // 7: photo 10
+                12,  // 8: photo pair 11+12
+                14,  // 9: photo pair 13+14
+                16,  // 10: photo pair 15+16
+                17,  // 11: text-photo-combo (photo 17)
+                18,  // 12: photo 18
+                20,  // 13: photo 20
+                19,  // 14: photo 19
+                22,  // 15: photo pair 21+22
+                23,  // 16: photo 23
+                24,  // 17: photo 24
+                24,  // 18: sustainability panel
+                28,  // 19: photo set 25-28
+                29,  // 20: photo 29
+                31,  // 21: photo pair 30+31
+                33,  // 22: photo pair 32+33
+                34,  // 23: photo 34
+                35,  // 24: photo 35
+                36,  // 25: photo 36
+                37,  // 26: photo 37
+                39,  // 27: photo pair 38+39
+                40,  // 28: photo 40
+                41,  // 29: photo 41
+                42,  // 30: photo 42
+                43,  // 31: photo 43
+                44,  // 32: photo 44
+                45,  // 33: photo 45
+                46,  // 34: photo 46
+                47   // 35: end-panel
+            ];
+            if (index < mapping.length) {
+                return mapping[index];
+            }
+            return 47; // Na einde
+        }
+
+        // Update overlay on scroll
+        const originalScrollToIndex = scrollToIndex;
+        scrollToIndex = function(index) {
+            originalScrollToIndex(index);
+            updateDarkOverlay();
+        };
+
+        // Initial update
+        updateDarkOverlay();
+
+        // Run on load and resize
+        const introPhotos = document.querySelectorAll('.abp-intro-photo img, .abp-intro-photo2 img');
+        introPhotos.forEach(img => {
+            if (img.complete) {
+                syncIntroLayout();
+            } else {
+                img.addEventListener('load', syncIntroLayout);
+            }
+        });
+        window.addEventListener('resize', syncIntroLayout);
+    </script>
+</body>
+</html>

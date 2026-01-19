@@ -1,0 +1,1200 @@
+/* ========================================
+   Toen de Mijnen Verdwenen - Page Styles
+   Editorial Documentary Aesthetic
+   ======================================== */
+
+:root {
+    /* Base colors */
+    --tdmv-bg: #1a1816;
+    --tdmv-bg-dark: #0f0e0d;
+    --tdmv-text: #f5f2ed;
+    --tdmv-text-muted: #8a857d;
+
+    /* Part 1: Golden Era (1965-1974) - Warm amber */
+    --tdmv-part1-accent: #c55a11;
+    --tdmv-part1-bg: #1f1a15;
+    --tdmv-part1-glow: rgba(197, 90, 17, 0.15);
+
+    /* Part 2: Abandonment (1974-2000) - Cool grays */
+    --tdmv-part2-accent: #6b7a8a;
+    --tdmv-part2-bg: #161a1d;
+    --tdmv-part2-glow: rgba(107, 122, 138, 0.1);
+
+    /* Part 3: Renewal (2000-now) - Returning warmth with green */
+    --tdmv-part3-accent: #8b9a6b;
+    --tdmv-part3-bg: #181a16;
+    --tdmv-part3-glow: rgba(139, 154, 107, 0.12);
+}
+
+/* ========================================
+   Base Page Styles
+   ======================================== */
+.tdmv-page {
+    margin: 0;
+    padding: 0;
+    background: transparent;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+/* ========================================
+   Navigation
+   ======================================== */
+.tdmv-page .horizontal-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    padding: 1.5rem 2rem;
+}
+
+.tdmv-page .horizontal-nav .back-link {
+    font-family: 'Scala Sans', sans-serif;
+    font-size: 0.8rem;
+    color: var(--tdmv-text-muted);
+    text-decoration: none;
+    transition: color 0.3s ease;
+    letter-spacing: 0.02em;
+}
+
+.tdmv-page .horizontal-nav .back-link:hover {
+    color: var(--tdmv-part1-accent);
+}
+
+.tdmv-page .horizontal-nav .nav-title {
+    font-family: 'Scala Sans', sans-serif;
+    font-size: 0.9rem;
+    color: var(--tdmv-text);
+    display: block;
+    margin-top: 0.25rem;
+}
+
+/* ========================================
+   Horizontal Scroll Container
+   ======================================== */
+.tdmv-page .horizontal-scroll-container {
+    display: flex;
+    overflow-x: auto;
+    overflow-y: hidden;
+    height: 100vh;
+    scroll-snap-type: x proximity;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    background: transparent;
+}
+
+.tdmv-page .horizontal-scroll-container::-webkit-scrollbar {
+    display: none;
+}
+
+.tdmv-page .horizontal-scroll-content {
+    display: flex;
+    align-items: center;
+    gap: 12rem;
+    padding: 0 4rem;
+    height: 100vh;
+}
+
+/* ========================================
+   Chapter Transition Panels
+   ======================================== */
+.tdmv-chapter {
+    flex-shrink: 0;
+    min-width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 4rem;
+    box-sizing: border-box;
+    scroll-snap-align: start;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Chapter backgrounds with gradient transitions */
+.tdmv-chapter.chapter-1 {
+    background: linear-gradient(135deg, var(--tdmv-part1-bg) 0%, var(--tdmv-bg) 100%);
+    transition: background 1s ease;
+}
+
+.tdmv-chapter.chapter-1::before {
+    content: '';
+    position: absolute;
+    top: 20%;
+    left: 10%;
+    width: 400px;
+    height: 400px;
+    background: var(--tdmv-part1-glow);
+    border-radius: 50%;
+    filter: blur(100px);
+    pointer-events: none;
+}
+
+.tdmv-chapter.chapter-2 {
+    background: linear-gradient(135deg, var(--tdmv-part2-bg) 0%, var(--tdmv-bg) 100%);
+    transition: background 1s ease;
+}
+
+.tdmv-chapter.chapter-2::before {
+    content: '';
+    position: absolute;
+    bottom: 20%;
+    right: 15%;
+    width: 350px;
+    height: 350px;
+    background: var(--tdmv-part2-glow);
+    border-radius: 50%;
+    filter: blur(120px);
+    pointer-events: none;
+}
+
+.tdmv-chapter.chapter-3 {
+    background: linear-gradient(135deg, var(--tdmv-part3-bg) 0%, var(--tdmv-bg) 100%);
+    transition: background 1s ease;
+}
+
+.tdmv-chapter.chapter-3::before {
+    content: '';
+    position: absolute;
+    top: 30%;
+    right: 20%;
+    width: 300px;
+    height: 300px;
+    background: var(--tdmv-part3-glow);
+    border-radius: 50%;
+    filter: blur(80px);
+    pointer-events: none;
+}
+
+.tdmv-chapter-content {
+    position: relative;
+    z-index: 1;
+    max-width: 700px;
+}
+
+.tdmv-chapter-number {
+    font-family: 'Scala Sans', sans-serif;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    margin-bottom: 1.5rem;
+    opacity: 0.5;
+}
+
+.chapter-1 .tdmv-chapter-number { color: var(--tdmv-part1-accent); }
+.chapter-2 .tdmv-chapter-number { color: var(--tdmv-part2-accent); }
+.chapter-3 .tdmv-chapter-number { color: var(--tdmv-part3-accent); }
+
+.tdmv-chapter-title {
+    font-family: 'chloe', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    line-height: 1.1;
+    margin-bottom: 1rem;
+    color: var(--tdmv-text);
+}
+
+.tdmv-chapter-period {
+    font-family: 'Scala Sans SC', sans-serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.2em;
+    margin-bottom: 3rem;
+}
+
+.chapter-1 .tdmv-chapter-period { color: var(--tdmv-part1-accent); }
+.chapter-2 .tdmv-chapter-period { color: var(--tdmv-part2-accent); }
+.chapter-3 .tdmv-chapter-period { color: var(--tdmv-part3-accent); }
+
+.tdmv-chapter-intro {
+    font-family: 'Scala Sans', sans-serif;
+    font-size: 0.95rem;
+    line-height: 1.8;
+    color: var(--tdmv-text-muted);
+    max-width: 550px;
+    margin: 0 auto;
+}
+
+.tdmv-chapter-arrow {
+    position: absolute;
+    bottom: 3rem;
+    right: 4rem;
+    font-size: 1.5rem;
+    color: var(--tdmv-text-muted);
+    opacity: 0.4;
+    animation: arrowPulse 2s ease-in-out infinite;
+    cursor: pointer;
+}
+
+.tdmv-chapter-arrow:hover {
+    opacity: 1;
+}
+
+@keyframes arrowPulse {
+    0%, 100% { transform: translateX(0); opacity: 0.4; }
+    50% { transform: translateX(8px); opacity: 0.7; }
+}
+
+/* ========================================
+   Intro Section - Vertical descent into mine
+   ======================================== */
+.tdmv-intro-section {
+    position: relative;
+    flex-shrink: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    scroll-snap-align: start;
+}
+
+/* Vertical scroll container within intro */
+.tdmv-descent {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 300vh;
+    transition: transform 1.2s ease;
+}
+
+/* State 1: Show photo 1 */
+.tdmv-intro-section.descended .tdmv-descent {
+    transform: translateY(-100vh);
+}
+
+/* State 2: Show chapter 1 */
+.tdmv-intro-section.descended-2 .tdmv-descent {
+    transform: translateY(-200vh);
+}
+
+/* Hero Panel - Title + Text (top) */
+.tdmv-hero-panel {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--tdmv-bg);
+    overflow: hidden;
+}
+
+/* Dust particles container */
+.tdmv-dust-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.tdmv-dust-particle {
+    position: absolute;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0) 70%);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+@keyframes dustFloat {
+    0% {
+        transform: translate(0, 0) rotate(0deg);
+        opacity: var(--dust-opacity, 0.4);
+    }
+    90% {
+        opacity: var(--dust-opacity, 0.4);
+    }
+    100% {
+        transform: translate(var(--dust-drift-x, 100px), var(--dust-drift-y, -200px)) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+.tdmv-hero-content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: 6rem;
+    max-width: 1200px;
+}
+
+.tdmv-hero-panel .tdmv-title {
+    color: var(--tdmv-part1-accent);
+}
+
+.tdmv-hero-text {
+    max-width: 400px;
+}
+
+.tdmv-hero-text p {
+    font-family: 'Scala Sans', sans-serif;
+    font-size: 0.95rem;
+    color: var(--tdmv-text-muted);
+    line-height: 1.75;
+    margin-bottom: 1.2rem;
+}
+
+.tdmv-hero-text p:last-child {
+    margin-bottom: 0;
+}
+
+/* Descent arrow indicator */
+.tdmv-descent-arrow {
+    position: absolute;
+    bottom: 3rem;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 2rem;
+    color: var(--tdmv-part1-accent);
+    opacity: 0.6;
+    animation: descentPulse 2s ease-in-out infinite;
+    cursor: pointer;
+}
+
+@keyframes descentPulse {
+    0%, 100% { transform: translateX(-50%) translateY(0); opacity: 0.6; }
+    50% { transform: translateX(-50%) translateY(10px); opacity: 1; }
+}
+
+/* Intro Photo - Photo 1 (bottom, revealed on descent) */
+.tdmv-intro-photo {
+    position: absolute;
+    top: 100vh;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--tdmv-bg);
+    overflow: hidden;
+}
+
+.tdmv-intro-photo-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.tdmv-intro-photo img {
+    height: 80vh;
+    width: auto;
+    object-fit: contain;
+    transform: scale(1);
+    transition: transform 8s ease-out;
+}
+
+.tdmv-intro-section.descended .tdmv-intro-photo img {
+    transform: scale(1.05);
+}
+
+/* Caption positioned absolutely to the right of centered photo */
+.tdmv-intro-photo > .tdmv-caption {
+    position: absolute;
+    bottom: 10vh;
+    max-width: 400px;
+    z-index: 1;
+    /* left wordt via JavaScript gezet op basis van fotobreedte */
+}
+
+/* Intro Chapter Panel (third level of descent) */
+.tdmv-intro-chapter {
+    position: absolute;
+    top: 200vh;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 4rem;
+    box-sizing: border-box;
+    background: linear-gradient(135deg, var(--tdmv-part1-bg) 0%, var(--tdmv-bg) 100%);
+    overflow: hidden;
+    transition: background 1s ease;
+}
+
+/* Fade out chapter background when leaving intro */
+.tdmv-intro-chapter.bg-hidden {
+    background: transparent !important;
+}
+
+.tdmv-intro-chapter::before {
+    transition: opacity 1s ease;
+}
+
+.tdmv-intro-chapter.bg-hidden::before {
+    opacity: 0;
+}
+
+.tdmv-intro-chapter .tdmv-chapter-arrow {
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+.tdmv-intro-chapter.bg-hidden .tdmv-chapter-arrow {
+    opacity: 0 !important;
+    animation: none;
+    visibility: hidden;
+}
+
+/* Fade out chapter backgrounds when scrolling past */
+.tdmv-chapter.bg-hidden {
+    background: transparent !important;
+}
+
+.tdmv-chapter.bg-hidden::before {
+    opacity: 0;
+}
+
+.tdmv-chapter::before {
+    transition: opacity 1s ease;
+}
+
+.tdmv-chapter .tdmv-chapter-arrow {
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+.tdmv-chapter.bg-hidden .tdmv-chapter-arrow {
+    opacity: 0 !important;
+    animation: none;
+    visibility: hidden;
+}
+
+.tdmv-intro-chapter .tdmv-chapter-content {
+    position: relative;
+    z-index: 1;
+}
+
+.tdmv-intro-chapter::before {
+    content: '';
+    position: absolute;
+    top: 20%;
+    left: 10%;
+    width: 400px;
+    height: 400px;
+    background: var(--tdmv-part1-glow);
+    border-radius: 50%;
+    filter: blur(100px);
+    pointer-events: none;
+}
+
+.tdmv-intro-chapter .tdmv-chapter-arrow {
+    position: absolute;
+    bottom: 3rem;
+    right: 4rem;
+    font-size: 1.5rem;
+    color: var(--tdmv-text-muted);
+    opacity: 0.4;
+    animation: arrowPulse 2s ease-in-out infinite;
+    cursor: pointer;
+    z-index: 1;
+}
+
+.tdmv-intro-chapter .tdmv-chapter-arrow:hover {
+    opacity: 1;
+}
+
+/* ========================================
+   Insert Panels (full width with image)
+   ======================================== */
+.tdmv-insert {
+    flex-shrink: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    scroll-snap-align: center;
+    overflow: hidden;
+}
+
+.tdmv-insert.part-1 {
+    background: rgba(197, 90, 17, 0.96);
+    position: relative;
+}
+
+.tdmv-insert.part-1::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('../toen-de-mijnen-verdwenen/mijngang.jpg') center center / cover no-repeat;
+    z-index: -1;
+}
+.tdmv-insert.part-2 { background: var(--tdmv-part2-accent); }
+.tdmv-insert.part-3 { background: var(--tdmv-part3-accent); }
+
+.tdmv-insert-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    padding: 3rem;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.tdmv-insert.in-view .tdmv-insert-content {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.tdmv-insert-title {
+    font-family: 'chloe', sans-serif;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 400;
+    color: var(--tdmv-text);
+    text-align: center;
+    margin: 0;
+}
+
+.tdmv-insert-image {
+    max-width: 80vw;
+    max-height: 70vh;
+    overflow: hidden;
+}
+
+.tdmv-insert-image img {
+    width: 100%;
+    height: auto;
+    max-height: 70vh;
+    object-fit: contain;
+    opacity: 0;
+    transform: scale(0.95);
+    transition: opacity 1s ease 0.3s, transform 1s ease 0.3s;
+}
+
+.tdmv-insert.in-view .tdmv-insert-image img {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* Map content layout */
+.tdmv-map-content {
+    align-items: flex-start !important;
+    width: 60vw;
+    gap: 1rem;
+}
+
+.tdmv-map-content .tdmv-insert-title {
+    text-align: left;
+    font-size: clamp(3rem, 6vw, 5rem);
+    margin-bottom: 0.5rem;
+}
+
+/* Leaflet Map */
+.tdmv-leaflet-map {
+    width: 60vw;
+    height: 45vh;
+    border-radius: 4px;
+    opacity: 0;
+    transform: scale(0.95);
+    transition: opacity 1s ease 0.3s, transform 1s ease 0.3s;
+}
+
+.tdmv-insert.in-view .tdmv-leaflet-map {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* Mine statistics grid */
+.tdmv-mine-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem 1.5rem;
+    margin-top: 1.5rem;
+    width: 60vw;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease 0.5s, transform 0.8s ease 0.5s;
+}
+
+.tdmv-insert.in-view .tdmv-mine-stats {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.tdmv-mine-stat {
+    display: flex;
+    flex-direction: column;
+    padding: 0.5rem 0;
+}
+
+.tdmv-mine-stat-name {
+    font-family: 'Scala Sans SC', sans-serif;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: #1a1a1a;
+    margin-bottom: 0.4rem;
+    white-space: nowrap;
+}
+
+.tdmv-mine-stat-bar {
+    height: 18px;
+    background: rgba(0,0,0,0.15);
+    border-radius: 2px;
+    margin-bottom: 0.3rem;
+    overflow: hidden;
+}
+
+.tdmv-mine-stat-bar-fill {
+    height: 100%;
+    background: #1a1a1a;
+    border-radius: 2px;
+    transition: width 1s ease 0.8s;
+}
+
+.tdmv-mine-stat-data {
+    font-family: 'Scala Sans', sans-serif;
+    font-size: 0.7rem;
+    color: #1a1a1a;
+    line-height: 1.4;
+}
+
+.tdmv-mine-stat-data span {
+    opacity: 0.6;
+}
+
+/* Custom Leaflet styling */
+.mine-marker {
+    background: var(--tdmv-part1-accent);
+    border: 4px solid #fff;
+    border-radius: 50%;
+    width: 32px !important;
+    height: 32px !important;
+    margin-left: -16px !important;
+    margin-top: -16px !important;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.mine-marker:hover {
+    transform: scale(1.3);
+    box-shadow: 0 0 20px rgba(197, 90, 17, 0.6);
+}
+
+.leaflet-popup-content-wrapper {
+    background: var(--tdmv-part1-accent);
+    color: var(--tdmv-text);
+    border-radius: 2px;
+    font-family: 'Scala Sans', sans-serif;
+}
+
+.leaflet-popup-content {
+    margin: 10px 14px;
+    font-size: 0.9rem;
+}
+
+.leaflet-popup-tip {
+    background: var(--tdmv-part1-accent);
+}
+
+.leaflet-popup-close-button {
+    color: var(--tdmv-text) !important;
+}
+
+/* ========================================
+   Intro Section - Title | Text | Photo
+   ======================================== */
+.tdmv-intro {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+    min-width: max-content;
+    height: 100vh;
+    padding-top: 60px;
+    scroll-snap-align: start;
+    margin-right: 2rem;
+}
+
+.tdmv-title {
+    font-family: 'chloe', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: clamp(6rem, 11vw, 9rem);
+    color: var(--tdmv-part1-accent);
+    line-height: 1.05;
+    white-space: nowrap;
+    flex-shrink: 0;
+    text-align: right;
+}
+
+.tdmv-title span {
+    display: block;
+}
+
+.tdmv-intro-text {
+    width: 300px;
+    flex-shrink: 0;
+}
+
+.tdmv-intro-text p {
+    font-family: 'Scala Sans', sans-serif;
+    font-size: 0.9rem;
+    color: var(--tdmv-text);
+    line-height: 1.75;
+    margin-bottom: 1.2rem;
+}
+
+.tdmv-intro-text p:last-child {
+    margin-bottom: 0;
+}
+
+.tdmv-intro-image {
+    height: 100vh;
+    flex-shrink: 0;
+}
+
+.tdmv-intro-image img {
+    height: 100%;
+    width: auto;
+    object-fit: cover;
+}
+
+/* ========================================
+   Photo Items with Caption
+   ======================================== */
+.tdmv-photo-block {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    gap: 1.5rem;
+    flex-shrink: 0;
+    scroll-snap-align: center;
+}
+
+.tdmv-photo-block img {
+    height: 70vh;
+    width: auto;
+    object-fit: contain;
+    opacity: 0;
+    transition: opacity 0.6s ease, transform 0.15s ease-out;
+    will-change: transform, opacity;
+}
+
+.tdmv-photo-block img.loaded {
+    opacity: 1;
+}
+
+/* All photos default to 70vh, select few at 90vh */
+.tdmv-photo-block img { height: 70vh; }
+.tdmv-photo-block.size-large img { height: 90vh; }
+
+/* Caption Box - Refined */
+.tdmv-caption {
+    background: rgba(15, 14, 13, 0.9);
+    padding: 1.25rem 1.5rem;
+    max-width: 320px;
+    border-left: 2px solid;
+}
+
+/* Part-specific caption accent colors */
+.part-1 .tdmv-caption { border-color: var(--tdmv-part1-accent); }
+.part-2 .tdmv-caption { border-color: var(--tdmv-part2-accent); }
+.part-3 .tdmv-caption { border-color: var(--tdmv-part3-accent); }
+
+.tdmv-caption-header {
+    font-family: 'Scala Sans SC', sans-serif;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: 0.6rem;
+}
+
+.part-1 .tdmv-caption-header { color: var(--tdmv-part1-accent); }
+.part-2 .tdmv-caption-header { color: var(--tdmv-part2-accent); }
+.part-3 .tdmv-caption-header { color: var(--tdmv-part3-accent); }
+
+.tdmv-caption-text {
+    font-family: 'Scala Sans', sans-serif;
+    font-size: 0.8rem;
+    color: var(--tdmv-text);
+    line-height: 1.65;
+}
+
+/* ========================================
+   Highlighted Photo with Panel
+   ======================================== */
+.tdmv-photo-highlight {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0;
+    flex-shrink: 0;
+    scroll-snap-align: center;
+}
+
+.tdmv-photo-highlight img {
+    height: 70vh;
+    width: auto;
+    object-fit: contain;
+    opacity: 0;
+    transition: opacity 0.6s ease;
+}
+
+.tdmv-photo-highlight.size-large img {
+    height: 90vh;
+}
+
+.tdmv-photo-highlight.size-large .tdmv-highlight-panel {
+    height: 90vh;
+}
+
+.tdmv-photo-highlight img.loaded {
+    opacity: 1;
+}
+
+.tdmv-highlight-panel {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 2.5rem;
+    width: 320px;
+    height: 70vh;
+}
+
+.tdmv-photo-highlight.part-1 .tdmv-highlight-panel { background: rgba(197, 90, 17, 0.7); }
+.tdmv-photo-highlight.part-2 .tdmv-highlight-panel { background: rgba(107, 122, 138, 0.7); }
+.tdmv-photo-highlight.part-3 .tdmv-highlight-panel { background: rgba(139, 154, 107, 0.7); }
+
+.tdmv-highlight-header {
+    font-family: 'Scala Sans SC', sans-serif;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--tdmv-text);
+    margin-bottom: 1.5rem;
+    opacity: 0.8;
+}
+
+.tdmv-highlight-text {
+    font-family: 'chloe', sans-serif;
+    font-size: 2.2rem;
+    color: var(--tdmv-text);
+    line-height: 1.5;
+}
+
+/* ========================================
+   Quote Panels - Editorial Style
+   ======================================== */
+.tdmv-quote-panel {
+    flex-shrink: 0;
+    width: 420px;
+    min-height: 50vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 3.5rem;
+    scroll-snap-align: center;
+    position: relative;
+}
+
+.tdmv-quote-panel.part-1 { background: var(--tdmv-part1-accent); }
+.tdmv-quote-panel.part-2 { background: var(--tdmv-part2-accent); }
+.tdmv-quote-panel.part-3 { background: var(--tdmv-part3-accent); }
+
+.tdmv-quote-panel::before {
+    content: '"';
+    position: absolute;
+    top: 2rem;
+    left: 2rem;
+    font-family: 'Playfair Display', serif;
+    font-size: 6rem;
+    line-height: 1;
+    opacity: 0.15;
+    color: var(--tdmv-text);
+}
+
+.tdmv-quote-text {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: clamp(1.1rem, 1.6vw, 1.35rem);
+    color: var(--tdmv-text);
+    line-height: 1.6;
+    margin-bottom: 2rem;
+    position: relative;
+    z-index: 1;
+}
+
+.tdmv-quote-author {
+    font-family: 'Scala Sans', sans-serif;
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.7);
+    letter-spacing: 0.05em;
+}
+
+/* ========================================
+   Page Background Layer
+   ======================================== */
+.tdmv-bg-layer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--tdmv-bg);
+    z-index: -2;
+}
+
+/* ========================================
+   Part 1 Dust Overlay (fixed, covers photos 2-19)
+   ======================================== */
+.tdmv-dust-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 5;
+    opacity: 0;
+    transition: opacity 1s ease;
+}
+
+.tdmv-dust-overlay.active {
+    opacity: 1;
+}
+
+/* ========================================
+   Mine Background (disabled - now using pseudo-element on map section)
+   ======================================== */
+.tdmv-mine-bg {
+    display: none;
+}
+
+/* ========================================
+   Mobile Styles
+   ======================================== */
+@media (max-width: 767px) {
+    .tdmv-page .horizontal-scroll-container {
+        flex-direction: column;
+        height: auto;
+        overflow-x: hidden;
+        overflow-y: auto;
+        scroll-snap-type: y proximity;
+    }
+
+    .tdmv-page .horizontal-scroll-content {
+        flex-direction: column;
+        height: auto;
+        gap: 3rem;
+        padding: 80px 1.5rem 3rem;
+    }
+
+    .tdmv-chapter {
+        min-width: 100%;
+        height: auto;
+        min-height: 80vh;
+        padding: 3rem 1.5rem;
+    }
+
+    .tdmv-chapter-title {
+        font-size: 2rem;
+    }
+
+    .tdmv-chapter-intro {
+        font-size: 0.9rem;
+    }
+
+    .tdmv-intro-section {
+        position: relative;
+        width: 100%;
+        height: auto;
+        min-height: auto;
+        overflow: visible;
+    }
+
+    .tdmv-descent {
+        position: relative;
+        height: auto;
+        transform: none !important;
+    }
+
+    .tdmv-hero-panel {
+        position: relative;
+        height: auto;
+        min-height: 80vh;
+        padding: 3rem 1.5rem;
+    }
+
+    .tdmv-descent-arrow {
+        display: none;
+    }
+
+    .tdmv-intro-photo {
+        position: relative;
+        top: 0;
+        height: auto;
+        flex-direction: column;
+        padding: 2rem 1.5rem;
+    }
+
+    .tdmv-intro-photo-wrapper {
+        flex-direction: column;
+    }
+
+    .tdmv-intro-photo img {
+        height: auto;
+        width: 100%;
+    }
+
+    .tdmv-hero-content {
+        flex-direction: column;
+        gap: 2rem;
+        text-align: center;
+    }
+
+    .tdmv-hero-text {
+        max-width: 100%;
+    }
+
+    .tdmv-intro-chapter {
+        position: relative;
+        top: 0;
+        height: auto;
+        min-height: 80vh;
+        padding: 3rem 1.5rem;
+    }
+
+    .tdmv-intro {
+        flex-direction: column;
+        align-items: flex-start;
+        height: auto;
+        min-width: 100%;
+        padding-top: 0;
+        margin-right: 0;
+        gap: 2rem;
+    }
+
+    .tdmv-title {
+        font-size: 2.5rem;
+    }
+
+    .tdmv-intro-text {
+        width: 100%;
+    }
+
+    .tdmv-intro-image {
+        height: auto;
+        width: 100%;
+    }
+
+    .tdmv-intro-image img {
+        height: auto;
+        width: 100%;
+    }
+
+    .tdmv-photo-block {
+        width: 100%;
+    }
+
+    .tdmv-photo-block img,
+    .tdmv-photo-block.size-small img,
+    .tdmv-photo-block.size-medium img,
+    .tdmv-photo-block.size-large img,
+    .tdmv-photo-block.size-full img {
+        height: auto;
+        width: 100%;
+    }
+
+    .tdmv-caption {
+        max-width: 100%;
+    }
+
+    .tdmv-quote-panel {
+        width: 100%;
+        padding: 2.5rem 1.5rem;
+        min-height: auto;
+    }
+
+    .tdmv-insert {
+        width: 100%;
+        height: auto;
+        min-height: 60vh;
+        padding: 2rem 1.5rem;
+    }
+
+    .tdmv-insert-content {
+        padding: 1rem;
+    }
+
+    .tdmv-insert-title {
+        font-size: 2rem;
+    }
+
+    .tdmv-insert-image {
+        max-width: 100%;
+        max-height: none;
+    }
+
+    .tdmv-insert-image img {
+        max-height: none;
+    }
+
+    .tdmv-mine-stats {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.5rem 1rem;
+    }
+
+    .tdmv-leaflet-map {
+        height: 35vh;
+    }
+
+    .tdmv-map-content {
+        width: 90vw;
+    }
+
+    .tdmv-leaflet-map,
+    .tdmv-mine-stats {
+        width: 90vw;
+    }
+
+    /* Reduce dust overlay on mobile for better performance */
+    .tdmv-dust-overlay {
+        opacity: 0.6;
+    }
+}
+
+/* ========================================
+   Reduced Motion
+   ======================================== */
+@media (prefers-reduced-motion: reduce) {
+    .tdmv-photo-block img {
+        transition: opacity 0.3s ease;
+        transform: none !important;
+    }
+
+    .tdmv-chapter-arrow {
+        animation: none;
+    }
+
+    .tdmv-parallax-bg {
+        display: none;
+    }
+
+    .tdmv-dust-container,
+    .tdmv-dust-overlay {
+        display: none;
+    }
+
+    .tdmv-dust-particle {
+        animation: none;
+    }
+}

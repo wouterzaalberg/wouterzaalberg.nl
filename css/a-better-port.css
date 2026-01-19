@@ -1,0 +1,1808 @@
+/* ========================================
+   A Better Port - Page Styles
+   ======================================== */
+
+:root {
+    --abp-bg: #e8e4df;
+    --abp-bg-dark: rgba(30, 40, 50, 0.85);
+    --abp-accent: #2c3e50;
+    --abp-yellow: rgba(225, 200, 90, 0.85);
+    --abp-yellow-solid: #e1c85a;
+    --abp-text: #1a1a1a;
+    --abp-text-light: #ffffff;
+    --abp-text-muted: #666666;
+}
+
+/* ========================================
+   Base Page Styles
+   ======================================== */
+.abp-page {
+    margin: 0;
+    padding: 0;
+    background: var(--abp-bg);
+    min-height: 100vh;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Rotating Background */
+.abp-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 300%;
+    height: 100%;
+    z-index: 0;
+    display: flex;
+    opacity: 0.15;
+}
+
+.abp-background img {
+    height: 100%;
+    width: auto;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+/* Dark overlay - opacity controlled via JS based on scroll position */
+.abp-dark-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000000;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.9; /* Start heel donker */
+    transition: opacity 0.5s ease;
+}
+
+/* ========================================
+   Navigation
+   ======================================== */
+.abp-page .horizontal-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    padding: 1.5rem 2rem;
+}
+
+.abp-page .horizontal-nav .back-link {
+    font-family: 'Scala Sans', sans-serif;
+    font-size: 0.85rem;
+    color: var(--abp-text-light);
+    text-decoration: none;
+    transition: color 0.3s ease;
+    opacity: 0.8;
+}
+
+.abp-page .horizontal-nav .nav-title {
+    color: var(--abp-text-light);
+}
+
+.abp-page .horizontal-nav .back-link:hover {
+    opacity: 1;
+}
+
+/* ========================================
+   Horizontal Scroll Container
+   ======================================== */
+.abp-page .horizontal-scroll-container {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    overflow-x: auto;
+    overflow-y: hidden;
+    height: 100vh;
+    scroll-snap-type: x proximity;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.abp-page .horizontal-scroll-container::-webkit-scrollbar {
+    display: none;
+}
+
+.abp-page .horizontal-scroll-content {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    padding: 0;
+    height: 100vh;
+}
+
+/* ========================================
+   Intro Section - Photo transforms into Text Panel
+   ======================================== */
+.abp-intro-section {
+    position: relative;
+    flex-shrink: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    scroll-snap-align: center;
+}
+
+/* Photo 1 - Centered, visible initially */
+.abp-intro-photo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.8s ease, visibility 0.8s ease;
+    background: transparent;
+}
+
+.abp-intro-photo.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Wrapper voor zoom effect zonder groter worden */
+.abp-intro-photo-wrapper {
+    height: 80vh;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.abp-intro-photo img {
+    height: 100%;
+    width: auto;
+    object-fit: contain;
+    animation: introZoom 8s ease-out 3s forwards; /* 3s delay voor zoom */
+}
+
+@keyframes introZoom {
+    from {
+        transform: scale(1);
+    }
+    to {
+        transform: scale(1.05);
+    }
+}
+
+/* Title - links naast de foto, rechts uitgelijnd */
+.abp-intro-section > .abp-hero-title {
+    position: absolute;
+    bottom: 11vh;
+    text-align: right;
+    font-family: 'Scala Sans SC', sans-serif;
+    font-size: clamp(4rem, 10vw, 8rem);
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    line-height: 0.9;
+    color: transparent;
+    -webkit-text-stroke: 2px #6a7d8a;
+    text-stroke: 2px #6a7d8a;
+    z-index: 10;
+    transition: opacity 0.8s ease, visibility 0.8s ease, -webkit-text-stroke 0.8s ease;
+    /* right wordt via JS gezet op basis van foto positie */
+}
+
+.abp-intro-section > .abp-hero-title span {
+    display: block;
+}
+
+/* Info button on intro photo - rechtsonder IN de foto */
+.abp-intro-photo .abp-info-btn {
+    position: absolute;
+    bottom: calc(10vh + 1rem); /* 10vh = ruimte onder foto, 1rem = binnen de foto */
+    /* left wordt via JS gezet op rechterrand van foto */
+}
+
+/* Caption onder de foto - breedte gelijk aan foto via JS */
+.abp-intro-photo .abp-caption {
+    position: absolute;
+    bottom: 2vh;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    /* width wordt via JS gelijk gezet aan foto */
+}
+
+.abp-intro-photo.info-active .abp-caption {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* ========================================
+   Intro Text Section - Yellow Panel
+   ======================================== */
+.abp-intro-panel {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: var(--abp-yellow);
+    display: flex;
+    align-items: center; /* Verticaal gecentreerd, zoals de foto */
+    justify-content: center;
+    padding: 4rem;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.8s ease, visibility 0.8s ease;
+}
+
+.abp-intro-section.show-text .abp-intro-photo {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.abp-intro-section.show-text .abp-intro-panel {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Photo 2 - Hidden initially, appears after text panel */
+.abp-intro-photo2 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.8s ease, visibility 0.8s ease;
+    background: transparent;
+}
+
+.abp-intro-photo2 .abp-intro-photo-wrapper {
+    height: 90vh;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.abp-intro-photo2 img {
+    height: 100%;
+    width: auto;
+    object-fit: contain;
+}
+
+/* State: show-photo2 - text panel fades out, photo 2 fades in */
+.abp-intro-section.show-photo2 .abp-intro-photo {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.abp-intro-section.show-photo2 .abp-intro-panel {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.abp-intro-section.show-photo2 .abp-intro-photo2 {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Titel verbergen bij foto 2 */
+.abp-intro-section.show-photo2 > .abp-hero-title {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.8s ease, visibility 0.8s ease;
+}
+
+/* Info button positioning for photo 2 */
+.abp-intro-photo2 .abp-info-btn {
+    position: absolute;
+    bottom: 10vh;
+}
+
+.abp-intro-photo2 .abp-caption {
+    position: absolute;
+    background: var(--abp-bg-dark);
+    padding: 1.25rem 1.5rem;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s ease, visibility 0.4s ease;
+    /* Positie en breedte worden via JS gezet */
+}
+
+.abp-intro-photo2.info-active .abp-caption {
+    opacity: 1;
+    visibility: visible;
+}
+
+.abp-intro-content {
+    height: 80vh; /* Zelfde hoogte als foto wrapper */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; /* Tekst van onder uitgelijnd */
+    overflow-y: auto;
+    padding-bottom: 1vh; /* Uitlijnen op onderkant titel "Port" */
+    box-sizing: border-box;
+    /* Breedte wordt via JS gezet op 90% van foto */
+}
+
+/* Titel kleur verandert bij tekstpaneel */
+.abp-intro-section.show-text > .abp-hero-title {
+    -webkit-text-stroke: 2px var(--abp-text);
+    text-stroke: 2px var(--abp-text);
+    transition: all 0.8s ease;
+}
+
+.abp-intro-text {
+    font-family: 'Scala Sans', sans-serif;
+    font-size: 1.15rem;
+    color: var(--abp-text);
+    line-height: 1.8;
+}
+
+.abp-intro-text p {
+    margin-bottom: 1.5rem;
+}
+
+.abp-intro-text p:last-child {
+    margin-bottom: 0;
+}
+
+.abp-intro-credit {
+    font-style: italic;
+    margin-top: 2rem !important;
+    color: var(--abp-text-muted);
+}
+
+/* Text Panel after photo 6 - direct zichtbaar (geen fade) */
+.abp-text-panel {
+    flex-shrink: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    scroll-snap-align: center;
+}
+
+.abp-text-panel .abp-intro-panel {
+    width: 100%;
+    height: 100%;
+}
+
+.abp-text-panel .abp-intro-content {
+    max-width: 500px;
+}
+
+/* ========================================
+   Photo Items with Info Button
+   ======================================== */
+.abp-photo-block {
+    position: relative;
+    flex-shrink: 0;
+    scroll-snap-align: center;
+    display: flex;
+    align-items: center;
+    height: 100vh;
+    padding: 0 14rem; /* Grotere ruimte tussen foto's */
+    background: transparent;
+}
+
+.abp-photo-block img.photo {
+    height: 70vh;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.abp-photo-block img.photo.loaded {
+    opacity: 1;
+}
+
+.abp-photo-block.size-full {
+    padding: 0 14rem; /* Zelfde ruimte als andere foto's */
+}
+
+.abp-photo-block.size-full img.photo {
+    height: 90vh; /* Grote foto's 90vh, verticaal gecentreerd */
+}
+
+/* Photo pairs - dicht tegen elkaar */
+.abp-photo-pair {
+    position: relative;
+    flex-shrink: 0;
+    scroll-snap-align: center;
+    display: flex;
+    align-items: center;
+    height: 100vh;
+    padding: 0 14rem; /* Zelfde ruimte als andere foto's */
+    gap: 0.5rem;
+    background: transparent;
+}
+
+.abp-photo-pair .abp-photo-block {
+    padding: 0;
+    scroll-snap-align: none;
+    background: transparent; /* Voorkom dubbele achtergrond */
+}
+
+.abp-photo-pair .abp-photo-block img.photo {
+    height: 70vh;
+}
+
+/* Info Button - in de foto, zelfde afstand van onder en rechts */
+.abp-info-btn {
+    position: absolute;
+    bottom: calc(15vh + 1rem); /* 15vh = afstand onder foto, 1rem = padding in foto */
+    right: calc(4rem + 1rem); /* 4rem = padding photo-block, 1rem = padding in foto */
+    width: 28px;
+    height: 28px;
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Georgia', serif;
+    font-size: 14px;
+    font-style: italic;
+    color: var(--abp-accent);
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+.abp-info-btn:hover {
+    background: #ffffff;
+    transform: scale(1.1);
+}
+
+.abp-photo-block.info-active .abp-info-btn,
+.abp-hero-image.info-active .abp-info-btn {
+    background: var(--abp-accent);
+    color: #ffffff;
+}
+
+/* Caption Overlay - exact zo breed als de foto */
+.abp-caption {
+    position: absolute;
+    bottom: 15vh; /* Onder de foto */
+    left: 4rem; /* Gelijk aan foto links */
+    right: 4rem; /* Gelijk aan foto rechts */
+    background: var(--abp-bg-dark);
+    padding: 1.25rem 1.5rem;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+
+.abp-photo-block.info-active .abp-caption,
+.abp-hero-image.info-active .abp-caption {
+    opacity: 1;
+    visibility: visible;
+}
+
+.abp-caption-header {
+    font-family: 'Scala Sans SC', sans-serif;
+    font-size: 0.65rem;
+    color: #a0a0a0;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.4rem;
+}
+
+.abp-caption-text {
+    font-family: 'Scala Sans', sans-serif;
+    font-size: 0.8rem;
+    color: var(--abp-text-light);
+    line-height: 1.6;
+}
+
+/* ========================================
+   Infographic Panel - Data visualization with background
+   ======================================== */
+.abp-infographic-panel {
+    position: relative;
+    flex-shrink: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    scroll-snap-align: center;
+    overflow: hidden;
+}
+
+/* Donkere buffers links en rechts van gele panelen */
+.abp-infographic-panel::before,
+.abp-infographic-panel::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    width: 14rem;
+    height: 100%;
+    background: #1a1a1a;
+    z-index: 10;
+}
+
+.abp-infographic-panel::before {
+    left: 0;
+    transform: translateX(-100%);
+}
+
+.abp-infographic-panel::after {
+    right: 0;
+    transform: translateX(100%);
+}
+
+.abp-infographic-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+.abp-infographic-bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(30%);
+    opacity: 0.4; /* Olietanker 40% zichtbaar */
+}
+
+.abp-infographic-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        135deg,
+        rgba(225, 200, 90, 0.94) 0%,
+        rgba(200, 175, 70, 0.96) 50%,
+        rgba(180, 155, 50, 0.95) 100%
+    );
+}
+
+.abp-infographic-content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+    max-width: 700px;
+    padding: 3rem;
+    align-items: stretch;
+}
+
+.abp-infographic-intro {
+    max-width: 600px;
+}
+
+.abp-infographic-title {
+    font-family: 'Scala Sans SC', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--abp-text);
+    margin: 0 0 1.25rem 0;
+    opacity: 0;
+    transform: translateY(25px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.abp-infographic-panel.revealed .abp-infographic-title {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.abp-infographic-intro p {
+    font-family: 'Scala Sans', sans-serif;
+    font-size: 1.15rem;
+    line-height: 1.75;
+    color: var(--abp-text);
+    margin: 0;
+    opacity: 0;
+    transform: translateY(25px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+    transition-delay: 0.1s;
+}
+
+.abp-infographic-panel.revealed .abp-infographic-intro p {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.abp-infographic-chart {
+    width: 100%;
+}
+
+.abp-chart-title {
+    font-family: 'Scala Sans SC', sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--abp-text);
+    margin: 0 0 1.75rem 0;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid rgba(26, 26, 26, 0.2);
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+    transition-delay: 0.2s;
+}
+
+.abp-infographic-panel.revealed .abp-chart-title {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.abp-chart-title span {
+    font-family: 'Scala Sans', sans-serif;
+    text-transform: none;
+    letter-spacing: 0;
+    opacity: 0.6;
+}
+
+.abp-chart-bars {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+}
+
+.abp-bar-item {
+    display: grid;
+    grid-template-columns: 200px 1fr 90px;
+    align-items: center;
+    gap: 1rem;
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.abp-infographic-panel.revealed .abp-bar-item {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Staggered animation delays for each bar */
+.abp-infographic-panel.revealed .abp-bar-item:nth-child(1) { transition-delay: 0.35s; }
+.abp-infographic-panel.revealed .abp-bar-item:nth-child(2) { transition-delay: 0.45s; }
+.abp-infographic-panel.revealed .abp-bar-item:nth-child(3) { transition-delay: 0.55s; }
+.abp-infographic-panel.revealed .abp-bar-item:nth-child(4) { transition-delay: 0.65s; }
+.abp-infographic-panel.revealed .abp-bar-item:nth-child(5) { transition-delay: 0.75s; }
+.abp-infographic-panel.revealed .abp-bar-item:nth-child(6) { transition-delay: 0.85s; }
+.abp-infographic-panel.revealed .abp-bar-item:nth-child(7) { transition-delay: 0.95s; }
+
+.abp-bar-label {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+.abp-bar-name {
+    font-family: 'Scala Sans', sans-serif;
+    font-size: 0.9rem;
+    color: var(--abp-text);
+    font-weight: 500;
+}
+
+.abp-bar-change {
+    font-family: 'Scala Sans', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.15rem 0.4rem;
+    border-radius: 3px;
+}
+
+.abp-bar-change.positive {
+    color: #1a5c1a;
+    background: rgba(45, 90, 39, 0.15);
+}
+
+.abp-bar-change.negative {
+    color: #8b2500;
+    background: rgba(139, 37, 0, 0.12);
+}
+
+.abp-bar-track {
+    height: 28px;
+    background: rgba(26, 26, 26, 0.08);
+    overflow: hidden;
+}
+
+.abp-bar-fill {
+    height: 100%;
+    width: var(--bar-width, 0%);
+    background: #6a7d8a; /* Zelfde kleur als titel foto 1 */
+    transition: width 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.abp-bar-fill.coal {
+    background: #6a7d8a;
+}
+
+.abp-bar-value {
+    font-family: 'Scala Sans', sans-serif;
+    font-size: 0.85rem;
+    color: var(--abp-text);
+    text-align: right;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+}
+
+/* Responsive infographic */
+@media (max-width: 900px) {
+    .abp-infographic-content {
+        max-width: 90%;
+        padding: 2rem;
+    }
+
+    .abp-bar-item {
+        grid-template-columns: 150px 1fr 85px;
+    }
+}
+
+@media (max-width: 767px) {
+    .abp-infographic-panel {
+        height: auto;
+        min-height: auto;
+        max-height: none;
+        padding: 3rem 1.5rem;
+    }
+
+    .abp-infographic-content {
+        padding: 1.5rem;
+        max-width: 100%;
+    }
+
+    .abp-bar-item {
+        grid-template-columns: 1fr;
+        gap: 0.3rem;
+    }
+
+    .abp-bar-label {
+        margin-bottom: 0.2rem;
+    }
+
+    .abp-bar-value {
+        text-align: left;
+        font-size: 0.8rem;
+    }
+
+    .abp-bar-track {
+        height: 24px;
+    }
+}
+
+/* ========================================
+   Sustainability Panel - Horizontal Layout
+   ======================================== */
+.abp-sustainability-panel .abp-infographic-content {
+    max-width: 1400px;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 2rem;
+}
+
+/* Titel bovenaan over volle breedte */
+.abp-sustainability-title {
+    width: 100%;
+    text-align: left;
+    margin-bottom: 1rem;
+}
+
+/* Horizontale rij met tekst, grafiek en kleine charts */
+.abp-sustainability-row {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 3rem;
+    width: 100%;
+}
+
+/* Linker kolom: tekst */
+.abp-sustainability-panel .abp-infographic-intro {
+    flex: 0 0 280px;
+}
+
+/* Middelste kolom: grote grafiek */
+.abp-sustainability-panel .abp-transition-chart.abp-main-chart {
+    flex: 1;
+    margin-top: 0;
+}
+
+/* Rechter kolom: twee kleinere grafieken gestapeld */
+.abp-sustainability-charts {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    flex: 0 0 280px;
+    margin-top: 0;
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
+    padding-left: 2rem;
+}
+
+.abp-donut-chart-container {
+    flex: 1;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+/* Delays na de hoofdgrafiek animatie */
+.abp-infographic-panel.revealed .abp-donut-chart-container:nth-child(1) {
+    transition-delay: 2.2s;
+}
+
+.abp-infographic-panel.revealed .abp-donut-chart-container:nth-child(2) {
+    transition-delay: 2.4s;
+}
+
+.abp-infographic-panel.revealed .abp-donut-chart-container {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.abp-donut-title {
+    font-family: 'Scala Sans', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--abp-text);
+    margin: 0 0 1.25rem 0;
+    text-align: left;
+}
+
+.abp-donut-comparison {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+}
+
+.abp-donut-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.abp-donut {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background: conic-gradient(
+        var(--color) calc(var(--percentage) * 3.6deg),
+        rgba(26, 26, 26, 0.15) calc(var(--percentage) * 3.6deg)
+    );
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.abp-donut::before {
+    content: '';
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: var(--abp-yellow-solid);
+}
+
+.abp-donut-value {
+    position: relative;
+    z-index: 1;
+    font-family: 'Scala Sans', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--abp-text);
+}
+
+.abp-donut-label {
+    font-family: 'Scala Sans', sans-serif;
+    font-size: 0.8rem;
+    color: var(--abp-text-muted);
+}
+
+.abp-donut-arrow {
+    font-size: 1.5rem;
+    color: var(--abp-text);
+    opacity: 0.5;
+}
+
+/* Progress bar style for solar panels */
+.abp-bar-progress {
+    width: 100px;
+    height: 90px;
+    background: rgba(26, 26, 26, 0.1);
+    border-radius: 4px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.abp-bar-progress-fill {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: calc(var(--progress) * 1%);
+    background: #6a7d8a;
+    transition: height 1s ease;
+}
+
+.abp-bar-progress.target .abp-bar-progress-fill {
+    background: linear-gradient(to top, #6a7d8a 74%, rgba(106, 125, 138, 0.4) 74%);
+}
+
+.abp-bar-progress-value {
+    position: relative;
+    z-index: 1;
+    font-family: 'Scala Sans', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--abp-text);
+    text-align: center;
+    padding: 0.25rem;
+}
+
+/* Responsive sustainability */
+@media (max-width: 1200px) {
+    .abp-sustainability-row {
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    .abp-sustainability-panel .abp-infographic-intro {
+        flex: none;
+        width: 100%;
+    }
+
+    .abp-sustainability-panel .abp-transition-chart.abp-main-chart {
+        flex: none;
+        width: 100%;
+    }
+
+    .abp-sustainability-charts {
+        flex-direction: row;
+        flex: none;
+        width: 100%;
+        border-left: none;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        padding-left: 0;
+        padding-top: 2rem;
+    }
+}
+
+@media (max-width: 767px) {
+    .abp-sustainability-charts {
+        flex-direction: column;
+        gap: 2rem;
+    }
+}
+
+/* ========================================
+   Transition Chart - Fossil to Sustainable
+   ======================================== */
+.abp-transition-chart {
+    width: 100%;
+    margin-top: 2rem;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+    transition-delay: 0.3s;
+}
+
+/* Main chart - groot bovenaan */
+.abp-transition-chart.abp-main-chart {
+    margin-top: 2.5rem;
+    padding: 2rem;
+    background: rgba(26, 26, 26, 0.3);
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.abp-transition-chart.abp-main-chart .abp-donut-title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    text-align: left;
+    margin-bottom: 1rem;
+}
+
+.abp-transition-chart.abp-main-chart .abp-transition-bars {
+    gap: 0.6rem;
+}
+
+.abp-transition-chart.abp-main-chart .abp-transition-row {
+    padding: 0.2rem 0;
+}
+
+.abp-transition-chart.abp-main-chart .abp-transition-year {
+    font-size: 0.95rem;
+    width: 45px;
+}
+
+.abp-transition-chart.abp-main-chart .abp-transition-bar-container {
+    height: 28px;
+}
+
+.abp-transition-chart.abp-main-chart .abp-transition-bar {
+    border-radius: 3px;
+}
+
+.abp-infographic-panel.revealed .abp-transition-chart {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.abp-transition-legend {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 1.5rem;
+    margin-top: 1rem;
+}
+
+.abp-legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'Scala Sans', sans-serif;
+    font-size: 0.85rem;
+    color: var(--abp-text);
+}
+
+.abp-legend-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 2px;
+}
+
+.abp-legend-item.sustainable .abp-legend-dot {
+    background: linear-gradient(135deg, #5a8f5a 0%, #3d6b3d 100%);
+}
+
+.abp-legend-item.fossil .abp-legend-dot {
+    background: linear-gradient(135deg, #6a7d8a 0%, #4a5a66 100%);
+}
+
+.abp-transition-bars {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.abp-transition-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.abp-infographic-panel.revealed .abp-transition-row {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Staggered animation delay for each row */
+.abp-infographic-panel.revealed .abp-transition-row:nth-child(1) { transition-delay: 0.8s; }
+.abp-infographic-panel.revealed .abp-transition-row:nth-child(2) { transition-delay: 0.88s; }
+.abp-infographic-panel.revealed .abp-transition-row:nth-child(3) { transition-delay: 0.96s; }
+.abp-infographic-panel.revealed .abp-transition-row:nth-child(4) { transition-delay: 1.04s; }
+.abp-infographic-panel.revealed .abp-transition-row:nth-child(5) { transition-delay: 1.12s; }
+.abp-infographic-panel.revealed .abp-transition-row:nth-child(6) { transition-delay: 1.2s; }
+.abp-infographic-panel.revealed .abp-transition-row:nth-child(7) { transition-delay: 1.28s; }
+.abp-infographic-panel.revealed .abp-transition-row:nth-child(8) { transition-delay: 1.36s; }
+.abp-infographic-panel.revealed .abp-transition-row:nth-child(9) { transition-delay: 1.44s; }
+.abp-infographic-panel.revealed .abp-transition-row:nth-child(10) { transition-delay: 1.52s; }
+.abp-infographic-panel.revealed .abp-transition-row:nth-child(11) { transition-delay: 1.6s; }
+
+.abp-transition-year {
+    font-family: 'Scala Sans', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--abp-text);
+    width: 36px;
+    flex-shrink: 0;
+}
+
+.abp-transition-bar-container {
+    flex: 1;
+    display: flex;
+    gap: 4px;
+    height: 20px;
+}
+
+.abp-transition-bar {
+    height: 100%;
+    border-radius: 2px;
+    width: 0; /* Start at 0 */
+    transition: width 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    position: relative;
+}
+
+.abp-transition-bar.sustainable {
+    background: linear-gradient(90deg, #5a8f5a 0%, #6fa86f 100%);
+    box-shadow: 0 2px 4px rgba(90, 143, 90, 0.3);
+}
+
+.abp-transition-bar.fossil {
+    background: linear-gradient(90deg, #6a7d8a 0%, #8a9aa8 100%);
+    box-shadow: 0 2px 4px rgba(106, 125, 138, 0.3);
+}
+
+/* Animate bars when revealed */
+.abp-infographic-panel.revealed .abp-transition-bar.sustainable {
+    width: calc((var(--value) / var(--max)) * 100%);
+}
+
+.abp-infographic-panel.revealed .abp-transition-bar.fossil {
+    width: calc((var(--value) / var(--max)) * 100%);
+}
+
+/* Staggered bar animation delays per row */
+.abp-infographic-panel.revealed .abp-transition-row:nth-child(1) .abp-transition-bar { transition-delay: 0.5s; }
+.abp-infographic-panel.revealed .abp-transition-row:nth-child(2) .abp-transition-bar { transition-delay: 0.6s; }
+.abp-infographic-panel.revealed .abp-transition-row:nth-child(3) .abp-transition-bar { transition-delay: 0.7s; }
+.abp-infographic-panel.revealed .abp-transition-row:nth-child(4) .abp-transition-bar { transition-delay: 0.8s; }
+.abp-infographic-panel.revealed .abp-transition-row:nth-child(5) .abp-transition-bar { transition-delay: 0.9s; }
+.abp-infographic-panel.revealed .abp-transition-row:nth-child(6) .abp-transition-bar { transition-delay: 1.0s; }
+.abp-infographic-panel.revealed .abp-transition-row:nth-child(7) .abp-transition-bar { transition-delay: 1.1s; }
+.abp-infographic-panel.revealed .abp-transition-row:nth-child(8) .abp-transition-bar { transition-delay: 1.2s; }
+.abp-infographic-panel.revealed .abp-transition-row:nth-child(9) .abp-transition-bar { transition-delay: 1.3s; }
+.abp-infographic-panel.revealed .abp-transition-row:nth-child(10) .abp-transition-bar { transition-delay: 1.4s; }
+.abp-infographic-panel.revealed .abp-transition-row:nth-child(11) .abp-transition-bar { transition-delay: 1.5s; }
+
+/* Crossover year highlight */
+.abp-transition-row.crossover {
+    background: rgba(90, 143, 90, 0.1);
+    border-radius: 4px;
+    padding: 0.3rem 0.5rem;
+    margin: 0.2rem -0.5rem;
+}
+
+.abp-transition-row.crossover .abp-transition-year {
+    color: #5a8f5a;
+}
+
+.abp-transition-row.crossover::after {
+    content: '←';
+    font-size: 0.75rem;
+    color: #5a8f5a;
+    margin-left: 0.5rem;
+    opacity: 0.8;
+}
+
+.abp-transition-source {
+    font-family: 'Scala Sans', sans-serif;
+    font-size: 0.7rem;
+    color: var(--abp-text-muted);
+    margin-top: 1rem;
+    opacity: 0.7;
+}
+
+/* Responsive transition chart */
+@media (max-width: 767px) {
+    .abp-transition-legend {
+        gap: 1rem;
+    }
+
+    .abp-legend-item {
+        font-size: 0.75rem;
+    }
+
+    .abp-transition-year {
+        font-size: 0.7rem;
+        width: 32px;
+    }
+
+    .abp-transition-bar-container {
+        height: 16px;
+    }
+}
+
+/* ========================================
+   Photo Grid - 2x2 layout
+   ======================================== */
+.abp-photo-grid {
+    position: relative;
+    flex-shrink: 0;
+    scroll-snap-align: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 0.5rem;
+    height: 70vh;
+    padding: 0 10rem;
+    align-items: center;
+    background: rgba(26, 26, 26, var(--photo-bg-opacity, 0.8));
+}
+
+.abp-grid-item {
+    position: relative;
+    height: 100%;
+    overflow: hidden;
+}
+
+.abp-grid-item img.photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.abp-grid-item img.photo.loaded {
+    opacity: 1;
+}
+
+.abp-grid-item .abp-info-btn {
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+}
+
+.abp-grid-item .abp-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--abp-bg-dark);
+    padding: 1rem 1.25rem;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+
+.abp-grid-item.info-active .abp-caption {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Responsive grid */
+@media (max-width: 900px) {
+    .abp-photo-grid {
+        padding: 0 4rem;
+    }
+}
+
+@media (max-width: 767px) {
+    .abp-photo-grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(4, 1fr);
+        height: auto;
+        min-height: 100vh;
+        padding: 2rem;
+        gap: 0.5rem;
+    }
+
+    .abp-grid-item {
+        height: 40vh;
+    }
+}
+
+/* ========================================
+   Photo Set - Layout: 25 | 27/26 gestapeld | 28
+   ======================================== */
+.abp-photo-set {
+    position: relative;
+    flex-shrink: 0;
+    scroll-snap-align: center;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    height: 100vh;
+    padding: 0 4rem;
+    background: transparent;
+}
+
+/* Enkele foto in de set (25 en 28) */
+.abp-photo-set > .abp-photo-block {
+    position: relative;
+    padding: 0;
+    background: transparent;
+    height: auto;
+    flex-shrink: 0;
+}
+
+.abp-photo-set > .abp-photo-block img.photo {
+    height: 70vh;
+    width: auto;
+    object-fit: contain;
+}
+
+/* Info button binnen foto in set */
+.abp-photo-set > .abp-photo-block .abp-info-btn {
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+}
+
+/* Caption binnen foto in set */
+.abp-photo-set > .abp-photo-block .abp-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+/* Gestapelde foto's (27 boven, 26 onder) */
+.abp-photo-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    height: 70vh;
+    flex-shrink: 0;
+}
+
+.abp-stack-item {
+    position: relative;
+    height: calc(35vh - 0.25rem); /* Helft van 70vh minus halve gap */
+    overflow: hidden;
+}
+
+.abp-stack-item img.photo {
+    height: 100%;
+    width: auto;
+    object-fit: cover;
+    display: block;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.abp-stack-item img.photo.loaded {
+    opacity: 1;
+}
+
+.abp-stack-item .abp-info-btn {
+    position: absolute;
+    bottom: 0.75rem;
+    right: 0.75rem;
+}
+
+.abp-stack-item .abp-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--abp-bg-dark);
+    padding: 0.75rem 1rem;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+
+.abp-stack-item.info-active .abp-caption {
+    opacity: 1;
+    visibility: visible;
+}
+
+.abp-stack-item .abp-caption-header {
+    font-size: 0.7rem;
+}
+
+.abp-stack-item .abp-caption-text {
+    font-size: 0.7rem;
+    line-height: 1.4;
+}
+
+/* Responsive photo set */
+@media (max-width: 767px) {
+    .abp-photo-set {
+        flex-direction: column;
+        height: auto;
+        min-height: 100vh;
+        padding: 2rem;
+        gap: 1rem;
+    }
+
+    .abp-photo-set > .abp-photo-block img.photo {
+        width: 100%;
+        height: auto;
+    }
+
+    .abp-photo-stack {
+        width: 100%;
+        height: auto;
+        flex-direction: row;
+        gap: 0.5rem;
+    }
+
+    .abp-stack-item {
+        height: 30vh;
+        flex: 1;
+    }
+
+    .abp-stack-item img.photo {
+        width: 100%;
+        height: 100%;
+    }
+}
+
+/* ========================================
+   Text + Photo Combo - Side by side layout
+   ======================================== */
+.abp-text-photo-combo {
+    position: relative;
+    flex-shrink: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    scroll-snap-align: center;
+    background: var(--abp-yellow); /* Gele achtergrond over hele breedte */
+}
+
+.abp-combo-text {
+    flex: 0 0 35%;
+    height: 100%;
+    background: transparent;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end; /* Tekst naar rechts uitlijnen, dicht bij foto */
+    justify-content: center;
+    padding: 4rem 3rem 4rem 4rem;
+}
+
+.abp-combo-title {
+    font-family: 'Scala Sans SC', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--abp-text);
+    margin: 0 0 1.5rem 0;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.abp-text-photo-combo.revealed .abp-combo-title {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.abp-combo-text p {
+    font-family: 'Scala Sans', sans-serif;
+    font-size: 1.2rem;
+    line-height: 1.8;
+    color: var(--abp-text);
+    max-width: 400px;
+    margin: 0;
+    text-align: left;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+    transition-delay: 0.15s;
+}
+
+.abp-text-photo-combo.revealed .abp-combo-text p {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.abp-combo-photo {
+    flex: 0 0 65%;
+    height: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* Foto naar links uitlijnen */
+    background: transparent; /* Gele achtergrond van parent zichtbaar */
+    overflow: hidden;
+}
+
+.abp-combo-photo-wrapper {
+    height: 85vh;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.abp-combo-photo-wrapper img {
+    height: 100%;
+    width: auto;
+    object-fit: contain;
+    transition: transform 8s ease-out;
+}
+
+.abp-combo-photo-wrapper img.zoomed {
+    transform: scale(1.08);
+}
+
+.abp-combo-photo .abp-info-btn {
+    position: absolute;
+    bottom: calc(7.5vh + 1rem); /* Uitgelijnd met onderkant foto */
+    right: calc(25% + 1rem); /* Rechts in de foto */
+    z-index: 10;
+}
+
+.abp-combo-photo .abp-caption {
+    position: absolute;
+    bottom: 7.5vh; /* Uitgelijnd met onderkant foto */
+    left: 50%;
+    transform: translateX(-50%);
+    max-width: 350px;
+    background: var(--abp-bg-dark);
+    padding: 1.25rem 1.5rem;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+
+.abp-combo-photo.info-active .abp-caption {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Responsive text-photo combo */
+@media (max-width: 900px) {
+    .abp-combo-text {
+        padding: 3rem;
+    }
+
+    .abp-combo-text p {
+        font-size: 1.1rem;
+    }
+}
+
+@media (max-width: 767px) {
+    .abp-text-photo-combo {
+        flex-direction: column;
+        height: auto;
+        min-height: 100vh;
+    }
+
+    .abp-combo-text {
+        flex: none;
+        height: auto;
+        min-height: 50vh;
+        padding: 3rem 2rem;
+    }
+
+    .abp-combo-photo {
+        flex: none;
+        height: 60vh;
+    }
+
+    .abp-combo-photo-wrapper {
+        height: 50vh;
+    }
+}
+
+/* ========================================
+   Quote Panels - Yellow, Full Height, Reveal Effect
+   ======================================== */
+.abp-quote-panel {
+    flex-shrink: 0;
+    width: 100vw;
+    height: 100vh;
+    background: var(--abp-yellow);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem;
+    scroll-snap-align: center;
+    position: relative;
+    overflow: hidden;
+    /* Donkere buffers links en rechts via box-shadow */
+    box-shadow: -14rem 0 0 0 #1a1a1a, 14rem 0 0 0 #1a1a1a;
+}
+
+/* Sliding/wipe effect - panel schuift over de pagina */
+.abp-quote-panel.sliding-panel {
+    position: sticky;
+    left: 0;
+    z-index: 50;
+    margin-left: -100vw;
+    transform: translateX(100vw);
+    transition: none;
+}
+
+.abp-quote-panel.sliding-panel.slide-active {
+    transform: translateX(0);
+}
+
+/* Reveal effect - content slides up */
+.abp-quote-inner {
+    max-width: 700px;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.abp-quote-panel.revealed .abp-quote-inner {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.abp-quote-text {
+    font-family: 'Scala Sans', sans-serif;
+    font-style: italic;
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    color: var(--abp-text);
+    line-height: 1.6;
+    margin-bottom: 2rem;
+}
+
+.abp-quote-source {
+    font-family: 'Scala Sans', sans-serif;
+    font-size: 0.9rem;
+    color: var(--abp-text-muted);
+}
+
+/* Decorative lines for quote panels */
+.abp-quote-panel::before,
+.abp-quote-panel::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 2px;
+    background: var(--abp-text);
+    opacity: 0.3;
+}
+
+.abp-quote-panel::before {
+    top: 20%;
+}
+
+.abp-quote-panel::after {
+    bottom: 20%;
+}
+
+/* ========================================
+   Mobile Styles
+   ======================================== */
+@media (max-width: 767px) {
+    .abp-page .horizontal-scroll-container {
+        flex-direction: column;
+        height: auto;
+        overflow-x: hidden;
+        overflow-y: auto;
+        scroll-snap-type: y proximity;
+    }
+
+    .abp-page .horizontal-scroll-content {
+        flex-direction: column;
+        height: auto;
+        gap: 0;
+        padding: 0;
+    }
+
+    .abp-hero {
+        height: auto;
+        min-height: 100vh;
+        padding-top: 80px;
+    }
+
+    .abp-hero-image {
+        height: auto;
+        padding: 2rem;
+    }
+
+    .abp-hero-image img {
+        height: auto;
+        width: 100%;
+        max-height: 70vh;
+    }
+
+    .abp-hero-title {
+        position: relative;
+        bottom: auto;
+        right: auto;
+        text-align: right;
+        padding: 2rem;
+        font-size: 3rem;
+        -webkit-text-stroke: 1px var(--abp-text);
+        text-stroke: 1px var(--abp-text);
+    }
+
+    .abp-intro-panel {
+        height: auto;
+        width: 100%;
+        min-height: 50vh;
+        padding: 3rem 2rem;
+    }
+
+    .abp-photo-block {
+        height: auto;
+        padding: 2rem;
+    }
+
+    .abp-photo-block img.photo,
+    .abp-photo-block.size-full img.photo {
+        height: auto;
+        width: 100%;
+    }
+
+    .abp-quote-panel {
+        width: 100%;
+        height: auto;
+        min-height: 60vh;
+        padding: 4rem 2rem;
+    }
+
+    .abp-quote-inner {
+        opacity: 1;
+        transform: none;
+    }
+
+    .abp-background {
+        display: none;
+    }
+
+    .abp-info-btn {
+        bottom: 1rem;
+        right: 3rem;
+    }
+
+    .abp-caption {
+        bottom: 0;
+        left: 2rem;
+        right: 2rem;
+    }
+}
+
+/* ========================================
+   Reduced Motion
+   ======================================== */
+@media (prefers-reduced-motion: reduce) {
+    .abp-photo-block img.photo,
+    .abp-hero-image img {
+        transition: opacity 0.3s ease;
+    }
+
+    .abp-caption {
+        transition: none;
+    }
+
+    .abp-quote-inner {
+        transition: none;
+        opacity: 1;
+        transform: none;
+    }
+
+    /* Infographic animations */
+    .abp-infographic-intro p,
+    .abp-chart-title,
+    .abp-bar-item {
+        transition: none;
+        opacity: 1;
+        transform: none;
+    }
+
+    /* Combo text animation */
+    .abp-combo-text p {
+        transition: none;
+        opacity: 1;
+        transform: none;
+    }
+
+    /* Combo photo zoom */
+    .abp-combo-photo-wrapper img {
+        transition: none;
+    }
+}
