@@ -73,7 +73,7 @@
 
 /* Make map dark and grayscale */
 .abp-map-background .leaflet-tile-pane {
-    filter: grayscale(100%) brightness(0.25) contrast(1.2);
+    filter: grayscale(100%) brightness(0.5);
 }
 
 /* Ship Animation Canvas - only at intro */
@@ -177,7 +177,7 @@
     scroll-snap-align: center;
 }
 
-/* Photo 1 - Centered, visible initially */
+/* Photo 1 - Centered, hidden by default (text panel shows first) */
 .abp-intro-photo {
     position: absolute;
     top: 0;
@@ -190,12 +190,7 @@
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.8s ease, visibility 0.8s ease;
-    background: transparent;
-}
-
-.abp-intro-photo.active {
-    opacity: 1;
-    visibility: visible;
+    background: rgba(225, 200, 90, 0.75); /* Semi-transparent yellow behind photo 1 */
 }
 
 /* Wrapper voor zoom effect zonder groter worden */
@@ -235,8 +230,9 @@
     letter-spacing: 0.02em;
     line-height: 0.9;
     color: transparent;
-    -webkit-text-stroke: 2px #6a7d8a;
-    text-stroke: 2px #6a7d8a;
+    /* Yellow stroke */
+    -webkit-text-stroke: 2px var(--abp-yellow-solid);
+    text-stroke: 2px var(--abp-yellow-solid);
     z-index: 10;
     transition: opacity 0.8s ease, visibility 0.8s ease, -webkit-text-stroke 0.8s ease;
     /* right wordt via JS gezet op basis van foto positie */
@@ -269,7 +265,7 @@
 }
 
 /* ========================================
-   Intro Text Section - Yellow Panel
+   Intro Text Section - White Panel
    ======================================== */
 .abp-intro-panel {
     position: absolute;
@@ -277,24 +273,25 @@
     left: 0;
     width: 100%;
     height: 100vh;
-    background: var(--abp-yellow);
+    background: transparent; /* Transparent - white box only behind text */
     display: flex;
-    align-items: center; /* Verticaal gecentreerd, zoals de foto */
+    align-items: flex-end; /* Uitlijnen op onderkant */
     justify-content: center;
-    padding: 4rem;
-    opacity: 0;
-    visibility: hidden;
+    padding-bottom: 10vh; /* Zelfde als onderkant foto (80vh gecentreerd = 10vh van onder) */
+    opacity: 1;
+    visibility: visible;
     transition: opacity 0.8s ease, visibility 0.8s ease;
 }
 
-.abp-intro-section.show-text .abp-intro-photo {
-    opacity: 0;
-    visibility: hidden;
-}
-
-.abp-intro-section.show-text .abp-intro-panel {
+/* State: show-photo1 - text fades out, photo 1 fades in */
+.abp-intro-section.show-photo1 .abp-intro-photo {
     opacity: 1;
     visibility: visible;
+}
+
+.abp-intro-section.show-photo1 .abp-intro-panel {
+    opacity: 0;
+    visibility: hidden;
 }
 
 /* Photo 2 - Hidden initially, appears after text panel */
@@ -327,7 +324,7 @@
     object-fit: contain;
 }
 
-/* State: show-photo2 - text panel fades out, photo 2 fades in */
+/* State: show-photo2 - photo 1 fades out, photo 2 fades in */
 .abp-intro-section.show-photo2 .abp-intro-photo {
     opacity: 0;
     visibility: hidden;
@@ -372,28 +369,22 @@
 }
 
 .abp-intro-content {
-    height: 80vh; /* Zelfde hoogte als foto wrapper */
     display: flex;
     flex-direction: column;
-    justify-content: flex-end; /* Tekst van onder uitgelijnd */
-    overflow-y: auto;
-    padding-bottom: 1vh; /* Uitlijnen op onderkant titel "Port" */
+    justify-content: center; /* Tekst verticaal gecentreerd */
+    padding: 3rem; /* Gelijke afstand aan alle kanten */
     box-sizing: border-box;
-    /* Breedte wordt via JS gezet op 90% van foto */
+    background: rgba(255, 255, 255, 0.35); /* Low opacity white behind text only */
+    /* Breedte wordt via JS gezet */
 }
 
-/* Titel kleur verandert bij tekstpaneel */
-.abp-intro-section.show-text > .abp-hero-title {
-    -webkit-text-stroke: 2px var(--abp-text);
-    text-stroke: 2px var(--abp-text);
-    transition: all 0.8s ease;
-}
+/* (Titel kleur is nu standaard donker, wordt lichter bij show-photo1 - zie hierboven) */
 
 .abp-intro-text {
     font-family: 'Scala Sans', sans-serif;
-    font-size: 1.15rem;
-    color: var(--abp-text);
-    line-height: 1.8;
+    font-size: 1.1rem;
+    color: #ffffff; /* Witte tekst */
+    line-height: 2.1;
 }
 
 .abp-intro-text p {
@@ -407,7 +398,7 @@
 .abp-intro-credit {
     font-style: italic;
     margin-top: 2rem !important;
-    color: var(--abp-text-muted);
+    color: var(--abp-yellow-solid); /* Geel */
 }
 
 /* Text Panel after photo 6 - direct zichtbaar (geen fade) */

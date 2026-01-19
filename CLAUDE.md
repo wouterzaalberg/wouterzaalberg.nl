@@ -417,39 +417,43 @@ const symbols = {
 ### Structuur
 - **Dark overlay**: Dynamische donkere overlay die verandert op basis van scroll positie
 - **Rotating background**: 3 achtergrondafbeeldingen (achtergrond 1, 2, 3) die herhalen
-- **Intro sectie**: 3 states - Foto 1 → Tekstpaneel → Foto 2 (alle met fade transities)
+- **Intro sectie**: 3 states - Tekstpaneel → Foto 1 → Foto 2 (alle met fade transities)
 - **Foto blokken**: Met info button en fade-in caption, padding 10rem tussen foto's
 - **Foto paren**: 11+12, 13+14, 21+22, 32+33, 38+39 (gap 0.5rem binnen paar)
 - **Quote panels**: Gele achtergrond, volle paginabreedte (100vw), met reveal effect
 - **Tekst panel na foto 6**: Direct zichtbaar geel tekstpaneel
 
-### Intro sectie (3 states: foto 1 → tekst → foto 2)
+### Intro sectie (3 states: tekst → foto 1 → foto 2)
 De intro sectie neemt de volledige viewport in beslag (100vw x 100vh) met 3 states:
-- **State 0**: Foto 1 gecentreerd (80vh) met titel "A BETTER PORT" links ernaast
-- **State 1**: Geel tekstpaneel (bij eerste scroll vooruit)
+- **State 0**: Tekstpaneel met wit semi-transparant kader, gele titel "A BETTER PORT" links ernaast
+- **State 1**: Foto 1 gecentreerd (80vh) met gele achtergrond (bij eerste scroll vooruit)
 - **State 2**: Foto 2 schermvullend (100vh) (bij tweede scroll vooruit)
 - Alle transities: 0.8s ease fade effect
 - Bij terugscrollen: omgekeerde volgorde
+- Scheepsanimatie zichtbaar bij state 0 en 1, verdwijnt bij state 2
 
 ```html
 <div class="abp-intro-section" id="introSection">
     <h1 class="abp-hero-title" id="introTitle">...</h1>
-    <div class="abp-intro-photo active">...</div>  <!-- Foto 1 -->
-    <div class="abp-intro-panel">...</div>         <!-- Tekstpaneel -->
+    <div class="abp-intro-photo">...</div>         <!-- Foto 1 (hidden by default) -->
+    <div class="abp-intro-panel">...</div>         <!-- Tekstpaneel (visible by default) -->
     <div class="abp-intro-photo2">...</div>        <!-- Foto 2 -->
 </div>
 ```
 
 JavaScript states:
-- `introState = 0`: Foto 1 zichtbaar (default)
-- `introState = 1`: `introSection.classList.add('show-text')`
+- `introState = 0`: Tekstpaneel zichtbaar (default)
+- `introState = 1`: `introSection.classList.add('show-photo1')`
 - `introState = 2`: `introSection.classList.add('show-photo2')`
 
 ### Intro tekst
-- **Breedte**: 90% van foto 1 breedte
-- **Hoogte**: 80vh (zelfde als foto wrapper)
-- **Uitlijning**: Van onder uitgelijnd op onderkant titel "Port"
-- **Lettergrootte**: 1.15rem, line-height 1.8
+- **Breedte**: 100% van foto 1 breedte (via JS)
+- **Uitlijning**: Verticaal gecentreerd, onderkant op 10vh van viewport onderkant
+- **Achtergrond**: Wit semi-transparant `rgba(255, 255, 255, 0.35)`
+- **Padding**: 3rem aan alle kanten
+- **Lettergrootte**: 1.1rem, line-height 2.1
+- **Tekstkleur**: Wit (#ffffff)
+- **Credit**: Geel (--abp-yellow-solid)
 
 De serie gaat over de haven van Amsterdam als spiegel van de energietransitie:
 - Amsterdam als grootste benzinehaven ter wereld
@@ -465,14 +469,13 @@ De serie gaat over de haven van Amsterdam als spiegel van de energietransitie:
     bottom: 11vh;
     text-align: right;
     color: transparent;
-    -webkit-text-stroke: 2px #6a7d8a;
-    text-stroke: 2px #6a7d8a;
+    -webkit-text-stroke: 2px var(--abp-yellow-solid);
+    text-stroke: 2px var(--abp-yellow-solid);
     /* right wordt via JS gezet */
 }
 ```
-- Transparant lettertype met blauw-grijze outline (#6a7d8a)
-- **Positie**: LINKS van de foto, rechts uitgelijnd (titel's rechterrand tegen foto's linkerrand)
-- Bij tekstpaneel: outline verandert naar donker (--abp-text)
+- Transparant lettertype met gele outline (--abp-yellow-solid / #e1c85a)
+- **Positie**: LINKS van de foto/tekstpaneel, rechts uitgelijnd
 - Font: Scala Sans SC, uppercase
 
 ### Dark overlay
@@ -495,14 +498,15 @@ Bij foto 1 (intro) wordt een Leaflet kaart met scheepvaartanimatie getoond. Na s
 **Scheepvaart animatie:**
 - Canvas overlay met bewegende bootjes
 - Routes gebaseerd op echte havencoördinaten:
-  - Noordzeekanaal (hoofdvaarweg, oost-west)
-  - Afrikahaven (52.4173, 4.7654)
-  - Amerikahaven (52.4167, 4.7667)
-  - Westhaven (52.4141, 4.8158)
-  - Petroleumhaven, Coenhaven, IJ
-- Bootjes: grijs (`rgba(180, 190, 200, 0.7)`), langzaam varend
-- Collision detection: max 2 bootjes per route, houden afstand
-- Pauzeert automatisch na scrollen voorbij intro (performance)
+  - Route 0: Noordzeekanaal (hoofdvaarweg, 8 schepen)
+  - Route 1-4: Westelijke havens (groen, blauw, geel, roze)
+  - Route 5-7: Centrale havens (turquoise, oranje, nieuwe lijn)
+  - Route 8: Limegroen haven
+  - Route 9-11: IJ waterway en oostelijke havens
+- Bootjes: geel (`rgba(225, 200, 90, 0.4)`), zeer langzaam varend
+- Navigatie: schepen varen van/naar zee via Noordzeekanaal
+- Collision detection: schepen houden afstand op zelfde route
+- Stopt automatisch bij foto 2 (niet meer zichtbaar)
 
 **Originele rotating background (na intro):**
 - Locatie: `a-better-port/achtergrond 1.jpg`, `achtergrond 2.jpg`, `achtergrond 3.jpg`

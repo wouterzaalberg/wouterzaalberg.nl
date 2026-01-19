@@ -47,8 +47,8 @@
                     <span>Port</span>
                 </h1>
 
-                <!-- Photo 1 - Visible initially -->
-                <div class="abp-intro-photo active">
+                <!-- Photo 1 - Hidden initially, appears after text panel -->
+                <div class="abp-intro-photo">
                     <div class="abp-intro-photo-wrapper">
                         <img src="a-better-port/1.jpg" alt="A Better Port" loading="eager">
                     </div>
@@ -59,7 +59,7 @@
                     </div>
                 </div>
 
-                <!-- Intro Text Panel - Hidden initially, appears on first scroll -->
+                <!-- Intro Text Panel - Visible initially, yellow semi-transparent -->
                 <div class="abp-intro-panel">
                     <div class="abp-intro-content">
                         <div class="abp-intro-text">
@@ -72,7 +72,7 @@
                     </div>
                 </div>
 
-                <!-- Photo 2 - Hidden initially, appears after text panel -->
+                <!-- Photo 2 - Hidden initially, appears after photo 1 -->
                 <div class="abp-intro-photo2">
                     <div class="abp-intro-photo-wrapper">
                         <img src="a-better-port/2.jpg" alt="A Better Port" loading="eager">
@@ -825,7 +825,7 @@
         let currentIndex = 0;
         let isAnimating = false;
         let scrollQueue = 0;
-        let introState = 0; // 0 = photo 1, 1 = text panel, 2 = photo 2
+        let introState = 0; // 0 = text panel, 1 = photo 1, 2 = photo 2
 
         // Info button toggle
         infoButtons.forEach(btn => {
@@ -968,16 +968,17 @@
             }
         });
 
-        // Toggle intro section between states: 0 = photo 1, 1 = text panel, 2 = photo 2
+        // Toggle intro section between states: 0 = text panel, 1 = photo 1, 2 = photo 2
         function setIntroState(state) {
             introState = state;
-            introSection.classList.remove('show-text', 'show-photo2');
+            introSection.classList.remove('show-photo1', 'show-photo2');
 
             if (state === 1) {
-                introSection.classList.add('show-text');
+                introSection.classList.add('show-photo1');
             } else if (state === 2) {
                 introSection.classList.add('show-photo2');
             }
+            // state === 0: no class needed, text panel visible by default
         }
 
         // Check if at intro section
@@ -1006,7 +1007,7 @@
             // If at intro section
             if (isAtIntroSection(currentIndex)) {
                 if (direction > 0) {
-                    // Forward: photo 1 → text → photo 2 → next
+                    // Forward: text → photo 1 → photo 2 → next
                     if (introState === 0) {
                         setIntroState(1);
                         return;
@@ -1016,7 +1017,7 @@
                     }
                     // introState === 2: continue to next item
                 } else if (direction < 0) {
-                    // Backward: photo 2 → text → photo 1 → prev
+                    // Backward: photo 2 → photo 1 → text → prev
                     if (introState === 2) {
                         setIntroState(1);
                         return;
@@ -1152,11 +1153,10 @@
                 const photoRight = wrapperRect.right;
                 const viewportWidth = window.innerWidth;
 
-                // Tekstkader 90% van foto breedte
+                // Tekstkader zelfde breedte als foto
                 if (introContent) {
-                    const textWidth = photoWidth * 0.9;
-                    introContent.style.maxWidth = textWidth + 'px';
-                    introContent.style.width = textWidth + 'px';
+                    introContent.style.maxWidth = photoWidth + 'px';
+                    introContent.style.width = photoWidth + 'px';
                 }
 
                 // Titel positioneren LINKS van de foto (rechts uitgelijnd)
@@ -1367,7 +1367,7 @@
             doubleClickZoom: false,
             touchZoom: false,
             keyboard: false
-        }).setView([52.413, 4.82], 13); // Port of Amsterdam - centered on harbor basins
+        }).setView([52.410, 4.78], 14); // Port of Amsterdam - Westpoort haven area, zoomed in
 
         // CartoDB dark tiles (made darker via CSS filter)
         L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
@@ -1397,44 +1397,183 @@
             });
 
             // Ship class using lat/lng coordinates
+            // Route connection map - defines where routes connect to each other
+            // Routes: 0=Rood, 1=Groen, 2=Blauw, 3=Geel, 4=Roze, 5=Turquoise, 6=Oranje, 7=NieuweLijn, 8=Limegroen, 9=IJ, 10=PaarsRoze, 11=IJbasin
+            const routeConnections = {
+                // Route 0 (Noordzeekanaal) connects to harbor routes at various points
+                0: [
+                    { target: 1, atProgress: 0.22, targetProgress: 0 }, // to green harbor
+                    { target: 2, atProgress: 0.30, targetProgress: 0 }, // to blue harbor
+                    { target: 5, atProgress: 0.45, targetProgress: 0 }, // to turquoise
+                    { target: 8, atProgress: 0.52, targetProgress: 0 }, // to lime green
+                    { target: 9, atProgress: 0.65, targetProgress: 0 }, // to IJ waterway
+                ],
+                // Harbor routes connect back to route 0 and to side routes
+                1: [{ target: 0, atProgress: 0, targetProgress: 0.22 }],
+                2: [{ target: 0, atProgress: 0, targetProgress: 0.30 }, { target: 3, atProgress: 0.7, targetProgress: 0 }, { target: 4, atProgress: 1, targetProgress: 0 }],
+                3: [{ target: 2, atProgress: 0, targetProgress: 0.7 }],
+                4: [{ target: 2, atProgress: 0, targetProgress: 1 }],
+                5: [{ target: 0, atProgress: 0, targetProgress: 0.45 }, { target: 6, atProgress: 0.5, targetProgress: 0 }, { target: 7, atProgress: 0.6, targetProgress: 0 }],
+                6: [{ target: 5, atProgress: 0, targetProgress: 0.5 }],
+                7: [{ target: 5, atProgress: 0, targetProgress: 0.6 }],
+                8: [{ target: 0, atProgress: 0, targetProgress: 0.52 }],
+                9: [{ target: 0, atProgress: 0, targetProgress: 0.65 }, { target: 10, atProgress: 0.4, targetProgress: 0 }, { target: 11, atProgress: 0.7, targetProgress: 0 }],
+                10: [{ target: 9, atProgress: 0, targetProgress: 0.4 }],
+                11: [{ target: 9, atProgress: 0, targetProgress: 0.7 }],
+            };
+
+            // Destination harbors (end points where ships dock)
+            const destinationRoutes = [1, 3, 4, 6, 7, 8, 10, 11];
+
             class Ship {
-                constructor(route, routeIndex, speed, size) {
-                    this.route = route; // Array of {lat, lng}
-                    this.routeIndex = routeIndex; // Which route this ship is on
+                constructor(speed, size) {
                     this.speed = speed;
                     this.size = size;
-                    this.progress = Math.random();
-                    this.direction = Math.random() > 0.5 ? 1 : -1;
+
+                    // Start on route 0 (Noordzeekanaal) coming from the sea
+                    this.routeIndex = 0;
+                    this.route = routes[0];
+                    this.progress = 0; // Start at sea (left)
+                    this.direction = 1; // Moving into harbor
+
+                    // Pick a random destination harbor
+                    this.destinationRoute = destinationRoutes[Math.floor(Math.random() * destinationRoutes.length)];
+                    this.headingToSea = false; // true when returning to sea after docking
+
+                    this.dockingTime = 0;
+                    this.transitionCooldown = 0; // Prevent immediate re-transition
+                }
+
+                // Find path to target route using BFS
+                findPathTo(target) {
+                    if (this.routeIndex === target) return [];
+
+                    const visited = new Set([this.routeIndex]);
+                    const queue = [[this.routeIndex, []]];
+
+                    while (queue.length > 0) {
+                        const [current, path] = queue.shift();
+                        const connections = routeConnections[current] || [];
+
+                        for (const conn of connections) {
+                            if (conn.target === target) {
+                                return [...path, { from: current, conn }];
+                            }
+                            if (!visited.has(conn.target)) {
+                                visited.add(conn.target);
+                                queue.push([conn.target, [...path, { from: current, conn }]]);
+                            }
+                        }
+                    }
+                    return null; // No path found
+                }
+
+                // Find the connection point to get closer to destination
+                findNextTransition() {
+                    const targetRoute = this.headingToSea ? 0 : this.destinationRoute;
+                    if (this.routeIndex === targetRoute) return null;
+
+                    const path = this.findPathTo(targetRoute);
+                    if (!path || path.length === 0) return null;
+
+                    // Return the first step in the path
+                    return path[0].conn;
                 }
 
                 update(allShips) {
-                    // Check for collision with ships ahead on same route
-                    const minDistance = 0.08; // Minimum progress distance between ships
+                    // Decrease transition cooldown
+                    if (this.transitionCooldown > 0) this.transitionCooldown--;
 
+                    // Check if ship is docking
+                    if (this.dockingTime > 0) {
+                        this.dockingTime--;
+                        return;
+                    }
+
+                    // Check for collision with ships ahead on same route (keep minimal distance)
+                    const minDistance = 0.05;
                     for (const other of allShips) {
-                        if (other === this) continue;
-                        if (other.routeIndex !== this.routeIndex) continue;
-
-                        // Check if other ship is ahead in our direction
+                        if (other === this || other.routeIndex !== this.routeIndex) continue;
                         const diff = other.progress - this.progress;
-
                         if (this.direction > 0 && diff > 0 && diff < minDistance) {
-                            // Ship ahead going forward - slow down or stop
+                            // Slow down instead of stopping completely
+                            this.progress += this.speed * 0.3 * this.direction;
                             return;
                         }
                         if (this.direction < 0 && diff < 0 && diff > -minDistance) {
-                            // Ship ahead going backward - slow down or stop
+                            this.progress += this.speed * 0.3 * this.direction;
                             return;
                         }
                     }
 
+                    // Determine where ship needs to go next
+                    const nextTransition = this.findNextTransition();
+
+                    // Check for route transition
+                    if (nextTransition && this.transitionCooldown === 0) {
+                        const distToTransition = Math.abs(this.progress - nextTransition.atProgress);
+                        if (distToTransition < 0.03) {
+                            // Transition to new route
+                            this.routeIndex = nextTransition.target;
+                            this.route = routes[nextTransition.target];
+                            this.progress = nextTransition.targetProgress;
+
+                            // Determine new direction based on next goal
+                            const newTransition = this.findNextTransition();
+                            if (newTransition) {
+                                this.direction = newTransition.atProgress > this.progress ? 1 : -1;
+                            } else if (this.routeIndex === this.destinationRoute && !this.headingToSea) {
+                                // At destination, go towards end to dock
+                                this.direction = 1;
+                            } else if (this.headingToSea) {
+                                // Heading to sea on route 0
+                                this.direction = -1;
+                            }
+
+                            this.transitionCooldown = 60;
+                            return;
+                        }
+
+                        // Adjust direction to reach transition point
+                        if (nextTransition.atProgress > this.progress && this.direction < 0) {
+                            this.direction = 1;
+                        } else if (nextTransition.atProgress < this.progress && this.direction > 0) {
+                            this.direction = -1;
+                        }
+                    }
+
+                    // Move ship
                     this.progress += this.speed * this.direction;
+
+                    // Handle route endpoints
                     if (this.progress >= 1) {
                         this.progress = 1;
-                        this.direction = -1;
+
+                        if (this.routeIndex === this.destinationRoute && !this.headingToSea) {
+                            // Arrived at destination - dock and prepare to leave
+                            this.dockingTime = 300 + Math.floor(Math.random() * 500);
+                            this.headingToSea = true;
+                            this.direction = -1;
+                        } else {
+                            this.direction = -1;
+                        }
                     } else if (this.progress <= 0) {
                         this.progress = 0;
-                        this.direction = 1;
+
+                        if (this.routeIndex === 0 && this.headingToSea) {
+                            // Ship reached the sea - reset for new journey
+                            this.destinationRoute = destinationRoutes[Math.floor(Math.random() * destinationRoutes.length)];
+                            this.headingToSea = false;
+                            this.direction = 1;
+                            this.dockingTime = 100 + Math.floor(Math.random() * 200);
+                        } else if (this.routeIndex === this.destinationRoute && !this.headingToSea) {
+                            // Arrived at destination (start of route) - dock
+                            this.dockingTime = 300 + Math.floor(Math.random() * 500);
+                            this.headingToSea = true;
+                            this.direction = 1;
+                        } else {
+                            this.direction = 1;
+                        }
                     }
                 }
 
@@ -1475,9 +1614,9 @@
                     ctx.translate(x, y);
                     ctx.rotate(angle);
 
-                    // Draw ship shape - subtle gray ships
-                    ctx.fillStyle = 'rgba(180, 190, 200, 0.7)';
-                    ctx.strokeStyle = 'rgba(120, 130, 140, 0.5)';
+                    // Draw ship shape - yellow ships (subtle)
+                    ctx.fillStyle = 'rgba(225, 200, 90, 0.4)';
+                    ctx.strokeStyle = 'rgba(180, 160, 70, 0.3)';
                     ctx.lineWidth = 0.8;
                     ctx.beginPath();
 
@@ -1497,94 +1636,166 @@
                 }
             }
 
-            // Ship routes using ACTUAL lat/lng coordinates of Port of Amsterdam waterways
-            // Based on: Amerikahaven 52.4167/4.7667, Afrikahaven 52.4173/4.7654, Westhaven 52.4141/4.8158
-            // Noordzeekanaal runs at ~52.418-52.420 latitude
+            // Ship routes based on user's hand-drawn corrections
+            // Map center: [52.410, 4.78], zoom 14
             const routes = [
-                // Noordzeekanaal - main shipping channel (west to east)
-                // This is the main waterway connecting to the North Sea
+                // Route 0 - ROOD: Noordzeekanaal - curves from top-left to bottom-right (4% toegevoegd links, schuin omhoog)
                 [
-                    { lat: 52.4195, lng: 4.75 },
-                    { lat: 52.4200, lng: 4.78 },
-                    { lat: 52.4195, lng: 4.81 },
-                    { lat: 52.4190, lng: 4.84 },
-                    { lat: 52.4185, lng: 4.87 }
+                    { lat: 52.444, lng: 4.695 },
+                    { lat: 52.438, lng: 4.708 },
+                    { lat: 52.432, lng: 4.74 },
+                    { lat: 52.425, lng: 4.78 },
+                    { lat: 52.420, lng: 4.82 },
+                    { lat: 52.415, lng: 4.865 },
+                    { lat: 52.405, lng: 4.880 },
+                    { lat: 52.395, lng: 4.895 },
+                    { lat: 52.385, lng: 4.910 }
                 ],
-                // Afrikahaven - harbor basin south of Noordzeekanaal (west side)
-                // Coordinates: 52.4173, 4.7654
+                // Route 1 - GROEN: Verticale haven links (gehalveerd, 8% naar links, iets omhoog)
                 [
-                    { lat: 52.4180, lng: 4.765 },
-                    { lat: 52.4140, lng: 4.766 },
-                    { lat: 52.4100, lng: 4.767 }
+                    { lat: 52.431, lng: 4.746 },
+                    { lat: 52.421, lng: 4.747 },
+                    { lat: 52.413, lng: 4.748 }
                 ],
-                // Amerikahaven - harbor basin (west side, near Afrikahaven)
-                // Coordinates: 52.4167, 4.7667
+                // Route 2 - BLAUW: Verticale haven midden (20% langer aan onderkant)
                 [
-                    { lat: 52.4175, lng: 4.770 },
-                    { lat: 52.4130, lng: 4.772 },
-                    { lat: 52.4085, lng: 4.774 }
+                    { lat: 52.427, lng: 4.769 },
+                    { lat: 52.414, lng: 4.776 },
+                    { lat: 52.403, lng: 4.776 }
                 ],
-                // Westhaven - central harbor area
-                // Coordinates: 52.4141, 4.8158
+                // Route 3 - GEEL: Horizontale tak (tegen blauwe lijn, net onder knik, gehalveerd)
                 [
-                    { lat: 52.4180, lng: 4.815 },
-                    { lat: 52.4140, lng: 4.816 },
-                    { lat: 52.4100, lng: 4.817 }
+                    { lat: 52.410, lng: 4.776 },
+                    { lat: 52.410, lng: 4.796 }
                 ],
-                // Petroleumhaven - east of Westhaven
+                // Route 4 - ROZE: Horizontale tak (tegen onderkant blauwe lijn, gehalveerd, 10% korter rechts)
                 [
-                    { lat: 52.4175, lng: 4.845 },
-                    { lat: 52.4130, lng: 4.847 },
-                    { lat: 52.4085, lng: 4.849 }
+                    { lat: 52.403, lng: 4.776 },
+                    { lat: 52.403, lng: 4.794 }
                 ],
-                // Coenhaven - between Afrikahaven and Westhaven
+                // Route 5 - TURQUOISE: iets korter aan bovenkant
                 [
-                    { lat: 52.4180, lng: 4.790 },
-                    { lat: 52.4135, lng: 4.792 },
-                    { lat: 52.4090, lng: 4.794 }
+                    { lat: 52.421, lng: 4.812 },
+                    { lat: 52.400, lng: 4.822 },
+                    { lat: 52.396, lng: 4.822 },
+                    { lat: 52.396, lng: 4.810 }
                 ],
-                // IJ - eastern waterway toward Amsterdam center
+                // Route 6 - ORANJE: Horizontale tak
                 [
-                    { lat: 52.4185, lng: 4.870 },
-                    { lat: 52.4180, lng: 4.890 },
-                    { lat: 52.4175, lng: 4.910 }
+                    { lat: 52.406, lng: 4.820 },
+                    { lat: 52.406, lng: 4.830 }
+                ],
+                // Route 6b - NIEUWE LIJN: 6% onder oranje
+                [
+                    { lat: 52.4025, lng: 4.820 },
+                    { lat: 52.4025, lng: 4.830 }
+                ],
+                // Route 7 - LIMEGROEN: iets korter aan onderkant
+                [
+                    { lat: 52.4165, lng: 4.844 },
+                    { lat: 52.408, lng: 4.847 },
+                    { lat: 52.406, lng: 4.851 }
+                ],
+                // IJ waterway - diagonal channel going southeast
+                [
+                    { lat: 52.415, lng: 4.865 },
+                    { lat: 52.405, lng: 4.880 },
+                    { lat: 52.395, lng: 4.895 },
+                    { lat: 52.385, lng: 4.910 }
+                ],
+                // Route 9 - PAARS-ROZE: Far right harbors (7% omlaag, 10% naar rechts)
+                [
+                    { lat: 52.406, lng: 4.904 },
+                    { lat: 52.406, lng: 4.919 },
+                    { lat: 52.406, lng: 4.934 }
+                ],
+                // Far right - IJ basin (large area on bottom right)
+                [
+                    { lat: 52.390, lng: 4.900 },
+                    { lat: 52.385, lng: 4.915 },
+                    { lat: 52.380, lng: 4.930 }
                 ]
             ];
 
-            // Create ships - spread them across routes, max 2 per route
+            // Create ships - spread across all routes for immediate activity
             const ships = [];
-            const shipsPerRoute = {};
 
-            // Initialize counter for each route
-            routes.forEach((_, idx) => shipsPerRoute[idx] = 0);
+            // Ship configurations: [routeIndex, progress, direction, headingToSea]
+            const shipConfigs = [
+                // Ships on main channel (route 0) - Noordzeekanaal
+                [0, 0.05, 1, false],  // just entering from sea
+                [0, 0.15, 1, false],  // entering harbor
+                [0, 0.28, 1, false],  // heading in
+                [0, 0.42, 1, false],  // mid channel heading in
+                [0, 0.55, -1, true],  // heading back to sea
+                [0, 0.68, -1, true],  // heading back
+                [0, 0.82, -1, true],  // almost at sea
+                [0, 0.95, -1, true],  // leaving harbor
+                // Ships in harbors
+                [1, 0.3, 1, false],   // green harbor
+                [1, 0.8, -1, true],   // green harbor returning
+                [2, 0.5, 1, false],   // blue harbor
+                [3, 0.4, 1, false],   // yellow dock
+                [4, 0.6, -1, true],   // pink dock returning
+                [5, 0.3, 1, false],   // turquoise
+                [5, 0.7, -1, true],   // turquoise returning
+                [6, 0.5, 1, false],   // orange dock
+                [7, 0.4, -1, true],   // new line dock
+                [8, 0.6, 1, false],   // lime green
+                [9, 0.3, 1, false],   // IJ waterway
+                [9, 0.6, -1, true],   // IJ waterway returning
+                [10, 0.5, 1, false],  // purple-pink harbor
+                [11, 0.7, -1, true],  // IJ basin returning
+            ];
 
-            // Create 10 ships, distributed across routes
-            for (let i = 0; i < 12; i++) {
-                // Find a route with fewer than 2 ships
-                let routeIdx;
-                let attempts = 0;
-                do {
-                    routeIdx = Math.floor(Math.random() * routes.length);
-                    attempts++;
-                } while (shipsPerRoute[routeIdx] >= 2 && attempts < 20);
+            for (let i = 0; i < shipConfigs.length; i++) {
+                const [routeIdx, progress, direction, headingToSea] = shipConfigs[i];
+                const speed = 0.00003 + Math.random() * 0.00002; // Very slow realistic ship speed
+                const size = 7 + Math.random() * 7;
+                const ship = new Ship(speed, size);
 
-                if (shipsPerRoute[routeIdx] < 2) {
-                    const speed = 0.00003 + Math.random() * 0.00004; // Much slower
-                    const size = 6 + Math.random() * 5;
-                    // Spread ships apart on same route
-                    const ship = new Ship(routes[routeIdx], routeIdx, speed, size);
-                    if (shipsPerRoute[routeIdx] === 1) {
-                        // Second ship on route - start at different position
-                        ship.progress = (ship.progress + 0.5) % 1;
-                    }
-                    ships.push(ship);
-                    shipsPerRoute[routeIdx]++;
-                }
+                ship.routeIndex = routeIdx;
+                ship.route = routes[routeIdx];
+                ship.progress = progress + (Math.random() * 0.1 - 0.05); // Small variation
+                ship.direction = direction;
+                ship.headingToSea = headingToSea;
+                ship.destinationRoute = headingToSea ? 0 : (routeIdx === 0 ? destinationRoutes[Math.floor(Math.random() * destinationRoutes.length)] : routeIdx);
+                ship.dockingTime = 0;
+                ship.transitionCooldown = 0;
+
+                ships.push(ship);
             }
 
             // Animation state
             let animationActive = true;
             let animationFrame = null;
+
+            // DEBUG: Draw routes as lines to see where they are
+            const DEBUG_ROUTES = false;
+
+            function drawDebugRoutes() {
+                if (!DEBUG_ROUTES) return;
+
+                const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff', '#ff8800', '#88ff00', '#0088ff', '#ff0088', '#8800ff'];
+
+                routes.forEach((route, idx) => {
+                    if (route.length < 2) return;
+
+                    ctx.beginPath();
+                    ctx.strokeStyle = colors[idx % colors.length];
+                    ctx.lineWidth = 3;
+
+                    const firstPoint = harborMap.latLngToContainerPoint([route[0].lat, route[0].lng]);
+                    ctx.moveTo(firstPoint.x, firstPoint.y);
+
+                    for (let i = 1; i < route.length; i++) {
+                        const point = harborMap.latLngToContainerPoint([route[i].lat, route[i].lng]);
+                        ctx.lineTo(point.x, point.y);
+                    }
+
+                    ctx.stroke();
+                });
+            }
 
             function animate() {
                 if (!animationActive) {
@@ -1594,6 +1805,10 @@
 
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+                // Draw debug routes first (underneath ships)
+                drawDebugRoutes();
+
+                // Draw and update moving ships
                 ships.forEach(ship => {
                     ship.update(ships); // Pass all ships for collision detection
                     ship.draw(ctx);
@@ -1630,11 +1845,12 @@
             const originalBg = document.getElementById('originalBackground');
             const shipCanvas = document.getElementById('shipCanvas');
 
-            function updateBackgroundVisibility(index) {
-                // Show map + ships only at intro (index 0 and states within intro)
-                const atIntro = index === 0;
+            function updateBackgroundVisibility(index, state) {
+                // Show map + ships only at intro states 0 (text) and 1 (photo 1)
+                // Hide at state 2 (photo 2) and beyond
+                const showMap = index === 0 && state < 2;
 
-                if (atIntro) {
+                if (showMap) {
                     mapBg.classList.remove('hidden');
                     shipCanvas.classList.remove('hidden');
                     originalBg.classList.remove('visible');
@@ -1646,13 +1862,20 @@
             }
 
             // Initial state
-            updateBackgroundVisibility(currentIndex);
+            updateBackgroundVisibility(currentIndex, introState);
 
             // Hook into scroll updates
             const origScrollToIndex = scrollToIndex;
             scrollToIndex = function(index) {
                 origScrollToIndex(index);
-                updateBackgroundVisibility(index);
+                updateBackgroundVisibility(index, introState);
+            };
+
+            // Hook into intro state changes
+            const origSetIntroState = setIntroState;
+            setIntroState = function(state) {
+                origSetIntroState(state);
+                updateBackgroundVisibility(currentIndex, state);
             };
         })();
     </script>
