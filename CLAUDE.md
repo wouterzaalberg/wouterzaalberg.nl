@@ -610,31 +610,52 @@ Twee gele infographic panels met data visualisaties:
 ### Kleuren
 ```css
 --ibl-bg: #2d3a4a;                    /* Donkerblauw/grijs */
---ibl-bg-dark: rgba(20, 30, 40, 0.9); /* Donkerder voor captions */
+--ibl-bg-dark: #1a242f;               /* Donkerder */
+--ibl-bg-light: #3d4a5a;              /* Lichter */
 --ibl-accent: #4a6fa5;                /* Blauw accent */
 --ibl-text: #ffffff;
---ibl-text-muted: #a0a8b0;
+--ibl-text-muted: #a0aab8;
 ```
 
-### Structuur
-- **Hero sectie**: Foto (534A3307.jpg) 3/4 breedte met titel overlay
-- **Intro panel**: Donker tekstpaneel met introductietekst
-- **Foto blokken**: Met info button en fade-in caption (zoals a-better-port)
-- **Quote panels**: Donkerblauwe achtergrond
+### Geanimeerde achtergrond
+- **Gradient**: Langzame overgang tussen donker en medium blauw (30s cyclus)
+- Kleuren: #1a242f ↔ #2d3a4a ↔ #1a2a3a
+- `background-size: 400% 400%` met `animation: gradientShift`
 
-### Hero titel
-- Transparant lettertype met witte outline
-- Rechts uitgelijnd in de hero foto
-- Font: Scala Sans SC, uppercase
+### Lichteffect overlay
+- Radiale gloed in het midden (rgba(74, 111, 165, 0.15))
+- Pulseert zachtjes (8s cyclus) - wordt groter/feller, dan kleiner/zachter
+- `pointer-events: none`, z-index: 1
+
+### Z-index lagen
+1. Lichteffect (z-index: 1)
+2. Scroll container (z-index: 2)
+3. Navigatie (z-index: 100)
+
+### Hero sectie
+- **Foto**: 45vw breed, 100vh hoog, tegen linkerkant
+- **Titel**: Rechtsonder in de foto, rechts uitgelijnd, `bottom: 15vh`
+- **Intro panel**: 55vw breed, bijna zwart (#0a0a0c)
+- **Intro tekst**: Uitgelijnd met titel (`align-items: flex-end`, `padding-bottom: 15vh`)
+- **Zoom animatie**: Start na 2s, 12s duur, scale naar 1.05
+
+### Scroll systeem
+- `position: fixed` scroll container (voorkomt blauwe balk bug)
+- Foto's worden gecentreerd in viewport bij scrollen
+- Formule: `scrollLeft = elementLeft - (viewportWidth - elementWidth) / 2`
+
+### Foto groottes
+- Standaard: 60vh
+- `size-full`: 90vh (gecentreerd)
+- Padding tussen foto's: 12rem (responsive: 8rem → 6rem → 2rem)
 
 ### Info button (caption toggle)
-- Zelfde systeem als a-better-port
 - Button: wit, rond, italic "i"
 - Caption: fade-in effect bij klik
 
-### Foto groottes
-- Standaard: 70vh
-- `size-full`: 100vh (volledige paginahoogte)
+### Responsive
+- **< 1024px**: Intro panel gecentreerd, foto's 50vh/80vh
+- **< 767px**: Verticaal scrollen, volle breedte
 
 ## Het Noordzeekanaal Gebied Pagina
 
