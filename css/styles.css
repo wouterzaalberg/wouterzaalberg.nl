@@ -709,18 +709,63 @@ img {
     object-position: left top;
 }
 
-.work-caption {
-    font-family: 'Scala Sans', sans-serif;
+/* Info button voor werk sectie */
+.work-info-btn {
+    position: absolute;
+    bottom: 2rem;
+    left: 12%;
+    width: 32px;
+    height: 32px;
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Minion Pro', Georgia, serif;
     font-style: italic;
-    font-size: 0.9rem;
-    margin-top: 1rem;
-    text-align: left;
-    transition: color 0.3s ease, opacity 0.4s ease;
-    opacity: 1;
+    font-size: 1.1rem;
+    color: #333;
+    z-index: 20;
+    transition: background 0.3s ease, transform 0.3s ease;
 }
 
-.work-caption.fade-out {
+.work-info-btn:hover {
+    background: #ffffff;
+    transform: scale(1.1);
+}
+
+.work-info-btn.active {
+    background: var(--color-dark-blue);
+    color: #ffffff;
+}
+
+/* Caption overlay voor werk sectie */
+.work-info-caption {
+    position: absolute;
+    bottom: 2rem;
+    left: calc(12% + 50px);
+    background: rgba(30, 40, 50, 0.85);
+    padding: 1rem 1.5rem;
+    max-width: 400px;
     opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s ease, visibility 0.4s ease;
+    z-index: 20;
+}
+
+.work-info-caption.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.work-info-caption p {
+    font-family: 'Scala Sans', sans-serif;
+    font-size: 0.95rem;
+    color: #ffffff;
+    line-height: 1.6;
+    margin: 0;
 }
 
 .work-text-overlay {

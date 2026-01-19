@@ -179,7 +179,11 @@
                     <img src="logo's/kleur/waternet.jpg" alt="Waternet" class="logo-color">
                 </div>
             </div>
-            <p class="work-caption" id="workCaption">Khadija, schoonmaakster. Voor een campagne van FNV</p>
+            <!-- Info button en caption -->
+            <button class="work-info-btn" id="workInfoBtn" aria-label="Toon informatie">i</button>
+            <div class="work-info-caption" id="workInfoCaption">
+                <p id="workCaptionText">Khadija, schoonmaakster. Voor een campagne van FNV</p>
+            </div>
         </div>
     </section>
 
@@ -313,7 +317,9 @@
         const workGrid = document.getElementById('workGrid');
         const gridImages = workGrid.querySelectorAll('.grid-img');
         const gridVideos = workGrid.querySelectorAll('.grid-video');
-        const workCaption = document.getElementById('workCaption');
+        const workInfoBtn = document.getElementById('workInfoBtn');
+        const workInfoCaption = document.getElementById('workInfoCaption');
+        const workCaptionText = document.getElementById('workCaptionText');
 
         // Helper functie om te checken of een bestand een video is
         function isVideoFile(src) {
@@ -338,10 +344,19 @@
         workImage1.offsetHeight;
         workImage1.style.transition = '';
 
-        // Initialiseer caption kleur
-        if (workCaption) {
-            workCaption.style.color = defaultCaptionColor;
-        }
+        // Info button click handler
+        workInfoBtn.addEventListener('click', function() {
+            this.classList.toggle('active');
+            workInfoCaption.classList.toggle('visible');
+        });
+
+        // Verberg caption bij klik ergens anders
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.work-info-btn') && !e.target.closest('.work-info-caption')) {
+                workInfoBtn.classList.remove('active');
+                workInfoCaption.classList.remove('visible');
+            }
+        });
 
         function hideGrid() {
             workGrid.classList.remove('visible');
@@ -355,10 +370,9 @@
         }
 
         function showGrid(images, caption, cols, captionColor) {
-            // Fade caption uit
-            if (workCaption) {
-                workCaption.classList.add('fade-out');
-            }
+            // Verberg caption
+            workInfoBtn.classList.remove('active');
+            workInfoCaption.classList.remove('visible');
 
             // Functie om nieuwe grid te laden en in te sliden
             function loadAndSlideIn() {
@@ -410,17 +424,10 @@
                 });
                 gridMode = true;
 
-                // Update caption en fade in
-                setTimeout(() => {
-                    if (workCaption) {
-                        // Update tekst en kleur terwijl caption verborgen is
-                        if (caption) workCaption.textContent = caption;
-                        if (captionColor) workCaption.style.color = captionColor;
-
-                        // Fade in
-                        workCaption.classList.remove('fade-out');
-                    }
-                }, 400);
+                // Update caption tekst
+                if (caption && workCaptionText) {
+                    workCaptionText.textContent = caption;
+                }
             }
 
             // Als er al een grid zichtbaar is, eerst uitsliden
@@ -446,10 +453,9 @@
         function slideToImage(newImageSrc, newCaption, isHorizontal, position, captionColor) {
             if (isSliding) return;
 
-            // Fade caption uit
-            if (workCaption) {
-                workCaption.classList.add('fade-out');
-            }
+            // Verberg caption
+            workInfoBtn.classList.remove('active');
+            workInfoCaption.classList.remove('visible');
 
             // Check of we van grid komen
             const comingFromGrid = gridMode;
@@ -507,17 +513,10 @@
                     // Wissel actieve afbeelding
                     activeWorkImage = inactiveImage;
 
-                    // Update caption en fade in
-                    setTimeout(() => {
-                        if (workCaption) {
-                            // Update tekst en kleur terwijl caption verborgen is
-                            if (newCaption) workCaption.textContent = newCaption;
-                            if (captionColor) workCaption.style.color = captionColor;
-
-                            // Fade in
-                            workCaption.classList.remove('fade-out');
-                        }
-                    }, 400);
+                    // Update caption tekst
+                    if (newCaption && workCaptionText) {
+                        workCaptionText.textContent = newCaption;
+                    }
 
                     // Reset outgoing na animatie
                     setTimeout(() => {
