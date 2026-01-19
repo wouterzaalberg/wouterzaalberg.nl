@@ -6,11 +6,86 @@
     <meta name="description" content="De Onmisbaren - Wouter Zaalberg">
     <title>De Onmisbaren - Wouter Zaalberg</title>
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap" rel="stylesheet">
     <style>
+        @keyframes subtleZoom {
+            from {
+                transform: scale(1);
+            }
+            to {
+                transform: scale(1.05);
+            }
+        }
         .photo-item {
             display: flex;
             flex-direction: column;
             align-items: flex-start;
+        }
+        .photo-img-wrapper {
+            overflow: hidden;
+            height: 70vh;
+        }
+        .photo-img-wrapper img {
+            height: 100%;
+            width: auto;
+        }
+        .photo-title {
+            font-size: 12rem;
+        }
+        @media (max-width: 1200px) {
+            .photo-title {
+                font-size: 9rem;
+            }
+        }
+        @media (max-width: 900px) {
+            .photo-title {
+                font-size: 6rem;
+            }
+        }
+        @media (max-width: 600px) {
+            .photo-title {
+                font-size: 4rem;
+            }
+        }
+        .photo-item img.zoom-active {
+            animation: subtleZoom 20s ease-out forwards;
+        }
+        .title-reflection {
+            font-family: 'Oswald', sans-serif;
+            font-size: 7rem;
+            font-weight: 700;
+            color: transparent;
+            text-transform: uppercase;
+            letter-spacing: 0.02em;
+            margin-bottom: 2rem;
+            line-height: 1.1;
+            display: flex;
+            flex-direction: column;
+        }
+        .title-line {
+            position: relative;
+            display: block;
+        }
+        .title-line::before {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            color: #ffffff;
+            clip-path: inset(0 0 50% 0);
+        }
+        .title-line::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            color: #ffffff;
+            filter: blur(8px);
+            -webkit-mask-image: linear-gradient(to bottom, transparent 40%, white 60%);
+            mask-image: linear-gradient(to bottom, transparent 40%, white 60%);
+            opacity: 0.5;
         }
         .photo-caption {
             margin-top: 0.75rem;
@@ -39,89 +114,105 @@
     </nav>
 
     <div class="horizontal-scroll-container" id="scrollContainer">
-        <div class="horizontal-scroll-content" style="gap: 8rem;">
-            <div class="photo-item">
-                <img src="de-onmisbaren/1.jpg" alt="De Onmisbaren" loading="eager">
-                <div class="photo-caption">
-                    <span class="caption-name">Maria van den Berg</span>
-                    <span class="caption-function">Verpleegkundige IC</span>
+        <div class="horizontal-scroll-content" style="gap: 12rem;">
+            <div class="intro-section" style="min-width: 100vw; display: flex; justify-content: center; align-items: center; gap: 4rem; padding: 0 4rem;">
+                <div class="photo-item" style="height: calc(100vh - 80px); position: relative; flex-shrink: 0; overflow: hidden;">
+                    <img src="de-onmisbaren/1.jpg" alt="De Onmisbaren" loading="eager" style="height: 100%; width: auto;">
+                    <div class="photo-caption" style="position: absolute; bottom: 2rem; left: 1.5rem; margin-top: 0;">
+                        <span class="caption-name">Khadija Hyati</span>
+                        <span class="caption-function">Schoonmaker</span>
+                    </div>
+                </div>
+
+                <div class="intro-panel" style="min-width: 600px; max-width: 700px;">
+                    <h2 class="photo-title" style="font-family: 'Oswald', sans-serif; font-weight: 700; text-transform: uppercase; letter-spacing: 0.02em; margin-bottom: 2rem; line-height: 0.95; display: flex; flex-direction: column;">
+                        <span style="background: linear-gradient(rgba(255,255,255,0.25), rgba(255,255,255,0.25)), url('de-onmisbaren/2.jpg'); background-size: cover; background-position: center; -webkit-background-clip: text; background-clip: text; color: transparent;">De</span>
+                        <span style="background: linear-gradient(rgba(255,255,255,0.25), rgba(255,255,255,0.25)), url('de-onmisbaren/4.jpg'), url('de-onmisbaren/5.jpg'); background-size: cover, 50% auto, 50% auto; background-position: center, left center, right center; background-repeat: no-repeat; -webkit-background-clip: text; background-clip: text; color: transparent;">Onmis</span>
+                        <span style="background: linear-gradient(rgba(255,255,255,0.25), rgba(255,255,255,0.25)), url('de-onmisbaren/6.jpg'), url('de-onmisbaren/7.jpg'); background-size: cover, 50% auto, 50% auto; background-position: center, left center, right center; background-repeat: no-repeat; -webkit-background-clip: text; background-clip: text; color: transparent;">Baren</span>
+                    </h2>
+                    <p style="font-family: 'Scala Sans', sans-serif; font-size: 0.95rem; line-height: 1.9; color: rgba(255,255,255,0.85); margin-bottom: 1.2rem;">
+                        De onmisbaren zijn alle mensen waar onze samenleving niet zonder kan. Officieel cruciaal genoemd aan het begin van de coronacrisis, maar vaak onderbetaald, met een hoge werkdruk en veel onzekerheid. Voor de FNV mocht ik een fotografische ode brengen aan De Onmisbaren.
+                    </p>
                 </div>
             </div>
 
-            <div class="intro-panel" style="min-width: 700px; max-width: 800px;">
-                <h2 style="font-family: 'Scala Sans SC', sans-serif; font-size: 1.8rem; font-weight: 500; color: #ffffff; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 1.5rem;">De Onmisbaren</h2>
-                <p style="font-family: 'Scala Sans', sans-serif; font-size: 0.95rem; line-height: 1.9; color: rgba(255,255,255,0.85); margin-bottom: 1.2rem;">
-                    Zij vormen het kloppend hart van onze samenleving. De mensen die vroeg opstaan en laat thuiskomen. Die doorwerken wanneer anderen rusten.
-                </p>
-                <p style="font-family: 'Scala Sans', sans-serif; font-size: 0.95rem; line-height: 1.9; color: rgba(255,255,255,0.85); margin-bottom: 1.2rem;">
-                    In deze serie portretteert Wouter Zaalberg de onmisbaren van Nederland. Van zorgmedewerkers tot vuilnisophalers, van leraren tot buschauffeurs.
-                </p>
-                <p style="font-family: 'Scala Sans', sans-serif; font-size: 0.95rem; line-height: 1.9; color: rgba(255,255,255,0.6); font-style: italic;">
-                    Hun verhalen verdienen het gezien te worden.
-                </p>
+            <div class="photo-item">
+                <div class="photo-img-wrapper">
+                    <img src="de-onmisbaren/2.jpg" alt="De Onmisbaren" loading="eager">
+                </div>
+                <div class="photo-caption">
+                    <span class="caption-name">Kitty van Blankers</span>
+                    <span class="caption-function">Medewerker gehandicaptenzorg</span>
+                </div>
             </div>
 
             <div class="photo-item">
-                <img src="de-onmisbaren/2.jpg" alt="De Onmisbaren" loading="eager">
+                <div class="photo-img-wrapper">
+                    <img src="de-onmisbaren/3.jpg" alt="De Onmisbaren" loading="eager">
+                </div>
                 <div class="photo-caption">
-                    <span class="caption-name">Johan de Vries</span>
+                    <span class="caption-name">Marco Groenewoud</span>
                     <span class="caption-function">Vuilnisman</span>
                 </div>
             </div>
 
             <div class="photo-item">
-                <img src="de-onmisbaren/3.jpg" alt="De Onmisbaren" loading="eager">
+                <div class="photo-img-wrapper">
+                    <img src="de-onmisbaren/4.jpg" alt="De Onmisbaren" loading="lazy">
+                </div>
                 <div class="photo-caption">
-                    <span class="caption-name">Fatima El Amrani</span>
-                    <span class="caption-function">Lerares basisonderwijs</span>
+                    <span class="caption-name">Laura</span>
+                    <span class="caption-function">Brandweervrouw</span>
                 </div>
             </div>
 
             <div class="photo-item">
-                <img src="de-onmisbaren/4.jpg" alt="De Onmisbaren" loading="lazy">
+                <div class="photo-img-wrapper">
+                    <img src="de-onmisbaren/5.jpg" alt="De Onmisbaren" loading="lazy">
+                </div>
                 <div class="photo-caption">
-                    <span class="caption-name">Peter Bakker</span>
-                    <span class="caption-function">Buschauffeur</span>
+                    <span class="caption-name">Maaike Metsje Visser</span>
+                    <span class="caption-function">Medewerker gehandicaptenzorg</span>
                 </div>
             </div>
 
             <div class="photo-item">
-                <img src="de-onmisbaren/5.jpg" alt="De Onmisbaren" loading="lazy">
+                <div class="photo-img-wrapper">
+                    <img src="de-onmisbaren/6.jpg" alt="De Onmisbaren" loading="lazy">
+                </div>
                 <div class="photo-caption">
-                    <span class="caption-name">Sandra Jansen</span>
-                    <span class="caption-function">Supermarktmedewerker</span>
+                    <span class="caption-name">Erwin Hoogenboom</span>
+                    <span class="caption-function">Allround medewerker buitenruimte</span>
                 </div>
             </div>
 
             <div class="photo-item">
-                <img src="de-onmisbaren/6.jpg" alt="De Onmisbaren" loading="lazy">
-                <div class="photo-caption">
-                    <span class="caption-name">Mohammed Hassan</span>
-                    <span class="caption-function">Pakketbezorger</span>
+                <div class="photo-img-wrapper">
+                    <img src="de-onmisbaren/7.jpg" alt="De Onmisbaren" loading="lazy">
                 </div>
-            </div>
-
-            <div class="photo-item">
-                <img src="de-onmisbaren/7.jpg" alt="De Onmisbaren" loading="lazy">
                 <div class="photo-caption">
-                    <span class="caption-name">Ingrid de Boer</span>
-                    <span class="caption-function">Thuiszorgmedewerker</span>
-                </div>
-            </div>
-
-            <div class="photo-item">
-                <img src="de-onmisbaren/8.jpg" alt="De Onmisbaren" loading="lazy">
-                <div class="photo-caption">
-                    <span class="caption-name">Willem Hendriks</span>
+                    <span class="caption-name">Khadija Hyati</span>
                     <span class="caption-function">Schoonmaker</span>
                 </div>
             </div>
 
             <div class="photo-item">
-                <img src="de-onmisbaren/9.jpg" alt="De Onmisbaren" loading="lazy">
+                <div class="photo-img-wrapper">
+                    <img src="de-onmisbaren/8.jpg" alt="De Onmisbaren" loading="lazy">
+                </div>
                 <div class="photo-caption">
-                    <span class="caption-name">Anna Visser</span>
-                    <span class="caption-function">Postbode</span>
+                    <span class="caption-name">Kapi Lijfrock</span>
+                    <span class="caption-function">Treinschoonmaker</span>
+                </div>
+            </div>
+
+            <div class="photo-item">
+                <div class="photo-img-wrapper">
+                    <img src="de-onmisbaren/9.jpg" alt="De Onmisbaren" loading="lazy">
+                </div>
+                <div class="photo-caption">
+                    <span class="caption-name">Mischa van der Heijden</span>
+                    <span class="caption-function">Kinderopvangmedewerker</span>
                 </div>
             </div>
 
@@ -154,7 +245,7 @@
 
     <script>
         const container = document.getElementById('scrollContainer');
-        const allItems = document.querySelectorAll('.photo-item, .intro-panel, .end-panel');
+        const allItems = document.querySelectorAll('.intro-section, .horizontal-scroll-content > .photo-item, .end-panel');
         let currentIndex = 0;
         let isAnimating = false;
         let scrollQueue = 0;
@@ -222,8 +313,8 @@
 
         const imageObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
+                const img = entry.target;
                 if (entry.isIntersecting) {
-                    const img = entry.target;
                     if (img.complete) {
                         img.classList.add('loaded');
                     } else {
@@ -235,22 +326,45 @@
             });
         }, observerOptions);
 
-        images.forEach(img => {
-            imageObserver.observe(img);
-        });
-
-        // Trigger first images immediately
-        images.forEach((img, index) => {
-            if (index < 3) {
-                if (img.complete) {
-                    img.classList.add('loaded');
+        // Separate observer for zoom - only when photo is centered
+        const zoomTimeouts = new Map();
+        const zoomObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                const img = entry.target;
+                if (entry.isIntersecting) {
+                    const timeout = setTimeout(() => img.classList.add('zoom-active'), 3000);
+                    zoomTimeouts.set(img, timeout);
                 } else {
-                    img.addEventListener('load', () => {
-                        img.classList.add('loaded');
-                    });
+                    // Stop zoom when leaving
+                    if (zoomTimeouts.has(img)) {
+                        clearTimeout(zoomTimeouts.get(img));
+                        zoomTimeouts.delete(img);
+                    }
+                    img.classList.remove('zoom-active');
                 }
+            });
+        }, { root: container, threshold: 0.8 });
+
+        images.forEach((img, index) => {
+            imageObserver.observe(img);
+            if (index > 0) {
+                zoomObserver.observe(img);
             }
         });
+
+        // Trigger first image immediately with delayed zoom
+        const firstImg = images[0];
+        if (firstImg) {
+            if (firstImg.complete) {
+                firstImg.classList.add('loaded');
+                setTimeout(() => firstImg.classList.add('zoom-active'), 2000);
+            } else {
+                firstImg.addEventListener('load', () => {
+                    firstImg.classList.add('loaded');
+                    setTimeout(() => firstImg.classList.add('zoom-active'), 2000);
+                });
+            }
+        }
     </script>
 </body>
 </html>

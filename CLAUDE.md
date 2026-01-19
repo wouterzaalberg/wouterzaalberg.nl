@@ -662,27 +662,44 @@ Twee gele infographic panels met data visualisaties:
 ### Structuur
 - **Achtergrond**: Licht (#f5f5f5 via horizontal-scroll-page)
 - **Navigatie**: Uitgelijnd met eerste foto (padding-left: 4rem)
-- **Intro panel**: Na eerste foto, 350-400px breed met titel en tekst
-- **Foto's**: 17 foto's (1.jpg - 17.jpg) op 70vh
-- **Grote foto's**: Foto 5 en 15 op 90vh, gecentreerd
-- **Foto paren**: 3+4, 6+7, 10+11 met kleine gap (0.5rem)
+- **Volgorde**: Foto 2 → Intro panel → Foto 1 → Foto paar 3+4 → Foto 5 → etc.
+- **Foto's**: 17 foto's op 70vh (standaard)
+- **Grote foto's**: Foto 5 en 15 op 90vh via `style="height: 90vh;"` op `.photo-item`
+- **Foto paren**: 3+4, 6+7, 10+11 (scrollen als één geheel)
+- **Gap**: 12rem tussen elementen
 - **End panel**: Donkergrijs (#1a1a1a) met links
 
-### Hover captions
+### Bijschriften (hover captions)
 ```css
 .photo-caption {
     position: absolute;
-    bottom: 1rem;
-    left: 1rem;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
     opacity: 0;
     transition: opacity 0.3s ease;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 1rem 1.5rem;
+    width: 80%;
+    max-width: 600px;
+    text-align: left;
 }
 .photo-item:hover .photo-caption {
     opacity: 1;
 }
 ```
-- **Naam**: wit, vet, text-shadow
-- **Functie**: wit italic, 85% opacity, text-shadow
+
+### Bijschrift format
+```html
+<div class="photo-caption">
+    <span class="caption-main">Naam en functie</span>
+    <span class="caption-detail">Uitgebreide beschrijving</span>
+    <span class="caption-location">Locatie: Plaatsnaam</span>
+</div>
+```
+- **caption-main**: wit, 0.95rem
+- **caption-detail**: 85% wit, 0.8rem, line-height 1.5
+- **caption-location**: 70% wit, 0.75rem, italic
 
 ### Foto paren
 ```html
@@ -692,7 +709,9 @@ Twee gele infographic panels met data visualisaties:
 </div>
 ```
 - Gap: 0.5rem tussen foto's in paar
-- Scrollen gaat per individuele foto, niet per paar
+- `scroll-snap-align: center` op photo-pair
+- JavaScript selector selecteert `.photo-pair` als geheel (niet individuele foto's)
+- Scrollen gaat per paar, beide foto's zichtbaar en gecentreerd
 
 ## De Exoten Pagina
 

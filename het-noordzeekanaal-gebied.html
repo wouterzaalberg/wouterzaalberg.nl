@@ -12,29 +12,46 @@
         }
         .photo-caption {
             position: absolute;
-            bottom: 1rem;
-            left: 1rem;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
             font-family: 'Scala Sans', sans-serif;
             opacity: 0;
             transition: opacity 0.3s ease;
             pointer-events: none;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 1rem 1.5rem;
+            width: 80%;
+            max-width: 600px;
+            text-align: left;
+        }
+        .photo-pair {
+            scroll-snap-align: center;
         }
         .photo-item:hover .photo-caption {
             opacity: 1;
         }
-        .caption-name {
-            font-weight: 600;
+        .caption-main {
             font-size: 0.95rem;
             color: #ffffff;
             display: block;
             text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+            margin-bottom: 0.5rem;
         }
-        .caption-function {
-            font-style: italic;
-            font-size: 0.85rem;
+        .caption-detail {
+            font-size: 0.8rem;
             color: rgba(255,255,255,0.85);
             display: block;
             text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+            line-height: 1.5;
+            margin-bottom: 0.5rem;
+        }
+        .caption-location {
+            font-size: 0.75rem;
+            color: rgba(255,255,255,0.7);
+            display: block;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+            font-style: italic;
         }
     </style>
 </head>
@@ -47,13 +64,9 @@
     </nav>
 
     <div class="horizontal-scroll-container" id="scrollContainer">
-        <div class="horizontal-scroll-content" style="gap: 4rem;">
+        <div class="horizontal-scroll-content" style="gap: 12rem;">
             <div class="photo-item">
                 <img src="het-noordzeekanaal-gebied/2.jpg" alt="Het Noordzeekanaal Gebied" loading="eager">
-                <div class="photo-caption">
-                    <span class="caption-name">Henk de Graaf</span>
-                    <span class="caption-function">Havenmeester</span>
-                </div>
             </div>
 
             <div class="intro-panel" style="min-width: 350px; max-width: 400px;">
@@ -72,119 +85,121 @@
             <div class="photo-item">
                 <img src="het-noordzeekanaal-gebied/1.jpg" alt="Het Noordzeekanaal Gebied" loading="eager">
                 <div class="photo-caption">
-                    <span class="caption-name">Maria Visser</span>
-                    <span class="caption-function">Sluiswachter</span>
+                    <span class="caption-main">Wieslaw snijdt oude stoomleidingen door bij de sloop van de energiecentrale Hemweg 08.</span>
+                    <span class="caption-detail">Sinds 2019 sloot deze centrale van Vattenfall, als onderdeel van de energietransitie. Het puin (o.a. 140.000 ton beton en 40.000 ton staal) wordt hergebruikt.</span>
+                    <span class="caption-location">Locatie: Westelijk Havengebied Amsterdam</span>
                 </div>
             </div>
+
             <div class="photo-pair">
                 <div class="photo-item">
                     <img src="het-noordzeekanaal-gebied/3.jpg" alt="Het Noordzeekanaal Gebied" loading="eager">
                     <div class="photo-caption">
-                        <span class="caption-name">Pieter van Dijk</span>
-                        <span class="caption-function">Kraanmachinist</span>
+                        <span class="caption-main">Jolanda, hoofdoperator bij het afvalenergiebedrijf AEB Amsterdam.</span>
+                        <span class="caption-detail">AEB zet restafval om in stoom, waarmee zij elektriciteit opwekt voor zo'n 365.000 huishoudens en warmte levert aan 40.000 woningen in Amsterdam-Noord via stadsverwarming. Vanaf 2028 vangt AEB ook CO₂ af en zet zo de volgende stap naar een nóg duurzamere, circulaire toekomst voor de regio.</span>
+                        <span class="caption-location">Locatie: Westelijk Havengebied Amsterdam</span>
                     </div>
                 </div>
                 <div class="photo-item">
                     <img src="het-noordzeekanaal-gebied/4.jpg" alt="Het Noordzeekanaal Gebied" loading="eager">
-                    <div class="photo-caption">
-                        <span class="caption-name">Jan Mulder</span>
-                        <span class="caption-function">Stuwadoor</span>
-                    </div>
                 </div>
             </div>
-            <div class="photo-item" style="height: 90vh; align-self: center;">
+            <div class="photo-item" style="height: 90vh;">
                 <img src="het-noordzeekanaal-gebied/5.jpg" alt="Het Noordzeekanaal Gebied" loading="eager">
                 <div class="photo-caption">
-                    <span class="caption-name">Kees Bakker</span>
-                    <span class="caption-function">Scheepsbouwer</span>
+                    <span class="caption-main">Manon, omgevingsmanager voor de Energiehaven</span>
+                    <span class="caption-detail">De Energiehaven IJmond wordt een haven specifiek gericht op de bouw van windparken op zee. Deze komt op de plaats waar nu de Averijhaven ligt. De ontwikkeling van de Energiehaven is een samenwerking tussen provincie Noord-Holland, gemeente Velsen, Zeehaven IJmuiden en Port of Amsterdam. Ook het Rijk en Tata Steel zijn betrokken.</span>
+                    <span class="caption-location">Locatie: IJmond</span>
                 </div>
             </div>
             <div class="photo-pair">
                 <div class="photo-item">
                     <img src="het-noordzeekanaal-gebied/6.jpg" alt="Het Noordzeekanaal Gebied" loading="eager">
                     <div class="photo-caption">
-                        <span class="caption-name">Els de Boer</span>
-                        <span class="caption-function">Loodswezen</span>
+                        <span class="caption-main">Jimmy, stuwadoor bij HES Bulk Terminal Amsterdam.</span>
+                        <span class="caption-detail">Jimmy verplaatst allerlei bulkgoederen met diverse machines en bedient ook grote kranen. Op het terrein van HES Bulk Terminal Amsterdam is goed te zien dat kolenvelden steeds meer plaats maken voor andere bulkgoederen zoals duurzame bouwmaterialen en agri-producten zoals granen.</span>
+                        <span class="caption-location">Locatie: Westelijk Havengebied Amsterdam</span>
                     </div>
                 </div>
                 <div class="photo-item">
                     <img src="het-noordzeekanaal-gebied/7.jpg" alt="Het Noordzeekanaal Gebied" loading="lazy">
-                    <div class="photo-caption">
-                        <span class="caption-name">Willem Jansen</span>
-                        <span class="caption-function">Bootsman</span>
-                    </div>
                 </div>
             </div>
             <div class="photo-item">
                 <img src="het-noordzeekanaal-gebied/8.jpg" alt="Het Noordzeekanaal Gebied" loading="lazy">
                 <div class="photo-caption">
-                    <span class="caption-name">Anna Smit</span>
-                    <span class="caption-function">Havenbeveiliger</span>
+                    <span class="caption-main">Lousanne, directeur van het Programmabureau Noordzeekanaalgebied (NZKG).</span>
+                    <span class="caption-detail">In dit gebied moet plaats worden gemaakt voor een 380 kV transformatorstation om de regio van voldoende stroom te blijven voorzien. Tegelijk vragen natuur, water en andere toekomstige functies om plek. Het Programmabureau NZKG brengt dit samen met partijen in beeld en helpt keuzes te maken.</span>
+                    <span class="caption-location">Locatie: Houtrakpolder</span>
                 </div>
             </div>
             <div class="photo-item">
                 <img src="het-noordzeekanaal-gebied/9.jpg" alt="Het Noordzeekanaal Gebied" loading="lazy">
                 <div class="photo-caption">
-                    <span class="caption-name">Theo van den Berg</span>
-                    <span class="caption-function">Douanier</span>
+                    <span class="caption-main">Etteray, procesoperator bij EVOS. Hij controleert leidingen waardoor benzine of diesel naar de tanks stroomt.</span>
+                    <span class="caption-detail">EVOS is actief in opslag en overslag van brandstoffen. Er is een pijpleidingverbinding naar Schiphol voor aanvoer van Jet Fuel. De tanks zijn klaar voor opslag van duurzame biobrandstoffen voor klanten en er wordt gekeken naar mogelijkheden voor waterstof.</span>
+                    <span class="caption-location">Locatie: Westelijk Havengebied Amsterdam</span>
                 </div>
             </div>
             <div class="photo-pair">
                 <div class="photo-item">
                     <img src="het-noordzeekanaal-gebied/10.jpg" alt="Het Noordzeekanaal Gebied" loading="lazy">
                     <div class="photo-caption">
-                        <span class="caption-name">Marieke Vermeer</span>
-                        <span class="caption-function">Containerterminal operator</span>
+                        <span class="caption-main">Leon werkt als monteur bij Olam food ingredients (ofi) in Koog aan de Zaan.</span>
+                        <span class="caption-detail">Ofi is een leverancier van cacaopoeder, boter en massa. De producten van ofi vind je o.a. terug in OREO en de Mars. Door verbranding van eigen cacaodoppen in een biomassa installatie voor het maken van stoom is het aardgasverbruik gehalveerd.</span>
+                        <span class="caption-location">Locatie: Zaanstreek</span>
                     </div>
                 </div>
                 <div class="photo-item">
                     <img src="het-noordzeekanaal-gebied/11.jpg" alt="Het Noordzeekanaal Gebied" loading="lazy">
-                    <div class="photo-caption">
-                        <span class="caption-name">Dirk Koning</span>
-                        <span class="caption-function">Voorman</span>
-                    </div>
                 </div>
             </div>
             <div class="photo-item">
                 <img src="het-noordzeekanaal-gebied/12.jpg" alt="Het Noordzeekanaal Gebied" loading="lazy">
                 <div class="photo-caption">
-                    <span class="caption-name">Gerrit Post</span>
-                    <span class="caption-function">Sleepbootkapitein</span>
+                    <span class="caption-main">Koen, Field Service Engineer bij Strohm.</span>
+                    <span class="caption-detail">Strohm maakt sterke, lichte buizen die worden gebruikt om olie, gas, waterstof of CO₂ veilig door te voeren. Ze roesten niet, zijn makkelijk te installeren en gaan lang mee. Zo helpen ze hun klanten duurzamer te werken en dragen ze bij aan een schonere energievoorziening.</span>
+                    <span class="caption-location">Locatie: IJmond</span>
                 </div>
             </div>
             <div class="photo-item">
                 <img src="het-noordzeekanaal-gebied/13.jpg" alt="Het Noordzeekanaal Gebied" loading="lazy">
                 <div class="photo-caption">
-                    <span class="caption-name">Liesbeth van Houten</span>
-                    <span class="caption-function">Logistiek planner</span>
+                    <span class="caption-main">Jaap, projectdirecteur Hollandse Kust West van TenneT.</span>
+                    <span class="caption-detail">Via het 380 kV transformatorstation Wijk aan Zee van TenneT komt energie van windmolens vanaf zee op het hoogspanningsnet. Dit bedient ruim 2 miljoen huishoudens. Nu zorgen windparken in Nederland voor 16% van de elektriciteit. Omdat de vraag naar elektriciteit enorm stijgt, moeten er meer windparken en transformatorstations bijkomen.</span>
+                    <span class="caption-location">Locatie: IJmond</span>
                 </div>
             </div>
             <div class="photo-item">
                 <img src="het-noordzeekanaal-gebied/14.jpg" alt="Het Noordzeekanaal Gebied" loading="lazy">
                 <div class="photo-caption">
-                    <span class="caption-name">Frank de Wit</span>
-                    <span class="caption-function">Lasser</span>
+                    <span class="caption-main">Jan werkt bij de havendienst van de Zeehaven IJmuiden waar hij onder andere schepen aansluit op walstroom.</span>
+                    <span class="caption-detail">Een aansluiting op het elektriciteitsnet van de wal zorgt voor veel minder schadelijke uitstoot en geluidsoverlast dan het laten draaien van dieselmotoren. In de toekomst hopen ze meer walstroomaansluitingen te realiseren.</span>
+                    <span class="caption-location">Locatie: IJmond</span>
                 </div>
             </div>
-            <div class="photo-item" style="height: 90vh; align-self: center;">
+            <div class="photo-item" style="height: 90vh;">
                 <img src="het-noordzeekanaal-gebied/15.jpg" alt="Het Noordzeekanaal Gebied" loading="lazy">
                 <div class="photo-caption">
-                    <span class="caption-name">Sophie Hendriks</span>
-                    <span class="caption-function">Scheepsagent</span>
+                    <span class="caption-main">Angeliki leidt bij Tata Steel Nederland (TSN) de teams die de DeNOx gaan testen.</span>
+                    <span class="caption-detail">Deze installatie wordt nu gebouwd en reduceert straks de uitstoot van stikstof (NOx). Samen met de grootste stofzuiger van Nederland (tegen stof, lood en andere zware metalen) en de nieuwe waterzuiveringsinstallatie maakt 'ie de industrie schoner. In 2045 wil de staalgigant zelfs volledig klimaatneutraal zijn.</span>
+                    <span class="caption-location">Locatie: IJmond</span>
                 </div>
             </div>
             <div class="photo-item">
                 <img src="het-noordzeekanaal-gebied/16.jpg" alt="Het Noordzeekanaal Gebied" loading="lazy">
                 <div class="photo-caption">
-                    <span class="caption-name">Bert Kok</span>
-                    <span class="caption-function">Havenkraan operator</span>
+                    <span class="caption-main">Willem, Installatietechnicus Elektro en Instrumentatie bij het compressor- en mengstation Beverwijk van Gasunie.</span>
+                    <span class="caption-detail">Gasunie test of de bestaande aardgasleiding tussen Spaarndam en Beverwijk geschikt is voor het transport van waterstof. De verwachting is dat er in het Noordzeekanaalgebied in 2030 naast aardgas ook waterstof wordt getransporteerd.</span>
+                    <span class="caption-location">Locatie: Heemskerk</span>
                 </div>
             </div>
             <div class="photo-item">
                 <img src="het-noordzeekanaal-gebied/17.jpg" alt="Het Noordzeekanaal Gebied" loading="lazy">
                 <div class="photo-caption">
-                    <span class="caption-name">Ingrid Wolters</span>
-                    <span class="caption-function">Waterbouwkundige</span>
+                    <span class="caption-main">Anita, medewerker bij de divisie Organics van Renewi waar ze organische reststoffen verwerken en omzetten in biogas.</span>
+                    <span class="caption-detail">Renewi zamelt afval in en recyclet het weer tot bruikbare materialen, zoals papier, metaal, kunststof, glas, hout, bouwstoffen, compost en energie. Daarmee draagt het concreet bij aan een circulaire en duurzame economie.</span>
+                    <span class="caption-location">Locatie: Westelijk Havengebied Amsterdam</span>
                 </div>
             </div>
 
@@ -219,7 +234,7 @@
 
     <script>
         const container = document.getElementById('scrollContainer');
-        const allItems = document.querySelectorAll('.horizontal-scroll-content > .photo-item, .photo-pair > .photo-item, .intro-panel, .end-panel');
+        const allItems = document.querySelectorAll('.horizontal-scroll-content > .photo-item, .horizontal-scroll-content > .photo-pair, .intro-panel, .end-panel');
         let currentIndex = 0;
         let isAnimating = false;
         let scrollQueue = 0;

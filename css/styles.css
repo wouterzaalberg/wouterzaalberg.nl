@@ -709,6 +709,22 @@ img {
     object-position: left top;
 }
 
+.work-grid.size-small {
+    height: auto;
+}
+
+.work-grid.size-small .grid-img,
+.work-grid.size-small .grid-video {
+    max-height: 28vh;
+}
+
+.work-grid.zoom .grid-img,
+.work-grid.zoom .grid-video {
+    object-fit: cover;
+    transform: scale(1.02);
+    clip-path: inset(1%);
+}
+
 /* Info button voor werk sectie */
 .work-info-btn {
     position: absolute;
@@ -716,7 +732,7 @@ img {
     left: 5rem;
     width: 32px;
     height: 32px;
-    background: rgba(180, 180, 180, 0.85);
+    background: rgba(220, 220, 220, 0.85);
     border: none;
     border-radius: 50%;
     cursor: pointer;
@@ -790,12 +806,12 @@ img {
 
 .work-text-overlay p {
     font-family: 'Scala Sans', sans-serif;
-    font-size: clamp(0.85rem, 1.2vw, 1.05rem);
-    line-height: 1.8;
+    font-size: clamp(0.82rem, 1.15vw, 1.02rem);
+    line-height: 1.75;
 }
 
 .work-text-overlay .logo-heading {
-    margin-top: 8rem;
+    margin-top: 2rem;
     margin-bottom: 1.5rem;
     font-family: 'Scala Sans', sans-serif;
     font-size: clamp(0.85rem, 1.2vw, 1.05rem);
