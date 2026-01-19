@@ -139,19 +139,126 @@ img {
     max-width: 20%;
 }
 
-@media (max-width: 1100px) {
+/* Grote schermen 1400-1600px - begin van verkleinen */
+@media (max-width: 1600px) and (min-width: 1401px) {
+    .hero-overlay-content {
+        top: 18%;
+        padding: 1.75rem;
+    }
+
     .hero-tagline,
     .hero-tagline-italic {
-        font-size: clamp(1.4rem, 2.5vw, 2rem);
+        font-size: 2rem;
+        margin-bottom: 0.8rem;
+    }
+
+    .hero-name {
+        font-size: 0.95rem;
+    }
+
+    .menu-section {
+        margin-bottom: 1.75rem;
+    }
+
+    .menu-heading {
+        font-size: 0.85rem;
+    }
+
+    .menu-list a {
+        font-size: 0.95rem;
+    }
+
+    .menu-list li {
+        margin-bottom: 0.35rem;
     }
 }
 
+/* Laptops 1100-1400px */
+@media (max-width: 1400px) and (min-width: 1101px) {
+    .hero-overlay-content {
+        top: 12%;
+        left: 55%;
+        max-width: 25%;
+        padding: 1.5rem;
+    }
+
+    .hero-tagline,
+    .hero-tagline-italic {
+        font-size: 1.7rem;
+        margin-bottom: 0.6rem;
+    }
+
+    .hero-name {
+        font-size: 0.85rem;
+    }
+
+    .menu-section {
+        margin-bottom: 1.5rem;
+    }
+
+    .menu-heading {
+        font-size: 0.75rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .menu-list a {
+        font-size: 0.85rem;
+    }
+
+    .menu-list li {
+        margin-bottom: 0.3rem;
+    }
+}
+
+/* Kleine laptops 768-1100px */
+@media (max-width: 1100px) and (min-width: 768px) {
+    .hero-overlay-content {
+        top: 10%;
+        left: 50%;
+        max-width: 30%;
+        padding: 1.5rem;
+    }
+
+    .hero-tagline,
+    .hero-tagline-italic {
+        font-size: clamp(1.3rem, 2.5vw, 1.8rem);
+    }
+
+    .hero-name {
+        font-size: 0.85rem;
+    }
+
+    .menu-section {
+        margin-bottom: 1.5rem;
+    }
+
+    .menu-heading {
+        font-size: 0.75rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .menu-list a {
+        font-size: 0.85rem;
+    }
+
+    .menu-list li {
+        margin-bottom: 0.3rem;
+    }
+
+    .hero-caption {
+        font-size: 0.85rem;
+    }
+}
+
+/* Mobiel */
 @media (max-width: 767px) {
     .hero-overlay-content {
         top: 10%;
         left: 5%;
         right: 5%;
         width: auto;
+        max-width: none;
+        padding: 1.5rem;
     }
 
     .hero-tagline,
@@ -159,10 +266,18 @@ img {
         font-size: 1.3rem;
     }
 
+    .hero-name {
+        font-size: 0.8rem;
+    }
+
+    .menu-section {
+        margin-bottom: 1.2rem;
+    }
+
     .hero-caption {
         bottom: 1rem;
         left: 5%;
-        font-size: 0.85rem;
+        font-size: 0.8rem;
     }
 }
 
@@ -330,41 +445,74 @@ img {
     color: var(--color-white);
 }
 
-@media (max-width: 1400px) and (min-width: 768px) {
+/* Grote schermen 1400-1600px */
+@media (max-width: 1600px) and (min-width: 1401px) {
+    .about-text-overlay {
+        top: 18%;
+    }
+
+    .about-text-overlay p {
+        font-size: 0.95rem;
+        line-height: 1.7;
+        margin-bottom: 1.2rem;
+    }
+
+    .about-heading {
+        font-size: 1.5rem;
+        margin-bottom: 1.2rem;
+    }
+}
+
+/* Laptops 1100-1400px */
+@media (max-width: 1400px) and (min-width: 1101px) {
     .about-text-overlay {
         top: 12%;
+        left: 55%;
+        max-width: 25%;
         max-height: 75vh;
         overflow-y: auto;
     }
 
     .about-text-overlay p {
-        font-size: 0.9rem;
-        line-height: 1.6;
-        margin-bottom: 1rem;
-    }
-
-    .about-heading {
-        font-size: 1.3rem;
-        margin-bottom: 1rem;
-    }
-}
-
-@media (max-width: 1100px) and (min-width: 768px) {
-    .about-text-overlay {
-        top: 10%;
-        width: 25%;
-    }
-
-    .about-text-overlay p {
         font-size: 0.85rem;
         line-height: 1.5;
+        margin-bottom: 0.9rem;
     }
 
     .about-heading {
         font-size: 1.2rem;
+        margin-bottom: 0.9rem;
     }
 }
 
+/* Kleine laptops 768-1100px - witte achtergrond toegevoegd */
+@media (max-width: 1100px) and (min-width: 768px) {
+    .about-text-overlay {
+        top: 10%;
+        left: 50%;
+        width: 30%;
+        background-color: rgba(255, 255, 255, 0.75);
+        padding: 1.5rem;
+        box-sizing: border-box;
+    }
+
+    .about-text-overlay p {
+        font-size: 0.8rem;
+        line-height: 1.5;
+        margin-bottom: 0.8rem;
+    }
+
+    .about-heading {
+        font-size: 1.1rem;
+        margin-bottom: 0.8rem;
+    }
+
+    .about-caption {
+        font-size: 0.85rem;
+    }
+}
+
+/* Mobiel */
 @media (max-width: 767px) {
     .about-section {
         height: auto;
@@ -376,20 +524,24 @@ img {
         left: 5%;
         right: 5%;
         width: auto;
+        background-color: rgba(255, 255, 255, 0.85);
+        padding: 1.5rem;
+        box-sizing: border-box;
     }
 
     .about-text-overlay p {
-        font-size: 0.9rem;
+        font-size: 0.85rem;
+        line-height: 1.5;
     }
 
     .about-heading {
-        font-size: 1.2rem;
+        font-size: 1.1rem;
     }
 
     .about-caption {
         bottom: 1rem;
         left: 5%;
-        font-size: 0.85rem;
+        font-size: 0.8rem;
     }
 }
 
@@ -558,6 +710,7 @@ img {
     font-style: italic;
     font-size: 1rem;
     color: var(--color-white);
+    transition: color 0.3s ease;
 }
 
 .work-text-overlay {
@@ -636,35 +789,41 @@ img {
     opacity: 1;
 }
 
-@media (max-width: 1400px) and (min-width: 768px) {
+/* Grote schermen 1400-1600px */
+@media (max-width: 1600px) and (min-width: 1401px) {
     .work-text-overlay {
-        top: 10%;
-        max-height: 80vh;
-        overflow-y: auto;
+        top: 18%;
+        padding: 1.75rem;
     }
 
     .work-text-overlay h2 {
-        font-size: 1.3rem;
+        font-size: 1.5rem;
     }
 
     .work-text-overlay p {
-        font-size: 0.85rem;
-        line-height: 1.5;
+        font-size: 0.95rem;
+        line-height: 1.6;
     }
 
     .work-text-overlay .logo-heading {
-        margin-top: 4rem;
+        margin-top: 5rem;
     }
 
-    .work-text-overlay .logo-item img {
-        max-height: 40px;
+    .work-text-overlay .logo-item img,
+    .work-text-overlay .logo-item .logo-color {
+        max-height: 55px;
     }
 }
 
-@media (max-width: 1100px) and (min-width: 768px) {
+/* Laptops 1100-1400px */
+@media (max-width: 1400px) and (min-width: 1101px) {
     .work-text-overlay {
-        top: 8%;
-        width: 25%;
+        top: 10%;
+        left: 55%;
+        max-width: 25%;
+        max-height: 80vh;
+        overflow-y: auto;
+        padding: 1.5rem;
     }
 
     .work-text-overlay h2 {
@@ -673,6 +832,7 @@ img {
 
     .work-text-overlay p {
         font-size: 0.8rem;
+        line-height: 1.45;
     }
 
     .work-text-overlay .logo-heading {
@@ -680,11 +840,56 @@ img {
         font-size: 0.8rem;
     }
 
-    .work-text-overlay .logo-item img {
-        max-height: 35px;
+    .work-text-overlay .logo-item img,
+    .work-text-overlay .logo-item .logo-color {
+        max-height: 40px;
+    }
+
+    .work-caption {
+        font-size: 0.9rem;
     }
 }
 
+/* Kleine laptops 768-1100px */
+@media (max-width: 1100px) and (min-width: 768px) {
+    .work-text-overlay {
+        top: 8%;
+        left: 50%;
+        width: 30%;
+        padding: 1.25rem;
+    }
+
+    .work-text-overlay h2 {
+        font-size: 1.1rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .work-text-overlay p {
+        font-size: 0.75rem;
+        line-height: 1.4;
+    }
+
+    .work-text-overlay .logo-heading {
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+        font-size: 0.75rem;
+    }
+
+    .work-text-overlay .logo-item img,
+    .work-text-overlay .logo-item .logo-color {
+        max-height: 32px;
+    }
+
+    .work-text-overlay .logo-grid {
+        gap: 0.15rem;
+    }
+
+    .work-caption {
+        font-size: 0.8rem;
+    }
+}
+
+/* Mobiel */
 @media (max-width: 767px) {
     .work-section {
         height: auto;
@@ -705,12 +910,32 @@ img {
         width: auto;
         max-width: none;
         margin: 2rem 5%;
+        padding: 1.25rem;
+    }
+
+    .work-text-overlay h2 {
+        font-size: 1.1rem;
+    }
+
+    .work-text-overlay p {
+        font-size: 0.8rem;
+        line-height: 1.4;
+    }
+
+    .work-text-overlay .logo-heading {
+        margin-top: 1.5rem;
+        font-size: 0.8rem;
+    }
+
+    .work-text-overlay .logo-item img,
+    .work-text-overlay .logo-item .logo-color {
+        max-height: 40px;
     }
 
     .work-caption {
         bottom: 1rem;
         left: 5%;
-        font-size: 0.85rem;
+        font-size: 0.75rem;
     }
 }
 
@@ -901,63 +1126,115 @@ img {
     background-color: #2a3a4a;
 }
 
-@media (max-width: 1400px) and (min-width: 768px) {
+/* Grote schermen 1400-1600px */
+@media (max-width: 1600px) and (min-width: 1401px) {
     .contact-text-overlay {
-        top: 10%;
-        max-height: 85vh;
-        overflow-y: auto;
+        top: 18%;
+        padding: 1.75rem;
     }
 
     .contact-text-overlay h2 {
-        font-size: 1.3rem;
+        font-size: 1.5rem;
+        margin-bottom: 1.2rem;
     }
 
     .contact-text-overlay p {
-        font-size: 0.9rem;
+        font-size: 0.95rem;
     }
 
     .contact-form {
         margin-top: 1.5rem;
+        gap: 0.6rem;
     }
 
     .contact-form input,
     .contact-form textarea {
         font-size: 0.85rem;
-        padding: 0.6rem;
+        padding: 0.65rem;
     }
 }
 
-@media (max-width: 1100px) and (min-width: 768px) {
+/* Laptops 1100-1400px */
+@media (max-width: 1400px) and (min-width: 1101px) {
     .contact-text-overlay {
-        top: 8%;
-        width: 25%;
+        top: 10%;
+        left: 55%;
+        max-width: 25%;
+        max-height: 85vh;
+        overflow-y: auto;
+        padding: 1.5rem;
     }
 
     .contact-text-overlay h2 {
         font-size: 1.2rem;
+        margin-bottom: 0.9rem;
     }
 
     .contact-text-overlay p {
-        font-size: 0.85rem;
+        font-size: 0.8rem;
     }
 
     .contact-form {
-        margin-top: 1rem;
+        margin-top: 1.2rem;
         gap: 0.5rem;
     }
 
     .contact-form input,
     .contact-form textarea {
         font-size: 0.8rem;
-        padding: 0.5rem;
+        padding: 0.55rem;
     }
 
-    .contact-form button {
-        font-size: 0.8rem;
-        padding: 0.6rem 1rem;
+    .contact-caption {
+        font-size: 0.9rem;
     }
 }
 
+/* Kleine laptops 768-1100px */
+@media (max-width: 1100px) and (min-width: 768px) {
+    .contact-text-overlay {
+        top: 8%;
+        left: 50%;
+        width: 30%;
+        padding: 1.25rem;
+    }
+
+    .contact-text-overlay h2 {
+        font-size: 1.1rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .contact-text-overlay p {
+        font-size: 0.75rem;
+        line-height: 1.4;
+    }
+
+    .contact-form {
+        margin-top: 1rem;
+        gap: 0.4rem;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+        font-size: 0.75rem;
+        padding: 0.5rem;
+    }
+
+    .contact-form textarea {
+        min-height: 60px;
+    }
+
+    .contact-form button {
+        font-size: 0.75rem;
+        padding: 0.5rem 0.8rem;
+    }
+
+    .contact-caption {
+        font-size: 0.8rem;
+    }
+}
+
+/* Mobiel */
 @media (max-width: 767px) {
     .contact-section {
         height: auto;
@@ -977,12 +1254,39 @@ img {
         right: 5%;
         width: auto;
         margin: 2rem 5%;
+        padding: 1.25rem;
+    }
+
+    .contact-text-overlay h2 {
+        font-size: 1.1rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .contact-text-overlay p {
+        font-size: 0.8rem;
+        line-height: 1.4;
+    }
+
+    .contact-form {
+        margin-top: 1rem;
+        gap: 0.5rem;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+        font-size: 0.8rem;
+        padding: 0.5rem;
+    }
+
+    .contact-form button {
+        font-size: 0.8rem;
+        padding: 0.5rem 1rem;
     }
 
     .contact-caption {
         bottom: 1rem;
         left: 5%;
-        font-size: 0.85rem;
+        font-size: 0.75rem;
     }
 }
 
