@@ -710,7 +710,7 @@ img {
     font-style: italic;
     font-size: 1rem;
     color: var(--color-white);
-    transition: color 0.3s ease;
+    transition: color 0.3s ease, left 0.5s ease;
 }
 
 .work-text-overlay {
