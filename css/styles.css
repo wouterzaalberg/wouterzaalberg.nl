@@ -673,7 +673,8 @@ img {
     max-width: 25vw;
 }
 
-.work-grid .grid-img {
+.work-grid .grid-img,
+.work-grid .grid-video {
     width: 100%;
     height: 100%;
     max-height: 40vh;
@@ -681,7 +682,8 @@ img {
     display: none;
 }
 
-.work-grid .grid-img.active {
+.work-grid .grid-img.active,
+.work-grid .grid-video.active {
     display: block;
 }
 

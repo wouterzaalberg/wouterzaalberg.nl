@@ -76,7 +76,7 @@
             <!-- Carousel met meerdere achtergrondafbeeldingen -->
             <img id="workImage1" class="work-img active" src="de-onmisbaren/7.jpg" alt="Werk in opdracht">
             <img id="workImage2" class="work-img" src="de-onmisbaren/7.jpg" alt="Werk in opdracht">
-            <!-- Grid voor meerdere foto's -->
+            <!-- Grid voor meerdere foto's/video's -->
             <div id="workGrid" class="work-grid">
                 <img class="grid-img" src="" alt="">
                 <img class="grid-img" src="" alt="">
@@ -84,6 +84,12 @@
                 <img class="grid-img" src="" alt="">
                 <img class="grid-img" src="" alt="">
                 <img class="grid-img" src="" alt="">
+                <video class="grid-video" muted loop playsinline></video>
+                <video class="grid-video" muted loop playsinline></video>
+                <video class="grid-video" muted loop playsinline></video>
+                <video class="grid-video" muted loop playsinline></video>
+                <video class="grid-video" muted loop playsinline></video>
+                <video class="grid-video" muted loop playsinline></video>
             </div>
             <p class="work-caption" id="workCaption">Khadija, schoonmaakster. Voor een campagne van FNV</p>
         </div>
@@ -157,7 +163,7 @@
                     <img src="logo's/grijs/wkpa.jpg" alt="WKPA" class="logo-grey">
                     <img src="logo's/kleur/wkpa.jpg" alt="WKPA" class="logo-color">
                 </div>
-                <div class="logo-item">
+                <div class="logo-item" data-grid="true" data-images="werk-in-opdracht/taqt1.mp4,werk-in-opdracht/taqt2.mp4,werk-in-opdracht/taqt3.mp4,werk-in-opdracht/taqt4.mp4" data-caption="Videoproductie voor Taqt" data-caption-color="#2d2d2d" data-grid-cols="2">
                     <img src="logo's/grijs/tertium.jpg" alt="Tertium" class="logo-grey">
                     <img src="logo's/kleur/tertium.jpg" alt="Tertium" class="logo-color">
                 </div>
@@ -306,7 +312,13 @@
         const workImage2 = document.getElementById('workImage2');
         const workGrid = document.getElementById('workGrid');
         const gridImages = workGrid.querySelectorAll('.grid-img');
+        const gridVideos = workGrid.querySelectorAll('.grid-video');
         const workCaption = document.getElementById('workCaption');
+
+        // Helper functie om te checken of een bestand een video is
+        function isVideoFile(src) {
+            return /\.(mp4|webm|mov|ogg)$/i.test(src);
+        }
         const workSection = document.querySelector('.work-section');
         const logoItems = document.querySelectorAll('.logo-item[data-image], .logo-item[data-grid]');
         let activeWorkImage = workImage1;
@@ -332,25 +344,25 @@
         }
 
         // Functie om caption positie te updaten gebaseerd op grid/image
-        function updateCaptionPosition(element, isGrid) {
+        function updateCaptionPosition(gridCols) {
             if (!workCaption) return;
 
-            // Wacht tot element zichtbaar is en gepositioneerd
-            setTimeout(() => {
-                if (isGrid && element) {
-                    const rect = element.getBoundingClientRect();
-                    const leftPercent = (rect.left / window.innerWidth) * 100;
-                    workCaption.style.left = Math.max(2, leftPercent) + '%';
-                } else {
-                    // Default positie voor single images
-                    workCaption.style.left = '12%';
-                }
-            }, 100);
+            // Vaste posities per grid type
+            if (gridCols === '3') {
+                workCaption.style.left = '5%';
+            } else if (gridCols === '2' || gridCols === '1') {
+                workCaption.style.left = '8%';
+            } else {
+                // Default positie voor single images
+                workCaption.style.left = '12%';
+            }
         }
 
         function hideGrid() {
             workGrid.classList.remove('visible');
             workGrid.classList.add('left');
+            // Pauzeer alle video's
+            gridVideos.forEach(video => video.pause());
             setTimeout(() => {
                 workGrid.classList.remove('left');
             }, 650);
@@ -378,23 +390,40 @@
                     workGrid.classList.add('cols-3');
                 }
 
-                // Laad grid images
+                // Reset alle grid items (images en videos)
                 gridImages.forEach(img => {
                     img.classList.remove('active');
                     img.src = '';
                 });
+                gridVideos.forEach(video => {
+                    video.classList.remove('active');
+                    video.src = '';
+                    video.pause();
+                });
+
+                // Laad grid items (images of videos)
                 images.forEach((src, index) => {
-                    if (gridImages[index]) {
-                        gridImages[index].src = src;
-                        gridImages[index].classList.add('active');
+                    if (isVideoFile(src)) {
+                        // Video bestand
+                        if (gridVideos[index]) {
+                            gridVideos[index].src = src;
+                            gridVideos[index].classList.add('active');
+                            gridVideos[index].play().catch(() => {});
+                        }
+                    } else {
+                        // Afbeelding bestand
+                        if (gridImages[index]) {
+                            gridImages[index].src = src;
+                            gridImages[index].classList.add('active');
+                        }
                     }
                 });
 
                 // Slide in grid
                 requestAnimationFrame(() => {
                     workGrid.classList.add('visible');
-                    // Update caption positie na grid is zichtbaar
-                    updateCaptionPosition(workGrid, true);
+                    // Update caption positie voor grid
+                    updateCaptionPosition(cols || '2');
                 });
                 gridMode = true;
 
@@ -503,7 +532,7 @@
                     activeWorkImage = inactiveImage;
 
                     // Reset caption positie voor single image
-                    updateCaptionPosition(null, false);
+                    updateCaptionPosition(null);
 
                     // Update caption en slide in
                     setTimeout(() => {
