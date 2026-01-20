@@ -82,6 +82,8 @@
     scrollbar-width: none;
     -ms-overflow-style: none;
     background: transparent;
+    position: relative;
+    z-index: 2;
 }
 
 .tdmv-page .horizontal-scroll-container::-webkit-scrollbar {
@@ -322,8 +324,11 @@
     z-index: 1;
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 6rem;
-    max-width: 1200px;
+    width: 100%;
+    padding: 0 4rem;
+    box-sizing: border-box;
 }
 
 .tdmv-hero-panel .tdmv-title {
@@ -331,7 +336,11 @@
 }
 
 .tdmv-hero-text {
-    max-width: 400px;
+    width: 400px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .tdmv-hero-text p {
@@ -524,20 +533,283 @@
 .tdmv-insert.part-1 {
     background: rgba(197, 90, 17, 0.96);
     position: relative;
+    transition: background 0.8s ease;
 }
 
-.tdmv-insert.part-1::before {
-    content: '';
-    position: absolute;
+.tdmv-insert.part-1.bg-fade-out {
+    background: transparent;
+}
+
+/* Subtle mine tunnel background for part 1 */
+.tdmv-part1-bg {
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     background: url('../toen-de-mijnen-verdwenen/mijngang.jpg') center center / cover no-repeat;
-    z-index: -1;
+    opacity: 0;
+    z-index: 1;
+    pointer-events: none;
+    transition: opacity 1s ease;
 }
-.tdmv-insert.part-2 { background: var(--tdmv-part2-accent); }
-.tdmv-insert.part-3 { background: var(--tdmv-part3-accent); }
+
+.tdmv-part1-bg.visible {
+    opacity: 0.12;
+}
+.tdmv-insert.part-2 {
+    background: var(--tdmv-part2-accent);
+    transition: opacity 0.8s ease, background 0.8s ease;
+}
+
+.tdmv-insert.part-2.bg-fade-out {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Het grote slopen - infographic layout */
+.tdmv-slopen-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4rem;
+    width: 90vw;
+    max-width: 1400px;
+    padding: 2rem;
+}
+
+.tdmv-slopen-photos {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.tdmv-slopen-photos img {
+    width: 35vw;
+    max-width: 500px;
+    height: auto;
+    object-fit: cover;
+}
+
+.tdmv-slopen-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    max-width: 450px;
+}
+
+.tdmv-slopen-title {
+    font-family: 'chloe', sans-serif;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 400;
+    color: var(--tdmv-text);
+    margin: 0;
+}
+
+.tdmv-slopen-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.tdmv-stat-block {
+    padding: 1rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.tdmv-stat-number {
+    font-family: 'Scala Sans', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--tdmv-text);
+    line-height: 1;
+    margin-bottom: 0.25rem;
+}
+
+.tdmv-stat-label {
+    font-family: 'Scala Sans SC', sans-serif;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.tdmv-stat-negative .tdmv-stat-number {
+    color: #c75050;
+}
+
+.tdmv-stat-positive .tdmv-stat-number {
+    color: var(--tdmv-part3-accent);
+}
+
+.tdmv-stat-large {
+    padding: 1.5rem 0;
+}
+
+.tdmv-stat-large .tdmv-stat-number {
+    font-size: 3rem;
+    color: var(--tdmv-part2-accent);
+}
+
+.tdmv-stat-breakdown {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    margin-top: 0.75rem;
+}
+
+.tdmv-stat-breakdown span {
+    font-family: 'Scala Sans', sans-serif;
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.tdmv-stat-row {
+    display: flex;
+    gap: 2rem;
+}
+
+.tdmv-stat-row .tdmv-stat-block {
+    flex: 1;
+    border-bottom: none;
+    padding: 0;
+}
+
+.tdmv-stat-row .tdmv-stat-number {
+    font-size: 1.8rem;
+}
+
+.tdmv-slopen-source {
+    font-family: 'Scala Sans', sans-serif;
+    font-size: 0.7rem;
+    font-style: italic;
+    color: rgba(255, 255, 255, 0.7);
+}
+.tdmv-insert.part-3 {
+    background: var(--tdmv-part3-accent);
+    transition: opacity 0.8s ease, background 0.8s ease;
+}
+
+.tdmv-insert.part-3.bg-fade-out {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Uit het dal insert layout */
+.tdmv-uithetdal-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4rem;
+    padding: 3rem;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.tdmv-insert.in-view .tdmv-uithetdal-content {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.tdmv-uithetdal-photo {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.tdmv-uithetdal-photo img {
+    height: 55vh;
+    width: auto;
+    object-fit: contain;
+}
+
+.tdmv-uithetdal-photo .tdmv-photo-credit {
+    margin-top: 0.75rem;
+}
+
+.tdmv-uithetdal-text {
+    max-width: 420px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.tdmv-uithetdal-title {
+    font-family: 'chloe', sans-serif;
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    font-weight: 400;
+    color: var(--tdmv-text);
+    margin: 0 0 1.5rem 0;
+}
+
+.tdmv-uithetdal-text p {
+    font-family: 'Scala Sans', sans-serif;
+    font-size: 0.95rem;
+    line-height: 1.8;
+    color: var(--tdmv-text);
+    margin: 0 0 1.25rem 0;
+}
+
+.tdmv-uithetdal-quote {
+    font-style: italic;
+    opacity: 0.85;
+    margin-top: 0.5rem !important;
+}
+
+/* Media insert layout */
+.tdmv-media-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4rem;
+    padding: 3rem;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.tdmv-insert.in-view .tdmv-media-content {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.tdmv-media-photos {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5rem;
+}
+
+.tdmv-media-photos img {
+    width: 140px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 2px;
+}
+
+.tdmv-media-text {
+    max-width: 380px;
+}
+
+.tdmv-media-title {
+    font-family: 'chloe', sans-serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 400;
+    color: var(--tdmv-text);
+    margin: 0 0 1.5rem 0;
+}
+
+.tdmv-media-text p {
+    font-family: 'Scala Sans', sans-serif;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--tdmv-text);
+    margin: 0 0 0.75rem 0;
+}
+
+.tdmv-media-text p:last-child {
+    margin-bottom: 0;
+}
 
 .tdmv-insert-content {
     display: flex;
@@ -585,23 +857,38 @@
     transform: scale(1);
 }
 
+.tdmv-photo-credit {
+    font-family: 'Scala Sans', sans-serif;
+    font-size: 0.75rem;
+    font-style: italic;
+    color: rgba(255, 255, 255, 0.6);
+    margin-top: 0.5rem;
+}
+
 /* Map content layout */
 .tdmv-map-content {
-    align-items: flex-start !important;
-    width: 60vw;
-    gap: 1rem;
+    display: grid !important;
+    grid-template-columns: 35vw 35vw;
+    grid-template-rows: auto 1fr;
+    gap: 1rem 3rem;
+    width: auto;
+    justify-content: center;
 }
 
 .tdmv-map-content .tdmv-insert-title {
+    grid-column: 1;
+    grid-row: 1;
     text-align: left;
-    font-size: clamp(3rem, 6vw, 5rem);
-    margin-bottom: 0.5rem;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    margin-bottom: 0;
 }
 
 /* Leaflet Map */
 .tdmv-leaflet-map {
-    width: 60vw;
-    height: 45vh;
+    grid-column: 1;
+    grid-row: 2;
+    width: 35vw;
+    height: 65vh;
     border-radius: 4px;
     opacity: 0;
     transform: scale(0.95);
@@ -615,14 +902,17 @@
 
 /* Mine statistics grid */
 .tdmv-mine-stats {
+    grid-column: 2;
+    grid-row: 1 / 3;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1rem 1.5rem;
-    margin-top: 1.5rem;
-    width: 60vw;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem 1.5rem;
+    width: 35vw;
+    align-self: center;
     opacity: 0;
     transform: translateY(20px);
     transition: opacity 0.8s ease 0.5s, transform 0.8s ease 0.5s;
+    align-content: center;
 }
 
 .tdmv-insert.in-view .tdmv-mine-stats {
@@ -644,13 +934,25 @@
     color: #1a1a1a;
     margin-bottom: 0.4rem;
     white-space: nowrap;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.tdmv-mine-stat-name:hover {
+    color: #1a3a52;
+}
+
+.tdmv-mine-stat-bars {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    margin-bottom: 0.3rem;
 }
 
 .tdmv-mine-stat-bar {
-    height: 18px;
+    height: 14px;
     background: rgba(0,0,0,0.15);
     border-radius: 2px;
-    margin-bottom: 0.3rem;
     overflow: hidden;
 }
 
@@ -661,15 +963,30 @@
     transition: width 1s ease 0.8s;
 }
 
+/* Worker bar - simple design */
+.tdmv-worker-bar {
+    height: 8px;
+    margin-top: 2px;
+}
+
+.tdmv-worker-fill {
+    background: #6b7a8a;
+    border-radius: 2px;
+}
+
 .tdmv-mine-stat-data {
     font-family: 'Scala Sans', sans-serif;
-    font-size: 0.7rem;
+    font-size: 0.65rem;
     color: #1a1a1a;
     line-height: 1.4;
 }
 
-.tdmv-mine-stat-data span {
-    opacity: 0.6;
+.tdmv-mine-stat-data .tdmv-tons {
+    color: #1a1a1a;
+}
+
+.tdmv-mine-stat-data .tdmv-workers {
+    color: #4a5568;
 }
 
 /* Custom Leaflet styling */
@@ -691,7 +1008,7 @@
 }
 
 .leaflet-popup-content-wrapper {
-    background: var(--tdmv-part1-accent);
+    background: #1a3a52;
     color: var(--tdmv-text);
     border-radius: 2px;
     font-family: 'Scala Sans', sans-serif;
@@ -703,7 +1020,15 @@
 }
 
 .leaflet-popup-tip {
-    background: var(--tdmv-part1-accent);
+    background: #1a3a52;
+}
+
+.mine-popup-img {
+    width: 200px;
+    height: auto;
+    display: block;
+    margin-bottom: 0.75rem;
+    border-radius: 2px;
 }
 
 .leaflet-popup-close-button {
@@ -728,17 +1053,82 @@
     font-family: 'chloe', sans-serif;
     font-style: normal;
     font-weight: 400;
-    font-size: clamp(6rem, 11vw, 9rem);
+    font-size: clamp(7rem, 14vw, 12rem);
     color: var(--tdmv-part1-accent);
-    line-height: 1.05;
+    line-height: 1.0;
     white-space: nowrap;
     flex-shrink: 0;
     text-align: right;
 }
 
-.tdmv-title span {
+.tdmv-title .title-line {
     display: block;
 }
+
+.tdmv-title .letter {
+    display: inline-block;
+    animation: letterCollapse 14s ease-in-out forwards;
+    animation-delay: var(--fall-delay, 5s);
+}
+
+/* Line 1: T-o-e-n */
+.tdmv-title .title-line:nth-child(1) .letter:nth-child(1) { --fall-delay: 5s; }
+.tdmv-title .title-line:nth-child(1) .letter:nth-child(2) { --fall-delay: 5.12s; }
+.tdmv-title .title-line:nth-child(1) .letter:nth-child(3) { --fall-delay: 5.06s; }
+.tdmv-title .title-line:nth-child(1) .letter:nth-child(4) { --fall-delay: 5.18s; }
+
+/* Line 2: d-e- -M-ij-n-e-n */
+.tdmv-title .title-line:nth-child(2) .letter:nth-child(1) { --fall-delay: 5.22s; }
+.tdmv-title .title-line:nth-child(2) .letter:nth-child(2) { --fall-delay: 5.28s; }
+.tdmv-title .title-line:nth-child(2) .letter:nth-child(3) { --fall-delay: 5.35s; }
+.tdmv-title .title-line:nth-child(2) .letter:nth-child(4) { --fall-delay: 5.15s; }
+.tdmv-title .title-line:nth-child(2) .letter:nth-child(5) { --fall-delay: 5.32s; }
+.tdmv-title .title-line:nth-child(2) .letter:nth-child(6) { --fall-delay: 5.25s; }
+.tdmv-title .title-line:nth-child(2) .letter:nth-child(7) { --fall-delay: 5.4s; }
+.tdmv-title .title-line:nth-child(2) .letter:nth-child(8) { --fall-delay: 5.2s; }
+
+/* Line 3: v-e-r-d-w-e-n-e-n */
+.tdmv-title .title-line:nth-child(3) .letter:nth-child(1) { --fall-delay: 5.38s; }
+.tdmv-title .title-line:nth-child(3) .letter:nth-child(2) { --fall-delay: 5.5s; }
+.tdmv-title .title-line:nth-child(3) .letter:nth-child(3) { --fall-delay: 5.42s; }
+.tdmv-title .title-line:nth-child(3) .letter:nth-child(4) { --fall-delay: 5.55s; }
+.tdmv-title .title-line:nth-child(3) .letter:nth-child(5) { --fall-delay: 5.35s; }
+.tdmv-title .title-line:nth-child(3) .letter:nth-child(6) { --fall-delay: 5.6s; }
+.tdmv-title .title-line:nth-child(3) .letter:nth-child(7) { --fall-delay: 5.48s; }
+.tdmv-title .title-line:nth-child(3) .letter:nth-child(8) { --fall-delay: 5.58s; }
+.tdmv-title .title-line:nth-child(3) .letter:nth-child(9) { --fall-delay: 5.65s; }
+
+@keyframes letterCollapse {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+    }
+    /* Collapse at ~5-7s */
+    8% {
+        transform: translateY(5px) rotate(var(--rot-start, -2deg));
+        opacity: 1;
+    }
+    15% {
+        transform: translateY(120vh) rotate(var(--rot-end, -20deg));
+        opacity: 0;
+    }
+    /* Stay hidden */
+    84% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
+    }
+    /* Fade back in (simple) */
+    100% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+    }
+}
+
+/* Random rotation directions for each letter */
+.tdmv-title .letter:nth-child(odd) { --rot-start: -3deg; --rot-end: -25deg; }
+.tdmv-title .letter:nth-child(even) { --rot-start: 2deg; --rot-end: 18deg; }
+.tdmv-title .letter:nth-child(3n) { --rot-start: -1deg; --rot-end: -30deg; }
+.tdmv-title .letter:nth-child(4n) { --rot-start: 4deg; --rot-end: 22deg; }
 
 .tdmv-intro-text {
     width: 300px;
@@ -841,6 +1231,16 @@
     scroll-snap-align: center;
 }
 
+.tdmv-highlight-img-wrapper {
+    overflow: hidden;
+    height: 90vh;
+}
+
+.tdmv-highlight-img-wrapper img {
+    height: 100%;
+    width: auto;
+}
+
 .tdmv-photo-highlight img {
     height: 70vh;
     width: auto;
@@ -861,12 +1261,35 @@
     opacity: 1;
 }
 
+/* Delayed zoom effect for specific photos */
+.tdmv-photo-highlight img.zoom-delayed,
+.tdmv-photo-block img.zoom-delayed {
+    transition: opacity 0.6s ease, transform 12s ease-out;
+}
+
+.tdmv-photo-highlight img.zoom-delayed.zoom-active,
+.tdmv-photo-block img.zoom-delayed.zoom-active {
+    transform: scale(1.08);
+}
+
+/* Photo block zoom wrapper */
+.tdmv-photo-img-wrapper {
+    height: 100%;
+    overflow: hidden;
+}
+
+.tdmv-photo-img-wrapper img {
+    height: 100%;
+    width: auto;
+    object-fit: cover;
+}
+
 .tdmv-highlight-panel {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 2.5rem;
-    width: 320px;
+    padding: 2.5rem 3.5rem;
+    width: 520px;
     height: 70vh;
 }
 
@@ -876,12 +1299,12 @@
 
 .tdmv-highlight-header {
     font-family: 'Scala Sans SC', sans-serif;
-    font-size: 1.5rem;
+    font-size: 0.75rem;
     text-transform: uppercase;
     letter-spacing: 0.1em;
     color: var(--tdmv-text);
-    margin-bottom: 1.5rem;
-    opacity: 0.8;
+    margin-bottom: 1rem;
+    opacity: 0.7;
 }
 
 .tdmv-highlight-text {
@@ -889,6 +1312,15 @@
     font-size: 2.2rem;
     color: var(--tdmv-text);
     line-height: 1.5;
+}
+
+.tdmv-highlight-description {
+    font-family: 'Scala Sans', sans-serif;
+    font-size: 0.9rem;
+    color: var(--tdmv-text);
+    line-height: 1.7;
+    margin-top: 1.5rem;
+    opacity: 0.85;
 }
 
 /* ========================================
@@ -977,6 +1409,36 @@
    ======================================== */
 .tdmv-mine-bg {
     display: none;
+}
+
+/* ========================================
+   Progress Indicator
+   ======================================== */
+.tdmv-progress {
+    position: fixed;
+    bottom: 2rem;
+    left: 2rem;
+    font-family: 'Scala Sans', sans-serif;
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.4);
+    z-index: 50;
+    pointer-events: none;
+    display: flex;
+    align-items: baseline;
+    gap: 0.1em;
+}
+
+.tdmv-progress-number {
+    font-variant-numeric: tabular-nums;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.5);
+    transition: color 0.3s ease;
+}
+
+.tdmv-progress-percent {
+    font-size: 0.75rem;
+    opacity: 0.7;
 }
 
 /* ========================================

@@ -336,14 +336,25 @@ const symbols = {
 ```
 
 ### Structuur
-- **Hero sectie**: Titel + dummy tekst, gecentreerd, met descent effect naar foto 1
+- **Hero sectie**: Titel met instort-animatie + intro tekst, gecentreerd
 - **Descent effect**: Scroll omlaag om "af te dalen in de mijn", onthult foto 1
 - **Chapter panels**: Schermvullende overgang tussen de drie delen
 - **Foto blokken**: Met caption box rechts naast de foto
-- **Quote panels**: Gekleurde achtergrond per deel
-- **Insert panels**: Paginabrede secties (bijv. interactieve kaart)
-- **Highlighted photos**: Foto met oranje tekstpaneel ernaast (bijv. foto 12)
+- **Insert panels**: Paginabrede secties met fade-out bij scrollen
+- **Highlighted photos**: Foto met gekleurd tekstpaneel ernaast (foto 3, 12, 23a, 28)
+- **Progress indicator**: Percentage linksonder dat mee-animeert met scroll
 - **Spacing**: `gap: 12rem` tussen elementen
+
+### Titel instort-animatie
+- Na 5 seconden vallen de letters één voor één naar beneden
+- Staggered delays per letter met random rotaties
+- Na ~10 seconden fadet de titel weer in op originele plek
+
+### Progress indicator
+- Positie: linksonder (`bottom: 2rem`, `left: 2rem`)
+- Toont percentage (0-100%) van serie bekeken
+- Animeert soepel bij scrollen (beide richtingen)
+- Subtiel wit (50% opacity)
 
 ### Descent effect (intro)
 ```html
@@ -357,32 +368,52 @@ const symbols = {
 - Scroll omlaag: `introSection.classList.add('descended')`
 - Verticale slide transitie (1.2s) simuleert afdaling in mijn
 
-### Mijn achtergrond
-- `mijngang.jpg` als vaste achtergrond vanaf foto 2
-- Donkere overlay (95% opacity)
-- Gecontroleerd via IntersectionObserver
+### Mijn achtergrond (deel 1)
+- `mijngang.jpg` als subtiele vaste achtergrond (12% opacity)
+- Alleen zichtbaar tijdens deel 1 foto's
+- Gecontroleerd via IntersectionObserver met `.visible` class
 
-### Interactieve kaart (Leaflet.js)
+### Interactieve kaart (Leaflet.js) - Insert "De Mijnstreek"
 - Insert panel na foto 5 met titel "De mijnstreek"
-- Leaflet kaart met CartoDB grayscale tiles
-- Custom oranje markers op mijnlocaties
-- Popup met mijnnaam en actieve jaren bij klik
-- 12 mijnen: Wilhelmina, Emma, Hendrik, Maurits, ON I-IV, Laura, Julia, Willem-Sophia, Domaniale
+- CSS Grid layout: titel linksboven, kaart links, statistieken rechts (2 kolommen)
+- Leaflet kaart met CartoDB grayscale tiles, donkerblauw popup (#1a3a52)
+- Custom oranje markers met foto's in popup (max 200px)
+- Klikbare mijnnamen in statistieken → pannen naar marker
+- 12 mijnen met productie (mln ton) en arbeiders data
+- Twee balken per mijn: oranje (productie), grijs (arbeiders)
+
+### Insert panels
+| Insert | Deel | Inhoud | Fade-out trigger |
+|--------|------|--------|------------------|
+| De Mijnstreek | 1 | Kaart + statistieken | Foto Zakia |
+| Het grote slopen | 2 | Foto's + infographics | Foto Zakia |
+| Uit het dal | 3 | Foto + tekst naast elkaar | Foto Bart |
+| Als expositie en in de media | 3 | 6 foto's grid + tekst | - |
 
 ### Foto groottes
 - Standaard: 70vh
 - `size-large`: 90vh
 
-### Highlighted photo (foto met tekstpaneel)
+### Highlighted photos (foto met tekstpaneel)
+Foto's 3, 12, 23a en 28 hebben een gekleurd tekstpaneel:
 ```html
 <div class="tdmv-photo-highlight part-1">
     <img src="..." alt="...">
     <div class="tdmv-highlight-panel">
         <div class="tdmv-highlight-header">Naam</div>
-        <div class="tdmv-highlight-text">Tekst</div>
+        <div class="tdmv-highlight-text">Quote of tekst</div>
+        <div class="tdmv-highlight-description">Optionele beschrijving</div>
     </div>
 </div>
 ```
+- Part-1: oranje panel (rgba(197, 90, 17, 0.7))
+- Part-2: grijs panel (rgba(107, 122, 138, 0.7))
+- Part-3: groen panel (rgba(139, 154, 107, 0.7))
+
+### Zoom effect (foto 12 en 40)
+- Wrapper met `overflow: hidden` om zoom binnen kader te houden
+- Class `zoom-delayed` op img, `zoom-active` bij in-view
+- 2 seconden delay, 12 seconden zoom naar scale(1.08)
 
 ### Chapter panels
 ```html
