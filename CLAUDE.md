@@ -821,10 +821,28 @@ const allItems = document.querySelectorAll(
 ### Structuur
 - **Achtergrond**: Donkergrijs (#2a2a2a)
 - **Navigatie**: Wit, uitgelijnd met eerste foto (padding-left: 4rem)
-- **Intro panel**: Na eerste foto, 700-800px breed
+- **Intro sectie**: 100vw x 100vh met foto 1 links en intro panel rechts
 - **Foto's**: 9 foto's (1.jpg - 9.jpg) op 70vh
-- **Gap**: 8rem tussen elementen
-- **End panel**: Donkergrijs (#1a1a1a)
+- **Gap**: 12rem tussen elementen
+- **End panel**: Donkergrijs (#1a1a1a), 100vh
+
+### Intro sectie layout
+- **Foto 1**: Absoluut gepositioneerd, 100vh hoog, links van center (`transform: translateX(-110%)`)
+- **Intro panel**: Absoluut gepositioneerd, verticaal gecentreerd, rechts van center (`transform: translate(-10%, -50%)`)
+- Caption onder foto 1 met naam en functie
+
+### Titel met foto-fill effect
+```html
+<h2 class="photo-title" style="background: linear-gradient(rgba(255,255,255,0.25), rgba(255,255,255,0.25)), url('de-onmisbaren/achterdetitel.jpg'); background-size: 100% auto; background-position: center; animation: bgZoom 20s ease-out forwards; -webkit-background-clip: text; background-clip: text; color: transparent;">
+    <span>De</span>
+    <span>Onmis</span>
+    <span>Baren</span>
+</h2>
+```
+- Font: Oswald, 12rem (responsive: 9rem/6rem/4rem)
+- Achtergrond: `achterdetitel.jpg` met witte overlay (25% opacity)
+- Één afbeelding loopt over alle drie regels
+- Zoom animatie: `bgZoom` van 100% naar 115% over 20s
 
 ### Captions onder foto's
 ```html
@@ -835,6 +853,11 @@ const allItems = document.querySelectorAll(
 ```
 - Naam: Scala Sans, vet (600), wit
 - Functie: Scala Sans, italic, 70% wit
+
+### Zoom effect op foto's
+- Foto's krijgen `zoom-active` class na 3 seconden in beeld
+- Animatie: `subtleZoom` van scale(1) naar scale(1.05) over 20s
+- Eerste foto start zoom na 2 seconden
 
 ## Een Plek Onder de Zon Pagina
 

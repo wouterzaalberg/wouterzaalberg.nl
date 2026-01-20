@@ -10,6 +10,13 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap" rel="stylesheet">
     <style>
+        /* Override defaults - remove ALL padding/alignment from parent */
+        .horizontal-scroll-content {
+            align-items: stretch !important;
+            padding-top: 0 !important;
+            padding-bottom: 0 !important;
+        }
+
         @keyframes subtleZoom {
             from {
                 transform: scale(1);
@@ -18,10 +25,63 @@
                 transform: scale(1.05);
             }
         }
+
+        @keyframes bgZoom {
+            from {
+                background-size: 100% auto;
+            }
+            to {
+                background-size: 115% auto;
+            }
+        }
+
+        /* Intro section - full viewport, use absolute positioning for children */
+        .intro-section {
+            position: relative;
+            min-width: 100vw;
+            height: 100vh;
+            background: #2a2a2a;
+        }
+
+        /* Photo 1 - absolutely positioned from top to bottom */
+        .intro-photo {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-110%);
+            overflow: hidden;
+        }
+        .intro-photo img {
+            height: 100%;
+            width: auto;
+            display: block;
+        }
+
+        /* Intro panel - absolutely positioned, vertically centered */
+        .intro-panel {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-10%, -50%);
+            min-width: 500px;
+            max-width: 600px;
+        }
+        .intro-photo .photo-caption {
+            position: absolute;
+            bottom: 2rem;
+            left: 1.5rem;
+        }
+
         .photo-item {
             display: flex;
             flex-direction: column;
             align-items: flex-start;
+            align-self: center;
+        }
+
+        .end-panel {
+            align-self: center;
         }
         .photo-img-wrapper {
             overflow: hidden;
@@ -49,7 +109,8 @@
                 font-size: 4rem;
             }
         }
-        .photo-item img.zoom-active {
+        .photo-item img.zoom-active,
+        .intro-photo img.zoom-active {
             animation: subtleZoom 20s ease-out forwards;
         }
         .title-reflection {
@@ -115,25 +176,25 @@
 
     <div class="horizontal-scroll-container" id="scrollContainer">
         <div class="horizontal-scroll-content" style="gap: 12rem;">
-            <div class="intro-section" style="min-width: 100vw; display: flex; justify-content: center; align-items: center; gap: 4rem; padding: 0 4rem;">
-                <div class="photo-item" style="height: calc(100vh - 80px); position: relative; flex-shrink: 0; overflow: hidden;">
-                    <img src="de-onmisbaren/1.jpg" alt="De Onmisbaren" loading="eager" style="height: 100%; width: auto;">
-                    <div class="photo-caption" style="position: absolute; bottom: 2rem; left: 1.5rem; margin-top: 0;">
+            <div class="intro-section">
+                <div class="intro-photo">
+                    <img src="de-onmisbaren/1.jpg" alt="De Onmisbaren" loading="eager">
+                    <div class="photo-caption">
                         <span class="caption-name">Khadija Hyati</span>
                         <span class="caption-function">Schoonmaker</span>
                     </div>
                 </div>
 
-                <div class="intro-panel" style="min-width: 600px; max-width: 700px;">
-                    <h2 class="photo-title" style="font-family: 'Oswald', sans-serif; font-weight: 700; text-transform: uppercase; letter-spacing: 0.02em; margin-bottom: 2rem; line-height: 0.95; display: flex; flex-direction: column;">
-                        <span style="background: linear-gradient(rgba(255,255,255,0.25), rgba(255,255,255,0.25)), url('de-onmisbaren/2.jpg'); background-size: cover; background-position: center; -webkit-background-clip: text; background-clip: text; color: transparent;">De</span>
-                        <span style="background: linear-gradient(rgba(255,255,255,0.25), rgba(255,255,255,0.25)), url('de-onmisbaren/4.jpg'), url('de-onmisbaren/5.jpg'); background-size: cover, 50% auto, 50% auto; background-position: center, left center, right center; background-repeat: no-repeat; -webkit-background-clip: text; background-clip: text; color: transparent;">Onmis</span>
-                        <span style="background: linear-gradient(rgba(255,255,255,0.25), rgba(255,255,255,0.25)), url('de-onmisbaren/6.jpg'), url('de-onmisbaren/7.jpg'); background-size: cover, 50% auto, 50% auto; background-position: center, left center, right center; background-repeat: no-repeat; -webkit-background-clip: text; background-clip: text; color: transparent;">Baren</span>
+                <div class="intro-panel">
+                    <h2 class="photo-title" style="font-family: 'Oswald', sans-serif; font-weight: 700; text-transform: uppercase; letter-spacing: 0.02em; margin-bottom: 2rem; line-height: 0.95; display: flex; flex-direction: column; background: linear-gradient(rgba(255,255,255,0.25), rgba(255,255,255,0.25)), url('de-onmisbaren/achterdetitel.jpg'); background-size: 100% auto; background-position: center; animation: bgZoom 20s ease-out forwards; -webkit-background-clip: text; background-clip: text; color: transparent;">
+                        <span>De</span>
+                        <span>Onmis</span>
+                        <span>Baren</span>
                     </h2>
                     <p style="font-family: 'Scala Sans', sans-serif; font-size: 0.95rem; line-height: 1.9; color: rgba(255,255,255,0.85); margin-bottom: 1.2rem;">
                         De onmisbaren zijn alle mensen waar onze samenleving niet zonder kan. Officieel cruciaal genoemd aan het begin van de coronacrisis, maar vaak onderbetaald, met een hoge werkdruk en veel onzekerheid. Voor de FNV mocht ik een fotografische ode brengen aan De Onmisbaren.
                     </p>
-                </div>
+                    </div>
             </div>
 
             <div class="photo-item">
@@ -216,7 +277,7 @@
                 </div>
             </div>
 
-            <div class="end-panel" style="flex-shrink: 0; height: 70vh; min-width: 800px; background: #1a1a1a; display: flex; flex-direction: column; justify-content: center; padding: 3rem;">
+            <div class="end-panel" style="flex-shrink: 0; height: 100vh; min-width: 800px; background: #1a1a1a; display: flex; flex-direction: column; justify-content: center; padding: 3rem;">
                 <p style="font-family: 'Scala Sans SC', sans-serif; font-size: 1.2rem; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 3rem;">Einde van deze serie</p>
                 <p style="font-family: 'Scala Sans', sans-serif; font-size: 0.85rem; color: rgba(255,255,255,0.4); margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.05em;">Bekijk ook</p>
                 <nav style="display: flex; flex-direction: column; gap: 0.6rem;">
@@ -302,7 +363,7 @@
         }
 
         // Fade in images when loaded
-        const images = document.querySelectorAll('.photo-item img');
+        const images = document.querySelectorAll('.photo-item img, .intro-photo img');
 
         // Intersection Observer for lazy fade-in
         const observerOptions = {
