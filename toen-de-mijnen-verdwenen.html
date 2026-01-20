@@ -31,6 +31,22 @@
         <span class="tdmv-progress-number" id="progressNumber">0</span><span class="tdmv-progress-percent">%</span>
     </div>
 
+    <!-- Audio soundscape -->
+    <audio id="soundscape" loop preload="auto">
+        <source src="toen-de-mijnen-verdwenen/soundscape.mp3" type="audio/mpeg">
+    </audio>
+    <button class="tdmv-sound-btn" id="soundBtn" aria-label="Geluid aan/uit">
+        <svg class="sound-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M11 5L6 9H2v6h4l5 4V5z"/>
+            <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/>
+        </svg>
+        <svg class="sound-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M11 5L6 9H2v6h4l5 4V5z"/>
+            <line x1="23" y1="9" x2="17" y2="15"/>
+            <line x1="17" y1="9" x2="23" y2="15"/>
+        </svg>
+    </button>
+
     <div class="horizontal-scroll-container" id="scrollContainer">
         <div class="horizontal-scroll-content">
 
@@ -49,9 +65,7 @@
                                 <span class="title-line"><span class="letter">v</span><span class="letter">e</span><span class="letter">r</span><span class="letter">d</span><span class="letter">w</span><span class="letter">e</span><span class="letter">n</span><span class="letter">e</span><span class="letter">n</span></span>
                             </h1>
                             <div class="tdmv-hero-text">
-                                <p>De mijnindustrie schepte de mijnstreek. Het zorgde voor welvaart, voor een duidelijke identiteit. Het zorgde voor huisvesting en scholen, het (ver)vormde de landschappen. Toen de mijnen verdwenen, verdween die scheppende hand. De streek bleef verweesd en berooid achter. Tientallen jaren kampte het met hoge werkloosheid, armoede, verbittering en zelfs een ongekende heroïne-epidemie.</p>
-                                <p>In de zoektocht naar een nieuwe identiteit voor de stad werd het verleden letterlijk afgebroken—bijna geen enkel mijngebouw heeft de sloopdrift overleefd. Pas na de millenniumwisseling krabbelde Heerlen overeind—en begon het mijnverleden opnieuw een plek in te nemen in het collectief bewustzijn.</p>
-                                <p>Meer dan 2 jaar reisde Wouter iedere maand naar de mijnstreek om dit verhaal te onderzoeken. Hij wilde de transformatie van het hart van de mijnindustrie naar het huidige Heerlen vertellen, en tegelijkertijd de worsteling met het verleden belichten. In 67 foto's vertelt hij deze geschiedenis.</p>
+                                <p>De mijnindustrie schepte de mijnstreek—en toen de mijnen verdwenen, bleef de streek verweesd achter. In 67 foto's vertelt Wouter Zaalberg dit verhaal: van de welvaart en kameraadschap, via de werkloosheid en heroïne-epidemie, naar de zoektocht naar een nieuwe identiteit.</p>
                             </div>
                         </div>
                         <span class="tdmv-descent-arrow">↓</span>
@@ -82,7 +96,6 @@
                             <p class="tdmv-chapter-intro">Wie vóór 1974 door de Oostelijke Mijnstreek reisde, zou een wereld ervaren waar alles draaide om een ding: steenkool. Overal zag je schachten, schoorstenen en koeltorens. Je hoorde het geluid van schachtwielen en het lossen van kolenwagens. Je zou struikelen over de vele spoorlijnen en je vergapen aan de steenbergen die iedere dag een beetje hoger werden. Eens in de zoveel uur zou je de mannen voorbij zien trekken, op weg naar de mijn of net klaar met de sjiech, want de mijnen draaiden 24 uur per dag.</p>
                             <p class="tdmv-chapter-intro">Er zat een grote vanzelfsprekendheid in de manier waarop de mijnbouw hier—samen met de kerk—de dienst uitmaakte en vorm gaf aan de samenleving. Het was de mijnbouw die zorgde voor scholing in de vorm van Ondergrondse Vakscholen en andere technische opleidingen. De mijn maakte van mannen koempels, zonder dat ze daar lang over nadachten. 'Dat deed je gewoon', zeggen oud-mijnwerkers als ze terugblikken op hun leven ondergronds.</p>
                         </div>
-                        <span class="tdmv-chapter-arrow">→</span>
                     </div>
                 </div>
             </div>
@@ -335,57 +348,74 @@
 
             <!-- Insert: Part 2 - Het grote slopen -->
             <div class="tdmv-insert part-2" data-section="insert" id="slopenInsert">
-                <div class="tdmv-slopen-content">
-                    <!-- Left: Photos -->
-                    <div class="tdmv-slopen-photos">
-                        <img src="toen-de-mijnen-verdwenen/sloop 1.jpg" alt="Sloop mijngebouwen" loading="lazy">
-                        <img src="toen-de-mijnen-verdwenen/sloop2.jpg" alt="Sloop mijngebouwen" loading="lazy">
-                    </div>
+                <div class="tdmv-slopen-layout">
+                    <h2 class="tdmv-slopen-title">Het grote slopen</h2>
 
-                    <!-- Right: Infographics -->
-                    <div class="tdmv-slopen-info">
-                        <h2 class="tdmv-slopen-title">Het grote slopen</h2>
-
-                        <div class="tdmv-slopen-stats">
-                            <!-- Banen -->
-                            <div class="tdmv-stat-block tdmv-stat-negative">
-                                <div class="tdmv-stat-number">75.000</div>
-                                <div class="tdmv-stat-label">banen verloren</div>
-                            </div>
-                            <div class="tdmv-stat-block tdmv-stat-positive">
-                                <div class="tdmv-stat-number">11.000</div>
-                                <div class="tdmv-stat-label">nieuwe banen</div>
-                            </div>
-
-                            <!-- Kosten -->
-                            <div class="tdmv-stat-block tdmv-stat-large">
-                                <div class="tdmv-stat-number">€10 mrd</div>
-                                <div class="tdmv-stat-label">maatschappelijke kosten</div>
-                                <div class="tdmv-stat-breakdown">
-                                    <span>Herstructurering: ≥€1,7 mrd</span>
-                                    <span>Indirecte kosten: ≥€9 mrd</span>
-                                    <span>Sanering & schade: tientallen miljoenen</span>
-                                </div>
-                            </div>
-
-                            <!-- Sanering -->
-                            <div class="tdmv-stat-row">
-                                <div class="tdmv-stat-block">
-                                    <div class="tdmv-stat-number">762</div>
-                                    <div class="tdmv-stat-label">hectare gesaneerd</div>
-                                </div>
-                                <div class="tdmv-stat-block">
-                                    <div class="tdmv-stat-number">6.900</div>
-                                    <div class="tdmv-stat-label">nieuwe woningen</div>
-                                </div>
-                                <div class="tdmv-stat-block">
-                                    <div class="tdmv-stat-number">12.000</div>
-                                    <div class="tdmv-stat-label">manjaren werk</div>
-                                </div>
-                            </div>
+                    <!-- Top row: Map + Timeline -->
+                    <div class="tdmv-slopen-top">
+                        <!-- Left: Map comparison slider -->
+                        <div class="tdmv-map-compare" id="mapCompare">
+                            <img src="toen-de-mijnen-verdwenen/heerlenmap1.jpg" alt="Heerlen voor de sloop" class="map-before" loading="lazy">
+                            <img src="toen-de-mijnen-verdwenen/heerlenmap2.jpg" alt="Heerlen na de sloop" class="map-after" loading="lazy">
+                            <div class="map-compare-line"></div>
+                            <div class="map-compare-label" id="mapCompareLabel"></div>
                         </div>
 
-                        <div class="tdmv-slopen-source">Bron: Een nieuw begin, Heerlen, 1982</div>
+                        <!-- Right: Timeline (horizontal, 2 columns) -->
+                        <div class="tdmv-timeline">
+                            <div class="tdmv-timeline-item">
+                                <div class="tdmv-timeline-year">1974</div>
+                                <div class="tdmv-timeline-title">Laatste mijnen sluiten</div>
+                            </div>
+                            <div class="tdmv-timeline-item">
+                                <div class="tdmv-timeline-year">1975</div>
+                                <div class="tdmv-timeline-title">Staatsmijnen wordt DSM</div>
+                            </div>
+                            <div class="tdmv-timeline-item">
+                                <div class="tdmv-timeline-year">1976</div>
+                                <div class="tdmv-timeline-title">Rijksuniversiteit Limburg</div>
+                            </div>
+                            <div class="tdmv-timeline-item">
+                                <div class="tdmv-timeline-year">1978</div>
+                                <div class="tdmv-timeline-title">Perspectievennota</div>
+                            </div>
+                            <div class="tdmv-timeline-item">
+                                <div class="tdmv-timeline-year">1979</div>
+                                <div class="tdmv-timeline-title">CBS naar Heerlen</div>
+                            </div>
+                            <div class="tdmv-timeline-item">
+                                <div class="tdmv-timeline-year">1982</div>
+                                <div class="tdmv-timeline-title">Dieptepunt werkloosheid</div>
+                            </div>
+                            <div class="tdmv-timeline-item">
+                                <div class="tdmv-timeline-year">1984</div>
+                                <div class="tdmv-timeline-title">Open Universiteit Heerlen</div>
+                            </div>
+                            <div class="tdmv-timeline-item">
+                                <div class="tdmv-timeline-year">1990</div>
+                                <div class="tdmv-timeline-title">Einde herstructurering</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Bottom row: Statistics -->
+                    <div class="tdmv-slopen-stats">
+                        <div class="tdmv-stat-item">
+                            <div class="tdmv-stat-number negative">75.000</div>
+                            <div class="tdmv-stat-label">banen verloren</div>
+                        </div>
+                        <div class="tdmv-stat-item">
+                            <div class="tdmv-stat-number positive">14.000</div>
+                            <div class="tdmv-stat-label">nieuwe banen gecreëerd</div>
+                        </div>
+                        <div class="tdmv-stat-item">
+                            <div class="tdmv-stat-number">762</div>
+                            <div class="tdmv-stat-label">hectare gesaneerd</div>
+                        </div>
+                        <div class="tdmv-stat-item">
+                            <div class="tdmv-stat-number">535</div>
+                            <div class="tdmv-stat-label">miljoen gulden steun</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -614,16 +644,18 @@
             <!-- Insert: Als expositie en in de media -->
             <div class="tdmv-insert part-3" data-section="insert">
                 <div class="tdmv-media-content">
-                    <div class="tdmv-media-photos">
-                        <img src="toen-de-mijnen-verdwenen/media 1.jpg" alt="Media" loading="lazy">
-                        <img src="toen-de-mijnen-verdwenen/media 2.jpg" alt="Media" loading="lazy">
-                        <img src="toen-de-mijnen-verdwenen/media 3.jpg" alt="Media" loading="lazy">
-                        <img src="toen-de-mijnen-verdwenen/media 4.jpg" alt="Media" loading="lazy">
-                        <img src="toen-de-mijnen-verdwenen/media 5.jpg" alt="Media" loading="lazy">
-                        <img src="toen-de-mijnen-verdwenen/media 6.jpg" alt="Media" loading="lazy">
+                    <div class="tdmv-media-left">
+                        <h2 class="tdmv-media-title">Als expositie en in de media</h2>
+                        <div class="tdmv-media-photos">
+                            <img src="toen-de-mijnen-verdwenen/media 1.jpg" alt="Media" loading="lazy">
+                            <img src="toen-de-mijnen-verdwenen/media 2.jpg" alt="Media" loading="lazy">
+                            <img src="toen-de-mijnen-verdwenen/media 3.jpg" alt="Media" loading="lazy">
+                            <img src="toen-de-mijnen-verdwenen/media 4.jpg" alt="Media" loading="lazy">
+                            <img src="toen-de-mijnen-verdwenen/media 5.jpg" alt="Media" loading="lazy">
+                            <img src="toen-de-mijnen-verdwenen/media 6.jpg" alt="Media" loading="lazy">
+                        </div>
                     </div>
                     <div class="tdmv-media-text">
-                        <h2 class="tdmv-media-title">Als expositie en in de media</h2>
                         <p>Grote expositie in Heerlen centrum</p>
                         <p>Exposities in Amsterdam, Maastricht en Kerkrade</p>
                         <p>Publicaties in <em>De Volkskrant</em>, <em>NRC</em>, PF Magazine, <em>De Limburger</em> en meer</p>
@@ -861,6 +893,42 @@
             slopenFadeObserver.observe(photoZakia);
         }
 
+        // Map comparison slider
+        const mapCompare = document.getElementById('mapCompare');
+        if (mapCompare) {
+            const mapBefore = mapCompare.querySelector('.map-before');
+            const compareLine = mapCompare.querySelector('.map-compare-line');
+            const mapLabel = document.getElementById('mapCompareLabel');
+
+            mapCompare.addEventListener('mousemove', (e) => {
+                const rect = mapCompare.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const percentage = (x / rect.width) * 100;
+                const clampedPercentage = Math.max(0, Math.min(100, percentage));
+
+                mapBefore.style.clipPath = `inset(0 ${100 - clampedPercentage}% 0 0)`;
+                compareLine.style.left = `${clampedPercentage}%`;
+
+                // Update label based on which map is dominant (>70%)
+                if (clampedPercentage > 70) {
+                    mapLabel.textContent = 'Heerlen 1970';
+                    mapLabel.classList.add('visible');
+                } else if (clampedPercentage < 30) {
+                    mapLabel.textContent = 'Heerlen 1980';
+                    mapLabel.classList.add('visible');
+                } else {
+                    mapLabel.classList.remove('visible');
+                }
+            });
+
+            // Reset to center on mouse leave
+            mapCompare.addEventListener('mouseleave', () => {
+                mapBefore.style.clipPath = 'inset(0 50% 0 0)';
+                compareLine.style.left = '50%';
+                mapLabel.classList.remove('visible');
+            });
+        }
+
         // Fade out "Uit het dal" insert when scrolling to Bart
         const uithetdalInsert = document.getElementById('uithetdalInsert');
         const photoBart = document.getElementById('photoBart');
@@ -1096,6 +1164,51 @@
 
         requestAnimationFrame(updateProgress);
 
+        // Soundscape audio - starts on first interaction
+        const soundscape = document.getElementById('soundscape');
+        const soundBtn = document.getElementById('soundBtn');
+        let audioStarted = false;
+
+        function startAudio() {
+            if (!audioStarted && soundscape) {
+                soundscape.volume = 0.3;
+                soundscape.play().then(() => {
+                    audioStarted = true;
+                    soundBtn.classList.remove('muted');
+                }).catch(err => {
+                    console.log('Audio autoplay blocked:', err);
+                });
+            }
+        }
+
+        // Start audio on first user interaction
+        const startAudioOnce = () => {
+            startAudio();
+            document.removeEventListener('click', startAudioOnce);
+            document.removeEventListener('scroll', startAudioOnce, true);
+            document.removeEventListener('keydown', startAudioOnce);
+        };
+
+        document.addEventListener('click', startAudioOnce);
+        document.addEventListener('scroll', startAudioOnce, true);
+        document.addEventListener('keydown', startAudioOnce);
+
+        // Toggle mute button
+        soundBtn.classList.add('muted'); // Start muted visually until audio plays
+        soundBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (soundscape.paused) {
+                soundscape.play();
+                soundBtn.classList.remove('muted');
+            } else if (soundscape.muted) {
+                soundscape.muted = false;
+                soundBtn.classList.remove('muted');
+            } else {
+                soundscape.muted = true;
+                soundBtn.classList.add('muted');
+            }
+        });
+
         // Position intro photo caption based on actual photo width
         function positionIntroCaption() {
             const introPhoto = document.querySelector('.tdmv-intro-photo img');
@@ -1217,18 +1330,18 @@
 
         // Mine locations with coordinates, production and workers data
         const mines = [
-            { name: 'Staatsmijn Emma', coords: [50.905, 5.948], years: '1911–1973', totalTons: 109.0, workers: 10000, workersDisplay: '~10.000', type: 'Staatsmijn', image: 'toen-de-mijnen-verdwenen/mijn-emma.jpg' },
-            { name: 'Staatsmijn Maurits', coords: [50.958, 5.827], years: '1926–1967', totalTons: 96.2, workers: 9500, workersDisplay: '~9.500', type: 'Staatsmijn', image: 'toen-de-mijnen-verdwenen/mijn-maurits.jpg' },
-            { name: 'Staatsmijn Hendrik', coords: [50.928, 5.970], years: '1915–1963', totalTons: 61.2, workers: 9500, workersDisplay: '~9.500', type: 'Staatsmijn', image: 'toen-de-mijnen-verdwenen/mijn-hendrik.jpg' },
-            { name: 'Staatsmijn Wilhelmina', coords: [50.875, 6.021], years: '1906–1969', totalTons: 59.2, workers: 9500, workersDisplay: '~9.500', type: 'Staatsmijn', image: 'toen-de-mijnen-verdwenen/mijn-wilhelmina.jpg' },
-            { name: 'Oranje-Nassau III', coords: [50.885, 5.957], years: '1917–1973', totalTons: 38.3, workers: 3800, workersDisplay: '~3.800', type: 'Particuliere mijn', image: 'toen-de-mijnen-verdwenen/mijn-on3.jpg' },
-            { name: 'Oranje-Nassau II', coords: [50.865, 5.960], years: '1904–1971', totalTons: 34.1, workers: 2100, workersDisplay: '~2.100', type: 'Particuliere mijn', image: 'toen-de-mijnen-verdwenen/mijn-on2.jpg' },
-            { name: 'Domaniale Mijn', coords: [50.867, 6.065], years: 'tot 1969', totalTons: 38.0, workers: 2764, workersDisplay: '~2.764', type: 'Particuliere mijn', image: 'toen-de-mijnen-verdwenen/mijn-domaniale.jpg' },
-            { name: 'Oranje-Nassau I', coords: [50.877, 5.973], years: '1899–1974', totalTons: 32.0, workers: 2900, workersDisplay: '~2.900', type: 'Particuliere mijn', image: 'toen-de-mijnen-verdwenen/mijn-on1.jpg' },
-            { name: 'Julia', coords: [50.894, 6.055], years: '1926–1974', totalTons: 32.0, workers: 4994, workersDisplay: '~4.994', type: 'Particuliere mijn', image: 'toen-de-mijnen-verdwenen/mijn-julia.jpg' },
-            { name: 'Laura', coords: [50.898, 6.045], years: '1905–1968', totalTons: 31.9, workers: 4428, workersDisplay: '~4.428', type: 'Particuliere mijn', image: 'toen-de-mijnen-verdwenen/mijn-laura.jpg' },
-            { name: 'Willem-Sophia', coords: [50.855, 6.028], years: '1902–1970', totalTons: 22.7, workers: 1691, workersDisplay: '~1.691', type: 'Particuliere mijn', image: 'toen-de-mijnen-verdwenen/mijn-willem-sophia.jpg' },
-            { name: 'Oranje-Nassau IV', coords: [50.912, 5.932], years: '1925–1966', totalTons: 13.8, workers: 3100, workersDisplay: '~3.100', type: 'Particuliere mijn', image: 'toen-de-mijnen-verdwenen/mijn-on4.jpg' }
+            { name: 'Emma', coords: [50.905, 5.948], location: 'Treebeek', years: '1911–1973', totalTons: 109.03, depth: 980, workers: 10000, type: 'Staatsmijn', image: 'toen-de-mijnen-verdwenen/mijnen/emma.jpg' },
+            { name: 'Maurits', coords: [50.958, 5.827], location: 'Lutterade', years: '1926–1967', totalTons: 96.21, depth: 895, workers: 9500, type: 'Staatsmijn', image: 'toen-de-mijnen-verdwenen/mijnen/maurits.jpg' },
+            { name: 'Hendrik', coords: [50.928, 5.970], location: 'Rumpen', years: '1915–1963', totalTons: 61.20, depth: 1058, workers: 9500, type: 'Staatsmijn', image: 'toen-de-mijnen-verdwenen/mijnen/hendrik.jpg' },
+            { name: 'Wilhelmina', coords: [50.875, 6.021], location: 'Terwinselen', years: '1906–1969', totalTons: 59.24, depth: 823, workers: 9500, type: 'Staatsmijn', image: 'toen-de-mijnen-verdwenen/mijnen/wilhelmina.jpg' },
+            { name: 'Oranje-Nassau III', coords: [50.885, 5.957], location: 'Heerlerheide', years: '1917–1973', totalTons: 38.27, depth: 844, workers: 3800, type: 'Particulier', image: 'toen-de-mijnen-verdwenen/mijnen/on3.jpg' },
+            { name: 'Domaniale', coords: [50.867, 6.065], location: 'Kerkrade', years: '1815–1969', totalTons: 37.99, depth: 802, workers: 2764, type: 'Particulier', image: 'toen-de-mijnen-verdwenen/mijnen/dominialen.jpg' },
+            { name: 'Oranje-Nassau II', coords: [50.865, 5.960], location: 'Schaesberg', years: '1904–1971', totalTons: 34.06, depth: 477, workers: 2100, type: 'Particulier', image: 'toen-de-mijnen-verdwenen/mijnen/on2.jpg' },
+            { name: 'Oranje-Nassau I', coords: [50.877, 5.973], location: 'Heerlen', years: '1899–1974', totalTons: 31.98, depth: 471, workers: 2900, type: 'Particulier', image: 'toen-de-mijnen-verdwenen/mijnen/on1.jpg' },
+            { name: 'Julia', coords: [50.894, 6.055], location: 'Eygelshoven', years: '1926–1974', totalTons: 31.96, depth: 568, workers: 4994, type: 'Particulier', image: 'toen-de-mijnen-verdwenen/mijnen/julia.jpg' },
+            { name: 'Laura', coords: [50.898, 6.045], location: 'Eygelshoven', years: '1905–1968', totalTons: 31.89, depth: 748, workers: 4428, type: 'Particulier', image: 'toen-de-mijnen-verdwenen/mijnen/laura.jpg' },
+            { name: 'Willem-Sophia', coords: [50.855, 6.028], location: 'Spekholzerheide', years: '1902–1970', totalTons: 22.68, depth: 651, workers: 1691, type: 'Particulier', image: 'toen-de-mijnen-verdwenen/mijnen/willemsophia.jpg' },
+            { name: 'Oranje-Nassau IV', coords: [50.912, 5.932], location: 'Heksenberg', years: '1925–1966', totalTons: 13.75, depth: 740, workers: 3100, type: 'Particulier', image: 'toen-de-mijnen-verdwenen/mijnen/on4.jpg' }
         ];
 
         // Find max tonnage and workers for bar chart scaling
@@ -1240,8 +1353,8 @@
         mines.forEach(mine => {
             const marker = L.marker(mine.coords, { icon: mineIcon }).addTo(mineMap);
             const popupContent = mine.image
-                ? `<img src="${mine.image}" alt="${mine.name}" class="mine-popup-img"><strong>${mine.name}</strong><br>${mine.type}<br>${mine.years}`
-                : `<strong>${mine.name}</strong><br>${mine.type}<br>${mine.years}`;
+                ? `<img src="${mine.image}" alt="${mine.name}" class="mine-popup-img"><strong>${mine.name}</strong><br><span style="opacity:0.7">${mine.location}</span><br>${mine.years}<br>${mine.depth} m diep`
+                : `<strong>${mine.name}</strong><br><span style="opacity:0.7">${mine.location}</span><br>${mine.years}<br>${mine.depth} m diep`;
             marker.bindPopup(popupContent, { maxWidth: 220 });
             mineMarkers[mine.name] = marker;
         });
@@ -1252,9 +1365,11 @@
             const statsHTML = mines.map(mine => {
                 const barWidth = (mine.totalTons / maxTons) * 100;
                 const workerBarWidth = (mine.workers / maxWorkers) * 100;
+                const workersFormatted = mine.workers.toLocaleString('nl-NL');
                 return `
                 <div class="tdmv-mine-stat">
                     <div class="tdmv-mine-stat-name" data-mine="${mine.name}">${mine.name}</div>
+                    <div class="tdmv-mine-stat-location">${mine.location} · ${mine.depth} m diep</div>
                     <div class="tdmv-mine-stat-bars">
                         <div class="tdmv-mine-stat-bar">
                             <div class="tdmv-mine-stat-bar-fill" style="width: 0%" data-width="${barWidth}%"></div>
@@ -1263,7 +1378,7 @@
                             <div class="tdmv-mine-stat-bar-fill tdmv-worker-fill" style="width: 0%" data-width="${workerBarWidth}%"></div>
                         </div>
                     </div>
-                    <div class="tdmv-mine-stat-data"><span class="tdmv-tons">${mine.totalTons} mln ton</span> · <span class="tdmv-workers">${mine.workersDisplay} arbeiders</span></div>
+                    <div class="tdmv-mine-stat-data"><span class="tdmv-tons">${mine.totalTons.toFixed(1)} mln ton</span> · <span class="tdmv-workers">~${workersFormatted} arbeiders</span></div>
                 </div>
             `}).join('');
             mineStatsContainer.innerHTML = statsHTML;

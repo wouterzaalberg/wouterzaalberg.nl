@@ -560,6 +560,25 @@
 .tdmv-insert.part-2 {
     background: var(--tdmv-part2-accent);
     transition: opacity 0.8s ease, background 0.8s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.tdmv-insert.part-2::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('../toen-de-mijnen-verdwenen/sloop 1.jpg') center center / cover no-repeat;
+    opacity: 0.08;
+    pointer-events: none;
+}
+
+.tdmv-insert.part-2 .tdmv-slopen-layout {
+    position: relative;
+    z-index: 1;
 }
 
 .tdmv-insert.part-2.bg-fade-out {
@@ -568,34 +587,117 @@
 }
 
 /* Het grote slopen - infographic layout */
-.tdmv-slopen-content {
+/* New slopen layout */
+.tdmv-slopen-layout {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    gap: 4rem;
+    gap: 2rem;
     width: 90vw;
     max-width: 1400px;
     padding: 2rem;
 }
 
-.tdmv-slopen-photos {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
+.tdmv-slopen-layout .tdmv-slopen-title {
+    text-align: center;
+    margin-bottom: 1rem;
 }
 
-.tdmv-slopen-photos img {
-    width: 35vw;
-    max-width: 500px;
-    height: auto;
+.tdmv-slopen-top {
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    gap: 3rem;
+    width: 100%;
+}
+
+/* Map comparison slider */
+.tdmv-map-compare {
+    position: relative;
+    width: 40vw;
+    max-width: 550px;
+    height: 50vh;
+    overflow: hidden;
+    cursor: ew-resize;
+    border-radius: 4px;
+    flex-shrink: 0;
+}
+
+.tdmv-map-compare img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
 }
 
-.tdmv-slopen-info {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-    max-width: 450px;
+.tdmv-map-compare .map-before {
+    z-index: 1;
+    clip-path: inset(0 50% 0 0);
+}
+
+.tdmv-map-compare .map-after {
+    z-index: 0;
+}
+
+.map-compare-line {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 2px;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.8);
+    z-index: 2;
+    pointer-events: none;
+    transform: translateX(-50%);
+}
+
+.map-compare-line::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 50%;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.map-compare-line::after {
+    content: '◀ ▶';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 0.7rem;
+    color: #333;
+    z-index: 3;
+    letter-spacing: 2px;
+}
+
+.map-compare-label {
+    position: absolute;
+    bottom: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Scala Sans', sans-serif;
+    font-size: 0.9rem;
+    color: white;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 0.4rem 1rem;
+    border-radius: 3px;
+    letter-spacing: 0.05em;
+    z-index: 3;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.map-compare-label.visible {
+    opacity: 1;
 }
 
 .tdmv-slopen-title {
@@ -606,15 +708,55 @@
     margin: 0;
 }
 
-.tdmv-slopen-stats {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
+/* Timeline styling - grid layout */
+.tdmv-timeline {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem 2rem;
+    padding: 1.5rem;
+    background: rgba(0, 0, 0, 0.15);
+    border-radius: 6px;
+    align-self: stretch;
 }
 
-.tdmv-stat-block {
-    padding: 1rem 0;
+.tdmv-timeline-item {
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+    padding: 0.5rem 0;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.tdmv-timeline-item:nth-last-child(-n+2) {
+    border-bottom: none;
+}
+
+.tdmv-timeline-year {
+    font-family: 'Scala Sans', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #fff;
+    min-width: 40px;
+}
+
+.tdmv-timeline-title {
+    font-family: 'Scala Sans', sans-serif;
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* Statistics row */
+.tdmv-slopen-stats {
+    display: flex;
+    justify-content: center;
+    gap: 4rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    width: 100%;
+}
+
+.tdmv-stat-item {
+    text-align: center;
 }
 
 .tdmv-stat-number {
@@ -623,66 +765,22 @@
     font-weight: 700;
     color: var(--tdmv-text);
     line-height: 1;
-    margin-bottom: 0.25rem;
+    margin-bottom: 0.3rem;
+}
+
+.tdmv-stat-number.negative {
+    color: #c75050;
+}
+
+.tdmv-stat-number.positive {
+    color: var(--tdmv-part3-accent);
 }
 
 .tdmv-stat-label {
     font-family: 'Scala Sans SC', sans-serif;
     font-size: 0.7rem;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: rgba(255, 255, 255, 0.85);
-}
-
-.tdmv-stat-negative .tdmv-stat-number {
-    color: #c75050;
-}
-
-.tdmv-stat-positive .tdmv-stat-number {
-    color: var(--tdmv-part3-accent);
-}
-
-.tdmv-stat-large {
-    padding: 1.5rem 0;
-}
-
-.tdmv-stat-large .tdmv-stat-number {
-    font-size: 3rem;
-    color: var(--tdmv-part2-accent);
-}
-
-.tdmv-stat-breakdown {
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
-    margin-top: 0.75rem;
-}
-
-.tdmv-stat-breakdown span {
-    font-family: 'Scala Sans', sans-serif;
-    font-size: 0.75rem;
-    color: rgba(255, 255, 255, 0.8);
-}
-
-.tdmv-stat-row {
-    display: flex;
-    gap: 2rem;
-}
-
-.tdmv-stat-row .tdmv-stat-block {
-    flex: 1;
-    border-bottom: none;
-    padding: 0;
-}
-
-.tdmv-stat-row .tdmv-stat-number {
-    font-size: 1.8rem;
-}
-
-.tdmv-slopen-source {
-    font-family: 'Scala Sans', sans-serif;
-    font-size: 0.7rem;
-    font-style: italic;
+    letter-spacing: 0.08em;
     color: rgba(255, 255, 255, 0.7);
 }
 .tdmv-insert.part-3 {
@@ -758,11 +856,17 @@
 }
 
 /* Media insert layout */
+.tdmv-insert:has(.tdmv-media-content) {
+    width: auto;
+    min-width: auto;
+    margin-right: -12rem; /* Remove gap to end panel */
+}
+
 .tdmv-media-content {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
-    gap: 4rem;
+    gap: 3rem;
     padding: 3rem;
     opacity: 0;
     transform: translateY(40px);
@@ -774,21 +878,10 @@
     transform: translateY(0);
 }
 
-.tdmv-media-photos {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 0.5rem;
-}
-
-.tdmv-media-photos img {
-    width: 140px;
-    height: 100px;
-    object-fit: cover;
-    border-radius: 2px;
-}
-
-.tdmv-media-text {
-    max-width: 380px;
+.tdmv-media-left {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }
 
 .tdmv-media-title {
@@ -797,6 +890,25 @@
     font-weight: 400;
     color: var(--tdmv-text);
     margin: 0 0 1.5rem 0;
+    text-align: left;
+}
+
+.tdmv-media-photos {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+}
+
+.tdmv-media-photos img {
+    width: 300px;
+    height: 210px;
+    object-fit: cover;
+    border-radius: 2px;
+}
+
+.tdmv-media-text {
+    max-width: 380px;
+    padding-top: 0;
 }
 
 .tdmv-media-text p {
@@ -939,7 +1051,15 @@
 }
 
 .tdmv-mine-stat-name:hover {
-    color: #1a3a52;
+    color: #2d5a8a;
+}
+
+.tdmv-mine-stat-location {
+    font-family: 'Scala Sans', sans-serif;
+    font-size: 0.55rem;
+    color: #555;
+    margin-bottom: 0.3rem;
+    margin-top: -0.2rem;
 }
 
 .tdmv-mine-stat-bars {
@@ -951,7 +1071,7 @@
 
 .tdmv-mine-stat-bar {
     height: 14px;
-    background: rgba(0,0,0,0.15);
+    background: rgba(0, 0, 0, 0.15);
     border-radius: 2px;
     overflow: hidden;
 }
@@ -963,14 +1083,15 @@
     transition: width 1s ease 0.8s;
 }
 
-/* Worker bar - simple design */
+/* Worker bar */
 .tdmv-worker-bar {
     height: 8px;
     margin-top: 2px;
+    background: rgba(74, 127, 181, 0.2);
 }
 
 .tdmv-worker-fill {
-    background: #6b7a8a;
+    background: #2d5a8a;
     border-radius: 2px;
 }
 
@@ -986,7 +1107,7 @@
 }
 
 .tdmv-mine-stat-data .tdmv-workers {
-    color: #4a5568;
+    color: #2d5a8a;
 }
 
 /* Custom Leaflet styling */
@@ -1439,6 +1560,54 @@
 .tdmv-progress-percent {
     font-size: 0.75rem;
     opacity: 0.7;
+}
+
+/* ========================================
+   Sound Button
+   ======================================== */
+.tdmv-sound-btn {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 36px;
+    height: 36px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+.tdmv-sound-btn:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.tdmv-sound-btn svg {
+    width: 18px;
+    height: 18px;
+    color: rgba(255, 255, 255, 0.5);
+    transition: color 0.3s ease;
+}
+
+.tdmv-sound-btn:hover svg {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.tdmv-sound-btn .sound-off {
+    display: none;
+}
+
+.tdmv-sound-btn.muted .sound-on {
+    display: none;
+}
+
+.tdmv-sound-btn.muted .sound-off {
+    display: block;
 }
 
 /* ========================================
