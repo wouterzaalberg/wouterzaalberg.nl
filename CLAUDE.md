@@ -638,40 +638,41 @@ Twee gele infographic panels met data visualisaties:
 ### Eigen stylesheet
 - `css/in-blauw-licht.css` - aparte CSS voor deze pagina
 
-### Kleuren
+### Foto's
+- **Locatie**: `in-blauw-licht/`
+- **Bestandsnamen**: `foto 1.jpg` t/m `foto 32.jpg`
+- 32 foto's totaal, allemaal met bijschriften
+
+### Kleuren en achtergrond
 ```css
---ibl-bg: #2d3a4a;                    /* Donkerblauw/grijs */
---ibl-bg-dark: #1a242f;               /* Donkerder */
---ibl-bg-light: #3d4a5a;              /* Lichter */
---ibl-accent: #4a6fa5;                /* Blauw accent */
---ibl-text: #ffffff;
---ibl-text-muted: #a0aab8;
+--ibl-bg-dark: #0a0a0c;              /* Intro panel achtergrond */
+--ibl-bg-light: #f0f0f0;             /* Lichtgrijs */
 ```
-
-### Geanimeerde achtergrond
-- **Gradient**: Langzame overgang tussen donker en medium blauw (30s cyclus)
-- Kleuren: #1a242f ↔ #2d3a4a ↔ #1a2a3a
-- `background-size: 400% 400%` met `animation: gradientShift`
-
-### Lichteffect overlay
-- Radiale gloed in het midden (rgba(74, 111, 165, 0.15))
-- Pulseert zachtjes (8s cyclus) - wordt groter/feller, dan kleiner/zachter
-- `pointer-events: none`, z-index: 1
+- **Achtergrond gradient**: Van donker (#0a0a0c) naar lichtgrijs (#f0f0f0)
+  - 0-5%: Donker (zelfde als intro panel)
+  - 5-50%: Geleidelijke overgang
+  - 50-100%: Lichtgrijs
+- Gradient op `.horizontal-scroll-content` zodat het mee-scrollt
 
 ### Z-index lagen
-1. Lichteffect (z-index: 1)
-2. Scroll container (z-index: 2)
+1. Scroll container (z-index: 2)
+2. Politiestrepen animatie (z-index: 50)
 3. Navigatie (z-index: 100)
 
 ### Hero sectie
-- **Foto**: 45vw breed, 100vh hoog, tegen linkerkant
+- **Foto**: 45vw breed, 100vh hoog, start op `left: 10vw`
+- **Donkere strip links**: 10vw breed, #0a0a0c (::before pseudo-element)
 - **Titel**: Rechtsonder in de foto, rechts uitgelijnd, `bottom: 15vh`
 - **Intro panel**: 55vw breed, bijna zwart (#0a0a0c)
 - **Intro tekst**: Uitgelijnd met titel (`align-items: flex-end`, `padding-bottom: 15vh`)
 - **Zoom animatie**: Start na 2s, 12s duur, scale naar 1.05
 
+### Navigatie
+- Transparante achtergrond (geen gradient)
+- Donkere tekst (#1a1a1a)
+
 ### Scroll systeem
-- `position: fixed` scroll container (voorkomt blauwe balk bug)
+- `position: fixed` scroll container
 - Foto's worden gecentreerd in viewport bij scrollen
 - Formule: `scrollLeft = elementLeft - (viewportWidth - elementWidth) / 2`
 
@@ -681,8 +682,63 @@ Twee gele infographic panels met data visualisaties:
 - Padding tussen foto's: 12rem (responsive: 8rem → 6rem → 2rem)
 
 ### Info button (caption toggle)
-- Button: wit, rond, italic "i"
-- Caption: fade-in effect bij klik
+```html
+<button class="ibl-info-btn">i</button>
+<div class="ibl-caption">
+    <div class="ibl-caption-header">Titel – Locatie</div>
+    <div class="ibl-caption-text">Beschrijving</div>
+</div>
+```
+- Button: donker (#000, 70% opacity), rond, italic "i", z-index: 20
+- Caption: donkere achtergrond (rgba(26, 36, 47, 0.9)), fade-in effect
+- Klik op "i" togglet caption aan/uit
+- Klik buiten foto sluit alle captions
+
+### Toggle alle onderschriften knop
+```html
+<button class="ibl-toggle-all-btn" id="toggleAllCaptions">
+    <span class="toggle-text">Toon alle onderschriften</span>
+</button>
+```
+- Positie: links onderin (`bottom: 2rem`, `left: 2rem`)
+- **Alleen zichtbaar vanaf foto 2** (na hero sectie)
+- Toggle tekst: "Toon alle onderschriften" ↔ "Verberg alle onderschriften"
+- Klik op individuele "i" terwijl alle aan staan: alleen die caption togglet
+
+### Politiestrepen animatie
+Geanimeerde diagonale strepen die de striping van politieauto's nabootsen.
+
+**HTML elementen:**
+```html
+<div class="ibl-stripes-red" id="stripesRed"></div>
+<div class="ibl-stripes-blue" id="stripesBlue"></div>
+```
+
+**Strepen:**
+- **4 rode strepen**: Bovenste helft (50vh), diagonaal (-65deg)
+- **5 blauwe strepen**: Onderste helft (50vh), diagonaal (-65deg)
+- Opacity: 15%, gecentreerd op scherm
+
+**Animatie:**
+- Trigger: Bij foto 10 (index 9)
+- **Rood**: Komt van boven het scherm, beweegt naar beneden en verdwijnt onder
+- **Blauw**: Komt van onder het scherm, beweegt naar boven en verdwijnt boven
+- **Horizontaal**: Beweegt van links-van-midden naar rechts-van-midden tijdens scroll
+- Geen fade, alleen beweging
+
+**JavaScript animatie logica:**
+```javascript
+// Verticaal: rood van -50vh naar +60vh, blauw van +50vh naar -60vh
+const redVertical = -50 + (animationProgress * 110);
+const blueVertical = 50 - (animationProgress * 110);
+
+// Horizontaal: -15vw naar +15vw
+const horizontalOffset = -15 + (animationProgress * 30);
+```
+
+### End panel
+- Hoogte: 100vh
+- Achtergrond: #1a2530 (donkerblauw)
 
 ### Responsive
 - **< 1024px**: Intro panel gecentreerd, foto's 50vh/80vh
@@ -978,7 +1034,7 @@ const allItems = document.querySelectorAll('... , .end-panel');
 ├── toen-de-mijnen-verdwenen/
 │   └── [photos: Foto 1.jpg - foto 35.jpg]
 ├── in-blauw-licht/
-│   └── [photos: 534A*.jpg]
+│   └── [photos: foto 1.jpg - foto 32.jpg]
 ├── het-noordzeekanaal-gebied/
 │   └── [photos: 1.jpg - 17.jpg]
 ├── de-onmisbaren/
