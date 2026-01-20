@@ -224,7 +224,7 @@
                 const newCaption = this.getAttribute('data-caption');
 
                 // Check welke afbeelding momenteel actief is
-                const currentSrc = activeImage.src;
+                const currentSrc = decodeURIComponent(activeImage.src);
                 const newFullSrc = window.location.href.substring(0, window.location.href.lastIndexOf('/') + 1) + newImageSrc;
 
                 if (currentSrc !== newFullSrc) {

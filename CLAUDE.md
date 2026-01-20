@@ -820,98 +820,117 @@ body.horizontal-scroll-page: #ffffff;  /* Witte achtergrond */
 color: #1a1a1a;                        /* Donkere tekst */
 ```
 
-### Structuur
-1. **Intro sectie** (gecentreerd op scherm)
-   - Foto 1 (70vh) + Intro wrapper (titel + beverrat + tekstvak)
-   - `min-width: 100vw`, `justify-content: center`
-2. **Cluster 1** - foto's 2-7 dicht bij elkaar (gap: 0.4rem)
-3. **Hoofdstuk titel** - "hoofdstuk 1 / de slag / om de / grenzen" (rechts uitgelijnd, italic bold)
-4. **Grijze sectie** (background: #f0f0f0) met:
-   - Foto 8 met bijschrift - wasbeer sectie
-   - Beverrat cluster - complexe grid met foto's 9-15
-   - Wolhandkrab cluster - foto's 16 + 17
-5. **End panel** - donkergroen (#1a3d1a)
-
-### Intro Wrapper
-```html
-<div class="intro-wrapper">
-    <h1 class="intro-title">De Exo<span>ten</span></h1>
-    <div class="intro-image"><img src="de-exoten/beverrat.jpg"></div>
-    <div class="intro-panel"><p>Tekst...</p></div>
-</div>
+### Foto formaten
+```css
+/* groot (70vh), midden (45vh), klein (35vh), extra-klein (17vh) */
 ```
-- Titel: Scala Sans, 3.5rem, "ten" cursief
-- Breedte dynamisch gelijk aan foto 1 (via JavaScript)
-- Totale hoogte: 70vh
+
+### Structuur
+1. **Intro sectie** - Foto 1 + titel "De Exoten" + beverrat + tekstvak
+2. **Cluster 1** - foto's 2-7 (gap: 0.4rem)
+3. **Hoofdstuk titel** - "hoofdstuk 1 / de slag / om de / grenzen"
+4. **Grijze sectie** met:
+   - Wasbeer sectie (foto 8)
+   - Beverrat cluster (foto's 9-15)
+   - Wolhandkrab cluster (foto's 16-17)
+   - Hemelboom sectie (foto's 18-24 + info kaart)
+   - Hoornaar boog (foto's 25-34)
+   - Foto 35 sectie met grid 36-39
+   - Rivierkreeft sectie (foto 40 + kreeft grid + foto 41)
+5. **Ongelijkbladig vederkruid sectie** (foto 42-49)
+6. **Vlinderstruik sectie** (foto 50)
+7. **Grote Waterteunisbloem sectie** (foto 51-53)
+8. **Watercrassula sectie** (foto 54-55)
+9. **Kleine waterteunisbloem sectie** (foto 56 + grid 57-61)
+10. **Japanse oester sectie** (foto 62)
+11. **Muskusrat sectie** (foto 63-70)
+12. **Einde deel panel** - "Einde van het eerste deel"
+13. **End panel** - donkergroen (#1a3d1a)
+
+### Kreeft Grid
+```css
+.kreeft-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    height: 70vh;
+}
+.kreeft-row {
+    display: flex;
+    gap: 0.4rem;
+    align-items: flex-end;
+}
+/* Groottes: kreeft-xs (12vh×16vh), kreeft-sm (15vh×20vh),
+   kreeft-md (16.5vh×22vh), kreeft-md-lg (17vh×23vh),
+   kreeft-lg/kreeft-central (18vh×24vh) */
+```
+- 3 rijen met kreeft1-11 + kreeftcentraal in het midden
+- Foto's in 3:4 verhouding (portret)
+
+### Foto 31-34 Cluster
+```css
+.foto-31-34-cluster {
+    display: flex;
+    gap: 0.4rem;
+    align-items: flex-end;
+}
+```
+- Foto 32 (17vh) boven foto 31 (25vh) in kolom
+- Foto 34 (10vh, piepklein) boven foto 33 (25vh) in kolom, rechts uitgelijnd
+
+### Secties met margin-left: 12rem
+Afstand tussen grote secties (met verticale labels):
+- rivierkreeft-section
+- vederkruid-section
+- vlinderstruik-section
+- waterteunisbloem-section
+- watercrassula-section
+- kleine-waterteunisbloem-section
+- japanse-oester-section
+- muskusrat-section
+
+### Kleine waterteunisbloem grid
+```css
+.kleine-waterteunisbloem-grid {
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 0.4rem;
+    height: 70vh;
+}
+```
+- 3 rijen × 3 kolommen
+- Foto 61 groot (span 3 rijen)
+- Bevat ook cluster 1 foto 6 en 7
 
 ### Verticale Labels
-```css
-.vertical-label {
-    position: absolute;
-    bottom: 100%;
-    left: 0;
-    writing-mode: vertical-rl;
-    transform: rotate(180deg);
-    font-family: 'Scala Sans', sans-serif;
-    font-weight: 700;
-    font-size: 1.6rem;
-    letter-spacing: 0.15em;
-}
-.vertical-label .accent {
-    font-family: 'Minion Pro', 'Times New Roman', serif;
-    font-style: italic;
-}
-```
-- Altijd één letter cursief in ander font (Minion Pro)
-- Voorbeeld: `wasb<span class="accent">e</span>er`
-- Uitgelijnd met linkerkant van foto
-
-### Bijschriften (Caption Boxes)
-```html
-<div class="photo-with-caption caption-right">
-    <div class="photo-item"><img src="..."></div>
-    <div class="photo-caption-box" style="margin-top: 23vh;">
-        <h4 class="caption-title">Titel</h4>
-        <p class="caption-text">Tekst...</p>
-    </div>
-</div>
-```
-- Transparante achtergrond met blauwe rand (`#a8c8e8`)
-- Posities: `caption-right`, `caption-left`, `caption-top`, `caption-bottom`
-- Verticale positie via `margin-top` (bijv. 23vh = 1/3 van 70vh foto)
-- Gap tussen foto en bijschrift: 1.5rem
-
-### Beverrat Cluster (complexe grid)
-```
-beverrat-cluster (padding-left: 3rem, padding-top: 2rem)
-├── vertical-label "beverrat" (absolute, top-left)
-├── beverrat-col1 (diana airbug, 18vh, blauwe bg #a8c8e8, align-self: center)
-├── beverrat-col23
-│   ├── col23-top (foto 9 + 10, elk 18vh)
-│   └── col23-bottom (foto 11, 42vh)
-├── beverrat-col45
-│   ├── col45-top (foto 12, 48vh)
-│   └── col45-bottom (foto 13 + 14, elk 21vh)
-└── beverrat-col6 (caption + foto 15, 21vh, align-self: flex-start)
-```
+- Altijd één letter cursief in Minion Pro: `<span class="accent">letter</span>`
+- Voorbeelden:
+  - `Grote<br>Water<br><span class="accent">t</span>eunisbloem`
+  - `Kleine<br>water<br><span class="accent">t</span>eunisbloem`
+  - `Vlinder<span class="accent">s</span>truik`
 
 ### Foto's
 - **Locatie**: `de-exoten/`
-- **Genummerde foto's**: 1.jpg - 17.jpg
+- **Genummerde foto's**: 1.jpg - 70.jpg
 - **Cluster foto's**: cluster 1 foto 2-7.jpg
-- **Speciale foto's**: beverrat.jpg, diana airbug a.jpg, snoek.jpg, klem.jpg, schep.jpg, verdelger.jpg, zender.jpg, wouter soorten.jpg, info 1-3.jpg
+- **Kreeft foto's**: kreeft1-11.jpg, kreeftcentraal.jpg
+- **Speciale foto's**: beverrat.jpg, diana airbug a.jpg, info 1-3.jpg
 
 ### JavaScript Selectors
 ```javascript
 const allItems = document.querySelectorAll(
-    '.intro-section, .photo-cluster, .photo-with-caption, .beverrat-cluster, .gray-section .photo-item, .end-panel'
+    '.intro-section, .photo-cluster, .chapter-title, .photo-with-caption, ' +
+    '.beverrat-cluster, .wolhandkrab-cluster, .gray-section > .photo-item, ' +
+    '.hemelboom-pair, .hoornaar-cluster, .hoornaar-boog, .foto-35-section, ' +
+    '.rivierkreeft-section > .labeled-photo, .rivierkreeft-section > .kreeft-grid, ' +
+    '.rivierkreeft-section > .foto-41-wrapper, .vederkruid-section > .labeled-photo, ' +
+    '.foto-43-46-cluster, .foto-47-48-column, .foto-49-wrapper, ' +
+    '.vlinderstruik-section, .waterteunisbloem-section, .watercrassula-section, ' +
+    '.kleine-waterteunisbloem-section, .japanse-oester-section, .muskusrat-section, ' +
+    '.einde-deel-panel, .end-panel'
 );
 ```
-
-### TODO
-- [ ] Meer clusters/secties toevoegen
-- [ ] Bijschriften invullen met echte tekst
-- [ ] Responsive aanpassingen
 
 ## De Onmisbaren Pagina
 
@@ -1050,7 +1069,7 @@ const allItems = document.querySelectorAll('... , .end-panel');
 ├── de-onmisbaren/
 │   └── [photos: 1.jpg - 9.jpg]
 ├── de-exoten/
-│   └── [photos: 1.jpg - 17.jpg, beverrat.jpg, diana airbug a.jpg, cluster foto's]
+│   └── [photos: 1.jpg - 70.jpg, kreeft1-11.jpg, kreeftcentraal.jpg, cluster 1 foto 2-7.jpg, beverrat.jpg, info 1-3.jpg]
 ├── een-plek-onder-de-zon/
 │   └── [photos: 5B2A*.jpg - 24 foto's]
 └── werk-in-opdracht/
