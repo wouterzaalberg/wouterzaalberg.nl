@@ -53,7 +53,205 @@
             text-shadow: 0 1px 3px rgba(0,0,0,0.5);
             font-style: italic;
         }
+
+        /* Large title with water effect */
+        .nzkg-title-panel {
+            min-width: 500px;
+            max-width: 600px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 2rem;
+        }
+        .nzkg-title {
+            font-family: 'Scala Sans SC', sans-serif;
+            font-size: 5rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            line-height: 1.05;
+        }
+        .nzkg-title-line {
+            display: block;
+            position: relative;
+            background: linear-gradient(
+                180deg,
+                #1a4a6e 0%,
+                #2d6a8a 15%,
+                #4a8fa8 35%,
+                #6ab4c8 50%,
+                #4a8fa8 65%,
+                #2d6a8a 85%,
+                #1a4a6e 100%
+            );
+            background-size: 100% 300%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: waterFlow var(--wave-duration, 12s) ease-in-out infinite;
+            animation-delay: var(--wave-delay, 0s);
+        }
+        .nzkg-title-line:nth-child(1) {
+            --wave-duration: 11s;
+            --wave-delay: 0s;
+        }
+        .nzkg-title-line:nth-child(2) {
+            --wave-duration: 14s;
+            --wave-delay: -2s;
+        }
+        .nzkg-title-line:nth-child(3) {
+            --wave-duration: 10s;
+            --wave-delay: -4s;
+        }
+        @keyframes waterFlow {
+            0%, 100% { background-position: 0% 0%; }
+            50% { background-position: 0% 50%; }
+        }
+        .nzkg-subtitle {
+            font-family: 'Scala Sans', sans-serif;
+            font-size: 0.95rem;
+            line-height: 1.9;
+            color: rgba(0,0,0,0.7);
+            margin-top: 2rem;
+            max-width: 400px;
+        }
+
+        /* Map insert */
+        .nzkg-map-insert {
+            min-width: 60vw;
+            height: 70vh;
+            background: linear-gradient(
+                180deg,
+                #1a4a6e 0%,
+                #2d6a8a 15%,
+                #4a8fa8 35%,
+                #6ab4c8 50%,
+                #4a8fa8 65%,
+                #2d6a8a 85%,
+                #1a4a6e 100%
+            );
+            background-size: 100% 300%;
+            animation: waterFlow 14s ease-in-out infinite;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            padding: 2rem;
+            box-sizing: border-box;
+        }
+        .nzkg-map-insert .nzkg-map-inner {
+            align-self: center;
+        }
+        .nzkg-map-header {
+            width: 90%;
+            text-align: left;
+        }
+        .nzkg-map-inner {
+            width: 90%;
+            height: 88%;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+        .leaflet-control-attribution {
+            display: none !important;
+        }
+        .nzkg-map-title {
+            font-family: 'Scala Sans SC', sans-serif;
+            font-size: 1.2rem;
+            color: #ffffff;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.3rem;
+        }
+        .nzkg-map-subtitle {
+            font-family: 'Scala Sans', sans-serif;
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.6);
+        }
+        .nzkg-map-container {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+        #locationMap {
+            width: 100%;
+            height: 100%;
+        }
+        .nzkg-marker {
+            background: #4a8fa8;
+            border: 3px solid #ffffff;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.5);
+            transition: transform 0.2s ease;
+        }
+        .nzkg-marker:hover {
+            transform: scale(1.2);
+        }
+        .nzkg-marker-thumb {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 3px solid #ffffff;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.5);
+            overflow: hidden;
+            transition: transform 0.2s ease;
+        }
+        .nzkg-marker-thumb:hover {
+            transform: scale(1.15);
+        }
+        .nzkg-marker-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .nzkg-marker-label {
+            background: rgba(26, 42, 58, 0.95);
+            border: none;
+            border-radius: 4px;
+            padding: 0.5rem 0.75rem;
+            font-family: 'Scala Sans', sans-serif;
+            font-size: 0.8rem;
+            color: #ffffff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            white-space: nowrap;
+        }
+        .nzkg-marker-label .photo-num {
+            color: #6ab4c8;
+            font-weight: 600;
+            margin-right: 0.3rem;
+        }
+        .leaflet-popup-content-wrapper {
+            background: rgba(26, 42, 58, 0.9) !important;
+            border-radius: 0 !important;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.2) !important;
+            padding: 0.5rem 0.7rem !important;
+        }
+        .leaflet-popup-content {
+            font-family: 'Scala Sans', sans-serif !important;
+            font-size: 0.9rem !important;
+            color: #ffffff !important;
+            margin: 0 !important;
+            line-height: 1.4 !important;
+            white-space: nowrap !important;
+            text-align: center !important;
+        }
+        .leaflet-popup-content strong {
+            color: #6ab4c8 !important;
+            font-size: 0.95rem !important;
+            display: block !important;
+        }
+        .leaflet-popup-tip {
+            background: rgba(26, 42, 58, 0.9) !important;
+        }
     </style>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 </head>
 <body class="horizontal-scroll-page">
     <nav class="horizontal-nav" style="padding-left: 4rem;">
@@ -69,16 +267,14 @@
                 <img src="het-noordzeekanaal-gebied/2.jpg" alt="Het Noordzeekanaal Gebied" loading="eager">
             </div>
 
-            <div class="intro-panel" style="min-width: 350px; max-width: 400px;">
-                <h2 style="font-family: 'Scala Sans SC', sans-serif; font-size: 1.6rem; font-weight: 500; color: var(--color-black); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 1.5rem;">Het Noordzeekanaal Gebied</h2>
-                <p style="font-family: 'Scala Sans', sans-serif; font-size: 0.95rem; line-height: 1.9; color: rgba(0,0,0,0.8); margin-bottom: 1.2rem;">
-                    Het Noordzeekanaal verbindt Amsterdam met de zee. Een landschap van industrie en natuur, van containerschepen en reigers.
-                </p>
-                <p style="font-family: 'Scala Sans', sans-serif; font-size: 0.95rem; line-height: 1.9; color: rgba(0,0,0,0.8); margin-bottom: 1.2rem;">
-                    In deze serie verkent Wouter Zaalberg de contrasten van dit gebied. De rauwheid van de havens, de stilte van het water, de mensen die hier werken en leven.
-                </p>
-                <p style="font-family: 'Scala Sans', sans-serif; font-size: 0.95rem; line-height: 1.9; color: rgba(0,0,0,0.5); font-style: italic;">
-                    Een gebied in transitie, vastgelegd in beeld.
+            <div class="nzkg-title-panel">
+                <h1 class="nzkg-title">
+                    <span class="nzkg-title-line">Het Noordzee</span>
+                    <span class="nzkg-title-line">kanaal</span>
+                    <span class="nzkg-title-line">Gebied</span>
+                </h1>
+                <p class="nzkg-subtitle">
+                    Het Noordzeekanaal verbindt Amsterdam met de zee. Een landschap van industrie en natuur, van containerschepen en reigers. Een gebied in transitie.
                 </p>
             </div>
 
@@ -133,6 +329,20 @@
                     <span class="caption-location">Locatie: Houtrakpolder</span>
                 </div>
             </div>
+
+            <!-- Map Insert -->
+            <div class="nzkg-map-insert" id="mapInsert">
+                <div class="nzkg-map-header">
+                    <h2 class="nzkg-map-title">De Locaties</h2>
+                    <p class="nzkg-map-subtitle">Van IJmuiden tot Amsterdam — het Noordzeekanaalgebied in beeld</p>
+                </div>
+                <div class="nzkg-map-inner">
+                    <div class="nzkg-map-container">
+                        <div id="locationMap"></div>
+                    </div>
+                </div>
+            </div>
+
             <div class="photo-item">
                 <img src="het-noordzeekanaal-gebied/9.jpg" alt="Het Noordzeekanaal Gebied" loading="lazy">
                 <div class="photo-caption">
@@ -202,6 +412,14 @@
                     <span class="caption-location">Locatie: Westelijk Havengebied Amsterdam</span>
                 </div>
             </div>
+            <div class="photo-item">
+                <img src="het-noordzeekanaal-gebied/18.jpg" alt="Het Noordzeekanaal Gebied" loading="lazy">
+                <div class="photo-caption">
+                    <span class="caption-main">Guus is werkzaam bij HYCC als project development manager van waterstoffabriek H2era.</span>
+                    <span class="caption-detail">Deze 500 megawatt elektrolyser is een van Europa's grootste groene waterstof initiatieven. Met deze fabriek willen we vanaf 2030 windenergie van zee optimaal omzetten naar groene waterstof voor de industrie & transport.</span>
+                    <span class="caption-location">Locatie: Westelijk Havengebied Amsterdam</span>
+                </div>
+            </div>
 
             <div class="end-panel" style="flex-shrink: 0; height: 70vh; min-width: 800px; background: #1a1a1a; display: flex; flex-direction: column; justify-content: center; padding: 3rem;">
                 <p style="font-family: 'Scala Sans SC', sans-serif; font-size: 1.2rem; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 3rem;">Einde van deze serie</p>
@@ -234,10 +452,192 @@
 
     <script>
         const container = document.getElementById('scrollContainer');
-        const allItems = document.querySelectorAll('.horizontal-scroll-content > .photo-item, .horizontal-scroll-content > .photo-pair, .intro-panel, .end-panel');
+        const allItems = document.querySelectorAll('.horizontal-scroll-content > .photo-item, .horizontal-scroll-content > .photo-pair, .nzkg-title-panel, .nzkg-map-insert, .end-panel');
         let currentIndex = 0;
         let isAnimating = false;
         let scrollQueue = 0;
+
+        // Initialize Leaflet map
+        function initLocationMap() {
+            const mapContainer = document.getElementById('locationMap');
+            if (!mapContainer) return;
+
+            // Center on the Noordzeekanaal area
+            const map = L.map('locationMap', {
+                center: [52.44, 4.70],
+                zoom: 12,
+                zoomControl: false,
+                scrollWheelZoom: false,
+                attributionControl: false
+            });
+
+            // Add light grayscale tiles
+            L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+                attribution: '&copy; OpenStreetMap contributors &copy; CARTO',
+                subdomains: 'abcd',
+                maxZoom: 19
+            }).addTo(map);
+
+            // Photo locations based on captions
+            const locations = [
+                {
+                    num: 1,
+                    coords: [52.3968, 4.8408],
+                    name: "Wieslaw",
+                    location: "Westelijk Havengebied Amsterdam",
+                    description: "Sloop energiecentrale Hemweg 08"
+                },
+                {
+                    num: 3,
+                    coords: [52.412, 4.785],
+                    name: "Jolanda",
+                    location: "Westelijk Havengebied Amsterdam",
+                    description: "Hoofdoperator AEB Amsterdam"
+                },
+                {
+                    num: 5,
+                    coords: [52.472, 4.588],
+                    name: "Manon",
+                    location: "IJmond",
+                    description: "Omgevingsmanager Energiehaven"
+                },
+                {
+                    num: 6,
+                    coords: [52.415, 4.828],
+                    name: "Jimmy",
+                    location: "Westelijk Havengebied Amsterdam",
+                    description: "Stuwadoor HES Bulk Terminal"
+                },
+                {
+                    num: 8,
+                    coords: [52.425, 4.715],
+                    name: "Lousanne",
+                    location: "Houtrakpolder",
+                    description: "Directeur Programmabureau NZKG"
+                },
+                {
+                    num: 9,
+                    coords: [52.414, 4.740],
+                    name: "Etteray",
+                    location: "Westelijk Havengebied Amsterdam",
+                    description: "Procesoperator EVOS"
+                },
+                {
+                    num: 10,
+                    coords: [52.465, 4.805],
+                    name: "Leon",
+                    location: "Zaanstreek",
+                    description: "Monteur bij Olam (ofi)"
+                },
+                {
+                    num: 12,
+                    coords: [52.458, 4.610],
+                    name: "Koen",
+                    location: "IJmond",
+                    description: "Field Service Engineer Strohm"
+                },
+                {
+                    num: 13,
+                    coords: [52.468, 4.628],
+                    name: "Jaap",
+                    location: "Velsen-Noord",
+                    description: "Projectdirecteur TenneT"
+                },
+                {
+                    num: 14,
+                    coords: [52.460, 4.585],
+                    name: "Jan",
+                    location: "IJmond",
+                    description: "Havendienst Zeehaven IJmuiden"
+                },
+                {
+                    num: 15,
+                    coords: [52.478, 4.615],
+                    name: "Angeliki",
+                    location: "IJmond - Tata Steel",
+                    description: "Teamleider DeNOx Tata Steel"
+                },
+                {
+                    num: 16,
+                    coords: [52.502, 4.655],
+                    name: "Willem",
+                    location: "Heemskerk",
+                    description: "Installatietechnicus Gasunie"
+                },
+                {
+                    num: 17,
+                    coords: [52.402, 4.795],
+                    name: "Anita",
+                    location: "Westelijk Havengebied Amsterdam",
+                    description: "Medewerker Renewi Organics"
+                },
+                {
+                    num: 18,
+                    coords: [52.414, 4.760],
+                    name: "Guus",
+                    location: "Westelijk Havengebied Amsterdam",
+                    description: "Project manager HYCC / H2era"
+                }
+            ];
+
+            // Custom marker icon (can be replaced with thumbnails)
+            const markerIcon = L.divIcon({
+                className: 'nzkg-marker',
+                iconSize: [24, 24],
+                iconAnchor: [12, 12]
+            });
+
+            // Function to create thumbnail marker (for when thumbnails are available)
+            function createThumbIcon(photoNum) {
+                return L.divIcon({
+                    className: 'nzkg-marker-thumb',
+                    html: `<img src="het-noordzeekanaal-gebied/thumbs/${photoNum}.jpg" alt="Foto ${photoNum}">`,
+                    iconSize: [50, 50],
+                    iconAnchor: [25, 25]
+                });
+            }
+
+            // Use thumbnail markers
+            const useThumbnails = true;
+
+            // Add markers
+            locations.forEach(loc => {
+                const icon = useThumbnails ? createThumbIcon(loc.num) : markerIcon;
+                const marker = L.marker(loc.coords, { icon: icon }).addTo(map);
+
+                marker.bindPopup(`
+                    <strong>Foto ${loc.num}: ${loc.name}</strong>
+                    ${loc.description}<br>
+                    <em style="color: rgba(255,255,255,0.6); font-size: 0.8rem;">${loc.location}</em>
+                `, {
+                    closeButton: false,
+                    offset: [0, -5]
+                });
+
+                marker.on('mouseover', function() {
+                    this.openPopup();
+                });
+                marker.on('mouseout', function() {
+                    this.closePopup();
+                });
+            });
+
+        }
+
+        // Initialize map when it becomes visible
+        const mapObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    setTimeout(initLocationMap, 100);
+                    mapObserver.disconnect();
+                }
+            });
+        }, { threshold: 0.1 });
+
+        const mapInsert = document.getElementById('mapInsert');
+        if (mapInsert) {
+            mapObserver.observe(mapInsert);
+        }
 
         // Scroll to target index
         function scrollToIndex(index) {
