@@ -383,8 +383,35 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: var(--tdmv-bg);
     overflow: hidden;
+}
+
+/* Donkere achtergrond laag */
+.tdmv-intro-photo::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--tdmv-bg);
+    z-index: 0;
+}
+
+/* Mijngang achtergrond achter foto 1 - subtiel */
+.tdmv-intro-photo::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../toen-de-mijnen-verdwenen/mijngang.jpg');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.04;
+    z-index: 1;
+    pointer-events: none;
 }
 
 .tdmv-intro-photo-wrapper {
@@ -393,7 +420,7 @@
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    z-index: 1;
+    z-index: 2;
 }
 
 .tdmv-intro-photo img {
@@ -490,13 +517,14 @@
 .tdmv-intro-chapter::before {
     content: '';
     position: absolute;
-    top: 20%;
-    left: 10%;
-    width: 400px;
-    height: 400px;
-    background: var(--tdmv-part1-glow);
-    border-radius: 50%;
-    filter: blur(100px);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../toen-de-mijnen-verdwenen/achtergrond.jpg');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.1;
     pointer-events: none;
 }
 
@@ -599,7 +627,8 @@
 }
 
 .tdmv-slopen-layout .tdmv-slopen-title {
-    text-align: center;
+    text-align: left;
+    align-self: flex-start;
     margin-bottom: 1rem;
 }
 
@@ -614,9 +643,9 @@
 /* Map comparison slider */
 .tdmv-map-compare {
     position: relative;
-    width: 40vw;
-    max-width: 550px;
-    height: 50vh;
+    width: 50vw;
+    max-width: 700px;
+    height: 60vh;
     overflow: hidden;
     cursor: ew-resize;
     border-radius: 4px;
@@ -708,7 +737,137 @@
     margin: 0;
 }
 
-/* Timeline styling - grid layout */
+/* Visual Timeline 1974-1990 */
+.tdmv-timeline-visual {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    padding: 1.5rem 1.5rem 1rem;
+    background: rgba(0, 0, 0, 0.15);
+    border-radius: 6px;
+    min-width: 420px;
+}
+
+/* The main timeline line */
+.tdmv-timeline-line {
+    position: relative;
+    height: 4px;
+    background: linear-gradient(90deg,
+        rgba(255, 255, 255, 0.8) 0%,
+        rgba(255, 255, 255, 0.4) 50%,
+        rgba(255, 255, 255, 0.2) 100%);
+    border-radius: 2px;
+    margin-bottom: 1.5rem;
+}
+
+.tdmv-timeline-start,
+.tdmv-timeline-end {
+    position: absolute;
+    top: -1.5rem;
+    font-family: 'Scala Sans', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.tdmv-timeline-start {
+    left: 0;
+}
+
+.tdmv-timeline-end {
+    right: 0;
+}
+
+/* Timeline periods */
+.tdmv-timeline-period {
+    position: relative;
+    padding-left: 1.25rem;
+    padding-bottom: 1rem;
+    border-left: 2px solid rgba(255, 255, 255, 0.15);
+    margin-left: 0.5rem;
+}
+
+.tdmv-timeline-period:last-child {
+    padding-bottom: 0;
+    border-left-color: transparent;
+}
+
+/* Period marker dot */
+.tdmv-period-marker {
+    position: absolute;
+    left: -6px;
+    top: 0;
+    width: 10px;
+    height: 10px;
+    background: #fff;
+    border-radius: 50%;
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.2);
+}
+
+.tdmv-timeline-period:first-child .tdmv-period-marker {
+    background: var(--tdmv-part2-accent);
+    box-shadow: 0 0 0 3px rgba(107, 122, 138, 0.3);
+}
+
+/* Period content */
+.tdmv-period-content {
+    padding-left: 0.75rem;
+}
+
+.tdmv-period-year {
+    font-family: 'Scala Sans', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.5);
+    letter-spacing: 0.05em;
+    margin-bottom: 0.15rem;
+}
+
+.tdmv-period-title {
+    font-family: 'Scala Sans', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 0.25rem;
+}
+
+.tdmv-period-summary {
+    font-family: 'Scala Sans', sans-serif;
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.4;
+}
+
+/* Container for additional details */
+.tdmv-period-details {
+    margin-top: 0.5rem;
+    padding-left: 0.5rem;
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.tdmv-period-details:empty {
+    display: none;
+}
+
+/* Detail items (for future expansion) */
+.tdmv-period-detail {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    padding: 0.25rem 0;
+    font-family: 'Scala Sans', sans-serif;
+    font-size: 0.7rem;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.tdmv-period-detail-year {
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.5);
+    min-width: 35px;
+}
+
+/* Legacy timeline classes (keep for backward compatibility) */
 .tdmv-timeline {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -793,66 +952,361 @@
     pointer-events: none;
 }
 
-/* Uit het dal insert layout */
+/* Uit het dal insert layout - 3 rijen */
 .tdmv-uithetdal-content {
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    align-items: flex-start;
     justify-content: center;
-    gap: 4rem;
+    gap: 2rem;
     padding: 3rem;
-    opacity: 0;
-    transform: translateY(40px);
-    transition: opacity 0.8s ease, transform 0.8s ease;
+    width: 100%;
+    max-width: 1300px;
 }
 
-.tdmv-insert.in-view .tdmv-uithetdal-content {
-    opacity: 1;
-    transform: translateY(0);
+.tdmv-uithetdal-content .tdmv-uithetdal-title {
+    font-family: 'chloe', sans-serif;
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    font-weight: 400;
+    color: var(--tdmv-text);
+    margin: 0;
+    text-align: left;
 }
 
-.tdmv-uithetdal-photo {
+/* Subtiele foto achtergrond in titel - nu via inline style in HTML */
+
+/* 3-rijen container */
+.tdmv-uithetdal-rows {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    width: 100%;
+}
+
+/* Individuele rijen */
+.tdmv-uithetdal-row {
+    display: grid;
+    gap: 1.25rem;
+    width: 100%;
+}
+
+.tdmv-uithetdal-row.row-1 {
+    grid-template-columns: 550px 1fr;
+    align-items: start;
+    gap: 3rem;
+}
+
+.tdmv-uithetdal-row.row-2 {
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.tdmv-uithetdal-row.row-3 {
+    grid-template-columns: repeat(4, 1fr);
+}
+
+/* Foto in rij 1 */
+.tdmv-uithetdal-photo-small {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
 }
 
-.tdmv-uithetdal-photo img {
-    height: 55vh;
-    width: auto;
+.tdmv-uithetdal-photo-small img {
+    width: 100%;
+    height: auto;
     object-fit: contain;
 }
 
-.tdmv-uithetdal-photo .tdmv-photo-credit {
-    margin-top: 0.75rem;
+.tdmv-uithetdal-caption {
+    font-family: 'Scala Sans', sans-serif;
+    font-size: 0.7rem;
+    font-style: italic;
+    color: rgba(255, 255, 255, 0.65);
+    margin-top: 0.6rem;
+    line-height: 1.45;
 }
 
-.tdmv-uithetdal-text {
-    max-width: 420px;
+/* Animatie items */
+.tdmv-uithetdal-content .anim-item {
+    opacity: 0;
+    transform: translateY(25px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+    transition-delay: var(--anim-delay, 0s);
+}
+
+.tdmv-insert.in-view .tdmv-uithetdal-content .anim-item {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Bar animatie - start op 0 width */
+.tdmv-uithetdal-content .tdmv-bar-fill {
+    width: 0 !important;
+    transition: width 1s ease;
+    transition-delay: calc(var(--anim-delay, 0s) + 0.3s);
+}
+
+.tdmv-insert.in-view .tdmv-uithetdal-content .tdmv-bar-fill {
+    width: var(--bar-width) !important;
+}
+
+/* Count-up nummer animatie */
+.tdmv-parkstad-number.count-up {
+    display: inline-block;
+}
+
+/* Uit het dal - layout with stats - titel links */
+/* Note: content alignment is flex-start (set above) */
+
+.tdmv-uithetdal-grid {
+    display: flex;
+    align-items: flex-start;
+    gap: 3rem;
+    max-width: 1200px;
+}
+
+/* Verwijderd: oude max-width beperking die foto klein hield */
+
+.tdmv-uithetdal-caption {
+    font-family: 'Scala Sans', sans-serif;
+    font-size: 0.75rem;
+    font-style: italic;
+    color: rgba(255, 255, 255, 0.7);
+    margin-top: 0.75rem;
+    line-height: 1.5;
+}
+
+/* Parkstad statistics visualization */
+.tdmv-parkstad-intro {
+    font-family: 'Scala Sans SC', sans-serif;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: rgba(255, 255, 255, 0.5);
+    margin-bottom: 0.5rem;
+}
+
+.tdmv-parkstad-header {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
 }
 
-.tdmv-uithetdal-title {
-    font-family: 'chloe', sans-serif;
-    font-size: clamp(2.5rem, 5vw, 3.5rem);
-    font-weight: 400;
-    color: var(--tdmv-text);
-    margin: 0 0 1.5rem 0;
-}
-
-.tdmv-uithetdal-text p {
+.tdmv-parkstad-population {
     font-family: 'Scala Sans', sans-serif;
-    font-size: 0.95rem;
-    line-height: 1.8;
+    font-size: 3rem;
+    font-weight: 700;
     color: var(--tdmv-text);
-    margin: 0 0 1.25rem 0;
+    line-height: 1;
 }
 
-.tdmv-uithetdal-quote {
+.tdmv-parkstad-sublabel {
+    font-family: 'Scala Sans', sans-serif;
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.8);
+    margin-top: 0.2rem;
+}
+
+.tdmv-parkstad-gemeenten {
+    font-family: 'Scala Sans', sans-serif;
+    font-size: 0.7rem;
+    color: rgba(255, 255, 255, 0.5);
+    margin-top: 0.6rem;
+    letter-spacing: 0.02em;
+}
+
+.tdmv-parkstad-stat {
+    background: rgba(0, 0, 0, 0.15);
+    padding: 0.9rem 1.1rem;
+    border-radius: 4px;
+}
+
+.tdmv-parkstad-stat.wide {
+    /* Geen speciale styling nodig in nieuwe grid */
+}
+
+.tdmv-parkstad-stat-label {
+    font-family: 'Scala Sans SC', sans-serif;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: rgba(255, 255, 255, 0.6);
+    margin-bottom: 0.75rem;
+}
+
+/* Bar chart rows */
+.tdmv-parkstad-bars {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.tdmv-parkstad-bar-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.tdmv-bar-label {
+    font-family: 'Scala Sans', sans-serif;
+    font-size: 0.65rem;
+    color: rgba(255, 255, 255, 0.7);
+    width: 55px;
+    flex-shrink: 0;
+}
+
+.tdmv-bar-track {
+    flex: 1;
+    height: 12px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.tdmv-bar-fill {
+    height: 100%;
+    border-radius: 2px;
+    transition: width 1s ease;
+}
+
+.tdmv-bar-fill.parkstad {
+    background: var(--tdmv-text);
+}
+
+.tdmv-bar-fill.compare {
+    background: rgba(255, 255, 255, 0.4);
+}
+
+.tdmv-bar-value {
+    font-family: 'Scala Sans', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--tdmv-text);
+    width: 40px;
+    text-align: right;
+    flex-shrink: 0;
+}
+
+/* Single stat display */
+.tdmv-parkstad-single {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+}
+
+.tdmv-parkstad-single.highlight-negative .tdmv-parkstad-number {
+    color: #c75050;
+}
+
+.tdmv-parkstad-number {
+    font-family: 'Scala Sans', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--tdmv-text);
+    line-height: 1;
+}
+
+.tdmv-parkstad-unit {
+    font-family: 'Scala Sans', sans-serif;
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+/* Dual stats */
+.tdmv-parkstad-dual {
+    display: flex;
+    gap: 3rem;
+}
+
+.tdmv-parkstad-dual-item {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+}
+
+/* Trend display */
+.tdmv-parkstad-trend {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.tdmv-trend-text {
+    font-family: 'Scala Sans', sans-serif;
+    font-size: 0.9rem;
+    color: var(--tdmv-text);
     font-style: italic;
-    opacity: 0.85;
-    margin-top: 0.5rem !important;
+}
+
+.tdmv-trend-source {
+    font-family: 'Scala Sans', sans-serif;
+    font-size: 0.65rem;
+    color: rgba(255, 255, 255, 0.4);
+}
+
+/* Responsive for Uit het dal stats */
+@media (max-width: 1100px) {
+    .tdmv-uithetdal-row.row-1 {
+        grid-template-columns: 400px 1fr;
+    }
+
+    .tdmv-uithetdal-row.row-2,
+    .tdmv-uithetdal-row.row-3 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .tdmv-parkstad-population {
+        font-size: 2.5rem;
+    }
+}
+
+@media (max-width: 767px) {
+    .tdmv-uithetdal-content {
+        padding: 2rem 1.5rem;
+        align-items: center;
+    }
+
+    .tdmv-uithetdal-content .tdmv-uithetdal-title {
+        text-align: center;
+    }
+
+    .tdmv-uithetdal-row.row-1 {
+        grid-template-columns: 1fr;
+        justify-items: center;
+        text-align: center;
+    }
+
+    .tdmv-uithetdal-photo-small {
+        max-width: 180px;
+        align-items: center;
+    }
+
+    .tdmv-uithetdal-caption {
+        text-align: center;
+    }
+
+    .tdmv-parkstad-header {
+        align-items: center;
+        text-align: center;
+    }
+
+    .tdmv-uithetdal-row.row-2,
+    .tdmv-uithetdal-row.row-3 {
+        grid-template-columns: 1fr;
+    }
+
+    .tdmv-parkstad-population {
+        font-size: 2.2rem;
+    }
+
+    .tdmv-parkstad-number {
+        font-size: 1.4rem;
+    }
+
+    .tdmv-parkstad-dual {
+        flex-direction: column;
+        gap: 1rem;
+    }
 }
 
 /* Media insert layout */
@@ -864,9 +1318,10 @@
 
 .tdmv-media-content {
     display: flex;
+    flex-direction: column;
     align-items: flex-start;
     justify-content: center;
-    gap: 3rem;
+    gap: 1.5rem;
     padding: 3rem;
     opacity: 0;
     transform: translateY(40px);
@@ -878,19 +1333,20 @@
     transform: translateY(0);
 }
 
-.tdmv-media-left {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-}
-
 .tdmv-media-title {
     font-family: 'chloe', sans-serif;
     font-size: clamp(2rem, 4vw, 3rem);
     font-weight: 400;
     color: var(--tdmv-text);
-    margin: 0 0 1.5rem 0;
+    margin: 0;
     text-align: left;
+}
+
+/* Rij met foto's en tekst naast elkaar */
+.tdmv-media-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 3rem;
 }
 
 .tdmv-media-photos {
@@ -908,7 +1364,7 @@
 
 .tdmv-media-text {
     max-width: 380px;
-    padding-top: 0;
+    align-self: flex-start;
 }
 
 .tdmv-media-text p {
@@ -921,6 +1377,18 @@
 
 .tdmv-media-text p:last-child {
     margin-bottom: 0;
+}
+
+.tdmv-media-text a {
+    color: #ffffff;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+    transition: border-color 0.3s ease, color 0.3s ease;
+}
+
+.tdmv-media-text a:hover {
+    color: #ffffff;
+    border-bottom-color: rgba(255, 255, 255, 0.9);
 }
 
 .tdmv-insert-content {
@@ -1051,7 +1519,7 @@
 }
 
 .tdmv-mine-stat-name:hover {
-    color: #2d5a8a;
+    color: #1a3a52;
 }
 
 .tdmv-mine-stat-location {
@@ -1087,11 +1555,11 @@
 .tdmv-worker-bar {
     height: 8px;
     margin-top: 2px;
-    background: rgba(74, 127, 181, 0.2);
+    background: rgba(26, 58, 82, 0.25);
 }
 
 .tdmv-worker-fill {
-    background: #2d5a8a;
+    background: #1a3a52;
     border-radius: 2px;
 }
 
@@ -1107,7 +1575,7 @@
 }
 
 .tdmv-mine-stat-data .tdmv-workers {
-    color: #2d5a8a;
+    color: #1a3a52;
 }
 
 /* Custom Leaflet styling */
@@ -1354,12 +1822,17 @@
 
 .tdmv-highlight-img-wrapper {
     overflow: hidden;
-    height: 90vh;
+    height: 70vh;
 }
 
 .tdmv-highlight-img-wrapper img {
     height: 100%;
     width: auto;
+}
+
+/* Wrapper past zich aan bij size-large */
+.tdmv-photo-highlight.size-large .tdmv-highlight-img-wrapper {
+    height: 90vh;
 }
 
 .tdmv-photo-highlight img {
@@ -1383,14 +1856,15 @@
 }
 
 /* Delayed zoom effect for specific photos */
+/* Cubic-bezier: langzaam starten, dan iets versnellen maar nog steeds traag */
 .tdmv-photo-highlight img.zoom-delayed,
 .tdmv-photo-block img.zoom-delayed {
-    transition: opacity 0.6s ease, transform 12s ease-out;
+    transition: opacity 0.6s ease, transform 14s cubic-bezier(0.25, 0.1, 0.25, 1);
 }
 
 .tdmv-photo-highlight img.zoom-delayed.zoom-active,
 .tdmv-photo-block img.zoom-delayed.zoom-active {
-    transform: scale(1.08);
+    transform: scale(1.06);
 }
 
 /* Photo block zoom wrapper */
@@ -1566,16 +2040,13 @@
    Sound Button
    ======================================== */
 .tdmv-sound-btn {
-    position: fixed;
-    bottom: 2rem;
-    right: 2rem;
+    position: relative;
     width: 36px;
     height: 36px;
     background: rgba(255, 255, 255, 0.1);
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 50%;
     cursor: pointer;
-    z-index: 50;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1608,6 +2079,117 @@
 
 .tdmv-sound-btn.muted .sound-off {
     display: block;
+}
+
+/* Sound wrapper (contains button + tooltip) */
+.tdmv-sound-wrapper {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 50;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+.tdmv-sound-wrapper.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Tooltip above sound button */
+.tdmv-sound-tooltip {
+    position: absolute;
+    bottom: calc(100% + 12px);
+    white-space: nowrap;
+    font-family: 'Scala Sans', sans-serif;
+    font-size: 0.75rem;
+    color: var(--tdmv-text);
+    background: rgba(26, 24, 22, 0.95);
+    padding: 0.5rem 0.85rem;
+    border-radius: 4px;
+    border: 1px solid rgba(197, 90, 17, 0.5);
+    box-shadow: 0 0 15px rgba(197, 90, 17, 0.3), 0 0 30px rgba(197, 90, 17, 0.15);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(5px);
+    transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s ease;
+}
+
+.tdmv-sound-tooltip::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 6px solid transparent;
+    border-top-color: rgba(26, 24, 22, 0.95);
+}
+
+.tdmv-sound-tooltip.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    animation: tooltipGlow 2s ease-in-out infinite;
+}
+
+@keyframes tooltipGlow {
+    0%, 100% {
+        box-shadow: 0 0 15px rgba(197, 90, 17, 0.3), 0 0 30px rgba(197, 90, 17, 0.15);
+    }
+    50% {
+        box-shadow: 0 0 20px rgba(197, 90, 17, 0.5), 0 0 40px rgba(197, 90, 17, 0.25);
+    }
+}
+
+/* Soundscape hint in chapter 1 */
+.tdmv-soundscape-hint {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-top: 2rem;
+    padding: 0.65rem 1.1rem;
+    background: transparent;
+    border: 1px solid rgba(197, 90, 17, 0.5);
+    border-radius: 4px;
+    color: var(--tdmv-part1-accent);
+    font-family: 'Scala Sans', sans-serif;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    animation: hintGlow 3s ease-in-out infinite;
+}
+
+.tdmv-soundscape-hint:hover {
+    background: rgba(197, 90, 17, 0.15);
+    border-color: var(--tdmv-part1-accent);
+}
+
+.tdmv-soundscape-hint svg {
+    width: 18px;
+    height: 18px;
+}
+
+.tdmv-soundscape-hint.active {
+    background: rgba(197, 90, 17, 0.2);
+    border-color: var(--tdmv-part1-accent);
+    animation: none;
+}
+
+.tdmv-soundscape-hint.active span::after {
+    content: ' ✓';
+}
+
+@keyframes hintGlow {
+    0%, 100% {
+        box-shadow: 0 0 0 rgba(197, 90, 17, 0);
+    }
+    50% {
+        box-shadow: 0 0 15px rgba(197, 90, 17, 0.3);
+    }
 }
 
 /* ========================================
@@ -1800,6 +2382,43 @@
     /* Reduce dust overlay on mobile for better performance */
     .tdmv-dust-overlay {
         opacity: 0.6;
+    }
+
+    /* Timeline visual responsive */
+    .tdmv-timeline-visual {
+        min-width: auto;
+        width: 100%;
+    }
+
+    .tdmv-slopen-top {
+        flex-direction: column;
+    }
+
+    .tdmv-map-compare {
+        width: 100%;
+        max-width: none;
+        height: 40vh;
+    }
+
+    /* Soundscape hint mobile */
+    .tdmv-soundscape-hint {
+        font-size: 0.75rem;
+        padding: 0.5rem 0.9rem;
+    }
+
+    .tdmv-soundscape-hint svg {
+        width: 16px;
+        height: 16px;
+    }
+
+    .tdmv-sound-wrapper {
+        bottom: 1.5rem;
+        right: 1.5rem;
+    }
+
+    .tdmv-sound-tooltip {
+        font-size: 0.7rem;
+        padding: 0.4rem 0.7rem;
     }
 }
 

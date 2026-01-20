@@ -35,17 +35,20 @@
     <audio id="soundscape" loop preload="auto">
         <source src="toen-de-mijnen-verdwenen/soundscape.mp3" type="audio/mpeg">
     </audio>
-    <button class="tdmv-sound-btn" id="soundBtn" aria-label="Geluid aan/uit">
-        <svg class="sound-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M11 5L6 9H2v6h4l5 4V5z"/>
-            <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/>
-        </svg>
-        <svg class="sound-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M11 5L6 9H2v6h4l5 4V5z"/>
-            <line x1="23" y1="9" x2="17" y2="15"/>
-            <line x1="17" y1="9" x2="23" y2="15"/>
-        </svg>
-    </button>
+    <div class="tdmv-sound-wrapper" id="soundWrapper">
+        <div class="tdmv-sound-tooltip" id="soundTooltip">Zet soundscape uit</div>
+        <button class="tdmv-sound-btn" id="soundBtn" aria-label="Geluid aan/uit">
+            <svg class="sound-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M11 5L6 9H2v6h4l5 4V5z"/>
+                <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/>
+            </svg>
+            <svg class="sound-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M11 5L6 9H2v6h4l5 4V5z"/>
+                <line x1="23" y1="9" x2="17" y2="15"/>
+                <line x1="17" y1="9" x2="23" y2="15"/>
+            </svg>
+        </button>
+    </div>
 
     <div class="horizontal-scroll-container" id="scrollContainer">
         <div class="horizontal-scroll-content">
@@ -95,6 +98,15 @@
                             <div class="tdmv-chapter-period">1965 — 1974</div>
                             <p class="tdmv-chapter-intro">Wie vóór 1974 door de Oostelijke Mijnstreek reisde, zou een wereld ervaren waar alles draaide om een ding: steenkool. Overal zag je schachten, schoorstenen en koeltorens. Je hoorde het geluid van schachtwielen en het lossen van kolenwagens. Je zou struikelen over de vele spoorlijnen en je vergapen aan de steenbergen die iedere dag een beetje hoger werden. Eens in de zoveel uur zou je de mannen voorbij zien trekken, op weg naar de mijn of net klaar met de sjiech, want de mijnen draaiden 24 uur per dag.</p>
                             <p class="tdmv-chapter-intro">Er zat een grote vanzelfsprekendheid in de manier waarop de mijnbouw hier—samen met de kerk—de dienst uitmaakte en vorm gaf aan de samenleving. Het was de mijnbouw die zorgde voor scholing in de vorm van Ondergrondse Vakscholen en andere technische opleidingen. De mijn maakte van mannen koempels, zonder dat ze daar lang over nadachten. 'Dat deed je gewoon', zeggen oud-mijnwerkers als ze terugblikken op hun leven ondergronds.</p>
+
+                            <!-- Soundscape hint -->
+                            <button class="tdmv-soundscape-hint" id="soundscapeHint">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M11 5L6 9H2v6h4l5 4V5z"/>
+                                    <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/>
+                                </svg>
+                                <span>Zet de soundscape aan</span>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -113,11 +125,13 @@
             </div>
 
             <!-- Photo 3 - Johan Heesbeen (highlighted) -->
-            <div class="tdmv-photo-highlight part-1" data-section="photo">
-                <picture>
-                    <source srcset="toen-de-mijnen-verdwenen/foto 3.webp" type="image/webp">
-                    <img src="toen-de-mijnen-verdwenen/foto 3.jpg" alt="Johan Heesbeen" loading="eager">
-                </picture>
+            <div class="tdmv-photo-highlight part-1" data-section="photo" id="photo3">
+                <div class="tdmv-highlight-img-wrapper">
+                    <picture>
+                        <source srcset="toen-de-mijnen-verdwenen/foto 3.webp" type="image/webp">
+                        <img src="toen-de-mijnen-verdwenen/foto 3.jpg" alt="Johan Heesbeen" loading="eager" class="zoom-delayed">
+                    </picture>
+                </div>
                 <div class="tdmv-highlight-panel">
                     <div class="tdmv-highlight-header">Johan Heesbeen, oud-mijnwerker Staatsmijn Emma</div>
                     <div class="tdmv-highlight-text">"We waren bovengronds soms eenlingen, maar zodra je in de lift stapte veranderde dat. Je keek naar elkaar om en je vertrouwde op elkaar. Het moest wel."</div>
@@ -328,8 +342,10 @@
             </div>
 
             <!-- Photo 23a - Martin (highlighted) -->
-            <div class="tdmv-photo-highlight part-2 size-large" data-section="photo">
-                <img src="toen-de-mijnen-verdwenen/foto 23a.jpg" alt="Martin" loading="lazy">
+            <div class="tdmv-photo-highlight part-2 size-large" data-section="photo" id="photo23a">
+                <div class="tdmv-highlight-img-wrapper">
+                    <img src="toen-de-mijnen-verdwenen/foto 23a.jpg" alt="Martin" loading="lazy" class="zoom-delayed">
+                </div>
                 <div class="tdmv-highlight-panel">
                     <div class="tdmv-highlight-header">Martin, oud-mijnwerker Oranje-Nassau III</div>
                     <div class="tdmv-highlight-text">'Het was een moeizame tijd, de mijnsluiting. Overal om mij heen was woede en ongenoegen en er was weinig kans op werk.'</div>
@@ -361,39 +377,124 @@
                             <div class="map-compare-label" id="mapCompareLabel"></div>
                         </div>
 
-                        <!-- Right: Timeline (horizontal, 2 columns) -->
-                        <div class="tdmv-timeline">
-                            <div class="tdmv-timeline-item">
-                                <div class="tdmv-timeline-year">1974</div>
-                                <div class="tdmv-timeline-title">Laatste mijnen sluiten</div>
+                        <!-- Right: Visual Timeline 1974-1990 -->
+                        <div class="tdmv-timeline-visual">
+                            <!-- Timeline line -->
+                            <div class="tdmv-timeline-line">
+                                <span class="tdmv-timeline-start">1974</span>
+                                <span class="tdmv-timeline-end">1990</span>
                             </div>
-                            <div class="tdmv-timeline-item">
-                                <div class="tdmv-timeline-year">1975</div>
-                                <div class="tdmv-timeline-title">Staatsmijnen wordt DSM</div>
+
+                            <!-- Period 1: 1974 -->
+                            <div class="tdmv-timeline-period" data-year="1974" style="--period-start: 0%; --period-width: 6%;">
+                                <div class="tdmv-period-marker"></div>
+                                <div class="tdmv-period-content">
+                                    <div class="tdmv-period-year">1974</div>
+                                    <div class="tdmv-period-title">Sluiting laatste mijn</div>
+                                    <div class="tdmv-period-summary">Verlies van ±45.000 directe banen. Start structurele werkloosheid.</div>
+                                    <div class="tdmv-period-details">
+                                        <div class="tdmv-period-detail">
+                                            <span class="tdmv-period-detail-year">31 dec</span>
+                                            <span>Oranje-Nassau I sluit als laatste mijn</span>
+                                        </div>
+                                        <div class="tdmv-period-detail">
+                                            <span class="tdmv-period-detail-year"></span>
+                                            <span>30.000 toeleveranciers verliezen werk</span>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="tdmv-timeline-item">
-                                <div class="tdmv-timeline-year">1976</div>
-                                <div class="tdmv-timeline-title">Rijksuniversiteit Limburg</div>
+
+                            <!-- Period 2: 1975-1978 -->
+                            <div class="tdmv-timeline-period" data-year="1975-1978" style="--period-start: 6%; --period-width: 25%;">
+                                <div class="tdmv-period-marker"></div>
+                                <div class="tdmv-period-content">
+                                    <div class="tdmv-period-year">1975–1978</div>
+                                    <div class="tdmv-period-title">Herstructureringsbeleid</div>
+                                    <div class="tdmv-period-summary">Sanering mijnsites, falende vervangende industrie.</div>
+                                    <div class="tdmv-period-details">
+                                        <div class="tdmv-period-detail">
+                                            <span class="tdmv-period-detail-year">1975</span>
+                                            <span>Staatsmijnen wordt DSM</span>
+                                        </div>
+                                        <div class="tdmv-period-detail">
+                                            <span class="tdmv-period-detail-year">1976</span>
+                                            <span>Oprichting Rijksuniversiteit Limburg</span>
+                                        </div>
+                                        <div class="tdmv-period-detail">
+                                            <span class="tdmv-period-detail-year">1978</span>
+                                            <span>Perspectievennota Limburg</span>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="tdmv-timeline-item">
-                                <div class="tdmv-timeline-year">1978</div>
-                                <div class="tdmv-timeline-title">Perspectievennota</div>
+
+                            <!-- Period 3: 1979-1982 -->
+                            <div class="tdmv-timeline-period" data-year="1979-1982" style="--period-start: 31%; --period-width: 25%;">
+                                <div class="tdmv-period-marker"></div>
+                                <div class="tdmv-period-content">
+                                    <div class="tdmv-period-year">1979–1982</div>
+                                    <div class="tdmv-period-title">Oliecrisis en dieptepunt</div>
+                                    <div class="tdmv-period-summary">Werkloosheidspiek (>10%), heroïne-epidemie zichtbaar in Heerlen.</div>
+                                    <div class="tdmv-period-details">
+                                        <div class="tdmv-period-detail">
+                                            <span class="tdmv-period-detail-year">1979</span>
+                                            <span>CBS verhuist naar Heerlen</span>
+                                        </div>
+                                        <div class="tdmv-period-detail">
+                                            <span class="tdmv-period-detail-year">1980</span>
+                                            <span>Tweede oliecrisis treft regio hard</span>
+                                        </div>
+                                        <div class="tdmv-period-detail">
+                                            <span class="tdmv-period-detail-year">1982</span>
+                                            <span>Dieptepunt: werkloosheid >10%</span>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="tdmv-timeline-item">
-                                <div class="tdmv-timeline-year">1979</div>
-                                <div class="tdmv-timeline-title">CBS naar Heerlen</div>
+
+                            <!-- Period 4: 1983-1986 -->
+                            <div class="tdmv-timeline-period" data-year="1983-1986" style="--period-start: 56%; --period-width: 25%;">
+                                <div class="tdmv-period-marker"></div>
+                                <div class="tdmv-period-content">
+                                    <div class="tdmv-period-year">1983–1986</div>
+                                    <div class="tdmv-period-title">Stabilisatie zonder herstel</div>
+                                    <div class="tdmv-period-summary">Hoge WAO-instroom, gezondheidsachterstand.</div>
+                                    <div class="tdmv-period-details">
+                                        <div class="tdmv-period-detail">
+                                            <span class="tdmv-period-detail-year">1984</span>
+                                            <span>Open Universiteit naar Heerlen</span>
+                                        </div>
+                                        <div class="tdmv-period-detail">
+                                            <span class="tdmv-period-detail-year">1985</span>
+                                            <span>Hoofdkantoor Staatsmijnen gesloopt</span>
+                                        </div>
+                                        <div class="tdmv-period-detail">
+                                            <span class="tdmv-period-detail-year">1986</span>
+                                            <span>Opening Corio Center</span>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="tdmv-timeline-item">
-                                <div class="tdmv-timeline-year">1982</div>
-                                <div class="tdmv-timeline-title">Dieptepunt werkloosheid</div>
-                            </div>
-                            <div class="tdmv-timeline-item">
-                                <div class="tdmv-timeline-year">1984</div>
-                                <div class="tdmv-timeline-title">Open Universiteit Heerlen</div>
-                            </div>
-                            <div class="tdmv-timeline-item">
-                                <div class="tdmv-timeline-year">1990</div>
-                                <div class="tdmv-timeline-title">Einde herstructurering</div>
+
+                            <!-- Period 5: 1987-1990 -->
+                            <div class="tdmv-timeline-period" data-year="1987-1990" style="--period-start: 81%; --period-width: 19%;">
+                                <div class="tdmv-period-marker"></div>
+                                <div class="tdmv-period-content">
+                                    <div class="tdmv-period-year">1987–1990</div>
+                                    <div class="tdmv-period-title">Einde uitzonderingsbeleid</div>
+                                    <div class="tdmv-period-summary">Blijvende krimp en culturele heroriëntatie.</div>
+                                    <div class="tdmv-period-details">
+                                        <div class="tdmv-period-detail">
+                                            <span class="tdmv-period-detail-year">1987</span>
+                                            <span>Einde rijkssteun herstructurering</span>
+                                        </div>
+                                        <div class="tdmv-period-detail">
+                                            <span class="tdmv-period-detail-year">1990</span>
+                                            <span>Operatie Hartslag tegen drugscriminaliteit</span>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -439,8 +540,10 @@
             </div>
 
             <!-- Photo 28 - Bern (highlighted) -->
-            <div class="tdmv-photo-highlight part-2 size-large" data-section="photo">
-                <img src="toen-de-mijnen-verdwenen/Foto 28.jpg" alt="Bern" loading="lazy">
+            <div class="tdmv-photo-highlight part-2 size-large" data-section="photo" id="photo28">
+                <div class="tdmv-highlight-img-wrapper">
+                    <img src="toen-de-mijnen-verdwenen/Foto 28.jpg" alt="Bern" loading="lazy" class="zoom-delayed">
+                </div>
                 <div class="tdmv-highlight-panel">
                     <div class="tdmv-highlight-header">Bern, oud-mijnwerker Staatsmijnen Wilhelmina en Emma</div>
                     <div class="tdmv-highlight-text">"De snelheid en grondigheid waarmee alles werd weggehaald, het was alsof we ons schaamden voor ons verleden."</div>
@@ -548,14 +651,137 @@
             <!-- Insert: Uit het dal -->
             <div class="tdmv-insert part-3" data-section="insert" id="uithetdalInsert">
                 <div class="tdmv-uithetdal-content">
-                    <div class="tdmv-uithetdal-photo">
-                        <img src="toen-de-mijnen-verdwenen/uithetdal.jpg" alt="Uit het dal" loading="lazy">
-                        <div class="tdmv-photo-credit">Foto: Ron Meyer</div>
-                    </div>
-                    <div class="tdmv-uithetdal-text">
-                        <h2 class="tdmv-uithetdal-title">Uit het dal</h2>
-                        <p>Wie twintig jaar na operatie Hartslag met de intercity Heerlen binnenrijdt, ziet een stad die onmiskenbaar veel mooier is geworden: het Glaspaleis van Schunck is gered van de sloop, gerenoveerd en vormt nu het culturele middelpunt van de binnenstad. Het Maankwartier, dat 'het wonder van Heerlen' wordt genoemd, is een fysieke verdichting van de kloof tussen Noord en Zuid. De murals die overal opduiken, maken van grauwe plekken een kleurrijke openluchtgalerie.</p>
-                        <p class="tdmv-uithetdal-quote">Joep Dohmen schreef al in <em>De geur van kolen</em>: 'Op een mooie stad kan je trots zijn. En trots biedt identiteit.'</p>
+                    <!-- Titel links uitgelijnd -->
+                    <h2 class="tdmv-uithetdal-title anim-item" style="--anim-delay: 0s;">Uit het dal</h2>
+
+                    <!-- 3-rijen grid -->
+                    <div class="tdmv-uithetdal-rows">
+                        <!-- Rij 1: Foto + Bevolkingsheader -->
+                        <div class="tdmv-uithetdal-row row-1">
+                            <div class="tdmv-uithetdal-photo-small anim-item" style="--anim-delay: 0.1s;">
+                                <img src="toen-de-mijnen-verdwenen/uithetdal.jpg" alt="Uit het dal" loading="lazy">
+                                <div class="tdmv-uithetdal-caption">De goedkope facade van een winkelpand in het centrum wordt afgebroken en de oude architectuur komt langzaam tevoorschijn.</div>
+                            </div>
+                            <div class="tdmv-parkstad-header anim-item" style="--anim-delay: 0.2s;">
+                                <div class="tdmv-parkstad-intro">De stand van Heerlen en omstreken:</div>
+                                <div class="tdmv-parkstad-population">255.600</div>
+                                <div class="tdmv-parkstad-sublabel">inwoners in Stadsregio Parkstad (2022)</div>
+                                <div class="tdmv-parkstad-gemeenten">Beekdaelen · Brunssum · Heerlen · Kerkrade · Landgraaf · Simpelveld · Voerendaal</div>
+                            </div>
+                        </div>
+
+                        <!-- Rij 2: 4 statistieken -->
+                        <div class="tdmv-uithetdal-row row-2">
+                            <!-- Uitkeringen -->
+                            <div class="tdmv-parkstad-stat anim-item" style="--anim-delay: 0.3s;">
+                                <div class="tdmv-parkstad-stat-label">Huishoudens met uitkering</div>
+                                <div class="tdmv-parkstad-bars">
+                                    <div class="tdmv-parkstad-bar-row">
+                                        <span class="tdmv-bar-label">Parkstad</span>
+                                        <div class="tdmv-bar-track"><div class="tdmv-bar-fill parkstad" data-width="100%"></div></div>
+                                        <span class="tdmv-bar-value">20%</span>
+                                    </div>
+                                    <div class="tdmv-parkstad-bar-row">
+                                        <span class="tdmv-bar-label">Limburg</span>
+                                        <div class="tdmv-bar-track"><div class="tdmv-bar-fill compare" data-width="77%"></div></div>
+                                        <span class="tdmv-bar-value">15,4%</span>
+                                    </div>
+                                    <div class="tdmv-parkstad-bar-row">
+                                        <span class="tdmv-bar-label">Nederland</span>
+                                        <div class="tdmv-bar-track"><div class="tdmv-bar-fill compare" data-width="61.5%"></div></div>
+                                        <span class="tdmv-bar-value">12,3%</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Gezondheid -->
+                            <div class="tdmv-parkstad-stat anim-item" style="--anim-delay: 0.4s;">
+                                <div class="tdmv-parkstad-stat-label">Goede/zeer goede gezondheid</div>
+                                <div class="tdmv-parkstad-bars">
+                                    <div class="tdmv-parkstad-bar-row">
+                                        <span class="tdmv-bar-label">Parkstad</span>
+                                        <div class="tdmv-bar-track"><div class="tdmv-bar-fill parkstad" data-width="91.9%"></div></div>
+                                        <span class="tdmv-bar-value">64,7%</span>
+                                    </div>
+                                    <div class="tdmv-parkstad-bar-row">
+                                        <span class="tdmv-bar-label">Nederland</span>
+                                        <div class="tdmv-bar-track"><div class="tdmv-bar-fill compare" data-width="100%"></div></div>
+                                        <span class="tdmv-bar-value">70,4%</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Arbeidsparticipatie -->
+                            <div class="tdmv-parkstad-stat anim-item" style="--anim-delay: 0.5s;">
+                                <div class="tdmv-parkstad-stat-label">Netto arbeidsparticipatie</div>
+                                <div class="tdmv-parkstad-single">
+                                    <span class="tdmv-parkstad-number count-up" data-value="665">0</span>
+                                    <span class="tdmv-parkstad-unit">per 1.000 inwoners (15-64)</span>
+                                </div>
+                            </div>
+
+                            <!-- Retail leegstand -->
+                            <div class="tdmv-parkstad-stat anim-item" style="--anim-delay: 0.6s;">
+                                <div class="tdmv-parkstad-stat-label">Retail-leegstand</div>
+                                <div class="tdmv-parkstad-single highlight-negative">
+                                    <span class="tdmv-parkstad-number count-up" data-value="45.1" data-suffix="%">0%</span>
+                                    <span class="tdmv-parkstad-unit">van verkooppunten</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Rij 3: 4 statistieken -->
+                        <div class="tdmv-uithetdal-row row-3">
+                            <!-- Werkgelegenheid -->
+                            <div class="tdmv-parkstad-stat anim-item" style="--anim-delay: 0.7s;">
+                                <div class="tdmv-parkstad-stat-label">Werkgelegenheid</div>
+                                <div class="tdmv-parkstad-dual">
+                                    <div class="tdmv-parkstad-dual-item">
+                                        <span class="tdmv-parkstad-number count-up" data-value="109000" data-format="thousands">0</span>
+                                        <span class="tdmv-parkstad-unit">werknemers</span>
+                                    </div>
+                                    <div class="tdmv-parkstad-dual-item">
+                                        <span class="tdmv-parkstad-number count-up" data-value="21000" data-format="thousands">0</span>
+                                        <span class="tdmv-parkstad-unit">bedrijven</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Vergrijzing -->
+                            <div class="tdmv-parkstad-stat anim-item" style="--anim-delay: 0.8s;">
+                                <div class="tdmv-parkstad-stat-label">Vergrijzing (65+)</div>
+                                <div class="tdmv-parkstad-bars">
+                                    <div class="tdmv-parkstad-bar-row">
+                                        <span class="tdmv-bar-label">Parkstad</span>
+                                        <div class="tdmv-bar-track"><div class="tdmv-bar-fill parkstad" data-width="100%"></div></div>
+                                        <span class="tdmv-bar-value">26,4%</span>
+                                    </div>
+                                    <div class="tdmv-parkstad-bar-row">
+                                        <span class="tdmv-bar-label">Nederland</span>
+                                        <div class="tdmv-bar-track"><div class="tdmv-bar-fill compare" data-width="75%"></div></div>
+                                        <span class="tdmv-bar-value">19,8%</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Woningwaarde -->
+                            <div class="tdmv-parkstad-stat anim-item" style="--anim-delay: 0.9s;">
+                                <div class="tdmv-parkstad-stat-label">Gem. woningwaarde</div>
+                                <div class="tdmv-parkstad-single">
+                                    <span class="tdmv-parkstad-number">€ <span class="count-up" data-value="227000" data-format="thousands">0</span></span>
+                                    <span class="tdmv-parkstad-unit">NL gemiddelde: € 420.000</span>
+                                </div>
+                            </div>
+
+                            <!-- Bevolkingstrend -->
+                            <div class="tdmv-parkstad-stat anim-item" style="--anim-delay: 1.0s;">
+                                <div class="tdmv-parkstad-stat-label">Bevolkingstrend</div>
+                                <div class="tdmv-parkstad-trend">
+                                    <span class="tdmv-trend-text">−12% sinds 1997, krimp vlakt af</span>
+                                    <span class="tdmv-trend-source">CBS / PBL prognose</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -579,8 +805,10 @@
             </div>
 
             <!-- Photo 56 - John motorclub -->
-            <div class="tdmv-photo-block part-3 size-large" data-parallax="1.2" data-section="photo">
-                <img src="toen-de-mijnen-verdwenen/Foto 56.jpg" alt="John" loading="lazy">
+            <div class="tdmv-photo-block part-3 size-large" data-parallax="1.2" data-section="photo" id="photo56">
+                <div class="tdmv-photo-img-wrapper">
+                    <img src="toen-de-mijnen-verdwenen/Foto 56.jpg" alt="John" loading="lazy" class="zoom-delayed">
+                </div>
                 <div class="tdmv-caption">
                     <div class="tdmv-caption-header">John, lid van de motorclub</div>
                     <div class="tdmv-caption-text">Op de plek waar ooit de Oranje-Nassau IV stond, staat nu het clubhuis van de Limbury Roadstars.</div>
@@ -633,8 +861,10 @@
             </div>
 
             <!-- Photo 65 - Inaya -->
-            <div class="tdmv-photo-block part-3 size-large" data-parallax="0.6" data-section="photo">
-                <img src="toen-de-mijnen-verdwenen/Foto 65.jpg" alt="Inaya" loading="lazy">
+            <div class="tdmv-photo-block part-3 size-large" data-parallax="0.6" data-section="photo" id="photo65">
+                <div class="tdmv-photo-img-wrapper">
+                    <img src="toen-de-mijnen-verdwenen/Foto 65.jpg" alt="Inaya" loading="lazy" class="zoom-delayed">
+                </div>
                 <div class="tdmv-caption">
                     <div class="tdmv-caption-header">Inaya, kinderburgemeester Heerlen</div>
                     <div class="tdmv-caption-text">Inaya was elf jaar oud toen ze in het kindercollege van Heerlen kwam. De opa van Inaya werkte als mijnwerker in een Oranje-Nassau mijn.</div>
@@ -644,8 +874,8 @@
             <!-- Insert: Als expositie en in de media -->
             <div class="tdmv-insert part-3" data-section="insert">
                 <div class="tdmv-media-content">
-                    <div class="tdmv-media-left">
-                        <h2 class="tdmv-media-title">Als expositie en in de media</h2>
+                    <h2 class="tdmv-media-title">Als expositie en in de media</h2>
+                    <div class="tdmv-media-row">
                         <div class="tdmv-media-photos">
                             <img src="toen-de-mijnen-verdwenen/media 1.jpg" alt="Media" loading="lazy">
                             <img src="toen-de-mijnen-verdwenen/media 2.jpg" alt="Media" loading="lazy">
@@ -654,12 +884,12 @@
                             <img src="toen-de-mijnen-verdwenen/media 5.jpg" alt="Media" loading="lazy">
                             <img src="toen-de-mijnen-verdwenen/media 6.jpg" alt="Media" loading="lazy">
                         </div>
-                    </div>
-                    <div class="tdmv-media-text">
-                        <p>Grote expositie in Heerlen centrum</p>
-                        <p>Exposities in Amsterdam, Maastricht en Kerkrade</p>
-                        <p>Publicaties in <em>De Volkskrant</em>, <em>NRC</em>, PF Magazine, <em>De Limburger</em> en meer</p>
-                        <p>Uitgave eigen boek (uitverkocht)</p>
+                        <div class="tdmv-media-text">
+                            <p>Grote expositie in Heerlen centrum</p>
+                            <p>Exposities in Amsterdam, Maastricht en Kerkrade</p>
+                            <p>Publicaties in <a href="https://www.volkskrant.nl/kijkverder/v/2022/in-limburg-zijn-de-mijnen-gesloten-maar-niet-vergeten~v483533/" target="_blank"><em>De Volkskrant</em></a>, <a href="https://www.nrc.nl/nieuws/2024/12/13/de-laatste-mijn-in-limburg-is-al-een-halve-eeuw-dicht-maar-het-mijnverleden-is-nog-steeds-niet-afgesloten-a4876358" target="_blank"><em>NRC</em></a>, PF Magazine, <em>De Limburger</em> en meer</p>
+                            <p>Uitgave eigen boek (uitverkocht)</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -859,6 +1089,64 @@
             insertObserver.observe(panel);
         });
 
+        // Uit het dal animations - bar widths and count-up
+        const uithetdalInsert = document.getElementById('uithetdalInsert');
+        if (uithetdalInsert) {
+            // Set bar widths from data attributes
+            const bars = uithetdalInsert.querySelectorAll('.tdmv-bar-fill[data-width]');
+            bars.forEach(bar => {
+                bar.style.setProperty('--bar-width', bar.dataset.width);
+            });
+
+            // Count-up animation
+            const countUpElements = uithetdalInsert.querySelectorAll('.count-up');
+            let countUpStarted = false;
+
+            const uithetdalObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting && !countUpStarted) {
+                        countUpStarted = true;
+
+                        // Delay count-up to sync with element animations
+                        setTimeout(() => {
+                            countUpElements.forEach(el => {
+                                const targetValue = parseFloat(el.dataset.value);
+                                const suffix = el.dataset.suffix || '';
+                                const format = el.dataset.format;
+                                const duration = 1500;
+                                const startTime = performance.now();
+
+                                function animate(currentTime) {
+                                    const elapsed = currentTime - startTime;
+                                    const progress = Math.min(elapsed / duration, 1);
+
+                                    // Ease out cubic
+                                    const easeProgress = 1 - Math.pow(1 - progress, 3);
+                                    const currentValue = targetValue * easeProgress;
+
+                                    if (format === 'thousands') {
+                                        el.textContent = Math.round(currentValue).toLocaleString('nl-NL') + suffix;
+                                    } else if (suffix === '%') {
+                                        el.textContent = currentValue.toFixed(1).replace('.', ',') + suffix;
+                                    } else {
+                                        el.textContent = Math.round(currentValue) + suffix;
+                                    }
+
+                                    if (progress < 1) {
+                                        requestAnimationFrame(animate);
+                                    }
+                                }
+
+                                requestAnimationFrame(animate);
+                            });
+                        }, 600); // Delay to let elements fade in first
+                    }
+                });
+            }, { threshold: 0.3 });
+
+            uithetdalObserver.observe(uithetdalInsert);
+        }
+
         // Fade out map background when scrolling to photo 6
         const mapInsert = document.querySelector('.tdmv-insert.part-1');
         const photo6 = document.querySelector('.tdmv-photo-block[data-parallax="1.1"]'); // Photo 6 - Handen van Deddo
@@ -930,7 +1218,7 @@
         }
 
         // Fade out "Uit het dal" insert when scrolling to Bart
-        const uithetdalInsert = document.getElementById('uithetdalInsert');
+        // Note: uithetdalInsert is already declared above
         const photoBart = document.getElementById('photoBart');
 
         if (uithetdalInsert && photoBart) {
@@ -986,6 +1274,111 @@
                 });
             }, { threshold: 0.5 });
             photo40Observer.observe(photo40);
+        }
+
+        // Delayed zoom for photo 3 (Maria)
+        const photo3 = document.getElementById('photo3');
+        if (photo3) {
+            const photo3Img = photo3.querySelector('img.zoom-delayed');
+            let photo3Timeout = null;
+
+            const photo3Observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        photo3Timeout = setTimeout(() => {
+                            photo3Img.classList.add('zoom-active');
+                        }, 2000);
+                    } else {
+                        if (photo3Timeout) clearTimeout(photo3Timeout);
+                        photo3Img.classList.remove('zoom-active');
+                    }
+                });
+            }, { threshold: 0.5 });
+            photo3Observer.observe(photo3);
+        }
+
+        // Delayed zoom for photo 23a (Martin)
+        const photo23a = document.getElementById('photo23a');
+        if (photo23a) {
+            const photo23aImg = photo23a.querySelector('img.zoom-delayed');
+            let photo23aTimeout = null;
+
+            const photo23aObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        photo23aTimeout = setTimeout(() => {
+                            photo23aImg.classList.add('zoom-active');
+                        }, 2000);
+                    } else {
+                        if (photo23aTimeout) clearTimeout(photo23aTimeout);
+                        photo23aImg.classList.remove('zoom-active');
+                    }
+                });
+            }, { threshold: 0.5 });
+            photo23aObserver.observe(photo23a);
+        }
+
+        // Delayed zoom for photo 56 (John)
+        const photo56 = document.getElementById('photo56');
+        if (photo56) {
+            const photo56Img = photo56.querySelector('img.zoom-delayed');
+            let photo56Timeout = null;
+
+            const photo56Observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        photo56Timeout = setTimeout(() => {
+                            photo56Img.classList.add('zoom-active');
+                        }, 2000);
+                    } else {
+                        if (photo56Timeout) clearTimeout(photo56Timeout);
+                        photo56Img.classList.remove('zoom-active');
+                    }
+                });
+            }, { threshold: 0.5 });
+            photo56Observer.observe(photo56);
+        }
+
+        // Delayed zoom for photo 65
+        const photo65 = document.getElementById('photo65');
+        if (photo65) {
+            const photo65Img = photo65.querySelector('img.zoom-delayed');
+            let photo65Timeout = null;
+
+            const photo65Observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        photo65Timeout = setTimeout(() => {
+                            photo65Img.classList.add('zoom-active');
+                        }, 2000);
+                    } else {
+                        if (photo65Timeout) clearTimeout(photo65Timeout);
+                        photo65Img.classList.remove('zoom-active');
+                    }
+                });
+            }, { threshold: 0.5 });
+            photo65Observer.observe(photo65);
+        }
+
+        // Delayed zoom for photo 28 (Bern)
+        const photo28 = document.getElementById('photo28');
+        if (photo28) {
+            const photo28Img = photo28.querySelector('img.zoom-delayed');
+            let photo28Timeout = null;
+
+            const photo28Observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        photo28Timeout = setTimeout(() => {
+                            photo28Img.classList.add('zoom-active');
+                        }, 2000);
+                    } else {
+                        if (photo28Timeout) clearTimeout(photo28Timeout);
+                        photo28Img.classList.remove('zoom-active');
+                    }
+                });
+            }, { threshold: 0.5 });
+            photo28Observer.observe(photo28);
         }
 
 
@@ -1129,14 +1522,34 @@
         }
         requestAnimationFrame(particleLoop);
 
-        // Progress indicator
+        // Progress indicator - starts from title (0%), counts intro states
         const progressNumber = document.getElementById('progressNumber');
         const scrollContainer = document.getElementById('scrollContainer');
         let currentProgress = 0;
         let targetProgress = 0;
+        let progressInitialized = false;
 
         // Reset scroll to beginning on page load
         scrollContainer.scrollLeft = 0;
+
+        function calculateProgress() {
+            // Always return 0 during initialization
+            if (!progressInitialized) return 0;
+
+            const scrollLeft = scrollContainer.scrollLeft;
+            const maxScroll = scrollContainer.scrollWidth - scrollContainer.clientWidth;
+
+            // If scroll has started (past intro section), calculate based on scroll position
+            if (scrollLeft > 50) {
+                // Scroll progress (3-100%)
+                const scrollProgress = maxScroll > 0 ? (scrollLeft / maxScroll) * 97 : 0;
+                return Math.round(3 + scrollProgress);
+            }
+
+            // Otherwise show intro state progress (0%, 1%, 2%)
+            // introState 0 = 0%, introState 1 = 1%, introState 2 = 2%
+            return introState;
+        }
 
         function updateProgress() {
             // Animate the number smoothly
@@ -1156,18 +1569,40 @@
             requestAnimationFrame(updateProgress);
         }
 
-        scrollContainer.addEventListener('scroll', () => {
-            const scrollLeft = scrollContainer.scrollLeft;
-            const maxScroll = scrollContainer.scrollWidth - scrollContainer.clientWidth;
-            targetProgress = Math.round((scrollLeft / maxScroll) * 100);
-        });
+        // Initialize progress to 0
+        targetProgress = 0;
+        currentProgress = 0;
+        progressNumber.textContent = '0';
 
+        // Start animation loop
         requestAnimationFrame(updateProgress);
 
-        // Soundscape audio - starts on first interaction
+        // Enable progress calculation after a short delay to avoid load-time scroll events
+        setTimeout(() => {
+            progressInitialized = true;
+
+            // Update progress on scroll
+            scrollContainer.addEventListener('scroll', () => {
+                targetProgress = calculateProgress();
+            });
+
+            // Also update progress when intro state changes
+            const originalSetIntroState = setIntroState;
+            setIntroState = function(state) {
+                originalSetIntroState(state);
+                targetProgress = calculateProgress();
+            };
+        }, 100);
+
+        // Soundscape audio system
         const soundscape = document.getElementById('soundscape');
         const soundBtn = document.getElementById('soundBtn');
+        const soundWrapper = document.getElementById('soundWrapper');
+        const soundTooltip = document.getElementById('soundTooltip');
+        const soundscapeHint = document.getElementById('soundscapeHint');
         let audioStarted = false;
+        let tooltipShown = false;
+        let tooltipTimeout = null;
 
         function startAudio() {
             if (!audioStarted && soundscape) {
@@ -1175,31 +1610,48 @@
                 soundscape.play().then(() => {
                     audioStarted = true;
                     soundBtn.classList.remove('muted');
+                    if (soundscapeHint) {
+                        soundscapeHint.classList.add('active');
+                        soundscapeHint.querySelector('span').textContent = 'Soundscape aan';
+                    }
                 }).catch(err => {
                     console.log('Audio autoplay blocked:', err);
                 });
             }
         }
 
-        // Start audio on first user interaction
-        const startAudioOnce = () => {
-            startAudio();
-            document.removeEventListener('click', startAudioOnce);
-            document.removeEventListener('scroll', startAudioOnce, true);
-            document.removeEventListener('keydown', startAudioOnce);
-        };
+        // Soundscape hint button in chapter 1
+        if (soundscapeHint) {
+            soundscapeHint.addEventListener('click', (e) => {
+                e.stopPropagation();
+                if (!audioStarted) {
+                    startAudio();
+                } else {
+                    // Toggle mute
+                    if (soundscape.muted || soundscape.paused) {
+                        soundscape.muted = false;
+                        if (soundscape.paused) soundscape.play();
+                        soundBtn.classList.remove('muted');
+                        soundscapeHint.classList.add('active');
+                        soundscapeHint.querySelector('span').textContent = 'Soundscape aan';
+                    } else {
+                        soundscape.muted = true;
+                        soundBtn.classList.add('muted');
+                        soundscapeHint.classList.remove('active');
+                        soundscapeHint.querySelector('span').textContent = 'Zet de soundscape aan';
+                    }
+                }
+            });
+        }
 
-        document.addEventListener('click', startAudioOnce);
-        document.addEventListener('scroll', startAudioOnce, true);
-        document.addEventListener('keydown', startAudioOnce);
-
-        // Toggle mute button
-        soundBtn.classList.add('muted'); // Start muted visually until audio plays
+        // Toggle mute button (fixed position)
+        soundBtn.classList.add('muted');
         soundBtn.addEventListener('click', (e) => {
             e.stopPropagation();
             if (soundscape.paused) {
                 soundscape.play();
                 soundBtn.classList.remove('muted');
+                audioStarted = true;
             } else if (soundscape.muted) {
                 soundscape.muted = false;
                 soundBtn.classList.remove('muted');
@@ -1207,7 +1659,65 @@
                 soundscape.muted = true;
                 soundBtn.classList.add('muted');
             }
+            // Hide tooltip when clicked
+            soundTooltip.classList.remove('visible');
+            if (tooltipTimeout) clearTimeout(tooltipTimeout);
         });
+
+        // Show/hide sound wrapper and tooltip based on scroll position
+        const firstPhoto = document.querySelector('.tdmv-photo-block.part-1');
+        let hasScrolledToPhotos = false;
+
+        const soundWrapperObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // Scrolled to first photo
+                    soundWrapper.classList.add('visible');
+                    hasScrolledToPhotos = true;
+
+                    // Show tooltip if audio is playing and not shown before
+                    if (audioStarted && !soundscape.muted && !tooltipShown) {
+                        tooltipShown = true;
+                        soundTooltip.classList.add('visible');
+
+                        // Hide tooltip after 5 seconds
+                        tooltipTimeout = setTimeout(() => {
+                            soundTooltip.classList.remove('visible');
+                        }, 5000);
+                    }
+                }
+            });
+        }, { threshold: 0.1 });
+
+        if (firstPhoto) {
+            soundWrapperObserver.observe(firstPhoto);
+        }
+
+        // Also show wrapper when any part-1 photo is visible (in case user scrolls fast)
+        const anyPhoto = document.querySelectorAll('.tdmv-photo-block');
+        const photoVisibilityObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !soundWrapper.classList.contains('visible')) {
+                    soundWrapper.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        anyPhoto.forEach(photo => photoVisibilityObserver.observe(photo));
+
+        // Hide wrapper when back at intro
+        const introChapter = document.querySelector('.tdmv-intro-chapter');
+        const introVisibilityObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && entry.intersectionRatio > 0.5) {
+                    soundWrapper.classList.remove('visible');
+                }
+            });
+        }, { threshold: 0.5 });
+
+        if (introChapter) {
+            introVisibilityObserver.observe(introChapter);
+        }
 
         // Position intro photo caption based on actual photo width
         function positionIntroCaption() {
@@ -1235,7 +1745,7 @@
         }
 
         // Chapter backgrounds - fade out when leaving
-        const introChapter = document.querySelector('.tdmv-intro-chapter');
+        // Note: introChapter is already declared above
         if (introChapter) {
             const firstPhotoBlock = document.querySelector('.tdmv-photo-block.part-1');
             if (firstPhotoBlock) {

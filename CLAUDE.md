@@ -352,9 +352,11 @@ const symbols = {
 
 ### Progress indicator
 - Positie: linksonder (`bottom: 2rem`, `left: 2rem`)
-- Toont percentage (0-100%) van serie bekeken
+- Start op 0% bij titel, telt intro states mee (0%, 1%, 2%)
+- Vanaf scroll: 3-100% op basis van scroll positie
 - Animeert soepel bij scrollen (beide richtingen)
 - Subtiel wit (50% opacity)
+- `progressInitialized` flag voorkomt foutieve start waarde bij laden
 
 ### Descent effect (intro)
 ```html
@@ -368,10 +370,10 @@ const symbols = {
 - Scroll omlaag: `introSection.classList.add('descended')`
 - Verticale slide transitie (1.2s) simuleert afdaling in mijn
 
-### Mijn achtergrond (deel 1)
-- `mijngang.jpg` als subtiele vaste achtergrond (12% opacity)
-- Alleen zichtbaar tijdens deel 1 foto's
-- Gecontroleerd via IntersectionObserver met `.visible` class
+### Achtergronden
+- **Foto 1**: `mijngang.jpg` als subtiele achtergrond (4% opacity) via `::before`
+- **Deel 1 chapter**: `achtergrond.jpg` als subtiele achtergrond (10% opacity) via `::before`
+- Beide achtergronden faden uit bij scrollen via `.bg-hidden` class
 
 ### Interactieve kaart (Leaflet.js) - Insert "De Mijnstreek"
 - Insert panel na foto 5 met titel "De mijnstreek"
@@ -386,9 +388,16 @@ const symbols = {
 | Insert | Deel | Inhoud | Fade-out trigger |
 |--------|------|--------|------------------|
 | De Mijnstreek | 1 | Kaart + statistieken | Foto Zakia |
-| Het grote slopen | 2 | Foto's + infographics | Foto Zakia |
-| Uit het dal | 3 | Foto + tekst naast elkaar | Foto Bart |
-| Als expositie en in de media | 3 | 6 foto's grid + tekst | - |
+| Het grote slopen | 2 | Visuele tijdlijn 1974-1990 + map vergelijking | Foto Zakia |
+| Uit het dal | 3 | Grote foto (550px) + Parkstad statistieken | Foto Bart |
+| Als expositie en in de media | 3 | 6 foto's grid + tekst met links naar NRC/Volkskrant | - |
+
+### Insert "Uit het dal" details
+- 3-rijen grid layout met foto links, statistieken rechts
+- Foto breedte: 550px (responsive naar 400px/320px)
+- Statistieken: uitkeringen, gezondheid, arbeidsparticipatie, retail-leegstand, werkgelegenheid, vergrijzing, woningwaarde, bevolkingstrend
+- Animaties: fade-in per item met staggered delay, count-up nummers
+- Bar charts met Parkstad vs Nederland/Limburg vergelijking
 
 ### Foto groottes
 - Standaard: 70vh
@@ -410,10 +419,11 @@ Foto's 3, 12, 23a en 28 hebben een gekleurd tekstpaneel:
 - Part-2: grijs panel (rgba(107, 122, 138, 0.7))
 - Part-3: groen panel (rgba(139, 154, 107, 0.7))
 
-### Zoom effect (foto 12 en 40)
+### Zoom effect (foto 3, 12, 23a, 28, 40, 56, 65)
 - Wrapper met `overflow: hidden` om zoom binnen kader te houden
 - Class `zoom-delayed` op img, `zoom-active` bij in-view
-- 2 seconden delay, 12 seconden zoom naar scale(1.08)
+- 2 seconden delay, 14 seconden zoom naar scale(1.06)
+- Timing: `cubic-bezier(0.25, 0.1, 0.25, 1)` - langzaam starten, dan versnellen
 
 ### Chapter panels
 ```html
