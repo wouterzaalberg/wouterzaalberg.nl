@@ -1732,17 +1732,17 @@ img {
 
     /* ---- ABOUT SECTION (MOBIEL) ---- */
     .about-section {
-        height: auto !important;
-        min-height: auto !important;
+        height: 100vh !important;
+        min-height: 100vh !important;
         display: flex !important;
         flex-direction: column !important;
-        overflow: visible !important;
+        overflow: hidden !important;
     }
 
     .about-image {
         position: relative !important;
         width: 100% !important;
-        height: 60vh !important;
+        height: 50vh !important;
         flex-shrink: 0;
     }
 
@@ -1769,10 +1769,12 @@ img {
         right: auto !important;
         width: 100% !important;
         max-width: none !important;
-        padding: 2rem 1.5rem !important;
+        padding: 1.5rem !important;
         background-color: #ffffff !important;
         box-sizing: border-box;
         z-index: 1;
+        flex: 1;
+        overflow-y: auto;
     }
 
     .about-heading {
@@ -1801,17 +1803,17 @@ img {
 
     /* ---- WORK SECTION (MOBIEL) ---- */
     .work-section {
-        height: auto !important;
-        min-height: auto !important;
+        height: 100vh !important;
+        min-height: 100vh !important;
         display: flex !important;
         flex-direction: column !important;
-        overflow: visible !important;
+        overflow: hidden !important;
     }
 
     .work-image {
         position: relative !important;
         width: 100% !important;
-        height: 50vh !important;
+        height: 40vh !important;
         flex-shrink: 0;
         overflow: hidden;
     }
@@ -1850,12 +1852,14 @@ img {
         right: auto !important;
         width: 100% !important;
         max-width: none !important;
-        padding: 2rem 1.5rem !important;
+        padding: 1.5rem !important;
         background-color: rgba(255, 255, 255, 0.95) !important;
         box-sizing: border-box;
         opacity: 1 !important;
         transform: none !important;
         z-index: 1;
+        flex: 1;
+        overflow-y: auto;
     }
 
     .work-text-overlay.fade-in-text,
