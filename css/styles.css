@@ -1594,25 +1594,78 @@ img {
 
 /* Mobile Styles for Horizontal Scroll */
 @media (max-width: 767px) {
+    .horizontal-scroll-page {
+        overflow-y: auto !important;
+        overflow-x: hidden !important;
+        height: auto !important;
+    }
+
     .horizontal-scroll-container {
-        flex-direction: column;
-        height: auto;
-        overflow-x: hidden;
-        overflow-y: auto;
+        flex-direction: column !important;
+        height: auto !important;
+        min-height: 100vh;
+        overflow-x: hidden !important;
+        overflow-y: visible !important;
     }
 
     .horizontal-scroll-content {
-        flex-direction: column;
-        padding: 100px 1rem 2rem;
-        gap: 1.5rem;
+        flex-direction: column !important;
+        padding: 0 !important;
+        gap: 2rem !important;
+        min-height: auto !important;
     }
 
+    /* Navigatie */
+    .horizontal-nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+        padding: 1rem 1.5rem !important;
+        background: linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, transparent 100%);
+    }
+
+    .horizontal-nav .back-link {
+        font-size: 0.75rem;
+    }
+
+    .horizontal-nav .nav-title {
+        font-size: 1rem;
+    }
+
+    /* Eerste foto - ruimte voor navigatie */
+    .photo-item.first-photo {
+        padding-top: 5.5rem;
+    }
+
+    /* Intro panel */
+    .intro-panel {
+        min-width: 100% !important;
+        max-width: 100% !important;
+        padding: 1rem 1.5rem 2rem !important;
+        margin: 0;
+        box-sizing: border-box;
+    }
+
+    .intro-panel h2 {
+        font-size: 1.4rem !important;
+        margin-bottom: 1rem !important;
+    }
+
+    .intro-panel p {
+        font-size: 0.9rem !important;
+        line-height: 1.7 !important;
+    }
+
+    /* Foto's */
     .photo-item,
     .photo-item.size-small,
     .photo-item.size-medium,
     .photo-item.size-large {
         height: auto;
-        width: 100%;
+        width: 94vw;
+        margin: 0 auto;
     }
 
     .photo-item img {
@@ -1636,9 +1689,24 @@ img {
         margin-top: 2rem;
     }
 
-    .intro-panel {
-        max-width: 100%;
-        padding: 1rem;
+    /* End panel */
+    .end-panel {
+        min-width: 100% !important;
+        height: auto !important;
+        padding: 3rem 1.5rem !important;
+        box-sizing: border-box;
+    }
+
+    .end-panel p {
+        font-size: 0.85rem !important;
+    }
+
+    .end-panel nav {
+        gap: 0.8rem !important;
+    }
+
+    .end-panel nav a {
+        font-size: 0.9rem !important;
     }
 }
 
@@ -1705,36 +1773,75 @@ img {
         right: 1.5rem;
         width: auto;
         max-width: none;
-        padding: 1rem;
-        background: rgba(255,255,255,0.85);
+        padding: 0.75rem 1rem;
+        background: rgba(255,255,255,0.75);
         box-sizing: border-box;
     }
 
+    /* Titel container bovenaan de pagina */
+    .hero-overlay-content::before {
+        content: '';
+        position: absolute;
+        top: 2rem;
+        left: 1.5rem;
+        right: 1.5rem;
+        height: 0;
+    }
+
+    .hero-name,
+    .hero-tagline,
+    .hero-tagline-italic {
+        position: absolute !important;
+        left: 0 !important;
+        right: 0 !important;
+    }
+
     .hero-name {
-        font-size: 0.75rem;
+        top: -62vh !important;
+        font-size: 0.8rem;
         letter-spacing: 0.15em;
-        margin-bottom: 0.25rem;
+        margin-bottom: 0;
+        color: #cd9854 !important;
+        text-shadow: 0 1px 4px rgba(0,0,0,0.15);
     }
 
     .hero-tagline {
-        font-size: 1.6rem;
+        top: calc(-62vh + 1.2rem) !important;
+        font-size: 1.5rem;
         line-height: 1.15;
         margin-bottom: 0;
+        color: #ffffff !important;
+        text-shadow: 0 1px 4px rgba(0,0,0,0.25);
     }
 
     .hero-tagline-italic {
-        font-size: 1.4rem;
-        margin-bottom: 1rem;
+        top: calc(-62vh + 3rem) !important;
+        font-size: 1.3rem;
+        margin-bottom: 0;
+        color: #ffffff !important;
+        text-shadow: 0 1px 4px rgba(0,0,0,0.25);
     }
 
     .menu-section {
-        margin-bottom: 0.5rem;
+        margin-bottom: 0.4rem;
     }
 
     .menu-heading {
         font-size: 0.65rem;
         letter-spacing: 0.12em;
         margin-bottom: 0.25rem;
+        color: #cd9854 !important;
+    }
+
+    /* Werk in opdracht en Contact zwart */
+    .menu-section:nth-last-child(1) .menu-heading,
+    .menu-section:nth-last-child(2) .menu-heading {
+        color: #1a1a1a !important;
+    }
+
+    .menu-section:nth-last-child(1) .menu-heading a,
+    .menu-section:nth-last-child(2) .menu-heading a {
+        color: #1a1a1a !important;
     }
 
     .menu-list {
@@ -1801,7 +1908,7 @@ img {
 
     .about-text-overlay {
         position: absolute !important;
-        top: 30% !important;
+        top: 15% !important;
         left: 1.5rem !important;
         right: 1.5rem !important;
         bottom: auto !important;
@@ -1840,7 +1947,7 @@ img {
     .work-image {
         position: relative !important;
         width: 100% !important;
-        height: 55vh !important;
+        height: 65vh !important;
         flex-shrink: 0;
         overflow: hidden;
     }
@@ -1877,8 +1984,8 @@ img {
         left: 0;
         width: 100%;
         height: 100%;
-        transform: none;
-        gap: 0.15rem;
+        transform: none !important;
+        gap: 2px;
         padding: 0;
         box-sizing: border-box;
         display: grid !important;
@@ -1887,15 +1994,22 @@ img {
     }
 
     .work-grid.visible {
-        transform: none;
+        transform: none !important;
     }
 
     .work-grid .grid-img,
     .work-grid .grid-video {
-        max-height: none;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
+        display: none;
+        max-height: none !important;
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important;
+        object-position: center !important;
+    }
+
+    .work-grid .grid-img.active,
+    .work-grid .grid-video.active {
+        display: block !important;
     }
 
     .work-text-overlay {
@@ -1905,14 +2019,14 @@ img {
         right: auto !important;
         width: 100% !important;
         max-width: none !important;
-        padding: 0.75rem 1rem !important;
+        padding: 0.5rem 1rem !important;
         background-color: rgba(255, 255, 255, 0.95) !important;
         box-sizing: border-box;
         opacity: 1 !important;
         transform: none !important;
         z-index: 1;
-        flex: 1;
-        overflow-y: auto;
+        flex: 0 0 auto;
+        overflow-y: visible;
     }
 
     .work-text-overlay.fade-in-text,
@@ -1931,51 +2045,57 @@ img {
     }
 
     .work-text-overlay h2 {
-        font-size: 0.9rem;
-        margin-bottom: 0.4rem;
+        display: block !important;
+        font-size: 0.75rem;
+        margin-bottom: 0.3rem;
     }
 
     .work-text-overlay p {
-        font-size: 0.8rem;
-        line-height: 1.4;
-        margin-bottom: 0.5rem;
+        display: none !important;
     }
 
     .work-text-overlay .logo-heading {
         display: none;
     }
 
-    .logo-grid {
-        display: grid;
-        grid-template-columns: repeat(5, 1fr);
-        gap: 0.2rem;
-        max-width: none;
+    .work-text-overlay .logo-grid {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        gap: 0.5rem !important;
+        width: 90vw !important;
+        max-width: 90vw !important;
+        justify-content: flex-start !important;
+        margin-top: 0 !important;
     }
 
-    .logo-item {
-        aspect-ratio: 1;
-        padding: 0.15rem;
+    .work-text-overlay .logo-item {
+        aspect-ratio: auto !important;
+        padding: 0 !important;
         cursor: pointer;
+        flex: 0 0 auto !important;
+        width: 17% !important;
     }
 
-    .logo-item img {
-        max-height: 100%;
+    .work-text-overlay .logo-item img {
+        max-height: 45px !important;
+        width: 100% !important;
+        object-fit: contain !important;
     }
 
-    .logo-item .logo-grey {
+    .work-text-overlay .logo-item .logo-grey {
         opacity: 0.7;
     }
 
-    .logo-item .logo-color {
+    .work-text-overlay .logo-item .logo-color {
         opacity: 0;
     }
 
-    .logo-item.active .logo-grey {
-        opacity: 0;
+    .work-text-overlay .logo-item.active .logo-grey {
+        opacity: 0 !important;
     }
 
-    .logo-item.active .logo-color {
-        opacity: 1;
+    .work-text-overlay .logo-item.active .logo-color {
+        opacity: 1 !important;
     }
 
     /* ---- CONTACT SECTION (MOBIEL) ---- */
