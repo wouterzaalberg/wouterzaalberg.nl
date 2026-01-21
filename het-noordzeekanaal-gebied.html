@@ -249,6 +249,154 @@
         .leaflet-popup-tip {
             background: rgba(26, 42, 58, 0.9) !important;
         }
+
+        /* ===== MOBILE STYLES ===== */
+        @media (max-width: 767px) {
+            /* Navigatie */
+            .horizontal-nav {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                z-index: 100;
+                padding: 1rem 1.5rem !important;
+                background: linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, transparent 100%);
+            }
+
+            /* Scroll container - verticaal op mobile */
+            .horizontal-scroll-container {
+                flex-direction: column !important;
+                height: auto !important;
+                min-height: 100vh;
+                overflow-x: hidden !important;
+                overflow-y: visible !important;
+            }
+
+            .horizontal-scroll-content {
+                flex-direction: column !important;
+                padding: 0 !important;
+                gap: 2rem !important;
+                min-height: auto !important;
+            }
+
+            /* Eerste foto - ruimte voor navigatie */
+            .horizontal-scroll-content > .photo-item:first-child {
+                padding-top: 5.5rem;
+            }
+
+            /* Foto's */
+            .photo-item {
+                height: auto !important;
+                width: 94vw;
+                margin: 0 auto;
+            }
+
+            .photo-item img {
+                width: 100%;
+                height: auto;
+            }
+
+            /* Titel panel */
+            .nzkg-title-panel {
+                min-width: auto !important;
+                max-width: none !important;
+                width: 94vw;
+                margin: 0 auto;
+                padding: 1.5rem !important;
+            }
+
+            .nzkg-title {
+                font-size: 14vw !important;
+                line-height: 1 !important;
+            }
+
+            .nzkg-subtitle {
+                font-size: 0.9rem;
+                margin-top: 1.5rem;
+                max-width: none;
+            }
+
+            /* Foto paren - verticaal stapelen */
+            .photo-pair {
+                display: flex;
+                flex-direction: column !important;
+                gap: 2rem !important;
+                width: 94vw;
+                margin: 0 auto;
+            }
+
+            .photo-pair .photo-item {
+                width: 100%;
+            }
+
+            /* Captions altijd zichtbaar op mobile */
+            .photo-caption {
+                position: relative !important;
+                bottom: auto !important;
+                left: auto !important;
+                transform: none !important;
+                opacity: 1 !important;
+                width: 100% !important;
+                max-width: none !important;
+                margin-top: 0.3rem;
+                padding: 0.5rem 0 !important;
+                background: transparent !important;
+                pointer-events: auto !important;
+            }
+
+            .caption-main {
+                font-size: 0.85rem;
+                color: rgba(0, 0, 0, 0.85);
+                text-shadow: none;
+            }
+
+            .caption-detail {
+                font-size: 0.75rem;
+                color: rgba(0, 0, 0, 0.65);
+                text-shadow: none;
+            }
+
+            .caption-location {
+                font-size: 0.7rem;
+                color: rgba(0, 0, 0, 0.5);
+                text-shadow: none;
+            }
+
+            /* Map insert */
+            .nzkg-map-insert {
+                min-width: auto !important;
+                width: 94vw !important;
+                height: 60vh !important;
+                margin: 0 auto;
+                padding: 1.5rem !important;
+            }
+
+            .nzkg-map-header {
+                width: 100%;
+            }
+
+            .nzkg-map-title {
+                font-size: 1rem;
+            }
+
+            .nzkg-map-subtitle {
+                font-size: 0.75rem;
+            }
+
+            .nzkg-map-inner {
+                width: 100%;
+                height: 85%;
+            }
+
+            /* End panel */
+            .end-panel {
+                min-width: auto !important;
+                width: 100% !important;
+                height: auto !important;
+                min-height: 70vh;
+                padding: 2rem 1.5rem !important;
+            }
+        }
     </style>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
@@ -463,9 +611,10 @@
             if (!mapContainer) return;
 
             // Center on the Noordzeekanaal area
+            const isMobile = window.innerWidth <= 767;
             const map = L.map('locationMap', {
                 center: [52.44, 4.70],
-                zoom: 12,
+                zoom: isMobile ? 10 : 12,
                 zoomControl: false,
                 scrollWheelZoom: false,
                 attributionControl: false

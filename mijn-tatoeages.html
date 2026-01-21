@@ -268,6 +268,11 @@
             font-style: italic;
         }
 
+        /* Read more button - hidden on desktop */
+        .read-more-btn {
+            display: none;
+        }
+
         .scroll-arrow {
             position: fixed;
             bottom: 3rem;
@@ -430,33 +435,99 @@
 
         /* Mobile */
         @media (max-width: 767px) {
+            .tattoo-page {
+                overflow-y: auto !important;
+                overflow-x: hidden !important;
+                height: auto !important;
+            }
+
+            .tattoo-nav {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                z-index: 100;
+                padding: 1rem 1.5rem !important;
+                background: linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, transparent 100%);
+            }
+
+            .tattoo-nav h1 {
+                font-size: 0.85rem;
+            }
+
             .tattoo-scroll-container {
                 flex-direction: column;
-                height: auto;
-                overflow-x: hidden;
-                overflow-y: auto;
+                height: auto !important;
+                overflow-x: hidden !important;
+                overflow-y: visible !important;
             }
 
             .tattoo-scroll-content {
                 flex-direction: column;
-                padding-top: 80px;
-                gap: 3rem;
+                padding-top: 0;
+                gap: 4rem;
             }
 
+            /* Title intro sectie */
+            .tattoo-title-intro {
+                min-width: 100% !important;
+                height: auto !important;
+                min-height: 100vh;
+                padding: 5.5rem 1.5rem 2rem 1.5rem !important;
+            }
+
+            .title-intro-content {
+                max-width: 100%;
+            }
+
+            .title-intro-content .logo {
+                max-width: 200px;
+                margin-bottom: 1.5rem;
+            }
+
+            .title-intro-content .subtitle {
+                font-size: 0.75rem;
+            }
+
+            .title-intro-content .intro-text {
+                font-size: 0.9rem;
+                line-height: 1.6;
+            }
+
+            .title-intro-arrow {
+                display: none;
+            }
+
+            /* Story secties */
             .tattoo-intro,
             .tattoo-story {
                 flex-direction: column;
-                height: auto;
-                min-height: auto;
-                min-width: 100%;
-                gap: 1rem;
-                padding: 0 1rem;
+                height: auto !important;
+                min-height: auto !important;
+                min-width: 100% !important;
+                gap: 0.5rem;
+                padding: 0;
             }
 
             .story-photo,
             .intro-photo-large {
                 height: auto;
-                width: 100%;
+                width: 94vw;
+                margin: 0 auto;
+            }
+
+            /* Tattoo foto in kader, rechts uitgelijnd */
+            .story-photo.tattoo {
+                width: 94vw;
+                background: #252525;
+                padding: 0;
+                display: flex;
+                justify-content: flex-end;
+            }
+
+            .story-photo.tattoo img {
+                width: 60vw;
+                display: block;
             }
 
             .story-photo img,
@@ -465,27 +536,105 @@
                 height: auto;
             }
 
+            /* Tekstpanel - 60vw breed, rechts uitgelijnd onder tattoo foto */
             .story-text-panel {
-                width: 100%;
-                min-width: 100%;
-                max-width: 100%;
-                height: auto;
-                min-height: 300px;
-                margin-left: 0;
+                width: 60vw !important;
+                min-width: auto !important;
+                max-width: none !important;
+                height: auto !important;
+                min-height: auto;
+                margin: 0 3vw 0 auto !important;
+                padding-top: 0 !important;
+            }
+
+            .story-text-bg {
+                position: absolute;
+                border-radius: 8px;
+            }
+
+            .story-text-content {
+                padding: 1.5rem !important;
+                max-height: none !important;
+            }
+
+            .story-text-content h2 {
+                font-size: 0.7rem;
+                margin-bottom: 0.2rem;
+            }
+
+            .story-text-content h3 {
+                font-size: 0.95rem;
+                margin-bottom: 0.75rem;
+            }
+
+            /* Verberg alle paragrafen standaard op mobile */
+            .story-text-content p {
+                display: none;
+                font-size: 0.8rem;
+                line-height: 1.6;
+            }
+
+            /* Toon paragrafen als expanded */
+            .story-text-panel.expanded .story-text-content p {
+                display: block;
+            }
+
+            /* Lees meer button */
+            .read-more-btn {
+                display: block !important;
+                background: transparent;
+                border: 1px solid rgba(255,255,255,0.3);
+                color: #c9a227;
+                font-family: 'Scala Sans', sans-serif;
+                font-size: 0.75rem;
+                padding: 0.6rem 1rem;
+                cursor: pointer;
+                margin-top: 0.5rem;
+                transition: all 0.3s ease;
+            }
+
+            .read-more-btn:hover {
+                border-color: #c9a227;
+            }
+
+            .story-text-panel.expanded .read-more-btn {
+                margin-top: 1rem;
             }
 
             .intro-panel {
-                width: 100%;
+                width: 94vw;
                 height: auto;
-                min-height: 250px;
+                min-height: auto;
+                margin: 0 auto;
+                padding: 1.5rem !important;
+            }
+
+            .intro-panel .logo {
+                max-width: 180px;
+                margin-bottom: 1.5rem;
             }
 
             .scroll-arrow {
-                display: none;
+                display: none !important;
             }
 
             .story-photo .person-name {
-                font-size: 0.85rem;
+                display: none;
+            }
+
+            /* End panel */
+            .end-panel {
+                min-width: auto !important;
+                width: 100% !important;
+                height: auto !important;
+                min-height: 70vh;
+                padding: 2rem 1.5rem !important;
+            }
+
+            /* Hide tattoo canvas on mobile */
+            #tattooCanvas,
+            #tattooHint {
+                display: none !important;
             }
         }
     </style>
@@ -1679,6 +1828,39 @@
                 scrollToIndex(currentIndex + 1);
             });
         });
+
+        // Mobile: Add read-more buttons to story panels
+        if (window.innerWidth <= 767) {
+            const storyPanels = document.querySelectorAll('.story-text-panel');
+            storyPanels.forEach(panel => {
+                const content = panel.querySelector('.story-text-content');
+                if (!content) return;
+
+                // Get the person's name from h3
+                const h3 = content.querySelector('h3');
+                const name = h3 ? h3.textContent : 'deze persoon';
+
+                // Create read-more button
+                const btn = document.createElement('button');
+                btn.className = 'read-more-btn';
+                btn.textContent = `Lees het verhaal van ${name}`;
+
+                // Insert after h3
+                if (h3) {
+                    h3.insertAdjacentElement('afterend', btn);
+                }
+
+                // Toggle expand/collapse
+                btn.addEventListener('click', () => {
+                    panel.classList.toggle('expanded');
+                    if (panel.classList.contains('expanded')) {
+                        btn.textContent = 'Verberg verhaal';
+                    } else {
+                        btn.textContent = `Lees het verhaal van ${name}`;
+                    }
+                });
+            });
+        }
     </script>
 </body>
 </html>
