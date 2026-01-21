@@ -181,37 +181,37 @@ img {
 /* Laptops 1100-1400px */
 @media (max-width: 1400px) and (min-width: 1101px) {
     .hero-overlay-content {
-        top: 12%;
+        top: 10%;
         left: 55%;
-        max-width: 25%;
-        padding: 1.5rem;
+        max-width: 28%;
+        padding: 1.25rem;
     }
 
     .hero-tagline,
     .hero-tagline-italic {
-        font-size: 1.7rem;
-        margin-bottom: 0.6rem;
+        font-size: 1.4rem;
+        margin-bottom: 0.4rem;
     }
 
     .hero-name {
-        font-size: 0.85rem;
+        font-size: 0.75rem;
     }
 
     .menu-section {
-        margin-bottom: 1.5rem;
+        margin-bottom: 1rem;
     }
 
     .menu-heading {
-        font-size: 0.75rem;
-        margin-bottom: 0.5rem;
+        font-size: 0.65rem;
+        margin-bottom: 0.4rem;
     }
 
     .menu-list a {
-        font-size: 0.85rem;
+        font-size: 0.75rem;
     }
 
     .menu-list li {
-        margin-bottom: 0.3rem;
+        margin-bottom: 0.2rem;
     }
 }
 
@@ -319,6 +319,26 @@ img {
     transition: color 0.5s ease-in-out;
 }
 
+/* Grote schermen 1600px+ - override clamp values */
+@media (min-width: 1601px) {
+    .hero-overlay-content {
+        top: 10%;
+    }
+
+    .hero-tagline,
+    .hero-tagline-italic {
+        font-size: 2.2rem;
+    }
+
+    .about-text-overlay,
+    .work-text-overlay,
+    .contact-text-overlay {
+        top: 10%;
+        width: fit-content;
+        max-width: 20%;
+    }
+}
+
 /* Menu Sections */
 .menu-section {
     margin-bottom: 2rem;
@@ -370,6 +390,41 @@ img {
 
 .menu-list a.highlight {
     color: var(--color-gold);
+}
+
+/* Budget laptops 1100-1400px - override clamp values */
+@media (max-width: 1400px) and (min-width: 1101px) {
+    .hero-overlay-content {
+        width: 22%;
+        max-width: 22%;
+    }
+
+    .hero-tagline,
+    .hero-tagline-italic {
+        font-size: 1.7rem;
+        margin-bottom: 0.4rem;
+    }
+
+    .hero-tagline-italic {
+        margin-bottom: 1rem;
+    }
+
+    .menu-section {
+        margin-bottom: 1rem;
+    }
+
+    .menu-heading {
+        font-size: 0.65rem;
+        margin-bottom: 0.4rem;
+    }
+
+    .menu-list a {
+        font-size: 1rem;
+    }
+
+    .menu-list li {
+        margin-bottom: 0.2rem;
+    }
 }
 
 @media (max-width: 767px) {
@@ -467,6 +522,13 @@ img {
     color: var(--color-white);
 }
 
+/* Grote schermen 1600px+ */
+@media (min-width: 1601px) {
+    .about-text-overlay {
+        width: 20%;
+    }
+}
+
 /* Grote schermen 1400-1600px */
 @media (max-width: 1600px) and (min-width: 1401px) {
     .about-text-overlay {
@@ -489,23 +551,23 @@ img {
 /* Laptops 1100-1400px */
 @media (max-width: 1400px) and (min-width: 1101px) {
     .about-text-overlay {
-        top: 12%;
+        top: 10%;
         left: 55%;
-        max-width: 25%;
-        max-height: 75vh;
-        overflow-y: auto;
-        padding: 1.5rem;
+        width: 22%;
+        max-height: none;
+        overflow-y: visible;
+        padding: 1.25rem;
     }
 
     .about-text-overlay p {
-        font-size: 0.85rem;
+        font-size: 0.9rem;
         line-height: 1.5;
-        margin-bottom: 0.9rem;
+        margin-bottom: 0.8rem;
     }
 
     .about-heading {
-        font-size: 1.2rem;
-        margin-bottom: 0.9rem;
+        font-size: 1.15rem;
+        margin-bottom: 0.8rem;
     }
 }
 
@@ -887,6 +949,13 @@ img {
     filter: grayscale(0%) !important;
 }
 
+/* Grote schermen 1600px+ */
+@media (min-width: 1601px) {
+    .work-text-overlay {
+        width: 20%;
+    }
+}
+
 /* Grote schermen 1400-1600px */
 @media (max-width: 1600px) and (min-width: 1401px) {
     .work-text-overlay {
@@ -916,31 +985,36 @@ img {
 /* Laptops 1100-1400px */
 @media (max-width: 1400px) and (min-width: 1101px) {
     .work-text-overlay {
-        top: 10%;
+        top: 8%;
         left: 55%;
-        max-width: 25%;
-        max-height: 80vh;
-        overflow-y: auto;
-        padding: 1.5rem;
+        width: 22%;
+        max-height: none;
+        overflow-y: visible;
+        padding: 1.25rem;
     }
 
     .work-text-overlay h2 {
-        font-size: 1.2rem;
+        font-size: 1.15rem;
     }
 
     .work-text-overlay p {
-        font-size: 0.8rem;
+        font-size: 0.85rem;
         line-height: 1.45;
     }
 
     .work-text-overlay .logo-heading {
-        margin-top: 3rem;
-        font-size: 0.8rem;
+        margin-top: 1rem;
+        margin-bottom: 0.75rem;
+        font-size: 0.75rem;
+    }
+
+    .work-text-overlay .logo-grid {
+        gap: 0;
     }
 
     .work-text-overlay .logo-item img,
     .work-text-overlay .logo-item .logo-color {
-        max-height: 40px;
+        max-height: 44px;
     }
 
     .work-caption {
@@ -1224,6 +1298,13 @@ img {
     background-color: #2a3a4a;
 }
 
+/* Grote schermen 1600px+ */
+@media (min-width: 1601px) {
+    .contact-text-overlay {
+        width: 20%;
+    }
+}
+
 /* Grote schermen 1400-1600px */
 @media (max-width: 1600px) and (min-width: 1401px) {
     .contact-text-overlay {
@@ -1257,7 +1338,7 @@ img {
     .contact-text-overlay {
         top: 10%;
         left: 55%;
-        max-width: 25%;
+        width: 22%;
         max-height: 85vh;
         overflow-y: auto;
         padding: 1.5rem;
