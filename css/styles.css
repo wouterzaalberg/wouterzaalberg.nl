@@ -108,6 +108,11 @@ img {
     transition: opacity 0.8s ease-in-out, transform 0s;
 }
 
+/* Verberg mobiele hero images op desktop */
+.hero-img-mobile {
+    display: none;
+}
+
 .hero-caption {
     position: absolute;
     bottom: 2rem;
@@ -1661,13 +1666,26 @@ img {
         height: 100dvh;
     }
 
-    .hero-image img.hero-img {
+    /* Verberg desktop hero images op mobiel */
+    .hero-image .hero-img-desktop {
+        display: none !important;
+    }
+
+    /* Toon en style mobiele hero images */
+    .hero-image .hero-img-mobile {
+        display: block !important;
         position: absolute;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
         object-fit: cover;
+        opacity: 0;
+        transition: opacity 1s ease-in-out;
+    }
+
+    .hero-image .hero-img-mobile.active {
+        opacity: 1;
     }
 
     .hero-overlay-content {

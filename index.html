@@ -11,8 +11,15 @@
     <!-- Hero Section: Full Screen Image with Menu Overlay -->
     <section class="hero-section">
         <div class="hero-image">
-            <img id="heroImage1" class="hero-img active" src="images/de-exoten.jpg" alt="Wouter Zaalberg">
-            <img id="heroImage2" class="hero-img" src="images/de-exoten.jpg" alt="Wouter Zaalberg">
+            <!-- Desktop hero images -->
+            <img id="heroImage1" class="hero-img hero-img-desktop active" src="images/de-exoten.jpg" alt="Wouter Zaalberg">
+            <img id="heroImage2" class="hero-img hero-img-desktop" src="images/de-exoten.jpg" alt="Wouter Zaalberg">
+            <!-- Mobile hero images (rotating) -->
+            <img class="hero-img-mobile" src="de-exoten/1.jpg" alt="De Exoten" data-index="0">
+            <img class="hero-img-mobile" src="mijn-tattoos/4a.jpg" alt="Mijn Tatoeages" data-index="1">
+            <img class="hero-img-mobile" src="a-better-port/1.jpg" alt="A Better Port" data-index="2">
+            <img class="hero-img-mobile" src="in-blauw-licht/foto 1.jpg" alt="In Blauw Licht" data-index="3">
+            <img class="hero-img-mobile" src="toen-de-mijnen-verdwenen/Foto 1.jpg" alt="Toen de Mijnen Verdwenen" data-index="4">
             <p class="hero-caption" id="heroCaption"></p>
 
             <!-- All content overlay on right side -->
@@ -672,6 +679,28 @@
                 }, 800);
 
             }, { passive: false });
+        }
+
+        // Mobiele hero image rotatie
+        if (window.innerWidth <= 767) {
+            const mobileHeroImages = document.querySelectorAll('.hero-img-mobile');
+            let currentMobileIndex = 0;
+            const rotationInterval = 4000; // 4 seconden per foto
+
+            // Activeer eerste foto
+            if (mobileHeroImages.length > 0) {
+                mobileHeroImages[0].classList.add('active');
+            }
+
+            // Rotatie functie
+            function rotateMobileHero() {
+                mobileHeroImages[currentMobileIndex].classList.remove('active');
+                currentMobileIndex = (currentMobileIndex + 1) % mobileHeroImages.length;
+                mobileHeroImages[currentMobileIndex].classList.add('active');
+            }
+
+            // Start rotatie
+            setInterval(rotateMobileHero, rotationInterval);
         }
     </script>
 </body>
