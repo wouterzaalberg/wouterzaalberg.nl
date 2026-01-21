@@ -2081,7 +2081,7 @@
     display: block;
 }
 
-/* Sound wrapper (contains button + tooltip) */
+/* Sound wrapper (contains button + tooltip) - fixed position */
 .tdmv-sound-wrapper {
     position: fixed;
     bottom: 2rem;
@@ -2196,36 +2196,83 @@
    Mobile Styles
    ======================================== */
 @media (max-width: 767px) {
+    /* ---- Base Layout ---- */
+    .tdmv-page {
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+
     .tdmv-page .horizontal-scroll-container {
         flex-direction: column;
         height: auto;
         overflow-x: hidden;
-        overflow-y: auto;
-        scroll-snap-type: y proximity;
+        overflow-y: visible;
+        scroll-snap-type: none;
     }
 
     .tdmv-page .horizontal-scroll-content {
         flex-direction: column;
         height: auto;
-        gap: 3rem;
-        padding: 80px 1.5rem 3rem;
+        gap: 2.5rem;
+        padding: 0;
     }
 
-    .tdmv-chapter {
-        min-width: 100%;
-        height: auto;
-        min-height: 80vh;
-        padding: 3rem 1.5rem;
+    /* ---- Navigation ---- */
+    .tdmv-page .horizontal-nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        padding: 1rem 1.5rem;
+        background: linear-gradient(to bottom, rgba(26, 24, 22, 0.95) 0%, rgba(26, 24, 22, 0) 100%);
+        z-index: 100;
     }
 
-    .tdmv-chapter-title {
-        font-size: 2rem;
+    .tdmv-page .horizontal-nav .nav-title {
+        font-size: 0.8rem;
     }
 
-    .tdmv-chapter-intro {
-        font-size: 0.9rem;
+    /* ---- Progress Indicator ---- */
+    .tdmv-progress {
+        bottom: 1rem;
+        left: 1rem;
+        z-index: 90;
     }
 
+    .tdmv-progress-number {
+        font-size: 1rem;
+        color: rgba(255, 255, 255, 0.35);
+    }
+
+    .tdmv-progress-percent {
+        font-size: 0.65rem;
+        color: rgba(255, 255, 255, 0.25);
+    }
+
+    /* ---- Background Layers ---- */
+    .tdmv-bg-layer {
+        position: fixed;
+    }
+
+    .tdmv-mine-bg,
+    .tdmv-part1-bg {
+        display: none !important;
+    }
+
+    .tdmv-dust-overlay {
+        display: none;
+    }
+
+    .tdmv-dust-container {
+        display: none;
+    }
+
+    /* Hide desktop-only content */
+    .desktop-only {
+        display: none !important;
+    }
+
+    /* ---- Intro Section ---- */
     .tdmv-intro-section {
         position: relative;
         width: 100%;
@@ -2238,87 +2285,167 @@
         position: relative;
         height: auto;
         transform: none !important;
+        display: flex;
+        flex-direction: column;
     }
 
+    /* Hero Panel */
     .tdmv-hero-panel {
         position: relative;
         height: auto;
-        min-height: 80vh;
-        padding: 3rem 1.5rem;
+        min-height: 100svh;
+        padding: 5rem 1rem 3rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .tdmv-hero-content {
+        flex-direction: column;
+        gap: 1.5rem;
+        text-align: center;
+        max-width: 100%;
+    }
+
+    .tdmv-title {
+        font-size: 2.8rem;
+        line-height: 1.1;
+    }
+
+    .tdmv-hero-text {
+        max-width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .tdmv-hero-text p {
+        font-size: 0.95rem;
+        line-height: 1.7;
     }
 
     .tdmv-descent-arrow {
         display: none;
     }
 
+    /* Intro Photo (Foto 1) */
     .tdmv-intro-photo {
         position: relative;
         top: 0;
         height: auto;
+        display: flex;
         flex-direction: column;
-        padding: 2rem 1.5rem;
+        padding: 0;
+        background: transparent;
+    }
+
+    .tdmv-intro-photo::before,
+    .tdmv-intro-photo::after {
+        display: none !important;
     }
 
     .tdmv-intro-photo-wrapper {
-        flex-direction: column;
-    }
-
-    .tdmv-intro-photo img {
-        height: auto;
         width: 100%;
     }
 
-    .tdmv-hero-content {
-        flex-direction: column;
-        gap: 2rem;
-        text-align: center;
+    .tdmv-intro-photo-wrapper picture,
+    .tdmv-intro-photo-wrapper img {
+        width: 100%;
+        height: auto;
     }
 
-    .tdmv-hero-text {
+    .tdmv-intro-photo .tdmv-caption {
+        position: relative;
+        margin-top: 0.75rem;
+        padding: 0.75rem 1.5rem 1rem;
         max-width: 100%;
+        background: transparent;
     }
 
+    /* Intro Chapter (Deel 1 in descent) */
     .tdmv-intro-chapter {
         position: relative;
         top: 0;
         height: auto;
-        min-height: 80vh;
-        padding: 3rem 1.5rem;
-    }
-
-    .tdmv-intro {
+        min-height: 100svh;
+        padding: 2rem 1.5rem;
+        display: flex;
         flex-direction: column;
-        align-items: flex-start;
-        height: auto;
+        justify-content: center;
+        background: linear-gradient(135deg, var(--tdmv-part1-bg) 0%, var(--tdmv-bg) 100%);
+    }
+
+    .tdmv-intro-chapter::before {
+        display: none !important;
+    }
+
+    .tdmv-intro-chapter .tdmv-chapter-content {
+        text-align: center;
+    }
+
+    .tdmv-intro-chapter .tdmv-chapter-title {
+        font-size: 1.8rem;
+    }
+
+    .tdmv-intro-chapter .tdmv-chapter-intro {
+        font-size: 0.9rem;
+        text-align: left;
+    }
+
+    /* ---- Chapter Panels ---- */
+    .tdmv-chapter {
         min-width: 100%;
-        padding-top: 0;
-        margin-right: 0;
-        gap: 2rem;
-    }
-
-    .tdmv-title {
-        font-size: 2.5rem;
-    }
-
-    .tdmv-intro-text {
         width: 100%;
-    }
-
-    .tdmv-intro-image {
         height: auto;
-        width: 100%;
+        min-height: 85svh;
+        padding: 4rem 1.5rem 3rem;
     }
 
-    .tdmv-intro-image img {
-        height: auto;
-        width: 100%;
+    .tdmv-chapter::before {
+        width: 200px;
+        height: 200px;
+        filter: blur(60px);
     }
 
+    .tdmv-chapter-content {
+        max-width: 100%;
+    }
+
+    .tdmv-chapter-title {
+        font-size: 1.8rem;
+    }
+
+    .tdmv-chapter-period {
+        font-size: 0.75rem;
+        margin-bottom: 2rem;
+    }
+
+    .tdmv-chapter-intro {
+        font-size: 0.9rem;
+        line-height: 1.7;
+        text-align: left;
+    }
+
+    .tdmv-chapter-arrow {
+        display: none;
+    }
+
+    /* ---- Photo Blocks ---- */
     .tdmv-photo-block {
         width: 100%;
+        padding: 0;
+        flex-shrink: 0;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .tdmv-photo-block[style*="margin-left"] {
+        margin-left: 0 !important;
     }
 
     .tdmv-photo-block img,
+    .tdmv-photo-block picture img,
     .tdmv-photo-block.size-small img,
     .tdmv-photo-block.size-medium img,
     .tdmv-photo-block.size-large img,
@@ -2327,83 +2454,383 @@
         width: 100%;
     }
 
-    .tdmv-caption {
-        max-width: 100%;
+    .tdmv-photo-block picture {
+        width: 100%;
     }
 
+    .tdmv-photo-img-wrapper {
+        height: auto;
+        width: 100%;
+        overflow: visible;
+    }
+
+    .tdmv-photo-img-wrapper img {
+        height: auto;
+        width: 100%;
+    }
+
+    /* ---- Captions ---- */
+    .tdmv-caption {
+        position: relative;
+        max-width: 100%;
+        margin-top: 0.75rem;
+        padding: 0.75rem 1.5rem;
+        background: transparent;
+        border-left: none;
+        border-top: 2px solid;
+    }
+
+    .part-1 .tdmv-caption { border-top-color: var(--tdmv-part1-accent); }
+    .part-2 .tdmv-caption { border-top-color: var(--tdmv-part2-accent); }
+    .part-3 .tdmv-caption { border-top-color: var(--tdmv-part3-accent); }
+
+    .tdmv-caption-header {
+        font-size: 0.8rem;
+        margin-bottom: 0.3rem;
+    }
+
+    .tdmv-caption-text {
+        font-size: 0.8rem;
+        line-height: 1.55;
+        color: var(--tdmv-text-muted);
+    }
+
+    /* ---- Highlighted Photos ---- */
+    .tdmv-photo-highlight {
+        flex-direction: column;
+        align-items: stretch;
+        width: 100%;
+        padding: 0;
+        gap: 0;
+    }
+
+    .tdmv-highlight-img-wrapper {
+        height: auto;
+        width: 100%;
+        overflow: hidden;
+    }
+
+    .tdmv-highlight-img-wrapper img,
+    .tdmv-photo-highlight img {
+        height: auto;
+        width: 100%;
+    }
+
+    .tdmv-photo-highlight.size-large .tdmv-highlight-img-wrapper {
+        height: auto;
+    }
+
+    .tdmv-photo-highlight.size-large img {
+        height: auto;
+    }
+
+    .tdmv-highlight-panel {
+        width: 100%;
+        height: auto;
+        padding: 1.25rem 1.5rem;
+    }
+
+    .tdmv-photo-highlight.size-large .tdmv-highlight-panel {
+        height: auto;
+    }
+
+    .tdmv-highlight-header {
+        font-size: 0.7rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .tdmv-highlight-text {
+        font-size: 1.2rem;
+        line-height: 1.4;
+    }
+
+    .tdmv-highlight-description {
+        font-size: 0.8rem;
+        margin-top: 0.75rem;
+        line-height: 1.55;
+    }
+
+    /* ---- Quote Panels ---- */
     .tdmv-quote-panel {
         width: 100%;
-        padding: 2.5rem 1.5rem;
+        padding: 2rem 1.5rem;
         min-height: auto;
     }
 
+    /* ---- Insert Panels ---- */
     .tdmv-insert {
         width: 100%;
         height: auto;
-        min-height: 60vh;
+        min-height: auto;
         padding: 2rem 1.5rem;
     }
 
     .tdmv-insert-content {
-        padding: 1rem;
+        padding: 0;
     }
 
     .tdmv-insert-title {
-        font-size: 2rem;
+        font-size: 1.6rem;
+        text-align: center;
+        margin-bottom: 1.5rem;
     }
 
-    .tdmv-insert-image {
-        max-width: 100%;
-        max-height: none;
+    /* Map Insert */
+    .tdmv-map-content {
+        display: flex !important;
+        flex-direction: column;
+        width: 100%;
+        gap: 1.5rem;
     }
 
-    .tdmv-insert-image img {
-        max-height: none;
-    }
-
-    .tdmv-mine-stats {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 0.5rem 1rem;
+    .tdmv-map-content .tdmv-insert-title {
+        text-align: center;
     }
 
     .tdmv-leaflet-map {
-        height: 35vh;
-    }
-
-    .tdmv-map-content {
-        width: 90vw;
-    }
-
-    .tdmv-leaflet-map,
-    .tdmv-mine-stats {
-        width: 90vw;
-    }
-
-    /* Reduce dust overlay on mobile for better performance */
-    .tdmv-dust-overlay {
-        opacity: 0.6;
-    }
-
-    /* Timeline visual responsive */
-    .tdmv-timeline-visual {
-        min-width: auto;
         width: 100%;
+        height: 40vh;
+        border-radius: 4px;
+    }
+
+    .tdmv-mine-stats {
+        width: 100%;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.4rem;
+    }
+
+    .tdmv-mine-stat {
+        padding: 0.4rem 0.5rem;
+    }
+
+    .tdmv-mine-name {
+        font-size: 0.65rem;
+    }
+
+    .tdmv-mine-bar-container {
+        gap: 0.2rem;
+    }
+
+    .tdmv-mine-bar {
+        height: 4px;
+    }
+
+    .tdmv-mine-value {
+        font-size: 0.55rem;
+    }
+
+    /* Slopen Insert (Timeline) */
+    .tdmv-slopen-layout {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        padding: 0;
+    }
+
+    .tdmv-slopen-title {
+        font-size: 1.6rem;
+        text-align: center;
     }
 
     .tdmv-slopen-top {
         flex-direction: column;
+        gap: 2rem;
     }
 
     .tdmv-map-compare {
         width: 100%;
         max-width: none;
-        height: 40vh;
+        height: 35vh;
+        order: 1;
     }
 
-    /* Soundscape hint mobile */
-    .tdmv-soundscape-hint {
+    .tdmv-timeline-visual {
+        min-width: auto;
+        width: 100%;
+        order: 2;
+    }
+
+    .tdmv-timeline-line {
+        display: none;
+    }
+
+    .tdmv-timeline-period {
+        position: relative;
+        left: 0;
+        width: 100%;
+        margin-bottom: 1.5rem;
+    }
+
+    .tdmv-period-marker {
+        display: none;
+    }
+
+    .tdmv-period-content {
+        position: relative;
+        top: 0;
+        transform: none;
+        padding: 1rem;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 4px;
+    }
+
+    .tdmv-period-year {
+        font-size: 0.9rem;
+    }
+
+    .tdmv-period-title {
+        font-size: 1rem;
+    }
+
+    .tdmv-period-summary {
+        font-size: 0.85rem;
+    }
+
+    .tdmv-period-details {
+        display: none;
+    }
+
+    .tdmv-period-detail {
+        font-size: 0.8rem;
+    }
+
+    .tdmv-period-summary {
+        font-size: 0.8rem;
+        line-height: 1.5;
+    }
+
+    .tdmv-slopen-stats {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+        order: 3;
+    }
+
+    .tdmv-stat-item {
+        text-align: center;
+    }
+
+    .tdmv-stat-number {
+        font-size: 1.5rem;
+    }
+
+    .tdmv-stat-label {
         font-size: 0.75rem;
-        padding: 0.5rem 0.9rem;
+    }
+
+    /* Uit het Dal Insert */
+    .tdmv-uithetdal-content {
+        padding: 1rem 0;
+        align-items: center;
+    }
+
+    .tdmv-uithetdal-content .tdmv-uithetdal-title {
+        text-align: center;
+        font-size: 1.6rem;
+    }
+
+    .tdmv-uithetdal-row {
+        grid-template-columns: 1fr !important;
+        gap: 1.5rem;
+    }
+
+    .tdmv-uithetdal-row.row-1 {
+        justify-items: center;
+        text-align: center;
+    }
+
+    .tdmv-uithetdal-photo-small {
+        max-width: 280px;
+    }
+
+    .tdmv-uithetdal-caption {
+        text-align: center;
+    }
+
+    .tdmv-parkstad-header {
+        align-items: center;
+        text-align: center;
+    }
+
+    .tdmv-parkstad-population {
+        font-size: 2rem;
+    }
+
+    .tdmv-parkstad-number {
+        font-size: 1.2rem;
+    }
+
+    .tdmv-parkstad-dual {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .tdmv-parkstad-stat {
+        padding: 0.75rem;
+    }
+
+    /* Media Insert */
+    .tdmv-insert:has(.tdmv-media-content) {
+        padding: 2rem 0 !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        width: 100% !important;
+        margin: 0 !important;
+        margin-bottom: -2.5rem !important;
+        justify-content: flex-start !important;
+        align-items: stretch !important;
+    }
+
+    .tdmv-media-content {
+        padding: 0;
+        gap: 1.5rem;
+        width: 100%;
+        align-items: stretch;
+    }
+
+    .tdmv-media-title {
+        font-size: 1.6rem;
+        text-align: left;
+        padding-left: 1rem;
+    }
+
+    .tdmv-media-row {
+        flex-direction: column;
+        gap: 1.5rem;
+        width: 100%;
+        align-items: stretch;
+    }
+
+    .tdmv-media-photos {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.5rem;
+        width: 95vw;
+        padding: 0;
+        margin: 0 auto;
+    }
+
+    .tdmv-media-photos img {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 4/3;
+    }
+
+    .tdmv-media-text {
+        max-width: 100%;
+        padding: 0 1rem;
+    }
+
+    .tdmv-media-text p {
+        font-size: 0.9rem;
+        text-align: left;
+    }
+
+    /* ---- Soundscape Controls ---- */
+    .tdmv-soundscape-hint {
+        font-size: 0.7rem;
+        padding: 0.4rem 0.8rem;
+        width: auto;
+        align-self: center;
     }
 
     .tdmv-soundscape-hint svg {
@@ -2416,9 +2843,30 @@
         right: 1.5rem;
     }
 
+    .tdmv-sound-btn {
+        width: 40px;
+        height: 40px;
+    }
+
     .tdmv-sound-tooltip {
-        font-size: 0.7rem;
-        padding: 0.4rem 0.7rem;
+        display: none;
+    }
+
+    /* ---- End Panel ---- */
+    .end-panel {
+        min-width: 100% !important;
+        width: 100% !important;
+        height: auto !important;
+        min-height: 80svh;
+        padding: 3rem 1.5rem !important;
+    }
+
+    .end-panel nav {
+        gap: 0.8rem !important;
+    }
+
+    .end-panel nav a {
+        font-size: 0.9rem !important;
     }
 }
 
