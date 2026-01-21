@@ -889,6 +889,34 @@ Afstand tussen grote secties (met verticale labels):
 - japanse-oester-section
 - muskusrat-section
 
+### Beverrat cluster
+```css
+.beverrat-cluster {
+    display: flex;
+    gap: 0.4rem;
+    align-items: center;
+    height: 70vh;
+}
+```
+- **Kolom 2-3**: foto 9+10 boven (rechts uitgelijnd), diana airbug + foto 11 onder
+- **Kolom 4-5**: foto 12 boven, foto 13+14 onder
+- **Kolom 6**: tekstkader + foto 15
+- Diana airbug: 12vh, uitgelijnd met bovenkant foto 11
+
+### Muskusrat sectie
+```css
+.muskusrat-section {
+    display: flex;
+    gap: 0.4rem;
+    align-items: flex-start;
+    min-height: 70vh;  /* min-height i.p.v. height om ruimte te geven */
+}
+```
+- **Kolom 1**: foto 63 (70vh) met verticaal label
+- **Kolom 2**: foto 64 (18vh, liggend) + foto 65 (32vh, staand), margin-top: 8vh
+- **Kolom 3**: foto 66 (28vh) + foto 67 (28vh) + klem.jpg (breedte 21vh, liggend)
+- Foto 68-70 in apart grid (.muskusrat-photos)
+
 ### Kleine waterteunisbloem grid
 ```css
 .kleine-waterteunisbloem-grid {
@@ -915,7 +943,7 @@ Afstand tussen grote secties (met verticale labels):
 - **Genummerde foto's**: 1.jpg - 70.jpg
 - **Cluster foto's**: cluster 1 foto 2-7.jpg
 - **Kreeft foto's**: kreeft1-11.jpg, kreeftcentraal.jpg
-- **Speciale foto's**: beverrat.jpg, diana airbug a.jpg, info 1-3.jpg
+- **Speciale foto's**: beverrat.jpg, diana airbug a.jpg, info 1-3.jpg, klem.jpg
 
 ### JavaScript Selectors
 ```javascript

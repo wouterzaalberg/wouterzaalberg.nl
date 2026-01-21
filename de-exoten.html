@@ -20,7 +20,7 @@
         }
 
         .horizontal-scroll-content {
-            gap: 4rem;
+            gap: 10rem;
         }
 
         .photo-item {
@@ -44,6 +44,9 @@
             gap: 0.4rem;
             align-items: flex-end;
             flex-shrink: 0;
+            margin-left: -8rem;
+            max-height: 70vh;
+            max-width: 80vw;
         }
 
         .photo-cluster img {
@@ -60,7 +63,17 @@
             width: auto;
         }
 
-        /* Rechter sectie: foto 3 bovenaan, foto 5+6 onderaan */
+        /* Linker kolom: foto 4 - tegen intro tekstkader */
+        .cluster-middle {
+            flex-shrink: 0;
+        }
+
+        .cluster-middle img {
+            height: 25vh;
+            width: auto;
+        }
+
+        /* Rechter sectie: foto 3 bovenaan, foto 5+6+7 onderaan */
         .cluster-right {
             display: flex;
             flex-direction: column;
@@ -68,14 +81,31 @@
             gap: 0.4rem;
         }
 
-        /* Foto 3 - niet croppen, kan uitsteken */
-        .cluster-right > img {
+        /* Foto 3 */
+        .cluster-right > img.foto-3 {
             height: 30vh;
             width: auto;
             object-fit: contain;
         }
 
-        /* Onderste rij: foto 5 en 6 */
+        /* Foto 8 wrapper met tekstkader */
+        .foto-8-wrapper {
+            display: flex;
+            gap: 0.4rem;
+            align-items: flex-start;
+        }
+
+        .foto-8-wrapper img.foto-8 {
+            height: 18vh;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .foto-8-wrapper .photo-caption-box {
+            max-width: 200px;
+        }
+
+        /* Onderste rij: foto 5, 6 en 7 */
         .cluster-bottom {
             display: flex;
             gap: 0.4rem;
@@ -94,18 +124,18 @@
         /* Grijze achtergrond sectie */
         .gray-section {
             display: flex;
-            align-items: flex-end;
+            align-items: center;
             background: #f0f0f0;
             padding: 0 4rem;
             padding-left: 6rem;
             padding-right: 8rem;
-            gap: 12rem;
+            gap: 10rem;
             flex-shrink: 0;
             min-height: 100vh;
             margin-top: -80px;
             margin-left: 0;
-            padding-top: calc(80px + 8rem);
-            padding-bottom: calc((100vh - 70vh) / 2);
+            margin-right: -6rem;
+            padding-top: 80px;
             box-sizing: border-box;
             position: relative;
         }
@@ -213,7 +243,7 @@
             align-items: flex-start;
             align-self: flex-start;
             gap: 0.4rem;
-            padding-top: 15vh;
+            padding-top: 5vh;
             box-sizing: border-box;
         }
 
@@ -231,17 +261,18 @@
         /* Foto 19-20 cluster: versprongen foto's */
         .photo-cluster-19-20 {
             display: flex;
-            gap: 1.5rem;
+            flex-direction: column;
+            gap: 0.4rem;
             flex-shrink: 0;
             height: 70vh;
             align-items: flex-start;
+            margin-left: 6rem;
         }
 
-        .photo-cluster-19-20 .photos-stack {
+        .photo-cluster-19-20 .photo-19-row {
             display: flex;
-            flex-direction: column;
             gap: 0.4rem;
-            overflow: visible;
+            align-items: flex-end;
         }
 
         .photo-cluster-19-20 .photo-top {
@@ -276,7 +307,9 @@
         }
 
         .photo-cluster-19-20 .caption-column {
-            align-self: flex-start;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
         }
 
         .photo-cluster-19-20 .caption-column .photo-caption-box {
@@ -290,6 +323,7 @@
             align-items: flex-end;
             flex-shrink: 0;
             height: 70vh;
+            margin-left: 16rem;
         }
 
         .hoornaar-cluster .photo-klein {
@@ -320,16 +354,12 @@
         .hoornaar-cluster .row-caption-23 {
             display: flex;
             gap: 0.4rem;
-            justify-content: space-between;
-            align-items: stretch;
+            align-items: flex-end;
         }
 
         .hoornaar-cluster .row-caption-23 .photo-caption-box {
-            height: 17vh;
+            min-width: 380px;
             box-sizing: border-box;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
         }
 
         .hoornaar-cluster .col-22-23 .photo-xs img {
@@ -374,42 +404,46 @@
             position: relative;
         }
 
-        .hoornaar-boog .vertical-label {
+        .hoornaar-boog > .vertical-label {
             position: absolute;
-            top: 0;
+            bottom: 100%;
             left: 0;
-            margin-left: -3rem;
+            margin-bottom: 0.5rem;
         }
 
-        /* Boog posities met margin-bottom voor hoogte */
-        .hoornaar-boog .foto-25 {
-            margin-bottom: 0;
-        }
-        .hoornaar-boog .foto-25 img {
-            height: 20vh;
+        /* Kolom voor foto 25 en 26 */
+        .hoornaar-boog .boog-kolom-25-26 {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+            align-items: flex-end;
+            align-self: flex-start;
+            margin-top: calc(25vh + 0.4rem);
         }
 
-        .hoornaar-boog .foto-26 {
-            margin-bottom: 18vh;
-            margin-left: -8vh;
-        }
         .hoornaar-boog .foto-26 img {
-            height: 22vh;
+            height: 26vh;
         }
 
-        .hoornaar-boog .foto-28 {
-            margin-bottom: 18vh;
-        }
-        .hoornaar-boog .foto-28 img {
-            height: 22vh;
+        .hoornaar-boog .foto-25 img {
+            height: 15vh;
         }
 
-        .hoornaar-boog .foto-27 {
-            margin-bottom: 45vh;
-            margin-left: -22vh;
+        /* Kolom voor foto 27 en 28 - linkerkanten uitgelijnd */
+        .hoornaar-boog .boog-kolom-27-28 {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+            align-items: flex-start;
+            align-self: flex-start;
         }
+
         .hoornaar-boog .foto-27 img {
             height: 25vh;
+        }
+
+        .hoornaar-boog .foto-28 img {
+            height: 26vh;
         }
 
         .hoornaar-boog .foto-29 {
@@ -429,10 +463,10 @@
         }
 
         .hoornaar-boog .foto-30 {
-            margin-bottom: 23vh;
+            margin-bottom: 22vh;
         }
         .hoornaar-boog .foto-30 img {
-            height: 20vh;
+            height: 26vh;
         }
 
         /* Foto 31-34 cluster */
@@ -451,8 +485,40 @@
             gap: 0.3rem;
         }
 
+        .foto-31-column .foto-32-row {
+            display: flex;
+            gap: 0.4rem;
+            align-items: flex-start;
+        }
+
         .foto-31-column .foto-32 img {
-            height: 17vh;
+            height: 22vh;
+        }
+
+        .foto-31-column .foto-32-caption {
+            background: transparent;
+            border: 2px solid #a8c8e8;
+            padding: 1.5rem;
+            box-sizing: border-box;
+            max-width: 320px;
+        }
+
+        .foto-31-column .foto-32-caption .caption-title {
+            font-family: 'Scala Sans', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: #1a1a1a;
+            margin: 0 0 0.8rem 0;
+        }
+
+        .foto-31-column .foto-32-caption .caption-text {
+            font-family: 'Scala Sans', sans-serif;
+            font-size: 0.85rem;
+            color: #1a1a1a;
+            line-height: 1.6;
+            margin: 0;
         }
 
         .foto-31-column .foto-31 img {
@@ -475,6 +541,27 @@
             height: 25vh;
         }
 
+        /* Foto 33-34 kolom naast foto 35 */
+        .foto-33-34-column {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+            align-items: flex-end;
+            justify-content: flex-end;
+            height: 70vh;
+            flex-shrink: 0;
+        }
+
+        .foto-33-34-column .foto-34 img {
+            height: 10vh;
+            width: auto;
+        }
+
+        .foto-33-34-column .foto-33 img {
+            height: 25vh;
+            width: auto;
+        }
+
         /* Foto 35 sectie met tekstkader en grid */
         .foto-35-section {
             display: flex;
@@ -482,6 +569,7 @@
             align-items: center;
             flex-shrink: 0;
             height: 70vh;
+            margin-left: -9.6rem;
         }
 
         .foto-35-section .labeled-photo img {
@@ -490,13 +578,15 @@
 
         .foto-35-section .section-caption {
             align-self: center;
-            max-width: 280px;
+            max-width: 320px;
         }
 
         .foto-grid-36-39 {
             display: flex;
             gap: 0.4rem;
             align-items: flex-start;
+            max-height: 70vh;
+            max-width: 80vw;
         }
 
         .foto-grid-36-39 .grid-column {
@@ -515,6 +605,11 @@
             display: block;
         }
 
+        /* Foto 38 en 39 iets groter */
+        .foto-grid-36-39 .grid-column:last-child img {
+            height: 28vh;
+        }
+
         /* Amerikaanse rivierkreeft sectie */
         .rivierkreeft-section {
             display: flex;
@@ -522,7 +617,7 @@
             align-items: flex-start;
             flex-shrink: 0;
             height: 70vh;
-            margin-left: 8rem;
+            margin-left: 16rem;
         }
 
         .rivierkreeft-section .labeled-photo img {
@@ -531,7 +626,7 @@
 
         .rivierkreeft-section .rivierkreeft-caption {
             margin-top: 17vh;
-            max-width: 280px;
+            max-width: 320px;
         }
 
         /* Kreeft grid - ronde vorm */
@@ -552,45 +647,41 @@
             align-items: flex-end;
         }
 
-        /* Individuele kreeft uitlijning */
-        .kreeft-grid .align-bottom {
-            align-self: flex-end;
-        }
-
-        .kreeft-grid .kreeft-md-lg {
-            width: 17vh;
-            height: 23vh;
-        }
-
         .kreeft-grid img {
             display: block;
             object-fit: cover;
         }
 
-        /* Variërende groottes voor organische look - 3:4 verhouding (portret), grid 70vh */
-        .kreeft-grid .kreeft-xs {
-            width: 12vh;
-            height: 16vh;
-        }
-
-        .kreeft-grid .kreeft-sm {
-            width: 15vh;
+        /* Rij 1: bovenste rij - 4 foto's, 20vh hoog */
+        .kreeft-row:nth-child(1) img {
             height: 20vh;
+            width: auto;
         }
 
-        .kreeft-grid .kreeft-md {
-            width: 16.5vh;
-            height: 22vh;
-        }
-
-        .kreeft-grid .kreeft-lg {
-            width: 18vh;
+        /* Rij 2: middelste rij - 5 foto's, 24vh hoog (breedst) */
+        .kreeft-row:nth-child(2) img {
             height: 24vh;
+            width: auto;
         }
 
+        /* Rij 3: onderste rij - 3 foto's, 18vh hoog */
+        .kreeft-row:nth-child(3) img {
+            height: 18vh;
+            width: auto;
+        }
+
+        /* Centrale kreeft iets groter */
         .kreeft-grid .kreeft-central {
-            width: 18vh;
-            height: 24vh;
+            height: 26vh;
+            width: auto;
+        }
+
+        /* Kreeft 8 kleiner en rechts uitgelijnd */
+        .kreeft-grid .kreeft-small {
+            height: 12vh;
+            width: auto;
+            align-self: flex-end;
+            margin-left: 0.4rem;
         }
 
         /* Foto 41 wrapper */
@@ -607,16 +698,16 @@
 
         .foto-41-wrapper .foto-41-caption {
             margin-top: 17vh;
-            max-width: 280px;
+            max-width: 320px;
         }
 
         /* Ongelijkbladig vederkruid sectie */
         .vederkruid-section {
             display: flex;
-            gap: 1.5rem;
+            gap: 0.4rem;
             align-items: center;
             flex-shrink: 0;
-            margin-left: 12rem;
+            margin-left: 16rem;
         }
 
         .vederkruid-section .labeled-photo img,
@@ -632,7 +723,7 @@
             align-items: flex-end;
             justify-content: flex-end;
             gap: 0.4rem;
-            height: 70vh;
+            height: 100%;
             flex-shrink: 0;
         }
 
@@ -655,23 +746,26 @@
 
         .foto-49-wrapper .caption-box {
             background: transparent;
-            border: 1px solid #a8c8e8;
-            padding: 1rem 1.5rem;
-            max-width: 280px;
+            border: 2px solid #a8c8e8;
+            padding: 1.5rem;
+            max-width: 320px;
         }
 
         .foto-49-wrapper .caption-box .caption-title {
-            font-family: 'Scala Sans SC', sans-serif;
-            font-size: 0.9rem;
+            font-family: 'Scala Sans', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
             color: #1a1a1a;
-            margin-bottom: 0.5rem;
+            margin: 0 0 0.8rem 0;
         }
 
         .foto-49-wrapper .caption-box .caption-text {
             font-family: 'Scala Sans', sans-serif;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             color: #1a1a1a;
-            line-height: 1.5;
+            line-height: 1.6;
         }
 
         .foto-49-wrapper img {
@@ -684,30 +778,33 @@
             gap: 1.5rem;
             align-items: center;
             flex-shrink: 0;
-            margin-left: 12rem;
+            margin-left: 16rem;
         }
 
         .vlinderstruik-section .caption-box {
             background: transparent;
-            border: 1px solid #a8c8e8;
-            padding: 1rem 1.5rem;
-            max-width: 280px;
+            border: 2px solid #a8c8e8;
+            padding: 1.5rem;
+            max-width: 320px;
             align-self: flex-start;
             margin-top: 17.5vh;
         }
 
         .vlinderstruik-section .caption-box .caption-title {
-            font-family: 'Scala Sans SC', sans-serif;
-            font-size: 0.9rem;
+            font-family: 'Scala Sans', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
             color: #1a1a1a;
-            margin-bottom: 0.5rem;
+            margin: 0 0 0.8rem 0;
         }
 
         .vlinderstruik-section .caption-box .caption-text {
             font-family: 'Scala Sans', sans-serif;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             color: #1a1a1a;
-            line-height: 1.5;
+            line-height: 1.6;
         }
 
         .vlinderstruik-section .labeled-photo img {
@@ -717,188 +814,354 @@
         /* Grote Waterteunisbloem sectie */
         .waterteunisbloem-section {
             display: flex;
-            gap: 1.5rem;
+            gap: 0.4rem;
             align-items: flex-start;
             flex-shrink: 0;
-            margin-left: 12rem;
         }
 
         .waterteunisbloem-section .labeled-photo img {
             height: 70vh;
         }
 
-        .waterteunisbloem-section .foto-51-wrapper {
-            display: flex;
-            gap: 1rem;
-            align-items: flex-start;
-        }
-
         .waterteunisbloem-section .foto-51-caption {
             background: transparent;
-            border: 1px solid #a8c8e8;
-            padding: 1rem 1.5rem;
-            max-width: 250px;
+            border: 2px solid #a8c8e8;
+            padding: 1.5rem;
+            max-width: 320px;
+            margin-left: 1.1rem;
         }
 
         .waterteunisbloem-section .foto-51-caption .caption-title {
-            font-family: 'Scala Sans SC', sans-serif;
-            font-size: 0.9rem;
+            font-family: 'Scala Sans', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
             color: #1a1a1a;
-            margin-bottom: 0.5rem;
+            margin: 0 0 0.8rem 0;
         }
 
         .waterteunisbloem-section .foto-51-caption .caption-text {
             font-family: 'Scala Sans', sans-serif;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             color: #1a1a1a;
-            line-height: 1.5;
+            line-height: 1.6;
         }
 
         .waterteunisbloem-section .foto-52-53-column {
             display: flex;
             flex-direction: column;
             gap: 0.4rem;
-            align-items: flex-end;
+            align-items: flex-start;
         }
 
-        .waterteunisbloem-section .foto-52-53-column img.foto-52 {
-            height: 25vh;
-        }
-
-        .waterteunisbloem-section .foto-52-53-column img.foto-53 {
-            height: 34vh;
+        .waterteunisbloem-section .foto-52-53-column img {
+            width: 25vh;
+            height: auto;
         }
 
         /* Watercrassula sectie */
+        /* Watercrassula sectie - zelfde patroon als vlinderstruik */
+        /* Watercrassula sectie */
         .watercrassula-section {
             display: flex;
-            gap: 1.5rem;
+            gap: 0.4rem;
             align-items: flex-start;
+            height: 70vh;
             flex-shrink: 0;
-            margin-left: 12rem;
+            position: relative;
+            margin-left: 16rem;
         }
 
-        .watercrassula-section .foto-54-wrapper {
-            display: flex;
-            gap: 1rem;
-            align-items: flex-start;
+        .watercrassula-section .vertical-label {
+            position: absolute;
+            bottom: 100%;
+            left: 0;
+            margin-bottom: 0.5rem;
         }
 
         .watercrassula-section .foto-54-column {
             display: flex;
             flex-direction: column;
-            gap: 0.5rem;
-            align-items: flex-start;
+            gap: 0.4rem;
+            align-items: flex-end;
         }
 
-        .watercrassula-section .foto-54-caption {
+        .watercrassula-section .foto-54 {
+            height: 45vh;
+            width: auto;
+        }
+
+        .watercrassula-section .caption-box {
             background: transparent;
-            border: 1px solid #a8c8e8;
-            padding: 1rem 1.5rem;
-            max-width: 250px;
+            border: 2px solid #a8c8e8;
+            padding: 1.5rem;
+            box-sizing: border-box;
+            max-width: 320px;
         }
 
-        .watercrassula-section .foto-54-caption .caption-title {
-            font-family: 'Scala Sans SC', sans-serif;
-            font-size: 0.9rem;
+        .watercrassula-section .caption-box .caption-title {
+            font-family: 'Scala Sans', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
             color: #1a1a1a;
+            margin: 0 0 0.8rem 0;
+        }
+
+        .watercrassula-section .caption-box .caption-text {
+            font-family: 'Scala Sans', sans-serif;
+            font-size: 0.85rem;
+            color: #1a1a1a;
+            line-height: 1.6;
+        }
+
+        .watercrassula-section .foto-55 {
+            height: 45vh;
+            width: auto;
+        }
+
+        /* Kleine waterteunisbloem sectie - CSS Grid layout */
+        /* Kleine waterteunisbloem - grid 80vw max, 70vh hoog */
+        .kleine-waterteunisbloem-section {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+            height: 70vh;
+            max-width: 80vw;
+            flex-shrink: 0;
+            position: relative;
+            margin-left: 16rem;
+        }
+
+        .kleine-waterteunisbloem-section .vertical-label {
+            position: absolute;
+            bottom: 100%;
+            left: 0;
             margin-bottom: 0.5rem;
         }
 
-        .watercrassula-section .foto-54-caption .caption-text {
-            font-family: 'Scala Sans', sans-serif;
-            font-size: 0.8rem;
-            color: #1a1a1a;
-            line-height: 1.5;
-        }
-
-        .watercrassula-section .foto-54-column img {
-            height: 45vh;
-        }
-
-        .watercrassula-section .foto-55 img {
-            height: 45vh;
-        }
-
-        /* Kleine waterteunisbloem sectie */
-        .kleine-waterteunisbloem-section {
+        /* Rijen */
+        .kwt-row {
             display: flex;
-            gap: 1.5rem;
-            align-items: center;
-            flex-shrink: 0;
-            margin-left: 12rem;
-        }
-
-        .kleine-waterteunisbloem-section .labeled-photo img {
-            height: 70vh;
-        }
-
-        .kleine-waterteunisbloem-grid {
-            display: grid;
-            grid-template-columns: repeat(3, auto);
-            grid-template-rows: repeat(3, 1fr);
             gap: 0.4rem;
-            height: 70vh;
-            align-items: end;
+            align-items: flex-start;
+        }
+        .kwt-row-1 {
+            height: 25vh;
+        }
+        .kwt-row-2 {
+            height: calc(45vh - 0.4rem);
         }
 
-        .kleine-waterteunisbloem-grid img {
-            height: 22vh;
-            object-fit: cover;
+        /* Foto containers vullen rij hoogte */
+        .kwt-foto-56,
+        .kwt-foto-57,
+        .kwt-foto-58a,
+        .kwt-foto-59,
+        .kwt-foto-58,
+        .kwt-foto-60 {
+            height: 100%;
         }
 
-        .kleine-waterteunisbloem-grid img.size-groot {
+        /* Foto's behouden aspect ratio */
+        .kwt-foto-56 img,
+        .kwt-foto-57 img,
+        .kwt-foto-58a img,
+        .kwt-foto-59 img,
+        .kwt-foto-58 img,
+        .kwt-foto-60 img {
+            height: 100%;
+            width: auto;
+        }
+
+        /* Tekst box */
+        .kwt-tekst {
+            background: transparent;
+            border: 2px solid #a8c8e8;
+            padding: 1.5rem;
+            box-sizing: border-box;
+            width: 220px;
+            flex-shrink: 0;
+        }
+        .kwt-tekst .caption-title {
+            font-family: 'Scala Sans', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: #1a1a1a;
+            margin: 0 0 0.8rem 0;
+        }
+        .kwt-tekst .caption-text {
+            font-family: 'Scala Sans', sans-serif;
+            font-size: 0.85rem;
+            color: #1a1a1a;
+            line-height: 1.6;
+        }
+
+        /* Foto 61 sectie */
+        .foto-61-section {
+            display: flex;
+            gap: 0.4rem;
+            align-items: flex-start;
+            flex-shrink: 0;
+        }
+
+        .foto-61-section .foto-61-caption {
+            margin-top: 17.5vh;
+            background: transparent;
+            border: 2px solid #a8c8e8;
+            padding: 1.5rem;
+            max-width: 320px;
+        }
+
+        .foto-61-section .foto-61-caption .caption-title {
+            font-family: 'Scala Sans', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: #1a1a1a;
+            margin: 0 0 0.8rem 0;
+        }
+
+        .foto-61-section .foto-61-caption .caption-text {
+            font-family: 'Scala Sans', sans-serif;
+            font-size: 0.85rem;
+            color: #1a1a1a;
+            line-height: 1.6;
+        }
+
+        .foto-61-section img {
             height: 70vh;
-            grid-row: span 3;
+            width: auto;
         }
 
         /* Japanse oester sectie */
         .japanse-oester-section {
             display: flex;
-            gap: 1.5rem;
-            align-items: center;
+            gap: 0.4rem;
+            align-items: flex-start;
             flex-shrink: 0;
-            margin-left: 12rem;
+            margin-left: 16rem;
         }
 
         .japanse-oester-section .labeled-photo img {
             height: 70vh;
         }
 
+        .japanse-oester-section .oester-caption {
+            margin-top: 17.5vh;
+            background: transparent;
+            border: 2px solid #a8c8e8;
+            padding: 1.5rem;
+            max-width: 320px;
+        }
+
+        .japanse-oester-section .oester-caption .caption-title {
+            font-family: 'Scala Sans', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: #1a1a1a;
+            margin: 0 0 0.8rem 0;
+        }
+
+        .japanse-oester-section .oester-caption .caption-text {
+            font-family: 'Scala Sans', sans-serif;
+            font-size: 0.85rem;
+            color: #1a1a1a;
+            line-height: 1.6;
+        }
+
         /* Muskusrat sectie */
+        /* Muskusrat sectie - 3 kolommen layout (40% / 35% / 25%) */
         .muskusrat-section {
             display: flex;
-            gap: 1.5rem;
-            align-items: center;
-            flex-shrink: 0;
-            margin-left: 12rem;
-        }
-
-        .muskusrat-section .labeled-photo img {
-            height: 70vh;
-        }
-
-        .muskusrat-grid {
-            display: grid;
-            grid-template-columns: repeat(3, auto);
             gap: 0.4rem;
+            align-items: flex-start;
+            flex-shrink: 0;
+            min-height: 70vh;
+        }
+
+        /* Kolom 1: 40% - foto 63 */
+        .muskusrat-col1 {
+            flex: 0 0 auto;
+            position: relative;
+        }
+
+        .muskusrat-col1 img {
             height: 70vh;
-            align-items: center;
+            width: auto;
         }
 
-        .muskusrat-grid img {
+        .muskusrat-col1 .vertical-label {
+            position: absolute;
+            bottom: 100%;
+            left: 0;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Kolom 2: 35% - foto 64 (liggend) boven 65 (staand), start op 1/4 hoogte */
+        .muskusrat-col2 {
+            flex: 0 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+            margin-top: 8vh;
+        }
+
+        .muskusrat-col2 .foto-64 {
+            height: 18vh;
+            width: auto;
+        }
+
+        .muskusrat-col2 .foto-65 {
             height: 32vh;
-            object-fit: cover;
+            width: auto;
         }
 
+        /* Kolom 3: 25% - foto 66 (liggend) en 67 (staand) */
+        .muskusrat-col3 {
+            flex: 0 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+
+        .muskusrat-col3 .foto-66 {
+            height: 28vh;
+            width: auto;
+        }
+
+        .muskusrat-col3 .foto-67 {
+            height: 28vh;
+            width: auto;
+        }
+
+        .muskusrat-col3 .foto-klem {
+            width: 21vh; /* 28vh * 3/4 = 21vh */
+            height: auto;
+        }
+
+        /* Caption box als standalone scroll element */
         .muskusrat-caption-box {
             display: flex;
-            gap: 2rem;
+            flex-direction: column;
+            gap: 1rem;
             background: transparent;
-            border: 1px solid #a8c8e8;
-            padding: 1.5rem 2rem;
-            max-width: 500px;
+            border: 2px solid #a8c8e8;
+            padding: 1.5rem;
+            max-width: 400px;
             flex-shrink: 0;
+            height: 70vh;
+            box-sizing: border-box;
+            justify-content: center;
+            margin-left: -8rem;
+            margin-right: -8rem;
         }
 
         .muskusrat-caption-box .caption-column {
@@ -906,28 +1169,69 @@
         }
 
         .muskusrat-caption-box .caption-title {
-            font-family: 'Scala Sans SC', sans-serif;
-            font-size: 0.9rem;
+            font-family: 'Scala Sans', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
             color: #1a1a1a;
-            margin-bottom: 0.5rem;
+            margin: 0 0 0.8rem 0;
         }
 
         .muskusrat-caption-box .caption-text {
             font-family: 'Scala Sans', sans-serif;
-            font-size: 0.8rem;
+            font-size: 0.95rem;
             color: #1a1a1a;
-            line-height: 1.5;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .muskusrat-caption-box .caption-text:last-child {
+            margin-bottom: 0;
         }
 
         .muskusrat-photos {
-            display: flex;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: auto auto;
             gap: 0.4rem;
-            align-items: center;
             flex-shrink: 0;
+            height: 70vh;
         }
 
-        .muskusrat-photos img {
-            height: 70vh;
+        .muskusrat-photos .foto-68 {
+            grid-column: 1 / 3;
+            grid-row: 1;
+            align-self: end;
+            justify-self: start;
+        }
+
+        .muskusrat-photos .foto-68 img {
+            height: 35vh;
+            width: auto;
+        }
+
+        .muskusrat-photos .foto-70 {
+            grid-column: 3 / 5;
+            grid-row: 1;
+            align-self: start;
+            justify-self: start;
+            margin-top: 8vh;
+        }
+
+        .muskusrat-photos .foto-70 img {
+            height: 30vh;
+            width: auto;
+        }
+
+        .muskusrat-photos .foto-69 {
+            grid-column: 1 / 4;
+            grid-row: 2;
+        }
+
+        .muskusrat-photos .foto-69 img {
+            height: 32vh;
+            width: auto;
         }
 
         /* Einde deel panel */
@@ -935,10 +1239,11 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            min-width: 100vw;
+            min-width: 400px;
             height: 70vh;
             flex-shrink: 0;
             text-align: center;
+            padding: 0 4rem;
         }
 
         .einde-deel-panel .einde-tekst {
@@ -950,13 +1255,23 @@
             line-height: 2;
         }
 
-        /* Foto 43-46 cluster */
-        .foto-43-46-cluster {
+        /* Foto 43-48 wrapper - uniforme gap tussen 46 en 47 */
+        .foto-43-48-wrapper {
             display: flex;
-            gap: 1.5rem;
+            gap: 0.4rem;
             align-items: center;
             flex-shrink: 0;
             height: 70vh;
+            margin-left: calc(-10rem + 0.4rem);
+        }
+
+        /* Foto 43-46 cluster */
+        .foto-43-46-cluster {
+            display: flex;
+            gap: 0.4rem;
+            align-items: center;
+            align-self: stretch;
+            flex-shrink: 0;
         }
 
         .foto-43-column {
@@ -964,30 +1279,33 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 0.5rem;
+            gap: 0.4rem;
         }
 
         .foto-43-column .caption-box {
             background: transparent;
-            border: 1px solid #a8c8e8;
-            padding: 1rem 1.5rem;
-            max-width: 280px;
+            border: 2px solid #a8c8e8;
+            padding: 1.5rem;
+            max-width: 380px;
             align-self: flex-start;
             text-align: left;
         }
 
         .foto-43-column .caption-box .caption-title {
-            font-family: 'Scala Sans SC', sans-serif;
-            font-size: 0.9rem;
+            font-family: 'Scala Sans', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
             color: #1a1a1a;
-            margin-bottom: 0.5rem;
+            margin: 0 0 0.8rem 0;
         }
 
         .foto-43-column .caption-box .caption-text {
             font-family: 'Scala Sans', sans-serif;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             color: #1a1a1a;
-            line-height: 1.5;
+            line-height: 1.6;
         }
 
         .foto-43-column .foto-43 img {
@@ -1025,7 +1343,7 @@
         /* Bijschrift styling */
         .photo-with-caption {
             display: flex;
-            align-items: flex-start;
+            align-items: center;
             gap: 1.5rem;
             flex-shrink: 0;
             position: relative;
@@ -1091,29 +1409,13 @@
         }
 
         /* Alle kolommen niet laten krimpen */
-        .beverrat-col1,
         .beverrat-col23,
         .beverrat-col45,
         .beverrat-col6 {
             flex-shrink: 0;
         }
 
-        /* Kolom 1: diana airbug met blauwe achtergrond */
-        .beverrat-col1 {
-            position: relative;
-        }
-
-        .beverrat-col1-inner {
-            background: #a8c8e8;
-            padding: 1.5rem;
-        }
-
-        .beverrat-col1 img {
-            height: 12vh;
-            width: auto;
-        }
-
-        /* Kolom 2-3: 9+10 boven, 11 onder */
+        /* Kolom 2-3: 9+10 boven, diana airbug + 11 onder */
         .beverrat-col23 {
             display: flex;
             flex-direction: column;
@@ -1123,20 +1425,27 @@
         .beverrat-col23-top {
             display: flex;
             gap: 0.4rem;
+            justify-content: flex-end;
         }
 
         .beverrat-col23-top img {
-            height: 12vh;
+            height: 22vh;
             width: auto;
         }
 
         .beverrat-col23-bottom {
             display: flex;
+            gap: 0.4rem;
+            align-items: flex-start;
         }
 
         .beverrat-col23-bottom img {
-            height: 28vh;
+            height: 40vh;
             width: auto;
+        }
+
+        .beverrat-col23-bottom .diana-airbug {
+            height: 12vh;
         }
 
         /* Kolom 4-5: 12 boven, 13+14 onder */
@@ -1157,7 +1466,7 @@
 
         .beverrat-col45-bottom {
             display: flex;
-            gap: 0.4rem;
+            gap: 2.4rem;
         }
 
         .beverrat-col45-bottom img {
@@ -1186,14 +1495,10 @@
         .wolhandkrab-cluster {
             position: relative;
             flex-shrink: 0;
-            min-width: 100vw;
             height: 70vh;
             display: flex;
             align-items: flex-end;
-            justify-content: center;
             box-sizing: border-box;
-            padding-left: 4rem;
-            padding-right: 4rem;
         }
 
         .wolhandkrab-inner {
@@ -1226,7 +1531,7 @@
         }
 
         .wolhandkrab-right .photo-caption-box {
-            max-width: 250px;
+            max-width: 350px;
         }
 
         /* Intro sectie: foto 1 + tekstvak gecentreerd */
@@ -1237,12 +1542,22 @@
             flex-shrink: 0;
             min-width: 100vw;
             justify-content: center;
-            padding: 0 4rem;
+            margin-left: -4rem;
             box-sizing: border-box;
         }
 
         .intro-section .photo-item {
             margin-right: 0;
+            overflow: hidden;
+        }
+
+        /* Zoom effect voor foto 1 */
+        .intro-section .photo-item img {
+            transition: transform 14s cubic-bezier(0.25, 0.1, 0.25, 1);
+        }
+
+        .intro-section .photo-item img.zoom-active {
+            transform: scale(1.06);
         }
 
         /* Intro wrapper: titel + plaatje + tekstvak = 70vh */
@@ -1251,20 +1566,46 @@
             flex-direction: column;
             align-items: center;
             flex-shrink: 0;
-            height: 70vh;
+            height: 80vh;
         }
 
         .intro-title {
             font-family: 'Scala Sans', sans-serif;
-            font-size: 3.5rem;
+            font-size: 9rem;
             font-weight: 400;
             color: #1a1a1a;
             margin: 0;
             line-height: 1;
             text-align: center;
+            white-space: nowrap;
         }
 
-        .intro-title span {
+        .intro-title .letter {
+            display: inline-block;
+            position: relative;
+            opacity: 0;
+            transition: opacity 0.6s ease-out;
+        }
+
+        .intro-title .letter.visible {
+            opacity: 1;
+        }
+
+        .intro-title .letter.italic {
+            font-style: italic;
+            color: #2d5a27;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .intro-title .letter.final {
+            font-style: normal;
+        }
+
+        .intro-title .letter.italic {
             font-style: italic;
         }
 
@@ -1281,7 +1622,6 @@
         /* Tekstvak */
         .intro-panel {
             flex: 1;
-            width: 100%;
             background: #e8e8e8;
             padding: 2rem;
             box-sizing: border-box;
@@ -1297,14 +1637,64 @@
             line-height: 1.7;
             color: rgba(0,0,0,0.75);
             margin: 0 0 0.8rem 0;
+            opacity: 0;
+            transform: translateY(-15px);
+            animation: fadeInDown 0.8s ease-out forwards;
+        }
+
+        .intro-panel p:nth-child(1) { animation-delay: 0.5s; }
+        .intro-panel p:nth-child(2) { animation-delay: 1s; }
+        .intro-panel p:nth-child(3) { animation-delay: 1.5s; }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-15px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .intro-panel p:last-child {
             margin-bottom: 0;
         }
+
+        /* Progress indicator */
+        .exoten-progress {
+            position: fixed;
+            bottom: 2rem;
+            left: 2rem;
+            font-family: 'Scala Sans', sans-serif;
+            font-size: 0.85rem;
+            color: rgba(0, 0, 0, 0.3);
+            z-index: 50;
+            pointer-events: none;
+            display: flex;
+            align-items: baseline;
+            gap: 0.1em;
+        }
+
+        .exoten-progress-number {
+            font-variant-numeric: tabular-nums;
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: rgba(0, 0, 0, 0.4);
+        }
+
+        .exoten-progress-percent {
+            font-size: 0.75rem;
+            opacity: 0.7;
+        }
     </style>
 </head>
 <body class="horizontal-scroll-page">
+    <!-- Progress indicator -->
+    <div class="exoten-progress" id="progressIndicator">
+        <span class="exoten-progress-number" id="progressNumber">0</span><span class="exoten-progress-percent">%</span>
+    </div>
+
     <nav class="horizontal-nav" style="padding-left: 4rem;">
         <div>
             <a href="index.html" class="back-link">← Terug</a>
@@ -1318,7 +1708,7 @@
             <div class="intro-section" id="introSection">
                 <div class="photo-item"><img src="de-exoten/1.jpg" alt="1" loading="eager" id="photo1"></div>
                 <div class="intro-wrapper" id="introWrapper">
-                <h1 class="intro-title">De Exo<span>ten</span></h1>
+                <h1 class="intro-title" id="introTitle"><span class="letter">D</span><span class="letter">e</span><span class="letter"> </span><span class="letter">E</span><span class="letter">x</span><span class="letter">o</span><span class="letter italic">t</span><span class="letter">e</span><span class="letter">n</span></h1>
                 <div class="intro-image">
                     <img src="de-exoten/beverrat.jpg" alt="Beverrat">
                 </div>
@@ -1331,16 +1721,28 @@
 
             <!-- Cluster 1 -->
             <div class="photo-cluster">
-                <!-- Linker kolom: foto 2 -->
+                <!-- Linker kolom: foto 4 (tegen intro tekstkader) -->
+                <div class="cluster-middle">
+                    <img src="de-exoten/cluster 1 foto 4.jpg" alt="cluster 1 foto 4" loading="eager">
+                </div>
+                <!-- Foto 2 -->
                 <div class="cluster-left">
                     <img src="de-exoten/cluster 1 foto 2.jpg" alt="cluster 1 foto 2" loading="eager">
                 </div>
-                <!-- Rechter sectie: foto 3 boven, foto 5+6 onder -->
+                <!-- Rechter sectie: foto 3, foto 8 eronder, foto 5+6+7 onderaan -->
                 <div class="cluster-right">
-                    <img src="de-exoten/cluster 1 foto 3.jpg" alt="cluster 1 foto 3" loading="eager">
+                    <img src="de-exoten/cluster 1 foto 3.jpg" alt="cluster 1 foto 3" loading="eager" class="foto-3">
+                    <div class="foto-8-wrapper">
+                        <img src="de-exoten/cluster 1 foto 8.jpg" alt="cluster 1 foto 8" loading="lazy" class="foto-8">
+                        <div class="photo-caption-box">
+                            <h4 class="caption-title">Overal exoten</h4>
+                            <p class="caption-text">Wasbeer, Aziatische hoornaar, zonnebaars, Japanse duizendknoop, beverrat, Amerikaanse rivierkreeft, en baby muskusratten op sterk water.</p>
+                        </div>
+                    </div>
                     <div class="cluster-bottom">
                         <img src="de-exoten/cluster 1 foto 5.jpg" alt="cluster 1 foto 5" loading="lazy">
                         <img src="de-exoten/cluster 1 foto 6.jpg" alt="cluster 1 foto 6" loading="lazy">
+                        <img src="de-exoten/cluster 1 foto 7.jpg" alt="cluster 1 foto 7" loading="lazy">
                     </div>
                 </div>
             </div>
@@ -1355,7 +1757,7 @@
             <div class="gray-section">
                 <div class="photo-with-caption caption-right">
                     <div class="labeled-photo">
-                        <span class="vertical-label">wasb<span class="accent">e</span>er</span>
+                        <span class="vertical-label">Wasb<span class="accent">e</span>er</span>
                         <img src="de-exoten/8.jpg" alt="8" loading="lazy">
                     </div>
                     <div class="photo-caption-box" style="margin-top: 23vh;">
@@ -1365,20 +1767,15 @@
                 </div>
                 <!-- Beverrat cluster sectie -->
                 <div class="beverrat-cluster">
-                    <span class="vertical-label">bev<span class="accent">e</span>rrat</span>
-                    <!-- Kolom 1: diana airbug -->
-                    <div class="beverrat-col1">
-                        <div class="beverrat-col1-inner">
-                            <img src="de-exoten/diana airbug a.jpg" alt="diana airbug" loading="lazy">
-                        </div>
-                    </div>
-                    <!-- Kolom 2-3: 9+10 boven, 11 onder -->
+                    <span class="vertical-label">Bev<span class="accent">e</span>rrat</span>
+                    <!-- Kolom 2-3: 9+10 boven, diana airbug + 11 onder -->
                     <div class="beverrat-col23">
                         <div class="beverrat-col23-top">
                             <img src="de-exoten/9.jpg" alt="9" loading="lazy">
                             <img src="de-exoten/10.jpg" alt="10" loading="lazy">
                         </div>
                         <div class="beverrat-col23-bottom">
+                            <img src="de-exoten/diana airbug a.jpg" alt="diana airbug" loading="lazy" class="diana-airbug">
                             <img src="de-exoten/11.jpg" alt="11" loading="lazy">
                         </div>
                     </div>
@@ -1409,8 +1806,8 @@
                         <img src="de-exoten/16.jpg" alt="16" loading="lazy" class="wolhandkrab-photo-large">
                         <div class="wolhandkrab-right">
                             <div class="photo-caption-box">
-                                <h4 class="caption-title">Dummy titel</h4>
-                                <p class="caption-text">Dit is een dummy bijschrift voor foto 17. De tekst wordt later aangevuld.</p>
+                                <h4 class="caption-title">Van zout naar zoet</h4>
+                                <p class="caption-text">Bijna een eeuw geleden brachten zeeschepen de Chinese wolhandkrab naar Oost-Groningen, en sindsdien hebben ze gestaag de Nederlandse wateren veroverd. Nog ieder jaar trekken de krabben van hun geboortegrond in zee naar het zoete water. Hier controleert aquatisch bioloog Peter of de jonge krabben al bij Nieuw Statenzijl zijn gearriveerd. Via de palingtunnel wandelen ze vervolgens het Groningse achterland binnen.</p>
                             </div>
                             <img src="de-exoten/17.jpg" alt="17" loading="lazy" class="wolhandkrab-photo-small">
                         </div>
@@ -1425,8 +1822,8 @@
                     </div>
                     <div class="info-column">
                         <div class="photo-caption-box">
-                            <h4 class="caption-title">Woekeraar</h4>
-                            <p class="caption-text">De hemelboom werd in de achttiende eeuw als sierboom naar Europa gehaald. De soort verspreidt zich via worteluitlopers en zaden, groeit tot tien meter per jaar en is nauwelijks uit te roeien. In steden breekt hij het asfalt open en ondermijnt hij fundamenten.</p>
+                            <h4 class="caption-title">Via de snelweg</h4>
+                            <p class="caption-text">De hemelboom is een exoot die vanuit het zuiden Nederland binnentrekt. Op vrachtwagens en auto's reizen de zaden mee, waarna ze ergens gedurende de reis weer eraf waaien. Hemelbomen vind je daarom vooral in de bermen, zoals hier op de A2 nabij Sittard.</p>
                         </div>
                         <img src="de-exoten/info 2.jpg" alt="info 2" loading="lazy">
                     </div>
@@ -1434,20 +1831,20 @@
 
                 <!-- Foto 19-20 cluster -->
                 <div class="photo-cluster-19-20">
-                    <div class="photos-stack">
+                    <div class="photo-19-row">
                         <div class="photo-top">
-                            <span class="vertical-label">micro<br><span class="accent">e</span>xoten</span>
+                            <span class="vertical-label">Micro<br><span class="accent">e</span>xoten</span>
                             <img src="de-exoten/19.jpg" alt="19" loading="lazy">
                         </div>
-                        <div class="photo-bottom">
-                            <img src="de-exoten/20.jpg" alt="20" loading="lazy">
+                        <div class="caption-column">
+                            <div class="photo-caption-box">
+                                <h4 class="caption-title">Reisticket eerste klas</h4>
+                                <p class="caption-text">Het ballastwater van zeeschepen biedt micro-exoten (larven, eitjes, parasieten, etc.) een eersteklas ticket om de wereld over te reizen. Water dat aan de ene kant van de wereld wordt ingeladen, wordt aan de andere kant van de wereld geloosd, met alle organismen die de reis hebben overleefd. Sinds enkele jaren moeten zeeschepen hun ballastwater zuiveren om dit te voorkomen. Michiel controleert hier in de haven of de filters werken.</p>
+                            </div>
                         </div>
                     </div>
-                    <div class="caption-column">
-                        <div class="photo-caption-box">
-                            <h4 class="caption-title">Onzichtbare indringers</h4>
-                            <p class="caption-text">In het water leven talloze micro-organismen die grote schade aanrichten. De watercrassula verstikt sloten, het kroos overwoekert vijvers en de Japanse duizendknoop ondermijnt oevers. Vaak worden ze pas opgemerkt als het te laat is.</p>
-                        </div>
+                    <div class="photo-bottom">
+                        <img src="de-exoten/20.jpg" alt="20" loading="lazy">
                     </div>
                 </div>
 
@@ -1460,8 +1857,8 @@
                     <div class="col-22-23">
                         <div class="row-caption-23">
                             <div class="photo-caption-box">
-                                <h4 class="caption-title">Eerste signalering</h4>
-                                <p class="caption-text">De eerste Aziatische hoornaar werd in 2004 in Zuid-Frankrijk gesignaleerd, verstopt in een lading aardewerk uit China. Sindsdien verspreidt het insect zich gestaag noordwaarts.</p>
+                                <h4 class="caption-title">Op zoek in Zeeland</h4>
+                                <p class="caption-text">Een ramp, vindt Marion de komst van Aziatische hoornaar. Veelvraten zijn het, die insecten waaronder de honingbij in grote aantallen opeten. Als vrijwilliger speurt ze de provincie af waar de beesten in 2017 voor het eerst werden waargenomen: in Zeeland. Met speciale lokpotten probeert ze de hoornaars te lokken, om ze daarna te volgen tot hun nest. De nesten zijn vaak moeilijk zichtbaar, zoals u als kijker ook niet het nest op een van de foto's heeft gespot.</p>
                             </div>
                             <div class="photo-xs">
                                 <img src="de-exoten/23.jpg" alt="23" loading="lazy">
@@ -1487,17 +1884,21 @@
             <!-- Aziatische hoornaar boog: foto 25-31 -->
             <div class="hoornaar-boog">
                 <span class="vertical-label">Aziatische<br>hoorn<span class="accent">a</span>ar</span>
-                <div class="boog-foto foto-25">
-                    <img src="de-exoten/25.jpg" alt="25" loading="lazy">
+                <div class="boog-kolom-25-26">
+                    <div class="boog-foto foto-26">
+                        <img src="de-exoten/26.jpg" alt="26" loading="lazy">
+                    </div>
+                    <div class="boog-foto foto-25">
+                        <img src="de-exoten/25.jpg" alt="25" loading="lazy">
+                    </div>
                 </div>
-                <div class="boog-foto foto-26">
-                    <img src="de-exoten/26.jpg" alt="26" loading="lazy">
-                </div>
-                <div class="boog-foto foto-28">
-                    <img src="de-exoten/28.jpg" alt="28" loading="lazy">
-                </div>
-                <div class="boog-foto foto-27">
-                    <img src="de-exoten/27.jpg" alt="27" loading="lazy">
+                <div class="boog-kolom-27-28">
+                    <div class="boog-foto foto-27">
+                        <img src="de-exoten/27.jpg" alt="27" loading="lazy">
+                    </div>
+                    <div class="boog-foto foto-28">
+                        <img src="de-exoten/28.jpg" alt="28" loading="lazy">
+                    </div>
                 </div>
                 <div class="boog-foto foto-29">
                     <img src="de-exoten/29.jpg" alt="29" loading="lazy">
@@ -1508,32 +1909,38 @@
                 </div>
                 <div class="foto-31-34-cluster">
                     <div class="foto-31-column">
-                        <div class="foto-32">
-                            <img src="de-exoten/32.jpg" alt="32" loading="lazy">
+                        <div class="foto-32-row">
+                            <div class="foto-32">
+                                <img src="de-exoten/32.jpg" alt="32" loading="lazy">
+                            </div>
+                            <div class="foto-32-caption">
+                                <h4 class="caption-title">Op de vlucht</h4>
+                                <p class="caption-text">Honderden bijtjes verliezen Marion en Peter dagelijks aan de hoornaars, die van 's ochtends vroeg tot 's avonds laat als duikbommenwerpers genadeloos de korven aanvallen. Hun bijen wonen op een tuinpark in Terneuzen in Zeeland. Moedeloos van de situatie besluiten ze de korven te verhuizen naar hoornaarvriendelijker territorium.</p>
+                            </div>
                         </div>
                         <div class="foto-31">
                             <img src="de-exoten/31.jpg" alt="31" loading="lazy">
                         </div>
                     </div>
-                    <div class="foto-33-column">
-                        <div class="foto-34">
-                            <img src="de-exoten/34.jpg" alt="34" loading="lazy">
-                        </div>
-                        <div class="foto-33">
-                            <img src="de-exoten/33.jpg" alt="33" loading="lazy">
-                        </div>
-                    </div>
                 </div>
             </div>
 
-            <!-- Foto 35 + tekstkader + grid 36-39 -->
+            <!-- Foto 33-34 kolom + Foto 35 + tekstkader + grid 36-39 -->
+            <div class="foto-33-34-column">
+                <div class="foto-34">
+                    <img src="de-exoten/34.jpg" alt="34" loading="lazy">
+                </div>
+                <div class="foto-33">
+                    <img src="de-exoten/33.jpg" alt="33" loading="lazy">
+                </div>
+            </div>
             <div class="foto-35-section">
                 <div class="labeled-photo">
                     <img src="de-exoten/35.jpg" alt="35" loading="lazy">
                 </div>
                 <div class="photo-caption-box section-caption">
-                    <h4 class="caption-title">Invasieroutes</h4>
-                    <p class="caption-text">De verspreiding van invasieve exoten volgt vaak voorspelbare routes: havens, rivieren en snelwegen. Vanuit deze knooppunten verspreiden de soorten zich over het land. De kaart toont de belangrijkste invasieroutes in Nederland.</p>
+                    <h4 class="caption-title">Snitch</h4>
+                    <p class="caption-text">Rob Voest, een grootheid in de hoornaarbestrijding, heeft in de afgelopen jaren een vernieuwende methode ontwikkeld om snel van de hoornaar af te komen. In plaats van eindeloos speuren met verrekijkers of drones, vangt hij één exemplaar die hij een microzendertje ombindt. Deze hoornaar wordt vrijgelaten en - eenmaal bijgekomen van zijn ontregelende ervaring - vliegt hij terug naar het nest. Rob hoeft het insect alleen maar met de ontvanger te volgen. Eenmaal bij het nest klimt hij in een hoogwerker en zuigt hij het leeg.</p>
                 </div>
                 <div class="foto-grid-36-39">
                     <div class="grid-column">
@@ -1554,35 +1961,35 @@
                     <img src="de-exoten/40.jpg" alt="40" loading="lazy">
                 </div>
                 <div class="photo-caption-box rivierkreeft-caption">
-                    <h4 class="caption-title">Een Amerikaan in Nederland</h4>
-                    <p class="caption-text">De Amerikaanse rivierkreeft werd in de jaren zeventig geïntroduceerd voor de aquacultuur. Het dier bleek een explosieve groeier en heeft zich inmiddels door heel Nederland verspreid. De kreeft graaft diepe gangen in oevers en dijken.</p>
+                    <h4 class="caption-title">50 kilo per dag</h4>
+                    <p class="caption-text">Roy en collega halen de netten binnen in de Molenpolder in Utrecht, waar de rivierkreeft welig tiert. Als experiment vangen ze iedere dag de beestjes, al maanden lang, om te kijken of de populatie daarmee ook afneemt. Ze vangen zo'n 50 kilo kreeft per dag. De kreeften worden verkocht aan restaurants en voedselfabrikanten.</p>
                 </div>
                 <!-- Kreeft grid - ronde vorm met kreeftcentraal in midden -->
                 <div class="kreeft-grid">
                     <div class="kreeft-row">
-                        <img src="de-exoten/kreeft1.jpg" alt="Kreeft" loading="lazy" class="kreeft-sm align-bottom">
-                        <img src="de-exoten/kreeft2.jpg" alt="Kreeft" loading="lazy" class="kreeft-md-lg align-bottom">
-                        <img src="de-exoten/kreeft3.jpg" alt="Kreeft" loading="lazy" class="kreeft-sm">
-                        <img src="de-exoten/kreeft4.jpg" alt="Kreeft" loading="lazy" class="kreeft-md">
+                        <img src="de-exoten/kreeft1.jpg" alt="Kreeft" loading="lazy">
+                        <img src="de-exoten/kreeft2.jpg" alt="Kreeft" loading="lazy">
+                        <img src="de-exoten/kreeft 11.jpg" alt="Kreeft" loading="lazy">
+                        <img src="de-exoten/kreeft4.jpg" alt="Kreeft" loading="lazy">
                     </div>
                     <div class="kreeft-row">
-                        <img src="de-exoten/kreeft 8.jpg" alt="Kreeft" loading="lazy" class="kreeft-md">
-                        <img src="de-exoten/kreeft 6.jpg" alt="Kreeft" loading="lazy" class="kreeft-sm">
+                        <img src="de-exoten/kreeft 8.jpg" alt="Kreeft" loading="lazy" class="kreeft-small">
+                        <img src="de-exoten/kreeft 6.jpg" alt="Kreeft" loading="lazy">
                         <img src="de-exoten/kreeftcentraal.jpg" alt="Kreeft centraal" loading="lazy" class="kreeft-central">
-                        <img src="de-exoten/kreeft7.jpg" alt="Kreeft" loading="lazy" class="kreeft-sm">
-                        <img src="de-exoten/kreeft 5.jpg" alt="Kreeft" loading="lazy" class="kreeft-md">
+                        <img src="de-exoten/kreeft7.jpg" alt="Kreeft" loading="lazy">
+                        <img src="de-exoten/kreeft 5.jpg" alt="Kreeft" loading="lazy">
                     </div>
                     <div class="kreeft-row">
-                        <img src="de-exoten/kreeft9.jpg" alt="Kreeft" loading="lazy" class="kreeft-md">
-                        <img src="de-exoten/kreeft 10.jpg" alt="Kreeft" loading="lazy" class="kreeft-sm">
-                        <img src="de-exoten/kreeft 11.jpg" alt="Kreeft" loading="lazy" class="kreeft-sm">
+                        <img src="de-exoten/kreeft9.jpg" alt="Kreeft" loading="lazy">
+                        <img src="de-exoten/kreeft 10.jpg" alt="Kreeft" loading="lazy">
+                        <img src="de-exoten/kreeft3.jpg" alt="Kreeft" loading="lazy">
                     </div>
                 </div>
                 <!-- Foto 41 met tekstkader -->
                 <div class="foto-41-wrapper">
                     <div class="photo-caption-box foto-41-caption">
-                        <h4 class="caption-title">Ondermijning</h4>
-                        <p class="caption-text">De kreeft graaft gangen tot een meter diep in oevers en dijken, wat kan leiden tot verzakking en erosie. Daarnaast eet het dier alles wat los en vast zit: waterplanten, vissen, amfibieën en zelfs jonge watervogels.</p>
+                        <h4 class="caption-title">Nog steeds 50 kilo per dag</h4>
+                        <p class="caption-text">Een half jaar later halen Roy en collega visser nog steeds 50 kilo kreeft per dag uit het poldergebied. Ondanks de volle netten is er geen zichtbare afname van het aantal kreeften. Het experiment is twee jaar na de start gestopt.</p>
                     </div>
                     <img src="de-exoten/41.jpg" alt="41" loading="lazy">
                 </div>
@@ -1596,41 +2003,44 @@
                 </div>
             </div>
 
-            <!-- Foto 43-46 cluster -->
-            <div class="foto-43-46-cluster">
-                <div class="foto-43-column">
-                    <div class="caption-box">
-                        <h4 class="caption-title">Titel</h4>
-                        <p class="caption-text">Bijschrift tekst hier...</p>
+            <!-- Foto 43-48 wrapper -->
+            <div class="foto-43-48-wrapper">
+                <!-- Foto 43-46 cluster -->
+                <div class="foto-43-46-cluster">
+                    <div class="foto-43-column">
+                        <div class="caption-box">
+                            <h4 class="caption-title">Plantensoep</h4>
+                            <p class="caption-text">In de Wieden, een van Neerlands mooiste gebieden in Overijssel, drijft in grote delen van het gebied een dikke plantensoep. Het ongelijkbladig vederkruid is een exotische aquariumplant, vaak uitgekozen vanwege zijn decoratieve kwaliteiten, die waarschijnlijk in het gebied gedumpt is. Sindsdien woekert het in een omvang die bijna niet beheersbaar is. De strijd wordt in sommige delen aangegaan met emmer en hark.</p>
+                        </div>
+                        <div class="foto-43">
+                            <img src="de-exoten/43.jpg" alt="43" loading="lazy">
+                        </div>
+                        <div class="foto-44-45-row">
+                            <img src="de-exoten/44.jpg" alt="44" loading="lazy">
+                            <img src="de-exoten/45.jpg" alt="45" loading="lazy">
+                        </div>
                     </div>
-                    <div class="foto-43">
-                        <img src="de-exoten/43.jpg" alt="43" loading="lazy">
-                    </div>
-                    <div class="foto-44-45-row">
-                        <img src="de-exoten/44.jpg" alt="44" loading="lazy">
-                        <img src="de-exoten/45.jpg" alt="45" loading="lazy">
+                    <div class="foto-46">
+                        <img src="de-exoten/46.jpg" alt="46" loading="lazy">
                     </div>
                 </div>
-                <div class="foto-46">
-                    <img src="de-exoten/46.jpg" alt="46" loading="lazy">
-                </div>
-            </div>
 
-            <!-- Foto 47-48 kolom -->
-            <div class="foto-47-48-column">
-                <div class="foto-48">
-                    <img src="de-exoten/48.jpg" alt="48" loading="lazy">
-                </div>
-                <div class="foto-47">
-                    <img src="de-exoten/47.jpg" alt="47" loading="lazy">
+                <!-- Foto 47-48 kolom -->
+                <div class="foto-47-48-column">
+                    <div class="foto-48">
+                        <img src="de-exoten/48.jpg" alt="48" loading="lazy">
+                    </div>
+                    <div class="foto-47">
+                        <img src="de-exoten/47.jpg" alt="47" loading="lazy">
+                    </div>
                 </div>
             </div>
 
             <!-- Foto 49 met tekstkader -->
             <div class="foto-49-wrapper">
                 <div class="caption-box">
-                    <h4 class="caption-title">Titel</h4>
-                    <p class="caption-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                    <h4 class="caption-title">Over de bodem</h4>
+                    <p class="caption-text">Maar spierkracht alleen is niet voldoende om het vederkruid uit het gebied te halen. De gemechaniseerde tak van de onkruidbrigade bestaat uit zogenaamde 'harkboten', boten met een grote ploeg die de bodem compleet omwoelen om ieder levend organisme, waaronder de exoot, te verwijderen. Deze de facto vernietiging van het onderwaterleven moet de Wieden een 'reset' geven tegen de woekerende plantensoep.</p>
                 </div>
                 <img src="de-exoten/49.jpg" alt="49" loading="lazy">
             </div>
@@ -1642,8 +2052,8 @@
                     <img src="de-exoten/50.jpg" alt="50" loading="lazy">
                 </div>
                 <div class="caption-box">
-                    <h4 class="caption-title">Titel</h4>
-                    <p class="caption-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                    <h4 class="caption-title">Weg met de vlinderstruik</h4>
+                    <p class="caption-text">De vlinderstruik heeft de voormalige ENCI-groeve, ten zuiden van Maastricht bereikt. En dat is slecht nieuws voor vlinders, want voor vlinders is deze struik junkfood: erg lekker, weinig voedingswaarde. Vrijwilligers zoals Guus trekken er in het weekend op uit om de plant uit de groeve te verwijderen.</p>
                 </div>
             </div>
 
@@ -1653,50 +2063,69 @@
                     <span class="vertical-label">Grote<br>Water<br><span class="accent">t</span>eunisbloem</span>
                     <img src="de-exoten/51.jpg" alt="51" loading="lazy">
                 </div>
-                <div class="foto-51-caption">
-                    <h4 class="caption-title">Titel</h4>
-                    <p class="caption-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor.</p>
-                </div>
                 <div class="foto-52-53-column">
                     <img src="de-exoten/52.jpg" alt="52" loading="lazy" class="foto-52">
                     <img src="de-exoten/53.jpg" alt="53" loading="lazy" class="foto-53">
+                </div>
+                <div class="foto-51-caption">
+                    <h4 class="caption-title">Met de hand</h4>
+                    <p class="caption-text">Werknemers van Staatsbosbeheer kammen een gebied uit in de Biesbosch, waar de waterteunisbloem zich heeft gevestigd. Wie die plant in zijn gebied heeft, krijgt het er bijna niet meer uit. Zelfs het kleinste drijvende stukje kan zich opnieuw in de oevers vestigen en uitgroeien tot een enorme plaag. Door de aard van het gebied moet de plant met de hand worden verwijderd.</p>
                 </div>
             </div>
 
             <!-- Watercrassula sectie -->
             <div class="watercrassula-section">
-                <div class="labeled-photo">
-                    <span class="vertical-label">Water<span class="accent">c</span>rassula</span>
-                </div>
-                <div class="foto-54-wrapper">
-                    <div class="foto-54-column">
-                        <div class="foto-54-caption">
-                            <h4 class="caption-title">Titel</h4>
-                            <p class="caption-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt.</p>
-                        </div>
-                        <img src="de-exoten/54.jpg" alt="54" loading="lazy">
+                <span class="vertical-label">Water<span class="accent">c</span>rassula</span>
+                <div class="foto-54-column">
+                    <div class="caption-box">
+                        <h4 class="caption-title">Besmettingsgevaar</h4>
+                        <p class="caption-text">In een natuurgebied in Brabant woekert de watercrassula, een plantje dat een bijna ondoordringbare mat vormt die al het andere groen het bestaansrecht ontneemt. De plant is zo besmettelijk dat de volle wagen iedere keer ontsmet moet worden als hij naar de afvoerberg rijdt.</p>
                     </div>
-                    <div class="foto-55">
-                        <img src="de-exoten/55.jpg" alt="55" loading="lazy">
-                    </div>
+                    <img src="de-exoten/54.jpg" alt="54" loading="lazy" class="foto-54">
                 </div>
+                <img src="de-exoten/55.jpg" alt="55" loading="lazy" class="foto-55">
             </div>
 
             <!-- Kleine waterteunisbloem sectie -->
             <div class="kleine-waterteunisbloem-section">
-                <div class="labeled-photo">
-                    <span class="vertical-label">Kleine<br>water<br><span class="accent">t</span>eunisbloem</span>
-                    <img src="de-exoten/56.jpg" alt="56" loading="lazy">
+                <span class="vertical-label">Kleine<br>water<br><span class="accent">t</span>eunisbloem</span>
+                <!-- Rij 1: foto 56 + tekst + foto 58a + foto 59 -->
+                <div class="kwt-row kwt-row-1">
+                    <div class="kwt-foto-56">
+                        <img src="de-exoten/56.jpg" alt="56" loading="lazy">
+                    </div>
+                    <div class="kwt-tekst">
+                        <h4 class="caption-title">Een woekeraar op Tiengemeten</h4>
+                        <p class="caption-text">Tiengemeten, op kleine afstand van de Biesbosch, heeft ook te maken met de waterteunisbloem (de kleine variant). Ook hier trekken wekelijks vrijwilligers eropuit om de plant te verwijderen. Ondanks de vele, vele uren van speuren, waden, scheppen en afvoeren zijn ze de strijd aan het verliezen.</p>
+                    </div>
+                    <div class="kwt-foto-58a">
+                        <img src="de-exoten/58a.jpg" alt="58a" loading="lazy">
+                    </div>
+                    <div class="kwt-foto-59">
+                        <img src="de-exoten/59.jpg" alt="59" loading="lazy">
+                    </div>
                 </div>
-                <div class="kleine-waterteunisbloem-grid">
-                    <img src="de-exoten/57.jpg" alt="57" loading="lazy">
-                    <img src="de-exoten/58.jpg" alt="58" loading="lazy">
-                    <img src="de-exoten/61.jpg" alt="61" loading="lazy" class="size-groot">
-                    <img src="de-exoten/59.jpg" alt="59" loading="lazy">
-                    <img src="de-exoten/60.jpg" alt="60" loading="lazy">
-                    <img src="de-exoten/cluster 1 foto 7.jpg" alt="cluster 1 foto 7" loading="lazy">
-                    <img src="de-exoten/cluster 1 foto 6.jpg" alt="cluster 1 foto 6" loading="lazy">
+                <!-- Rij 2: foto 57 + foto 58 + foto 60 -->
+                <div class="kwt-row kwt-row-2">
+                    <div class="kwt-foto-57">
+                        <img src="de-exoten/57.jpg" alt="57" loading="lazy">
+                    </div>
+                    <div class="kwt-foto-58">
+                        <img src="de-exoten/58.jpg" alt="58" loading="lazy">
+                    </div>
+                    <div class="kwt-foto-60">
+                        <img src="de-exoten/60.jpg" alt="60" loading="lazy">
+                    </div>
                 </div>
+            </div>
+
+            <!-- Foto 61 sectie -->
+            <div class="foto-61-section">
+                <div class="foto-61-caption">
+                    <h4 class="caption-title">Opgegeven</h4>
+                    <p class="caption-text">Het gevolg is dat hele stukken van Tiengemeten worden opgegeven. Hier is de waterteunisbloem zo dominant dat er niks meer tegen te beginnen is, zelfs als graafmachines het gebied zouden afgraven. Inmiddels denkt Natuurmonumenten erover na om de natuurbestemming van het eiland aan te passen, waarbij de eentonigheid van het gebied wordt erkend en er in het geheel niet meer tegen de exoot wordt opgetreden. Het zou een spectaculaire overwinning voor de waterteunisbloem versus de mens betekenen.</p>
+                </div>
+                <img src="de-exoten/61.jpg" alt="61" loading="lazy">
             </div>
 
             <!-- Japanse oester sectie -->
@@ -1705,34 +2134,53 @@
                     <span class="vertical-label">Japanse<br><span class="accent">O</span>ester</span>
                     <img src="de-exoten/62.jpg" alt="62" loading="lazy">
                 </div>
+                <div class="oester-caption">
+                    <h4 class="caption-title">Overgenomen</h4>
+                    <p class="caption-text">De Waddenzee was ooit het domein van de inheemse oester. Een ziekte en de komst van de Japanse oester heeft dat doen veranderen. Inmiddels zijn bijna alle oesters exoten geworden. Hier inspecteert David, een professor verbonden aan het Nederlands Instituut voor Onderzoek der Zee, een oesterbank.</p>
+                </div>
             </div>
 
             <!-- Muskusrat sectie -->
+            <!-- Muskusrat deel 1: foto 63-67 -->
             <div class="muskusrat-section">
-                <div class="labeled-photo">
+                <!-- Kolom 1: 40% - foto 63 met label -->
+                <div class="muskusrat-col1">
                     <span class="vertical-label">Muskus<span class="accent">r</span>at</span>
                     <img src="de-exoten/63.jpg" alt="63" loading="lazy">
                 </div>
-                <div class="muskusrat-grid">
-                    <img src="de-exoten/64.jpg" alt="64" loading="lazy">
-                    <img src="de-exoten/65.jpg" alt="65" loading="lazy">
-                    <img src="de-exoten/66.jpg" alt="66" loading="lazy">
-                    <img src="de-exoten/67.jpg" alt="67" loading="lazy">
+                <!-- Kolom 2: 35% - foto 64 (liggend) boven 65 (staand), start op 1/4 -->
+                <div class="muskusrat-col2">
+                    <img src="de-exoten/64.jpg" alt="64" loading="lazy" class="foto-64">
+                    <img src="de-exoten/65.jpg" alt="65" loading="lazy" class="foto-65">
                 </div>
-                <div class="muskusrat-caption-box">
-                    <div class="caption-column">
-                        <h4 class="caption-title">Titel</h4>
-                        <p class="caption-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt.</p>
-                    </div>
-                    <div class="caption-column">
-                        <h4 class="caption-title">Titel</h4>
-                        <p class="caption-text">Ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.</p>
-                    </div>
+                <!-- Kolom 3: 25% - foto 66, 67 en klem -->
+                <div class="muskusrat-col3">
+                    <img src="de-exoten/66.jpg" alt="66" loading="lazy" class="foto-66">
+                    <img src="de-exoten/67.jpg" alt="67" loading="lazy" class="foto-67">
+                    <img src="de-exoten/klem.jpg" alt="klem" loading="lazy" class="foto-klem">
                 </div>
-                <div class="muskusrat-photos">
+            </div>
+
+            <!-- Muskusrat deel 2: tekstkader -->
+            <div class="muskusrat-caption-box">
+                <div class="caption-column">
+                    <h4 class="caption-title">Richard de Rattenjager</h4>
+                    <p class="caption-text">Als mensen een kaartje naar hem sturen, dan volstaat straatnaam en 'Richard de rattenjager'. De postbode weet genoeg. Al meer dan 40 jaar vangt Richard muskusratten in de omgeving van Utrecht, vroeger duizenden per jaar, nu honderden- een goede muskusratjager is toch een soort slachtoffer van zijn eigen succes. De dieren zijn invasieve exoten die dijken veranderen in gatenkaas, en mannen als Richard gaan er daarom dagelijks op uit om ze te vangen.</p>
+                    <p class="caption-text">Maar hij is meer dan een jager alleen: hij is een wandelende muskusrat encyclopedie. Alles houdt hij bij in een uitgebreid archief, vol krantenknipsels, vangcijfers en onderzoeksartikelen, aangevuld met een grote collectie muskusratcuriositeiten zoals muskusratjes op sterk water. Hij ís zijn werk- een jager die buiten moet zijn, genietend van het kat en muis spel tussen, ehh, jager en rat. Maar, zegt Richard, rattenvangen komt met een prijs: je eigen gezondheid. Hij kent geen muskusratjager die geen versleten rug heeft aan het einde van zijn carrière, en ook hij zit sinds december tijdelijk thuis. Hij woont samen met zijn moeder, wie hij verzorgt- de pijn in de rug werd ondragelijk.</p>
+                    <p class="caption-text">Wat hij gaan doen weet hij nog niet. Misschien zijn archief bijwerken. Maar echt veel zin heeft Richard er niet in. Buiten lopen de ratten, en hij zit binnen te wachten tot de rug herstelt. Een ondragelijke gedachte voor een Rattenjager.</p>
+                </div>
+            </div>
+
+            <!-- Muskusrat deel 3: foto 68-70 -->
+            <div class="muskusrat-photos">
+                <div class="foto-68">
                     <img src="de-exoten/68.jpg" alt="68" loading="lazy">
-                    <img src="de-exoten/69.jpg" alt="69" loading="lazy">
+                </div>
+                <div class="foto-70">
                     <img src="de-exoten/70.jpg" alt="70" loading="lazy">
+                </div>
+                <div class="foto-69">
+                    <img src="de-exoten/69.jpg" alt="69" loading="lazy">
                 </div>
             </div>
 
@@ -1771,22 +2219,21 @@
 
     <script>
         const container = document.getElementById('scrollContainer');
-        const allItems = document.querySelectorAll('.intro-section, .photo-cluster, .chapter-title, .photo-with-caption, .beverrat-cluster, .wolhandkrab-cluster, .gray-section > .photo-item, .gray-section > .labeled-photo, .hemelboom-pair, .photo-cluster-19-20, .hoornaar-cluster, .hoornaar-boog, .foto-35-section, .rivierkreeft-section > .labeled-photo, .rivierkreeft-section > .kreeft-grid, .rivierkreeft-section > .foto-41-wrapper, .vederkruid-section > .labeled-photo, .foto-43-46-cluster, .foto-47-48-column, .foto-49-wrapper, .vlinderstruik-section, .waterteunisbloem-section, .watercrassula-section, .kleine-waterteunisbloem-section, .japanse-oester-section, .muskusrat-section, .einde-deel-panel, .end-panel');
+        const allItems = document.querySelectorAll('.intro-section, .photo-cluster, .chapter-title, .photo-with-caption, .beverrat-cluster, .wolhandkrab-cluster, .gray-section > .photo-item, .gray-section > .labeled-photo, .hemelboom-pair, .photo-cluster-19-20, .hoornaar-cluster, .hoornaar-boog, .foto-35-section > .labeled-photo, .foto-35-section > .foto-grid-36-39, .rivierkreeft-section > .labeled-photo, .rivierkreeft-section > .kreeft-grid, .rivierkreeft-section > .foto-41-wrapper, .vederkruid-section, .foto-43-48-wrapper, .foto-49-wrapper, .vlinderstruik-section, .waterteunisbloem-section, .watercrassula-section, .kleine-waterteunisbloem-section, .foto-61-section, .japanse-oester-section, .muskusrat-section, .muskusrat-caption-box, .muskusrat-photos, .einde-deel-panel, .end-panel');
 
-        // Stel intro-wrapper breedte in op basis van foto 1
-        function setDynamicWidths() {
-            const photo1 = document.getElementById('photo1');
-            const introWrapper = document.getElementById('introWrapper');
+        // Stel intro-panel breedte in op basis van titel
+        function setIntroWidths() {
+            const introTitle = document.getElementById('introTitle');
+            const introPanel = document.getElementById('introPanel');
 
-            if (photo1 && photo1.complete && photo1.naturalWidth) {
-                const aspectRatio = photo1.naturalWidth / photo1.naturalHeight;
-                const width = 70 * aspectRatio; // 70vh * aspect ratio
-                introWrapper.style.width = width + 'vh';
+            if (introTitle && introPanel) {
+                const titleWidth = introTitle.offsetWidth;
+                introPanel.style.width = titleWidth + 'px';
             }
         }
 
-        document.getElementById('photo1').addEventListener('load', setDynamicWidths);
-        window.addEventListener('load', setDynamicWidths);
+        window.addEventListener('load', setIntroWidths);
+        document.fonts.ready.then(setIntroWidths);
 
         let currentIndex = 0;
         let isAnimating = false;
@@ -1853,6 +2300,73 @@
                     img.classList.add('loaded');
                 });
             }
+        });
+
+        // Zoom effect voor foto 1 - start na 2 seconden
+        setTimeout(() => {
+            const photo1 = document.getElementById('photo1');
+            if (photo1) {
+                photo1.classList.add('zoom-active');
+            }
+        }, 2000);
+
+        // Letter fade-in animatie voor titel
+        const titleLetters = document.querySelectorAll('#introTitle .letter');
+        const finalText = 'De Exoten';
+
+        // Maak willekeurige volgorde voor fade-in (alleen niet-spaties)
+        const fadeOrder = [];
+        for (let i = 0; i < titleLetters.length; i++) {
+            if (finalText[i] !== ' ') fadeOrder.push(i);
+        }
+        // Shuffle de volgorde
+        for (let i = fadeOrder.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [fadeOrder[i], fadeOrder[j]] = [fadeOrder[j], fadeOrder[i]];
+        }
+
+        // Fade in letters één voor één in willekeurige volgorde
+        let delay = 500;
+        fadeOrder.forEach((idx) => {
+            setTimeout(() => {
+                titleLetters[idx].classList.add('visible');
+            }, delay);
+            delay += 200 + Math.random() * 150;
+        });
+
+        // Progress indicator
+        const progressNumber = document.getElementById('progressNumber');
+        let currentProgress = 0;
+        let targetProgress = 0;
+
+        function calculateProgress() {
+            const scrollLeft = container.scrollLeft;
+            const maxScroll = container.scrollWidth - container.clientWidth;
+            if (maxScroll <= 0) return 0;
+            return Math.round((scrollLeft / maxScroll) * 100);
+        }
+
+        function updateProgress() {
+            if (currentProgress !== targetProgress) {
+                const diff = targetProgress - currentProgress;
+                const step = diff > 0 ? Math.max(1, Math.ceil(diff / 8)) : Math.min(-1, Math.floor(diff / 8));
+                currentProgress += step;
+
+                if ((diff > 0 && currentProgress > targetProgress) || (diff < 0 && currentProgress < targetProgress)) {
+                    currentProgress = targetProgress;
+                }
+
+                progressNumber.textContent = Math.max(0, Math.min(100, currentProgress));
+            }
+            requestAnimationFrame(updateProgress);
+        }
+
+        // Start animation loop
+        requestAnimationFrame(updateProgress);
+
+        // Update progress on scroll
+        container.addEventListener('scroll', () => {
+            targetProgress = calculateProgress();
         });
     </script>
 </body>
