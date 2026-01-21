@@ -94,24 +94,94 @@
         .photo-title {
             font-size: 12rem;
         }
-        @media (max-width: 1200px) {
+        @media (max-width: 1200px) and (min-width: 768px) {
             .photo-title {
                 font-size: 9rem;
             }
         }
-        @media (max-width: 900px) {
+        @media (max-width: 900px) and (min-width: 768px) {
             .photo-title {
                 font-size: 6rem;
-            }
-        }
-        @media (max-width: 600px) {
-            .photo-title {
-                font-size: 4rem;
             }
         }
         .photo-item img.zoom-active,
         .intro-photo img.zoom-active {
             animation: subtleZoom 20s ease-out forwards;
+        }
+
+        /* ===== MOBILE STYLES ===== */
+        @media (max-width: 767px) {
+            .intro-section {
+                position: relative;
+                min-width: 100% !important;
+                width: 100%;
+                height: auto !important;
+                display: flex;
+                flex-direction: column;
+                padding-top: 5.5rem;
+            }
+
+            .intro-photo {
+                position: relative !important;
+                top: auto !important;
+                bottom: auto !important;
+                left: auto !important;
+                transform: none !important;
+                width: 94vw;
+                margin: 0 auto;
+                overflow: hidden;
+            }
+
+            .intro-photo img {
+                width: 100%;
+                height: auto;
+            }
+
+            .intro-photo .photo-caption {
+                position: relative;
+                bottom: auto;
+                left: auto;
+                margin-top: 0.75rem;
+            }
+
+            .intro-panel {
+                position: relative !important;
+                top: auto !important;
+                left: auto !important;
+                transform: none !important;
+                min-width: 100% !important;
+                max-width: 100% !important;
+                padding: 2rem 1.5rem !important;
+                box-sizing: border-box;
+            }
+
+            h2.photo-title {
+                font-size: 26vw !important;
+                line-height: 0.85 !important;
+                margin-bottom: 1.5rem !important;
+                width: 100% !important;
+                max-width: none !important;
+            }
+
+            .photo-item {
+                width: 94vw;
+                margin: 0 auto;
+                align-self: center;
+            }
+
+            .photo-img-wrapper {
+                height: auto !important;
+                width: 100%;
+            }
+
+            .photo-img-wrapper img {
+                width: 100%;
+                height: auto;
+            }
+
+            .photo-caption {
+                padding: 0 0.5rem;
+            }
         }
         .title-reflection {
             font-family: 'Oswald', sans-serif;
@@ -186,7 +256,7 @@
                 </div>
 
                 <div class="intro-panel">
-                    <h2 class="photo-title" style="font-family: 'Oswald', sans-serif; font-weight: 700; text-transform: uppercase; letter-spacing: 0.02em; margin-bottom: 2rem; line-height: 0.95; display: flex; flex-direction: column; background: linear-gradient(rgba(255,255,255,0.25), rgba(255,255,255,0.25)), url('de-onmisbaren/achterdetitel.jpg'); background-size: 100% auto; background-position: center; animation: bgZoom 20s ease-out forwards; -webkit-background-clip: text; background-clip: text; color: transparent;">
+                    <h2 class="photo-title" style="font-family: 'Oswald', sans-serif; font-weight: 700; text-transform: uppercase; letter-spacing: 0.02em; margin-bottom: 2rem; line-height: 0.95; display: flex; flex-direction: column; background: linear-gradient(rgba(255,255,255,0.2), rgba(255,255,255,0.2)), url('de-onmisbaren/achterdetitel.jpg'); background-size: 100% auto; background-position: center; animation: bgZoom 20s ease-out forwards; -webkit-background-clip: text; background-clip: text; color: transparent;">
                         <span>De</span>
                         <span>Onmis</span>
                         <span>Baren</span>
