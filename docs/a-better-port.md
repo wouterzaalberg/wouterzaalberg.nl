@@ -85,7 +85,11 @@ CSS: `css/a-better-port.css`
 ## Responsive (< 767px)
 - Verticaal scrollen
 - Haven animatie behouden in intro
-- Titel: `left: calc(5vw + 1.25rem)`, `bottom: 38%`
-- Verkorte introtekst via `.mobile-short`
-- Aparte secties voor foto 1 en 2
-- Map positie: `[52.39, 4.85]`
+- **Titel**: `font-size: 5.5rem`, `bottom: 28%`, gele outline
+- **Introtekst**: `bottom: 12%`, verkorte tekst via `.mobile-short`
+- **Map positie**: `[52.39, 4.80]`, zoom 13
+- **Aparte secties** voor foto 1 en 2 met info buttons en captions
+- **Captions**: header 0.85rem, tekst 0.8rem
+- **Infographic "Een haven ter waarde"**: compacte bars (18px hoogte, 0.4rem gap)
+- **Infographic "Haven in verandering"**: geschaald (donut 85%, chart 90%)
+- **Text-photo combo**: caption `bottom: 0`, volle breedte

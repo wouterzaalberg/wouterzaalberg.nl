@@ -1809,12 +1809,38 @@
         padding: 2rem 0;
     }
 
-    .abp-mobile-photo2 img {
+    .abp-mobile-photo2-img {
+        position: relative;
         width: 95vw;
-        height: auto;
-        display: block;
         margin: 0 auto;
     }
+
+    .abp-mobile-photo2-img img {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+
+    .abp-mobile-photo2-img .abp-info-btn {
+        position: absolute;
+        bottom: 1rem;
+        right: 1rem;
+    }
+
+    .abp-mobile-photo2-img .abp-caption {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: var(--abp-bg-dark);
+        padding: 0.75rem;
+    }
+
+    .abp-mobile-photo2-img.info-active .abp-caption {
+        opacity: 1;
+        visibility: visible;
+    }
+
     /* Basis layout - verticaal scrollen */
     .abp-page {
         height: auto !important;
@@ -1907,14 +1933,14 @@
     /* Titel links uitgelijnd op de introtekst */
     .abp-intro-section > .abp-hero-title {
         position: absolute !important;
-        bottom: 38% !important;
+        bottom: 28% !important;
         top: auto !important;
         left: calc(5vw + 1.25rem) !important;
         transform: none !important;
         right: auto !important;
         padding: 0;
         text-align: left;
-        font-size: 3rem;
+        font-size: 5.5rem;
         z-index: 20;
         -webkit-text-stroke: 2px var(--abp-yellow-solid);
         text-stroke: 2px var(--abp-yellow-solid);
@@ -1924,7 +1950,7 @@
     .abp-intro-panel {
         display: flex !important;
         position: absolute !important;
-        bottom: 22% !important;
+        bottom: 12% !important;
         top: auto !important;
         left: 5vw !important;
         right: 5vw !important;
@@ -2048,13 +2074,13 @@
     }
 
     .abp-caption-header {
-        font-size: 0.6rem;
-        margin-bottom: 0.2rem;
+        font-size: 0.85rem;
+        margin-bottom: 0.3rem;
     }
 
     .abp-caption-text {
-        font-size: 0.55rem;
-        line-height: 1.4;
+        font-size: 0.8rem;
+        line-height: 1.5;
     }
 
     /* ---- INFOGRAPHIC PANELS ---- */
@@ -2081,6 +2107,50 @@
 
     .abp-infographic-intro p {
         font-size: 0.95rem;
+    }
+
+    /* Bar chart compacter */
+    .abp-infographic-chart {
+        gap: 0.4rem;
+    }
+
+    .abp-bar-item {
+        gap: 0.2rem;
+    }
+
+    .abp-bar-track {
+        height: 18px;
+    }
+
+    .abp-bar-label {
+        font-size: 0.7rem;
+    }
+
+    .abp-bar-value {
+        font-size: 0.65rem;
+    }
+
+    /* Sustainability panel compacter */
+    .abp-sustainability-panel {
+        padding: 2rem 1rem !important;
+    }
+
+    .abp-sustainability-panel .abp-infographic-content {
+        gap: 1rem;
+    }
+
+    .abp-sustainability-panel .abp-infographic-intro {
+        font-size: 0.85rem;
+    }
+
+    .abp-donut-chart-container {
+        transform: scale(0.85);
+        transform-origin: top center;
+    }
+
+    .abp-transition-chart {
+        transform: scale(0.9);
+        transform-origin: top center;
     }
 
     /* ---- QUOTE PANELS ---- */
@@ -2137,6 +2207,22 @@
     .abp-combo-photo-wrapper img {
         width: 100%;
         height: auto;
+    }
+
+    /* Combo photo info button en caption - mobiel */
+    .abp-combo-photo .abp-info-btn {
+        bottom: 1rem !important;
+        right: 1rem !important;
+    }
+
+    .abp-combo-photo .abp-caption {
+        position: absolute;
+        bottom: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        transform: none !important;
+        max-width: 100% !important;
+        padding: 0.75rem 1rem;
     }
 
     /* ---- PHOTO GRID ---- */

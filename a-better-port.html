@@ -108,7 +108,14 @@
 
             <!-- Mobile only: Foto 2 -->
             <div class="abp-mobile-photo2">
-                <img src="a-better-port/2.jpg" alt="A Better Port" loading="eager">
+                <div class="abp-mobile-photo2-img">
+                    <img src="a-better-port/2.jpg" alt="A Better Port" loading="eager">
+                    <button class="abp-info-btn" aria-label="Toon informatie">i</button>
+                    <div class="abp-caption">
+                        <div class="abp-caption-header">Rietlanden terminal</div>
+                        <div class="abp-caption-text">De kolenbergen van de Rietlanden terminal. Voor 2030 zal de steenkool hier plaatsmaken voor andere bulkgoederen.</div>
+                    </div>
+                </div>
             </div>
 
             <!-- Photo pair 3+4 -->
@@ -857,10 +864,10 @@
         infoButtons.forEach(btn => {
             btn.addEventListener('click', (e) => {
                 e.stopPropagation();
-                const photoBlock = btn.closest('.abp-photo-block') || btn.closest('.abp-intro-photo') || btn.closest('.abp-intro-photo2');
+                const photoBlock = btn.closest('.abp-photo-block') || btn.closest('.abp-intro-photo') || btn.closest('.abp-intro-photo2') || btn.closest('.abp-mobile-photo1-img') || btn.closest('.abp-mobile-photo2-img');
 
                 // Close other open captions
-                document.querySelectorAll('.abp-photo-block.info-active, .abp-intro-photo.info-active, .abp-intro-photo2.info-active').forEach(block => {
+                document.querySelectorAll('.abp-photo-block.info-active, .abp-intro-photo.info-active, .abp-intro-photo2.info-active, .abp-mobile-photo1-img.info-active, .abp-mobile-photo2-img.info-active').forEach(block => {
                     if (block !== photoBlock) {
                         block.classList.remove('info-active');
                     }
@@ -875,8 +882,8 @@
 
         // Close caption when clicking outside
         document.addEventListener('click', (e) => {
-            if (!e.target.closest('.abp-photo-block') && !e.target.closest('.abp-intro-photo') && !e.target.closest('.abp-intro-photo2') && !e.target.closest('.abp-combo-photo') && !e.target.closest('.abp-grid-item') && !e.target.closest('.abp-stack-item')) {
-                document.querySelectorAll('.abp-photo-block.info-active, .abp-intro-photo.info-active, .abp-intro-photo2.info-active, .abp-combo-photo.info-active, .abp-grid-item.info-active, .abp-stack-item.info-active').forEach(block => {
+            if (!e.target.closest('.abp-photo-block') && !e.target.closest('.abp-intro-photo') && !e.target.closest('.abp-intro-photo2') && !e.target.closest('.abp-combo-photo') && !e.target.closest('.abp-grid-item') && !e.target.closest('.abp-stack-item') && !e.target.closest('.abp-mobile-photo1-img') && !e.target.closest('.abp-mobile-photo2-img')) {
+                document.querySelectorAll('.abp-photo-block.info-active, .abp-intro-photo.info-active, .abp-intro-photo2.info-active, .abp-combo-photo.info-active, .abp-grid-item.info-active, .abp-stack-item.info-active, .abp-mobile-photo1-img.info-active, .abp-mobile-photo2-img.info-active').forEach(block => {
                     block.classList.remove('info-active');
                 });
             }
@@ -1393,7 +1400,7 @@
             doubleClickZoom: false,
             touchZoom: false,
             keyboard: false
-        }).setView([window.innerWidth <= 767 ? 52.39 : 52.410, window.innerWidth <= 767 ? 4.85 : 4.78], window.innerWidth <= 767 ? 13 : 14); // Port of Amsterdam - shifted south+east on mobile
+        }).setView([window.innerWidth <= 767 ? 52.39 : 52.410, window.innerWidth <= 767 ? 4.80 : 4.78], window.innerWidth <= 767 ? 13 : 14); // Port of Amsterdam - shifted south+west on mobile
 
         // CartoDB dark tiles (made darker via CSS filter)
         L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
