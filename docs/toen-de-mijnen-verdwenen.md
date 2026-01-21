@@ -84,17 +84,25 @@ Font: Adobe Typekit Chloe (`https://use.typekit.net/qwc4lnx.css`)
 - Deel nummer, titel, periode, intro tekst
 - Pijl rechts
 
+## Soundscape knoppen
+- **"Zet soundscape aan"**: onder introtekst in hero panel, gecentreerd
+- **Aan/uit toggle**: fixed positie rechtsonder, verschijnt bij foto 2, verdwijnt bij terugscrollen naar intro
+
 ## Responsive (< 767px)
 - **Verticaal scrollen** (geen horizontaal)
 - **Descent effect uitgeschakeld**: alle 3 panelen (hero, foto 1, chapter 1) onder elkaar
-- **Progress indicator verborgen**
+- **Progress indicator**: verticale scroll berekening i.p.v. horizontaal
 - **Dust particles verborgen** voor performance
 - **Navigatie**: fixed met gradient achtergrond
-- **Foto's**: 100% breedte
+- **Hero panel**: padding 1rem links/rechts, soundscape knop gecentreerd
+- **Foto's**: 100% breedte, captions eronder met top border
 - **Highlighted photos**: foto boven, panel onder (verticaal gestapeld)
+- **Achtergronden**: verborgen (::before/::after op intro-photo en intro-chapter)
+- **Deel 1 chapter**: 100svh, gradient achtergrond, verkort intro tekst (.desktop-only)
 - **Insert panels**:
-  - Kaart: 40vh hoog, statistieken in 1 kolom
-  - Timeline: periodes als cards onder elkaar, geen tijdlijn
-  - Statistieken: 2x2 grid
+  - Kaart: zoom 11, statistieken 2 kolommen
+  - Timeline: periodes 1 en 3 zichtbaar (.desktop-only op 2 en 4)
+  - Uit het dal: foto 280px, retail-leegstand en bevolkingstrend verborgen (.desktop-only)
+  - Als expositie: 100% breedte, foto grid 95vw gecentreerd
 - **Chapter panels**: 85svh min-height, tekst links uitgelijnd
-- **End panel**: volle breedte, auto hoogte
+- **End panel**: volle breedte, sluit direct aan op laatste insert
