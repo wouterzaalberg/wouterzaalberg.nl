@@ -1691,13 +1691,13 @@ img {
     .hero-overlay-content {
         position: absolute;
         top: auto;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        width: 100%;
+        bottom: 1.5rem;
+        left: 1.5rem;
+        right: 1.5rem;
+        width: auto;
         max-width: none;
-        padding: 2rem 1.5rem 3rem;
-        background: linear-gradient(to top, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.6) 60%, rgba(255,255,255,0) 100%);
+        padding: 1.5rem;
+        background: rgba(255,255,255,0.85);
         box-sizing: border-box;
     }
 
