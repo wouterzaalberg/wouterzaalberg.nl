@@ -626,10 +626,18 @@
 }
 
 @media (max-width: 767px) {
+    /* Basis layout - verticaal scrollen */
+    .ibl-page {
+        height: auto !important;
+        overflow-y: auto !important;
+        overflow-x: hidden !important;
+    }
+
     .ibl-page .horizontal-scroll-container {
-        overflow-x: hidden;
-        overflow-y: auto;
-        height: auto;
+        position: relative !important;
+        overflow-x: hidden !important;
+        overflow-y: visible !important;
+        height: auto !important;
     }
 
     .ibl-page .horizontal-scroll-content {
@@ -637,63 +645,200 @@
         height: auto;
         padding: 0;
         gap: 0;
+        background: #ffffff;
     }
 
+    /* Navigatie */
+    .ibl-page .horizontal-nav {
+        padding: 1rem 1.5rem !important;
+        background: linear-gradient(to bottom, rgba(10, 10, 12, 0.9) 0%, transparent 100%);
+    }
+
+    .ibl-page .back-link {
+        color: #ffffff !important;
+        opacity: 0.7;
+    }
+
+    .ibl-page .nav-title {
+        color: #ffffff !important;
+        font-size: 0.95rem;
+    }
+
+    /* Politiestrepen verbergen op mobiel */
+    .ibl-stripes-red,
+    .ibl-stripes-blue {
+        display: none !important;
+    }
+
+    /* Toggle button verbergen op mobiel */
+    .ibl-toggle-all-btn {
+        display: none !important;
+    }
+
+    /* Hero sectie - verticaal */
     .ibl-hero {
-        min-width: 100%;
+        min-width: 100% !important;
         width: 100%;
-        height: 100vh;
-        justify-content: center;
+        height: auto !important;
+        min-height: 100svh;
+        flex-direction: column;
+        position: relative;
     }
 
-    .ibl-hero-image {
-        width: 100%;
-        height: 80vh;
+    .ibl-hero::before {
+        display: none;
+    }
+
+    .ibl-page .ibl-hero .ibl-hero-image {
+        position: relative !important;
+        left: 0 !important;
+        width: 100% !important;
+        height: 70svh !important;
+        object-position: center center;
     }
 
     .ibl-hero-content {
-        right: 5vw;
-        bottom: 5vh;
+        position: absolute;
+        left: 1.5rem !important;
+        right: auto !important;
+        bottom: auto !important;
+        top: 70svh !important;
+        transform: translateY(-100%);
+        text-align: left;
+        padding-bottom: 1.5rem;
     }
 
-    .ibl-intro {
-        min-width: 100%;
-        width: 100%;
-        height: auto;
-        padding: 4rem 2rem;
+    .ibl-hero-subtitle {
+        font-size: 0.7rem;
+        margin-bottom: 0.25rem;
     }
 
-    .ibl-photo-block {
-        min-width: 100%;
-        width: 100%;
-        height: auto;
-        padding: 2rem;
+    .ibl-hero-title {
+        font-size: 2.5rem;
     }
 
-    .ibl-photo-block .photo-wrapper,
-    .ibl-photo-block img.photo {
-        height: auto;
-        width: 100%;
+    .ibl-hero-panel {
+        position: relative !important;
+        width: 100% !important;
+        height: auto !important;
+        padding: 2rem 1.5rem 3rem 1.5rem !important;
+    }
+
+    .ibl-hero-panel-content {
         max-width: 100%;
     }
 
+    .ibl-hero-panel-text {
+        font-size: 0.9rem;
+        line-height: 1.8;
+    }
+
+    /* Foto blokken */
+    .ibl-photo-block {
+        min-width: 100% !important;
+        width: 100%;
+        height: auto !important;
+        padding: 2rem 0 !important;
+        background: #ffffff;
+        display: flex;
+        justify-content: center;
+    }
+
+    .ibl-photo-block .photo-wrapper {
+        height: auto !important;
+        width: 95vw;
+    }
+
+    .ibl-photo-block img.photo {
+        height: auto !important;
+        width: 100% !important;
+        max-width: 100%;
+    }
+
+    .ibl-photo-block.size-full .photo-wrapper,
+    .ibl-photo-block.size-full img.photo {
+        height: auto !important;
+        width: 100% !important;
+    }
+
+    /* Info button en caption - subtieler */
+    .ibl-info-btn {
+        bottom: 0.5rem;
+        right: 0.5rem;
+        width: 24px;
+        height: 24px;
+        font-size: 0.75rem;
+        opacity: 0.5;
+    }
+
+    .ibl-caption {
+        padding: 0.75rem;
+        background: rgba(0, 0, 0, 0.6);
+    }
+
+    .ibl-caption-header {
+        font-size: 0.65rem;
+        margin-bottom: 0.25rem;
+    }
+
+    .ibl-caption-text {
+        font-size: 0.6rem;
+        line-height: 1.4;
+    }
+
+    /* Double photo block */
     .ibl-double-block {
         flex-direction: column;
-        height: auto;
+        min-width: 100% !important;
+        width: 100%;
+        height: auto !important;
         gap: 1rem;
-        padding: 2rem;
+        padding: 2rem 0 !important;
+        background: #ffffff;
+        align-items: center;
     }
 
-    .ibl-double-block .photo-wrapper,
+    .ibl-double-block .photo-wrapper {
+        height: auto !important;
+        width: 95vw;
+    }
+
     .ibl-double-block img.photo {
-        height: auto;
+        height: auto !important;
         width: 100%;
     }
 
+    /* Quote panel */
     .ibl-quote-panel {
-        min-width: 100%;
+        min-width: 100% !important;
         width: 100%;
-        height: auto;
-        padding: 4rem 2rem;
+        height: auto !important;
+        padding: 4rem 1.5rem !important;
+    }
+
+    .ibl-quote-text {
+        font-size: 1.1rem;
+    }
+
+    /* Intro sectie */
+    .ibl-intro {
+        min-width: 100% !important;
+        width: 100%;
+        height: auto !important;
+        padding: 3rem 1.5rem !important;
+    }
+
+    /* End panel */
+    .ibl-page .end-panel {
+        min-width: 100% !important;
+        width: 100% !important;
+        height: auto !important;
+        min-height: 60svh;
+        padding: 3rem 1.5rem !important;
+    }
+
+    /* Scroll hint verbergen */
+    .ibl-scroll-hint {
+        display: none;
     }
 }

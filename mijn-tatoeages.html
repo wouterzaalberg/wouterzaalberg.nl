@@ -516,35 +516,98 @@
                 margin: 0 auto;
             }
 
-            /* Tattoo foto in kader, rechts uitgelijnd */
-            .story-photo.tattoo {
-                width: 94vw;
-                background: #252525;
-                padding: 0;
-                display: flex;
-                justify-content: flex-end;
-            }
-
-            .story-photo.tattoo img {
-                width: 60vw;
-                display: block;
-            }
-
             .story-photo img,
             .intro-photo-large img {
                 width: 100%;
                 height: auto;
             }
 
-            /* Tekstpanel - 60vw breed, rechts uitgelijnd onder tattoo foto */
+            /* Tattoo kader met tekst links, foto rechts uitgelijnd */
+            .story-photo.tattoo {
+                width: 94vw;
+                background: #252525;
+                padding: 0 0 0 1rem;
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: stretch;
+                gap: 1rem;
+            }
+
+            .story-photo.tattoo img {
+                width: 55vw;
+                flex-shrink: 0;
+                display: block;
+            }
+
+            /* Container voor titel/naam in tattoo kader */
+            .mobile-text-in-frame {
+                display: flex !important;
+                flex-direction: column;
+                justify-content: flex-start;
+                color: #fff;
+                flex: 1;
+                padding: 1rem 0;
+            }
+
+            .mobile-text-in-frame h2 {
+                font-family: 'Scala Sans SC', sans-serif;
+                font-size: 0.75rem;
+                font-weight: 500;
+                text-transform: uppercase;
+                letter-spacing: 0.1em;
+                color: #c9a227;
+                margin-bottom: 0.3rem;
+            }
+
+            .mobile-text-in-frame h3 {
+                font-family: 'Scala Sans', sans-serif;
+                font-size: 1rem;
+                font-weight: 400;
+                color: #fff;
+                margin-bottom: 0;
+            }
+
+            .mobile-text-in-frame .read-more-btn {
+                align-self: flex-start;
+                margin-top: auto;
+            }
+
+            /* Verberg origineel tekstpanel op mobile */
             .story-text-panel {
-                width: 60vw !important;
-                min-width: auto !important;
-                max-width: none !important;
-                height: auto !important;
-                min-height: auto;
-                margin: 0 3vw 0 auto !important;
+                display: none !important;
+            }
+
+            /* Toon tekstpanel als expanded */
+            .story-text-panel.story-expanded {
+                display: block !important;
+                width: 94vw !important;
+                margin: 0 auto !important;
                 padding-top: 0 !important;
+                position: relative !important;
+                height: auto !important;
+            }
+
+            .story-text-panel.story-expanded .story-text-bg {
+                display: none !important;
+            }
+
+            .story-text-panel.story-expanded .story-text-content {
+                position: relative !important;
+                padding: 1.5rem !important;
+                max-height: none !important;
+                overflow: visible !important;
+                color: #fff !important;
+            }
+
+            .story-text-panel.story-expanded .story-text-content p {
+                display: block !important;
+                color: #ddd !important;
+            }
+
+            .story-text-panel.story-expanded .story-text-content h2,
+            .story-text-panel.story-expanded .story-text-content h3 {
+                display: block !important;
             }
 
             .story-text-bg {
@@ -1829,36 +1892,43 @@
             });
         });
 
-        // Mobile: Add read-more buttons to story panels
+        // Mobile: Move title/name into tattoo frame
         if (window.innerWidth <= 767) {
-            const storyPanels = document.querySelectorAll('.story-text-panel');
-            storyPanels.forEach(panel => {
-                const content = panel.querySelector('.story-text-content');
-                if (!content) return;
+            const stories = document.querySelectorAll('.tattoo-story');
+            stories.forEach(story => {
+                const tattooContainer = story.querySelector('.story-photo.tattoo');
+                const textPanel = story.querySelector('.story-text-panel');
+                const content = textPanel ? textPanel.querySelector('.story-text-content') : null;
 
-                // Get the person's name from h3
+                if (!tattooContainer || !content) return;
+
+                // Get title and name
+                const h2 = content.querySelector('h2');
                 const h3 = content.querySelector('h3');
                 const name = h3 ? h3.textContent : 'deze persoon';
+
+                // Create mobile text container
+                const mobileText = document.createElement('div');
+                mobileText.className = 'mobile-text-in-frame';
+
+                // Clone title and name
+                if (h2) mobileText.appendChild(h2.cloneNode(true));
+                if (h3) mobileText.appendChild(h3.cloneNode(true));
 
                 // Create read-more button
                 const btn = document.createElement('button');
                 btn.className = 'read-more-btn';
-                btn.textContent = `Lees het verhaal van ${name}`;
+                btn.textContent = `Lees meer`;
 
-                // Insert after h3
-                if (h3) {
-                    h3.insertAdjacentElement('afterend', btn);
-                }
-
-                // Toggle expand/collapse
                 btn.addEventListener('click', () => {
-                    panel.classList.toggle('expanded');
-                    if (panel.classList.contains('expanded')) {
-                        btn.textContent = 'Verberg verhaal';
-                    } else {
-                        btn.textContent = `Lees het verhaal van ${name}`;
-                    }
+                    textPanel.classList.toggle('story-expanded');
+                    btn.textContent = textPanel.classList.contains('story-expanded') ? 'Verberg' : 'Lees meer';
                 });
+
+                mobileText.appendChild(btn);
+
+                // Insert at beginning of tattoo container (before img)
+                tattooContainer.insertBefore(mobileText, tattooContainer.firstChild);
             });
         }
     </script>

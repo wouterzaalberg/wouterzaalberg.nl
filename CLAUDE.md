@@ -643,6 +643,25 @@ Twee gele infographic panels met data visualisaties:
 - Foto 17 met zoom effect (8s, scale 1.08)
 - Titel en tekst met fade-in animatie
 
+### Responsive (< 767px)
+- **Verticaal scrollen** (geen horizontaal)
+- **Haven animatie behouden**: Leaflet kaart + scheepvaart canvas blijven zichtbaar in intro
+- **Intro sectie (100svh)**:
+  - Titel links uitgelijnd (`left: calc(5vw + 1.25rem)`, `bottom: 38%`)
+  - Introtekst onder titel (`bottom: 22%`, 90vw breed)
+  - Verkorte introtekst via `.mobile-short` class
+  - Achtergrond: transparant (kaart zichtbaar)
+- **Foto 1 sectie**: Aparte `.abp-mobile-photo1` sectie met gele achtergrond
+  - Foto 95vw breed
+  - Info button en caption toegevoegd
+- **Foto 2 sectie**: Aparte `.abp-mobile-photo2` sectie met witte achtergrond
+- **Achtergrond gradient**: `linear-gradient(to bottom, transparent 200svh, #ffffff 200svh)`
+  - Transparant voor intro + gele sectie
+  - Wit daarna (voorkomt donkere gaps tussen foto's)
+- **Foto blokken**: 95vw breed, witte achtergrond, `padding: 2rem 0`
+- **Dark overlay en rotating background**: Verborgen op mobiel
+- **Map positie mobiel**: `[52.39, 4.85]`, zoom 13
+
 ## In Blauw Licht Pagina
 
 ### Eigen stylesheet

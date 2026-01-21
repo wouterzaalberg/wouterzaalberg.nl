@@ -1774,7 +1774,7 @@ img {
         width: auto;
         max-width: none;
         padding: 0.75rem 1rem;
-        background: rgba(255,255,255,0.75);
+        background: transparent;
         box-sizing: border-box;
     }
 
@@ -1797,7 +1797,7 @@ img {
     }
 
     .hero-name {
-        top: -62vh !important;
+        top: -62svh !important;
         font-size: 0.8rem;
         letter-spacing: 0.15em;
         margin-bottom: 0;
@@ -1806,7 +1806,7 @@ img {
     }
 
     .hero-tagline {
-        top: calc(-62vh + 1.2rem) !important;
+        top: calc(-62svh + 1.2rem) !important;
         font-size: 1.5rem;
         line-height: 1.15;
         margin-bottom: 0;
@@ -1815,7 +1815,7 @@ img {
     }
 
     .hero-tagline-italic {
-        top: calc(-62vh + 3rem) !important;
+        top: calc(-62svh + 3rem) !important;
         font-size: 1.3rem;
         margin-bottom: 0;
         color: #ffffff !important;
@@ -1833,15 +1833,24 @@ img {
         color: #cd9854 !important;
     }
 
-    /* Werk in opdracht en Contact zwart */
+    /* Alle menu teksten wit (test zonder witte achtergrond) */
     .menu-section:nth-last-child(1) .menu-heading,
     .menu-section:nth-last-child(2) .menu-heading {
-        color: #1a1a1a !important;
+        color: #ffffff !important;
+    }
+
+    /* Ruimte boven Werk in opdracht */
+    .menu-section:nth-last-child(2) {
+        margin-top: 0.8rem;
     }
 
     .menu-section:nth-last-child(1) .menu-heading a,
     .menu-section:nth-last-child(2) .menu-heading a {
-        color: #1a1a1a !important;
+        color: #ffffff !important;
+    }
+
+    .menu-list a {
+        color: #ffffff !important;
     }
 
     .menu-list {

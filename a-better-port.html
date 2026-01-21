@@ -63,7 +63,8 @@
                 <div class="abp-intro-panel">
                     <div class="abp-intro-content">
                         <div class="abp-intro-text">
-                            <p>Het is het minst bekende en meest onbeminde stuk Amsterdam: de haven. Anders dan in Rotterdam is het geen onderdeel van het DNA van de stad. Dat wil niet zeggen dat het gebied niet belangrijk is: vanaf hier wordt de Nederlandse en Europese economie gevoed met grondstoffen en, vooral, energie. Amsterdam is de grootste benzinehaven ter wereld. Daarmee is het ook een spiegel van onze samenleving: de mate waarin de haven verandert, geeft inzicht in de snelheid van de energietransitie.</p>
+                            <p class="mobile-short">Amsterdam is de grootste benzinehaven ter wereld. De mate waarin de haven verandert, geeft inzicht in de snelheid van de energietransitie. Ik liep een jaar (af en aan) rond in de Amsterdamse haven om de omslag in beeld te brengen.</p>
+                            <p class="desktop-only">Het is het minst bekende en meest onbeminde stuk Amsterdam: de haven. Anders dan in Rotterdam is het geen onderdeel van het DNA van de stad. Dat wil niet zeggen dat het gebied niet belangrijk is: vanaf hier wordt de Nederlandse en Europese economie gevoed met grondstoffen en, vooral, energie. Amsterdam is de grootste benzinehaven ter wereld. Daarmee is het ook een spiegel van onze samenleving: de mate waarin de haven verandert, geeft inzicht in de snelheid van de energietransitie.</p>
                             <p>Zelf is de Port of Amsterdam er hard mee bezig. Steenkool eruit, bio-fuels erin. Het moet duurzaam, circulair, draaiend op waterstof en stroom uit de parken op zee. Zoals het havenbedrijf zelf zegt: be part of a better port. Maar hoe verander je een haven die geknipt is voor fossiele overslag, voor een samenleving die gebouwd is op fossiele energie?</p>
                             <p>Tegen de achtergrond van een haven in transitie, waarin de fossiele bulk beetje bij beetje plaatsmaakt voor de economie van de toekomst, legt fotograaf Wouter Zaalberg de mensen, het werk en de plekken vast.</p>
                             <p>Dit tijdsbeeld laat het begin van verandering zien, maar toont ook hoe weerbarstig de realiteit is van een haven, en een land, dat ondanks alles, nog steeds bijna volledig afhankelijk is van fossiele energie.</p>
@@ -83,6 +84,31 @@
                         <div class="abp-caption-text">De kolenbergen van de Rietlanden terminal. Voor 2030 zal de steenkool hier plaatsmaken voor andere bulkgoederen.</div>
                     </div>
                 </div>
+            </div>
+
+            <!-- Mobile only: Foto 1 met gele achtergrond -->
+            <div class="abp-mobile-photo1">
+                <div class="abp-mobile-photo1-img">
+                    <img src="a-better-port/1.jpg" alt="A Better Port" loading="eager">
+                    <button class="abp-info-btn" aria-label="Toon informatie">i</button>
+                    <div class="abp-caption">
+                        <div class="abp-caption-header">Carlos, Port Officier</div>
+                        <div class="abp-caption-text">Op dek tijdens een storm</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mobile only: Tekst panel -->
+            <div class="abp-mobile-text">
+                <div class="abp-mobile-text-content">
+                    <p>Amsterdam is de grootste benzinehaven ter wereld. Daarmee is de haven ook een spiegel van onze samenleving: de mate waarin zij verandert, geeft inzicht in de snelheid van de energietransitie.</p>
+                    <p class="abp-mobile-credit">Wouter Zaalberg, Amsterdam, 2024</p>
+                </div>
+            </div>
+
+            <!-- Mobile only: Foto 2 -->
+            <div class="abp-mobile-photo2">
+                <img src="a-better-port/2.jpg" alt="A Better Port" loading="eager">
             </div>
 
             <!-- Photo pair 3+4 -->
@@ -1367,7 +1393,7 @@
             doubleClickZoom: false,
             touchZoom: false,
             keyboard: false
-        }).setView([52.410, 4.78], 14); // Port of Amsterdam - Westpoort haven area, zoomed in
+        }).setView([window.innerWidth <= 767 ? 52.39 : 52.410, window.innerWidth <= 767 ? 4.85 : 4.78], window.innerWidth <= 767 ? 13 : 14); // Port of Amsterdam - shifted south+east on mobile
 
         // CartoDB dark tiles (made darker via CSS filter)
         L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
@@ -1861,22 +1887,45 @@
                 }
             }
 
-            // Initial state
-            updateBackgroundVisibility(currentIndex, introState);
+            // Desktop: hook into state changes
+            if (window.innerWidth > 767) {
+                // Initial state
+                updateBackgroundVisibility(currentIndex, introState);
 
-            // Hook into scroll updates
-            const origScrollToIndex = scrollToIndex;
-            scrollToIndex = function(index) {
-                origScrollToIndex(index);
-                updateBackgroundVisibility(index, introState);
-            };
+                // Hook into scroll updates
+                const origScrollToIndex = scrollToIndex;
+                scrollToIndex = function(index) {
+                    origScrollToIndex(index);
+                    updateBackgroundVisibility(index, introState);
+                };
 
-            // Hook into intro state changes
-            const origSetIntroState = setIntroState;
-            setIntroState = function(state) {
-                origSetIntroState(state);
-                updateBackgroundVisibility(currentIndex, state);
-            };
+                // Hook into intro state changes
+                const origSetIntroState = setIntroState;
+                setIntroState = function(state) {
+                    origSetIntroState(state);
+                    updateBackgroundVisibility(currentIndex, state);
+                };
+            } else {
+                // Mobile: scroll-based fading
+                const introSection = document.querySelector('.abp-intro-section');
+
+                function updateMobileBackground() {
+                    const scrollY = window.scrollY;
+                    const introHeight = introSection ? introSection.offsetHeight : window.innerHeight;
+
+                    // Fade out when scrolled past intro section
+                    if (scrollY > introHeight * 0.5) {
+                        mapBg.classList.add('hidden');
+                        shipCanvas.classList.add('hidden');
+                    } else {
+                        mapBg.classList.remove('hidden');
+                        shipCanvas.classList.remove('hidden');
+                    }
+                }
+
+                window.addEventListener('scroll', updateMobileBackground, { passive: true });
+                updateMobileBackground();
+            }
         })();
     </script>
 </body>

@@ -1732,15 +1732,104 @@
 }
 
 /* ========================================
+   Mobile-only elements (hidden on desktop)
+   ======================================== */
+.abp-mobile-photo1,
+.abp-mobile-text,
+.abp-mobile-photo2 {
+    display: none;
+}
+
+/* Mobile/desktop text visibility */
+.abp-intro-text .mobile-short {
+    display: none;
+}
+
+.abp-intro-text .desktop-only {
+    display: block;
+}
+
+/* ========================================
    Mobile Styles
    ======================================== */
 @media (max-width: 767px) {
-    .abp-page .horizontal-scroll-container {
-        flex-direction: column;
+    /* Toon mobiele elementen */
+    .abp-mobile-photo1 {
+        display: flex !important;
+        width: 100%;
+        min-height: 100svh;
+        background: var(--abp-yellow);
+        align-items: center;
+        justify-content: center;
+        padding: 1rem;
+        box-sizing: border-box;
+    }
+
+    .abp-mobile-photo1-img {
+        width: 95vw;
+        max-width: none;
+        position: relative;
+    }
+
+    .abp-mobile-photo1-img img {
+        width: 100%;
         height: auto;
-        overflow-x: hidden;
-        overflow-y: auto;
-        scroll-snap-type: y proximity;
+        display: block;
+    }
+
+    .abp-mobile-photo1-img .abp-info-btn {
+        position: absolute;
+        bottom: 1rem;
+        right: 1rem;
+    }
+
+    .abp-mobile-photo1-img .abp-caption {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: var(--abp-bg-dark);
+        padding: 0.75rem;
+    }
+
+    .abp-mobile-photo1-img.info-active .abp-caption {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    /* Mobiele tekst verborgen - staat nu in intro */
+    .abp-mobile-text {
+        display: none !important;
+    }
+
+    .abp-mobile-photo2 {
+        display: block !important;
+        width: 100%;
+        background: #ffffff;
+        padding: 2rem 0;
+    }
+
+    .abp-mobile-photo2 img {
+        width: 95vw;
+        height: auto;
+        display: block;
+        margin: 0 auto;
+    }
+    /* Basis layout - verticaal scrollen */
+    .abp-page {
+        height: auto !important;
+        overflow-y: auto !important;
+        overflow-x: hidden !important;
+        background: #0a0a0c !important;
+    }
+
+    .abp-page .horizontal-scroll-container {
+        position: relative !important;
+        flex-direction: column;
+        height: auto !important;
+        overflow-x: hidden !important;
+        overflow-y: visible !important;
+        scroll-snap-type: none;
     }
 
     .abp-page .horizontal-scroll-content {
@@ -1748,59 +1837,259 @@
         height: auto;
         gap: 0;
         padding: 0;
+        /* Transparant voor de intro + gele sectie, daarna wit */
+        background: linear-gradient(to bottom, transparent 200svh, #ffffff 200svh);
     }
 
-    .abp-hero {
-        height: auto;
-        min-height: 100vh;
-        padding-top: 80px;
+    /* Witte achtergrond voor alles na de intro sectie */
+    .abp-page .horizontal-scroll-content > *:not(.abp-intro-section) {
+        background: #ffffff;
     }
 
-    .abp-hero-image {
-        height: auto;
-        padding: 2rem;
+    /* Gele achtergrond voor specifieke elementen */
+    .abp-page .horizontal-scroll-content > .abp-mobile-photo1,
+    .abp-page .horizontal-scroll-content > .abp-infographic-panel,
+    .abp-page .horizontal-scroll-content > .abp-quote-panel,
+    .abp-page .horizontal-scroll-content > .abp-text-photo-combo {
+        background: var(--abp-yellow) !important;
     }
 
-    .abp-hero-image img {
-        height: auto;
-        width: 100%;
-        max-height: 70vh;
+    /* Donkere achtergrond voor end panel */
+    .abp-page .horizontal-scroll-content > .end-panel {
+        background: #1e3a4f !important;
     }
 
-    .abp-hero-title {
+    /* Navigatie */
+    .abp-page .horizontal-nav {
+        padding: 1rem 1.5rem !important;
+        background: linear-gradient(to bottom, rgba(0, 0, 0, 0.6) 0%, transparent 100%);
+    }
+
+    /* Achtergronden - rotating bg en dark overlay verbergen */
+    .abp-background {
+        display: none !important;
+    }
+
+    .abp-dark-overlay {
+        display: none !important;
+    }
+
+    /* Map en ships - fixed binnen viewport, beperkt tot intro hoogte */
+    .abp-map-background,
+    .abp-ship-canvas {
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100vw !important;
+        height: 100svh !important;
+        z-index: 1;
+        transition: opacity 0.5s ease;
+    }
+
+    .abp-map-background.hidden,
+    .abp-ship-canvas.hidden {
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    /* ---- INTRO SECTIE: Haven animatie + titel (100vh) ---- */
+    .abp-intro-section {
+        width: 100% !important;
+        height: 100svh !important;
+        min-height: 100svh !important;
+        max-height: 100svh !important;
+        flex-direction: column;
         position: relative;
-        bottom: auto;
-        right: auto;
-        text-align: right;
-        padding: 2rem;
+        background: transparent !important;
+        overflow: hidden;
+    }
+
+    /* Titel links uitgelijnd op de introtekst */
+    .abp-intro-section > .abp-hero-title {
+        position: absolute !important;
+        bottom: 38% !important;
+        top: auto !important;
+        left: calc(5vw + 1.25rem) !important;
+        transform: none !important;
+        right: auto !important;
+        padding: 0;
+        text-align: left;
         font-size: 3rem;
-        -webkit-text-stroke: 1px var(--abp-text);
-        text-stroke: 1px var(--abp-text);
+        z-index: 20;
+        -webkit-text-stroke: 2px var(--abp-yellow-solid);
+        text-stroke: 2px var(--abp-yellow-solid);
     }
 
+    /* Intro tekst direct onder de titel */
     .abp-intro-panel {
-        height: auto;
-        width: 100%;
-        min-height: 50vh;
-        padding: 3rem 2rem;
+        display: flex !important;
+        position: absolute !important;
+        bottom: 22% !important;
+        top: auto !important;
+        left: 5vw !important;
+        right: 5vw !important;
+        transform: none !important;
+        width: 90vw !important;
+        max-width: none !important;
+        height: auto !important;
+        padding: 0 !important;
+        background: transparent !important;
+        z-index: 20;
+        justify-content: center;
     }
 
+    .abp-intro-content {
+        background: rgba(0, 0, 0, 0.5) !important;
+        padding: 1rem 1.25rem !important;
+        width: 100% !important;
+        max-width: none !important;
+        display: block !important;
+        box-sizing: border-box !important;
+    }
+
+    .abp-intro-text {
+        font-size: 0.85rem !important;
+        line-height: 1.6 !important;
+        color: #ffffff !important;
+    }
+
+    .abp-intro-text p {
+        margin-bottom: 0 !important;
+        color: #ffffff !important;
+    }
+
+    /* Toon korte tekst, verberg lange tekst op mobiel */
+    .abp-intro-text .mobile-short {
+        display: block !important;
+    }
+
+    .abp-intro-text .desktop-only,
+    .abp-intro-text p:nth-child(n+3) {
+        display: none !important;
+    }
+
+    /* Verberg foto 1 en 2 in de intro sectie (worden aparte secties) */
+    .abp-intro-photo,
+    .abp-intro-photo2 {
+        display: none !important;
+    }
+
+    /* Op mobiel: intro-panel altijd zichtbaar, foto's verborgen */
+    .abp-intro-section .abp-intro-panel,
+    .abp-intro-section.show-photo1 .abp-intro-panel,
+    .abp-intro-section.show-photo2 .abp-intro-panel {
+        display: flex !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+    }
+
+    .abp-intro-section.show-photo1 .abp-intro-photo,
+    .abp-intro-section.show-photo2 .abp-intro-photo2 {
+        display: none !important;
+    }
+
+    /* Titel altijd zichtbaar */
+    .abp-intro-section.show-photo2 > .abp-hero-title {
+        opacity: 1 !important;
+        visibility: visible !important;
+    }
+
+    /* ---- FOTO BLOKKEN ---- */
     .abp-photo-block {
-        height: auto;
-        padding: 2rem;
+        width: 100% !important;
+        height: auto !important;
+        padding: 2rem 0 !important;
+        background: #ffffff;
+        display: flex;
+        justify-content: center;
     }
 
-    .abp-photo-block img.photo,
+    .abp-photo-block img.photo {
+        width: 95vw !important;
+        height: auto !important;
+    }
+
     .abp-photo-block.size-full img.photo {
-        height: auto;
-        width: 100%;
+        width: 100% !important;
+        height: auto !important;
     }
 
+    /* Foto paren - verticaal */
+    .abp-photo-pair {
+        flex-direction: column;
+        width: 100% !important;
+        min-width: 100% !important;
+        height: auto !important;
+        padding: 0 !important;
+        gap: 0;
+        background: #ffffff !important;
+    }
+
+    .abp-photo-pair .abp-photo-block {
+        padding: 2rem 0 !important;
+        background: #ffffff !important;
+    }
+
+    /* Info button en caption - subtieler */
+    .abp-info-btn {
+        bottom: 2.5rem !important;
+        right: calc(2.5vw + 0.5rem) !important;
+        width: 24px;
+        height: 24px;
+        font-size: 12px;
+        opacity: 0.6;
+    }
+
+    .abp-caption {
+        bottom: 2rem !important;
+        left: 2.5vw !important;
+        right: 2.5vw !important;
+        padding: 0.75rem;
+    }
+
+    .abp-caption-header {
+        font-size: 0.6rem;
+        margin-bottom: 0.2rem;
+    }
+
+    .abp-caption-text {
+        font-size: 0.55rem;
+        line-height: 1.4;
+    }
+
+    /* ---- INFOGRAPHIC PANELS ---- */
+    .abp-infographic-panel {
+        width: 100% !important;
+        height: auto !important;
+        min-height: auto !important;
+        padding: 3rem 1.5rem !important;
+    }
+
+    .abp-infographic-panel::before,
+    .abp-infographic-panel::after {
+        display: none;
+    }
+
+    .abp-infographic-content {
+        padding: 0;
+        max-width: 100%;
+    }
+
+    .abp-infographic-title {
+        font-size: 1.3rem;
+    }
+
+    .abp-infographic-intro p {
+        font-size: 0.95rem;
+    }
+
+    /* ---- QUOTE PANELS ---- */
     .abp-quote-panel {
-        width: 100%;
-        height: auto;
-        min-height: 60vh;
-        padding: 4rem 2rem;
+        width: 100% !important;
+        height: auto !important;
+        min-height: 50svh;
+        padding: 3rem 1.5rem !important;
+        box-shadow: none;
     }
 
     .abp-quote-inner {
@@ -1808,19 +2097,112 @@
         transform: none;
     }
 
-    .abp-background {
-        display: none;
+    .abp-quote-text {
+        font-size: 1.1rem;
     }
 
-    .abp-info-btn {
-        bottom: 1rem;
-        right: 3rem;
+    /* ---- TEXT-PHOTO COMBO ---- */
+    .abp-text-photo-combo {
+        width: 100% !important;
+        height: auto !important;
+        min-height: auto;
+        flex-direction: column;
     }
 
-    .abp-caption {
-        bottom: 0;
-        left: 2rem;
-        right: 2rem;
+    .abp-combo-text {
+        flex: none;
+        width: 100%;
+        height: auto;
+        padding: 2rem 1.5rem !important;
+        align-items: flex-start;
+    }
+
+    .abp-combo-text p {
+        text-align: left;
+        font-size: 1rem;
+        max-width: 100%;
+    }
+
+    .abp-combo-photo {
+        flex: none;
+        width: 100%;
+        height: auto;
+    }
+
+    .abp-combo-photo-wrapper {
+        height: auto;
+        width: 100%;
+    }
+
+    .abp-combo-photo-wrapper img {
+        width: 100%;
+        height: auto;
+    }
+
+    /* ---- PHOTO GRID ---- */
+    .abp-photo-grid {
+        width: 100% !important;
+        height: auto !important;
+        min-height: auto;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        padding: 0 !important;
+        gap: 0;
+        background: #ffffff !important;
+    }
+
+    .abp-grid-item {
+        height: auto;
+    }
+
+    .abp-grid-item img.photo {
+        width: 100%;
+        height: auto;
+    }
+
+    /* ---- PHOTO SET ---- */
+    .abp-photo-set {
+        width: 100% !important;
+        height: auto !important;
+        flex-direction: column;
+        padding: 0 !important;
+        gap: 0;
+        background: #ffffff !important;
+    }
+
+    .abp-photo-set > .abp-photo-block {
+        width: 100%;
+    }
+
+    .abp-photo-set > .abp-photo-block img.photo {
+        width: 95vw;
+        height: auto;
+    }
+
+    .abp-photo-stack {
+        width: 100%;
+        height: auto;
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .abp-stack-item {
+        height: auto;
+        width: 100%;
+    }
+
+    .abp-stack-item img.photo {
+        width: 100%;
+        height: auto;
+    }
+
+    /* ---- END PANEL ---- */
+    .abp-page .end-panel {
+        min-width: 100% !important;
+        width: 100% !important;
+        height: auto !important;
+        min-height: 60svh;
+        padding: 3rem 1.5rem !important;
     }
 }
 
