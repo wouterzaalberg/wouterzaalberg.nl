@@ -36,6 +36,25 @@
     <!-- Ship Animation Canvas (only visible at intro/photo 1) -->
     <canvas id="shipCanvas" class="abp-ship-canvas"></canvas>
 
+    <!-- Map Interlude Overlay (outside scroll container for proper z-index) -->
+    <div class="abp-map-interlude-overlay" id="mapInterludeOverlay">
+        <h2 class="abp-map-interlude-title">De Haven in Beeld</h2>
+        <p class="abp-map-interlude-subtitle">Klik op een locatie om de foto te zien</p>
+        <button class="abp-scroll-hint" id="scrollHintBtn">
+            <span>Scroll voor meer</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M9 18l6-6-6-6"/>
+            </svg>
+        </button>
+    </div>
+
+    <!-- Zoom Controls (only visible at Map Interlude) -->
+    <div class="abp-zoom-controls" id="zoomControls">
+        <button class="abp-zoom-btn" id="zoomInBtn">+</button>
+        <button class="abp-zoom-btn" id="zoomOutBtn">−</button>
+        <button class="abp-zoom-btn abp-zoom-reset" id="zoomResetBtn">Reset</button>
+    </div>
+
     <div class="horizontal-scroll-container" id="scrollContainer">
         <div class="horizontal-scroll-content">
             <!-- Intro Section - Photo transforms into Text Panel -->
@@ -64,10 +83,12 @@
                     <div class="abp-intro-content">
                         <div class="abp-intro-text">
                             <p class="mobile-short">Amsterdam is de grootste benzinehaven ter wereld. De mate waarin de haven verandert, geeft inzicht in de snelheid van de energietransitie. Ik liep een jaar (af en aan) rond in de Amsterdamse haven om de omslag in beeld te brengen.</p>
+                            <p class="desktop-small">Amsterdam is de grootste benzinehaven ter wereld. De mate waarin de haven verandert, geeft inzicht in de snelheid van de energietransitie. Steenkool eruit, bio-fuels erin. Maar hoe verander je een haven die geknipt is voor fossiele overslag?</p>
+                            <p class="desktop-small">Dit tijdsbeeld laat het begin van verandering zien, maar toont ook hoe weerbarstig de realiteit is van een haven die nog steeds afhankelijk is van fossiele energie.</p>
                             <p class="desktop-only">Het is het minst bekende en meest onbeminde stuk Amsterdam: de haven. Anders dan in Rotterdam is het geen onderdeel van het DNA van de stad. Dat wil niet zeggen dat het gebied niet belangrijk is: vanaf hier wordt de Nederlandse en Europese economie gevoed met grondstoffen en, vooral, energie. Amsterdam is de grootste benzinehaven ter wereld. Daarmee is het ook een spiegel van onze samenleving: de mate waarin de haven verandert, geeft inzicht in de snelheid van de energietransitie.</p>
-                            <p>Zelf is de Port of Amsterdam er hard mee bezig. Steenkool eruit, bio-fuels erin. Het moet duurzaam, circulair, draaiend op waterstof en stroom uit de parken op zee. Zoals het havenbedrijf zelf zegt: be part of a better port. Maar hoe verander je een haven die geknipt is voor fossiele overslag, voor een samenleving die gebouwd is op fossiele energie?</p>
-                            <p>Tegen de achtergrond van een haven in transitie, waarin de fossiele bulk beetje bij beetje plaatsmaakt voor de economie van de toekomst, legt fotograaf Wouter Zaalberg de mensen, het werk en de plekken vast.</p>
-                            <p>Dit tijdsbeeld laat het begin van verandering zien, maar toont ook hoe weerbarstig de realiteit is van een haven, en een land, dat ondanks alles, nog steeds bijna volledig afhankelijk is van fossiele energie.</p>
+                            <p class="desktop-large">Zelf is de Port of Amsterdam er hard mee bezig. Steenkool eruit, bio-fuels erin. Het moet duurzaam, circulair, draaiend op waterstof en stroom uit de parken op zee. Zoals het havenbedrijf zelf zegt: be part of a better port. Maar hoe verander je een haven die geknipt is voor fossiele overslag, voor een samenleving die gebouwd is op fossiele energie?</p>
+                            <p class="desktop-large">Tegen de achtergrond van een haven in transitie, waarin de fossiele bulk beetje bij beetje plaatsmaakt voor de economie van de toekomst, legt fotograaf Wouter Zaalberg de mensen, het werk en de plekken vast.</p>
+                            <p class="desktop-large">Dit tijdsbeeld laat het begin van verandering zien, maar toont ook hoe weerbarstig de realiteit is van een haven, en een land, dat ondanks alles, nog steeds bijna volledig afhankelijk is van fossiele energie.</p>
                             <p class="abp-intro-credit">Wouter Zaalberg, Amsterdam, maart 2024</p>
                         </div>
                     </div>
@@ -401,6 +422,10 @@
                     <div class="abp-caption-header">EVOS terminal</div>
                     <div class="abp-caption-text">Een medewerker van EVOS controleert de brandstoftanks op de terminal. In iedere tank kan zo'n 50 miljoen liter benzine opslaan. De tanks van EVOS zijn klaar voor bio-brandstoffen, maar ze merken dat er geen vraag is vanuit de markt.</div>
                 </div>
+            </div>
+
+            <!-- Map Interlude - Photo locations -->
+            <div class="abp-map-interlude" id="mapInterlude">
             </div>
 
             <!-- Photo pair 21+22 -->
@@ -819,7 +844,7 @@
                 </div>
             </div>
 
-            <div class="end-panel" style="flex-shrink: 0; height: 70vh; min-width: 800px; background: #1e3a4f; display: flex; flex-direction: column; justify-content: center; padding: 3rem;">
+            <div class="end-panel" style="flex-shrink: 0; height: 100vh; min-width: 600px; background: #1e3a4f; display: flex; flex-direction: column; justify-content: center; padding: 3rem;">
                 <p style="font-family: 'Scala Sans SC', sans-serif; font-size: 1.2rem; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 3rem;">Einde van deze serie</p>
                 <p style="font-family: 'Scala Sans', sans-serif; font-size: 0.85rem; color: rgba(255,255,255,0.4); margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.05em;">Bekijk ook</p>
                 <nav style="display: flex; flex-direction: column; gap: 0.6rem;">
@@ -852,13 +877,21 @@
     <script>
         const container = document.getElementById('scrollContainer');
         const introSection = document.getElementById('introSection');
-        const allItems = document.querySelectorAll('.abp-intro-section, .abp-photo-block:not(.abp-photo-pair .abp-photo-block):not(.abp-combo-photo .abp-photo-block):not(.abp-photo-set .abp-photo-block), .abp-photo-pair, .abp-infographic-panel, .abp-text-photo-combo, .abp-photo-set, .abp-quote-panel, .end-panel');
+        const allItems = document.querySelectorAll('.abp-intro-section, .abp-photo-block:not(.abp-photo-pair .abp-photo-block):not(.abp-combo-photo .abp-photo-block):not(.abp-photo-set .abp-photo-block), .abp-photo-pair, .abp-infographic-panel, .abp-text-photo-combo, .abp-photo-set, .abp-quote-panel, .abp-map-interlude, .end-panel');
         const infoButtons = document.querySelectorAll('.abp-info-btn');
         const quotePanels = document.querySelectorAll('.abp-quote-panel');
         let currentIndex = 0;
         let isAnimating = false;
-        let scrollQueue = 0;
         let introState = 0; // 0 = text panel, 1 = photo 1, 2 = photo 2
+
+        // Improved scroll handling - works for both mouse and trackpad
+        // See docs/horizontal-scroll.md for documentation
+        let accumulatedDelta = 0;
+        let lastDelta = 0;
+        let scrollDirection = 0;
+        const DELTA_THRESHOLD = 50;  // Minimum delta to trigger scroll
+        const COOLDOWN = 500;        // Ms to wait after scroll
+        const MOMENTUM_THRESHOLD = 0.5; // Ignore if delta drops below this ratio
 
         // Info button toggle
         infoButtons.forEach(btn => {
@@ -1073,40 +1106,47 @@
             }
         }
 
-        // Process scroll queue
-        function processScrollQueue() {
-            if (scrollQueue !== 0) {
-                const direction = scrollQueue > 0 ? 1 : -1;
-                scrollQueue = 0;
-                handleScroll(direction);
-
-                setTimeout(() => {
-                    isAnimating = false;
-                    if (scrollQueue !== 0) {
-                        processScrollQueue();
-                    }
-                }, 500);
-            } else {
+        // Trigger scroll in direction
+        function triggerScroll(direction) {
+            if (isAnimating) return;
+            isAnimating = true;
+            handleScroll(direction);
+            setTimeout(() => {
                 isAnimating = false;
-            }
+                accumulatedDelta = 0;
+                lastDelta = 0;
+                scrollDirection = 0;
+            }, COOLDOWN);
         }
 
         // Smooth scroll handling (desktop only)
         if (window.innerWidth > 767) {
             container.addEventListener('wheel', (e) => {
                 e.preventDefault();
+                const delta = Math.abs(e.deltaY);
+                const direction = e.deltaY > 0 ? 1 : -1;
 
-                if (e.deltaY > 0) {
-                    scrollQueue++;
-                } else if (e.deltaY < 0) {
-                    scrollQueue--;
+                if (isAnimating) return;
+
+                // Momentum detection: ignore decreasing deltas (trackpad coasting)
+                if (lastDelta > 0 && delta < lastDelta * MOMENTUM_THRESHOLD) {
+                    lastDelta = delta;
+                    return;
                 }
 
-                if (!isAnimating) {
-                    isAnimating = true;
-                    processScrollQueue();
+                // Reset if direction changes
+                if (scrollDirection !== 0 && direction !== scrollDirection) {
+                    accumulatedDelta = 0;
                 }
 
+                scrollDirection = direction;
+                accumulatedDelta += delta;
+                lastDelta = delta;
+
+                // Trigger scroll when threshold reached
+                if (accumulatedDelta >= DELTA_THRESHOLD) {
+                    triggerScroll(direction);
+                }
             }, { passive: false });
         }
 
@@ -1302,27 +1342,28 @@
                 18,  // 12: photo 18
                 20,  // 13: photo 20
                 19,  // 14: photo 19
-                22,  // 15: photo pair 21+22
-                23,  // 16: photo 23
-                24,  // 17: photo 24
-                24,  // 18: sustainability panel
-                28,  // 19: photo set 25-28
-                29,  // 20: photo 29
-                31,  // 21: photo pair 30+31
-                33,  // 22: photo pair 32+33
-                34,  // 23: photo 34
-                35,  // 24: photo 35
-                36,  // 25: photo 36
-                37,  // 26: photo 37
-                39,  // 27: photo pair 38+39
-                40,  // 28: photo 40
-                41,  // 29: photo 41
-                42,  // 30: photo 42
-                43,  // 31: photo 43
-                44,  // 32: photo 44
-                45,  // 33: photo 45
-                46,  // 34: photo 46
-                47   // 35: end-panel
+                20,  // 15: map interlude (between photo 19 and 21)
+                22,  // 16: photo pair 21+22
+                23,  // 17: photo 23
+                24,  // 18: photo 24
+                24,  // 19: sustainability panel
+                28,  // 20: photo set 25-28
+                29,  // 21: photo 29
+                31,  // 22: photo pair 30+31
+                33,  // 23: photo pair 32+33
+                34,  // 24: photo 34
+                35,  // 25: photo 35
+                36,  // 26: photo 36
+                37,  // 27: photo 37
+                39,  // 28: photo pair 38+39
+                40,  // 29: photo 40
+                41,  // 30: photo 41
+                42,  // 31: photo 42
+                43,  // 32: photo 43
+                44,  // 33: photo 44
+                45,  // 34: photo 45
+                46,  // 35: photo 46
+                47   // 36: end-panel
             ];
             if (index < mapping.length) {
                 return mapping[index];
@@ -1362,9 +1403,9 @@
                 }
             }
 
-            // sustainability panel is at allItems index 18, fade when past it (index > 18)
+            // sustainability panel is at allItems index 19, fade when past it (index > 19)
             if (sustainabilityPanel) {
-                if (index > 18) {
+                if (index > 19) {
                     sustainabilityPanel.classList.add('faded-out');
                 } else {
                     sustainabilityPanel.classList.remove('faded-out');
@@ -1850,9 +1891,9 @@
                 animationFrame = requestAnimationFrame(animate);
             }
 
-            // Pause animation when scrolled past intro
+            // Keep animation running throughout page (stop only at end panel)
             function checkAnimationVisibility() {
-                const shouldAnimate = currentIndex < 5;
+                const shouldAnimate = currentIndex < allItems.length - 1; // Stop at end panel
                 if (shouldAnimate && !animationActive) {
                     animationActive = true;
                     if (!animationFrame) animate();
@@ -1871,27 +1912,116 @@
         })();
 
         // ========================================
-        // Toggle Map/Ships vs Original Background
+        // Map/Ships Background Throughout Page
         // ========================================
         (function() {
             const mapBg = document.getElementById('harborMap');
             const originalBg = document.getElementById('originalBackground');
             const shipCanvas = document.getElementById('shipCanvas');
 
-            function updateBackgroundVisibility(index, state) {
-                // Show map + ships only at intro states 0 (text) and 1 (photo 1)
-                // Hide at state 2 (photo 2) and beyond
-                const showMap = index === 0 && state < 2;
+            // Yellow sections where map/ships should be hidden
+            const yellowSections = document.querySelectorAll('.abp-quote-panel, .abp-infographic-panel, .abp-text-photo-combo');
 
-                if (showMap) {
+            // Calculate dynamic brightness based on photo number
+            // Follows day/night cycle of photos: dark (night) -> light (day) -> dark (night)
+            function getBackgroundBrightness(photoNum) {
+                // Map brightness range: 0.12 (very dark/night) to 0.55 (bright/day)
+                // Ship opacity range: 0.2 (dark) to 0.75 (bright)
+
+                let mapBrightness, shipOpacity;
+
+                if (photoNum <= 10) {
+                    // Photo 1-10: dark (night photos)
+                    mapBrightness = 0.12;
+                    shipOpacity = 0.2;
+                } else if (photoNum <= 25) {
+                    // Photo 10-25: gradually lighter (dawn to day)
+                    const progress = (photoNum - 10) / 15;
+                    mapBrightness = 0.12 + (0.43 * progress); // 0.12 -> 0.55
+                    shipOpacity = 0.2 + (0.55 * progress);    // 0.2 -> 0.75
+                } else if (photoNum <= 30) {
+                    // Photo 25-30: peak brightness (midday)
+                    mapBrightness = 0.55;
+                    shipOpacity = 0.75;
+                } else if (photoNum <= 46) {
+                    // Photo 30-46: gradually darker (dusk to night)
+                    const progress = (photoNum - 30) / 16;
+                    mapBrightness = 0.55 - (0.43 * progress); // 0.55 -> 0.12
+                    shipOpacity = 0.75 - (0.55 * progress);   // 0.75 -> 0.2
+                } else {
+                    // Photo 46+: dark (night)
+                    mapBrightness = 0.12;
+                    shipOpacity = 0.2;
+                }
+
+                return { mapBrightness, shipOpacity };
+            }
+
+            function updateBackgroundVisibility(index, state) {
+                // Check if current item is a yellow section
+                const currentItem = allItems[index];
+                const isYellowSection = currentItem && (
+                    currentItem.classList.contains('abp-quote-panel') ||
+                    currentItem.classList.contains('abp-infographic-panel') ||
+                    currentItem.classList.contains('abp-text-photo-combo')
+                );
+
+                // Check if at map interlude
+                const isAtInterlude = currentItem && currentItem.id === 'mapInterlude';
+
+                // Full prominence at intro (state 0 and 1)
+                const isFullProminence = index === 0 && state < 2;
+
+                if (isYellowSection) {
+                    // Don't hide - yellow sections cover the background naturally
+                    // Just reduce brightness for consistency
                     mapBg.classList.remove('hidden');
                     shipCanvas.classList.remove('hidden');
-                    originalBg.classList.remove('visible');
+                    const mapTiles = mapBg.querySelector('.leaflet-tile-pane');
+                    if (mapTiles) {
+                        mapTiles.style.filter = 'grayscale(100%) brightness(0.2)';
+                    }
+                    shipCanvas.style.opacity = '0.3';
                 } else {
-                    mapBg.classList.add('hidden');
-                    shipCanvas.classList.add('hidden');
-                    originalBg.classList.add('visible');
+                    // Show map and ships
+                    mapBg.classList.remove('hidden');
+                    shipCanvas.classList.remove('hidden');
+
+                    // Apply brightness based on context
+                    if (isFullProminence) {
+                        // Intro: full brightness, no filter
+                        mapBg.classList.remove('subtle');
+                        shipCanvas.classList.remove('subtle');
+                        const mapTiles = mapBg.querySelector('.leaflet-tile-pane');
+                        if (mapTiles) {
+                            mapTiles.style.filter = '';
+                        }
+                        shipCanvas.style.opacity = '';
+                    } else {
+                        // Normal scroll or interlude: apply dynamic brightness
+                        mapBg.classList.remove('subtle');
+                        shipCanvas.classList.remove('subtle');
+
+                        const photoNum = getApproximatePhotoNumber(index);
+                        let { mapBrightness, shipOpacity } = getBackgroundBrightness(photoNum);
+
+                        // Boost brightness at interlude
+                        if (isAtInterlude) {
+                            mapBrightness = Math.min(0.6, mapBrightness + 0.15);
+                            shipOpacity = Math.min(0.8, shipOpacity + 0.15);
+                        }
+
+                        // Apply dynamic values via inline style
+                        const mapTiles = mapBg.querySelector('.leaflet-tile-pane');
+                        if (mapTiles) {
+                            mapTiles.style.filter = `grayscale(100%) brightness(${mapBrightness})`;
+                        }
+                        shipCanvas.style.opacity = shipOpacity;
+                    }
                 }
+
+                // Original background no longer needed - map is now the permanent background
+                originalBg.classList.remove('visible');
             }
 
             // Desktop: hook into state changes
@@ -1913,7 +2043,7 @@
                     updateBackgroundVisibility(currentIndex, state);
                 };
             } else {
-                // Mobile: scroll-based fading
+                // Mobile: scroll-based fading (keep original behavior - hide after intro)
                 const introSection = document.querySelector('.abp-intro-section');
 
                 function updateMobileBackground() {
@@ -1933,6 +2063,241 @@
                 window.addEventListener('scroll', updateMobileBackground, { passive: true });
                 updateMobileBackground();
             }
+        })();
+
+        // ========================================
+        // Map Interlude - Photo Location Markers
+        // ========================================
+        (function() {
+            if (window.innerWidth <= 767) return; // Skip on mobile
+
+            const mapInterlude = document.getElementById('mapInterlude');
+            if (!mapInterlude || !window.harborMap) return;
+
+            // Photo locations with coordinates from Google Maps
+            const photoLocations = [
+                { photo: 1, lat: 52.426835, lng: 4.746218, img: 'a-better-port/1.jpg' },
+                { photo: 2, lat: 52.420081, lng: 4.741673, img: 'a-better-port/2.jpg' },
+                { photo: 3, lat: 52.410448, lng: 4.821323, img: 'a-better-port/3.jpg' },
+                { photo: 4, lat: 52.413653, lng: 4.817088, img: 'a-better-port/4.jpg' },
+                { photo: 5, lat: 52.408797, lng: 4.839597, img: 'a-better-port/5.jpg' },
+                { photo: 6, lat: 52.426332, lng: 4.834396, img: 'a-better-port/6.jpg' },
+                // Foto 7 heeft geen marker
+                { photo: 8, lat: 52.418076, lng: 4.813868, img: 'a-better-port/8.jpg' },
+                { photo: 9, lat: 52.433227, lng: 4.723632, img: 'a-better-port/9.jpg' },
+                { photo: 10, lat: 52.411583, lng: 4.852021, img: 'a-better-port/10.jpg' },
+                { photo: 11, lat: 52.400800, lng: 4.792068, img: 'a-better-port/11.jpg' },
+                { photo: 12, lat: 52.399576, lng: 4.793432, img: 'a-better-port/12.jpg' },
+                { photo: 13, lat: 52.410325, lng: 4.836279, img: 'a-better-port/13.jpg' },
+                { photo: 14, lat: 52.410325, lng: 4.836278, img: 'a-better-port/14.jpg' },
+                { photo: 15, lat: 52.407172, lng: 4.816485, img: 'a-better-port/15.jpg' },
+                { photo: 16, lat: 52.416560, lng: 4.770814, img: 'a-better-port/16.jpg' },
+                { photo: 17, lat: 52.409532, lng: 4.846137, img: 'a-better-port/17.jpg' },
+                { photo: 18, lat: 52.408674, lng: 4.818952, img: 'a-better-port/18.jpg' },
+                { photo: 19, lat: 52.410946, lng: 4.742718, img: 'a-better-port/19.jpg' },
+                { photo: 20, lat: 52.391867, lng: 4.831891, img: 'a-better-port/20.jpg' },
+                { photo: 21, lat: 52.406842, lng: 4.832283, img: 'a-better-port/21.jpg' },
+                { photo: 22, lat: 52.406842, lng: 4.832283, img: 'a-better-port/22.jpg' },
+                { photo: 23, lat: 52.405872, lng: 4.849079, img: 'a-better-port/23.jpg' },
+                { photo: 24, lat: 52.404565, lng: 4.846634, img: 'a-better-port/24.jpg' },
+                { photo: 25, lat: 52.405752, lng: 4.852919, img: 'a-better-port/25.jpg' },
+                { photo: 26, lat: 52.405752, lng: 4.852920, img: 'a-better-port/26.jpg' },
+                { photo: 27, lat: 52.405752, lng: 4.852918, img: 'a-better-port/27.jpg' },
+                { photo: 28, lat: 52.401529, lng: 4.788567, img: 'a-better-port/28.jpg' },
+                // Foto 29 heeft geen marker (Friesland)
+                { photo: 30, lat: 52.399980, lng: 4.812031, img: 'a-better-port/30.jpg' },
+                { photo: 31, lat: 52.399974, lng: 4.809522, img: 'a-better-port/31.jpg' },
+                { photo: 32, lat: 52.400108, lng: 4.807481, img: 'a-better-port/32.jpg' },
+                { photo: 33, lat: 52.399782, lng: 4.807411, img: 'a-better-port/33.jpg' },
+                { photo: 34, lat: 52.405832, lng: 4.788024, img: 'a-better-port/34.jpg' },
+                { photo: 35, lat: 52.402139, lng: 4.787851, img: 'a-better-port/35.jpg' },
+                { photo: 36, lat: 52.424968, lng: 4.762087, img: 'a-better-port/36.jpg' },
+                { photo: 37, lat: 52.425064, lng: 4.836028, img: 'a-better-port/37.jpg' },
+                { photo: 38, lat: 52.406178, lng: 4.799223, img: 'a-better-port/38.jpg' },
+                { photo: 39, lat: 52.406178, lng: 4.799223, img: 'a-better-port/39.jpg' },
+                { photo: 40, lat: 52.398583, lng: 4.809405, img: 'a-better-port/40.jpg' },
+                { photo: 41, lat: 52.398846, lng: 4.807387, img: 'a-better-port/41.jpg' },
+                { photo: 42, lat: 52.416022, lng: 4.836170, img: 'a-better-port/42.jpg' },
+                { photo: 43, lat: 52.411622, lng: 4.740434, img: 'a-better-port/43.jpg' },
+                { photo: 44, lat: 52.393235, lng: 4.822626, img: 'a-better-port/44.jpg' },
+                { photo: 45, lat: 52.428301, lng: 4.742228, img: 'a-better-port/45.jpg' },
+                { photo: 46, lat: 52.381402, lng: 4.895790, img: 'a-better-port/46.jpg' },
+            ];
+
+            // Create marker layer group
+            const markerGroup = L.layerGroup();
+            let markersAdded = false;
+
+            // Custom marker icon
+            const markerIcon = L.divIcon({
+                className: 'abp-photo-marker',
+                html: '<div class="abp-photo-marker-icon"></div>',
+                iconSize: [24, 24],
+                iconAnchor: [12, 12],
+                popupAnchor: [0, -15]
+            });
+
+            // Create markers with staggered animation
+            photoLocations.forEach((loc, index) => {
+                // Create custom icon with animation delay
+                const delay = index * 0.08; // 80ms stagger between markers
+                const customIcon = L.divIcon({
+                    className: 'abp-photo-marker',
+                    html: `<div class="abp-photo-marker-icon" style="animation-delay: ${delay}s"></div>`,
+                    iconSize: [24, 24],
+                    iconAnchor: [12, 12],
+                    popupAnchor: [0, -15]
+                });
+
+                const marker = L.marker([loc.lat, loc.lng], { icon: customIcon });
+
+                const popupContent = `
+                    <div class="abp-marker-popup-content">
+                        <img src="${loc.img}" alt="Foto ${loc.photo}" class="abp-marker-thumbnail">
+                        <div class="abp-marker-info">
+                            <div class="abp-marker-title">Foto ${loc.photo}</div>
+                        </div>
+                    </div>
+                `;
+
+                marker.bindPopup(popupContent, {
+                    className: 'abp-marker-popup',
+                    closeButton: false,
+                    maxWidth: 200
+                });
+
+                marker.on('mouseover', function() { this.openPopup(); });
+                marker.on('mouseout', function() { this.closePopup(); });
+
+                markerGroup.addLayer(marker);
+            });
+
+            // Show/hide markers and enhance map at interlude
+            let interludeWheelHandler = null;
+            const mapEl = document.getElementById('harborMap');
+            const shipEl = document.getElementById('shipCanvas');
+            const interludeOverlay = document.getElementById('mapInterludeOverlay');
+
+            // Wheel handler for when map is elevated
+            function handleInterludeWheel(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                const direction = e.deltaY > 0 ? 1 : -1;
+                triggerScroll(direction);
+            }
+
+            // Zoom controls
+            const zoomControls = document.getElementById('zoomControls');
+            const zoomInBtn = document.getElementById('zoomInBtn');
+            const zoomOutBtn = document.getElementById('zoomOutBtn');
+            const zoomResetBtn = document.getElementById('zoomResetBtn');
+            const scrollHintBtn = document.getElementById('scrollHintBtn');
+
+            // Store original map view for reset
+            const originalView = {
+                center: [52.410, 4.78],
+                zoom: 14
+            };
+
+            // Zoom button handlers
+            if (zoomInBtn) {
+                zoomInBtn.addEventListener('click', () => {
+                    harborMap.zoomIn();
+                });
+            }
+            if (zoomOutBtn) {
+                zoomOutBtn.addEventListener('click', () => {
+                    harborMap.zoomOut();
+                });
+            }
+            if (zoomResetBtn) {
+                zoomResetBtn.addEventListener('click', () => {
+                    harborMap.setView(originalView.center, originalView.zoom);
+                });
+            }
+
+            // Scroll hint button - go to next section
+            if (scrollHintBtn) {
+                scrollHintBtn.addEventListener('click', () => {
+                    triggerScroll(1);
+                });
+            }
+
+            function updateMapInterlude(index) {
+                const currentItem = allItems[index];
+                const isAtInterlude = currentItem && currentItem.id === 'mapInterlude';
+
+                if (isAtInterlude) {
+                    // Show markers
+                    if (!markersAdded) {
+                        markerGroup.addTo(harborMap);
+                        markersAdded = true;
+                    }
+                    // Make map more visible
+                    mapEl.classList.remove('subtle');
+                    mapEl.classList.add('interlude');
+                    shipEl.classList.remove('subtle');
+                    shipEl.classList.add('interlude');
+
+                    // Show overlay text
+                    if (interludeOverlay) {
+                        interludeOverlay.classList.add('visible');
+                    }
+
+                    // Show zoom controls
+                    if (zoomControls) {
+                        zoomControls.classList.add('visible');
+                    }
+
+                    // Enable map dragging
+                    harborMap.dragging.enable();
+
+                    // Capture wheel events on elevated map and pass to scroll system
+                    if (!interludeWheelHandler) {
+                        interludeWheelHandler = handleInterludeWheel;
+                        mapEl.addEventListener('wheel', interludeWheelHandler, { passive: false });
+                    }
+                } else {
+                    // Hide markers
+                    if (markersAdded) {
+                        markerGroup.remove();
+                        markersAdded = false;
+                    }
+                    // Remove interlude class
+                    mapEl.classList.remove('interlude');
+                    shipEl.classList.remove('interlude');
+
+                    // Hide overlay text
+                    if (interludeOverlay) {
+                        interludeOverlay.classList.remove('visible');
+                    }
+
+                    // Hide zoom controls
+                    if (zoomControls) {
+                        zoomControls.classList.remove('visible');
+                    }
+
+                    // Disable map dragging and reset view
+                    harborMap.dragging.disable();
+                    harborMap.setView(originalView.center, originalView.zoom);
+
+                    // Remove wheel handler
+                    if (interludeWheelHandler) {
+                        mapEl.removeEventListener('wheel', interludeWheelHandler);
+                        interludeWheelHandler = null;
+                    }
+                }
+            }
+
+            // Hook into scroll
+            const origScrollForMarkers = scrollToIndex;
+            scrollToIndex = function(index) {
+                origScrollForMarkers(index);
+                updateMapInterlude(index);
+            };
+
+            // Initial state
+            updateMapInterlude(currentIndex);
         })();
     </script>
 </body>

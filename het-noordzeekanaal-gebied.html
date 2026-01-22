@@ -250,6 +250,46 @@
             background: rgba(26, 42, 58, 0.9) !important;
         }
 
+        /* ===== DESKTOP KLEIN 768-1400px ===== */
+        @media (max-width: 1400px) and (min-width: 768px) {
+            .horizontal-scroll-content {
+                gap: clamp(4rem, 8vw, 12rem) !important;
+            }
+
+            .nzkg-title-panel {
+                min-width: auto;
+                max-width: clamp(300px, 45vw, 500px);
+            }
+
+            .nzkg-title {
+                font-size: clamp(2.5rem, 5vw, 4rem);
+            }
+
+            .nzkg-subtitle {
+                max-width: clamp(250px, 40vw, 400px);
+                font-size: 0.85rem;
+            }
+
+            .nzkg-map-insert {
+                min-width: 50vw;
+            }
+
+            .end-panel {
+                height: auto !important;
+                min-height: 70vh;
+                min-width: 500px !important;
+                padding: 2rem !important;
+            }
+
+            .end-panel p {
+                margin-bottom: 1.5rem !important;
+            }
+
+            .end-panel nav {
+                gap: 0.4rem !important;
+            }
+        }
+
         /* ===== MOBILE STYLES ===== */
         @media (max-width: 767px) {
             /* Navigatie */
@@ -612,9 +652,11 @@
 
             // Center on the Noordzeekanaal area
             const isMobile = window.innerWidth <= 767;
+            const isSmallDesktop = window.innerWidth > 767 && window.innerWidth <= 1400;
+            const zoomLevel = isMobile ? 10 : (isSmallDesktop ? 11 : 12);
             const map = L.map('locationMap', {
                 center: [52.44, 4.70],
-                zoom: isMobile ? 10 : 12,
+                zoom: zoomLevel,
                 zoomControl: false,
                 scrollWheelZoom: false,
                 attributionControl: false
@@ -802,22 +844,29 @@
             });
         }
 
-        // Process scroll queue
-        function processScrollQueue() {
-            if (scrollQueue !== 0) {
-                const newIndex = currentIndex + scrollQueue;
-                scrollQueue = 0;
-                scrollToIndex(newIndex);
+        // Improved scroll handling - works for both mouse and trackpad
+        // See docs/horizontal-scroll.md for documentation
+        let accumulatedDelta = 0;
+        let lastDelta = 0;
+        let scrollDirection = 0;
+        let lastScrollTime = 0;
+        const DELTA_THRESHOLD = 50;  // Minimum delta to trigger scroll
+        const COOLDOWN = 500;        // Ms to wait after scroll
+        const MOMENTUM_THRESHOLD = 0.5; // Ignore if delta drops below this ratio
 
-                setTimeout(() => {
-                    isAnimating = false;
-                    if (scrollQueue !== 0) {
-                        processScrollQueue();
-                    }
-                }, 500);
-            } else {
+        function triggerScroll(direction) {
+            if (isAnimating) return;
+
+            isAnimating = true;
+            const newIndex = currentIndex + direction;
+            scrollToIndex(newIndex);
+
+            setTimeout(() => {
                 isAnimating = false;
-            }
+                accumulatedDelta = 0;
+                lastDelta = 0;
+                scrollDirection = 0;
+            }, COOLDOWN);
         }
 
         // Smooth scroll handling (desktop only)
@@ -825,15 +874,33 @@
             container.addEventListener('wheel', (e) => {
                 e.preventDefault();
 
-                if (e.deltaY > 0) {
-                    scrollQueue++;
-                } else if (e.deltaY < 0) {
-                    scrollQueue--;
+                const now = Date.now();
+                const delta = Math.abs(e.deltaY);
+                const direction = e.deltaY > 0 ? 1 : -1;
+
+                // Skip if in cooldown
+                if (isAnimating) return;
+
+                // Detect momentum scrolling (trackpad coasting)
+                // If delta suddenly drops significantly, it's likely momentum
+                if (lastDelta > 0 && delta < lastDelta * MOMENTUM_THRESHOLD) {
+                    // Momentum detected, ignore this event
+                    lastDelta = delta;
+                    return;
                 }
 
-                if (!isAnimating) {
-                    isAnimating = true;
-                    processScrollQueue();
+                // Reset if direction changes
+                if (scrollDirection !== 0 && direction !== scrollDirection) {
+                    accumulatedDelta = 0;
+                }
+
+                scrollDirection = direction;
+                accumulatedDelta += delta;
+                lastDelta = delta;
+
+                // Trigger scroll when threshold reached
+                if (accumulatedDelta >= DELTA_THRESHOLD) {
+                    triggerScroll(direction);
                 }
 
             }, { passive: false });

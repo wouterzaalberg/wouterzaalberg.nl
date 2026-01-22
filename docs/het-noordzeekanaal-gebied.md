@@ -3,7 +3,7 @@
 ## Basis
 - Achtergrond: `#f5f5f5`
 - 17 foto's op 70vh
-- Gap: 12rem
+- Gap: 12rem (responsive: `clamp(4rem, 8vw, 12rem)`)
 
 ## Volgorde
 Foto 2 → Intro panel → Foto 1 → Foto paar 3+4 → Foto 5 → etc.
@@ -30,5 +30,25 @@ Foto 2 → Intro panel → Foto 1 → Foto paar 3+4 → Foto 5 → etc.
 - **caption-detail**: 85% wit, 0.8rem (beschrijving)
 - **caption-location**: 70% wit, 0.75rem, italic
 
+## Leaflet Kaart
+- Zoom levels: 10 (mobiel) / 11 (desktop klein) / 12 (desktop groot)
+- Positie: center `[52.45, 4.75]`
+
+## Responsive Breakpoints
+- **Desktop groot (> 1400px)**: originele styling
+- **Desktop klein (768-1400px)**:
+  - Gap: `clamp(4rem, 8vw, 12rem)`
+  - Titel panel: `max-width: clamp(300px, 45vw, 500px)`
+  - Titel: `font-size: clamp(2.5rem, 5vw, 4rem)`
+  - Subtitle: `max-width: clamp(250px, 40vw, 400px)`
+  - Kaart: `min-width: 50vw`, zoom level 11
+  - End panel: `height: auto`, `min-height: 70vh`
+- **Mobiel (< 767px)**: verticaal scrollen
+
 ## End Panel
 - Achtergrond: `#1a1a1a`
+- Desktop groot: `height: 70vh`
+- Desktop klein: `height: auto`, `min-height: 70vh`
+
+## Scroll
+Zie `docs/horizontal-scroll.md` voor de verbeterde scroll logica.

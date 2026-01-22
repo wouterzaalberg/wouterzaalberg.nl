@@ -67,3 +67,20 @@
 - **1100-1400px**: Kleinere tekst, tekstvak hoger (top: 10-12%)
 - **768-1100px**: Breder tekstvak (25%)
 - **< 767px**: Verticaal, volledige breedte
+
+## Mobiele Hero Rotatie (< 767px)
+
+### Foto rotatie
+- 5 foto's uit grote series roteren elke 4 seconden
+- Cross-fade transitie (1s)
+- Foto's: de-exoten, mijn-tattoos, a-better-port, in-blauw-licht, toen-de-mijnen-verdwenen
+
+### Serie highlight
+- Bij rotatie licht de bijbehorende serie naam op in het menu
+- Subtiele kleurverandering met glim animatie (0.6s)
+- Kleuren per serie (vale tinten):
+  - De Exoten: `#8aab7a` (zacht groen)
+  - Mijn Tatoeages: `#d4b89a` (zacht bruin)
+  - A Better Port: `#e8d89a` (zacht geel)
+  - In Blauw Licht: `#8ab4cc` (zacht blauw)
+  - Toen de Mijnen Verdwenen: `#d4937a` (zacht oranje)

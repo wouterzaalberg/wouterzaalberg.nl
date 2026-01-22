@@ -15,11 +15,11 @@
             <img id="heroImage1" class="hero-img hero-img-desktop active" src="images/de-exoten.jpg" alt="Wouter Zaalberg">
             <img id="heroImage2" class="hero-img hero-img-desktop" src="images/de-exoten.jpg" alt="Wouter Zaalberg">
             <!-- Mobile hero images (rotating) -->
-            <img class="hero-img-mobile" src="de-exoten/1.jpg" alt="De Exoten" data-index="0">
-            <img class="hero-img-mobile" src="mijn-tattoos/4a.jpg" alt="Mijn Tatoeages" data-index="1">
-            <img class="hero-img-mobile" src="a-better-port/1.jpg" alt="A Better Port" data-index="2">
-            <img class="hero-img-mobile" src="in-blauw-licht/foto 1.jpg" alt="In Blauw Licht" data-index="3">
-            <img class="hero-img-mobile" src="toen-de-mijnen-verdwenen/Foto 1.jpg" alt="Toen de Mijnen Verdwenen" data-index="4">
+            <img class="hero-img-mobile" src="de-exoten/1.jpg" alt="De Exoten" data-index="0" data-series="de-exoten.html" data-glow="#8aab7a">
+            <img class="hero-img-mobile" src="mijn-tattoos/4a.jpg" alt="Mijn Tatoeages" data-index="1" data-series="mijn-tatoeages.html" data-glow="#d4b89a">
+            <img class="hero-img-mobile" src="a-better-port/1.jpg" alt="A Better Port" data-index="2" data-series="a-better-port.html" data-glow="#e8d89a">
+            <img class="hero-img-mobile" src="in-blauw-licht/foto 1.jpg" alt="In Blauw Licht" data-index="3" data-series="in-blauw-licht.html" data-glow="#8ab4cc">
+            <img class="hero-img-mobile" src="toen-de-mijnen-verdwenen/Foto 1.jpg" alt="Toen de Mijnen Verdwenen" data-index="4" data-series="toen-de-mijnen-verdwenen.html" data-glow="#d4937a">
             <p class="hero-caption" id="heroCaption"></p>
 
             <!-- All content overlay on right side -->
@@ -690,12 +690,35 @@
         // Mobiele hero image rotatie
         if (window.innerWidth <= 767) {
             const mobileHeroImages = document.querySelectorAll('.hero-img-mobile');
+            const menuLinks = document.querySelectorAll('.menu-list a');
             let currentMobileIndex = 0;
             const rotationInterval = 4000; // 4 seconden per foto
 
-            // Activeer eerste foto
+            // Highlight de bijbehorende menu link
+            function highlightSeriesLink(imageEl) {
+                const seriesHref = imageEl.dataset.series;
+                const highlightColor = imageEl.dataset.glow;
+
+                // Verwijder highlight van alle links
+                menuLinks.forEach(link => {
+                    link.classList.remove('mobile-highlight');
+                    link.style.removeProperty('--highlight-color');
+                });
+
+                // Voeg highlight toe aan de bijbehorende link
+                if (seriesHref && highlightColor) {
+                    const matchingLink = document.querySelector(`.menu-list a[href="${seriesHref}"]`);
+                    if (matchingLink) {
+                        matchingLink.style.setProperty('--highlight-color', highlightColor);
+                        matchingLink.classList.add('mobile-highlight');
+                    }
+                }
+            }
+
+            // Activeer eerste foto en highlight
             if (mobileHeroImages.length > 0) {
                 mobileHeroImages[0].classList.add('active');
+                highlightSeriesLink(mobileHeroImages[0]);
             }
 
             // Rotatie functie
@@ -703,6 +726,7 @@
                 mobileHeroImages[currentMobileIndex].classList.remove('active');
                 currentMobileIndex = (currentMobileIndex + 1) % mobileHeroImages.length;
                 mobileHeroImages[currentMobileIndex].classList.add('active');
+                highlightSeriesLink(mobileHeroImages[currentMobileIndex]);
             }
 
             // Start rotatie

@@ -94,14 +94,23 @@
         .photo-title {
             font-size: 12rem;
         }
-        @media (max-width: 1200px) and (min-width: 768px) {
+
+        /* Desktop klein 768-1400px */
+        @media (max-width: 1400px) and (min-width: 768px) {
             .photo-title {
-                font-size: 9rem;
+                font-size: clamp(6rem, 8vw, 9rem);
             }
-        }
-        @media (max-width: 900px) and (min-width: 768px) {
-            .photo-title {
-                font-size: 6rem;
+            .intro-panel {
+                min-width: auto;
+                max-width: clamp(280px, 45vw, 500px);
+                transform: translate(0, -50%);
+            }
+            .intro-photo {
+                transform: translateX(-105%);
+            }
+            .intro-photo img {
+                height: auto;
+                width: clamp(280px, 45vw, 500px);
             }
         }
         .photo-item img.zoom-active,
@@ -379,7 +388,15 @@
         const allItems = document.querySelectorAll('.intro-section, .horizontal-scroll-content > .photo-item, .end-panel');
         let currentIndex = 0;
         let isAnimating = false;
-        let scrollQueue = 0;
+
+        // Improved scroll handling - works for both mouse and trackpad
+        // See docs/horizontal-scroll.md for documentation
+        let accumulatedDelta = 0;
+        let lastDelta = 0;
+        let scrollDirection = 0;
+        const DELTA_THRESHOLD = 50;  // Minimum delta to trigger scroll
+        const COOLDOWN = 500;        // Ms to wait after scroll
+        const MOMENTUM_THRESHOLD = 0.5; // Ignore if delta drops below this ratio
 
         // Scroll to target index
         function scrollToIndex(index) {
@@ -395,40 +412,48 @@
             });
         }
 
-        // Process scroll queue
-        function processScrollQueue() {
-            if (scrollQueue !== 0) {
-                const newIndex = currentIndex + scrollQueue;
-                scrollQueue = 0;
-                scrollToIndex(newIndex);
-
-                setTimeout(() => {
-                    isAnimating = false;
-                    if (scrollQueue !== 0) {
-                        processScrollQueue();
-                    }
-                }, 500);
-            } else {
+        // Trigger scroll in direction
+        function triggerScroll(direction) {
+            if (isAnimating) return;
+            isAnimating = true;
+            const newIndex = currentIndex + direction;
+            scrollToIndex(newIndex);
+            setTimeout(() => {
                 isAnimating = false;
-            }
+                accumulatedDelta = 0;
+                lastDelta = 0;
+                scrollDirection = 0;
+            }, COOLDOWN);
         }
 
         // Smooth scroll handling (desktop only)
         if (window.innerWidth > 767) {
             container.addEventListener('wheel', (e) => {
                 e.preventDefault();
+                const delta = Math.abs(e.deltaY);
+                const direction = e.deltaY > 0 ? 1 : -1;
 
-                if (e.deltaY > 0) {
-                    scrollQueue++;
-                } else if (e.deltaY < 0) {
-                    scrollQueue--;
+                if (isAnimating) return;
+
+                // Momentum detection: ignore decreasing deltas (trackpad coasting)
+                if (lastDelta > 0 && delta < lastDelta * MOMENTUM_THRESHOLD) {
+                    lastDelta = delta;
+                    return;
                 }
 
-                if (!isAnimating) {
-                    isAnimating = true;
-                    processScrollQueue();
+                // Reset if direction changes
+                if (scrollDirection !== 0 && direction !== scrollDirection) {
+                    accumulatedDelta = 0;
                 }
 
+                scrollDirection = direction;
+                accumulatedDelta += delta;
+                lastDelta = delta;
+
+                // Trigger scroll when threshold reached
+                if (accumulatedDelta >= DELTA_THRESHOLD) {
+                    triggerScroll(direction);
+                }
             }, { passive: false });
         }
 

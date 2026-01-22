@@ -3,16 +3,23 @@
 ## Basis
 - Achtergrond: groen `#2d5a27`
 - Navigatie: wit
-- 24 foto's op 70vh
+- 14 foto's op 70vh
 - Gap: 8rem
 
 ## Foto's
 - Locatie: `een-plek-onder-de-zon/`
-- Bestandsnamen: 5B2A0004.jpg, 5B2A0013.jpg, etc.
+- Bestandsnamen: Foto 1.jpg - Foto 14.jpg
 
 ## Intro Panel
 - Na eerste foto
-- Breedte: 700-800px
+- `width: fit-content` - past aan titelbreedte
+- Titel: `white-space: nowrap` - altijd één regel
+- Titel kleur: wit met geel accent `#f0c040` voor "Zon"
 
 ## End Panel
 - Achtergrond: donkergroen `#1a3d1a`
+- 70vh hoogte
+
+## Responsive
+- Foto's: `max-width: calc(100vw - 8rem)` via styles.css
+- Verticale foto's schalen mee bij smalle viewports

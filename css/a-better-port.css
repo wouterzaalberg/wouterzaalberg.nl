@@ -66,6 +66,28 @@
     pointer-events: none;
 }
 
+.abp-map-background.subtle .leaflet-tile-pane {
+    filter: grayscale(100%) brightness(0.25);
+}
+
+/* Interlude brightness is now controlled dynamically via JS */
+
+.abp-map-background.interlude {
+    z-index: 12; /* Above scroll container (10) */
+    pointer-events: auto; /* Receive wheel events for scroll passthrough */
+}
+
+/* Map tiles don't intercept clicks */
+.abp-map-background.interlude .leaflet-tile-pane {
+    pointer-events: none;
+}
+
+/* Markers and popups are clickable */
+.abp-map-background.interlude .leaflet-marker-pane,
+.abp-map-background.interlude .leaflet-popup-pane {
+    pointer-events: auto;
+}
+
 /* Hide Leaflet controls and attribution */
 .abp-map-background .leaflet-control-container {
     display: none !important;
@@ -91,6 +113,16 @@
 
 .abp-ship-canvas.hidden {
     opacity: 0;
+}
+
+.abp-ship-canvas.subtle {
+    opacity: 0.4;
+}
+
+.abp-ship-canvas.interlude {
+    opacity: 0.7;
+    z-index: 13; /* Above map (12) during interlude */
+    pointer-events: none;
 }
 
 /* Dark overlay - opacity controlled via JS based on scroll position */
@@ -549,6 +581,220 @@
     font-size: 0.8rem;
     color: var(--abp-text-light);
     line-height: 1.6;
+}
+
+/* ========================================
+   Map Interlude - Photo Locations
+   ======================================== */
+.abp-map-interlude {
+    position: relative;
+    flex-shrink: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    scroll-snap-align: center;
+    background: transparent;
+}
+
+.abp-map-interlude-overlay {
+    position: fixed;
+    bottom: 12vh;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    z-index: 100;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+    pointer-events: none;
+}
+
+.abp-map-interlude-overlay.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Scroll hint arrow - clickable button */
+.abp-scroll-hint {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 1.5rem;
+    color: rgba(255, 255, 255, 0.6);
+    font-family: 'Scala Sans', sans-serif;
+    font-size: 0.85rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    transition: color 0.2s ease, background 0.2s ease;
+    pointer-events: auto;
+}
+
+.abp-scroll-hint:hover {
+    color: rgba(255, 255, 255, 0.9);
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.abp-scroll-hint svg {
+    width: 20px;
+    height: 20px;
+    animation: arrowBounce 1.5s ease-in-out infinite;
+}
+
+@keyframes arrowBounce {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(5px); }
+}
+
+.abp-map-interlude-title {
+    font-family: 'Scala Sans SC', sans-serif;
+    font-size: 2rem;
+    font-weight: 400;
+    color: var(--abp-yellow-solid);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-bottom: 0.5rem;
+}
+
+.abp-map-interlude-subtitle {
+    font-family: 'Scala Sans', sans-serif;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* Photo location markers */
+.abp-photo-marker {
+    cursor: pointer;
+}
+
+.abp-photo-marker:hover .abp-photo-marker-icon {
+    transform: scale(1.2);
+}
+
+.abp-photo-marker-icon {
+    width: 24px;
+    height: 24px;
+    background: var(--abp-yellow-solid);
+    border: 2px solid #ffffff;
+    border-radius: 50%;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+    transition: transform 0.2s ease;
+    animation: markerFadeIn 0.6s ease-out backwards;
+}
+
+@keyframes markerFadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+/* Marker popup with thumbnail */
+.abp-marker-popup {
+    padding: 0;
+    min-width: 200px;
+}
+
+.abp-marker-popup .leaflet-popup-content-wrapper {
+    background: rgba(30, 40, 50, 0.95);
+    border-radius: 4px;
+    padding: 0;
+}
+
+.abp-marker-popup .leaflet-popup-content {
+    margin: 0;
+    width: 200px !important;
+}
+
+.abp-marker-popup .leaflet-popup-tip {
+    background: rgba(30, 40, 50, 0.95);
+}
+
+.abp-marker-thumbnail {
+    width: 100%;
+    height: 130px;
+    object-fit: cover;
+    display: block;
+}
+
+.abp-marker-info {
+    padding: 0.75rem;
+}
+
+.abp-marker-title {
+    font-family: 'Scala Sans SC', sans-serif;
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.6);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.25rem;
+}
+
+.abp-marker-caption {
+    font-family: 'Scala Sans', sans-serif;
+    font-size: 0.8rem;
+    color: #ffffff;
+    line-height: 1.4;
+}
+
+/* Map Interlude Zoom Controls */
+.abp-zoom-controls {
+    position: fixed;
+    bottom: 12vh;
+    right: 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    z-index: 101;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+
+.abp-zoom-controls.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.abp-zoom-btn {
+    width: 40px;
+    height: 40px;
+    background: rgba(30, 40, 50, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+    color: #ffffff;
+    font-size: 1.4rem;
+    font-weight: 300;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.abp-zoom-btn:hover {
+    background: rgba(50, 60, 70, 0.9);
+    border-color: var(--abp-yellow-solid);
+}
+
+.abp-zoom-btn:active {
+    background: var(--abp-yellow-solid);
+    color: #1a1a1a;
+}
+
+/* Reset zoom button */
+.abp-zoom-reset {
+    font-size: 0.7rem;
+    font-family: 'Scala Sans SC', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
 }
 
 /* ========================================
@@ -1598,7 +1844,7 @@
 .abp-combo-photo .abp-caption {
     position: absolute;
     bottom: 7.5vh; /* Uitgelijnd met onderkant foto */
-    left: 50%;
+    left: 25%; /* Gecentreerd binnen de foto, niet de container */
     transform: translateX(-50%);
     max-width: 350px;
     background: var(--abp-bg-dark);
@@ -1745,8 +1991,86 @@
     display: none;
 }
 
-.abp-intro-text .desktop-only {
+.abp-intro-text .desktop-small {
+    display: none;
+}
+
+.abp-intro-text .desktop-only,
+.abp-intro-text .desktop-large {
     display: block;
+}
+
+/* ========================================
+   Desktop Klein (768-1400px)
+   ======================================== */
+@media (max-width: 1400px) and (min-width: 768px) {
+    /* Titel kleiner en uitlijnen op foto/panel onderkant */
+    .abp-intro-section > .abp-hero-title {
+        font-size: clamp(3rem, 7vw, 5.5rem);
+        bottom: 20vh;
+    }
+
+    /* Foto kleiner zodat kader breder wordt */
+    .abp-intro-photo-wrapper {
+        height: 60vh;
+    }
+
+    /* Panel uitlijnen op foto onderkant (60vh gecentreerd = 20vh van onder) */
+    .abp-intro-panel {
+        padding-bottom: 20vh;
+    }
+
+    /* Intro content compacter */
+    .abp-intro-content {
+        padding: 1.5rem;
+        min-width: 320px;
+    }
+
+    .abp-intro-text {
+        font-size: 0.9rem;
+        line-height: 1.7;
+    }
+
+    .abp-intro-text p {
+        margin-bottom: 1rem;
+    }
+
+    /* Foto paren - minder padding */
+    .abp-photo-pair {
+        padding: 0 6rem;
+    }
+
+    /* Sustainability panel - compacter */
+    .abp-transition-chart.abp-main-chart {
+        padding: 1.5rem;
+    }
+
+    .abp-transition-chart.abp-main-chart .abp-transition-bars {
+        gap: 0.3rem;
+    }
+
+    .abp-transition-chart.abp-main-chart .abp-transition-bar-container {
+        height: 20px;
+    }
+
+    .abp-transition-chart.abp-main-chart .abp-transition-year {
+        font-size: 0.85rem;
+    }
+
+    /* End panel - kleinere min-width voor desktop klein */
+    .end-panel {
+        min-width: 450px !important;
+    }
+
+    /* Tekst: desktop-small tonen, desktop-only/large verbergen */
+    .abp-intro-text .desktop-small {
+        display: block;
+    }
+
+    .abp-intro-text .desktop-only,
+    .abp-intro-text .desktop-large {
+        display: none;
+    }
 }
 
 /* ========================================
@@ -1785,9 +2109,9 @@
 
     .abp-mobile-photo1-img .abp-caption {
         position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
+        bottom: 2rem;
+        left: 2.5vw;
+        right: 2.5vw;
         background: var(--abp-bg-dark);
         padding: 0.75rem;
     }
@@ -1829,9 +2153,9 @@
 
     .abp-mobile-photo2-img .abp-caption {
         position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
+        bottom: 2rem;
+        left: 2.5vw;
+        right: 2.5vw;
         background: var(--abp-bg-dark);
         padding: 0.75rem;
     }
@@ -1918,6 +2242,11 @@
         pointer-events: none;
     }
 
+    /* Kaart lichter op mobiel */
+    .abp-map-background .leaflet-tile-pane {
+        filter: grayscale(100%) brightness(0.7) !important;
+    }
+
     /* ---- INTRO SECTIE: Haven animatie + titel (100vh) ---- */
     .abp-intro-section {
         width: 100% !important;
@@ -1965,7 +2294,7 @@
     }
 
     .abp-intro-content {
-        background: rgba(0, 0, 0, 0.5) !important;
+        background: transparent !important;
         padding: 1rem 1.25rem !important;
         width: 100% !important;
         max-width: none !important;
@@ -1990,7 +2319,8 @@
     }
 
     .abp-intro-text .desktop-only,
-    .abp-intro-text p:nth-child(n+3) {
+    .abp-intro-text .desktop-small,
+    .abp-intro-text .desktop-large {
         display: none !important;
     }
 

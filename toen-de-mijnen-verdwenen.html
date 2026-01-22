@@ -928,8 +928,16 @@
         const introSection = document.getElementById('introSection');
         let currentIndex = 0;
         let isAnimating = false;
-        let scrollQueue = 0;
         let introState = 0; // 0 = hero, 1 = photo 1, 2 = chapter 1
+
+        // Improved scroll handling - works for both mouse and trackpad
+        // See docs/horizontal-scroll.md for documentation
+        let accumulatedDelta = 0;
+        let lastDelta = 0;
+        let scrollDirection = 0;
+        const DELTA_THRESHOLD = 50;  // Minimum delta to trigger scroll
+        const COOLDOWN = 500;        // Ms to wait after scroll
+        const MOMENTUM_THRESHOLD = 0.5; // Ignore if delta drops below this ratio
 
         // Check if current item is the intro section
         function isAtIntroSection(index) {
@@ -1012,40 +1020,47 @@
             scrollToIndex(newIndex);
         }
 
-        // Process scroll queue
-        function processScrollQueue() {
-            if (scrollQueue !== 0) {
-                const direction = scrollQueue > 0 ? 1 : -1;
-                scrollQueue = 0;
-                handleScroll(direction);
-
-                setTimeout(() => {
-                    isAnimating = false;
-                    if (scrollQueue !== 0) {
-                        processScrollQueue();
-                    }
-                }, 500);
-            } else {
+        // Trigger scroll in direction
+        function triggerScroll(direction) {
+            if (isAnimating) return;
+            isAnimating = true;
+            handleScroll(direction);
+            setTimeout(() => {
                 isAnimating = false;
-            }
+                accumulatedDelta = 0;
+                lastDelta = 0;
+                scrollDirection = 0;
+            }, COOLDOWN);
         }
 
         // Smooth scroll handling (desktop only)
         if (window.innerWidth > 767) {
             container.addEventListener('wheel', (e) => {
                 e.preventDefault();
+                const delta = Math.abs(e.deltaY);
+                const direction = e.deltaY > 0 ? 1 : -1;
 
-                if (e.deltaY > 0) {
-                    scrollQueue++;
-                } else if (e.deltaY < 0) {
-                    scrollQueue--;
+                if (isAnimating) return;
+
+                // Momentum detection: ignore decreasing deltas (trackpad coasting)
+                if (lastDelta > 0 && delta < lastDelta * MOMENTUM_THRESHOLD) {
+                    lastDelta = delta;
+                    return;
                 }
 
-                if (!isAnimating) {
-                    isAnimating = true;
-                    processScrollQueue();
+                // Reset if direction changes
+                if (scrollDirection !== 0 && direction !== scrollDirection) {
+                    accumulatedDelta = 0;
                 }
 
+                scrollDirection = direction;
+                accumulatedDelta += delta;
+                lastDelta = delta;
+
+                // Trigger scroll when threshold reached
+                if (accumulatedDelta >= DELTA_THRESHOLD) {
+                    triggerScroll(direction);
+                }
             }, { passive: false });
         }
 

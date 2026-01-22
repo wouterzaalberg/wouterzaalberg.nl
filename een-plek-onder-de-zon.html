@@ -28,8 +28,8 @@
                 <img src="een-plek-onder-de-zon/Foto 1.jpg" alt="Een Plek Onder de Zon" loading="eager">
             </div>
 
-            <div class="intro-panel" style="min-width: 700px; max-width: 800px;">
-                <h2 style="font-family: 'Scala Sans SC', sans-serif; font-size: 1.8rem; font-weight: 500; color: #ffffff; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 1.5rem;">Een Plek Onder de <span style="color: #f0c040;">Zon</span></h2>
+            <div class="intro-panel" style="min-width: auto; width: fit-content;">
+                <h2 style="font-family: 'Scala Sans SC', sans-serif; font-size: 1.8rem; font-weight: 500; color: #ffffff; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 1.5rem; white-space: nowrap;">Een Plek Onder de <span style="color: #f0c040;">Zon</span></h2>
                 <p style="font-family: 'Scala Sans', sans-serif; font-size: 0.95rem; line-height: 1.9; color: rgba(255,255,255,0.85); margin-bottom: 1.2rem;">
                     Een van mijn eerste opdrachten was voor de gemeente Amsterdam. Ik mocht een serie maken over tuinparken in Amsterdam en hun bewoners. Het werk is uit 2019.
                 </p>
@@ -119,7 +119,15 @@
         const allItems = document.querySelectorAll('.photo-item, .intro-panel, .end-panel');
         let currentIndex = 0;
         let isAnimating = false;
-        let scrollQueue = 0;
+
+        // Improved scroll handling - works for both mouse and trackpad
+        // See docs/horizontal-scroll.md for documentation
+        let accumulatedDelta = 0;
+        let lastDelta = 0;
+        let scrollDirection = 0;
+        const DELTA_THRESHOLD = 50;  // Minimum delta to trigger scroll
+        const COOLDOWN = 500;        // Ms to wait after scroll
+        const MOMENTUM_THRESHOLD = 0.5; // Ignore if delta drops below this ratio
 
         // Scroll to target index
         function scrollToIndex(index) {
@@ -135,40 +143,48 @@
             });
         }
 
-        // Process scroll queue
-        function processScrollQueue() {
-            if (scrollQueue !== 0) {
-                const newIndex = currentIndex + scrollQueue;
-                scrollQueue = 0;
-                scrollToIndex(newIndex);
-
-                setTimeout(() => {
-                    isAnimating = false;
-                    if (scrollQueue !== 0) {
-                        processScrollQueue();
-                    }
-                }, 500);
-            } else {
+        // Trigger scroll in direction
+        function triggerScroll(direction) {
+            if (isAnimating) return;
+            isAnimating = true;
+            const newIndex = currentIndex + direction;
+            scrollToIndex(newIndex);
+            setTimeout(() => {
                 isAnimating = false;
-            }
+                accumulatedDelta = 0;
+                lastDelta = 0;
+                scrollDirection = 0;
+            }, COOLDOWN);
         }
 
         // Smooth scroll handling (desktop only)
         if (window.innerWidth > 767) {
             container.addEventListener('wheel', (e) => {
                 e.preventDefault();
+                const delta = Math.abs(e.deltaY);
+                const direction = e.deltaY > 0 ? 1 : -1;
 
-                if (e.deltaY > 0) {
-                    scrollQueue++;
-                } else if (e.deltaY < 0) {
-                    scrollQueue--;
+                if (isAnimating) return;
+
+                // Momentum detection: ignore decreasing deltas (trackpad coasting)
+                if (lastDelta > 0 && delta < lastDelta * MOMENTUM_THRESHOLD) {
+                    lastDelta = delta;
+                    return;
                 }
 
-                if (!isAnimating) {
-                    isAnimating = true;
-                    processScrollQueue();
+                // Reset if direction changes
+                if (scrollDirection !== 0 && direction !== scrollDirection) {
+                    accumulatedDelta = 0;
                 }
 
+                scrollDirection = direction;
+                accumulatedDelta += delta;
+                lastDelta = delta;
+
+                // Trigger scroll when threshold reached
+                if (accumulatedDelta >= DELTA_THRESHOLD) {
+                    triggerScroll(direction);
+                }
             }, { passive: false });
         }
 

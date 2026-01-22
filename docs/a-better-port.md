@@ -23,24 +23,36 @@ CSS: `css/a-better-port.css`
 - Breedte: zelfde als foto 1 (via JS)
 - Achtergrond: `rgba(255, 255, 255, 0.35)`
 - Onderkant op 10vh van viewport
+- Responsive varianten:
+  - `.mobile-short`: korte tekst voor mobiel
+  - `.desktop-small`: medium tekst voor kleinere desktop
+  - `.desktop-large`: volledige tekst voor grote schermen
+  - `.desktop-only`: alleen op desktop (alle formaten)
+
+## Scroll Handling (desktop)
+- Momentum detection voor trackpad/muis
+- Delta threshold: 50px om scroll te triggeren
+- Cooldown: 500ms tussen scrolls
+- Queue-based: meerdere scrolls worden niet gestapeld
 
 ## Achtergrond Systeem
 
-### Leaflet kaart (intro)
+### Leaflet kaart (door hele pagina)
 - CartoDB dark tiles, grayscale
-- Positie: `[52.413, 4.82]`, zoom 13
-- Non-interactief
+- Positie: `[52.410, 4.78]`, zoom 14
+- Dynamische brightness op basis van fotonummer (dag/nacht cyclus):
+  - Foto 1-10: donker (nacht)
+  - Foto 10-25: geleidelijk lichter (ochtend → middag)
+  - Foto 25-30: maximale brightness (middag)
+  - Foto 30-46: geleidelijk donkerder (avond → nacht)
 
 ### Scheepvaart animatie
 - Canvas overlay met bewegende bootjes
 - 12 routes gebaseerd op havencoördinaten
 - Kleur: `rgba(225, 200, 90, 0.4)`
 - Collision detection per route
-- Stopt bij state 2
-
-### Rotating background (na intro)
-- 3 achtergrondafbeeldingen, 15% opacity
-- Breedte: 300% voor scroll effect
+- Opacity varieert mee met dag/nacht cyclus
+- Stopt bij end panel
 
 ## Dark Overlay
 - Foto 1-2: opacity 0.8
@@ -81,6 +93,23 @@ CSS: `css/a-better-port.css`
 - 50% geel tekstvak, 50% foto
 - Titel: "9 maanden van huis"
 - Zoom effect op foto
+
+## Map Interlude (tussen foto 19 en 21)
+- Kaart met fotolocatie markers
+- 44 markers (foto 7 en 29 uitgesloten)
+- Coördinaten uit Google Maps
+- Popup toont alleen "Foto [nummer]" + thumbnail
+
+### Zoom controls
+- `+` / `−` knoppen rechtsonder
+- `Reset` knop voor originele view
+- Dragging ingeschakeld bij interlude
+- Automatische reset bij navigatie weg
+
+### Overlay
+- Titel: "De Haven in Beeld"
+- Subtitel: "Klik op een locatie om de foto te zien"
+- Klikbare "Scroll voor meer" knop
 
 ## Responsive (< 767px)
 - Verticaal scrollen
