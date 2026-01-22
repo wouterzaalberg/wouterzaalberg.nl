@@ -1702,19 +1702,28 @@ img {
         font-size: 0.9rem;
         padding: 0.2rem 0;
         display: inline-block;
-        transition: color 0.4s ease;
     }
 
-    /* Kleur highlight voor actieve serie bij hero rotatie */
+    /* Shimmer effect voor actieve serie bij hero rotatie */
     .menu-list a.mobile-highlight {
-        color: var(--highlight-color, #ffffff) !important;
-        animation: subtleGlim 0.6s ease-out;
+        background: linear-gradient(
+            90deg,
+            #ffffff 0%,
+            #ffffff 40%,
+            rgba(255, 255, 255, 0.4) 50%,
+            #ffffff 60%,
+            #ffffff 100%
+        );
+        background-size: 200% 100%;
+        background-clip: text;
+        -webkit-background-clip: text;
+        color: transparent !important;
+        animation: shimmer 3s ease-in-out infinite;
     }
 
-    @keyframes subtleGlim {
-        0% { opacity: 0.7; }
-        50% { opacity: 1; }
-        100% { opacity: 1; }
+    @keyframes shimmer {
+        0% { background-position: 100% 0; }
+        100% { background-position: -100% 0; }
     }
 
     .hero-caption {

@@ -694,22 +694,19 @@
             let currentMobileIndex = 0;
             const rotationInterval = 4000; // 4 seconden per foto
 
-            // Highlight de bijbehorende menu link
+            // Highlight de bijbehorende menu link met glim effect
             function highlightSeriesLink(imageEl) {
                 const seriesHref = imageEl.dataset.series;
-                const highlightColor = imageEl.dataset.glow;
 
                 // Verwijder highlight van alle links
                 menuLinks.forEach(link => {
                     link.classList.remove('mobile-highlight');
-                    link.style.removeProperty('--highlight-color');
                 });
 
-                // Voeg highlight toe aan de bijbehorende link
-                if (seriesHref && highlightColor) {
+                // Voeg glim toe aan de bijbehorende link
+                if (seriesHref) {
                     const matchingLink = document.querySelector(`.menu-list a[href="${seriesHref}"]`);
                     if (matchingLink) {
-                        matchingLink.style.setProperty('--highlight-color', highlightColor);
                         matchingLink.classList.add('mobile-highlight');
                     }
                 }
