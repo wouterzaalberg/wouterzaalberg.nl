@@ -5,16 +5,18 @@
 - Story secties: Portret + Tattoo + Tekstpanel
 - Elke sectie: `min-width: 100vw`
 
-## Afmetingen (desktop)
-- Foto's: 58vh
-- Tekstpanel: 420px breed, 100vh hoog
-- Intro panel: 70vh hoog, 420px breed
-- Gap foto's: 0.5rem
+## Afmetingen (desktop) - Vloeiende schaling met clamp()
+- Foto's: `clamp(45vh, 35vw, 60vh)`
+- Intro foto: `clamp(45vh, 38vw, 70vh)`
+- Tekstpanel: `clamp(320px, 26vw, 480px)` breed, 100vh hoog
+- Intro panel: `clamp(45vh, 38vw, 70vh)` hoog, `clamp(320px, 26vw, 480px)` breed
+- Gap foto's: `clamp(0.3rem, 0.5vw, 0.8rem)` (schaalt met schermgrootte)
+- Padding-top tekstpanel: `clamp(18vh, 12vw, 21vh)`
 
 ## Tekstpanel Uitlijning
-- Foto's 58vh, verticaal gecentreerd → bovenkant op 21vh
-- `.story-text-panel`: `padding-top: 21vh`
-- `.story-text-content`: `padding: 0 3rem 3rem 3rem`
+- `.story-text-panel`: `padding-top: clamp(18vh, 12vw, 21vh)`
+- `.story-text-content`: `padding: 0 2rem 3rem 1.5rem`
+- Centrering: `justify-content: center` op `.tattoo-story`
 
 ## Elementen
 - Persoonsnaam: onder portretfoto, `font-weight: 600`, gekleurd
@@ -35,7 +37,8 @@
 5. Penning (rond, nummer "45")
 
 ### Technisch
-- Canvas: `position: fixed`, `pointer-events: none`, `z-index: 50`
+- Canvas: `position: fixed`, `pointer-events: none`, `z-index: 5`
+- Foto's en tekstpanelen: `z-index: 10` (canvas blijft achter content)
 - Lijn: `rgba(255, 255, 255, 0.12)`, `lineWidth: 0.8`
 - Eerste symbool: linksonder (120px, 150px van onder)
 - Volgende: random in marges
@@ -48,6 +51,32 @@
 - Fade-in na 2s, fade-out na eerste symbool
 
 ## Responsive
-- **< 1200px**: Foto's 50vh, panel 300px
-- **< 1024px**: Foto's 45vh, panel 280px
-- **< 767px**: Verticaal, volle breedte
+- **Desktop**: Vloeiende schaling via `clamp()` - geen vaste breakpoints voor afmetingen
+- **< 1400px**: "Lees meer" knop na 2e alinea (verbergt overige tekst)
+- **< 1200px**: Kleinere gap (`0.2rem`)
+- **< 1024px**: Kleinere fontsizes in tekstpanel
+- **< 767px**: Mobiele layout (zie onder)
+
+## Mobiel (< 767px)
+
+### Tattoo Canvas Effect
+- Zichtbaar alleen tijdens intro sectie
+- Kleinere symbolen: 30-50px (desktop: 55-90px)
+- Stopt volledig bij scrollen voorbij intro
+
+### Story Layout
+Elke story sectie heeft de volgende structuur:
+1. **Portretfoto**: 100vw (volle breedte)
+2. **Titel + naam**: h2 (goud) + h3 (wit)
+3. **Eerste alinea**: volle breedte (~4 regels)
+4. **Tweede alinea + tattoo foto**: tekst links, foto float rechts (45%)
+   - Tekst stopt gelijk met onderkant foto (`max-height` via JS)
+5. **"Lees meer" knop**: toont overige tekst
+
+### CSS Classes (mobiel)
+- `.mobile-story-content`: container voor hele story
+- `.mobile-text-with-photo`: container met float foto
+- `.float-photo`: tattoo foto (45%, float right)
+- `.visible-text`: tekst naast foto
+- `.extra-text`: verborgen tekst (getoond bij expanded)
+- `.read-more-btn`: toggle knop

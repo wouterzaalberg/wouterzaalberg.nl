@@ -1504,6 +1504,7 @@ img {
     .photo-item img {
         width: 100%;
         height: auto;
+        max-width: none;
     }
 
     .photo-pair {
@@ -1592,10 +1593,12 @@ img {
         object-fit: cover;
         opacity: 0;
         transition: opacity 1s ease-in-out;
+        transform: scale(1);
     }
 
     .hero-image .hero-img-mobile.active {
         opacity: 1;
+        animation: mobileHeroZoom 6s ease-out forwards;
     }
 
     .hero-overlay-content {
@@ -1718,12 +1721,18 @@ img {
         background-clip: text;
         -webkit-background-clip: text;
         color: transparent !important;
-        animation: shimmer 3s ease-in-out infinite;
+        animation: shimmer 4s ease-in-out infinite;
     }
 
     @keyframes shimmer {
         0% { background-position: 100% 0; }
         100% { background-position: -100% 0; }
+    }
+
+    /* Zoom animatie voor mobiele hero rotatie */
+    @keyframes mobileHeroZoom {
+        0% { transform: scale(1); }
+        100% { transform: scale(1.05); }
     }
 
     .hero-caption {

@@ -79,8 +79,10 @@
         }
 
         .intro-photo-large {
-            height: 70vh;
+            height: clamp(45vh, 38vw, 70vh);
             flex-shrink: 0;
+            position: relative;
+            z-index: 10;
         }
 
         .intro-photo-large img {
@@ -90,8 +92,8 @@
         }
 
         .intro-panel {
-            height: 70vh;
-            width: 420px;
+            height: clamp(45vh, 38vw, 70vh);
+            width: clamp(320px, 26vw, 480px);
             background: #2a2a2a;
             display: flex;
             flex-direction: column;
@@ -142,7 +144,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 0.5rem;
+            gap: clamp(0.3rem, 0.5vw, 0.8rem);
             flex-shrink: 0;
             height: 100%;
             min-width: 100vw;
@@ -150,11 +152,13 @@
         }
 
         .story-photo {
-            height: 58vh;
+            height: clamp(45vh, 35vw, 60vh);
             flex-shrink: 0;
             display: flex;
             flex-direction: column;
             align-items: flex-start;
+            position: relative;
+            z-index: 10;
         }
 
         .story-photo img {
@@ -172,15 +176,15 @@
 
         .story-text-panel {
             position: relative;
+            z-index: 10;
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
-            padding-top: 21vh;
-            width: 420px;
+            padding-top: clamp(18vh, 12vw, 21vh);
+            width: clamp(320px, 26vw, 480px);
             height: 100vh;
             overflow: hidden;
             flex-shrink: 0;
-            margin-left: 1.5rem;
             box-sizing: border-box;
         }
 
@@ -198,7 +202,7 @@
         .story-text-content {
             position: relative;
             z-index: 1;
-            padding: 0 3rem 3rem 3rem;
+            padding: 0 2rem 3rem 1.5rem;
             color: #fff;
             overflow-y: auto;
             max-height: 80vh;
@@ -270,6 +274,11 @@
 
         /* Read more button - hidden on desktop */
         .read-more-btn {
+            display: none;
+        }
+
+        /* Desktop read more button - hidden by default */
+        .desktop-read-more {
             display: none;
         }
 
@@ -377,53 +386,49 @@
             color: rgba(255, 255, 255, 1);
         }
 
-        /* Tablet / Medium screens */
+        /* Tablet / Medium screens - clamp() handles sizing, only adjust gaps */
         @media (max-width: 1200px) {
-            .story-photo,
-            .intro-photo-large {
-                height: 50vh;
-            }
-
-            .story-photo img {
-                height: calc(100% - 2rem);
-            }
-
-            .story-text-panel {
-                width: 300px;
-                height: 100vh;
-            }
-
-            .intro-panel {
-                height: 50vh;
-                width: 300px;
-            }
-
             .tattoo-story,
             .tattoo-intro {
-                gap: 0.3rem;
+                gap: 0.2rem;
+            }
+        }
+
+        /* Smaller desktop - lees meer functionaliteit */
+        @media (max-width: 1400px) and (min-width: 768px) {
+            .story-text-panel,
+            .intro-panel {
+                width: clamp(340px, 32vw, 520px);
             }
 
-            .story-text-panel {
-                margin-left: 1rem;
+            .story-text-content p:nth-of-type(n+3) {
+                display: none;
+            }
+
+            .story-text-content.expanded p:nth-of-type(n+3) {
+                display: block;
+            }
+
+            .story-text-content .desktop-read-more {
+                display: inline-block;
+                background: transparent;
+                border: 1px solid rgba(255,255,255,0.3);
+                color: #c9a227;
+                font-family: 'Scala Sans', sans-serif;
+                font-size: 0.7rem;
+                padding: 0.4rem 0.8rem;
+                cursor: pointer;
+                margin-top: 0.8rem;
+                transition: all 0.3s ease;
+            }
+
+            .story-text-content .desktop-read-more:hover {
+                border-color: #c9a227;
             }
         }
 
         /* Smaller tablets */
         @media (max-width: 1024px) {
-            .story-photo,
-            .intro-photo-large {
-                height: 45vh;
-            }
-
-            .story-text-panel {
-                width: 280px;
-            }
-
-            .intro-panel {
-                height: 45vh;
-                width: 280px;
-            }
-
             .story-text-content p {
                 font-size: 0.75rem;
             }
@@ -505,163 +510,143 @@
                 height: auto !important;
                 min-height: auto !important;
                 min-width: 100% !important;
-                gap: 0.5rem;
+                gap: 0;
                 padding: 0;
             }
 
-            .story-photo,
-            .intro-photo-large {
-                height: auto;
-                width: 94vw;
-                margin: 0 auto;
+            /* Verberg originele desktop elementen */
+            .story-photo.tattoo,
+            .story-text-panel {
+                display: none !important;
             }
 
-            .story-photo img,
+            /* Portret foto - 100vw breed */
+            .story-photo.portrait,
+            .intro-photo-large {
+                height: auto;
+                width: 100vw;
+                margin: 0;
+            }
+
+            .story-photo.portrait img,
             .intro-photo-large img {
                 width: 100%;
                 height: auto;
             }
 
-            /* Tattoo kader met tekst links, foto rechts uitgelijnd */
-            .story-photo.tattoo {
-                width: 94vw;
-                background: #252525;
-                padding: 0 0 0 1rem;
-                display: flex;
-                flex-direction: row;
-                justify-content: space-between;
-                align-items: stretch;
-                gap: 1rem;
+            .story-photo .person-name {
+                display: none;
             }
 
-            .story-photo.tattoo img {
-                width: 55vw;
-                flex-shrink: 0;
-                display: block;
+            /* Nieuwe mobiele layout container */
+            .mobile-story-content {
+                display: block !important;
+                width: 100%;
+                padding: 1.25rem 1rem;
+                box-sizing: border-box;
             }
 
-            /* Container voor titel/naam in tattoo kader */
-            .mobile-text-in-frame {
-                display: flex !important;
-                flex-direction: column;
-                justify-content: flex-start;
-                color: #fff;
-                flex: 1;
-                padding: 1rem 0;
-            }
-
-            .mobile-text-in-frame h2 {
+            .mobile-story-content h2 {
                 font-family: 'Scala Sans SC', sans-serif;
-                font-size: 0.75rem;
+                font-size: 0.7rem;
                 font-weight: 500;
                 text-transform: uppercase;
                 letter-spacing: 0.1em;
                 color: #c9a227;
+                margin-bottom: 0.25rem;
+            }
+
+            .mobile-story-content h3 {
+                font-family: 'Scala Sans', sans-serif;
+                font-size: 1.1rem;
+                font-weight: 400;
+                color: #fff;
+                margin-bottom: 1rem;
+            }
+
+            .mobile-story-content p {
+                font-family: 'Scala Sans', sans-serif;
+                font-size: 0.85rem;
+                line-height: 1.6;
+                color: #ccc;
+                margin-bottom: 0.8rem;
+            }
+
+            /* Tekst met foto rechts - tekst stopt gelijk met foto */
+            .mobile-text-with-photo {
+                position: relative;
+                overflow: hidden;
+            }
+
+            .mobile-text-with-photo .float-photo {
+                float: right;
+                width: 45%;
+                margin-left: 1rem;
                 margin-bottom: 0.3rem;
             }
 
-            .mobile-text-in-frame h3 {
-                font-family: 'Scala Sans', sans-serif;
-                font-size: 1rem;
-                font-weight: 400;
-                color: #fff;
-                margin-bottom: 0;
-            }
-
-            .mobile-text-in-frame .read-more-btn {
-                align-self: flex-start;
-                margin-top: auto;
-            }
-
-            /* Verberg origineel tekstpanel op mobile */
-            .story-text-panel {
-                display: none !important;
-            }
-
-            /* Toon tekstpanel als expanded */
-            .story-text-panel.story-expanded {
-                display: block !important;
-                width: 94vw !important;
-                margin: 0 auto !important;
-                padding-top: 0 !important;
-                position: relative !important;
-                height: auto !important;
-            }
-
-            .story-text-panel.story-expanded .story-text-bg {
-                display: none !important;
-            }
-
-            .story-text-panel.story-expanded .story-text-content {
-                position: relative !important;
-                padding: 1.5rem !important;
-                max-height: none !important;
-                overflow: visible !important;
-                color: #fff !important;
-            }
-
-            .story-text-panel.story-expanded .story-text-content p {
-                display: block !important;
-                color: #ddd !important;
-            }
-
-            .story-text-panel.story-expanded .story-text-content h2,
-            .story-text-panel.story-expanded .story-text-content h3 {
-                display: block !important;
-            }
-
-            .story-text-bg {
-                position: absolute;
-                border-radius: 8px;
-            }
-
-            .story-text-content {
-                padding: 1.5rem !important;
-                max-height: none !important;
-            }
-
-            .story-text-content h2 {
-                font-size: 0.7rem;
-                margin-bottom: 0.2rem;
-            }
-
-            .story-text-content h3 {
-                font-size: 0.95rem;
-                margin-bottom: 0.75rem;
-            }
-
-            /* Verberg alle paragrafen standaard op mobile */
-            .story-text-content p {
-                display: none;
-                font-size: 0.8rem;
-                line-height: 1.6;
-            }
-
-            /* Toon paragrafen als expanded */
-            .story-text-panel.expanded .story-text-content p {
+            .mobile-text-with-photo .float-photo img {
+                width: 100%;
+                height: auto;
                 display: block;
             }
 
-            /* Lees meer button */
+            .mobile-text-with-photo .visible-text p {
+                margin-bottom: 0.6rem;
+            }
+
+            /* Verborgen extra tekst */
+            .mobile-story-content .extra-text {
+                display: none;
+            }
+
+            .mobile-story-content.expanded .mobile-text-with-photo {
+                max-height: none !important;
+            }
+
+            .mobile-story-content.expanded .extra-text {
+                display: block;
+                margin-top: 0.8rem;
+            }
+
+            .mobile-story-content .extra-text p {
+                margin-bottom: 0.8rem;
+            }
+
+            .mobile-story-content .extra-text .section-title {
+                font-family: 'Scala Sans SC', sans-serif;
+                font-size: 0.65rem;
+                text-transform: uppercase;
+                letter-spacing: 0.1em;
+                color: #c9a227;
+                margin-top: 1.2rem;
+                margin-bottom: 0.4rem;
+            }
+
+            .mobile-story-content .extra-text .credit {
+                font-size: 0.7rem;
+                color: #666;
+                margin-top: 1rem;
+            }
+
+            /* Lees meer button - direct onder foto */
             .read-more-btn {
                 display: block !important;
+                clear: both;
                 background: transparent;
                 border: 1px solid rgba(255,255,255,0.3);
                 color: #c9a227;
                 font-family: 'Scala Sans', sans-serif;
                 font-size: 0.75rem;
-                padding: 0.6rem 1rem;
+                padding: 0.5rem 1rem;
                 cursor: pointer;
-                margin-top: 0.5rem;
+                margin-top: 0.8rem;
                 transition: all 0.3s ease;
+                width: fit-content;
             }
 
             .read-more-btn:hover {
                 border-color: #c9a227;
-            }
-
-            .story-text-panel.expanded .read-more-btn {
-                margin-top: 1rem;
             }
 
             .intro-panel {
@@ -694,8 +679,18 @@
                 padding: 2rem 1.5rem !important;
             }
 
-            /* Hide tattoo canvas on mobile */
-            #tattooCanvas,
+            /* Tattoo canvas op mobile - alleen zichtbaar in intro */
+            #tattooCanvas {
+                display: block !important;
+                opacity: 1;
+                transition: opacity 0.5s ease;
+            }
+
+            #tattooCanvas.hidden {
+                opacity: 0;
+                pointer-events: none;
+            }
+
             #tattooHint {
                 display: none !important;
             }
@@ -1406,7 +1401,7 @@
     <span class="scroll-arrow" id="globalScrollArrow">→</span>
 
     <!-- Tattoo line canvas -->
-    <canvas id="tattooCanvas" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 50;"></canvas>
+    <canvas id="tattooCanvas" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 5;"></canvas>
 
     <!-- Tattoo hint text -->
     <div id="tattooHint" style="position: fixed; bottom: 2.5rem; left: 2.5rem; z-index: 51; pointer-events: none; opacity: 0; transition: opacity 1.5s ease-in-out;">
@@ -1416,6 +1411,9 @@
     </div>
 
     <script>
+        // Global flag to control tattoo animation
+        let tattooAnimationRunning = true;
+
         // Tattoo line drawing effect - Mining symbols
         (function() {
             const canvas = document.getElementById('tattooCanvas');
@@ -1570,10 +1568,13 @@
             let x = 0, y = 0;
             let lastSymbolName = null; // Track last symbol to avoid repeats
 
-            // Fixed starting position (bottom-left corner)
+            // Check if mobile
+            const isMobile = window.innerWidth <= 767;
+
+            // Fixed starting position (bottom-left corner) - smaller on mobile
             let symbolCount = 0;
-            const startX = 120;
-            const startY = window.innerHeight - 150;
+            const startX = isMobile ? 60 : 120;
+            const startY = window.innerHeight - (isMobile ? 100 : 150);
 
             // Show hint text after delay
             setTimeout(() => {
@@ -1583,36 +1584,37 @@
 
             // Get position for symbols - first one fixed, then random in margins
             function getRandomPosition() {
-                const margin = 80;
-                const size = 55 + Math.random() * 35; // Larger symbols (55-90px)
+                const margin = isMobile ? 40 : 80;
+                const size = isMobile ? (30 + Math.random() * 20) : (55 + Math.random() * 35); // Smaller on mobile (30-50px)
                 let posX, posY;
 
                 // First symbol starts at fixed position
                 if (symbolCount === 0) {
                     symbolCount++;
-                    return { x: startX, y: startY, size: 70 }; // Larger first symbol
+                    return { x: startX, y: startY, size: isMobile ? 40 : 70 }; // Smaller first symbol on mobile
                 }
 
                 symbolCount++;
 
                 // Choose left, right, top or bottom margin
                 const side = Math.floor(Math.random() * 4);
+                const spread = isMobile ? 60 : 120;
                 switch(side) {
                     case 0: // Left
-                        posX = margin + Math.random() * 120;
+                        posX = margin + Math.random() * spread;
                         posY = margin + Math.random() * (canvas.height - margin * 2);
                         break;
                     case 1: // Right
-                        posX = canvas.width - margin - 120 - Math.random() * 120;
+                        posX = canvas.width - margin - spread - Math.random() * spread;
                         posY = margin + Math.random() * (canvas.height - margin * 2);
                         break;
                     case 2: // Top
                         posX = margin + Math.random() * (canvas.width - margin * 2);
-                        posY = margin + Math.random() * 100;
+                        posY = margin + Math.random() * (isMobile ? 60 : 100);
                         break;
                     case 3: // Bottom
                         posX = margin + Math.random() * (canvas.width - margin * 2);
-                        posY = canvas.height - margin - 100 - Math.random() * 80;
+                        posY = canvas.height - margin - (isMobile ? 60 : 100) - Math.random() * (isMobile ? 40 : 80);
                         break;
                 }
                 return { x: posX, y: posY, size: size };
@@ -1782,8 +1784,18 @@
                     ctx.fill();
                 }
 
-                requestAnimationFrame(draw);
+                if (tattooAnimationRunning) {
+                    requestAnimationFrame(draw);
+                }
             }
+
+            // Expose a way to restart the animation
+            window.startTattooAnimation = function() {
+                if (!tattooAnimationRunning) {
+                    tattooAnimationRunning = true;
+                    draw();
+                }
+            };
 
             draw();
         })();
@@ -1908,43 +1920,148 @@
             });
         });
 
-        // Mobile: Move title/name into tattoo frame
+        // Desktop < 1400px: Add read more buttons to text panels
+        if (window.innerWidth >= 768 && window.innerWidth <= 1400) {
+            const textContents = document.querySelectorAll('.story-text-content');
+            textContents.forEach(content => {
+                const paragraphs = content.querySelectorAll('p');
+                // Only add button if there are more than 2 paragraphs
+                if (paragraphs.length > 2) {
+                    const btn = document.createElement('button');
+                    btn.className = 'desktop-read-more';
+                    btn.textContent = 'Lees meer';
+
+                    btn.addEventListener('click', () => {
+                        content.classList.toggle('expanded');
+                        btn.textContent = content.classList.contains('expanded') ? 'Verberg' : 'Lees meer';
+                    });
+
+                    // Insert button after the 2nd paragraph
+                    paragraphs[1].after(btn);
+                }
+            });
+        }
+
+        // Mobile: Hide tattoo canvas and stop animation when scrolling past intro
+        if (window.innerWidth <= 767) {
+            const tattooCanvas = document.getElementById('tattooCanvas');
+            const titleIntroSection = document.querySelector('.tattoo-title-intro');
+
+            if (tattooCanvas && titleIntroSection) {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            tattooCanvas.classList.remove('hidden');
+                            // Animatie loopt al, geen actie nodig
+                        } else {
+                            tattooCanvas.classList.add('hidden');
+                            // Stop de animatie
+                            tattooAnimationRunning = false;
+                        }
+                    });
+                }, { threshold: 0.1 });
+
+                observer.observe(titleIntroSection);
+            }
+        }
+
+        // Mobile: Restructure story layout
         if (window.innerWidth <= 767) {
             const stories = document.querySelectorAll('.tattoo-story');
             stories.forEach(story => {
-                const tattooContainer = story.querySelector('.story-photo.tattoo');
+                const tattooPhoto = story.querySelector('.story-photo.tattoo');
                 const textPanel = story.querySelector('.story-text-panel');
                 const content = textPanel ? textPanel.querySelector('.story-text-content') : null;
 
-                if (!tattooContainer || !content) return;
+                if (!tattooPhoto || !content) return;
 
-                // Get title and name
+                // Get all content elements
                 const h2 = content.querySelector('h2');
                 const h3 = content.querySelector('h3');
-                const name = h3 ? h3.textContent : 'deze persoon';
+                const paragraphs = content.querySelectorAll('p');
+                const tattooImg = tattooPhoto.querySelector('img');
 
-                // Create mobile text container
-                const mobileText = document.createElement('div');
-                mobileText.className = 'mobile-text-in-frame';
+                if (paragraphs.length < 1) return;
 
-                // Clone title and name
-                if (h2) mobileText.appendChild(h2.cloneNode(true));
-                if (h3) mobileText.appendChild(h3.cloneNode(true));
+                // Create new mobile content container
+                const mobileContent = document.createElement('div');
+                mobileContent.className = 'mobile-story-content';
 
-                // Create read-more button
+                // Add title and name BEFORE the photo section
+                if (h2) mobileContent.appendChild(h2.cloneNode(true));
+                if (h3) mobileContent.appendChild(h3.cloneNode(true));
+
+                // Add first paragraph before the photo (gives ~4 lines before photo)
+                if (paragraphs[0]) mobileContent.appendChild(paragraphs[0].cloneNode(true));
+
+                // Create container with photo float and remaining text
+                const textWithPhoto = document.createElement('div');
+                textWithPhoto.className = 'mobile-text-with-photo';
+
+                // Photo floats right
+                const floatPhoto = document.createElement('div');
+                floatPhoto.className = 'float-photo';
+                if (tattooImg) {
+                    const clonedImg = tattooImg.cloneNode(true);
+                    clonedImg.style.opacity = '1';
+                    floatPhoto.appendChild(clonedImg);
+                }
+                textWithPhoto.appendChild(floatPhoto);
+
+                // Add second paragraph next to the photo
+                const visibleText = document.createElement('div');
+                visibleText.className = 'visible-text';
+                if (paragraphs[1]) visibleText.appendChild(paragraphs[1].cloneNode(true));
+                textWithPhoto.appendChild(visibleText);
+
+                mobileContent.appendChild(textWithPhoto);
+
+                // Collect remaining text for "read more"
+                const extraText = document.createElement('div');
+                extraText.className = 'extra-text';
+
+                for (let i = 2; i < paragraphs.length; i++) {
+                    extraText.appendChild(paragraphs[i].cloneNode(true));
+                }
+
+                if (extraText.children.length > 0) {
+                    mobileContent.appendChild(extraText);
+                }
+
+                // Add read-more button
                 const btn = document.createElement('button');
                 btn.className = 'read-more-btn';
-                btn.textContent = `Lees meer`;
+                btn.textContent = 'Lees meer';
 
                 btn.addEventListener('click', () => {
-                    textPanel.classList.toggle('story-expanded');
-                    btn.textContent = textPanel.classList.contains('story-expanded') ? 'Verberg' : 'Lees meer';
+                    mobileContent.classList.toggle('expanded');
+                    btn.textContent = mobileContent.classList.contains('expanded') ? 'Verberg' : 'Lees meer';
                 });
 
-                mobileText.appendChild(btn);
+                mobileContent.appendChild(btn);
 
-                // Insert at beginning of tattoo container (before img)
-                tattooContainer.insertBefore(mobileText, tattooContainer.firstChild);
+                // Insert mobile content after portrait photo
+                const portraitPhoto = story.querySelector('.story-photo.portrait');
+                if (portraitPhoto) {
+                    portraitPhoto.after(mobileContent);
+                }
+
+                // After images load, set max-height to match photo height
+                const imgInFloat = floatPhoto.querySelector('img');
+                if (imgInFloat) {
+                    const setHeight = () => {
+                        const photoHeight = imgInFloat.offsetHeight;
+                        if (photoHeight > 0) {
+                            textWithPhoto.style.maxHeight = photoHeight + 'px';
+                        }
+                    };
+
+                    if (imgInFloat.complete) {
+                        setTimeout(setHeight, 100);
+                    } else {
+                        imgInFloat.addEventListener('load', setHeight);
+                    }
+                }
             });
         }
     </script>
