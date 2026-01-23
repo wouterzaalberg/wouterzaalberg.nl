@@ -48,11 +48,17 @@ CSS: `css/a-better-port.css`
 
 ### Scheepvaart animatie
 - Canvas overlay met bewegende bootjes
-- 12 routes gebaseerd op havencoördinaten
+- 11 routes gebaseerd op havencoördinaten (WGS84, zelfde als Google Maps)
+- Dual-lane systeem: schepen naar zee rechts, schepen van zee links (8px offset)
 - Kleur: `rgba(225, 200, 90, 0.4)`
 - Collision detection per route
 - Opacity varieert mee met dag/nacht cyclus
 - Stopt bij end panel
+
+### Statische schepen (aangemeerd)
+- 6 stilliggende schepen in havens
+- Coördinaten + hoek in graden
+- Grotere schepen via `size` parameter
 
 ## Dark Overlay
 - Foto 1-2: opacity 0.8

@@ -1659,7 +1659,7 @@
 
                     if (idx >= routeLen - 1) {
                         const lastPt = this.route[routeLen - 1];
-                        return { lat: lastPt.lat, lng: lastPt.lng, angle: 0 };
+                        return { lat: lastPt.lat, lng: lastPt.lng, angle: 0, offsetX: 0, offsetY: 0 };
                     }
 
                     const p1 = this.route[idx];
@@ -1672,14 +1672,23 @@
                     const pt2 = harborMap.latLngToContainerPoint([p2.lat, p2.lng]);
                     const angle = Math.atan2(pt2.y - pt1.y, pt2.x - pt1.x);
 
-                    return { lat, lng, angle: this.direction > 0 ? angle : angle + Math.PI };
+                    // Lane offset: perpendicular to route direction
+                    // Heading to sea = right side (positive offset)
+                    // Coming from sea = left side (negative offset)
+                    const laneOffset = 8; // pixels
+                    const perpAngle = angle + Math.PI / 2;
+                    const offsetMultiplier = this.headingToSea ? 1 : -1;
+                    const offsetX = Math.cos(perpAngle) * laneOffset * offsetMultiplier;
+                    const offsetY = Math.sin(perpAngle) * laneOffset * offsetMultiplier;
+
+                    return { lat, lng, angle: this.direction > 0 ? angle : angle + Math.PI, offsetX, offsetY };
                 }
 
                 draw(ctx) {
                     const pos = this.getPosition();
                     const point = harborMap.latLngToContainerPoint([pos.lat, pos.lng]);
-                    const x = point.x;
-                    const y = point.y;
+                    const x = point.x + (pos.offsetX || 0);
+                    const y = point.y + (pos.offsetY || 0);
                     const angle = pos.angle;
                     const size = this.size;
 
@@ -1715,11 +1724,12 @@
                 // Route 0 - ROOD: Noordzeekanaal - curves from top-left to bottom-right (4% toegevoegd links, schuin omhoog)
                 [
                     { lat: 52.444, lng: 4.695 },
-                    { lat: 52.438, lng: 4.708 },
-                    { lat: 52.432, lng: 4.74 },
-                    { lat: 52.425, lng: 4.78 },
-                    { lat: 52.420, lng: 4.82 },
-                    { lat: 52.415, lng: 4.865 },
+                    { lat: 52.435403, lng: 4.714725 },
+                    { lat: 52.429859, lng: 4.748499 },
+                    { lat: 52.424416, lng: 4.792067 },
+                    { lat: 52.419864, lng: 4.825181 },
+                    { lat: 52.416766, lng: 4.853253 },
+                    { lat: 52.413639, lng: 4.864332 },
                     { lat: 52.405, lng: 4.880 },
                     { lat: 52.395, lng: 4.895 },
                     { lat: 52.385, lng: 4.910 }
@@ -1758,35 +1768,28 @@
                     { lat: 52.406, lng: 4.820 },
                     { lat: 52.406, lng: 4.830 }
                 ],
-                // Route 6b - NIEUWE LIJN: 6% onder oranje
+                // Route 7: 6% onder oranje
                 [
-                    { lat: 52.4025, lng: 4.820 },
-                    { lat: 52.4025, lng: 4.830 }
+                    { lat: 52.399131, lng: 4.821352 },
+                    { lat: 52.399000, lng: 4.833440 }
                 ],
-                // Route 7 - LIMEGROEN: iets korter aan onderkant
+                // Route 8 - LIMEGROEN: iets korter aan onderkant
                 [
-                    { lat: 52.4165, lng: 4.844 },
+                    { lat: 52.417932, lng: 4.841991 },
                     { lat: 52.408, lng: 4.847 },
                     { lat: 52.406, lng: 4.851 }
                 ],
-                // IJ waterway - diagonal channel going southeast
+                // Route 9 - IJ waterway: diagonal channel going southeast
                 [
-                    { lat: 52.415, lng: 4.865 },
+                    { lat: 52.413639, lng: 4.864332 },
                     { lat: 52.405, lng: 4.880 },
                     { lat: 52.395, lng: 4.895 },
                     { lat: 52.385, lng: 4.910 }
                 ],
-                // Route 9 - PAARS-ROZE: Far right harbors (7% omlaag, 10% naar rechts)
+                // Route 10 - Nieuwe lijn vanaf 9.1 (IJ waterway punt 1)
                 [
-                    { lat: 52.406, lng: 4.904 },
-                    { lat: 52.406, lng: 4.919 },
-                    { lat: 52.406, lng: 4.934 }
-                ],
-                // Far right - IJ basin (large area on bottom right)
-                [
-                    { lat: 52.390, lng: 4.900 },
-                    { lat: 52.385, lng: 4.915 },
-                    { lat: 52.380, lng: 4.930 }
+                    { lat: 52.405, lng: 4.880 },
+                    { lat: 52.398054, lng: 4.861730 }
                 ]
             ];
 
@@ -1817,8 +1820,6 @@
                 [8, 0.6, 1, false],   // lime green
                 [9, 0.3, 1, false],   // IJ waterway
                 [9, 0.6, -1, true],   // IJ waterway returning
-                [10, 0.5, 1, false],  // purple-pink harbor
-                [11, 0.7, -1, true],  // IJ basin returning
             ];
 
             for (let i = 0; i < shipConfigs.length; i++) {
@@ -1839,6 +1840,51 @@
                 ships.push(ship);
             }
 
+            // Static ships (docked, not moving)
+            // Format: { lat, lng, angle (degrees), size }
+            const staticShips = [
+                { lat: 52.401684, lng: 4.856175, angle: 40, size: 10 },
+                { lat: 52.414718, lng: 4.767759, angle: -14, size: 10 },
+                { lat: 52.409764, lng: 4.835748, angle: -50, size: 16 },
+                { lat: 52.419558, lng: 4.742604, angle: -16, size: 10 },
+                { lat: 52.411811, lng: 4.858598, angle: -45, size: 10 },
+                { lat: 52.419385, lng: 4.799986, angle: -30, size: 10 }
+            ];
+
+            function drawStaticShips() {
+                staticShips.forEach(ship => {
+                    const point = harborMap.latLngToContainerPoint([ship.lat, ship.lng]);
+                    const x = point.x;
+                    const y = point.y;
+                    const angle = ship.angle * Math.PI / 180; // Convert degrees to radians
+                    const size = ship.size || 10;
+
+                    ctx.save();
+                    ctx.translate(x, y);
+                    ctx.rotate(angle);
+
+                    // Draw ship shape - same style as moving ships
+                    ctx.fillStyle = 'rgba(225, 200, 90, 0.4)';
+                    ctx.strokeStyle = 'rgba(180, 160, 70, 0.3)';
+                    ctx.lineWidth = 0.8;
+                    ctx.beginPath();
+
+                    const length = size * 3;
+                    const width = size * 1.2;
+
+                    ctx.moveTo(-length / 2, -width / 2);
+                    ctx.lineTo(-length / 2, width / 2);
+                    ctx.lineTo(length / 3, width / 2);
+                    ctx.lineTo(length / 2, 0);
+                    ctx.lineTo(length / 3, -width / 2);
+                    ctx.closePath();
+                    ctx.fill();
+                    ctx.stroke();
+
+                    ctx.restore();
+                });
+            }
+
             // Animation state
             let animationActive = true;
             let animationFrame = null;
@@ -1854,8 +1900,11 @@
                 routes.forEach((route, idx) => {
                     if (route.length < 2) return;
 
+                    const color = colors[idx % colors.length];
+
+                    // Teken de lijn
                     ctx.beginPath();
-                    ctx.strokeStyle = colors[idx % colors.length];
+                    ctx.strokeStyle = color;
                     ctx.lineWidth = 3;
 
                     const firstPoint = harborMap.latLngToContainerPoint([route[0].lat, route[0].lng]);
@@ -1867,6 +1916,27 @@
                     }
 
                     ctx.stroke();
+
+                    // Teken genummerde markers op elk punt
+                    route.forEach((coord, pointIdx) => {
+                        const point = harborMap.latLngToContainerPoint([coord.lat, coord.lng]);
+
+                        // Cirkel
+                        ctx.beginPath();
+                        ctx.arc(point.x, point.y, 12, 0, Math.PI * 2);
+                        ctx.fillStyle = color;
+                        ctx.fill();
+                        ctx.strokeStyle = '#ffffff';
+                        ctx.lineWidth = 2;
+                        ctx.stroke();
+
+                        // Nummer
+                        ctx.fillStyle = '#ffffff';
+                        ctx.font = 'bold 10px sans-serif';
+                        ctx.textAlign = 'center';
+                        ctx.textBaseline = 'middle';
+                        ctx.fillText(`${idx}.${pointIdx}`, point.x, point.y);
+                    });
                 });
             }
 
@@ -1880,6 +1950,9 @@
 
                 // Draw debug routes first (underneath ships)
                 drawDebugRoutes();
+
+                // Draw static ships (docked)
+                drawStaticShips();
 
                 // Draw and update moving ships
                 ships.forEach(ship => {
