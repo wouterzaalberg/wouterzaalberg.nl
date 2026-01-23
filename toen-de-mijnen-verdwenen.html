@@ -1630,6 +1630,25 @@
             };
         }, 100);
 
+        // Caption fade-in observer (mobiel)
+        if (window.innerWidth <= 767) {
+            const captions = document.querySelectorAll('.tdmv-caption');
+            const captionObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, {
+                threshold: 0.3,
+                rootMargin: '0px 0px -50px 0px'
+            });
+
+            captions.forEach(caption => {
+                captionObserver.observe(caption);
+            });
+        }
+
         // Soundscape audio system
         const soundscape = document.getElementById('soundscape');
         const soundBtn = document.getElementById('soundBtn');

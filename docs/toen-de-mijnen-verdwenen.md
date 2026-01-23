@@ -96,6 +96,8 @@ Font: Adobe Typekit Chloe (`https://use.typekit.net/qwc4lnx.css`)
 - **Navigatie**: fixed met gradient achtergrond
 - **Hero panel**: padding 1rem links/rechts, soundscape knop gecentreerd
 - **Foto's**: 100% breedte, captions eronder met top border
+- **Caption fade-in**: IntersectionObserver, opacity 0→1, translateY 15px→0, 0.6s ease-out
+- **Photo-block gap**: 0 (overschrijft desktop 1.5rem), caption margin-top: 0.7rem
 - **Highlighted photos**: foto boven, panel onder (verticaal gestapeld)
 - **Achtergronden**: verborgen (::before/::after op intro-photo en intro-chapter)
 - **Deel 1 chapter**: 100svh, gradient achtergrond, verkort intro tekst (.desktop-only)

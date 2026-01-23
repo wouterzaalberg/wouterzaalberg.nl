@@ -2438,6 +2438,7 @@
         flex-shrink: 0;
         display: flex;
         flex-direction: column;
+        gap: 0;
     }
 
     .tdmv-photo-block[style*="margin-left"] {
@@ -2473,11 +2474,20 @@
     .tdmv-caption {
         position: relative;
         max-width: 100%;
-        margin-top: 0.75rem;
+        margin-top: 0.7rem;
         padding: 0.75rem 1.5rem;
         background: transparent;
         border-left: none;
         border-top: 2px solid;
+        /* Fade-in animatie */
+        opacity: 0;
+        transform: translateY(15px);
+        transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+
+    .tdmv-caption.visible {
+        opacity: 1;
+        transform: translateY(0);
     }
 
     .part-1 .tdmv-caption { border-top-color: var(--tdmv-part1-accent); }
