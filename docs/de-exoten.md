@@ -63,6 +63,39 @@ rivierkreeft, vederkruid, vlinderstruik, waterteunisbloem, watercrassula, kleine
 - Kreeft: kreeft1-11.jpg, kreeftcentraal.jpg
 - Speciaal: beverrat.jpg, diana airbug a.jpg, info 1-3.jpg, klem.jpg
 
+## Small Desktop (768-1400px)
+
+### Algemeen
+- Intro titel: 6rem
+- Intro wrapper: 80vh, justify-content: flex-start
+- Verticale labels: 1.1rem
+
+### Bijschriften (uniforme styling)
+- Padding: 0.5rem
+- Border: 1px
+- Titel: 0.65rem
+- Tekst: 0.65rem, line-height 1.4
+- Classes: `.photo-caption-box`, `.caption-box`, `.foto-32-caption`, `.muskusrat-caption-box`
+
+### Desktop Foto Popup
+- Klik om te vergroten, loslaten om te sluiten
+- Alleen voor foto's kleiner dan 65vh
+- Cursor: zoom-in op klikbare foto's
+
+### Hoornaar Cluster
+- "Op zoek in Zeeland" tekstkader: 100% breed
+- Foto 23 verborgen
+- Hoornaar boog foto's verkleind (20-22vh)
+
+### Rivierkreeft Sectie
+- Gecentreerd met margin-left: 8rem
+- Caption margin-top: 10vh
+
+### End Panel
+- Hoogte: 100vh
+- Breedte: calc(100vw - 100px)
+- align-self: flex-start (voorkomt vertical shift)
+
 ## Mobiel
 
 ### Intro Carousel

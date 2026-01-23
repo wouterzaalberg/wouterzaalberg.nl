@@ -1534,6 +1534,34 @@
             max-width: 350px;
         }
 
+        /* Desktop foto popup */
+        .desktop-photo-popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.9);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.15s ease-out;
+        }
+
+        .desktop-photo-popup.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .desktop-photo-popup img {
+            max-width: 90vw;
+            max-height: 90vh;
+            object-fit: contain;
+        }
+
         /* Intro sectie: foto 1 + tekstvak gecentreerd */
         .intro-section {
             display: flex;
@@ -1690,6 +1718,224 @@
         /* Mobiele content verborgen op desktop */
         .mobile-content {
             display: none;
+        }
+
+        /* ===========================================
+           KLEINE DESKTOP (768px - 1400px)
+           =========================================== */
+        @media (min-width: 768px) and (max-width: 1400px) {
+            .horizontal-scroll-container {
+                overflow-y: hidden;
+            }
+
+            .horizontal-scroll-content {
+                overflow: hidden;
+            }
+
+            /* Progress indicator zichtbaar houden */
+            .exoten-progress {
+                z-index: 9999;
+                display: flex !important;
+                opacity: 1 !important;
+                visibility: visible !important;
+            }
+
+            .intro-title {
+                font-size: 6rem;
+            }
+
+            .intro-section {
+                align-items: flex-end;
+            }
+
+            .intro-wrapper {
+                height: 80vh;
+                justify-content: flex-start;
+            }
+
+            .intro-title {
+                font-size: 6rem;
+            }
+
+            .intro-image img {
+                height: 12vh;
+            }
+
+            .intro-panel {
+                padding: 1rem;
+                overflow: hidden;
+            }
+
+            .intro-panel p {
+                font-size: 0.85rem;
+                line-height: 1.5;
+                margin-bottom: 0.5rem;
+            }
+
+            .chapter-name {
+                font-size: 2rem;
+            }
+
+            .vertical-label {
+                font-size: 1.3rem;
+            }
+
+            .gray-section {
+                padding-left: 4rem;
+                padding-right: 5rem;
+                gap: 6rem;
+            }
+
+            .photo-cluster {
+                margin-left: -4rem;
+                margin-right: 4rem;
+            }
+
+            /* Uniforme bijschrift styling voor alle caption boxes */
+            .photo-caption-box,
+            .caption-box,
+            .foto-32-caption,
+            .foto-43-column .caption-box,
+            .foto-49-wrapper .caption-box,
+            .vlinderstruik-section .caption-box,
+            .watercrassula-section .caption-box,
+            .muskusrat-caption-box {
+                padding: 0.5rem !important;
+                border-width: 1px !important;
+            }
+
+            .photo-caption-box h4,
+            .photo-caption-box .caption-title,
+            .caption-box h4,
+            .caption-box .caption-title,
+            .foto-32-caption .caption-title,
+            .foto-43-column .caption-box .caption-title,
+            .foto-49-wrapper .caption-box .caption-title,
+            .vlinderstruik-section .caption-box .caption-title,
+            .watercrassula-section .caption-box .caption-title,
+            .muskusrat-caption-box .caption-title {
+                font-size: 0.65rem !important;
+                margin-bottom: 0.25rem !important;
+                letter-spacing: 0.1em !important;
+            }
+
+            .photo-caption-box p,
+            .photo-caption-box .caption-text,
+            .caption-box p,
+            .caption-box .caption-text,
+            .foto-32-caption .caption-text,
+            .foto-43-column .caption-box .caption-text,
+            .foto-49-wrapper .caption-box .caption-text,
+            .vlinderstruik-section .caption-box .caption-text,
+            .watercrassula-section .caption-box .caption-text,
+            .muskusrat-caption-box .caption-text {
+                font-size: 0.65rem !important;
+                line-height: 1.4 !important;
+                margin-bottom: 0.3rem !important;
+            }
+
+            .hoornaar-cluster {
+                margin-left: 10rem;
+            }
+
+            .hoornaar-cluster .row-caption-23 .photo-caption-box {
+                min-width: 280px;
+            }
+
+            .info-column .photo-caption-box {
+                max-width: 200px;
+            }
+
+            /* 2) Op zoek in Zeeland - breder, foto 23 verbergen */
+            .hoornaar-cluster .row-caption-23 .photo-caption-box {
+                min-width: 100%;
+                overflow: hidden;
+            }
+
+            .hoornaar-cluster .row-caption-23 .photo-xs {
+                display: none;
+            }
+
+            /* 4) Snitch tekstkader smaller */
+            .foto-35-section .section-caption {
+                max-width: 220px;
+                overflow: hidden;
+            }
+
+            /* 5) Verticale labels kleiner */
+            .vertical-label {
+                font-size: 1.1rem;
+            }
+
+            /* 6) 50 kilo per dag - gecentreerd */
+            .rivierkreeft-section {
+                margin-left: 8rem;
+                justify-content: center;
+            }
+
+            .rivierkreeft-section .rivierkreeft-caption {
+                margin-top: 10vh;
+                max-width: 260px;
+                overflow: hidden;
+            }
+
+            /* 7) End panel - passend in viewport */
+            .end-panel {
+                height: 100vh !important;
+                min-width: calc(100vw - 100px) !important;
+                padding: 2rem !important;
+                padding-right: 4rem !important;
+                align-self: flex-start !important;
+                margin-top: -80px !important;
+                padding-top: calc(2rem + 80px) !important;
+                box-sizing: border-box !important;
+                margin-right: -4rem !important;
+            }
+
+            /* 3) Hoornaar boog kleiner - foto 31-34 apart */
+            .hoornaar-boog {
+                gap: 0.3rem;
+            }
+
+            .hoornaar-boog .boog-kolom-25-26 {
+                margin-top: calc(20vh + 0.3rem);
+            }
+
+            .hoornaar-boog .foto-26 img {
+                height: 22vh;
+            }
+
+            .hoornaar-boog .foto-25 img {
+                height: 12vh;
+            }
+
+            .hoornaar-boog .foto-27 img {
+                height: 20vh;
+            }
+
+            .hoornaar-boog .foto-28 img {
+                height: 22vh;
+            }
+
+            .hoornaar-boog .foto-29 {
+                margin-bottom: 38vh;
+            }
+
+            .hoornaar-boog .foto-29 img {
+                height: 20vh;
+            }
+
+            .hoornaar-boog .foto-30 {
+                margin-bottom: 18vh;
+            }
+
+            .hoornaar-boog .foto-30 img {
+                height: 22vh;
+            }
+
+            .foto-31-34-cluster {
+                margin-left: 2rem;
+            }
         }
 
         /* ===========================================
@@ -2374,9 +2620,9 @@
                     <img src="de-exoten/beverrat.jpg" alt="Beverrat">
                 </div>
                 <div class="intro-panel" id="introPanel">
-                    <p>Er woedt een onzichtbare oorlog in Nederland. Een oorlog tussen invasieve exoten, de inheemse natuur en de mens. De slagvelden zijn de vennen en de volkstuinen, de beken en de bossen, de rivierbekken en de postzegelparkjes. Hier vestigen zich de Amerikaanse rivierkreeft en de Japanse duizendknoop, de watercrassula en de wasbeerhond, de stierkikker en de Chinese wolhandkrab.</p>
-                    <p>De oorlog draait om de simpele vraag: wie domineert? Is dat de inheemse Nederlandse natuur, de door Jac. P. Thijsse zo wonderschoon gedefinieerde sloten bossen en ander groen? Is het de mens, die eeuwenlang strijd heeft geleverd tegen de natuurlijke wereld, totdat zij eindelijk, met spierkracht, kennismacht en machines, haar kon bedwingen en boetseren naar eigen inzicht? Of zijn het al die invasieve exoten, die zich maar weinig aantrekken van dit menselijk privilege en op hun eigen wijze de natuur onherkenbaar veranderen?</p>
-                    <p>Deze serie gaat over deze invasieve exoten. Maar eigenlijk gaat het over de mens. De mens die planten en dieren over de aardbol versleept. De mens die soms gedreven door winst, soms vanwege onwetendheid de planten en dieren in vreemde ecosystemen introduceert. En de mens die vervolgens wanhopige pogingen doet om de exoten te vernietigen voordat ze dat met onze natuur doen.</p>
+                    <p>Er woedt een onzichtbare oorlog in Nederland. Een oorlog tussen invasieve exoten, de inheemse natuur en de mens. De slagvelden zijn de vennen, de beken, de rivierbekken en de postzegelparkjes. Hier vestigen zich de Amerikaanse rivierkreeft, de watercrassula en de Chinese wolhandkrab.</p>
+                    <p>De oorlog draait om de simpele vraag: wie domineert? De inheemse natuur? De mens die eeuwenlang strijd heeft geleverd tegen de natuurlijke wereld? Of de invasieve exoten, die op hun eigen wijze de natuur onherkenbaar veranderen?</p>
+                    <p>Deze serie gaat over invasieve exoten. Maar eigenlijk gaat het over de mens. De mens die planten en dieren over de aardbol versleept, soms gedreven door winst, soms vanwege onwetendheid. En de mens die wanhopige pogingen doet om de exoten te vernietigen.</p>
                 </div>
             </div></div>
 
@@ -2874,6 +3120,11 @@
                         </svg>
                     </a>
                 </div>
+            </div>
+
+            <!-- Desktop foto popup -->
+            <div class="desktop-photo-popup" id="desktopPhotoPopup">
+                <img src="" alt="Popup">
             </div>
         </div>
 
@@ -3699,6 +3950,57 @@
         container.addEventListener('scroll', () => {
             targetProgress = calculateProgress();
         });
+
+        // Desktop foto popup (klik om te vergroten, loslaten om te sluiten)
+        if (window.innerWidth > 767) {
+            const desktopPopup = document.getElementById('desktopPhotoPopup');
+            const desktopPopupImg = desktopPopup.querySelector('img');
+
+            // Selecteer alle foto's in de desktop content (behalve de grootste)
+            const desktopContent = document.querySelector('.horizontal-scroll-content');
+            const desktopPhotos = desktopContent.querySelectorAll('img:not(.intro-section img):not(.desktop-photo-popup img)');
+            const HEIGHT_THRESHOLD = 0.65; // 65vh - foto's hoger dan dit krijgen geen popup
+
+            // Functie om cursor te updaten op basis van grootte
+            function updateCursors() {
+                const viewportHeight = window.innerHeight;
+                desktopPhotos.forEach(img => {
+                    const imgHeight = img.getBoundingClientRect().height;
+                    if (imgHeight > 0 && imgHeight < viewportHeight * HEIGHT_THRESHOLD) {
+                        img.style.cursor = 'zoom-in';
+                    } else {
+                        img.style.cursor = 'default';
+                    }
+                });
+            }
+
+            // Update cursors na laden en bij resize
+            window.addEventListener('load', updateCursors);
+            window.addEventListener('resize', updateCursors);
+            setTimeout(updateCursors, 500);
+
+            desktopPhotos.forEach(img => {
+                img.addEventListener('mousedown', (e) => {
+                    // Check of foto kleiner is dan 65vh
+                    const imgHeight = img.getBoundingClientRect().height;
+                    const viewportHeight = window.innerHeight;
+                    if (imgHeight >= viewportHeight * HEIGHT_THRESHOLD) {
+                        return; // Foto is al groot genoeg, geen popup nodig
+                    }
+
+                    e.preventDefault();
+                    desktopPopupImg.src = img.src;
+                    desktopPopup.classList.add('active');
+                });
+            });
+
+            // Sluit popup bij mouseup (overal op de pagina)
+            document.addEventListener('mouseup', () => {
+                if (desktopPopup.classList.contains('active')) {
+                    desktopPopup.classList.remove('active');
+                }
+            });
+        }
     </script>
 </body>
 </html>
