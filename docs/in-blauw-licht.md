@@ -79,3 +79,6 @@ Trigger: bij foto 1 (begin pagina), achter de foto's
 - **> 1400px**: Grotere introtekst (1.5rem), meer spacing
 - **< 1024px**: Intro gecentreerd, foto's 50vh/80vh
 - **< 767px**: Verticaal scrollen, strepen verborgen
+  - Titel: 3.2rem
+  - Insert secties: foto 100%, caption eronder, 2rem blauw boven foto
+  - Navigatie met gradient achtergrond

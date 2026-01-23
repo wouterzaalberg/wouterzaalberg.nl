@@ -120,6 +120,33 @@
 
         /* ===== MOBILE STYLES ===== */
         @media (max-width: 767px) {
+            /* Navigatie met gradient */
+            .horizontal-nav {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                z-index: 100;
+                padding: 1rem 1.5rem !important;
+                background: linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, transparent 100%);
+            }
+
+            /* Scroll container - verticaal */
+            .horizontal-scroll-container {
+                flex-direction: column !important;
+                height: auto !important;
+                min-height: 100vh;
+                overflow-x: hidden !important;
+                overflow-y: visible !important;
+            }
+
+            .horizontal-scroll-content {
+                flex-direction: column !important;
+                padding: 0 !important;
+                gap: 2rem !important;
+                min-height: auto !important;
+            }
+
             .intro-section {
                 position: relative;
                 min-width: 100% !important;
@@ -136,8 +163,8 @@
                 bottom: auto !important;
                 left: auto !important;
                 transform: none !important;
-                width: 94vw;
-                margin: 0 auto;
+                width: 100vw;
+                margin: 0;
                 overflow: hidden;
             }
 
@@ -151,6 +178,7 @@
                 bottom: auto;
                 left: auto;
                 margin-top: 0.75rem;
+                padding: 0 1.5rem;
             }
 
             .intro-panel {
@@ -173,9 +201,9 @@
             }
 
             .photo-item {
-                width: 94vw;
-                margin: 0 auto;
-                align-self: center;
+                width: 100vw;
+                margin: 0;
+                align-self: stretch;
             }
 
             .photo-img-wrapper {
@@ -189,7 +217,48 @@
             }
 
             .photo-caption {
-                padding: 0 0.5rem;
+                padding: 0 1.5rem;
+                opacity: 0;
+                transform: translateY(15px);
+                transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            }
+
+            .photo-caption.visible {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+            /* Titel fade-in */
+            h2.photo-title {
+                opacity: 0;
+                transform: translateY(20px);
+                transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+            }
+
+            h2.photo-title.visible {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+            /* Intro tekst fade-in */
+            .intro-panel p {
+                opacity: 0;
+                transform: translateY(15px);
+                transition: opacity 0.6s ease-out 0.3s, transform 0.6s ease-out 0.3s;
+            }
+
+            .intro-panel p.visible {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+            /* End panel */
+            .end-panel {
+                min-width: auto !important;
+                width: 100% !important;
+                height: auto !important;
+                min-height: 70vh;
+                padding: 2rem 1.5rem !important;
             }
         }
         .title-reflection {
@@ -520,6 +589,39 @@
                     setTimeout(() => firstImg.classList.add('zoom-active'), 2000);
                 });
             }
+        }
+
+        // Mobile: Fade-in animations
+        if (window.innerWidth <= 767) {
+            // Caption fade-in
+            const captions = document.querySelectorAll('.photo-caption');
+            const captionObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.3 });
+
+            captions.forEach(caption => {
+                captionObserver.observe(caption);
+            });
+
+            // Title and intro text fade-in
+            const title = document.querySelector('h2.photo-title');
+            const introText = document.querySelector('.intro-panel p');
+            const titleObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        if (entry.target === title && introText) {
+                            setTimeout(() => introText.classList.add('visible'), 200);
+                        }
+                    }
+                });
+            }, { threshold: 0.5 });
+
+            if (title) titleObserver.observe(title);
         }
     </script>
 </body>

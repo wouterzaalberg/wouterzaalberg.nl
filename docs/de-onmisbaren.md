@@ -36,4 +36,8 @@
   - Titel: `clamp(6rem, 8vw, 9rem)`
   - Intro panel: `max-width: clamp(280px, 45vw, 500px)`
   - Intro foto: `width: clamp(280px, 45vw, 500px)`
-- **Mobiel (< 767px)**: volledige breedte, verticale layout
+- **Mobiel (< 767px)**:
+  - Verticale layout, foto's 100vw
+  - Navigatie met gradient achtergrond
+  - Caption fade-in animatie (opacity 0→1, translateY 15px→0)
+  - Titel/intro tekst fade-in animatie
