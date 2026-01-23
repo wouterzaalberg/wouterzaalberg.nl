@@ -2209,9 +2209,70 @@
             .mobile-intro-carousel {
                 position: relative;
                 width: 100%;
-                height: 60vh;
+                height: 68vh;
                 overflow: hidden;
             }
+
+            /* Witte achtergrond na alle foto's */
+            .mobile-intro-carousel .carousel-dark {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: #ffffff;
+                opacity: 0;
+                transition: opacity 1.2s ease-in-out;
+                z-index: 1;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .mobile-intro-carousel .carousel-dark.active {
+                opacity: 1;
+            }
+
+            /* Letters fade out wanneer wit scherm verschijnt */
+            .mobile-title-row .letter.highlight.filled {
+                -webkit-text-stroke: 0;
+                animation: colorCycle 8s ease-in-out infinite;
+                transition: opacity 0.8s ease-out;
+            }
+
+            .mobile-title-row .letter.highlight.filled.fade-out {
+                opacity: 0 !important;
+            }
+
+            /* Gecentreerde titel op wit scherm */
+            .carousel-centered-title {
+                font-family: 'Scala Sans', sans-serif;
+                font-size: 4.5rem;
+                font-weight: 700;
+                letter-spacing: 0.02em;
+                white-space: nowrap;
+                opacity: 0;
+                transition: opacity 1s ease-out 0.5s;
+            }
+
+            .carousel-dark.active .carousel-centered-title {
+                opacity: 1;
+            }
+
+            .carousel-centered-title .letter {
+                display: inline-block;
+                animation: colorCycle 8s ease-in-out infinite;
+            }
+
+            .carousel-centered-title .letter:nth-child(1) { animation-delay: 0s; }
+            .carousel-centered-title .letter:nth-child(2) { animation-delay: 1s; }
+            .carousel-centered-title .space { display: inline-block; width: 0.5em; }
+            .carousel-centered-title .letter:nth-child(4) { animation-delay: 2s; }
+            .carousel-centered-title .letter:nth-child(5) { animation-delay: 3s; }
+            .carousel-centered-title .letter:nth-child(6) { animation-delay: 4s; }
+            .carousel-centered-title .letter:nth-child(7) { animation-delay: 5s; }
+            .carousel-centered-title .letter:nth-child(8) { animation-delay: 6s; }
+            .carousel-centered-title .letter:nth-child(9) { animation-delay: 7s; }
 
             .mobile-intro-carousel .carousel-slide {
                 position: absolute;
@@ -2232,6 +2293,12 @@
                 height: 100%;
                 object-fit: cover;
                 display: block;
+                transform: scale(1);
+                transition: transform 4s ease-out;
+            }
+
+            .mobile-intro-carousel .carousel-slide.active img {
+                transform: scale(1.05);
             }
 
             /* Titel overlay met herhaalde tekst */
@@ -2256,6 +2323,25 @@
                 white-space: nowrap;
                 line-height: 1;
                 letter-spacing: -0.02em;
+            }
+
+            /* Langzame beweging van rijen - afwisselend links/rechts */
+            .mobile-title-row:nth-child(odd) {
+                animation: moveRight 20s ease-in-out infinite alternate;
+            }
+
+            .mobile-title-row:nth-child(even) {
+                animation: moveLeft 20s ease-in-out infinite alternate;
+            }
+
+            @keyframes moveRight {
+                0% { transform: translateX(-5%); }
+                100% { transform: translateX(5%); }
+            }
+
+            @keyframes moveLeft {
+                0% { transform: translateX(5%); }
+                100% { transform: translateX(-5%); }
             }
 
             .mobile-title-row .letter {
@@ -3135,23 +3221,22 @@
             <!-- Intro met carousel -->
             <div class="mobile-intro" style="padding-top: 4rem;">
                 <div class="mobile-intro-carousel" id="mobileCarousel">
-                    <div class="carousel-slide active" data-name="Wasbeer" data-color="#8b7355">
-                        <img src="de-exoten/cluster 1 foto 2.jpg" alt="Wasbeer" loading="eager">
-                    </div>
-                    <div class="carousel-slide" data-name="Aziatische hoornaar" data-color="#4a90c2">
-                        <img src="de-exoten/cluster 1 foto 3.jpg" alt="Aziatische hoornaar" loading="eager">
-                    </div>
-                    <div class="carousel-slide" data-name="Baby muskusratten" data-color="#5a7a4a">
-                        <img src="de-exoten/cluster 1 foto 4.jpg" alt="Baby muskusratten" loading="eager">
-                    </div>
-                    <div class="carousel-slide" data-name="Japanse duizendknoop" data-color="#6b8e4a">
-                        <img src="de-exoten/cluster 1 foto 5.jpg" alt="Japanse duizendknoop" loading="eager">
-                    </div>
-                    <div class="carousel-slide" data-name="Beverrat" data-color="#a67c52">
-                        <img src="de-exoten/cluster 1 foto 6.jpg" alt="Beverrat" loading="eager">
+                    <div class="carousel-slide active" data-name="Baby muskusratten" data-color="#5a7a4a">
+                        <img src="de-exoten/carousel/cluster 1 foto 4.jpg" alt="Baby muskusratten" loading="eager">
                     </div>
                     <div class="carousel-slide" data-name="Amerikaanse rivierkreeft" data-color="#c45c4a">
-                        <img src="de-exoten/cluster 1 foto 7.jpg" alt="Amerikaanse rivierkreeft" loading="eager">
+                        <img src="de-exoten/carousel/cluster 1 foto 7.jpg" alt="Amerikaanse rivierkreeft" loading="eager">
+                    </div>
+                    <div class="carousel-slide" data-name="Wasbeer gevangen" data-color="#8b7355">
+                        <img src="de-exoten/carousel/534A0049.jpg" alt="Wasbeer gevangen" loading="eager">
+                    </div>
+                    <div class="carousel-slide" data-name="Wasbeerhond" data-color="#7a6a5a">
+                        <img src="de-exoten/carousel/534A4628.jpg" alt="Wasbeerhond" loading="eager">
+                    </div>
+
+                    <!-- Witte achtergrond -->
+                    <div class="carousel-dark" id="carouselDark">
+                        <div class="carousel-centered-title" id="centeredTitle"><span class="letter">D</span><span class="letter">e</span><span class="space"></span><span class="letter">E</span><span class="letter">x</span><span class="letter">o</span><span class="letter">t</span><span class="letter">e</span><span class="letter">n</span></div>
                     </div>
 
                     <!-- Titel overlay met herhaalde tekst -->
@@ -3167,14 +3252,6 @@
                         <div class="mobile-title-row" style="margin-left: -45%;"><span class="letter">D</span><span class="letter">e</span><span class="letter">&nbsp;</span><span class="letter">E</span><span class="letter">x</span><span class="letter">o</span><span class="letter">t</span><span class="letter">e</span><span class="letter">n</span><span class="letter">&nbsp;</span><span class="letter">D</span><span class="letter">e</span><span class="letter">&nbsp;</span><span class="letter">E</span><span class="letter">x</span><span class="letter">o</span><span class="letter">t</span><span class="letter">e</span><span class="letter">n</span><span class="letter">&nbsp;</span><span class="letter">D</span><span class="letter">e</span><span class="letter">&nbsp;</span><span class="letter">E</span><span class="letter">x</span><span class="letter">o</span><span class="letter">t</span><span class="letter">e</span><span class="letter">n</span><span class="letter">&nbsp;</span><span class="letter">D</span><span class="letter">e</span><span class="letter">&nbsp;</span><span class="letter">E</span><span class="letter">x</span><span class="letter">o</span><span class="letter">t</span><span class="letter">e</span><span class="letter">n</span><span class="letter">&nbsp;</span><span class="letter">D</span><span class="letter">e</span><span class="letter">&nbsp;</span><span class="letter">E</span><span class="letter">x</span><span class="letter">o</span><span class="letter">t</span><span class="letter">e</span><span class="letter">n</span><span class="letter">&nbsp;</span><span class="letter">D</span><span class="letter">e</span><span class="letter">&nbsp;</span><span class="letter">E</span><span class="letter">x</span><span class="letter">o</span><span class="letter">t</span><span class="letter">e</span><span class="letter">n</span></div>
                         <div class="mobile-title-row" style="margin-left: -20%;"><span class="letter">D</span><span class="letter">e</span><span class="letter">&nbsp;</span><span class="letter">E</span><span class="letter">x</span><span class="letter">o</span><span class="letter">t</span><span class="letter">e</span><span class="letter">n</span><span class="letter">&nbsp;</span><span class="letter">D</span><span class="letter">e</span><span class="letter">&nbsp;</span><span class="letter">E</span><span class="letter">x</span><span class="letter">o</span><span class="letter">t</span><span class="letter">e</span><span class="letter">n</span><span class="letter">&nbsp;</span><span class="letter">D</span><span class="letter">e</span><span class="letter">&nbsp;</span><span class="letter">E</span><span class="letter">x</span><span class="letter">o</span><span class="letter">t</span><span class="letter">e</span><span class="letter">n</span><span class="letter">&nbsp;</span><span class="letter">D</span><span class="letter">e</span><span class="letter">&nbsp;</span><span class="letter">E</span><span class="letter">x</span><span class="letter">o</span><span class="letter">t</span><span class="letter">e</span><span class="letter">n</span><span class="letter">&nbsp;</span><span class="letter">D</span><span class="letter">e</span><span class="letter">&nbsp;</span><span class="letter">E</span><span class="letter">x</span><span class="letter">o</span><span class="letter">t</span><span class="letter">e</span><span class="letter">n</span><span class="letter">&nbsp;</span><span class="letter">D</span><span class="letter">e</span><span class="letter">&nbsp;</span><span class="letter">E</span><span class="letter">x</span><span class="letter">o</span><span class="letter">t</span><span class="letter">e</span><span class="letter">n</span></div>
                     </div>
-                </div>
-                <div class="mobile-carousel-caption">
-                    <span class="exoot-name active">Wasbeer</span>
-                    <span class="exoot-name">Aziatische hoornaar</span>
-                    <span class="exoot-name">Baby muskusratten</span>
-                    <span class="exoot-name">Japanse duizendknoop</span>
-                    <span class="exoot-name">Beverrat</span>
-                    <span class="exoot-name">Amerikaanse rivierkreeft</span>
                 </div>
                 <div class="mobile-intro-image">
                     <img src="de-exoten/beverrat.jpg" alt="Beverrat illustratie">
@@ -3752,23 +3829,68 @@
             });
         }
 
-        // Mobiele intro carousel
+        // Mobiele intro carousel met fade animatie
         const carousel = document.getElementById('mobileCarousel');
         if (carousel) {
             const slides = carousel.querySelectorAll('.carousel-slide');
-            const captionContainer = document.querySelector('.mobile-carousel-caption');
-            const captions = captionContainer ? captionContainer.querySelectorAll('.exoot-name') : [];
+            const darkSlide = document.getElementById('carouselDark');
+            const highlightLettersForReset = document.querySelectorAll('#mobileTitleOverlay .letter.highlight');
             let currentSlide = 0;
+            let isInDarkPhase = false;
 
-            function nextSlide() {
-                slides[currentSlide].classList.remove('active');
-                if (captions[currentSlide]) captions[currentSlide].classList.remove('active');
-                currentSlide = (currentSlide + 1) % slides.length;
-                slides[currentSlide].classList.add('active');
-                if (captions[currentSlide]) captions[currentSlide].classList.add('active');
+            // Sorteer letters op volgorde
+            const sortedHighlightLetters = Array.from(highlightLettersForReset).sort((a, b) => {
+                return parseInt(a.dataset.order) - parseInt(b.dataset.order);
+            });
+
+            function fadeOutLetters() {
+                sortedHighlightLetters.forEach(letter => {
+                    letter.classList.add('fade-out');
+                });
             }
 
-            setInterval(nextSlide, 5000);
+            function resetLetters() {
+                sortedHighlightLetters.forEach(letter => {
+                    letter.classList.remove('fade-out', 'filled');
+                });
+
+                // Voeg filled class weer toe met vertraging
+                let fillDelay = 800;
+                sortedHighlightLetters.forEach((letter) => {
+                    setTimeout(() => {
+                        letter.classList.add('filled');
+                    }, fillDelay);
+                    fillDelay += 350;
+                });
+            }
+
+            function nextSlide() {
+                if (isInDarkPhase) return;
+
+                slides[currentSlide].classList.remove('active');
+
+                // Check of we bij de laatste foto zijn
+                if (currentSlide === slides.length - 1) {
+                    // Toon witte achtergrond
+                    isInDarkPhase = true;
+                    fadeOutLetters();
+                    darkSlide.classList.add('active');
+
+                    // Na 10 seconden: reset en herstart
+                    setTimeout(() => {
+                        darkSlide.classList.remove('active');
+                        resetLetters();
+                        currentSlide = 0;
+                        slides[currentSlide].classList.add('active');
+                        isInDarkPhase = false;
+                    }, 10000);
+                } else {
+                    currentSlide++;
+                    slides[currentSlide].classList.add('active');
+                }
+            }
+
+            setInterval(nextSlide, 4000);
         }
 
         // Tekstkaders fade-in bij scrollen (mobiel)

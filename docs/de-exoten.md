@@ -98,11 +98,6 @@ rivierkreeft, vederkruid, vlinderstruik, waterteunisbloem, watercrassula, kleine
 
 ## Mobiel
 
-### Intro Carousel
-- Hoogte: 60vh
-- Foto interval: 5 seconden
-- Foto's: cluster 1 foto 2-7.jpg
-- Bijschriften onder foto (zwart, links uitgelijnd)
 
 ### Titel Overlay
 - 10 rijen herhaalde "De Exoten" tekst
@@ -119,3 +114,20 @@ rivierkreeft, vederkruid, vlinderstruik, waterteunisbloem, watercrassula, kleine
   - Hemelsblauw: `#7a9db8`
   - Olijf/bruin: `#8a7a5a`
 - Elke letter heeft andere animation-delay
+
+### Bewegende Rijen
+- Oneven rijen bewegen naar rechts
+- Even rijen bewegen naar links
+- Langzame animatie: 20s cyclus, -5% tot +5%
+
+### Intro Carousel
+- 4 foto's uit `de-exoten/carousel/`
+- Interval: 4 seconden per foto
+- Lichte zoom op actieve foto (scale 1 → 1.05)
+- Hoogte: 68vh
+
+### Witte Tussenstand
+- Na alle foto's: witte achtergrond (10 seconden)
+- Gekleurde letters faden uit
+- "De Exoten" fadet in gecentreerd (4.5rem)
+- Daarna: carousel herstart, letter animatie reset
