@@ -62,3 +62,27 @@ rivierkreeft, vederkruid, vlinderstruik, waterteunisbloem, watercrassula, kleine
 - Cluster: cluster 1 foto 2-7.jpg
 - Kreeft: kreeft1-11.jpg, kreeftcentraal.jpg
 - Speciaal: beverrat.jpg, diana airbug a.jpg, info 1-3.jpg, klem.jpg
+
+## Mobiel
+
+### Intro Carousel
+- Hoogte: 60vh
+- Foto interval: 5 seconden
+- Foto's: cluster 1 foto 2-7.jpg
+- Bijschriften onder foto (zwart, links uitgelijnd)
+
+### Titel Overlay
+- 10 rijen herhaalde "De Exoten" tekst
+- Letters: doorschijnend wit (15% opacity)
+- Font: Scala Sans, 4.5rem, bold
+- Rijen met variërende margin-left (-10% tot -55%)
+
+### Gekleurde Letters Animatie
+- Spelt "De Exoten" met 8 gekleurde letters
+- Letters verschijnen na elkaar (350ms interval)
+- Kleurcyclus animatie (8s):
+  - Bosgroen: `#5a7a4a`
+  - Grasgroen: `#6b8b5a`
+  - Hemelsblauw: `#7a9db8`
+  - Olijf/bruin: `#8a7a5a`
+- Elke letter heeft andere animation-delay

@@ -1593,7 +1593,6 @@
 
         .intro-title .letter.italic {
             font-style: italic;
-            color: #2d5a27;
         }
 
         @keyframes fadeIn {
@@ -1686,6 +1685,668 @@
         .exoten-progress-percent {
             font-size: 0.75rem;
             opacity: 0.7;
+        }
+
+        /* Mobiele content verborgen op desktop */
+        .mobile-content {
+            display: none;
+        }
+
+        /* ===========================================
+           MOBIEL (< 767px)
+           =========================================== */
+        @media (max-width: 767px) {
+            /* Toon mobiele content, verberg desktop */
+            .mobile-content {
+                display: block !important;
+            }
+
+            .horizontal-scroll-content {
+                display: none !important;
+            }
+            /* Basis container */
+            body.horizontal-scroll-page {
+                overflow-y: auto !important;
+                overflow-x: hidden !important;
+                height: auto !important;
+            }
+
+            .horizontal-scroll-container {
+                overflow-y: auto !important;
+                overflow-x: hidden !important;
+                height: auto !important;
+            }
+
+            .horizontal-scroll-content {
+                flex-direction: column;
+                gap: 0;
+                padding: 0;
+                height: auto !important;
+            }
+
+            /* Navigatie */
+            .horizontal-nav {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                padding: 1rem !important;
+                background: rgba(255, 255, 255, 0.95);
+                z-index: 100;
+            }
+
+            .horizontal-nav .nav-title {
+                display: none;
+            }
+
+            /* Progress indicator verbergen op mobiel */
+            .exoten-progress {
+                display: none;
+            }
+
+            /* Grijze sectie */
+            .gray-section {
+                flex-direction: column;
+                padding: 0 !important;
+                margin: 0 !important;
+                gap: 0;
+                min-height: auto;
+                padding-top: 0 !important;
+            }
+
+            /* ===========================================
+               SECTIE WRAPPERS
+               =========================================== */
+            .mobile-gray-section {
+                background: #f0f0f0;
+                padding-bottom: 1.5rem;
+            }
+
+            .mobile-white-section {
+                background: #fff;
+                padding-bottom: 1.5rem;
+            }
+
+            .mobile-gray-section .mobile-section-header {
+                background: #f0f0f0;
+            }
+
+            .mobile-gray-section .mobile-caption-box {
+                background: transparent;
+            }
+
+            /* ===========================================
+               SECTIE HEADERS - Exoot namen
+               =========================================== */
+            .mobile-section-header {
+                display: flex;
+                flex-direction: column;
+                padding: 2.5rem 1.25rem 1.5rem 1.25rem;
+                background: #fff;
+            }
+
+            .gray-section .mobile-section-header {
+                background: #f0f0f0;
+            }
+
+            .mobile-section-header .section-name {
+                font-family: 'Scala Sans', sans-serif;
+                font-size: 1.8rem;
+                font-weight: 700;
+                color: #555555;
+                line-height: 1.1;
+                margin: 0;
+            }
+
+            .mobile-section-header .section-name .letter {
+                display: inline-block;
+                opacity: 0;
+                transition: opacity 0.4s ease-out;
+            }
+
+            .mobile-section-header .section-name .letter.visible {
+                opacity: 1;
+            }
+
+            .mobile-section-header .section-name .accent {
+                font-style: italic;
+            }
+
+            .mobile-section-header::after {
+                content: '';
+                display: block;
+                width: 3rem;
+                height: 2px;
+                background: #1a1a1a;
+                margin-top: 1rem;
+            }
+
+            /* ===========================================
+               BASIS FOTO STYLING
+               =========================================== */
+            /* Verberg alle desktop-specifieke layouts standaard */
+            .photo-cluster,
+            .chapter-title,
+            .labeled-photo,
+            .photo-with-caption,
+            .beverrat-cluster,
+            .wolhandkrab-cluster,
+            .hemelboom-pair,
+            .photo-cluster-19-20,
+            .hoornaar-cluster,
+            .hoornaar-boog,
+            .foto-31-34-cluster,
+            .foto-33-34-column,
+            .foto-35-section,
+            .foto-grid-36-39,
+            .rivierkreeft-section,
+            .kreeft-grid,
+            .foto-41-wrapper,
+            .vederkruid-section,
+            .foto-43-48-wrapper,
+            .foto-49-wrapper,
+            .vlinderstruik-section,
+            .waterteunisbloem-section,
+            .watercrassula-section,
+            .kleine-waterteunisbloem-section,
+            .foto-61-section,
+            .japanse-oester-section,
+            .muskusrat-section,
+            .muskusrat-caption-box,
+            .muskusrat-photos,
+            .einde-deel-panel,
+            .intro-section {
+                display: none !important;
+            }
+
+            /* Mobiele foto container */
+            .mobile-photo {
+                width: 100%;
+                padding: 0 1.25rem;
+                box-sizing: border-box;
+                margin-bottom: 0.75rem;
+            }
+
+            .mobile-photo img {
+                width: 100%;
+                height: auto;
+                display: block;
+            }
+
+            .mobile-photo.size-small {
+                width: 75%;
+                margin-left: 1.25rem;
+            }
+
+            .mobile-photo.size-medium {
+                width: 85%;
+                padding: 0;
+                margin-left: 1.25rem;
+            }
+
+            .mobile-photo.offset-right {
+                margin-left: auto;
+                margin-right: 1.25rem;
+            }
+
+            .mobile-photo.full-width {
+                padding: 0;
+                width: 100%;
+            }
+
+            /* Twee foto's naast elkaar */
+            .mobile-photo-row {
+                display: flex;
+                gap: 0.5rem;
+                padding: 0 1.25rem;
+                margin-bottom: 0.75rem;
+            }
+
+            .mobile-photo-row .mobile-photo {
+                flex: 1;
+                padding: 0;
+                margin: 0;
+            }
+
+            .mobile-photo.centered {
+                margin-left: auto;
+                margin-right: auto;
+                padding: 0;
+            }
+
+            /* Foto 47-48: 48 iets breder voor gelijke hoogte */
+            .foto-47-48-row .foto-48 {
+                flex: 1.15;
+            }
+
+            /* Tekstkaders */
+            .mobile-caption-box {
+                margin: 1rem 1.25rem;
+                padding: 1.25rem;
+                border: 2px solid #a8c8e8;
+                background: transparent;
+                opacity: 0;
+                transform: translateY(20px);
+                transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            }
+
+            .mobile-caption-box.visible {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+            .mobile-caption-box .caption-title {
+                font-family: 'Scala Sans', sans-serif;
+                font-size: 0.8rem;
+                font-weight: 600;
+                text-transform: uppercase;
+                letter-spacing: 0.12em;
+                color: #1a1a1a;
+                margin: 0 0 0.6rem 0;
+            }
+
+            .mobile-caption-box .caption-text {
+                font-family: 'Scala Sans', sans-serif;
+                font-size: 0.85rem;
+                line-height: 1.6;
+                color: #1a1a1a;
+                margin: 0;
+            }
+
+            /* ===========================================
+               INTRO SECTIE
+               =========================================== */
+            .mobile-intro {
+                background: #fff;
+            }
+
+            .mobile-intro-carousel {
+                position: relative;
+                width: 100%;
+                height: 60vh;
+                overflow: hidden;
+            }
+
+            .mobile-intro-carousel .carousel-slide {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                opacity: 0;
+                transition: opacity 1.2s ease-in-out;
+            }
+
+            .mobile-intro-carousel .carousel-slide.active {
+                opacity: 1;
+            }
+
+            .mobile-intro-carousel .carousel-slide img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                display: block;
+            }
+
+            /* Titel overlay met herhaalde tekst */
+            .mobile-title-overlay {
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                padding: 0;
+                z-index: 10;
+                overflow: hidden;
+            }
+
+            .mobile-title-row {
+                font-family: 'Scala Sans', sans-serif;
+                font-size: 4.5rem;
+                font-weight: 700;
+                white-space: nowrap;
+                line-height: 1;
+                letter-spacing: -0.02em;
+            }
+
+            .mobile-title-row .letter {
+                display: inline-block;
+                color: rgba(255,255,255,0.15);
+                transition: color 0.8s ease-out;
+            }
+
+            .mobile-title-row .letter.highlight {
+                color: rgba(255,255,255,0.2);
+            }
+
+            .mobile-title-row .letter.highlight.filled {
+                -webkit-text-stroke: 0;
+                animation: colorCycle 8s ease-in-out infinite;
+            }
+
+            @keyframes colorCycle {
+                0%, 100% { color: #5a7a4a; }
+                25% { color: #6b8b5a; }
+                50% { color: #7a9db8; }
+                75% { color: #8a7a5a; }
+            }
+
+            .mobile-title-row .letter.highlight.filled[data-order="1"] { animation-delay: 0s; }
+            .mobile-title-row .letter.highlight.filled[data-order="2"] { animation-delay: 1s; }
+            .mobile-title-row .letter.highlight.filled[data-order="3"] { animation-delay: 2s; }
+            .mobile-title-row .letter.highlight.filled[data-order="4"] { animation-delay: 3s; }
+            .mobile-title-row .letter.highlight.filled[data-order="5"] { animation-delay: 4s; }
+            .mobile-title-row .letter.highlight.filled[data-order="6"] { animation-delay: 5s; }
+            .mobile-title-row .letter.highlight.filled[data-order="7"] { animation-delay: 6s; }
+            .mobile-title-row .letter.highlight.filled[data-order="8"] { animation-delay: 7s; }
+
+            .mobile-carousel-caption {
+                position: relative;
+                padding: 0.75rem 1.25rem 0;
+                text-align: left;
+                height: 1.5rem;
+            }
+
+            .mobile-carousel-caption .exoot-name {
+                position: absolute;
+                left: 1.25rem;
+                font-family: 'Scala Sans', sans-serif;
+                font-size: 1rem;
+                font-style: italic;
+                color: #1a1a1a;
+                opacity: 0;
+                transition: opacity 1.2s ease-in-out;
+            }
+
+            .mobile-carousel-caption .exoot-name.active {
+                opacity: 1;
+            }
+
+            .mobile-intro-image {
+                padding: 1rem 1.25rem;
+                display: flex;
+                justify-content: center;
+            }
+
+            .mobile-intro-image img {
+                height: 12vh;
+                width: auto;
+                display: block;
+            }
+
+            .mobile-intro-text {
+                width: 80vw;
+                margin: 0 auto;
+                padding: 1.25rem;
+                background: #e8e8e8;
+                box-sizing: border-box;
+            }
+
+            .mobile-intro-text p {
+                font-family: 'Scala Sans', sans-serif;
+                font-size: 0.9rem;
+                line-height: 1.7;
+                color: rgba(0,0,0,0.75);
+                margin: 0 0 0.8rem 0;
+            }
+
+            .mobile-intro-text p:last-child {
+                margin-bottom: 0;
+            }
+
+            .mobile-intro {
+                margin-bottom: 2rem;
+            }
+
+            /* Caption met afbeelding ernaast */
+            .mobile-caption-with-image {
+                display: flex;
+                gap: 0.75rem;
+                padding: 0 1.25rem;
+                margin: 1rem 0;
+                align-items: stretch;
+            }
+
+            .mobile-caption-with-image .mobile-caption-box {
+                flex: 1;
+                margin: 0;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+            }
+
+            .mobile-caption-with-image .mobile-side-image {
+                flex: 0 0 40%;
+            }
+
+            .mobile-caption-with-image .mobile-side-image img {
+                width: 100%;
+                height: auto;
+                display: block;
+            }
+
+            /* Kreeft grid */
+            .mobile-kreeft-grid {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                grid-template-rows: repeat(3, 1fr);
+                gap: 0.3rem;
+                padding: 0 1.25rem;
+                margin-bottom: 1.5rem;
+                aspect-ratio: 1 / 1;
+            }
+
+            .mobile-kreeft-grid img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                display: block;
+            }
+
+            /* Zoom foto */
+            .mobile-zoom-photo {
+                overflow: hidden;
+            }
+
+            .mobile-zoom-photo img {
+                transform: scale(1.05);
+            }
+
+            /* Snitch grid (foto 36-39) - asymmetrisch vierkant */
+            .mobile-snitch-grid {
+                display: flex;
+                gap: 0.3rem;
+                padding: 0 1.25rem;
+                margin-bottom: 0.75rem;
+            }
+
+            .mobile-snitch-grid .snitch-column {
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                gap: 0.3rem;
+            }
+
+            .mobile-snitch-grid img {
+                width: 100%;
+                height: auto;
+                display: block;
+            }
+
+            /* Muskusrat grid (foto 64, 65, 69) */
+            .mobile-muskusrat-grid {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                grid-template-rows: 1fr 1fr;
+                gap: 0.3rem;
+                padding: 0 1.25rem;
+                margin-bottom: 0.75rem;
+                height: 50vh;
+            }
+
+            .mobile-muskusrat-grid img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                display: block;
+            }
+
+            .mobile-muskusrat-grid .foto-64 {
+                grid-column: 1;
+                grid-row: 1;
+            }
+
+            .mobile-muskusrat-grid .foto-65 {
+                grid-column: 2;
+                grid-row: 1 / 3;
+            }
+
+            .mobile-muskusrat-grid .foto-69 {
+                grid-column: 1;
+                grid-row: 2;
+            }
+
+            /* Waterteunisbloem grid (foto 57-60) - 57 boven 59, 58 boven 60 */
+            .mobile-waterteunisbloem-grid {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                grid-template-rows: auto auto;
+                gap: 0.3rem;
+                padding: 0 1.25rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .mobile-waterteunisbloem-grid img {
+                width: 100%;
+                height: auto;
+                display: block;
+            }
+
+            .mobile-waterteunisbloem-grid .foto-57 {
+                grid-column: 1;
+                grid-row: 1;
+            }
+
+            .mobile-waterteunisbloem-grid .foto-59 {
+                grid-column: 1;
+                grid-row: 2;
+            }
+
+            .mobile-waterteunisbloem-grid .foto-58 {
+                grid-column: 2;
+                grid-row: 1;
+            }
+
+            .mobile-waterteunisbloem-grid .foto-60 {
+                grid-column: 2;
+                grid-row: 2;
+            }
+
+            /* Foto popup overlay */
+            .mobile-photo-popup {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(0,0,0,0.9);
+                z-index: 1000;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                opacity: 0;
+                pointer-events: none;
+                transition: opacity 0.2s ease-out;
+            }
+
+            .mobile-photo-popup.active {
+                opacity: 1;
+                pointer-events: auto;
+            }
+
+            .mobile-photo-popup img {
+                max-width: 95vw;
+                max-height: 90vh;
+                object-fit: contain;
+            }
+
+            /* Hoornaar grid (foto 21-25) */
+            .mobile-hoornaar-grid {
+                display: grid;
+                grid-template-columns: repeat(4, 1fr);
+                grid-template-rows: repeat(10, 1fr);
+                gap: 0.3rem;
+                padding: 0 1.25rem;
+                margin-bottom: 0.75rem;
+                height: 90vh;
+            }
+
+            .mobile-hoornaar-grid img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                display: block;
+            }
+
+            .mobile-hoornaar-grid .foto-22 {
+                grid-column: 1 / 5;
+                grid-row: 1 / 4;
+            }
+
+            .mobile-hoornaar-grid .foto-24 {
+                grid-column: 3 / 5;
+                grid-row: 4 / 7;
+            }
+
+            .mobile-hoornaar-grid .foto-23 {
+                grid-column: 1 / 3;
+                grid-row: 5 / 8;
+            }
+
+            .mobile-hoornaar-grid .foto-25 {
+                grid-column: 1 / 5;
+                grid-row: 8 / 11;
+            }
+
+            /* Einde deel 1 */
+            .mobile-einde-deel {
+                padding: 3rem 1.5rem;
+                background: #fff;
+                text-align: center;
+            }
+
+            .mobile-einde-deel .einde-tekst {
+                font-family: 'Scala Sans SC', sans-serif;
+                font-size: 1rem;
+                color: #1a1a1a;
+                text-transform: uppercase;
+                letter-spacing: 0.1em;
+                line-height: 2;
+            }
+
+            /* Einde panel */
+            .mobile-end-panel {
+                min-height: 50vh;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                padding: 3rem 1.5rem;
+                background: #1a3d1a;
+                text-align: center;
+            }
+
+            .mobile-end-panel .einde-tekst {
+                font-family: 'Scala Sans SC', sans-serif;
+                font-size: 1.1rem;
+                color: rgba(255,255,255,0.7);
+                text-transform: uppercase;
+                letter-spacing: 0.1em;
+                line-height: 2;
+            }
         }
     </style>
 </head>
@@ -2215,6 +2876,478 @@
                 </div>
             </div>
         </div>
+
+        <!-- ===========================================
+             MOBIELE CONTENT
+             =========================================== -->
+        <div class="mobile-content" id="mobileContent">
+            <!-- Intro met carousel -->
+            <div class="mobile-intro" style="padding-top: 4rem;">
+                <div class="mobile-intro-carousel" id="mobileCarousel">
+                    <div class="carousel-slide active" data-name="Wasbeer" data-color="#8b7355">
+                        <img src="de-exoten/cluster 1 foto 2.jpg" alt="Wasbeer" loading="eager">
+                    </div>
+                    <div class="carousel-slide" data-name="Aziatische hoornaar" data-color="#4a90c2">
+                        <img src="de-exoten/cluster 1 foto 3.jpg" alt="Aziatische hoornaar" loading="eager">
+                    </div>
+                    <div class="carousel-slide" data-name="Baby muskusratten" data-color="#5a7a4a">
+                        <img src="de-exoten/cluster 1 foto 4.jpg" alt="Baby muskusratten" loading="eager">
+                    </div>
+                    <div class="carousel-slide" data-name="Japanse duizendknoop" data-color="#6b8e4a">
+                        <img src="de-exoten/cluster 1 foto 5.jpg" alt="Japanse duizendknoop" loading="eager">
+                    </div>
+                    <div class="carousel-slide" data-name="Beverrat" data-color="#a67c52">
+                        <img src="de-exoten/cluster 1 foto 6.jpg" alt="Beverrat" loading="eager">
+                    </div>
+                    <div class="carousel-slide" data-name="Amerikaanse rivierkreeft" data-color="#c45c4a">
+                        <img src="de-exoten/cluster 1 foto 7.jpg" alt="Amerikaanse rivierkreeft" loading="eager">
+                    </div>
+
+                    <!-- Titel overlay met herhaalde tekst -->
+                    <div class="mobile-title-overlay" id="mobileTitleOverlay">
+                        <div class="mobile-title-row" style="margin-left: -30%;"><span class="letter">D</span><span class="letter">e</span><span class="letter">&nbsp;</span><span class="letter">E</span><span class="letter">x</span><span class="letter">o</span><span class="letter">t</span><span class="letter">e</span><span class="letter">n</span><span class="letter">&nbsp;</span><span class="letter highlight" data-order="1">D</span><span class="letter">e</span><span class="letter">&nbsp;</span><span class="letter">E</span><span class="letter">x</span><span class="letter">o</span><span class="letter">t</span><span class="letter">e</span><span class="letter">n</span><span class="letter">&nbsp;</span><span class="letter">D</span><span class="letter">e</span><span class="letter">&nbsp;</span><span class="letter">E</span><span class="letter">x</span><span class="letter">o</span><span class="letter">t</span><span class="letter">e</span><span class="letter">n</span><span class="letter">&nbsp;</span><span class="letter">D</span><span class="letter">e</span><span class="letter">&nbsp;</span><span class="letter">E</span><span class="letter">x</span><span class="letter">o</span><span class="letter">t</span><span class="letter">e</span><span class="letter">n</span><span class="letter">&nbsp;</span><span class="letter">D</span><span class="letter">e</span><span class="letter">&nbsp;</span><span class="letter">E</span><span class="letter">x</span><span class="letter">o</span><span class="letter">t</span><span class="letter">e</span><span class="letter">n</span><span class="letter">&nbsp;</span><span class="letter">D</span><span class="letter">e</span><span class="letter">&nbsp;</span><span class="letter">E</span><span class="letter">x</span><span class="letter">o</span><span class="letter">t</span><span class="letter">e</span><span class="letter">n</span></div>
+                        <div class="mobile-title-row" style="margin-left: -55%;"><span class="letter">D</span><span class="letter">e</span><span class="letter">&nbsp;</span><span class="letter">E</span><span class="letter">x</span><span class="letter">o</span><span class="letter">t</span><span class="letter">e</span><span class="letter">n</span><span class="letter">&nbsp;</span><span class="letter">D</span><span class="letter">e</span><span class="letter">&nbsp;</span><span class="letter">E</span><span class="letter">x</span><span class="letter">o</span><span class="letter">t</span><span class="letter highlight" data-order="2">e</span><span class="letter">n</span><span class="letter">&nbsp;</span><span class="letter">D</span><span class="letter">e</span><span class="letter">&nbsp;</span><span class="letter">E</span><span class="letter">x</span><span class="letter">o</span><span class="letter">t</span><span class="letter">e</span><span class="letter">n</span><span class="letter">&nbsp;</span><span class="letter">D</span><span class="letter">e</span><span class="letter">&nbsp;</span><span class="letter">E</span><span class="letter">x</span><span class="letter">o</span><span class="letter">t</span><span class="letter">e</span><span class="letter">n</span><span class="letter">&nbsp;</span><span class="letter">D</span><span class="letter">e</span><span class="letter">&nbsp;</span><span class="letter">E</span><span class="letter">x</span><span class="letter">o</span><span class="letter">t</span><span class="letter">e</span><span class="letter">n</span><span class="letter">&nbsp;</span><span class="letter">D</span><span class="letter">e</span><span class="letter">&nbsp;</span><span class="letter">E</span><span class="letter">x</span><span class="letter">o</span><span class="letter">t</span><span class="letter">e</span><span class="letter">n</span></div>
+                        <div class="mobile-title-row" style="margin-left: -15%;"><span class="letter">D</span><span class="letter">e</span><span class="letter">&nbsp;</span><span class="letter highlight" data-order="3">E</span><span class="letter">x</span><span class="letter">o</span><span class="letter">t</span><span class="letter">e</span><span class="letter">n</span><span class="letter">&nbsp;</span><span class="letter">D</span><span class="letter">e</span><span class="letter">&nbsp;</span><span class="letter">E</span><span class="letter">x</span><span class="letter">o</span><span class="letter">t</span><span class="letter">e</span><span class="letter">n</span><span class="letter">&nbsp;</span><span class="letter">D</span><span class="letter">e</span><span class="letter">&nbsp;</span><span class="letter">E</span><span class="letter">x</span><span class="letter">o</span><span class="letter">t</span><span class="letter">e</span><span class="letter">n</span><span class="letter">&nbsp;</span><span class="letter">D</span><span class="letter">e</span><span class="letter">&nbsp;</span><span class="letter">E</span><span class="letter">x</span><span class="letter">o</span><span class="letter">t</span><span class="letter">e</span><span class="letter">n</span><span class="letter">&nbsp;</span><span class="letter">D</span><span class="letter">e</span><span class="letter">&nbsp;</span><span class="letter">E</span><span class="letter">x</span><span class="letter">o</span><span class="letter">t</span><span class="letter">e</span><span class="letter">n</span><span class="letter">&nbsp;</span><span class="letter">D</span><span class="letter">e</span><span class="letter">&nbsp;</span><span class="letter">E</span><span class="letter">x</span><span class="letter">o</span><span class="letter">t</span><span class="letter">e</span><span class="letter">n</span></div>
+                        <div class="mobile-title-row" style="margin-left: -40%;"><span class="letter">D</span><span class="letter">e</span><span class="letter">&nbsp;</span><span class="letter">E</span><span class="letter">x</span><span class="letter">o</span><span class="letter">t</span><span class="letter">e</span><span class="letter">n</span><span class="letter">&nbsp;</span><span class="letter">D</span><span class="letter">e</span><span class="letter">&nbsp;</span><span class="letter">E</span><span class="letter highlight" data-order="4">x</span><span class="letter">o</span><span class="letter">t</span><span class="letter">e</span><span class="letter">n</span><span class="letter">&nbsp;</span><span class="letter">D</span><span class="letter">e</span><span class="letter">&nbsp;</span><span class="letter">E</span><span class="letter">x</span><span class="letter">o</span><span class="letter">t</span><span class="letter">e</span><span class="letter">n</span><span class="letter">&nbsp;</span><span class="letter">D</span><span class="letter">e</span><span class="letter">&nbsp;</span><span class="letter">E</span><span class="letter">x</span><span class="letter">o</span><span class="letter">t</span><span class="letter">e</span><span class="letter">n</span><span class="letter">&nbsp;</span><span class="letter">D</span><span class="letter">e</span><span class="letter">&nbsp;</span><span class="letter">E</span><span class="letter">x</span><span class="letter">o</span><span class="letter">t</span><span class="letter">e</span><span class="letter">n</span><span class="letter">&nbsp;</span><span class="letter">D</span><span class="letter">e</span><span class="letter">&nbsp;</span><span class="letter">E</span><span class="letter">x</span><span class="letter">o</span><span class="letter">t</span><span class="letter">e</span><span class="letter">n</span></div>
+                        <div class="mobile-title-row" style="margin-left: -25%;"><span class="letter">D</span><span class="letter">e</span><span class="letter">&nbsp;</span><span class="letter">E</span><span class="letter">x</span><span class="letter highlight" data-order="5">o</span><span class="letter">t</span><span class="letter">e</span><span class="letter">n</span><span class="letter">&nbsp;</span><span class="letter">D</span><span class="letter">e</span><span class="letter">&nbsp;</span><span class="letter">E</span><span class="letter">x</span><span class="letter">o</span><span class="letter">t</span><span class="letter">e</span><span class="letter">n</span><span class="letter">&nbsp;</span><span class="letter">D</span><span class="letter">e</span><span class="letter">&nbsp;</span><span class="letter">E</span><span class="letter">x</span><span class="letter">o</span><span class="letter">t</span><span class="letter">e</span><span class="letter">n</span><span class="letter">&nbsp;</span><span class="letter">D</span><span class="letter">e</span><span class="letter">&nbsp;</span><span class="letter">E</span><span class="letter">x</span><span class="letter">o</span><span class="letter">t</span><span class="letter">e</span><span class="letter">n</span><span class="letter">&nbsp;</span><span class="letter">D</span><span class="letter">e</span><span class="letter">&nbsp;</span><span class="letter">E</span><span class="letter">x</span><span class="letter">o</span><span class="letter">t</span><span class="letter">e</span><span class="letter">n</span><span class="letter">&nbsp;</span><span class="letter">D</span><span class="letter">e</span><span class="letter">&nbsp;</span><span class="letter">E</span><span class="letter">x</span><span class="letter">o</span><span class="letter">t</span><span class="letter">e</span><span class="letter">n</span></div>
+                        <div class="mobile-title-row" style="margin-left: -50%;"><span class="letter">D</span><span class="letter">e</span><span class="letter">&nbsp;</span><span class="letter">E</span><span class="letter">x</span><span class="letter">o</span><span class="letter highlight" data-order="6">t</span><span class="letter">e</span><span class="letter">n</span><span class="letter">&nbsp;</span><span class="letter">D</span><span class="letter">e</span><span class="letter">&nbsp;</span><span class="letter">E</span><span class="letter">x</span><span class="letter">o</span><span class="letter">t</span><span class="letter">e</span><span class="letter">n</span><span class="letter">&nbsp;</span><span class="letter">D</span><span class="letter">e</span><span class="letter">&nbsp;</span><span class="letter">E</span><span class="letter">x</span><span class="letter">o</span><span class="letter">t</span><span class="letter">e</span><span class="letter">n</span><span class="letter">&nbsp;</span><span class="letter">D</span><span class="letter">e</span><span class="letter">&nbsp;</span><span class="letter">E</span><span class="letter">x</span><span class="letter">o</span><span class="letter">t</span><span class="letter">e</span><span class="letter">n</span><span class="letter">&nbsp;</span><span class="letter">D</span><span class="letter">e</span><span class="letter">&nbsp;</span><span class="letter">E</span><span class="letter">x</span><span class="letter">o</span><span class="letter">t</span><span class="letter">e</span><span class="letter">n</span><span class="letter">&nbsp;</span><span class="letter">D</span><span class="letter">e</span><span class="letter">&nbsp;</span><span class="letter">E</span><span class="letter">x</span><span class="letter">o</span><span class="letter">t</span><span class="letter">e</span><span class="letter">n</span></div>
+                        <div class="mobile-title-row" style="margin-left: -10%;"><span class="letter">D</span><span class="letter">e</span><span class="letter">&nbsp;</span><span class="letter">E</span><span class="letter">x</span><span class="letter">o</span><span class="letter">t</span><span class="letter highlight" data-order="7">e</span><span class="letter">n</span><span class="letter">&nbsp;</span><span class="letter">D</span><span class="letter">e</span><span class="letter">&nbsp;</span><span class="letter">E</span><span class="letter">x</span><span class="letter">o</span><span class="letter">t</span><span class="letter">e</span><span class="letter">n</span><span class="letter">&nbsp;</span><span class="letter">D</span><span class="letter">e</span><span class="letter">&nbsp;</span><span class="letter">E</span><span class="letter">x</span><span class="letter">o</span><span class="letter">t</span><span class="letter">e</span><span class="letter">n</span><span class="letter">&nbsp;</span><span class="letter">D</span><span class="letter">e</span><span class="letter">&nbsp;</span><span class="letter">E</span><span class="letter">x</span><span class="letter">o</span><span class="letter">t</span><span class="letter">e</span><span class="letter">n</span><span class="letter">&nbsp;</span><span class="letter">D</span><span class="letter">e</span><span class="letter">&nbsp;</span><span class="letter">E</span><span class="letter">x</span><span class="letter">o</span><span class="letter">t</span><span class="letter">e</span><span class="letter">n</span><span class="letter">&nbsp;</span><span class="letter">D</span><span class="letter">e</span><span class="letter">&nbsp;</span><span class="letter">E</span><span class="letter">x</span><span class="letter">o</span><span class="letter">t</span><span class="letter">e</span><span class="letter">n</span></div>
+                        <div class="mobile-title-row" style="margin-left: -35%;"><span class="letter">D</span><span class="letter">e</span><span class="letter">&nbsp;</span><span class="letter">E</span><span class="letter">x</span><span class="letter">o</span><span class="letter">t</span><span class="letter">e</span><span class="letter highlight" data-order="8">n</span><span class="letter">&nbsp;</span><span class="letter">D</span><span class="letter">e</span><span class="letter">&nbsp;</span><span class="letter">E</span><span class="letter">x</span><span class="letter">o</span><span class="letter">t</span><span class="letter">e</span><span class="letter">n</span><span class="letter">&nbsp;</span><span class="letter">D</span><span class="letter">e</span><span class="letter">&nbsp;</span><span class="letter">E</span><span class="letter">x</span><span class="letter">o</span><span class="letter">t</span><span class="letter">e</span><span class="letter">n</span><span class="letter">&nbsp;</span><span class="letter">D</span><span class="letter">e</span><span class="letter">&nbsp;</span><span class="letter">E</span><span class="letter">x</span><span class="letter">o</span><span class="letter">t</span><span class="letter">e</span><span class="letter">n</span><span class="letter">&nbsp;</span><span class="letter">D</span><span class="letter">e</span><span class="letter">&nbsp;</span><span class="letter">E</span><span class="letter">x</span><span class="letter">o</span><span class="letter">t</span><span class="letter">e</span><span class="letter">n</span><span class="letter">&nbsp;</span><span class="letter">D</span><span class="letter">e</span><span class="letter">&nbsp;</span><span class="letter">E</span><span class="letter">x</span><span class="letter">o</span><span class="letter">t</span><span class="letter">e</span><span class="letter">n</span></div>
+                        <div class="mobile-title-row" style="margin-left: -45%;"><span class="letter">D</span><span class="letter">e</span><span class="letter">&nbsp;</span><span class="letter">E</span><span class="letter">x</span><span class="letter">o</span><span class="letter">t</span><span class="letter">e</span><span class="letter">n</span><span class="letter">&nbsp;</span><span class="letter">D</span><span class="letter">e</span><span class="letter">&nbsp;</span><span class="letter">E</span><span class="letter">x</span><span class="letter">o</span><span class="letter">t</span><span class="letter">e</span><span class="letter">n</span><span class="letter">&nbsp;</span><span class="letter">D</span><span class="letter">e</span><span class="letter">&nbsp;</span><span class="letter">E</span><span class="letter">x</span><span class="letter">o</span><span class="letter">t</span><span class="letter">e</span><span class="letter">n</span><span class="letter">&nbsp;</span><span class="letter">D</span><span class="letter">e</span><span class="letter">&nbsp;</span><span class="letter">E</span><span class="letter">x</span><span class="letter">o</span><span class="letter">t</span><span class="letter">e</span><span class="letter">n</span><span class="letter">&nbsp;</span><span class="letter">D</span><span class="letter">e</span><span class="letter">&nbsp;</span><span class="letter">E</span><span class="letter">x</span><span class="letter">o</span><span class="letter">t</span><span class="letter">e</span><span class="letter">n</span><span class="letter">&nbsp;</span><span class="letter">D</span><span class="letter">e</span><span class="letter">&nbsp;</span><span class="letter">E</span><span class="letter">x</span><span class="letter">o</span><span class="letter">t</span><span class="letter">e</span><span class="letter">n</span></div>
+                        <div class="mobile-title-row" style="margin-left: -20%;"><span class="letter">D</span><span class="letter">e</span><span class="letter">&nbsp;</span><span class="letter">E</span><span class="letter">x</span><span class="letter">o</span><span class="letter">t</span><span class="letter">e</span><span class="letter">n</span><span class="letter">&nbsp;</span><span class="letter">D</span><span class="letter">e</span><span class="letter">&nbsp;</span><span class="letter">E</span><span class="letter">x</span><span class="letter">o</span><span class="letter">t</span><span class="letter">e</span><span class="letter">n</span><span class="letter">&nbsp;</span><span class="letter">D</span><span class="letter">e</span><span class="letter">&nbsp;</span><span class="letter">E</span><span class="letter">x</span><span class="letter">o</span><span class="letter">t</span><span class="letter">e</span><span class="letter">n</span><span class="letter">&nbsp;</span><span class="letter">D</span><span class="letter">e</span><span class="letter">&nbsp;</span><span class="letter">E</span><span class="letter">x</span><span class="letter">o</span><span class="letter">t</span><span class="letter">e</span><span class="letter">n</span><span class="letter">&nbsp;</span><span class="letter">D</span><span class="letter">e</span><span class="letter">&nbsp;</span><span class="letter">E</span><span class="letter">x</span><span class="letter">o</span><span class="letter">t</span><span class="letter">e</span><span class="letter">n</span><span class="letter">&nbsp;</span><span class="letter">D</span><span class="letter">e</span><span class="letter">&nbsp;</span><span class="letter">E</span><span class="letter">x</span><span class="letter">o</span><span class="letter">t</span><span class="letter">e</span><span class="letter">n</span></div>
+                    </div>
+                </div>
+                <div class="mobile-carousel-caption">
+                    <span class="exoot-name active">Wasbeer</span>
+                    <span class="exoot-name">Aziatische hoornaar</span>
+                    <span class="exoot-name">Baby muskusratten</span>
+                    <span class="exoot-name">Japanse duizendknoop</span>
+                    <span class="exoot-name">Beverrat</span>
+                    <span class="exoot-name">Amerikaanse rivierkreeft</span>
+                </div>
+                <div class="mobile-intro-image">
+                    <img src="de-exoten/beverrat.jpg" alt="Beverrat illustratie">
+                </div>
+                <div class="mobile-intro-text">
+                    <p>Er woedt een onzichtbare oorlog in Nederland. Een oorlog tussen invasieve exoten, de inheemse natuur en de mens. De slagvelden zijn de vennen en de volkstuinen, de beken en de bossen, de rivierbekken en de postzegelparkjes. Hier vestigen zich de Amerikaanse rivierkreeft en de Japanse duizendknoop, de watercrassula en de wasbeerhond, de stierkikker en de Chinese wolhandkrab.</p>
+                    <p>De oorlog draait om de simpele vraag: wie domineert? Is dat de inheemse Nederlandse natuur, de door Jac. P. Thijsse zo wonderschoon gedefinieerde sloten bossen en ander groen? Is het de mens, die eeuwenlang strijd heeft geleverd tegen de natuurlijke wereld, totdat zij eindelijk, met spierkracht, kennismacht en machines, haar kon bedwingen en boetseren naar eigen inzicht? Of zijn het al die invasieve exoten, die zich maar weinig aantrekken van dit menselijk privilege en op hun eigen wijze de natuur onherkenbaar veranderen?</p>
+                    <p>Deze serie gaat over deze invasieve exoten. Maar eigenlijk gaat het over de mens. De mens die planten en dieren over de aardbol versleept. De mens die soms gedreven door winst, soms vanwege onwetendheid de planten en dieren in vreemde ecosystemen introduceert. En de mens die vervolgens wanhopige pogingen doet om de exoten te vernietigen voordat ze dat met onze natuur doen.</p>
+                </div>
+            </div>
+
+            <!-- =========================================
+                 WASBEER SECTIE (foto 8) - Grijze achtergrond
+                 ========================================= -->
+            <div class="mobile-gray-section">
+                <div class="mobile-section-header">
+                    <h2 class="section-name">Wasb<span class="accent">e</span>er</h2>
+                </div>
+                <div class="mobile-photo full-width">
+                    <img src="de-exoten/8.jpg" alt="Wasbeer" loading="lazy">
+                </div>
+                <div class="mobile-caption-box">
+                    <h4 class="caption-title">Ontsnapt</h4>
+                    <p class="caption-text">In het Wildpark in Gangelt, net over de grens van Zuid-Limburg, is een deel van de wasberen enkele jaren geleden ontsnapt. Sindsdien hebben ze zich razend snel genesteld en voortgeplant in de heuvels van Limburg.</p>
+                </div>
+            </div>
+
+            <!-- =========================================
+                 BEVERRAT SECTIE (foto 9-15) - Grijze achtergrond
+                 ========================================= -->
+            <div class="mobile-gray-section">
+                <div class="mobile-section-header">
+                    <h2 class="section-name">Bev<span class="accent">e</span>rrat</h2>
+                </div>
+                <div class="mobile-photo full-width">
+                    <img src="de-exoten/9.jpg" alt="Beverrat" loading="lazy">
+                </div>
+                <div class="mobile-photo-row">
+                    <div class="mobile-photo">
+                        <img src="de-exoten/10.jpg" alt="Beverrat" loading="lazy">
+                    </div>
+                    <div class="mobile-photo">
+                        <img src="de-exoten/11.jpg" alt="Beverrat" loading="lazy">
+                    </div>
+                </div>
+                <div class="mobile-photo full-width">
+                    <img src="de-exoten/12.jpg" alt="Beverrat" loading="lazy">
+                </div>
+                <div class="mobile-caption-box">
+                    <h4 class="caption-title">Via de Roer</h4>
+                    <p class="caption-text">De Roer, een kleine rivier die vanuit Duitsland richting Roermond stroomt, fungeert als de snelweg voor beverratten om ons land binnen te komen. In Duitsland wordt het dier niet bejaagd, waardoor iedere week tientallen exemplaren de trek westwaarts maken op zoek naar ongeclaimd territorium.</p>
+                </div>
+                <div class="mobile-photo-row">
+                    <div class="mobile-photo">
+                        <img src="de-exoten/13.jpg" alt="Beverrat" loading="lazy">
+                    </div>
+                    <div class="mobile-photo">
+                        <img src="de-exoten/14.jpg" alt="Beverrat" loading="lazy">
+                    </div>
+                </div>
+                <div class="mobile-photo full-width">
+                    <img src="de-exoten/15.jpg" alt="Beverrat" loading="lazy">
+                </div>
+            </div>
+
+            <!-- =========================================
+                 WOLHANDKRAB SECTIE (foto 16-17) - Grijze achtergrond
+                 ========================================= -->
+            <div class="mobile-gray-section">
+                <div class="mobile-section-header">
+                    <h2 class="section-name">Chin<span class="accent">e</span>se Wolhandkrab</h2>
+                </div>
+                <div class="mobile-photo full-width">
+                    <img src="de-exoten/16.jpg" alt="Chinese Wolhandkrab" loading="lazy">
+                </div>
+                <div class="mobile-caption-box">
+                    <h4 class="caption-title">Van zout naar zoet</h4>
+                    <p class="caption-text">Bijna een eeuw geleden brachten zeeschepen de Chinese wolhandkrab naar Oost-Groningen, en sindsdien hebben ze gestaag de Nederlandse wateren veroverd. Nog ieder jaar trekken de krabben van hun geboortegrond in zee naar het zoete water. Hier controleert aquatisch bioloog Peter of de jonge krabben al bij Nieuw Statenzijl zijn gearriveerd.</p>
+                </div>
+                <div class="mobile-photo size-medium centered">
+                    <img src="de-exoten/17.jpg" alt="Wolhandkrab" loading="lazy">
+                </div>
+            </div>
+
+            <!-- =========================================
+                 HEMELBOOM SECTIE (foto 18) - Grijze achtergrond
+                 ========================================= -->
+            <div class="mobile-gray-section">
+                <div class="mobile-section-header">
+                    <h2 class="section-name">H<span class="accent">e</span>melboom</h2>
+                </div>
+                <div class="mobile-photo full-width">
+                    <img src="de-exoten/18.jpg" alt="Hemelboom" loading="lazy">
+                </div>
+                <div class="mobile-caption-with-image">
+                    <div class="mobile-caption-box">
+                        <h4 class="caption-title">Via de snelweg</h4>
+                        <p class="caption-text">De hemelboom is een exoot die vanuit het zuiden Nederland binnentrekt. Op vrachtwagens en auto's reizen de zaden mee, waarna ze ergens gedurende de reis weer eraf waaien.</p>
+                    </div>
+                    <div class="mobile-side-image">
+                        <img src="de-exoten/info 2.jpg" alt="Hemelboom info" loading="lazy">
+                    </div>
+                </div>
+            </div>
+
+            <!-- =========================================
+                 MICRO-EXOTEN SECTIE (foto 19-20) - Grijze achtergrond
+                 ========================================= -->
+            <div class="mobile-gray-section">
+                <div class="mobile-section-header">
+                    <h2 class="section-name">Micro-<span class="accent">e</span>xoten</h2>
+                </div>
+                <div class="mobile-photo full-width">
+                    <img src="de-exoten/19.jpg" alt="Micro-exoten" loading="lazy">
+                </div>
+                <div class="mobile-caption-box">
+                    <h4 class="caption-title">Reisticket eerste klas</h4>
+                    <p class="caption-text">Het ballastwater van zeeschepen biedt micro-exoten (larven, eitjes, parasieten) een eersteklas ticket om de wereld over te reizen. Sinds enkele jaren moeten zeeschepen hun ballastwater zuiveren. Michiel controleert hier in de haven of de filters werken.</p>
+                </div>
+                <div class="mobile-photo full-width">
+                    <img src="de-exoten/20.jpg" alt="Micro-exoten" loading="lazy">
+                </div>
+            </div>
+
+            <!-- =========================================
+                 AZIATISCHE HOORNAAR SECTIE (foto 21-32) - Grijze achtergrond
+                 ========================================= -->
+            <div class="mobile-gray-section">
+                <div class="mobile-section-header">
+                    <h2 class="section-name">Aziatische Hoorn<span class="accent">a</span>ar</h2>
+                </div>
+                <div class="mobile-hoornaar-grid">
+                    <img class="foto-22" src="de-exoten/22.jpg" alt="Aziatische Hoornaar" loading="lazy">
+                    <img class="foto-24" src="de-exoten/24.jpg" alt="Hoornaar" loading="lazy">
+                    <img class="foto-23" src="de-exoten/23.jpg" alt="Hoornaar" loading="lazy">
+                    <img class="foto-25" src="de-exoten/25.jpg" alt="Hoornaar" loading="lazy">
+                </div>
+                <div class="mobile-caption-box">
+                    <h4 class="caption-title">Op zoek in Zeeland</h4>
+                    <p class="caption-text">Een ramp, vindt Marion de komst van Aziatische hoornaar. Veelvraten zijn het, die insecten waaronder de honingbij in grote aantallen opeten. Als vrijwilliger speurt ze de provincie af waar de beesten in 2017 voor het eerst werden waargenomen: in Zeeland.</p>
+                </div>
+                <div class="mobile-photo-row">
+                    <div class="mobile-photo">
+                        <img src="de-exoten/26.jpg" alt="Hoornaar" loading="lazy">
+                    </div>
+                    <div class="mobile-photo">
+                        <img src="de-exoten/28.jpg" alt="Hoornaar" loading="lazy">
+                    </div>
+                </div>
+                <div class="mobile-photo full-width">
+                    <img src="de-exoten/27.jpg" alt="Hoornaar" loading="lazy">
+                </div>
+                <div class="mobile-caption-box">
+                    <h4 class="caption-title">Op de vlucht</h4>
+                    <p class="caption-text">Honderden bijtjes verliezen Marion en Peter dagelijks aan de hoornaars, die van 's ochtends vroeg tot 's avonds laat als duikbommenwerpers genadeloos de korven aanvallen. Moedeloos van de situatie besluiten ze de korven te verhuizen naar hoornaarvriendelijker territorium.</p>
+                </div>
+                <div class="mobile-photo">
+                    <img src="de-exoten/31.jpg" alt="Hoornaar" loading="lazy">
+                </div>
+                <div class="mobile-photo-row">
+                    <div class="mobile-photo">
+                        <img src="de-exoten/32.jpg" alt="Hoornaar" loading="lazy">
+                    </div>
+                    <div class="mobile-photo">
+                        <img src="de-exoten/34.jpg" alt="Hoornaar" loading="lazy">
+                    </div>
+                </div>
+                <div class="mobile-photo" style="margin-bottom: 2rem;">
+                    <img src="de-exoten/33.jpg" alt="Hoornaar" loading="lazy">
+                </div>
+                <div class="mobile-photo full-width mobile-zoom-photo">
+                    <img src="de-exoten/35.jpg" alt="Hoornaar" loading="lazy">
+                </div>
+                <div class="mobile-caption-box">
+                    <h4 class="caption-title">Snitch</h4>
+                    <p class="caption-text">Rob Voest heeft een vernieuwende methode ontwikkeld: hij vangt één hoornaar en bindt er een microzendertje om. Deze hoornaar vliegt terug naar het nest, Rob volgt met de ontvanger en zuigt vervolgens het nest leeg vanuit een hoogwerker.</p>
+                </div>
+                <div class="mobile-snitch-grid">
+                    <div class="snitch-column">
+                        <img src="de-exoten/36.jpg" alt="Hoornaar" loading="lazy">
+                        <img src="de-exoten/39.jpg" alt="Hoornaar" loading="lazy">
+                    </div>
+                    <div class="snitch-column">
+                        <img src="de-exoten/38.jpg" alt="Hoornaar" loading="lazy">
+                        <img src="de-exoten/37.jpg" alt="Hoornaar" loading="lazy">
+                    </div>
+                </div>
+            </div>
+
+            <!-- =========================================
+                 AMERIKAANSE RIVIERKREEFT SECTIE (foto 40) - Grijze achtergrond
+                 ========================================= -->
+            <div class="mobile-gray-section">
+                <div class="mobile-section-header">
+                    <h2 class="section-name">Amerikaanse Rivier<span class="accent">k</span>reeft</h2>
+                </div>
+                <div class="mobile-photo full-width">
+                    <img src="de-exoten/40.jpg" alt="Amerikaanse Rivierkreeft" loading="lazy">
+                </div>
+                <div class="mobile-caption-box">
+                    <h4 class="caption-title">50 kilo per dag</h4>
+                    <p class="caption-text">Roy en collega halen de netten binnen in de Molenpolder in Utrecht, waar de rivierkreeft welig tiert. Als experiment vangen ze iedere dag de beestjes, al maanden lang, om te kijken of de populatie daarmee ook afneemt. Ze vangen zo'n 50 kilo kreeft per dag.</p>
+                </div>
+                <div class="mobile-kreeft-grid">
+                    <img src="de-exoten/kreeft1.jpg" alt="Kreeft" loading="lazy">
+                    <img src="de-exoten/kreeft2.jpg" alt="Kreeft" loading="lazy">
+                    <img src="de-exoten/kreeft3.jpg" alt="Kreeft" loading="lazy">
+                    <img src="de-exoten/kreeft4.jpg" alt="Kreeft" loading="lazy">
+                    <img src="de-exoten/kreeftcentraal.jpg" alt="Kreeft" loading="lazy">
+                    <img src="de-exoten/kreeft 5.jpg" alt="Kreeft" loading="lazy">
+                    <img src="de-exoten/kreeft 6.jpg" alt="Kreeft" loading="lazy">
+                    <img src="de-exoten/kreeft7.jpg" alt="Kreeft" loading="lazy">
+                    <img src="de-exoten/kreeft 8.jpg" alt="Kreeft" loading="lazy">
+                </div>
+                <div class="mobile-photo full-width">
+                    <img src="de-exoten/41.jpg" alt="Kreeft" loading="lazy">
+                </div>
+            </div>
+
+            <!-- =========================================
+                 VEDERKRUID SECTIE (foto 42-49) - Witte achtergrond
+                 ========================================= -->
+            <div class="mobile-white-section">
+                <div class="mobile-section-header">
+                    <h2 class="section-name">Ongelijkbladig Veder<span class="accent">k</span>ruid</h2>
+                </div>
+                <div class="mobile-photo full-width">
+                    <img src="de-exoten/42.jpg" alt="Vederkruid" loading="lazy">
+                </div>
+                <div class="mobile-caption-box">
+                    <h4 class="caption-title">Plantensoep</h4>
+                    <p class="caption-text">In de Wieden, een van Neerlands mooiste gebieden in Overijssel, drijft in grote delen van het gebied een dikke plantensoep. Het ongelijkbladig vederkruid is een exotische aquariumplant die waarschijnlijk in het gebied gedumpt is. Sindsdien woekert het in een omvang die bijna niet beheersbaar is.</p>
+                </div>
+                <div class="mobile-photo full-width">
+                    <img src="de-exoten/43.jpg" alt="Vederkruid" loading="lazy">
+                </div>
+                <div class="mobile-photo full-width">
+                    <img src="de-exoten/46.jpg" alt="Vederkruid" loading="lazy">
+                </div>
+                <div class="mobile-photo-row foto-47-48-row">
+                    <div class="mobile-photo foto-47">
+                        <img src="de-exoten/47.jpg" alt="Vederkruid" loading="lazy">
+                    </div>
+                    <div class="mobile-photo foto-48">
+                        <img src="de-exoten/48.jpg" alt="Vederkruid" loading="lazy">
+                    </div>
+                </div>
+                <div class="mobile-caption-box">
+                    <h4 class="caption-title">Over de bodem</h4>
+                    <p class="caption-text">Spierkracht alleen is niet voldoende om het vederkruid uit het gebied te halen. De gemechaniseerde tak van de onkruidbrigade bestaat uit 'harkboten', boten met een grote ploeg die de bodem compleet omwoelen om ieder levend organisme te verwijderen.</p>
+                </div>
+                <div class="mobile-photo full-width">
+                    <img src="de-exoten/49.jpg" alt="Vederkruid" loading="lazy">
+                </div>
+            </div>
+
+            <!-- =========================================
+                 WATERCRASSULA SECTIE (foto 54-55) - Witte achtergrond
+                 ========================================= -->
+            <div class="mobile-white-section">
+                <div class="mobile-section-header">
+                    <h2 class="section-name">Water<span class="accent">c</span>rassula</h2>
+                </div>
+                <div class="mobile-photo full-width">
+                    <img src="de-exoten/54.jpg" alt="Watercrassula" loading="lazy">
+                </div>
+                <div class="mobile-caption-box">
+                    <h4 class="caption-title">Besmettingsgevaar</h4>
+                    <p class="caption-text">In een natuurgebied in Brabant woekert de watercrassula, een plantje dat een bijna ondoordringbare mat vormt die al het andere groen het bestaansrecht ontneemt. De plant is zo besmettelijk dat de volle wagen iedere keer ontsmet moet worden als hij naar de afvoerberg rijdt.</p>
+                </div>
+                <div class="mobile-photo">
+                    <img src="de-exoten/55.jpg" alt="Watercrassula" loading="lazy">
+                </div>
+            </div>
+
+            <!-- =========================================
+                 VLINDERSTRUIK SECTIE (foto 50) - Witte achtergrond
+                 ========================================= -->
+            <div class="mobile-white-section">
+                <div class="mobile-section-header">
+                    <h2 class="section-name">Vlinder<span class="accent">s</span>truik</h2>
+                </div>
+                <div class="mobile-photo full-width">
+                    <img src="de-exoten/50.jpg" alt="Vlinderstruik" loading="lazy">
+                </div>
+                <div class="mobile-caption-box">
+                    <h4 class="caption-title">Weg met de vlinderstruik</h4>
+                    <p class="caption-text">De vlinderstruik heeft de voormalige ENCI-groeve, ten zuiden van Maastricht bereikt. En dat is slecht nieuws voor vlinders, want voor vlinders is deze struik junkfood: erg lekker, weinig voedingswaarde. Vrijwilligers zoals Guus trekken er in het weekend op uit om de plant uit de groeve te verwijderen.</p>
+                </div>
+            </div>
+
+            <!-- =========================================
+                 GROTE WATERTEUNISBLOEM SECTIE (foto 51-53) - Witte achtergrond
+                 ========================================= -->
+            <div class="mobile-white-section">
+                <div class="mobile-section-header">
+                    <h2 class="section-name">Grote Water<span class="accent">t</span>eunisbloem</h2>
+                </div>
+                <div class="mobile-photo full-width">
+                    <img src="de-exoten/51.jpg" alt="Grote Waterteunisbloem" loading="lazy">
+                </div>
+                <div class="mobile-caption-box">
+                    <h4 class="caption-title">Met de hand</h4>
+                    <p class="caption-text">Werknemers van Staatsbosbeheer kammen een gebied uit in de Biesbosch, waar de waterteunisbloem zich heeft gevestigd. Wie die plant in zijn gebied heeft, krijgt het er bijna niet meer uit. Zelfs het kleinste drijvende stukje kan zich opnieuw in de oevers vestigen en uitgroeien tot een enorme plaag.</p>
+                </div>
+                <div class="mobile-photo full-width">
+                    <img src="de-exoten/52.jpg" alt="Waterteunisbloem" loading="lazy">
+                </div>
+                <div class="mobile-photo full-width">
+                    <img src="de-exoten/53.jpg" alt="Waterteunisbloem" loading="lazy">
+                </div>
+            </div>
+
+            <!-- =========================================
+                 KLEINE WATERTEUNISBLOEM SECTIE (foto 56-61) - Witte achtergrond
+                 ========================================= -->
+            <div class="mobile-white-section">
+                <div class="mobile-section-header">
+                    <h2 class="section-name">Kleine Water<span class="accent">t</span>eunisbloem</h2>
+                </div>
+                <div class="mobile-photo full-width">
+                    <img src="de-exoten/56.jpg" alt="Kleine Waterteunisbloem" loading="lazy">
+                </div>
+                <div class="mobile-caption-box">
+                    <h4 class="caption-title">Een woekeraar op Tiengemeten</h4>
+                    <p class="caption-text">Tiengemeten, op kleine afstand van de Biesbosch, heeft ook te maken met de waterteunisbloem. Ook hier trekken wekelijks vrijwilligers eropuit om de plant te verwijderen. Ondanks de vele uren van speuren, waden, scheppen en afvoeren zijn ze de strijd aan het verliezen.</p>
+                </div>
+                <div class="mobile-waterteunisbloem-grid">
+                    <img class="foto-57" src="de-exoten/57.jpg" alt="Waterteunisbloem" loading="lazy">
+                    <img class="foto-58" src="de-exoten/58.jpg" alt="Waterteunisbloem" loading="lazy">
+                    <img class="foto-59" src="de-exoten/59.jpg" alt="Waterteunisbloem" loading="lazy">
+                    <img class="foto-60" src="de-exoten/60.jpg" alt="Waterteunisbloem" loading="lazy">
+                </div>
+                <div class="mobile-caption-box">
+                    <h4 class="caption-title">Opgegeven</h4>
+                    <p class="caption-text">Het gevolg is dat hele stukken van Tiengemeten worden opgegeven. Hier is de waterteunisbloem zo dominant dat er niks meer tegen te beginnen is. Inmiddels denkt Natuurmonumenten erover na om de natuurbestemming van het eiland aan te passen.</p>
+                </div>
+                <div class="mobile-photo full-width mobile-zoom-photo">
+                    <img src="de-exoten/61.jpg" alt="Waterteunisbloem" loading="lazy">
+                </div>
+            </div>
+
+            <!-- =========================================
+                 JAPANSE OESTER SECTIE (foto 62) - Witte achtergrond
+                 ========================================= -->
+            <div class="mobile-white-section">
+                <div class="mobile-section-header">
+                    <h2 class="section-name">Japanse <span class="accent">O</span>ester</h2>
+                </div>
+                <div class="mobile-photo full-width">
+                    <img src="de-exoten/62.jpg" alt="Japanse Oester" loading="lazy">
+                </div>
+                <div class="mobile-caption-box">
+                    <h4 class="caption-title">Overgenomen</h4>
+                    <p class="caption-text">De Waddenzee was ooit het domein van de inheemse oester. Een ziekte en de komst van de Japanse oester heeft dat doen veranderen. Inmiddels zijn bijna alle oesters exoten geworden. Hier inspecteert David, een professor verbonden aan het Nederlands Instituut voor Onderzoek der Zee, een oesterbank.</p>
+                </div>
+            </div>
+
+            <!-- =========================================
+                 MUSKUSRAT SECTIE (foto 63-70) - Witte achtergrond
+                 ========================================= -->
+            <div class="mobile-white-section">
+                <div class="mobile-section-header">
+                    <h2 class="section-name">Muskus<span class="accent">r</span>at</h2>
+                </div>
+                <div class="mobile-photo full-width">
+                    <img src="de-exoten/63.jpg" alt="Muskusrat" loading="lazy">
+                </div>
+                <div class="mobile-muskusrat-grid">
+                    <img class="foto-64" src="de-exoten/64.jpg" alt="Muskusrat" loading="lazy">
+                    <img class="foto-65" src="de-exoten/65.jpg" alt="Muskusrat" loading="lazy">
+                    <img class="foto-69" src="de-exoten/69.jpg" alt="Muskusrat" loading="lazy">
+                </div>
+                <div class="mobile-caption-box">
+                    <h4 class="caption-title">Richard de Rattenjager</h4>
+                    <p class="caption-text">Al meer dan 40 jaar vangt Richard muskusratten in de omgeving van Utrecht. De dieren zijn invasieve exoten die dijken veranderen in gatenkaas, en mannen als Richard gaan er daarom dagelijks op uit om ze te vangen.</p>
+                </div>
+                <div class="mobile-photo-row">
+                    <div class="mobile-photo">
+                        <img src="de-exoten/66.jpg" alt="Muskusrat" loading="lazy">
+                    </div>
+                    <div class="mobile-photo">
+                        <img src="de-exoten/67.jpg" alt="Muskusrat" loading="lazy">
+                    </div>
+                </div>
+                <div class="mobile-photo full-width">
+                    <img src="de-exoten/68.jpg" alt="Muskusrat" loading="lazy">
+                </div>
+                <div class="mobile-photo full-width">
+                    <img src="de-exoten/70.jpg" alt="Muskusrat" loading="lazy">
+                </div>
+            </div>
+
+            <!-- Einde deel 1 -->
+            <div class="mobile-einde-deel">
+                <p class="einde-tekst">Einde van het eerste deel.<br>Binnenkort het tweede deel!</p>
+            </div>
+
+            <!-- Einde van de serie -->
+            <div class="mobile-end-panel">
+                <p class="einde-tekst">Einde van deze serie</p>
+                <p style="font-family: 'Scala Sans', sans-serif; font-size: 0.8rem; color: rgba(255,255,255,0.4); margin: 2rem 0 0.8rem; text-transform: uppercase; letter-spacing: 0.05em;">Bekijk ook</p>
+                <nav style="display: flex; flex-direction: column; gap: 0.5rem;">
+                    <a href="index.html" style="font-family: 'Scala Sans', sans-serif; font-size: 0.95rem; color: #ffffff; text-decoration: none;">Home</a>
+                    <a href="mijn-tatoeages.html" style="font-family: 'Scala Sans', sans-serif; font-size: 0.95rem; color: #ffffff; text-decoration: none;">Mijn Tatoeages</a>
+                    <a href="a-better-port.html" style="font-family: 'Scala Sans', sans-serif; font-size: 0.95rem; color: #ffffff; text-decoration: none;">A Better Port</a>
+                    <a href="in-blauw-licht.html" style="font-family: 'Scala Sans', sans-serif; font-size: 0.95rem; color: #ffffff; text-decoration: none;">In Blauw Licht</a>
+                    <a href="toen-de-mijnen-verdwenen.html" style="font-family: 'Scala Sans', sans-serif; font-size: 0.95rem; color: #ffffff; text-decoration: none;">Toen de Mijnen Verdwenen</a>
+                    <a href="het-noordzeekanaal-gebied.html" style="font-family: 'Scala Sans', sans-serif; font-size: 0.95rem; color: #ffffff; text-decoration: none;">Het Noordzeekanaal Gebied</a>
+                    <a href="de-onmisbaren.html" style="font-family: 'Scala Sans', sans-serif; font-size: 0.95rem; color: #ffffff; text-decoration: none;">De Onmisbaren</a>
+                    <a href="een-plek-onder-de-zon.html" style="font-family: 'Scala Sans', sans-serif; font-size: 0.95rem; color: #ffffff; text-decoration: none;">Een Plek Onder de Zon</a>
+                </nav>
+                <p style="font-family: 'Scala Sans', sans-serif; font-size: 0.8rem; color: rgba(255,255,255,0.4); margin: 2rem 0 0.5rem; text-transform: uppercase; letter-spacing: 0.05em;">Contact</p>
+                <div>
+                    <p style="font-family: 'Scala Sans', sans-serif; font-size: 0.9rem; color: #ffffff; margin-bottom: 0.3rem;">wouterzaalberg@gmail.com</p>
+                    <p style="font-family: 'Scala Sans', sans-serif; font-size: 0.9rem; color: #ffffff;">06 45 788 180</p>
+                </div>
+            </div>
+
+            <!-- Foto popup -->
+            <div class="mobile-photo-popup" id="mobilePhotoPopup">
+                <img src="" alt="Popup">
+            </div>
+        </div>
     </div>
 
     <script>
@@ -2349,6 +3482,155 @@
             }, delay);
             delay += 200 + Math.random() * 150;
         });
+
+        // Mobiele titel animatie - letters vullen met kleur
+        const highlightLetters = document.querySelectorAll('#mobileTitleOverlay .letter.highlight');
+        if (highlightLetters.length > 0) {
+            // Sorteer op data-order
+            const sortedLetters = Array.from(highlightLetters).sort((a, b) => {
+                return parseInt(a.dataset.order) - parseInt(b.dataset.order);
+            });
+
+            // Vul letters één voor één met kleur
+            let fillDelay = 800;
+            sortedLetters.forEach((letter, index) => {
+                setTimeout(() => {
+                    letter.classList.add('filled');
+                }, fillDelay);
+                fillDelay += 350;
+            });
+        }
+
+        // Mobiele intro carousel
+        const carousel = document.getElementById('mobileCarousel');
+        if (carousel) {
+            const slides = carousel.querySelectorAll('.carousel-slide');
+            const captionContainer = document.querySelector('.mobile-carousel-caption');
+            const captions = captionContainer ? captionContainer.querySelectorAll('.exoot-name') : [];
+            let currentSlide = 0;
+
+            function nextSlide() {
+                slides[currentSlide].classList.remove('active');
+                if (captions[currentSlide]) captions[currentSlide].classList.remove('active');
+                currentSlide = (currentSlide + 1) % slides.length;
+                slides[currentSlide].classList.add('active');
+                if (captions[currentSlide]) captions[currentSlide].classList.add('active');
+            }
+
+            setInterval(nextSlide, 5000);
+        }
+
+        // Tekstkaders fade-in bij scrollen (mobiel)
+        const mobileContent = document.getElementById('mobileContent');
+        if (mobileContent) {
+            const captionBoxes = mobileContent.querySelectorAll('.mobile-caption-box');
+
+            const captionObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, {
+                threshold: 0.2,
+                rootMargin: '0px 0px -20px 0px'
+            });
+
+            captionBoxes.forEach(box => captionObserver.observe(box));
+
+            // Sectietitel animatie
+            const sectionNames = mobileContent.querySelectorAll('.section-name');
+
+            sectionNames.forEach(name => {
+                const text = name.innerHTML;
+                let newHtml = '';
+                let inTag = false;
+                let tagContent = '';
+
+                for (let i = 0; i < text.length; i++) {
+                    const char = text[i];
+                    if (char === '<') {
+                        inTag = true;
+                        tagContent = '<';
+                    } else if (char === '>') {
+                        inTag = false;
+                        tagContent += '>';
+                        newHtml += tagContent;
+                        tagContent = '';
+                    } else if (inTag) {
+                        tagContent += char;
+                    } else if (char === ' ') {
+                        newHtml += '<span class="letter space">&nbsp;</span>';
+                    } else {
+                        newHtml += `<span class="letter">${char}</span>`;
+                    }
+                }
+                name.innerHTML = newHtml;
+            });
+
+            const sectionObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const letters = entry.target.querySelectorAll('.letter:not(.space)');
+                        // Maak willekeurige volgorde voor fade-in
+                        const indices = [];
+                        for (let i = 0; i < letters.length; i++) {
+                            indices.push(i);
+                        }
+                        // Shuffle
+                        for (let i = indices.length - 1; i > 0; i--) {
+                            const j = Math.floor(Math.random() * (i + 1));
+                            [indices[i], indices[j]] = [indices[j], indices[i]];
+                        }
+                        // Fade in letters in willekeurige volgorde
+                        let delay = 0;
+                        indices.forEach(idx => {
+                            setTimeout(() => {
+                                letters[idx].classList.add('visible');
+                            }, delay);
+                            delay += 60 + Math.random() * 40;
+                        });
+                        // Spaties direct zichtbaar
+                        entry.target.querySelectorAll('.letter.space').forEach(space => {
+                            space.classList.add('visible');
+                        });
+                        sectionObserver.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.5
+            });
+
+            sectionNames.forEach(name => sectionObserver.observe(name));
+
+            // Touch-based photo popup
+            const popup = document.getElementById('mobilePhotoPopup');
+            const popupImg = popup.querySelector('img');
+
+            // Selecteer alle kleine foto's in grids en rijen
+            const popupPhotos = mobileContent.querySelectorAll('.mobile-photo-row img, [class*="-grid"] img');
+
+            popupPhotos.forEach(img => {
+                img.addEventListener('touchstart', (e) => {
+                    e.preventDefault();
+                    popupImg.src = img.src;
+                    popup.classList.add('active');
+                }, { passive: false });
+
+                img.addEventListener('touchend', () => {
+                    popup.classList.remove('active');
+                });
+
+                img.addEventListener('touchcancel', () => {
+                    popup.classList.remove('active');
+                });
+            });
+
+            // Sluit popup ook bij touch buiten de foto
+            popup.addEventListener('touchend', () => {
+                popup.classList.remove('active');
+            });
+        }
 
         // Progress indicator
         const progressNumber = document.getElementById('progressNumber');
