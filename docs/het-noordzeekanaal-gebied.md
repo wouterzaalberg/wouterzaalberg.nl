@@ -18,6 +18,7 @@ Foto 2 → Intro panel → Foto 1 → Foto paar 3+4 → Foto 5 → etc.
 - 10+11
 - Gap binnen paar: 0.5rem
 - Scrollen als één geheel
+- Mobiel: beide foto's eerst, dan caption eronder (`.pair-caption`)
 
 ## Bijschriften (hover)
 - Positie: `bottom: 2rem`, gecentreerd
@@ -44,6 +45,9 @@ Foto 2 → Intro panel → Foto 1 → Foto paar 3+4 → Foto 5 → etc.
   - Kaart: `min-width: 50vw`, zoom level 11
   - End panel: `height: auto`, `min-height: 70vh`
 - **Mobiel (< 767px)**: verticaal scrollen
+  - Titel/subtitle fade-in: opacity 0→1, translateY 20px→0, 0.8s ease-out
+  - Caption fade-in: opacity 0→1, translateY 15px→0, 0.6s ease-out
+  - Captions onder foto's met transparante achtergrond
 
 ## End Panel
 - Achtergrond: `#1a1a1a`

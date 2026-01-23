@@ -54,6 +54,20 @@
             font-style: italic;
         }
 
+        /* Pair caption - desktop: show on hover of first photo */
+        .pair-caption {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+        .photo-pair:hover .pair-caption {
+            opacity: 1;
+        }
+
         /* Large title with water effect */
         .nzkg-title-panel {
             min-width: 500px;
@@ -356,11 +370,34 @@
                 max-width: none;
             }
 
+            /* Title/subtitle fade-in animation */
+            .nzkg-title {
+                opacity: 0;
+                transform: translateY(20px);
+                transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+            }
+
+            .nzkg-title.visible {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+            .nzkg-subtitle {
+                opacity: 0;
+                transform: translateY(15px);
+                transition: opacity 0.6s ease-out 0.3s, transform 0.6s ease-out 0.3s;
+            }
+
+            .nzkg-subtitle.visible {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
             /* Foto paren - verticaal stapelen */
             .photo-pair {
                 display: flex;
                 flex-direction: column !important;
-                gap: 2rem !important;
+                gap: 0.5rem !important;
                 width: 94vw;
                 margin: 0 auto;
             }
@@ -374,14 +411,30 @@
                 position: relative !important;
                 bottom: auto !important;
                 left: auto !important;
-                transform: none !important;
-                opacity: 1 !important;
+                transform: translateY(15px) !important;
+                opacity: 0 !important;
                 width: 100% !important;
                 max-width: none !important;
                 margin-top: 0.3rem;
                 padding: 0.5rem 0 !important;
                 background: transparent !important;
                 pointer-events: auto !important;
+                transition: opacity 0.6s ease-out, transform 0.6s ease-out !important;
+            }
+
+            .photo-caption.visible {
+                opacity: 1 !important;
+                transform: translateY(0) !important;
+            }
+
+            /* Pair captions - positioned after both photos */
+            .pair-caption {
+                position: relative !important;
+                bottom: auto !important;
+                left: auto !important;
+                transform: translateY(15px) !important;
+                width: 100% !important;
+                margin-top: -0.2rem !important;
             }
 
             .caption-main {
@@ -478,14 +531,14 @@
             <div class="photo-pair">
                 <div class="photo-item">
                     <img src="het-noordzeekanaal-gebied/3.jpg" alt="Het Noordzeekanaal Gebied" loading="eager">
-                    <div class="photo-caption">
-                        <span class="caption-main">Jolanda, hoofdoperator bij het afvalenergiebedrijf AEB Amsterdam.</span>
-                        <span class="caption-detail">AEB zet restafval om in stoom, waarmee zij elektriciteit opwekt voor zo'n 365.000 huishoudens en warmte levert aan 40.000 woningen in Amsterdam-Noord via stadsverwarming. Vanaf 2028 vangt AEB ook CO₂ af en zet zo de volgende stap naar een nóg duurzamere, circulaire toekomst voor de regio.</span>
-                        <span class="caption-location">Locatie: Westelijk Havengebied Amsterdam</span>
-                    </div>
                 </div>
                 <div class="photo-item">
                     <img src="het-noordzeekanaal-gebied/4.jpg" alt="Het Noordzeekanaal Gebied" loading="eager">
+                </div>
+                <div class="photo-caption pair-caption">
+                    <span class="caption-main">Jolanda, hoofdoperator bij het afvalenergiebedrijf AEB Amsterdam.</span>
+                    <span class="caption-detail">AEB zet restafval om in stoom, waarmee zij elektriciteit opwekt voor zo'n 365.000 huishoudens en warmte levert aan 40.000 woningen in Amsterdam-Noord via stadsverwarming. Vanaf 2028 vangt AEB ook CO₂ af en zet zo de volgende stap naar een nóg duurzamere, circulaire toekomst voor de regio.</span>
+                    <span class="caption-location">Locatie: Westelijk Havengebied Amsterdam</span>
                 </div>
             </div>
             <div class="photo-item" style="height: 90vh;">
@@ -499,14 +552,14 @@
             <div class="photo-pair">
                 <div class="photo-item">
                     <img src="het-noordzeekanaal-gebied/6.jpg" alt="Het Noordzeekanaal Gebied" loading="eager">
-                    <div class="photo-caption">
-                        <span class="caption-main">Jimmy, stuwadoor bij HES Bulk Terminal Amsterdam.</span>
-                        <span class="caption-detail">Jimmy verplaatst allerlei bulkgoederen met diverse machines en bedient ook grote kranen. Op het terrein van HES Bulk Terminal Amsterdam is goed te zien dat kolenvelden steeds meer plaats maken voor andere bulkgoederen zoals duurzame bouwmaterialen en agri-producten zoals granen.</span>
-                        <span class="caption-location">Locatie: Westelijk Havengebied Amsterdam</span>
-                    </div>
                 </div>
                 <div class="photo-item">
                     <img src="het-noordzeekanaal-gebied/7.jpg" alt="Het Noordzeekanaal Gebied" loading="lazy">
+                </div>
+                <div class="photo-caption pair-caption">
+                    <span class="caption-main">Jimmy, stuwadoor bij HES Bulk Terminal Amsterdam.</span>
+                    <span class="caption-detail">Jimmy verplaatst allerlei bulkgoederen met diverse machines en bedient ook grote kranen. Op het terrein van HES Bulk Terminal Amsterdam is goed te zien dat kolenvelden steeds meer plaats maken voor andere bulkgoederen zoals duurzame bouwmaterialen en agri-producten zoals granen.</span>
+                    <span class="caption-location">Locatie: Westelijk Havengebied Amsterdam</span>
                 </div>
             </div>
             <div class="photo-item">
@@ -542,14 +595,14 @@
             <div class="photo-pair">
                 <div class="photo-item">
                     <img src="het-noordzeekanaal-gebied/10.jpg" alt="Het Noordzeekanaal Gebied" loading="lazy">
-                    <div class="photo-caption">
-                        <span class="caption-main">Leon werkt als monteur bij Olam food ingredients (ofi) in Koog aan de Zaan.</span>
-                        <span class="caption-detail">Ofi is een leverancier van cacaopoeder, boter en massa. De producten van ofi vind je o.a. terug in OREO en de Mars. Door verbranding van eigen cacaodoppen in een biomassa installatie voor het maken van stoom is het aardgasverbruik gehalveerd.</span>
-                        <span class="caption-location">Locatie: Zaanstreek</span>
-                    </div>
                 </div>
                 <div class="photo-item">
                     <img src="het-noordzeekanaal-gebied/11.jpg" alt="Het Noordzeekanaal Gebied" loading="lazy">
+                </div>
+                <div class="photo-caption pair-caption">
+                    <span class="caption-main">Leon werkt als monteur bij Olam food ingredients (ofi) in Koog aan de Zaan.</span>
+                    <span class="caption-detail">Ofi is een leverancier van cacaopoeder, boter en massa. De producten van ofi vind je o.a. terug in OREO en de Mars. Door verbranding van eigen cacaodoppen in een biomassa installatie voor het maken van stoom is het aardgasverbruik gehalveerd.</span>
+                    <span class="caption-location">Locatie: Zaanstreek</span>
                 </div>
             </div>
             <div class="photo-item">
@@ -947,6 +1000,39 @@
                 }
             }
         });
+
+        // Mobile: Caption fade-in animation
+        if (window.innerWidth <= 767) {
+            const captions = document.querySelectorAll('.photo-caption');
+            const captionObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.3 });
+
+            captions.forEach(caption => {
+                captionObserver.observe(caption);
+            });
+
+            // Title/subtitle fade-in
+            const title = document.querySelector('.nzkg-title');
+            const subtitle = document.querySelector('.nzkg-subtitle');
+            const titleObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        // Also trigger subtitle when title becomes visible
+                        if (entry.target.classList.contains('nzkg-title') && subtitle) {
+                            setTimeout(() => subtitle.classList.add('visible'), 200);
+                        }
+                    }
+                });
+            }, { threshold: 0.5 });
+
+            if (title) titleObserver.observe(title);
+        }
     </script>
 </body>
 </html>
