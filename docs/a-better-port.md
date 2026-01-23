@@ -114,11 +114,35 @@ CSS: `css/a-better-port.css`
 ## Responsive (< 767px)
 - Verticaal scrollen
 - Haven animatie behouden in intro
-- **Titel**: `font-size: 5.5rem`, `bottom: 28%`, gele outline
-- **Introtekst**: `bottom: 12%`, verkorte tekst via `.mobile-short`
-- **Map positie**: `[52.39, 4.80]`, zoom 13
+- **Titel**: `font-size: 5.5rem`, `top: 40%`, gele outline
+- **Introtekst**: `top: calc(40% + 16rem + 1rem)`, onder de titel, verkorte tekst via `.mobile-short`
+- **Map positie**: `[52.39, 4.80]`, zoom 12.5
 - **Aparte secties** voor foto 1 en 2 met info buttons en captions
 - **Captions**: header 0.85rem, tekst 0.8rem
-- **Infographic "Een haven ter waarde"**: compacte bars (18px hoogte, 0.4rem gap)
-- **Infographic "Haven in verandering"**: geschaald (donut 85%, chart 90%)
-- **Text-photo combo**: caption `bottom: 0`, volle breedte
+
+### Special photo layouts (`.abp-benzolweg`)
+Foto's met geel kader boven en onder, onderschrift zichtbaar in onderste kader:
+- Foto 5 (Benzolweg)
+- Foto 23 (Hemwegcentrale)
+- Foto 29 (Neo Orbis)
+- Foto 34 (Schrootmetalen terminal)
+- Foto 45 (EVOS terminal nacht)
+
+### Diptych pairs (`.abp-diptych`)
+Foto paren naast elkaar op mobiel (totaal 95vw, 2px gap):
+- Foto 11+12 (Kees-Jan AEB / Afval Energie Bedrijf)
+- Foto 21+22 (Frits / Actievoerder)
+- Foto 26+27 (Biomassacentrale)
+
+### Tight pairs (`.abp-tight-pair`)
+Foto paren met minimale ruimte ertussen (0.5rem):
+- Foto 13+14
+- Foto 32+33
+
+### Infographics
+- **"Een haven ter waarde"**: compacte bars (18px hoogte, 0.4rem gap), bar animaties van 0 naar doelwaarde
+- **"Haven in verandering"**: geschaald (donut 85%, chart 90%)
+
+### Text-photo combo ("9 maanden van huis")
+- Geel tekstvak met `padding: 3rem 1.5rem 1rem`
+- Tekst dicht bij foto via `justify-content: flex-end`

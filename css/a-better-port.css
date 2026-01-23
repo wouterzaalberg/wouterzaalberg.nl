@@ -1023,10 +1023,23 @@
 
 .abp-bar-fill {
     height: 100%;
-    width: var(--bar-width, 0%);
+    width: 0;
     background: #6a7d8a; /* Zelfde kleur als titel foto 1 */
     transition: width 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
+
+.abp-infographic-panel.revealed .abp-bar-fill {
+    width: var(--bar-width, 0%);
+}
+
+/* Staggered bar fill animation delays */
+.abp-infographic-panel.revealed .abp-bar-item:nth-child(1) .abp-bar-fill { transition-delay: 0.4s; }
+.abp-infographic-panel.revealed .abp-bar-item:nth-child(2) .abp-bar-fill { transition-delay: 0.5s; }
+.abp-infographic-panel.revealed .abp-bar-item:nth-child(3) .abp-bar-fill { transition-delay: 0.6s; }
+.abp-infographic-panel.revealed .abp-bar-item:nth-child(4) .abp-bar-fill { transition-delay: 0.7s; }
+.abp-infographic-panel.revealed .abp-bar-item:nth-child(5) .abp-bar-fill { transition-delay: 0.8s; }
+.abp-infographic-panel.revealed .abp-bar-item:nth-child(6) .abp-bar-fill { transition-delay: 0.9s; }
+.abp-infographic-panel.revealed .abp-bar-item:nth-child(7) .abp-bar-fill { transition-delay: 1.0s; }
 
 .abp-bar-fill.coal {
     background: #6a7d8a;
@@ -2091,7 +2104,7 @@
         display: flex !important;
         width: 100%;
         min-height: 100svh;
-        background: var(--abp-yellow);
+        background: var(--abp-yellow-solid);
         align-items: center;
         justify-content: center;
         padding: 1rem;
@@ -2112,8 +2125,8 @@
 
     .abp-mobile-photo1-img .abp-info-btn {
         position: absolute;
-        bottom: 1rem;
-        right: 1rem;
+        bottom: 1rem !important;
+        right: 1rem !important;
     }
 
     .abp-mobile-photo1-img .abp-caption {
@@ -2156,8 +2169,8 @@
 
     .abp-mobile-photo2-img .abp-info-btn {
         position: absolute;
-        bottom: 1rem;
-        right: 1rem;
+        bottom: 1rem !important;
+        right: 1rem !important;
     }
 
     .abp-mobile-photo2-img .abp-caption {
@@ -2206,7 +2219,10 @@
     }
 
     /* Gele achtergrond voor specifieke elementen */
-    .abp-page .horizontal-scroll-content > .abp-mobile-photo1,
+    .abp-page .horizontal-scroll-content > .abp-mobile-photo1 {
+        background: var(--abp-yellow-solid) !important;
+    }
+
     .abp-page .horizontal-scroll-content > .abp-infographic-panel,
     .abp-page .horizontal-scroll-content > .abp-quote-panel,
     .abp-page .horizontal-scroll-content > .abp-text-photo-combo {
@@ -2268,11 +2284,11 @@
         overflow: hidden;
     }
 
-    /* Titel links uitgelijnd op de introtekst */
+    /* Titel links uitgelijnd, boven de introtekst */
     .abp-intro-section > .abp-hero-title {
         position: absolute !important;
-        bottom: 28% !important;
-        top: auto !important;
+        bottom: auto !important;
+        top: 40% !important;
         left: calc(5vw + 1.25rem) !important;
         transform: none !important;
         right: auto !important;
@@ -2284,12 +2300,12 @@
         text-stroke: 2px var(--abp-yellow-solid);
     }
 
-    /* Intro tekst direct onder de titel */
+    /* Intro tekst onder de titel met kleine tussenruimte */
     .abp-intro-panel {
         display: flex !important;
         position: absolute !important;
-        bottom: 12% !important;
-        top: auto !important;
+        top: calc(40% + 16rem + 1rem) !important;
+        bottom: auto !important;
         left: 5vw !important;
         right: 5vw !important;
         transform: none !important;
@@ -2393,6 +2409,108 @@
     .abp-photo-pair .abp-photo-block {
         padding: 2rem 0 !important;
         background: #ffffff !important;
+    }
+
+    /* ---- TIGHT PAIR - minder ruimte tussen foto's ---- */
+    .abp-tight-pair .abp-photo-block:first-child {
+        padding-bottom: 0.25rem !important;
+    }
+
+    .abp-tight-pair .abp-photo-block:last-child {
+        padding-top: 0.25rem !important;
+    }
+
+    /* ---- DIPTYCH - naast elkaar op mobiel ---- */
+    .abp-diptych {
+        flex-direction: row !important;
+        align-items: flex-end !important;
+        justify-content: center !important;
+        width: 100% !important;
+        min-width: 100% !important;
+        gap: 2px !important;
+        padding: 2rem 0 !important;
+    }
+
+    .abp-diptych .abp-photo-block {
+        flex: none !important;
+        width: calc((95vw - 2px) / 2) !important;
+        padding: 0 !important;
+    }
+
+    .abp-diptych .abp-photo-block img.photo {
+        width: 100% !important;
+        height: 65vw !important;
+        object-fit: cover !important;
+    }
+
+    .abp-diptych .abp-info-btn {
+        bottom: 0.5rem !important;
+        right: 0.5rem !important;
+    }
+
+    .abp-diptych .abp-caption {
+        bottom: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        padding: 0.5rem !important;
+    }
+
+    .abp-diptych .abp-caption-header {
+        font-size: 0.7rem !important;
+    }
+
+    .abp-diptych .abp-caption-text {
+        font-size: 0.65rem !important;
+        line-height: 1.4 !important;
+    }
+
+    /* ---- BENZOLWEG SPECIAL LAYOUT ---- */
+    .abp-benzolweg {
+        flex-direction: column !important;
+        padding: 0 !important;
+        background: var(--abp-yellow-solid) !important;
+    }
+
+    .abp-benzolweg::before {
+        content: '';
+        display: block;
+        width: 100%;
+        height: 1.5rem;
+        background: var(--abp-yellow-solid);
+        order: -1;
+    }
+
+    .abp-benzolweg img.photo {
+        width: 100vw !important;
+        order: 0;
+    }
+
+    .abp-benzolweg .abp-info-btn {
+        display: none !important;
+    }
+
+    .abp-benzolweg .abp-caption {
+        position: relative !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        bottom: auto !important;
+        left: auto !important;
+        right: auto !important;
+        background: var(--abp-yellow-solid) !important;
+        padding: 1rem 1.5rem !important;
+        order: 1;
+    }
+
+    .abp-benzolweg .abp-caption-header {
+        color: #ffffff !important;
+        font-size: 0.9rem;
+        margin-bottom: 0.3rem;
+    }
+
+    .abp-benzolweg .abp-caption-text {
+        color: #ffffff !important;
+        font-size: 0.85rem;
+        line-height: 1.5;
     }
 
     /* Info button en caption - subtieler */
@@ -2522,8 +2640,10 @@
         flex: none;
         width: 100%;
         height: auto;
-        padding: 2rem 1.5rem !important;
+        min-height: auto !important;
+        padding: 3rem 1.5rem 1rem 1.5rem !important;
         align-items: flex-start;
+        justify-content: flex-end !important;
     }
 
     .abp-combo-text p {
