@@ -1598,7 +1598,12 @@ img {
 
     .hero-image .hero-img-mobile.active {
         opacity: 1;
-        animation: mobileHeroZoom 6s ease-out forwards;
+        animation: mobileHeroZoom 5s ease-out forwards;
+    }
+
+    /* Behoud zoom tijdens uitfaden */
+    .hero-image .hero-img-mobile.zoomed {
+        transform: scale(1.05);
     }
 
     .hero-overlay-content {
@@ -1793,6 +1798,15 @@ img {
         background: rgba(255,255,255,0.85) !important;
         box-sizing: border-box;
         z-index: 10;
+        /* Fade-in animatie */
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    }
+
+    .about-section.in-view .about-text-overlay {
+        opacity: 1;
+        transform: translateY(0);
     }
 
     .about-heading {
@@ -2011,6 +2025,15 @@ img {
         box-sizing: border-box;
         z-index: 1;
         text-align: center;
+        /* Fade-in animatie */
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    }
+
+    .contact-section.in-view .contact-text-overlay {
+        opacity: 1;
+        transform: translateY(0);
     }
 
     .contact-text-overlay h2 {

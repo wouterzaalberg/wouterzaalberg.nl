@@ -692,7 +692,7 @@
             const mobileHeroImages = document.querySelectorAll('.hero-img-mobile');
             const menuLinks = document.querySelectorAll('.menu-list a');
             let currentMobileIndex = 0;
-            const rotationInterval = 6000; // 6 seconden per foto
+            const rotationInterval = 5000; // 5 seconden per foto
 
             // Highlight de bijbehorende menu link met glim effect
             function highlightSeriesLink(imageEl) {
@@ -720,10 +720,22 @@
 
             // Rotatie functie
             function rotateMobileHero() {
-                mobileHeroImages[currentMobileIndex].classList.remove('active');
+                const outgoingImage = mobileHeroImages[currentMobileIndex];
+
+                // Voeg zoomed toe zodat scale behouden blijft tijdens fade out
+                outgoingImage.classList.add('zoomed');
+                outgoingImage.classList.remove('active');
+
+                // Verwijder zoomed na fade transitie (1s)
+                setTimeout(() => {
+                    outgoingImage.classList.remove('zoomed');
+                }, 1000);
+
                 currentMobileIndex = (currentMobileIndex + 1) % mobileHeroImages.length;
-                mobileHeroImages[currentMobileIndex].classList.add('active');
-                highlightSeriesLink(mobileHeroImages[currentMobileIndex]);
+                const incomingImage = mobileHeroImages[currentMobileIndex];
+                incomingImage.classList.remove('zoomed'); // Reset voor nieuwe animatie
+                incomingImage.classList.add('active');
+                highlightSeriesLink(incomingImage);
             }
 
             // Start rotatie

@@ -71,9 +71,11 @@
 ## Mobiele Hero Rotatie (< 767px)
 
 ### Foto rotatie
-- 5 foto's uit grote series roteren elke 4 seconden
+- 5 foto's uit grote series roteren elke 5 seconden
 - Cross-fade transitie (1s)
 - Foto's: de-exoten, mijn-tattoos, a-better-port, in-blauw-licht, toen-de-mijnen-verdwenen
+- Zoom animatie: `scale(1.05)` gedurende 5s
+- `.zoomed` class behoudt zoom tijdens fade-out
 
 ### Serie highlight
 - Bij rotatie licht de bijbehorende serie naam op in het menu
@@ -84,3 +86,8 @@
   - A Better Port: `#e8d89a` (zacht geel)
   - In Blauw Licht: `#8ab4cc` (zacht blauw)
   - Toen de Mijnen Verdwenen: `#d4937a` (zacht oranje)
+
+### Tekstvak Fade-in (sectie 2 en 4)
+- Tekstvakken verschijnen met fade-in bij scroll
+- IntersectionObserver triggert `.in-view` class op sectie
+- Animatie: opacity 0→1, translateY 20px→0, 0.8s ease-out
