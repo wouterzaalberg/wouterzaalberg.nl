@@ -595,9 +595,23 @@
                 margin-bottom: 0.6rem;
             }
 
+            /* Fade-in animatie voor tekst content */
+            .mobile-story-content {
+                opacity: 0;
+                transform: translateY(15px);
+                transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            }
+
+            .mobile-story-content.visible {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
             /* Verborgen extra tekst */
             .mobile-story-content .extra-text {
                 display: none;
+                opacity: 0;
+                transform: translateY(10px);
             }
 
             .mobile-story-content.expanded .mobile-text-with-photo {
@@ -607,6 +621,18 @@
             .mobile-story-content.expanded .extra-text {
                 display: block;
                 margin-top: 0.8rem;
+                animation: fadeInText 0.5s ease-out forwards;
+            }
+
+            @keyframes fadeInText {
+                from {
+                    opacity: 0;
+                    transform: translateY(10px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
             }
 
             .mobile-story-content .extra-text p {
@@ -693,6 +719,45 @@
 
             #tattooHint {
                 display: none !important;
+            }
+
+            /* Foto popup overlay */
+            .mobile-photo-popup {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(0,0,0,0.9);
+                z-index: 1000;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                opacity: 0;
+                pointer-events: none;
+                transition: opacity 0.2s ease-out;
+            }
+
+            .mobile-photo-popup.active {
+                opacity: 1;
+                pointer-events: auto;
+            }
+
+            .mobile-photo-popup img {
+                max-width: 95vw;
+                max-height: 90vh;
+                object-fit: contain;
+            }
+
+            /* Progress indicator */
+            .progress-indicator {
+                position: fixed;
+                bottom: 1.5rem;
+                left: 1.5rem;
+                font-family: 'Scala Sans', sans-serif;
+                font-size: 0.85rem;
+                color: rgba(255, 255, 255, 0.5);
+                z-index: 50;
             }
         }
     </style>
@@ -1367,6 +1432,16 @@
                     </div>
                     <span class="scroll-arrow">→</span>
                 </div>
+            </div>
+
+            <!-- Foto popup voor mobiel -->
+            <div class="mobile-photo-popup" id="mobilePhotoPopup">
+                <img src="" alt="Popup">
+            </div>
+
+            <!-- Progress indicator -->
+            <div class="progress-indicator" id="progressIndicator">
+                <span id="progressNumber">0</span>%
             </div>
 
             <div class="end-panel" style="flex-shrink: 0; height: 100vh; min-width: 800px; background: #3d2817; display: flex; flex-direction: column; justify-content: center; padding: 3rem;">
@@ -2063,6 +2138,77 @@
                     }
                 }
             });
+
+            // Mobile: Fade-in animation for story content
+            const mobileContents = document.querySelectorAll('.mobile-story-content');
+            const contentObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.2 });
+
+            mobileContents.forEach(content => {
+                contentObserver.observe(content);
+            });
+
+            // Mobile: Photo popup for small tattoo photos
+            const popup = document.getElementById('mobilePhotoPopup');
+            const popupImg = popup.querySelector('img');
+            const floatPhotos = document.querySelectorAll('.float-photo img');
+            const MOVE_THRESHOLD = 10;
+
+            floatPhotos.forEach(img => {
+                let touchStartX = 0;
+                let touchStartY = 0;
+                let isTap = true;
+
+                img.addEventListener('touchstart', (e) => {
+                    touchStartX = e.touches[0].clientX;
+                    touchStartY = e.touches[0].clientY;
+                    isTap = true;
+                }, { passive: true });
+
+                img.addEventListener('touchmove', (e) => {
+                    if (!isTap) return;
+                    const moveX = Math.abs(e.touches[0].clientX - touchStartX);
+                    const moveY = Math.abs(e.touches[0].clientY - touchStartY);
+                    if (moveX > MOVE_THRESHOLD || moveY > MOVE_THRESHOLD) {
+                        isTap = false;
+                    }
+                }, { passive: true });
+
+                img.addEventListener('touchend', () => {
+                    if (isTap) {
+                        popupImg.src = img.src;
+                        popup.classList.add('active');
+                    }
+                });
+
+                img.addEventListener('touchcancel', () => {
+                    isTap = false;
+                });
+            });
+
+            // Close popup on touch
+            popup.addEventListener('touchstart', () => {
+                popup.classList.remove('active');
+            });
+
+            // Mobile: Progress indicator
+            const progressIndicator = document.getElementById('progressIndicator');
+            const progressNumber = document.getElementById('progressNumber');
+
+            function updateProgress() {
+                const scrollY = window.scrollY;
+                const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+                const progress = Math.round((scrollY / maxScroll) * 100);
+                progressNumber.textContent = Math.min(100, Math.max(0, progress));
+            }
+
+            window.addEventListener('scroll', updateProgress);
+            updateProgress();
         }
     </script>
 </body>

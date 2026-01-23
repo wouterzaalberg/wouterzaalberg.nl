@@ -80,3 +80,16 @@ Elke story sectie heeft de volgende structuur:
 - `.visible-text`: tekst naast foto
 - `.extra-text`: verborgen tekst (getoond bij expanded)
 - `.read-more-btn`: toggle knop
+
+### Animaties (mobiel)
+- Tekst fade-in: opacity 0→1, translateY 15px→0, 0.6s ease-out
+- Extra tekst fade-in bij "Lees meer": 0.5s animatie
+
+### Foto Popup (mobiel)
+- Tik op kleine tattoo foto om te vergroten
+- Tik ergens om te sluiten
+- Alleen voor `.float-photo` afbeeldingen
+
+### Progress Indicator (mobiel)
+- Positie: linksonder (1.5rem)
+- Toont scroll percentage (0-100%)
