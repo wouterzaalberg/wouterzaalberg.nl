@@ -19,16 +19,16 @@
         </div>
     </div>
 
-    <!-- Police stripes animation -->
-    <div class="ibl-stripes-red" id="stripesRed"></div>
-    <div class="ibl-stripes-blue" id="stripesBlue"></div>
-
     <!-- Toggle all captions button -->
     <button class="ibl-toggle-all-btn" id="toggleAllCaptions">
         <span class="toggle-text">Toon alle onderschriften</span>
     </button>
 
     <div class="horizontal-scroll-container" id="scrollContainer">
+        <!-- Police stripes animation -->
+        <div class="ibl-stripes-red" id="stripesRed"></div>
+        <div class="ibl-stripes-blue" id="stripesBlue"></div>
+
         <div class="horizontal-scroll-content">
             <!-- Hero Section - photo + dark intro panel -->
             <div class="ibl-hero">
@@ -44,7 +44,7 @@
                 <div class="ibl-hero-panel">
                     <div class="ibl-hero-panel-content">
                         <div class="ibl-hero-panel-text">
-                            <p>Wat is het werk van een politieagent in Nederland? Hoe ziet een doorsnee dag eruit, en wat maakt het bijzonder? Fotograaf Wouter Zaalberg volgde meerdere eenheden van de Nederlandse politie om dit vast te leggen.</p>
+                            <p>Wat is het werk van een politieagent in Nederland? Hoe ziet een doorsnee dag eruit, en wat maakt het bijzonder? <span class="ibl-highlight-red">Fotograaf Wouter Zaalberg</span> volgde meerdere eenheden van de Nederlandse politie om dit vast te leggen.</p>
                             <p>Van nachtdiensten tot buurtwerk, van spanning tot verbinding. Deze serie toont het menselijke gezicht achter het uniform, de momenten tussen de meldingen, en de band tussen agenten en de gemeenschappen die zij dienen.</p>
                         </div>
                     </div>
@@ -147,15 +147,14 @@
                 </div>
             </div>
 
-            <!-- Photo 10 -->
-            <div class="ibl-photo-block">
+            <!-- Photo 10 - Insert -->
+            <div class="ibl-insert">
                 <div class="photo-wrapper">
                     <img src="in-blauw-licht/foto 10.jpg" alt="In Blauw Licht" class="photo" loading="lazy">
-                    <button class="ibl-info-btn">i</button>
-                    <div class="ibl-caption">
-                        <div class="ibl-caption-header">Scootmobiel in het water – Almere</div>
-                        <div class="ibl-caption-text">Studenten en agenten kijken de camerabeelden terug van een vrouw die met haar scootmobiel ter water is geraakt. Ze zijn op zoek naar aanwijzingen voor de oorzaak van het ongeval.</div>
-                    </div>
+                </div>
+                <div class="ibl-insert-caption">
+                    <div class="ibl-insert-caption-header">Scootmobiel in het water – Almere</div>
+                    <div class="ibl-insert-caption-text">Studenten en agenten kijken de camerabeelden terug van een vrouw die met haar scootmobiel ter water is geraakt. Ze zijn op zoek naar aanwijzingen voor de oorzaak van het ongeval.</div>
                 </div>
             </div>
 
@@ -279,15 +278,14 @@
                 </div>
             </div>
 
-            <!-- Photo 21 -->
-            <div class="ibl-photo-block">
+            <!-- Photo 21 - Insert -->
+            <div class="ibl-insert">
                 <div class="photo-wrapper">
                     <img src="in-blauw-licht/foto 21.jpg" alt="In Blauw Licht" class="photo" loading="lazy">
-                    <button class="ibl-info-btn">i</button>
-                    <div class="ibl-caption">
-                        <div class="ibl-caption-header">De uitvaart – Goes</div>
-                        <div class="ibl-caption-text">De draagploeg van de politie tilt de kist de kerk binnen terwijl tientallen collega's salueren.</div>
-                    </div>
+                </div>
+                <div class="ibl-insert-caption">
+                    <div class="ibl-insert-caption-header">De uitvaart – Goes</div>
+                    <div class="ibl-insert-caption-text">De draagploeg van de politie tilt de kist de kerk binnen terwijl tientallen collega's salueren.</div>
                 </div>
             </div>
 
@@ -375,15 +373,14 @@
                 </div>
             </div>
 
-            <!-- Photo 29 -->
-            <div class="ibl-photo-block">
+            <!-- Photo 29 - Insert -->
+            <div class="ibl-insert">
                 <div class="photo-wrapper">
                     <img src="in-blauw-licht/foto 29.jpg" alt="In Blauw Licht" class="photo" loading="lazy">
-                    <button class="ibl-info-btn">i</button>
-                    <div class="ibl-caption">
-                        <div class="ibl-caption-header">Het Wilhelmus – Haarlem</div>
-                        <div class="ibl-caption-text">Ruim twintig agenten zijn zojuist beëdigd en luisteren naar het Wilhelmus.</div>
-                    </div>
+                </div>
+                <div class="ibl-insert-caption">
+                    <div class="ibl-insert-caption-header">Het Wilhelmus – Haarlem</div>
+                    <div class="ibl-insert-caption-text">Ruim twintig agenten zijn zojuist beëdigd en luisteren naar het Wilhelmus.</div>
                 </div>
             </div>
 
@@ -452,7 +449,7 @@
 
     <script>
         const container = document.getElementById('scrollContainer');
-        const allItems = document.querySelectorAll('.ibl-hero, .ibl-photo-block, .end-panel');
+        const allItems = document.querySelectorAll('.ibl-hero, .ibl-photo-block, .ibl-insert, .end-panel');
         const infoButtons = document.querySelectorAll('.ibl-info-btn');
         let currentIndex = 0;
         let isAnimating = false;
@@ -547,13 +544,47 @@
         container.addEventListener('scroll', updateToggleButtonVisibility);
         updateToggleButtonVisibility(); // Check on load
 
+        // Hero panel fade on scroll
+        const heroPanel = document.querySelector('.ibl-hero-panel');
+        function updateHeroPanelFade() {
+            if (container.scrollLeft > 100) {
+                heroPanel.classList.add('faded');
+            } else {
+                heroPanel.classList.remove('faded');
+            }
+        }
+        container.addEventListener('scroll', updateHeroPanelFade);
+        updateHeroPanelFade(); // Check on load
+
+        // Insert caption fade and zoom on scroll
+        const inserts = document.querySelectorAll('.ibl-insert');
+        function updateInsertEffects() {
+            const scrollLeft = container.scrollLeft;
+            inserts.forEach(insert => {
+                const insertLeft = insert.offsetLeft;
+                const insertWidth = insert.offsetWidth;
+                // Add in-view when insert is visible
+                if (scrollLeft > insertLeft - window.innerWidth && scrollLeft < insertLeft + insertWidth) {
+                    insert.classList.add('in-view');
+                }
+                // Fade when scrolled past center of insert
+                if (scrollLeft > insertLeft + insertWidth * 0.3) {
+                    insert.classList.add('caption-faded');
+                } else {
+                    insert.classList.remove('caption-faded');
+                }
+            });
+        }
+        container.addEventListener('scroll', updateInsertEffects);
+        updateInsertEffects(); // Check on load
+
         // Police stripes animation
         const stripesRed = document.getElementById('stripesRed');
         const stripesBlue = document.getElementById('stripesBlue');
         const photoBlocks = document.querySelectorAll('.ibl-photo-block');
 
-        // Define which photos trigger stripes (1x: photo 10)
-        const stripePhotoIndices = [9]; // 0-indexed
+        // Define which photos trigger stripes (bij begin van de pagina)
+        const stripePhotoIndices = [0]; // 0-indexed (foto 1)
 
         function updateStripes() {
             const scrollLeft = container.scrollLeft;
@@ -590,17 +621,17 @@
                 // Horizontal: start left of center (-15vw), move to right of center (+15vw)
                 const horizontalOffset = -15 + (animationProgress * 30); // -15vw to +15vw
 
-                // Red: from top (-50vh) to bottom (+60vh) - continuous downward
-                // Blue: from bottom (+50vh) to top (-60vh) - continuous upward
-                const redVertical = -50 + (animationProgress * 110); // -50vh to +60vh
-                const blueVertical = 50 - (animationProgress * 110); // +50vh to -60vh
+                // Red: from top (-60vh) to bottom (+120vh) - continuous downward
+                // Blue: from bottom (+60vh) to top (-120vh) - continuous upward
+                const redVertical = -60 + (animationProgress * 180); // -60vh to +120vh
+                const blueVertical = 60 - (animationProgress * 180); // +60vh to -120vh
 
                 stripesRed.style.transform = `translateX(${horizontalOffset}vw) translateY(${redVertical}vh)`;
                 stripesBlue.style.transform = `translateX(${horizontalOffset}vw) translateY(${blueVertical}vh)`;
             } else {
                 // Reset to starting position (off screen)
-                stripesRed.style.transform = 'translateX(-15vw) translateY(-50vh)';
-                stripesBlue.style.transform = 'translateX(-15vw) translateY(50vh)';
+                stripesRed.style.transform = 'translateX(-15vw) translateY(-60vh)';
+                stripesBlue.style.transform = 'translateX(-15vw) translateY(60vh)';
             }
         }
 
@@ -675,7 +706,7 @@
         }
 
         // Fade in images when loaded
-        const images = document.querySelectorAll('.ibl-photo-block img.photo, .ibl-hero-image');
+        const images = document.querySelectorAll('.ibl-photo-block img.photo, .ibl-insert img.photo, .ibl-hero-image');
 
         // Intersection Observer for lazy fade-in
         const observerOptions = {

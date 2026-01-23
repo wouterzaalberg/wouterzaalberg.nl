@@ -83,7 +83,7 @@
     gap: 0;
     padding: 0;
     margin: 0;
-    background: linear-gradient(to right, #0a0a0c 0%, #0a0a0c 5%, #f0f0f0 50%, #f0f0f0 100%);
+    background: #f0f0f0;
 }
 
 /* Police stripe pattern - animated */
@@ -93,7 +93,7 @@
     left: -50vw;
     width: 200vw;
     pointer-events: none;
-    z-index: 50;
+    z-index: 1;
     opacity: 1;
 }
 
@@ -172,6 +172,7 @@
     position: relative;
     display: flex;
     align-items: stretch;
+    z-index: 2;
     justify-content: flex-start;
     padding: 0;
     margin: 0;
@@ -227,11 +228,16 @@
     right: 0;
     width: 55vw;
     height: 100%;
-    background: #0a0a0c;
+    background: #0d1418;
     display: flex;
     align-items: flex-end;
     justify-content: flex-start;
     padding: 4rem 6rem 15vh 4rem;
+    transition: opacity 0.8s ease-out;
+}
+
+.ibl-hero-panel.faded {
+    opacity: 0;
 }
 
 
@@ -249,6 +255,10 @@
 
 .ibl-hero-panel-text p {
     margin-bottom: 1.5rem;
+}
+
+.ibl-highlight-red {
+    color: #c83232;
 }
 
 .ibl-hero-panel-text p:last-child {
@@ -282,11 +292,36 @@
     letter-spacing: 0.05em;
     text-transform: uppercase;
     line-height: 1.1;
-    color: var(--ibl-text);
     margin: 0;
     opacity: 0;
     transform: translateY(30px);
-    animation: fadeInUp 1s ease 0.7s forwards;
+    animation: fadeInUp 1s ease 0.7s forwards, blueLightText 18s ease-in-out 3s infinite;
+    /* Text with animated light */
+    background: linear-gradient(
+        90deg,
+        var(--ibl-text) 0%,
+        var(--ibl-text) 40%,
+        #4a7fd4 50%,
+        var(--ibl-text) 60%,
+        var(--ibl-text) 100%
+    );
+    background-size: 300% 100%;
+    background-position: 100% 0;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+@keyframes blueLightText {
+    0% {
+        background-position: 300% 0;
+    }
+    35% {
+        background-position: -200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
 }
 
 .ibl-hero-title span {
@@ -351,6 +386,8 @@
     min-width: auto;
     height: 100vh;
     display: flex;
+    position: relative;
+    z-index: 2;
     align-items: center;
     justify-content: center;
     padding: 12rem;
@@ -389,6 +426,79 @@
 
 .ibl-photo-block.size-full {
     align-items: center;
+}
+
+/* Insert blocks - large photo with blue background and caption beside */
+.ibl-insert {
+    min-width: 100vw;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4rem;
+    padding: 4rem 8rem;
+    background: #1a3a5c;
+    position: relative;
+    z-index: 2;
+    box-sizing: border-box;
+    transition: background 0.5s ease-out;
+}
+
+.ibl-insert .photo-wrapper {
+    height: 85vh;
+    flex-shrink: 0;
+    overflow: hidden;
+}
+
+.ibl-insert img.photo {
+    height: 85vh;
+    width: auto;
+    max-width: none;
+    transform: scale(1);
+    transition: transform 12s ease-out;
+}
+
+.ibl-insert.in-view img.photo {
+    transform: scale(1.05);
+}
+
+.ibl-insert .ibl-insert-caption {
+    max-width: 450px;
+    color: #f0f0f0;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.ibl-insert.in-view .ibl-insert-caption {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.ibl-insert.caption-faded {
+    background: transparent;
+}
+
+.ibl-insert.caption-faded .ibl-insert-caption {
+    opacity: 0 !important;
+    transform: translateY(0);
+}
+
+.ibl-insert .ibl-insert-caption-header {
+    font-family: 'Scala Sans SC', sans-serif;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 1.2rem;
+    color: #ffffff;
+}
+
+.ibl-insert .ibl-insert-caption-text {
+    font-family: 'Scala Sans', sans-serif;
+    font-size: 1.2rem;
+    line-height: 1.9;
+    color: rgba(255, 255, 255, 0.85);
 }
 
 /* Photo with light background panel - now transparent for animated gradient */
@@ -590,6 +700,29 @@
 }
 
 /* Responsive */
+
+/* Large screens (> 1400px) */
+@media (min-width: 1401px) {
+    .ibl-hero-panel {
+        align-items: flex-end;
+        justify-content: flex-start;
+        padding-bottom: 15vh;
+    }
+
+    .ibl-hero-panel-content {
+        max-width: 550px;
+    }
+
+    .ibl-hero-panel-text {
+        font-size: 1.5rem;
+        line-height: 2.2;
+    }
+
+    .ibl-hero-panel-text p {
+        margin-bottom: 2.5rem;
+    }
+}
+
 @media (max-width: 1200px) {
     .ibl-intro {
         min-width: 50vw;
