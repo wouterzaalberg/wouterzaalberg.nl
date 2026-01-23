@@ -91,3 +91,16 @@
 - Tekstvakken verschijnen met fade-in bij scroll
 - IntersectionObserver triggert `.in-view` class op sectie
 - Animatie: opacity 0→1, translateY 20px→0, 0.8s ease-out
+
+### Sectie 2 - About (mobiel)
+- Foto: `de-exoten/53.jpg`
+- Caption onderaan: wit, cursief, 0.75rem
+- Tekst: "In de Biesbosch verwijderen mannen zakken vol invasieve exoten. Uit: De Exoten"
+
+### Sectie 3 - Work (mobiel)
+- Grid gecentreerd: `top: 50%`, `left: 50%`, `transform: translate(-50%, -50%)`
+- Vierkant aspect-ratio met `max-height: 90%`
+
+### Sectie 4 - Contact (mobiel)
+- Tekst links uitgelijnd
+- Button links uitgelijnd (`align-self: flex-start`)

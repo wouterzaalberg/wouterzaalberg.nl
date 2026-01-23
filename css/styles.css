@@ -1821,7 +1821,15 @@ img {
     }
 
     .about-caption {
-        display: none !important;
+        display: block !important;
+        position: absolute !important;
+        bottom: 1.5rem !important;
+        left: 1.5rem !important;
+        right: 1.5rem !important;
+        color: white !important;
+        font-style: italic !important;
+        font-size: 0.75rem !important;
+        text-align: left !important;
     }
 
     /* ---- WORK SECTION (MOBIEL) ---- */
@@ -1869,11 +1877,13 @@ img {
     /* Work grid op mobiel - maximaliseer foto weergave */
     .work-grid {
         position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        transform: none !important;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) !important;
+        width: 95%;
+        height: auto;
+        aspect-ratio: 1 / 1;
+        max-height: 90%;
         gap: 2px;
         padding: 0;
         box-sizing: border-box;
@@ -1883,7 +1893,7 @@ img {
     }
 
     .work-grid.visible {
-        transform: none !important;
+        transform: translate(-50%, -50%) !important;
     }
 
     .work-grid .grid-img,
@@ -2024,7 +2034,7 @@ img {
         background-color: rgba(255, 255, 255, 0.9) !important;
         box-sizing: border-box;
         z-index: 1;
-        text-align: center;
+        text-align: left;
         /* Fade-in animatie */
         opacity: 0;
         transform: translateY(20px);
@@ -2085,7 +2095,7 @@ img {
         color: white;
         border: none;
         cursor: pointer;
-        align-self: center;
+        align-self: flex-start;
     }
 
     .contact-caption {
