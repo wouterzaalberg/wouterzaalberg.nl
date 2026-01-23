@@ -1083,6 +1083,15 @@
     .abp-bar-track {
         height: 24px;
     }
+
+    /* Hide map interlude on mobile */
+    .abp-map-interlude {
+        display: none;
+    }
+
+    .abp-map-interlude-overlay {
+        display: none;
+    }
 }
 
 /* ========================================
