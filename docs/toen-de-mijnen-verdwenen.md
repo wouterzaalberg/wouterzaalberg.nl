@@ -92,19 +92,23 @@ Font: Adobe Typekit Chloe (`https://use.typekit.net/qwc4lnx.css`)
 - **Verticaal scrollen** (geen horizontaal)
 - **Descent effect uitgeschakeld**: alle 3 panelen (hero, foto 1, chapter 1) onder elkaar
 - **Progress indicator**: verticale scroll berekening i.p.v. horizontaal
-- **Dust particles verborgen** voor performance
+- **Titel**: 3.5rem (groter dan desktop)
+- **Dust particles**: ingeschakeld (opacity 0.5), stopt automatisch na foto 1
 - **Navigatie**: fixed met gradient achtergrond
 - **Hero panel**: padding 1rem links/rechts, soundscape knop gecentreerd
 - **Foto's**: 100% breedte, captions eronder met top border
 - **Caption fade-in**: IntersectionObserver, opacity 0→1, translateY 15px→0, 0.6s ease-out
+- **Caption foto 1**: zichtbaar onder foto met fade-in animatie
+- **Chapter titles fade-in**: opacity 0→1, translateY 20px→0, 0.8s ease-out
 - **Photo-block gap**: 0 (overschrijft desktop 1.5rem), caption margin-top: 0.7rem
 - **Highlighted photos**: foto boven, panel onder (verticaal gestapeld)
 - **Achtergronden**: verborgen (::before/::after op intro-photo en intro-chapter)
 - **Deel 1 chapter**: 100svh, gradient achtergrond, verkort intro tekst (.desktop-only)
 - **Insert panels**:
-  - Kaart: zoom 11, statistieken 2 kolommen
-  - Timeline: periodes 1 en 3 zichtbaar (.desktop-only op 2 en 4)
-  - Uit het dal: foto 280px, retail-leegstand en bevolkingstrend verborgen (.desktop-only)
-  - Als expositie: 100% breedte, foto grid 95vw gecentreerd
+  - Kaart mijnstreek: zoom 11, statistieken 2 kolommen
+  - Het grote slopen: touch support voor kaart slider
+  - Uit het dal: foto 100% breedte, langzamere fade-out (1.5s)
+  - Als expositie: oranje achtergrond (part 1 accent), 100% breedte
+- **Story end divider**: `* * *` gecentreerd tussen foto 65 en "Als expositie" insert
 - **Chapter panels**: 85svh min-height, tekst links uitgelijnd
 - **End panel**: volle breedte, sluit direct aan op laatste insert

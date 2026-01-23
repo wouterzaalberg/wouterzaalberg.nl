@@ -944,12 +944,26 @@
 }
 .tdmv-insert.part-3 {
     background: var(--tdmv-part3-accent);
-    transition: opacity 0.8s ease, background 0.8s ease;
+    transition: opacity 1.5s ease, background 1.5s ease;
 }
 
 .tdmv-insert.part-3.bg-fade-out {
     opacity: 0;
     pointer-events: none;
+}
+
+/* Story end divider */
+.tdmv-story-end {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 4rem 2rem;
+    font-family: 'Scala Sans', sans-serif;
+    font-size: 1.5rem;
+    letter-spacing: 0.5em;
+    color: var(--tdmv-text-muted);
+    background: var(--tdmv-bg);
 }
 
 /* Uit het dal insert layout - 3 rijen */
@@ -1314,6 +1328,7 @@
     width: auto;
     min-width: auto;
     margin-right: -12rem; /* Remove gap to end panel */
+    background: var(--tdmv-part1-accent) !important; /* Oranje - suggereert breuk/postscriptum */
 }
 
 .tdmv-media-content {
@@ -2260,11 +2275,12 @@
     }
 
     .tdmv-dust-overlay {
-        display: none;
+        display: block;
+        opacity: 0.5; /* Iets subtieler op mobiel */
     }
 
     .tdmv-dust-container {
-        display: none;
+        display: block;
     }
 
     /* Hide desktop-only content */
@@ -2309,7 +2325,7 @@
     }
 
     .tdmv-title {
-        font-size: 2.8rem;
+        font-size: 3.5rem;
         line-height: 1.1;
     }
 
@@ -2355,12 +2371,21 @@
         height: auto;
     }
 
-    .tdmv-intro-photo .tdmv-caption {
-        position: relative;
+    .tdmv-intro-photo > .tdmv-caption {
+        display: block !important;
+        position: relative !important;
+        top: auto !important;
+        bottom: auto !important;
+        left: auto !important;
+        right: auto !important;
         margin-top: 0.75rem;
         padding: 0.75rem 1.5rem 1rem;
         max-width: 100%;
+        width: 100%;
         background: transparent;
+        border-top: 2px solid var(--tdmv-part1-accent);
+        border-left: none;
+        /* Animatie via .visible class en IntersectionObserver */
     }
 
     /* Intro Chapter (Deel 1 in descent) */
@@ -2414,6 +2439,14 @@
 
     .tdmv-chapter-title {
         font-size: 1.8rem;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    }
+
+    .tdmv-chapter-title.visible {
+        opacity: 1;
+        transform: translateY(0);
     }
 
     .tdmv-chapter-period {
@@ -2750,7 +2783,8 @@
     }
 
     .tdmv-uithetdal-photo-small {
-        max-width: 280px;
+        max-width: 100%;
+        width: 100%;
     }
 
     .tdmv-uithetdal-caption {

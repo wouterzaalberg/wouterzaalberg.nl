@@ -870,6 +870,9 @@
                 </div>
             </div>
 
+            <!-- Story end divider -->
+            <div class="tdmv-story-end">* * *</div>
+
             <!-- Insert: Als expositie en in de media -->
             <div class="tdmv-insert part-3" data-section="insert">
                 <div class="tdmv-media-content">
@@ -1202,9 +1205,9 @@
             const compareLine = mapCompare.querySelector('.map-compare-line');
             const mapLabel = document.getElementById('mapCompareLabel');
 
-            mapCompare.addEventListener('mousemove', (e) => {
+            function updateMapSlider(clientX) {
                 const rect = mapCompare.getBoundingClientRect();
-                const x = e.clientX - rect.left;
+                const x = clientX - rect.left;
                 const percentage = (x / rect.width) * 100;
                 const clampedPercentage = Math.max(0, Math.min(100, percentage));
 
@@ -1221,13 +1224,42 @@
                 } else {
                     mapLabel.classList.remove('visible');
                 }
-            });
+            }
 
-            // Reset to center on mouse leave
-            mapCompare.addEventListener('mouseleave', () => {
+            function resetMapSlider() {
                 mapBefore.style.clipPath = 'inset(0 50% 0 0)';
                 compareLine.style.left = '50%';
                 mapLabel.classList.remove('visible');
+            }
+
+            // Mouse events (desktop)
+            mapCompare.addEventListener('mousemove', (e) => {
+                updateMapSlider(e.clientX);
+            });
+
+            mapCompare.addEventListener('mouseleave', () => {
+                resetMapSlider();
+            });
+
+            // Touch events (mobile)
+            let isTouching = false;
+
+            mapCompare.addEventListener('touchstart', (e) => {
+                isTouching = true;
+                e.preventDefault();
+                updateMapSlider(e.touches[0].clientX);
+            }, { passive: false });
+
+            mapCompare.addEventListener('touchmove', (e) => {
+                if (isTouching) {
+                    e.preventDefault();
+                    updateMapSlider(e.touches[0].clientX);
+                }
+            }, { passive: false });
+
+            mapCompare.addEventListener('touchend', () => {
+                isTouching = false;
+                // Niet resetten op mobiel, zodat gebruiker resultaat kan zien
             });
         }
 
@@ -1483,6 +1515,31 @@
             }
         });
 
+        // Mobile: stop all dust after scrolling past intro photo
+        if (isMobile) {
+            const introPhoto = document.querySelector('.tdmv-intro-photo');
+            let dustStoppedOnMobile = false;
+
+            const mobileIntroObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (!entry.isIntersecting && !dustStoppedOnMobile) {
+                        // Intro photo is out of view, stop all dust
+                        dustStoppedOnMobile = true;
+                        dustConfigs.forEach(config => {
+                            config.active = false;
+                        });
+                        // Also hide the dust overlay
+                        const dustOverlay = document.getElementById('dustOverlay');
+                        if (dustOverlay) dustOverlay.classList.remove('active');
+                    }
+                });
+            }, { threshold: 0 });
+
+            if (introPhoto) {
+                mobileIntroObserver.observe(introPhoto);
+            }
+        }
+
         // Part 1 dust overlay and background - track when in part 1 photos (2-19)
         const dustOverlay = document.getElementById('dustOverlay');
         const part1Bg = document.getElementById('part1Bg');
@@ -1646,6 +1703,23 @@
 
             captions.forEach(caption => {
                 captionObserver.observe(caption);
+            });
+
+            // Chapter titles fade-in
+            const chapterTitles = document.querySelectorAll('.tdmv-chapter-title');
+            const titleObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, {
+                threshold: 0.3,
+                rootMargin: '0px 0px -50px 0px'
+            });
+
+            chapterTitles.forEach(title => {
+                titleObserver.observe(title);
             });
         }
 
