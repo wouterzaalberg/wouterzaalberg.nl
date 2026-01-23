@@ -3603,31 +3603,64 @@
 
             sectionNames.forEach(name => sectionObserver.observe(name));
 
-            // Touch-based photo popup
+            // Touch-based photo popup (alleen voor kleine foto's, met scroll-detectie)
             const popup = document.getElementById('mobilePhotoPopup');
             const popupImg = popup.querySelector('img');
 
             // Selecteer alle kleine foto's in grids en rijen
             const popupPhotos = mobileContent.querySelectorAll('.mobile-photo-row img, [class*="-grid"] img');
+            const MOVE_THRESHOLD = 10; // pixels - beweging groter dan dit is scrollen
+            const WIDTH_THRESHOLD = 0.9; // 90vw - foto's breder dan dit krijgen geen popup
 
             popupPhotos.forEach(img => {
+                let touchStartX = 0;
+                let touchStartY = 0;
+                let isTap = true;
+
                 img.addEventListener('touchstart', (e) => {
-                    e.preventDefault();
-                    popupImg.src = img.src;
-                    popup.classList.add('active');
-                }, { passive: false });
+                    // Check of foto kleiner is dan 90vw
+                    const imgWidth = img.getBoundingClientRect().width;
+                    const viewportWidth = window.innerWidth;
+                    if (imgWidth >= viewportWidth * WIDTH_THRESHOLD) {
+                        return; // Foto is al groot genoeg, geen popup nodig
+                    }
+
+                    touchStartX = e.touches[0].clientX;
+                    touchStartY = e.touches[0].clientY;
+                    isTap = true;
+                }, { passive: true });
+
+                img.addEventListener('touchmove', (e) => {
+                    if (!isTap) return;
+
+                    const moveX = Math.abs(e.touches[0].clientX - touchStartX);
+                    const moveY = Math.abs(e.touches[0].clientY - touchStartY);
+
+                    // Als beweging groter is dan threshold, is het scrollen
+                    if (moveX > MOVE_THRESHOLD || moveY > MOVE_THRESHOLD) {
+                        isTap = false;
+                    }
+                }, { passive: true });
 
                 img.addEventListener('touchend', () => {
-                    popup.classList.remove('active');
+                    // Alleen popup tonen bij echte tap (geen scroll)
+                    if (isTap) {
+                        const imgWidth = img.getBoundingClientRect().width;
+                        const viewportWidth = window.innerWidth;
+                        if (imgWidth < viewportWidth * WIDTH_THRESHOLD) {
+                            popupImg.src = img.src;
+                            popup.classList.add('active');
+                        }
+                    }
                 });
 
                 img.addEventListener('touchcancel', () => {
-                    popup.classList.remove('active');
+                    isTap = false;
                 });
             });
 
-            // Sluit popup ook bij touch buiten de foto
-            popup.addEventListener('touchend', () => {
+            // Sluit popup bij touch
+            popup.addEventListener('touchstart', () => {
                 popup.classList.remove('active');
             });
         }
