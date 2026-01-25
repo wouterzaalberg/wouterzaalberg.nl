@@ -135,45 +135,45 @@ img {
     position: absolute;
     top: 12vh;
     left: 60%;
-    width: fit-content;
+    width: 20%;
     z-index: 10;
     background-color: rgba(255, 255, 255, 0.75);
     padding: 2rem;
-    box-sizing: content-box;
+    box-sizing: border-box;
     max-height: 85vh;
     overflow-y: auto;
 }
 
-/* Desktop klein 768-1400px - uniforme schaling voor alle tekstvakken */
+/* Desktop klein 768-1400px - alleen tekst verkleinen, positie blijft gelijk */
 @media (max-width: 1400px) and (min-width: 768px) {
     .hero-overlay-content,
     .about-text-overlay,
     .work-text-overlay,
     .contact-text-overlay {
-        top: clamp(4vh, 8vh, 12vh);
-        left: clamp(50%, 40% + 1.4vw, 60%);
-        padding: clamp(1rem, 2vh, 2rem);
+        top: 8vh;
+        width: 25%;
+        padding: 1.5rem;
     }
 
     .menu-section {
-        margin-bottom: clamp(1rem, 2vh, 2rem);
+        margin-bottom: 1.5rem;
     }
 
     .menu-heading {
-        font-size: clamp(0.7rem, 1.1vh, 0.95rem);
+        font-size: 0.8rem;
     }
 
     .menu-list a {
-        font-size: clamp(0.8rem, 1.3vh, 1.05rem);
+        font-size: 0.9rem;
     }
 
     .hero-tagline,
     .hero-tagline-italic {
-        font-size: clamp(1.4rem, 3vh, 2.2rem);
+        font-size: 1.6rem;
     }
 
     .hero-tagline-italic {
-        margin-bottom: clamp(1rem, 2vh, 2rem);
+        margin-bottom: 1.5rem;
     }
 }
 
@@ -385,10 +385,11 @@ img {
     position: absolute;
     top: 12vh;
     left: 60%;
+    width: 20%;
     z-index: 10;
     background-color: rgba(255, 255, 255, 0.75);
     padding: 2rem;
-    box-sizing: content-box;
+    box-sizing: border-box;
     max-height: 85vh;
     overflow-y: auto;
 }
@@ -702,10 +703,11 @@ img {
     position: absolute;
     top: 12vh;
     left: 60%;
+    width: 20%;
     z-index: 10;
     background-color: rgba(255, 255, 255, 0.75);
     padding: 2rem;
-    box-sizing: content-box;
+    box-sizing: border-box;
     max-height: 85vh;
     overflow-y: auto;
 }
@@ -934,10 +936,11 @@ img {
     position: absolute;
     top: 12vh;
     left: 60%;
+    width: 20%;
     z-index: 10;
     background-color: rgba(255, 255, 255, 0.75);
     padding: 2rem;
-    box-sizing: content-box;
+    box-sizing: border-box;
     max-height: 85vh;
     overflow-y: auto;
 }
