@@ -741,6 +741,25 @@
             // Start rotatie
             setInterval(rotateMobileHero, rotationInterval);
         }
+
+        // Synchroniseer tekstvak breedtes met sectie 1 (alleen desktop)
+        function syncOverlayWidths() {
+            if (window.innerWidth <= 767) return; // Skip op mobiel
+
+            const heroOverlay = document.querySelector('.hero-overlay-content');
+            const otherOverlays = document.querySelectorAll('.about-text-overlay, .work-text-overlay, .contact-text-overlay');
+
+            if (heroOverlay && otherOverlays.length > 0) {
+                const heroWidth = heroOverlay.offsetWidth;
+                otherOverlays.forEach(overlay => {
+                    overlay.style.width = heroWidth + 'px';
+                });
+            }
+        }
+
+        // Voer uit na laden en bij resize
+        window.addEventListener('load', syncOverlayWidths);
+        window.addEventListener('resize', syncOverlayWidths);
     </script>
 </body>
 </html>

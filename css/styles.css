@@ -135,7 +135,7 @@ img {
     position: absolute;
     top: 12vh;
     left: 60%;
-    width: 20%;
+    width: fit-content;
     z-index: 10;
     background-color: rgba(255, 255, 255, 0.75);
     padding: 2rem;
@@ -385,7 +385,6 @@ img {
     position: absolute;
     top: 12vh;
     left: 60%;
-    width: 20%;
     z-index: 10;
     background-color: rgba(255, 255, 255, 0.75);
     padding: 2rem;
@@ -703,7 +702,6 @@ img {
     position: absolute;
     top: 12vh;
     left: 60%;
-    width: 20%;
     z-index: 10;
     background-color: rgba(255, 255, 255, 0.75);
     padding: 2rem;
@@ -936,7 +934,6 @@ img {
     position: absolute;
     top: 12vh;
     left: 60%;
-    width: 20%;
     z-index: 10;
     background-color: rgba(255, 255, 255, 0.75);
     padding: 2rem;
