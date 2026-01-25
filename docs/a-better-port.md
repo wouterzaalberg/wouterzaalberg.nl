@@ -34,6 +34,7 @@ CSS: `css/a-better-port.css`
 - Delta threshold: 50px om scroll te triggeren
 - Cooldown: 500ms tussen scrolls
 - Queue-based: meerdere scrolls worden niet gestapeld
+- Map interlude wheel handler: zelfde threshold/momentum logica als hoofdscroll
 
 ## Achtergrond Systeem
 
@@ -116,6 +117,15 @@ CSS: `css/a-better-port.css`
 - Titel: "De Haven in Beeld"
 - Subtitel: "Klik op een locatie om de foto te zien"
 - Klikbare "Scroll voor meer" knop
+- **< 1400px**: links gepositioneerd en links uitgelijnd (voorkomt marker overlap)
+
+## Responsive - Small Desktop (768-1400px)
+- Sustainability chart bars: 20px hoogte
+- Map overlay: links uitgelijnd
+
+## Responsive - Kleine hoogte (max-height 1000px)
+- Sustainability chart bars: 16px hoogte
+- Kleinere gaps (0.2rem) en font-size (0.8rem)
 
 ## Responsive (< 767px)
 - Verticaal scrollen
