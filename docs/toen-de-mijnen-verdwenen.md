@@ -41,9 +41,10 @@ Font: Adobe Typekit Chloe (`https://use.typekit.net/qwc4lnx.css`)
 - Verticale slide (1.2s) simuleert afdaling
 
 ## Achtergronden
-- Foto 1: `mijngang.jpg` (4% opacity)
-- Deel 1 chapter: `achtergrond.jpg` (10% opacity)
+- Foto 1: achtergrond uitgeschakeld (`display: none`)
+- Deel 1 chapter: `achtergrond.jpg` (10% opacity), zoom effect (scale 1.03 → 1.18 bij descent)
 - Faden uit via `.bg-hidden` class
+- Dust particles: z-index 1 (boven dark overlay)
 
 ## Interactieve Kaart (Leaflet)
 - Insert panel na foto 5: "De mijnstreek"
@@ -61,9 +62,11 @@ Font: Adobe Typekit Chloe (`https://use.typekit.net/qwc4lnx.css`)
 | Als expositie en in de media | 3 | - |
 
 ### "Uit het dal" details
-- Foto 550px breed
-- Statistieken: uitkeringen, gezondheid, arbeidsparticipatie, etc.
-- Count-up animatie, bar charts
+- Foto 550px breed, bijschrift "Foto Ron Meyer"
+- Statistieken: uitkeringen, gezondheid, arbeidsparticipatie, woningwaarde
+- Demografische data: leeftijdsgroepen, migratieachtergrond
+- Count-up animatie met data-prefix support (voor € teken)
+- Bar charts
 
 ## Foto Groottes
 - Standaard: 70vh
@@ -87,6 +90,17 @@ Font: Adobe Typekit Chloe (`https://use.typekit.net/qwc4lnx.css`)
 ## Soundscape knoppen
 - **"Zet soundscape aan"**: onder introtekst in hero panel, gecentreerd
 - **Aan/uit toggle**: fixed positie rechtsonder, verschijnt bij foto 2, verdwijnt bij terugscrollen naar intro
+
+## Responsive - Small Desktop (768-900px)
+- **Hero**: kleinere gap, padding, title (clamp 3.5-5rem), text width 240px
+- **Hero alignment**: centered met soundscape knop absoluut gepositioneerd
+- **Highlighted panels**: zelfde hoogte als foto's (70vh), smaller width (180px)
+- **Foto's en captions**: max-width calc(100vw - 4rem)
+- **Mijnstreek insert**: 30vw grid kolommen, 50vh map hoogte
+
+## Responsive - Small Height (max-height 650px)
+- **Mijnstreek insert**: 28vw grid, 45vh map, kleinere fonts en spacing
+- **Chapter panels**: kleinere padding en fonts
 
 ## Responsive (< 767px)
 - **Verticaal scrollen** (geen horizontaal)

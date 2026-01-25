@@ -659,13 +659,19 @@
                         <div class="tdmv-uithetdal-row row-1">
                             <div class="tdmv-uithetdal-photo-small anim-item" style="--anim-delay: 0.1s;">
                                 <img src="toen-de-mijnen-verdwenen/uithetdal.jpg" alt="Uit het dal" loading="lazy">
-                                <div class="tdmv-uithetdal-caption">De goedkope facade van een winkelpand in het centrum wordt afgebroken en de oude architectuur komt langzaam tevoorschijn.</div>
+                                <div class="tdmv-uithetdal-caption">De goedkope facade van een winkelpand in het centrum wordt afgebroken en de oude architectuur komt langzaam tevoorschijn. <span style="opacity: 0.6;">Foto Ron Meyer</span></div>
                             </div>
                             <div class="tdmv-parkstad-header anim-item" style="--anim-delay: 0.2s;">
                                 <div class="tdmv-parkstad-intro">De stand van Heerlen en omstreken:</div>
                                 <div class="tdmv-parkstad-population">255.600</div>
                                 <div class="tdmv-parkstad-sublabel">inwoners in Stadsregio Parkstad (2022)</div>
                                 <div class="tdmv-parkstad-gemeenten">Beekdaelen · Brunssum · Heerlen · Kerkrade · Landgraaf · Simpelveld · Voerendaal</div>
+                                <div class="tdmv-parkstad-demographics">
+                                    <span>0-19 jaar: 18%</span>
+                                    <span>20-64 jaar: 56%</span>
+                                    <span>65+: 26%</span>
+                                    <span>Migratieachtergrond: 27%</span>
+                                </div>
                             </div>
                         </div>
 
@@ -767,7 +773,7 @@
                             <div class="tdmv-parkstad-stat anim-item" style="--anim-delay: 0.9s;">
                                 <div class="tdmv-parkstad-stat-label">Gem. woningwaarde</div>
                                 <div class="tdmv-parkstad-single">
-                                    <span class="tdmv-parkstad-number">€ <span class="count-up" data-value="227000" data-format="thousands">0</span></span>
+                                    <span class="tdmv-parkstad-number count-up" data-value="227000" data-format="thousands" data-prefix="€ ">€ 0</span>
                                     <span class="tdmv-parkstad-unit">NL gemiddelde: € 420.000</span>
                                 </div>
                             </div>
@@ -1135,6 +1141,7 @@
                         setTimeout(() => {
                             countUpElements.forEach(el => {
                                 const targetValue = parseFloat(el.dataset.value);
+                                const prefix = el.dataset.prefix || '';
                                 const suffix = el.dataset.suffix || '';
                                 const format = el.dataset.format;
                                 const duration = 1500;
@@ -1149,11 +1156,11 @@
                                     const currentValue = targetValue * easeProgress;
 
                                     if (format === 'thousands') {
-                                        el.textContent = Math.round(currentValue).toLocaleString('nl-NL') + suffix;
+                                        el.textContent = prefix + Math.round(currentValue).toLocaleString('nl-NL') + suffix;
                                     } else if (suffix === '%') {
-                                        el.textContent = currentValue.toFixed(1).replace('.', ',') + suffix;
+                                        el.textContent = prefix + currentValue.toFixed(1).replace('.', ',') + suffix;
                                     } else {
-                                        el.textContent = Math.round(currentValue) + suffix;
+                                        el.textContent = prefix + Math.round(currentValue) + suffix;
                                     }
 
                                     if (progress < 1) {
