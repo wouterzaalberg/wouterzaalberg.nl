@@ -73,6 +73,7 @@ CSS: `css/a-better-port.css`
 - `size-full`: 100vh
 - Padding: 10rem tussen foto's
 - Foto paren: 3+4, 11+12, 13+14, 15+16, 21+22, 32+33, 38+39
+- **Foto paren responsive**: alleen verkleind (55vh/50vh) bij lage hoogte EN smalle aspect ratio (< 4:3)
 
 ## Info Buttons
 - Wit, rond, italic "i"
