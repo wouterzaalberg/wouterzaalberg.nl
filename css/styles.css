@@ -136,6 +136,7 @@ img {
     top: 12vh;
     left: 60%;
     width: 20%;
+    min-width: 280px;
     z-index: 10;
     background-color: rgba(255, 255, 255, 0.75);
     padding: 2rem;
@@ -144,14 +145,16 @@ img {
     overflow-y: auto;
 }
 
-/* Desktop klein 768-1400px - alleen tekst verkleinen, positie blijft gelijk */
+/* Desktop klein 768-1400px - tekstvakken breder voor leesbaarheid */
 @media (max-width: 1400px) and (min-width: 768px) {
     .hero-overlay-content,
     .about-text-overlay,
     .work-text-overlay,
     .contact-text-overlay {
         top: 8vh;
-        width: 25%;
+        left: 50%;
+        width: 35%;
+        min-width: 280px;
         padding: 1.5rem;
     }
 
@@ -386,6 +389,7 @@ img {
     top: 12vh;
     left: 60%;
     width: 20%;
+    min-width: 280px;
     z-index: 10;
     background-color: rgba(255, 255, 255, 0.75);
     padding: 2rem;
@@ -704,6 +708,7 @@ img {
     top: 12vh;
     left: 60%;
     width: 20%;
+    min-width: 280px;
     z-index: 10;
     background-color: rgba(255, 255, 255, 0.75);
     padding: 2rem;
@@ -937,6 +942,7 @@ img {
     top: 12vh;
     left: 60%;
     width: 20%;
+    min-width: 280px;
     z-index: 10;
     background-color: rgba(255, 255, 255, 0.75);
     padding: 2rem;
