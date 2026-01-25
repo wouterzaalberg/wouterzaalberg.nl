@@ -2627,12 +2627,35 @@
             const shipEl = document.getElementById('shipCanvas');
             const interludeOverlay = document.getElementById('mapInterludeOverlay');
 
-            // Wheel handler for when map is elevated
+            // Wheel handler for when map is elevated - use same threshold logic as main handler
             function handleInterludeWheel(e) {
                 e.preventDefault();
                 e.stopPropagation();
+
+                const delta = Math.abs(e.deltaY);
                 const direction = e.deltaY > 0 ? 1 : -1;
-                triggerScroll(direction);
+
+                if (isAnimating) return;
+
+                // Momentum detection: ignore decreasing deltas (trackpad coasting)
+                if (lastDelta > 0 && delta < lastDelta * MOMENTUM_THRESHOLD) {
+                    lastDelta = delta;
+                    return;
+                }
+
+                // Reset if direction changes
+                if (scrollDirection !== 0 && direction !== scrollDirection) {
+                    accumulatedDelta = 0;
+                }
+
+                scrollDirection = direction;
+                accumulatedDelta += delta;
+                lastDelta = delta;
+
+                // Trigger scroll when threshold reached
+                if (accumulatedDelta >= DELTA_THRESHOLD) {
+                    triggerScroll(direction);
+                }
             }
 
             // Zoom controls

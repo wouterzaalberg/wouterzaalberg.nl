@@ -2307,6 +2307,28 @@
     .end-panel {
         min-width: 450px !important;
     }
+
+    /* Map interlude overlay - links positioneren zodat markers niet overlappen */
+    .abp-map-interlude-overlay {
+        left: 3rem;
+        transform: none;
+        text-align: left;
+    }
+}
+
+/* Kleinere hoogte schermen (700-1000px) - bars inkrimpen */
+@media (min-width: 768px) and (max-height: 1000px) {
+    .abp-transition-chart.abp-main-chart .abp-transition-bar-container {
+        height: 16px;
+    }
+
+    .abp-transition-chart.abp-main-chart .abp-transition-bars {
+        gap: 0.2rem;
+    }
+
+    .abp-transition-chart.abp-main-chart .abp-transition-year {
+        font-size: 0.8rem;
+    }
 }
 
 /* ========================================
