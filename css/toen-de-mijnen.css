@@ -2669,6 +2669,11 @@
         line-height: 1.7;
     }
 
+    .tdmv-hero-text .tdmv-soundscape-hint {
+        position: static;
+        margin-top: 1.5rem;
+    }
+
     .tdmv-descent-arrow {
         display: none;
     }

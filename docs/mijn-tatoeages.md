@@ -51,11 +51,30 @@
 - Fade-in na 2s, fade-out na eerste symbool
 
 ## Responsive
-- **Desktop**: Vloeiende schaling via `clamp()` - geen vaste breakpoints voor afmetingen
-- **< 1400px**: "Lees meer" knop na 2e alinea (verbergt overige tekst)
+- **Desktop (≥ 1400px)**: Vloeiende schaling via `clamp()` - foto's naast tekstpanel
+- **768-1399px**: Aangepaste layout (zie onder)
 - **< 1200px**: Kleinere gap (`0.2rem`)
 - **< 1024px**: Kleinere fontsizes in tekstpanel
 - **< 767px**: Mobiele layout (zie onder)
+
+## Tablet/Small Desktop (768-1399px)
+
+### Story Layout
+- Foto's naast elkaar (horizontaal), tekst eronder
+- Beide foto's: `height: 45vh`
+- Tekst in 3 kolommen (`column-count: 3`)
+- Persoonsnaam verborgen
+
+### Breedte Synchronisatie (JavaScript)
+- ResizeObserver meet foto breedtes
+- Tekstpanel krijgt `width = foto1 + foto2 + gap (16px)`
+- Zorgt dat tekst exact zo breed is als de foto's samen
+
+### CSS Structuur
+- `.tattoo-story`: `display: flex`, `flex-wrap: wrap`, `justify-content: center`
+- `.story-photo`: `display: block` (geen flex-direction)
+- `.story-text-panel`: `flex-basis: 100%` (forceert wrap naar nieuwe regel)
+- `.story-text-content`: `column-count: 3`, `column-gap: 2rem`
 
 ## Mobiel (< 767px)
 

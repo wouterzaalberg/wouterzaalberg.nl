@@ -386,55 +386,151 @@
             color: rgba(255, 255, 255, 1);
         }
 
-        /* Tablet / Medium screens - clamp() handles sizing, only adjust gaps */
-        @media (max-width: 1200px) {
-            .tattoo-story,
+        /* >= 1400px: Tekst uitgelijnd aan bovenkant van foto's */
+        @media (min-width: 1400px) {
+            .tattoo-story {
+                align-items: flex-start;
+                padding-top: 18vh;
+            }
+
+            .story-photo {
+                height: auto;
+            }
+
+            .story-photo img {
+                height: 60vh;
+            }
+
+            .story-text-panel {
+                height: auto;
+                max-height: 65vh;
+                padding-top: 0;
+                overflow-y: auto;
+            }
+
             .tattoo-intro {
-                gap: 0.2rem;
+                align-items: flex-start;
+                padding-top: 18vh;
+            }
+
+            .intro-photo-large {
+                height: auto;
+            }
+
+            .intro-photo-large img {
+                height: 60vh;
+            }
+
+            .intro-panel {
+                height: auto;
+                max-height: 65vh;
+                overflow-y: auto;
             }
         }
 
-        /* Smaller desktop - lees meer functionaliteit */
-        @media (max-width: 1400px) and (min-width: 768px) {
-            .story-text-panel,
-            .intro-panel {
-                width: clamp(340px, 32vw, 520px);
+        /* < 1400px: Foto's naast elkaar, tekst eronder */
+        @media (max-width: 1399px) and (min-width: 768px) {
+            .tattoo-story {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                align-items: flex-start;
+                row-gap: 0;
+                column-gap: 1rem;
+                padding: 6rem 2rem 2rem;
+                width: 100vw;
+                height: auto !important;
+                min-height: auto !important;
+            }
+
+            /* Fotos als flex items - override base column layout */
+            .tattoo-story .story-photo {
+                flex-shrink: 0;
+                display: block !important;
+                height: auto !important;
+            }
+
+            .tattoo-story .story-photo img {
+                width: auto;
+                height: 45vh !important;
+                display: block;
+            }
+
+            .tattoo-story .story-photo .person-name {
+                display: none !important;
+            }
+
+            /* Text panel: volledige breedte om naar volgende regel te gaan */
+            .story-text-panel {
+                flex-basis: 100%;
+                display: flex !important;
+                flex-direction: row !important;
+                justify-content: center !important;
+                align-items: flex-start !important;
+                width: auto !important;
+                height: auto !important;
+                padding: 0 !important;
+                margin: 0.3rem 0 0 0 !important;
+                overflow: visible !important;
+            }
+
+            .story-text-bg,
+            .story-text-panel .scroll-arrow {
+                display: none !important;
+            }
+
+            .story-text-content {
+                position: relative !important;
+                column-count: 3;
+                column-gap: 2rem;
+                max-height: none !important;
+                padding: 0 !important;
+                margin: 0 !important;
+                text-align: left;
+                overflow: visible !important;
+            }
+
+            .story-text-content > *:first-child,
+            .story-text-content h2 {
+                margin-top: 0 !important;
+            }
+
+            .story-text-content h2,
+            .story-text-content h3 {
+                column-span: all;
             }
 
             .story-text-content p:nth-of-type(n+3) {
-                display: none;
-            }
-
-            .story-text-content.expanded p:nth-of-type(n+3) {
                 display: block;
             }
 
             .story-text-content .desktop-read-more {
-                display: inline-block;
-                background: transparent;
-                border: 1px solid rgba(255,255,255,0.3);
-                color: #c9a227;
-                font-family: 'Scala Sans', sans-serif;
-                font-size: 0.7rem;
-                padding: 0.4rem 0.8rem;
-                cursor: pointer;
-                margin-top: 0.8rem;
-                transition: all 0.3s ease;
+                display: none;
             }
 
-            .story-text-content .desktop-read-more:hover {
-                border-color: #c9a227;
-            }
-        }
-
-        /* Smaller tablets */
-        @media (max-width: 1024px) {
-            .story-text-content p {
-                font-size: 0.75rem;
+            /* Intro section */
+            .tattoo-intro {
+                flex-direction: column;
+                align-items: center;
+                padding: 6rem 2rem 3rem;
+                gap: 2rem;
             }
 
-            .story-text-content h3 {
-                font-size: 0.9rem;
+            .intro-photo-large {
+                height: auto;
+                max-height: 50vh;
+            }
+
+            .intro-photo-large img {
+                height: auto;
+                max-height: 50vh;
+                max-width: calc(100vw - 4rem);
+            }
+
+            .intro-panel {
+                width: 100%;
+                max-width: calc(100vw - 4rem);
+                height: auto;
             }
         }
 
@@ -2210,6 +2306,48 @@
             window.addEventListener('scroll', updateProgress);
             updateProgress();
         }
+
+        // Match text panel width to photos (alleen < 1400px)
+        if (window.innerWidth < 1400 && window.innerWidth >= 768) {
+            const resizeObserver = new ResizeObserver(() => {
+                document.querySelectorAll('.tattoo-story').forEach(story => {
+                    const photos = story.querySelectorAll('.story-photo');
+                    const textPanel = story.querySelector('.story-text-panel');
+
+                    if (photos.length >= 2 && textPanel) {
+                        const photo1 = photos[0];
+                        const photo2 = photos[1];
+
+                        // Totale breedte = beide foto's + gap (1rem uit flex gap)
+                        const totalWidth = photo1.offsetWidth + photo2.offsetWidth + 16;
+
+                        const textContent = textPanel.querySelector('.story-text-content');
+                        if (textContent && totalWidth > 100) {
+                            textContent.style.width = totalWidth + 'px';
+                        }
+                    }
+                });
+            });
+
+            // Observe alle foto containers
+            document.querySelectorAll('.tattoo-story .story-photo').forEach(photo => {
+                resizeObserver.observe(photo);
+            });
+        }
+
+        // Bij resize pagina herladen voor juiste breakpoint
+        let currentWidth = window.innerWidth;
+        window.addEventListener('resize', () => {
+            const newWidth = window.innerWidth;
+            const crossedBreakpoint = (currentWidth < 1400 && newWidth >= 1400) ||
+                                       (currentWidth >= 1400 && newWidth < 1400) ||
+                                       (currentWidth < 768 && newWidth >= 768) ||
+                                       (currentWidth >= 768 && newWidth < 768);
+            if (crossedBreakpoint) {
+                location.reload();
+            }
+            currentWidth = newWidth;
+        });
     </script>
 </body>
 </html>
