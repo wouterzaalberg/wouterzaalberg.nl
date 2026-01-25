@@ -130,57 +130,18 @@ img {
     opacity: 1;
 }
 
-/* Hero Overlay Content */
+/* Hero Overlay Content - vloeiende schaling vanaf 768px tot 1400px+ */
 .hero-overlay-content {
     position: absolute;
-    top: 12vh;
-    left: 60%;
+    top: clamp(6vh, 4vh + 0.5vw, 12vh);
+    left: clamp(50%, 42% + 6vw, 60%);
     width: fit-content;
     z-index: 10;
     background-color: rgba(255, 255, 255, 0.75);
-    padding: clamp(1rem, 2.5vh, 2rem);
+    padding: clamp(0.75rem, 0.5rem + 0.8vh + 0.2vw, 2rem);
     box-sizing: content-box;
     max-height: 85vh;
     overflow-y: auto;
-}
-
-/* Desktop klein 768-1400px */
-@media (max-width: 1400px) and (min-width: 768px) {
-    .hero-overlay-content {
-        top: 8vh;
-        left: clamp(50%, 42% + 6vw, 60%);
-        padding: clamp(0.75rem, 2vh, 1.5rem);
-    }
-
-    .hero-tagline,
-    .hero-tagline-italic {
-        font-size: clamp(1.3rem, 2.5vw, 1.8rem);
-    }
-
-    .hero-name {
-        font-size: 0.85rem;
-    }
-
-    .menu-section {
-        margin-bottom: 1.5rem;
-    }
-
-    .menu-heading {
-        font-size: 0.75rem;
-        margin-bottom: 0.5rem;
-    }
-
-    .menu-list a {
-        font-size: 0.85rem;
-    }
-
-    .menu-list li {
-        margin-bottom: 0.3rem;
-    }
-
-    .hero-caption {
-        font-size: 0.85rem;
-    }
 }
 
 /* Mobiel */
@@ -250,12 +211,8 @@ img {
     white-space: nowrap;
 }
 
-/* Desktop groot 1400px+ */
+/* Desktop groot 1400px+ - tekstvakken krijgen fit-content zoals sectie 1 */
 @media (min-width: 1401px) {
-    .hero-overlay-content {
-        top: 12vh;
-    }
-
     .hero-tagline,
     .hero-tagline-italic {
         font-size: 2.2rem;
@@ -264,9 +221,7 @@ img {
     .about-text-overlay,
     .work-text-overlay,
     .contact-text-overlay {
-        top: 12vh;
         width: fit-content;
-        max-width: 20%;
     }
 }
 
@@ -401,12 +356,12 @@ img {
 
 .about-text-overlay {
     position: absolute;
-    top: 12vh;
-    left: 60%;
-    width: 20%;
+    top: clamp(6vh, 4vh + 0.5vw, 12vh);
+    left: clamp(50%, 42% + 6vw, 60%);
+    width: clamp(25%, 22% + 0.4vw, 30%);
     z-index: 10;
     background-color: rgba(255, 255, 255, 0.75);
-    padding: clamp(1rem, 2.5vh, 2rem);
+    padding: clamp(0.75rem, 0.5rem + 0.8vh + 0.2vw, 2rem);
     box-sizing: border-box;
     max-height: 85vh;
     overflow-y: auto;
@@ -423,20 +378,20 @@ img {
 
 .about-heading {
     font-family: 'Scala Sans SC', sans-serif;
-    font-size: clamp(1rem, 2vh, 1.8rem);
+    font-size: clamp(0.9rem, 0.6rem + 0.8vh + 0.3vw, 1.8rem);
     font-weight: 500;
     color: #2d5a27;
-    margin-bottom: clamp(0.75rem, 1.5vh, 1.5rem);
+    margin-bottom: clamp(0.4rem, 0.3rem + 0.8vh + 0.2vw, 1.5rem);
     letter-spacing: 0.05em;
     text-transform: uppercase;
 }
 
 .about-text-overlay p {
     font-family: 'Scala Sans', sans-serif;
-    font-size: clamp(0.75rem, 1.3vh, 1.05rem);
+    font-size: clamp(0.7rem, 0.5rem + 0.5vh + 0.2vw, 1.05rem);
     color: var(--color-black);
     line-height: 1.6;
-    margin-bottom: clamp(0.75rem, 1.5vh, 1.5rem);
+    margin-bottom: clamp(0.4rem, 0.3rem + 0.8vh + 0.2vw, 1.5rem);
 }
 
 .about-caption {
@@ -452,34 +407,14 @@ img {
 /* Desktop groot 1400px+ */
 @media (min-width: 1401px) {
     .about-text-overlay {
-        width: 20%;
+        width: fit-content;
     }
 }
 
-/* Desktop klein 768-1400px */
+/* About caption schaling */
 @media (max-width: 1400px) and (min-width: 768px) {
-    .about-text-overlay {
-        top: 8vh;
-        left: clamp(50%, 42% + 6vw, 60%);
-        width: 30%;
-        background-color: rgba(255, 255, 255, 0.75);
-        padding: clamp(0.75rem, 2vh, 1.5rem);
-        box-sizing: border-box;
-    }
-
-    .about-text-overlay p {
-        font-size: clamp(0.7rem, 1.2vh, 0.8rem);
-        line-height: 1.5;
-        margin-bottom: clamp(0.4rem, 1vh, 0.8rem);
-    }
-
-    .about-heading {
-        font-size: clamp(0.9rem, 1.5vh, 1.1rem);
-        margin-bottom: clamp(0.4rem, 1vh, 0.8rem);
-    }
-
     .about-caption {
-        font-size: 0.85rem;
+        font-size: clamp(0.75rem, 0.5rem + 0.3vw, 1rem);
     }
 }
 
@@ -752,12 +687,12 @@ img {
 
 .work-text-overlay {
     position: absolute;
-    top: 12vh;
-    left: 60%;
-    width: 20%;
+    top: clamp(6vh, 4vh + 0.5vw, 12vh);
+    left: clamp(50%, 42% + 6vw, 60%);
+    width: clamp(25%, 22% + 0.4vw, 30%);
     z-index: 10;
     background-color: rgba(255, 255, 255, 0.75);
-    padding: clamp(1rem, 2.5vh, 2rem);
+    padding: clamp(0.75rem, 0.5rem + 0.8vh + 0.2vw, 2rem);
     box-sizing: border-box;
     max-height: 85vh;
     overflow-y: auto;
@@ -770,24 +705,24 @@ img {
 
 .work-text-overlay h2 {
     font-family: 'Scala Sans SC', sans-serif;
-    font-size: clamp(1.4rem, 2vw, 1.8rem);
+    font-size: clamp(0.9rem, 0.6rem + 0.8vh + 0.3vw, 1.8rem);
     font-weight: 500;
-    margin-bottom: 1rem;
+    margin-bottom: clamp(0.4rem, 0.3rem + 0.5vh + 0.2vw, 1rem);
     letter-spacing: 0.05em;
     text-transform: uppercase;
 }
 
 .work-text-overlay p {
     font-family: 'Scala Sans', sans-serif;
-    font-size: clamp(0.82rem, 1.15vw, 1.02rem);
-    line-height: 1.75;
+    font-size: clamp(0.65rem, 0.5rem + 0.4vh + 0.15vw, 1.02rem);
+    line-height: 1.6;
 }
 
 .work-text-overlay .logo-heading {
-    margin-top: 2rem;
-    margin-bottom: 1.5rem;
+    margin-top: clamp(1rem, 0.5rem + 1vh + 0.3vw, 2rem);
+    margin-bottom: clamp(0.5rem, 0.3rem + 0.8vh + 0.2vw, 1.5rem);
     font-family: 'Scala Sans', sans-serif;
-    font-size: clamp(0.85rem, 1.2vw, 1.05rem);
+    font-size: clamp(0.65rem, 0.5rem + 0.4vh + 0.15vw, 1.05rem);
     font-style: italic;
 }
 
@@ -805,7 +740,7 @@ img {
 }
 
 .work-text-overlay .logo-item img {
-    max-height: 75px;
+    max-height: clamp(32px, 20px + 3vh + 1vw, 75px);
     width: auto;
     display: block;
 }
@@ -839,46 +774,7 @@ img {
 /* Desktop groot 1400px+ */
 @media (min-width: 1401px) {
     .work-text-overlay {
-        width: 20%;
-    }
-}
-
-/* Desktop klein 768-1400px */
-@media (max-width: 1400px) and (min-width: 768px) {
-    .work-text-overlay {
-        top: 8vh;
-        left: clamp(50%, 42% + 6vw, 60%);
-        width: 30%;
-        padding: clamp(0.75rem, 1.5vh, 1.25rem);
-    }
-
-    .work-text-overlay h2 {
-        font-size: clamp(0.9rem, 1.5vh, 1.1rem);
-        margin-bottom: clamp(0.4rem, 1vh, 0.75rem);
-    }
-
-    .work-text-overlay p {
-        font-size: clamp(0.65rem, 1.1vh, 0.75rem);
-        line-height: 1.4;
-    }
-
-    .work-text-overlay .logo-heading {
-        margin-top: clamp(1rem, 2.5vh, 2rem);
-        margin-bottom: clamp(0.5rem, 1.2vh, 1rem);
-        font-size: clamp(0.65rem, 1.1vh, 0.75rem);
-    }
-
-    .work-text-overlay .logo-item img,
-    .work-text-overlay .logo-item .logo-color {
-        max-height: clamp(24px, 4vh, 32px);
-    }
-
-    .work-text-overlay .logo-grid {
-        gap: 0.15rem;
-    }
-
-    .work-caption {
-        font-size: 0.8rem;
+        width: fit-content;
     }
 }
 
@@ -1031,12 +927,12 @@ img {
 
 .contact-text-overlay {
     position: absolute;
-    top: 12vh;
-    left: 60%;
-    width: 20%;
+    top: clamp(6vh, 4vh + 0.5vw, 12vh);
+    left: clamp(50%, 42% + 6vw, 60%);
+    width: clamp(25%, 22% + 0.4vw, 30%);
     z-index: 10;
     background-color: rgba(255, 255, 255, 0.75);
-    padding: clamp(1rem, 2.5vh, 2rem);
+    padding: clamp(0.75rem, 0.5rem + 0.8vh + 0.2vw, 2rem);
     box-sizing: border-box;
     max-height: 85vh;
     overflow-y: auto;
@@ -1044,9 +940,9 @@ img {
 
 .contact-text-overlay h2 {
     font-family: 'Scala Sans SC', sans-serif;
-    font-size: clamp(1.4rem, 2vw, 1.8rem);
+    font-size: clamp(0.9rem, 0.6rem + 0.8vh + 0.3vw, 1.8rem);
     font-weight: 500;
-    margin-bottom: 1.5rem;
+    margin-bottom: clamp(0.75rem, 0.5rem + 0.8vh + 0.2vw, 1.5rem);
     letter-spacing: 0.05em;
     text-transform: uppercase;
     color: #1a2a3a;
@@ -1054,7 +950,7 @@ img {
 
 .contact-text-overlay p {
     font-family: 'Scala Sans', sans-serif;
-    font-size: clamp(0.85rem, 1.2vw, 1.05rem);
+    font-size: clamp(0.7rem, 0.5rem + 0.5vh + 0.2vw, 1.05rem);
     color: var(--color-black);
     margin-bottom: 0.3rem;
     line-height: 1.6;
@@ -1067,17 +963,17 @@ img {
 }
 
 .contact-form {
-    margin-top: 2rem;
+    margin-top: clamp(0.5rem, 0.3rem + 1vh + 0.3vw, 2rem);
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
+    gap: clamp(0.3rem, 0.2rem + 0.4vh + 0.1vw, 0.75rem);
 }
 
 .contact-form input,
 .contact-form textarea {
     font-family: 'Scala Sans', sans-serif;
-    font-size: 0.9rem;
-    padding: 0.75rem;
+    font-size: clamp(0.7rem, 0.5rem + 0.4vh + 0.15vw, 0.9rem);
+    padding: clamp(0.4rem, 0.3rem + 0.4vh + 0.1vw, 0.75rem);
     border: 1px solid #ccc;
     border-radius: 0;
     background-color: rgba(255, 255, 255, 0.9);
@@ -1100,15 +996,15 @@ img {
 
 .contact-form textarea {
     resize: vertical;
-    min-height: 80px;
+    min-height: clamp(50px, 40px + 4vh, 80px);
 }
 
 .contact-form button {
     font-family: 'Scala Sans SC', sans-serif;
-    font-size: 0.9rem;
+    font-size: clamp(0.7rem, 0.5rem + 0.4vh + 0.15vw, 0.9rem);
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    padding: 0.75rem 1.5rem;
+    padding: clamp(0.4rem, 0.3rem + 0.4vh, 0.75rem) clamp(0.8rem, 0.5rem + 0.8vh, 1.5rem);
     background-color: #1a2a3a;
     color: var(--color-white);
     border: none;
@@ -1124,51 +1020,7 @@ img {
 /* Desktop groot 1400px+ */
 @media (min-width: 1401px) {
     .contact-text-overlay {
-        width: 20%;
-    }
-}
-
-/* Desktop klein 768-1400px */
-@media (max-width: 1400px) and (min-width: 768px) {
-    .contact-text-overlay {
-        top: 8vh;
-        left: clamp(50%, 42% + 6vw, 60%);
-        width: 30%;
-        padding: clamp(0.75rem, 1.5vh, 1.25rem);
-    }
-
-    .contact-text-overlay h2 {
-        font-size: clamp(0.9rem, 1.5vh, 1.1rem);
-        margin-bottom: clamp(0.4rem, 1vh, 0.75rem);
-    }
-
-    .contact-text-overlay p {
-        font-size: clamp(0.65rem, 1.1vh, 0.75rem);
-        line-height: 1.4;
-    }
-
-    .contact-form {
-        margin-top: clamp(0.5rem, 1.2vh, 1rem);
-        gap: clamp(0.2rem, 0.5vh, 0.4rem);
-    }
-
-    .contact-form input,
-    .contact-form textarea {
-        font-size: clamp(0.65rem, 1.1vh, 0.75rem);
-        padding: clamp(0.3rem, 0.7vh, 0.5rem);
-    }
-
-    .contact-form textarea {
-        min-height: clamp(40px, 8vh, 60px);
-    }
-
-    .contact-form button {
-        font-size: clamp(0.65rem, 1.1vh, 0.75rem);
-        padding: clamp(0.3rem, 0.7vh, 0.5rem) clamp(0.5rem, 1vh, 0.8rem);
-    }
-
-    .contact-caption {
-        font-size: 0.8rem;
+        width: fit-content;
     }
 }
 
