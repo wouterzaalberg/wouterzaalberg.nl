@@ -167,6 +167,7 @@ Alle projectpagina's eindigen met end panel:
 ```
 
 ## Notities
+- "lees md" = lees CLAUDE.md (dit bestand)
 - Geen emojis tenzij gevraagd
 - Mobile breakpoint: 767px
 - Lazy loading op afbeeldingen (behalve eerste)

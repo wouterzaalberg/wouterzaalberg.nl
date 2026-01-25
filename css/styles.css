@@ -133,21 +133,23 @@ img {
 /* Hero Overlay Content */
 .hero-overlay-content {
     position: absolute;
-    top: 20%;
+    top: clamp(5%, 12vh, 20%);
     left: 60%;
     width: fit-content;
     z-index: 10;
     background-color: rgba(255, 255, 255, 0.75);
-    padding: 2rem;
+    padding: clamp(1rem, 2.5vh, 2rem);
     box-sizing: content-box;
+    max-height: 85vh;
+    overflow-y: auto;
 }
 
 /* Desktop klein 768-1400px */
 @media (max-width: 1400px) and (min-width: 768px) {
     .hero-overlay-content {
-        top: 10%;
+        top: clamp(3%, 8vh, 10%);
         left: clamp(50%, 42% + 6vw, 60%);
-        padding: 1.5rem;
+        padding: clamp(0.75rem, 2vh, 1.5rem);
     }
 
     .hero-tagline,
@@ -243,7 +245,7 @@ img {
     font-weight: 500;
     font-style: italic;
     line-height: 1.2;
-    margin: 0 0 2rem 0;
+    margin: 0 0 clamp(1rem, 2.5vh, 2rem) 0;
     transition: color 0.5s ease-in-out;
     white-space: nowrap;
 }
@@ -270,7 +272,7 @@ img {
 
 /* Menu Sections */
 .menu-section {
-    margin-bottom: 2rem;
+    margin-bottom: clamp(1rem, 2.5vh, 2rem);
 }
 
 .menu-heading {
@@ -301,7 +303,7 @@ img {
 }
 
 .menu-list li {
-    margin-bottom: 0.4rem;
+    margin-bottom: clamp(0.2rem, 0.5vh, 0.4rem);
 }
 
 .menu-list a {
@@ -399,13 +401,15 @@ img {
 
 .about-text-overlay {
     position: absolute;
-    top: 20%;
+    top: clamp(5%, 12vh, 20%);
     left: 60%;
     width: 20%;
     z-index: 10;
     background-color: rgba(255, 255, 255, 0.75);
-    padding: 2rem;
+    padding: clamp(1rem, 2.5vh, 2rem);
     box-sizing: border-box;
+    max-height: 85vh;
+    overflow-y: auto;
 }
 
 /* Desktop tekst tonen, mobiel verbergen (default) */
@@ -455,23 +459,23 @@ img {
 /* Desktop klein 768-1400px */
 @media (max-width: 1400px) and (min-width: 768px) {
     .about-text-overlay {
-        top: 10%;
+        top: clamp(3%, 8vh, 10%);
         left: clamp(50%, 42% + 6vw, 60%);
         width: 30%;
         background-color: rgba(255, 255, 255, 0.75);
-        padding: 1.5rem;
+        padding: clamp(0.75rem, 2vh, 1.5rem);
         box-sizing: border-box;
     }
 
     .about-text-overlay p {
-        font-size: 0.8rem;
+        font-size: clamp(0.7rem, 1.2vh, 0.8rem);
         line-height: 1.5;
-        margin-bottom: 0.8rem;
+        margin-bottom: clamp(0.4rem, 1vh, 0.8rem);
     }
 
     .about-heading {
-        font-size: 1.1rem;
-        margin-bottom: 0.8rem;
+        font-size: clamp(0.9rem, 1.5vh, 1.1rem);
+        margin-bottom: clamp(0.4rem, 1vh, 0.8rem);
     }
 
     .about-caption {
@@ -748,13 +752,15 @@ img {
 
 .work-text-overlay {
     position: absolute;
-    top: 20%;
+    top: clamp(5%, 12vh, 20%);
     left: 60%;
     width: 20%;
     z-index: 10;
     background-color: rgba(255, 255, 255, 0.75);
-    padding: 2rem;
+    padding: clamp(1rem, 2.5vh, 2rem);
     box-sizing: border-box;
+    max-height: 85vh;
+    overflow-y: auto;
 }
 
 /* Verberg mobiele tekst op desktop */
@@ -840,31 +846,31 @@ img {
 /* Desktop klein 768-1400px */
 @media (max-width: 1400px) and (min-width: 768px) {
     .work-text-overlay {
-        top: 8%;
+        top: clamp(3%, 6vh, 8%);
         left: clamp(50%, 42% + 6vw, 60%);
         width: 30%;
-        padding: 1.25rem;
+        padding: clamp(0.75rem, 1.5vh, 1.25rem);
     }
 
     .work-text-overlay h2 {
-        font-size: 1.1rem;
-        margin-bottom: 0.75rem;
+        font-size: clamp(0.9rem, 1.5vh, 1.1rem);
+        margin-bottom: clamp(0.4rem, 1vh, 0.75rem);
     }
 
     .work-text-overlay p {
-        font-size: 0.75rem;
+        font-size: clamp(0.65rem, 1.1vh, 0.75rem);
         line-height: 1.4;
     }
 
     .work-text-overlay .logo-heading {
-        margin-top: 2rem;
-        margin-bottom: 1rem;
-        font-size: 0.75rem;
+        margin-top: clamp(1rem, 2.5vh, 2rem);
+        margin-bottom: clamp(0.5rem, 1.2vh, 1rem);
+        font-size: clamp(0.65rem, 1.1vh, 0.75rem);
     }
 
     .work-text-overlay .logo-item img,
     .work-text-overlay .logo-item .logo-color {
-        max-height: 32px;
+        max-height: clamp(24px, 4vh, 32px);
     }
 
     .work-text-overlay .logo-grid {
@@ -1025,13 +1031,15 @@ img {
 
 .contact-text-overlay {
     position: absolute;
-    top: 20%;
+    top: clamp(5%, 12vh, 20%);
     left: 60%;
     width: 20%;
     z-index: 10;
     background-color: rgba(255, 255, 255, 0.75);
-    padding: 2rem;
+    padding: clamp(1rem, 2.5vh, 2rem);
     box-sizing: border-box;
+    max-height: 85vh;
+    overflow-y: auto;
 }
 
 .contact-text-overlay h2 {
@@ -1123,40 +1131,40 @@ img {
 /* Desktop klein 768-1400px */
 @media (max-width: 1400px) and (min-width: 768px) {
     .contact-text-overlay {
-        top: 8%;
+        top: clamp(3%, 6vh, 8%);
         left: clamp(50%, 42% + 6vw, 60%);
         width: 30%;
-        padding: 1.25rem;
+        padding: clamp(0.75rem, 1.5vh, 1.25rem);
     }
 
     .contact-text-overlay h2 {
-        font-size: 1.1rem;
-        margin-bottom: 0.75rem;
+        font-size: clamp(0.9rem, 1.5vh, 1.1rem);
+        margin-bottom: clamp(0.4rem, 1vh, 0.75rem);
     }
 
     .contact-text-overlay p {
-        font-size: 0.75rem;
+        font-size: clamp(0.65rem, 1.1vh, 0.75rem);
         line-height: 1.4;
     }
 
     .contact-form {
-        margin-top: 1rem;
-        gap: 0.4rem;
+        margin-top: clamp(0.5rem, 1.2vh, 1rem);
+        gap: clamp(0.2rem, 0.5vh, 0.4rem);
     }
 
     .contact-form input,
     .contact-form textarea {
-        font-size: 0.75rem;
-        padding: 0.5rem;
+        font-size: clamp(0.65rem, 1.1vh, 0.75rem);
+        padding: clamp(0.3rem, 0.7vh, 0.5rem);
     }
 
     .contact-form textarea {
-        min-height: 60px;
+        min-height: clamp(40px, 8vh, 60px);
     }
 
     .contact-form button {
-        font-size: 0.75rem;
-        padding: 0.5rem 0.8rem;
+        font-size: clamp(0.65rem, 1.1vh, 0.75rem);
+        padding: clamp(0.3rem, 0.7vh, 0.5rem) clamp(0.5rem, 1vh, 0.8rem);
     }
 
     .contact-caption {
