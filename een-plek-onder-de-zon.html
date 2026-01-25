@@ -120,6 +120,13 @@
         let currentIndex = 0;
         let isAnimating = false;
 
+        // Prevent middle-click autoscroll (browser's drag-to-scroll feature)
+        container.addEventListener('mousedown', (e) => {
+            if (e.button === 1) { // Middle mouse button
+                e.preventDefault();
+            }
+        });
+
         // Improved scroll handling - works for both mouse and trackpad
         // See docs/horizontal-scroll.md for documentation
         let accumulatedDelta = 0;

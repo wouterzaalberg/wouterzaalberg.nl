@@ -103,10 +103,12 @@ Portfolio website voor fotograaf Wouter Zaalberg. Fotografieprojecten over Neder
 - Eigen CSS: `css/a-better-port.css`
 - Geel accent: `#e1c85a`
 - Intro: 3 states (tekst → foto 1 → foto 2)
-- Leaflet kaart + scheepvaart animatie in intro
+- Leaflet kaart + scheepvaart animatie in intro (2 boten met fade-out)
 - Dark overlay varieert per scroll positie
 - Info buttons op foto's
 - Infographic panels na foto 6 en 24
+- Responsive: clamp() formulas + height-based breakpoints
+- Foto paren: 70vh default, 55vh bij ≤900px hoogte, 50vh bij ≤700px
 
 ### In Blauw Licht
 - Eigen CSS: `css/in-blauw-licht.css`
@@ -145,9 +147,15 @@ Alle projectpagina's eindigen met end panel:
 
 ## Responsive Breakpoints
 
+### Breedte
 - **1100-1400px**: Kleinere tekst, hogere tekstvakken
 - **768-1100px**: Breder tekstvak (25%)
 - **< 767px**: Verticaal, volledige breedte
+
+### Hoogte (A Better Port)
+- **> 900px**: Standaard formaten
+- **≤ 900px**: Compactere intro, foto paren 55vh
+- **≤ 700px**: Minimale intro (2 paragrafen verborgen), foto paren 50vh
 
 ## Bestandsstructuur
 

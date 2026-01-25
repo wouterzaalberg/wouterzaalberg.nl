@@ -3682,6 +3682,13 @@
         const container = document.getElementById('scrollContainer');
         const allItems = document.querySelectorAll('.intro-section, .photo-cluster, .chapter-title, .photo-with-caption, .beverrat-cluster, .wolhandkrab-cluster, .gray-section > .photo-item, .gray-section > .labeled-photo, .hemelboom-pair, .photo-cluster-19-20, .hoornaar-cluster, .hoornaar-boog, .foto-35-section > .labeled-photo, .foto-35-section > .foto-grid-36-39, .rivierkreeft-section > .labeled-photo, .rivierkreeft-section > .kreeft-grid, .rivierkreeft-section > .foto-41-wrapper, .vederkruid-section, .foto-43-48-wrapper, .foto-49-wrapper, .vlinderstruik-section, .waterteunisbloem-section, .watercrassula-section, .kleine-waterteunisbloem-section, .foto-61-section, .japanse-oester-section, .muskusrat-section, .muskusrat-caption-box, .muskusrat-photos, .einde-deel-panel, .end-panel');
 
+        // Prevent middle-click autoscroll (browser's drag-to-scroll feature)
+        container.addEventListener('mousedown', (e) => {
+            if (e.button === 1) { // Middle mouse button
+                e.preventDefault();
+            }
+        });
+
         // Stel intro-panel breedte in op basis van titel
         function setIntroWidths() {
             const introTitle = document.getElementById('introTitle');

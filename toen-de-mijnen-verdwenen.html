@@ -933,6 +933,13 @@
         let isAnimating = false;
         let introState = 0; // 0 = hero, 1 = photo 1, 2 = chapter 1
 
+        // Prevent middle-click autoscroll (browser's drag-to-scroll feature)
+        container.addEventListener('mousedown', (e) => {
+            if (e.button === 1) { // Middle mouse button
+                e.preventDefault();
+            }
+        });
+
         // Improved scroll handling - works for both mouse and trackpad
         // See docs/horizontal-scroll.md for documentation
         let accumulatedDelta = 0;

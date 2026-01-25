@@ -698,6 +698,13 @@
         let isAnimating = false;
         let scrollQueue = 0;
 
+        // Prevent middle-click autoscroll (browser's drag-to-scroll feature)
+        container.addEventListener('mousedown', (e) => {
+            if (e.button === 1) { // Middle mouse button
+                e.preventDefault();
+            }
+        });
+
         // Initialize Leaflet map
         function initLocationMap() {
             const mapContainer = document.getElementById('locationMap');

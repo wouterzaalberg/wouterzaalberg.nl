@@ -17,6 +17,11 @@
         </div>
     </div>
 
+    <!-- Progress indicator -->
+    <div class="abp-progress" id="progressIndicator">
+        <span class="abp-progress-number" id="progressNumber">0</span><span class="abp-progress-percent">%</span>
+    </div>
+
     <!-- Dark Overlay - opacity controlled via JS -->
     <div class="abp-dark-overlay" id="darkOverlay"></div>
 
@@ -40,12 +45,7 @@
     <div class="abp-map-interlude-overlay" id="mapInterludeOverlay">
         <h2 class="abp-map-interlude-title">De Haven in Beeld</h2>
         <p class="abp-map-interlude-subtitle">Klik op een locatie om de foto te zien</p>
-        <button class="abp-scroll-hint" id="scrollHintBtn">
-            <span>Scroll voor meer</span>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M9 18l6-6-6-6"/>
-            </svg>
-        </button>
+        <p class="abp-scroll-hint-text">De serie gaat na de kaart verder</p>
     </div>
 
     <!-- Zoom Controls (only visible at Map Interlude) -->
@@ -82,13 +82,11 @@
                 <div class="abp-intro-panel">
                     <div class="abp-intro-content">
                         <div class="abp-intro-text">
-                            <p class="mobile-short">Amsterdam is de grootste benzinehaven ter wereld. De mate waarin de haven verandert, geeft inzicht in de snelheid van de energietransitie. Ik liep een jaar (af en aan) rond in de Amsterdamse haven om de omslag in beeld te brengen.</p>
-                            <p class="desktop-small">Amsterdam is de grootste benzinehaven ter wereld. De mate waarin de haven verandert, geeft inzicht in de snelheid van de energietransitie. Steenkool eruit, bio-fuels erin. Maar hoe verander je een haven die geknipt is voor fossiele overslag?</p>
-                            <p class="desktop-small">Dit tijdsbeeld laat het begin van verandering zien, maar toont ook hoe weerbarstig de realiteit is van een haven die nog steeds afhankelijk is van fossiele energie.</p>
+                            <p class="mobile-only">Amsterdam is de grootste benzinehaven ter wereld. De mate waarin de haven verandert, geeft inzicht in de snelheid van de energietransitie. Ik liep een jaar (af en aan) rond in de Amsterdamse haven om de omslag in beeld te brengen.</p>
                             <p class="desktop-only">Het is het minst bekende en meest onbeminde stuk Amsterdam: de haven. Anders dan in Rotterdam is het geen onderdeel van het DNA van de stad. Dat wil niet zeggen dat het gebied niet belangrijk is: vanaf hier wordt de Nederlandse en Europese economie gevoed met grondstoffen en, vooral, energie. Amsterdam is de grootste benzinehaven ter wereld. Daarmee is het ook een spiegel van onze samenleving: de mate waarin de haven verandert, geeft inzicht in de snelheid van de energietransitie.</p>
-                            <p class="desktop-large">Zelf is de Port of Amsterdam er hard mee bezig. Steenkool eruit, bio-fuels erin. Het moet duurzaam, circulair, draaiend op waterstof en stroom uit de parken op zee. Zoals het havenbedrijf zelf zegt: be part of a better port. Maar hoe verander je een haven die geknipt is voor fossiele overslag, voor een samenleving die gebouwd is op fossiele energie?</p>
-                            <p class="desktop-large">Tegen de achtergrond van een haven in transitie, waarin de fossiele bulk beetje bij beetje plaatsmaakt voor de economie van de toekomst, legt fotograaf Wouter Zaalberg de mensen, het werk en de plekken vast.</p>
-                            <p class="desktop-large">Dit tijdsbeeld laat het begin van verandering zien, maar toont ook hoe weerbarstig de realiteit is van een haven, en een land, dat ondanks alles, nog steeds bijna volledig afhankelijk is van fossiele energie.</p>
+                            <p class="desktop-only">Zelf is de Port of Amsterdam er hard mee bezig. Steenkool eruit, bio-fuels erin. Het moet duurzaam, circulair, draaiend op waterstof en stroom uit de parken op zee. Zoals het havenbedrijf zelf zegt: be part of a better port. Maar hoe verander je een haven die geknipt is voor fossiele overslag, voor een samenleving die gebouwd is op fossiele energie?</p>
+                            <p class="desktop-only">Tegen de achtergrond van een haven in transitie, waarin de fossiele bulk beetje bij beetje plaatsmaakt voor de economie van de toekomst, legt fotograaf Wouter Zaalberg de mensen, het werk en de plekken vast.</p>
+                            <p class="desktop-only">Dit tijdsbeeld laat het begin van verandering zien, maar toont ook hoe weerbarstig de realiteit is van een haven, en een land, dat ondanks alles, nog steeds bijna volledig afhankelijk is van fossiele energie.</p>
                             <p class="abp-intro-credit">Wouter Zaalberg, Amsterdam, maart 2024</p>
                         </div>
                     </div>
@@ -385,8 +383,8 @@
                 <div class="abp-combo-photo">
                     <div class="abp-combo-photo-wrapper">
                         <img src="a-better-port/17.jpg" alt="A Better Port" class="photo" loading="lazy">
+                        <button class="abp-info-btn" aria-label="Toon informatie">i</button>
                     </div>
-                    <button class="abp-info-btn" aria-label="Toon informatie">i</button>
                     <div class="abp-caption">
                         <div class="abp-caption-header">Ocean Blue</div>
                         <div class="abp-caption-text">Zeeman op de Ocean Blue, vlak voor aanvang van zijn dienst.</div>
@@ -882,6 +880,13 @@
         let currentIndex = 0;
         let isAnimating = false;
         let introState = 0; // 0 = text panel, 1 = photo 1, 2 = photo 2
+
+        // Prevent middle-click autoscroll (browser's drag-to-scroll feature)
+        container.addEventListener('mousedown', (e) => {
+            if (e.button === 1) { // Middle mouse button
+                e.preventDefault();
+            }
+        });
 
         // Improved scroll handling - works for both mouse and trackpad
         // See docs/horizontal-scroll.md for documentation
@@ -1853,6 +1858,298 @@
                 { lat: 52.419385, lng: 4.799986, angle: -30, size: 10 }
             ];
 
+            // Special Photo 8 boat - starts docked, sails when interlude is reached
+            const photo8Boat = {
+                route: [
+                    { lat: 52.422226, lng: 4.838971 }, // Start (aangemeerd)
+                    { lat: 52.419968, lng: 4.840094 }, // Punt 1
+                    { lat: 52.419015, lng: 4.837089 }, // Punt 2
+                    { lat: 52.422430, lng: 4.811068 }, // Punt 3
+                    { lat: 52.402291, lng: 4.819610 }  // Eindpunt
+                ],
+                progress: 0,        // 0 = start, 1 = end
+                isSailing: false,   // Starts docked
+                opacity: 1,         // For fade out effect
+                isFadingOut: false, // Fade state
+                speed: 0.00012,     // Slow speed similar to other ships
+                size: 12,           // Slightly larger than regular ships
+
+                // Get current position along route
+                getPosition() {
+                    const route = this.route;
+                    if (route.length < 2) return route[0];
+
+                    // Calculate total route length and find current segment
+                    let totalLength = 0;
+                    const segmentLengths = [];
+
+                    for (let i = 0; i < route.length - 1; i++) {
+                        const dx = route[i + 1].lng - route[i].lng;
+                        const dy = route[i + 1].lat - route[i].lat;
+                        const len = Math.sqrt(dx * dx + dy * dy);
+                        segmentLengths.push(len);
+                        totalLength += len;
+                    }
+
+                    // Find position at current progress
+                    let targetDist = this.progress * totalLength;
+                    let accumulated = 0;
+
+                    for (let i = 0; i < segmentLengths.length; i++) {
+                        if (accumulated + segmentLengths[i] >= targetDist) {
+                            const segmentProgress = (targetDist - accumulated) / segmentLengths[i];
+                            return {
+                                lat: route[i].lat + (route[i + 1].lat - route[i].lat) * segmentProgress,
+                                lng: route[i].lng + (route[i + 1].lng - route[i].lng) * segmentProgress
+                            };
+                        }
+                        accumulated += segmentLengths[i];
+                    }
+
+                    return route[route.length - 1]; // At end
+                },
+
+                // Get angle for ship rotation based on current segment
+                getAngle() {
+                    const route = this.route;
+                    if (route.length < 2) return 0;
+
+                    // Find current segment based on progress
+                    let totalLength = 0;
+                    const segmentLengths = [];
+
+                    for (let i = 0; i < route.length - 1; i++) {
+                        const p1 = harborMap.latLngToContainerPoint([route[i].lat, route[i].lng]);
+                        const p2 = harborMap.latLngToContainerPoint([route[i + 1].lat, route[i + 1].lng]);
+                        const len = Math.sqrt((p2.x - p1.x) ** 2 + (p2.y - p1.y) ** 2);
+                        segmentLengths.push(len);
+                        totalLength += len;
+                    }
+
+                    let targetDist = this.progress * totalLength;
+                    let accumulated = 0;
+
+                    for (let i = 0; i < segmentLengths.length; i++) {
+                        if (accumulated + segmentLengths[i] >= targetDist || i === segmentLengths.length - 1) {
+                            // Use this segment's direction
+                            const p1 = harborMap.latLngToContainerPoint([route[i].lat, route[i].lng]);
+                            const p2 = harborMap.latLngToContainerPoint([route[i + 1].lat, route[i + 1].lng]);
+                            return Math.atan2(p2.y - p1.y, p2.x - p1.x);
+                        }
+                        accumulated += segmentLengths[i];
+                    }
+                    return 0;
+                },
+
+                update() {
+                    if (!this.isSailing) return;
+                    if (this.progress >= 1) {
+                        this.progress = 1;
+                        this.isSailing = false; // Stop at end
+                        return;
+                    }
+                    this.progress += this.speed;
+                },
+
+                draw(ctx) {
+                    if (this.opacity <= 0) return; // Don't draw if fully faded
+
+                    const pos = this.getPosition();
+                    const point = harborMap.latLngToContainerPoint([pos.lat, pos.lng]);
+                    const angle = this.getAngle();
+
+                    ctx.save();
+                    ctx.globalAlpha = this.opacity;
+                    ctx.translate(point.x, point.y);
+                    ctx.rotate(angle);
+
+                    // Draw ship shape - slightly brighter than other ships
+                    ctx.fillStyle = 'rgba(225, 200, 90, 0.6)';
+                    ctx.strokeStyle = 'rgba(180, 160, 70, 0.5)';
+                    ctx.lineWidth = 1;
+                    ctx.beginPath();
+
+                    const length = this.size * 3;
+                    const width = this.size * 1.2;
+
+                    ctx.moveTo(-length / 2, -width / 2);
+                    ctx.lineTo(-length / 2, width / 2);
+                    ctx.lineTo(length / 3, width / 2);
+                    ctx.lineTo(length / 2, 0);
+                    ctx.lineTo(length / 3, -width / 2);
+                    ctx.closePath();
+                    ctx.fill();
+                    ctx.stroke();
+
+                    ctx.restore();
+                },
+
+                // Start fade out animation
+                startFadeOut() {
+                    this.isFadingOut = true;
+                },
+
+                // Reset to start position (called after fade completes)
+                reset() {
+                    this.progress = 0;
+                    this.isSailing = false;
+                    this.opacity = 1;
+                    this.isFadingOut = false;
+                },
+
+                // Start sailing
+                startSailing() {
+                    if (this.progress >= 1) {
+                        this.progress = 0; // Reset if already at end
+                    }
+                    this.opacity = 1;
+                    this.isFadingOut = false;
+                    this.isSailing = true;
+                }
+            };
+
+            // Special Photo 9 boat - on Noordzeekanaal (red line / Route 0), sails west towards sea
+            const photo9Boat = {
+                // Route follows Route 0 (red line) reversed - sailing west towards sea
+                route: [
+                    { lat: 52.424416, lng: 4.792067 },  // Start (oost, op Route 0)
+                    { lat: 52.429859, lng: 4.748499 },  // Via Route 0 punt
+                    { lat: 52.435403, lng: 4.714725 },  // Via Route 0 punt
+                    { lat: 52.444, lng: 4.695 }         // Eind (west, zee)
+                ],
+                progress: 0,
+                isSailing: false,
+                opacity: 1,         // For fade out effect
+                isFadingOut: false, // Fade state
+                speed: 0.00010,     // Iets langzamer dan foto 8 boot
+                size: 14,           // Groter schip op hoofdvaarweg
+
+                getPosition() {
+                    const route = this.route;
+                    if (route.length < 2) return route[0];
+
+                    let totalLength = 0;
+                    const segmentLengths = [];
+
+                    for (let i = 0; i < route.length - 1; i++) {
+                        const dx = route[i + 1].lng - route[i].lng;
+                        const dy = route[i + 1].lat - route[i].lat;
+                        segmentLengths.push(Math.sqrt(dx * dx + dy * dy));
+                        totalLength += segmentLengths[i];
+                    }
+
+                    let targetDist = this.progress * totalLength;
+                    let accumulated = 0;
+
+                    for (let i = 0; i < segmentLengths.length; i++) {
+                        if (accumulated + segmentLengths[i] >= targetDist) {
+                            const segmentProgress = (targetDist - accumulated) / segmentLengths[i];
+                            return {
+                                lat: route[i].lat + (route[i + 1].lat - route[i].lat) * segmentProgress,
+                                lng: route[i].lng + (route[i + 1].lng - route[i].lng) * segmentProgress
+                            };
+                        }
+                        accumulated += segmentLengths[i];
+                    }
+                    return route[route.length - 1];
+                },
+
+                getAngle() {
+                    const route = this.route;
+                    if (route.length < 2) return 0;
+
+                    let totalLength = 0;
+                    const segmentLengths = [];
+
+                    for (let i = 0; i < route.length - 1; i++) {
+                        const p1 = harborMap.latLngToContainerPoint([route[i].lat, route[i].lng]);
+                        const p2 = harborMap.latLngToContainerPoint([route[i + 1].lat, route[i + 1].lng]);
+                        segmentLengths.push(Math.sqrt((p2.x - p1.x) ** 2 + (p2.y - p1.y) ** 2));
+                        totalLength += segmentLengths[i];
+                    }
+
+                    let targetDist = this.progress * totalLength;
+                    let accumulated = 0;
+
+                    for (let i = 0; i < segmentLengths.length; i++) {
+                        if (accumulated + segmentLengths[i] >= targetDist || i === segmentLengths.length - 1) {
+                            const p1 = harborMap.latLngToContainerPoint([route[i].lat, route[i].lng]);
+                            const p2 = harborMap.latLngToContainerPoint([route[i + 1].lat, route[i + 1].lng]);
+                            return Math.atan2(p2.y - p1.y, p2.x - p1.x);
+                        }
+                        accumulated += segmentLengths[i];
+                    }
+                    return 0;
+                },
+
+                update() {
+                    if (!this.isSailing) return;
+                    if (this.progress >= 1) {
+                        this.progress = 1;
+                        this.isSailing = false;
+                        return;
+                    }
+                    this.progress += this.speed;
+                },
+
+                draw(ctx) {
+                    if (this.opacity <= 0) return; // Don't draw if fully faded
+
+                    const pos = this.getPosition();
+                    const point = harborMap.latLngToContainerPoint([pos.lat, pos.lng]);
+                    const angle = this.getAngle();
+
+                    ctx.save();
+                    ctx.globalAlpha = this.opacity;
+                    ctx.translate(point.x, point.y);
+                    ctx.rotate(angle);
+
+                    ctx.fillStyle = 'rgba(225, 200, 90, 0.6)';
+                    ctx.strokeStyle = 'rgba(180, 160, 70, 0.5)';
+                    ctx.lineWidth = 1;
+                    ctx.beginPath();
+
+                    const length = this.size * 3;
+                    const width = this.size * 1.2;
+
+                    ctx.moveTo(-length / 2, -width / 2);
+                    ctx.lineTo(-length / 2, width / 2);
+                    ctx.lineTo(length / 3, width / 2);
+                    ctx.lineTo(length / 2, 0);
+                    ctx.lineTo(length / 3, -width / 2);
+                    ctx.closePath();
+                    ctx.fill();
+                    ctx.stroke();
+
+                    ctx.restore();
+                },
+
+                // Start fade out animation
+                startFadeOut() {
+                    this.isFadingOut = true;
+                },
+
+                reset() {
+                    this.progress = 0;
+                    this.isSailing = false;
+                    this.opacity = 1;
+                    this.isFadingOut = false;
+                },
+
+                startSailing() {
+                    if (this.progress >= 1) {
+                        this.progress = 0;
+                    }
+                    this.opacity = 1;
+                    this.isFadingOut = false;
+                    this.isSailing = true;
+                }
+            };
+
+            // Expose boats globally for marker sync
+            window.photo8Boat = photo8Boat;
+            window.photo9Boat = photo9Boat;
+
             function drawStaticShips() {
                 staticShips.forEach(ship => {
                     const point = harborMap.latLngToContainerPoint([ship.lat, ship.lng]);
@@ -1961,6 +2258,29 @@
                     ship.update(ships); // Pass all ships for collision detection
                     ship.draw(ctx);
                 });
+
+                // Draw and update special photo boats
+                photo8Boat.update();
+                photo9Boat.update();
+
+                // Handle fade-out animation
+                if (photo8Boat.isFadingOut) {
+                    photo8Boat.opacity -= 0.02;
+                    if (photo8Boat.opacity <= 0) {
+                        photo8Boat.opacity = 0;
+                        photo8Boat.reset();
+                    }
+                }
+                if (photo9Boat.isFadingOut) {
+                    photo9Boat.opacity -= 0.02;
+                    if (photo9Boat.opacity <= 0) {
+                        photo9Boat.opacity = 0;
+                        photo9Boat.reset();
+                    }
+                }
+
+                photo8Boat.draw(ctx);
+                photo9Boat.draw(ctx);
 
                 animationFrame = requestAnimationFrame(animate);
             }
@@ -2211,6 +2531,10 @@
                 popupAnchor: [0, -15]
             });
 
+            // Reference to photo 8 and 9 markers for boat sync
+            let photo8Marker = null;
+            let photo9Marker = null;
+
             // Create markers with staggered animation
             photoLocations.forEach((loc, index) => {
                 // Create custom icon with animation delay
@@ -2223,7 +2547,17 @@
                     popupAnchor: [0, -15]
                 });
 
-                const marker = L.marker([loc.lat, loc.lng], { icon: customIcon });
+                // Photo 8 and 9 markers start at boat positions
+                const isPhoto8 = loc.photo === 8;
+                const isPhoto9 = loc.photo === 9;
+                let startPos = [loc.lat, loc.lng];
+                if (isPhoto8 && window.photo8Boat) {
+                    startPos = [window.photo8Boat.route[0].lat, window.photo8Boat.route[0].lng];
+                } else if (isPhoto9 && window.photo9Boat) {
+                    startPos = [window.photo9Boat.route[0].lat, window.photo9Boat.route[0].lng];
+                }
+
+                const marker = L.marker(startPos, { icon: customIcon });
 
                 const popupContent = `
                     <div class="abp-marker-popup-content">
@@ -2244,7 +2578,48 @@
                 marker.on('mouseout', function() { this.closePopup(); });
 
                 markerGroup.addLayer(marker);
+
+                // Store reference to photo 8 and 9 markers
+                if (isPhoto8) {
+                    photo8Marker = marker;
+                }
+                if (isPhoto9) {
+                    photo9Marker = marker;
+                }
             });
+
+            // Update photo 8 marker position to follow boat
+            function updatePhoto8MarkerPosition() {
+                if (photo8Marker && window.photo8Boat) {
+                    const pos = window.photo8Boat.getPosition();
+                    photo8Marker.setLatLng([pos.lat, pos.lng]);
+                }
+            }
+
+            // Update photo 9 marker position to follow boat
+            function updatePhoto9MarkerPosition() {
+                if (photo9Marker && window.photo9Boat) {
+                    const pos = window.photo9Boat.getPosition();
+                    photo9Marker.setLatLng([pos.lat, pos.lng]);
+                }
+            }
+
+            // Animation frame for marker sync (runs when boats are active or fading)
+            let markerSyncFrame = null;
+            function syncMarkerWithBoat() {
+                updatePhoto8MarkerPosition();
+                updatePhoto9MarkerPosition();
+                const boat8Active = window.photo8Boat && (window.photo8Boat.isSailing || window.photo8Boat.isFadingOut);
+                const boat9Active = window.photo9Boat && (window.photo9Boat.isSailing || window.photo9Boat.isFadingOut);
+                if (boat8Active || boat9Active) {
+                    markerSyncFrame = requestAnimationFrame(syncMarkerWithBoat);
+                } else {
+                    // Final update after fade complete to ensure markers are at start
+                    updatePhoto8MarkerPosition();
+                    updatePhoto9MarkerPosition();
+                    markerSyncFrame = null;
+                }
+            }
 
             // Show/hide markers and enhance map at interlude
             let interludeWheelHandler = null;
@@ -2265,7 +2640,6 @@
             const zoomInBtn = document.getElementById('zoomInBtn');
             const zoomOutBtn = document.getElementById('zoomOutBtn');
             const zoomResetBtn = document.getElementById('zoomResetBtn');
-            const scrollHintBtn = document.getElementById('scrollHintBtn');
 
             // Store original map view for reset
             const originalView = {
@@ -2287,13 +2661,6 @@
             if (zoomResetBtn) {
                 zoomResetBtn.addEventListener('click', () => {
                     harborMap.setView(originalView.center, originalView.zoom);
-                });
-            }
-
-            // Scroll hint button - go to next section
-            if (scrollHintBtn) {
-                scrollHintBtn.addEventListener('click', () => {
-                    triggerScroll(1);
                 });
             }
 
@@ -2331,6 +2698,18 @@
                         interludeWheelHandler = handleInterludeWheel;
                         mapEl.addEventListener('wheel', interludeWheelHandler, { passive: false });
                     }
+
+                    // Start photo 8 and 9 boats sailing
+                    if (window.photo8Boat && !window.photo8Boat.isSailing) {
+                        window.photo8Boat.startSailing();
+                    }
+                    if (window.photo9Boat && !window.photo9Boat.isSailing) {
+                        window.photo9Boat.startSailing();
+                    }
+                    // Start marker sync animation
+                    if (!markerSyncFrame) {
+                        syncMarkerWithBoat();
+                    }
                 } else {
                     // Hide markers
                     if (markersAdded) {
@@ -2360,18 +2739,141 @@
                         mapEl.removeEventListener('wheel', interludeWheelHandler);
                         interludeWheelHandler = null;
                     }
+
+                    // Start fade out for photo 8 and 9 boats (they will reset after fade completes)
+                    if (window.photo8Boat && !window.photo8Boat.isFadingOut) {
+                        window.photo8Boat.startFadeOut();
+                    }
+                    if (window.photo9Boat && !window.photo9Boat.isFadingOut) {
+                        window.photo9Boat.startFadeOut();
+                    }
                 }
             }
 
             // Hook into scroll
             const origScrollForMarkers = scrollToIndex;
+            let interludeTimeout = null;
             scrollToIndex = function(index) {
                 origScrollForMarkers(index);
-                updateMapInterlude(index);
+                const currentItem = allItems[index];
+                const isAtInterlude = currentItem && currentItem.id === 'mapInterlude';
+
+                // Clear any pending timeout
+                if (interludeTimeout) {
+                    clearTimeout(interludeTimeout);
+                    interludeTimeout = null;
+                }
+
+                if (isAtInterlude) {
+                    // Delay interlude activation until scroll animation completes
+                    interludeTimeout = setTimeout(() => {
+                        updateMapInterlude(index);
+                    }, 500);
+                } else {
+                    // Immediately deactivate when leaving interlude
+                    updateMapInterlude(index);
+                }
             };
 
             // Initial state
             updateMapInterlude(currentIndex);
+        })();
+
+        // ========================================
+        // Progress Indicator
+        // ========================================
+        (function() {
+            const progressNumber = document.getElementById('progressNumber');
+            const scrollContainer = document.getElementById('scrollContainer');
+            let currentProgress = 0;
+            let targetProgress = 0;
+            let progressInitialized = false;
+
+            // Reset scroll to beginning on page load
+            scrollContainer.scrollLeft = 0;
+
+            function calculateProgress() {
+                // Always return 0 during initialization
+                if (!progressInitialized) return 0;
+
+                const isMobile = window.innerWidth <= 767;
+
+                if (isMobile) {
+                    // Mobile: use vertical scroll (window scroll)
+                    const scrollTop = window.scrollY || document.documentElement.scrollTop;
+                    const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+
+                    if (maxScroll > 0) {
+                        const scrollProgress = (scrollTop / maxScroll) * 100;
+                        return Math.round(scrollProgress);
+                    }
+                    return 0;
+                } else {
+                    // Desktop: use horizontal scroll
+                    const scrollLeft = scrollContainer.scrollLeft;
+                    const maxScroll = scrollContainer.scrollWidth - scrollContainer.clientWidth;
+
+                    // If scroll has started (past intro section), calculate based on scroll position
+                    if (scrollLeft > 50) {
+                        // Scroll progress (3-100%)
+                        const scrollProgress = maxScroll > 0 ? (scrollLeft / maxScroll) * 97 : 0;
+                        return Math.round(3 + scrollProgress);
+                    }
+
+                    // Otherwise show intro state progress (0%, 1%, 2%)
+                    return introState;
+                }
+            }
+
+            function updateProgress() {
+                // Animate the number smoothly
+                if (currentProgress !== targetProgress) {
+                    const diff = targetProgress - currentProgress;
+                    const step = diff > 0 ? Math.max(1, Math.ceil(diff / 8)) : Math.min(-1, Math.floor(diff / 8));
+                    currentProgress += step;
+
+                    // Clamp to target if very close
+                    if (Math.abs(targetProgress - currentProgress) <= 1) {
+                        currentProgress = targetProgress;
+                    }
+
+                    progressNumber.textContent = Math.max(0, Math.min(100, currentProgress));
+                }
+
+                requestAnimationFrame(updateProgress);
+            }
+
+            // Initialize progress to 0
+            targetProgress = 0;
+            currentProgress = 0;
+            progressNumber.textContent = '0';
+
+            // Start animation loop
+            requestAnimationFrame(updateProgress);
+
+            // Enable progress calculation after a short delay to avoid load-time scroll events
+            setTimeout(() => {
+                progressInitialized = true;
+
+                // Update progress on scroll (both horizontal for desktop and vertical for mobile)
+                scrollContainer.addEventListener('scroll', () => {
+                    targetProgress = calculateProgress();
+                });
+
+                // Also listen for window scroll on mobile
+                window.addEventListener('scroll', () => {
+                    if (window.innerWidth <= 767) {
+                        targetProgress = calculateProgress();
+                    }
+                });
+
+                // Hook into intro state changes
+                const origSetIntroStateForProgress = setIntroState;
+                setIntroState = function(state) {
+                    origSetIntroStateForProgress(state);
+                    targetProgress = calculateProgress();
+                };
+            }, 500);
         })();
     </script>
 </body>
