@@ -2314,6 +2314,12 @@
         transform: none;
         text-align: left;
     }
+
+    .abp-map-interlude-title,
+    .abp-map-interlude-subtitle,
+    .abp-scroll-hint-text {
+        text-align: left;
+    }
 }
 
 /* Kleinere hoogte schermen (700-1000px) - bars inkrimpen */
