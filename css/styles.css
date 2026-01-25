@@ -153,7 +153,6 @@ img {
         top: clamp(4vh, 8vh, 12vh);
         left: clamp(50%, 40% + 1.4vw, 60%);
         padding: clamp(1rem, 2vh, 2rem);
-        max-width: clamp(200px, 28vw, 22vw);
     }
 
     .menu-section {
@@ -387,7 +386,6 @@ img {
     top: 12vh;
     left: 60%;
     width: fit-content;
-    max-width: 22vw;
     z-index: 10;
     background-color: rgba(255, 255, 255, 0.75);
     padding: 2rem;
@@ -706,7 +704,6 @@ img {
     top: 12vh;
     left: 60%;
     width: fit-content;
-    max-width: 22vw;
     z-index: 10;
     background-color: rgba(255, 255, 255, 0.75);
     padding: 2rem;
@@ -940,7 +937,6 @@ img {
     top: 12vh;
     left: 60%;
     width: fit-content;
-    max-width: 22vw;
     z-index: 10;
     background-color: rgba(255, 255, 255, 0.75);
     padding: 2rem;
