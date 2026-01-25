@@ -2224,7 +2224,10 @@
         padding: 1rem;
     }
 
-    /* Foto paartjes kleiner zodat beide passen */
+}
+
+/* Foto paartjes kleiner bij lage hoogte EN beperkte breedte */
+@media (min-width: 768px) and (max-width: 1600px) and (max-height: 850px) {
     .abp-photo-pair .abp-photo-block img.photo {
         height: 55vh;
     }
@@ -2275,7 +2278,10 @@
         display: none;
     }
 
-    /* Foto paartjes kleiner zodat beide passen */
+}
+
+/* Foto paartjes nog kleiner bij zeer kleine hoogte EN beperkte breedte */
+@media (min-width: 768px) and (max-width: 1600px) and (max-height: 700px) {
     .abp-photo-pair .abp-photo-block img.photo {
         height: 50vh;
     }
