@@ -20,7 +20,15 @@ Foto 2 → Intro panel → Foto 1 → Foto paar 3+4 → Foto 5 → etc.
 - Scrollen als één geheel
 - Mobiel: beide foto's eerst, dan caption eronder (`.pair-caption`)
 
-## Bijschriften (hover)
+## Bijschriften (info button)
+- Toggle via "i" button (`.nzkg-info-btn`) - niet hover
+- Button: rechtsonder op foto, blauw accent `#2d6a8a`
+- Bij foto paren: button op rechter foto
+- Klik opent caption, andere captions sluiten automatisch
+- Klik buiten caption sluit alles
+- Mobiel: buttons verborgen, captions altijd zichtbaar onder foto
+
+### Caption styling
 - Positie: `bottom: 2rem`, gecentreerd
 - Achtergrond: `rgba(0, 0, 0, 0.7)`
 - Padding: `1rem 1.5rem`
@@ -32,6 +40,9 @@ Foto 2 → Intro panel → Foto 1 → Foto paar 3+4 → Foto 5 → etc.
 - **caption-location**: 70% wit, 0.75rem, italic
 
 ## Leaflet Kaart
+- Kader (`.nzkg-map-insert`): 100vh, blauw gradient
+- Kaart (`.nzkg-map-inner`): 70vh, verticaal gecentreerd met titel
+- Scroll fix: `margin-top: -80px`, `padding-top/bottom: calc(2rem + 80px)`
 - Zoom levels: 10 (mobiel) / 11 (desktop klein) / 12 (desktop groot)
 - Positie: center `[52.45, 4.75]`
 
@@ -51,8 +62,13 @@ Foto 2 → Intro panel → Foto 1 → Foto paar 3+4 → Foto 5 → etc.
 
 ## End Panel
 - Achtergrond: `#1a1a1a`
-- Desktop groot: `height: 70vh`
-- Desktop klein: `height: auto`, `min-height: 70vh`
+- Hoogte: 100vh
+- Breedte: 33vw, max 600px, min 300px
+- Scroll fix: `margin-top: -80px`, `padding-top: 80px`
+
+## Lazy Loading
+- Eerste 6 foto's: `loading="eager"`
+- Rest: `loading="lazy"` met `rootMargin: 500px`
 
 ## Scroll
 - Titel panel (`.nzkg-title-panel`) is geen scroll-stop

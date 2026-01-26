@@ -141,6 +141,8 @@ Portfolio website voor fotograaf Wouter Zaalberg. Fotografieprojecten over Neder
 ## End Panels
 
 Alle projectpagina's eindigen met end panel:
+- Standaard: 100vh hoogte, 33vw breed, max 600px, min 300px
+- Scroll fix: `margin-top: -80px`, `padding-top: 80px`, `margin-right: -4rem`
 - Kleuren per pagina: zie `css/styles.css`
 - Contact: wouterzaalberg@gmail.com, 06 45 788 180
 - Instagram link

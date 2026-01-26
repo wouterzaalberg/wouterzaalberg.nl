@@ -12,6 +12,16 @@
             flex-direction: column;
             align-items: flex-start;
         }
+        .end-panel {
+            height: 100vh !important;
+            width: 33vw !important;
+            max-width: 600px !important;
+            min-width: 300px !important;
+            margin-top: -80px !important;
+            padding-top: 80px !important;
+            box-sizing: border-box !important;
+            margin-right: -4rem !important;
+        }
     </style>
 </head>
 <body class="horizontal-scroll-page" style="background: #2d5a27;">
@@ -36,19 +46,19 @@
             </div>
 
             <div class="photo-item">
-                <img src="een-plek-onder-de-zon/Foto 2.jpg" alt="Een Plek Onder de Zon" loading="lazy">
+                <img src="een-plek-onder-de-zon/Foto 2.jpg" alt="Een Plek Onder de Zon" loading="eager">
             </div>
 
             <div class="photo-item">
-                <img src="een-plek-onder-de-zon/Foto 3.jpg" alt="Een Plek Onder de Zon" loading="lazy">
+                <img src="een-plek-onder-de-zon/Foto 3.jpg" alt="Een Plek Onder de Zon" loading="eager">
             </div>
 
             <div class="photo-item">
-                <img src="een-plek-onder-de-zon/foto 4.jpg" alt="Een Plek Onder de Zon" loading="lazy">
+                <img src="een-plek-onder-de-zon/foto 4.jpg" alt="Een Plek Onder de Zon" loading="eager">
             </div>
 
             <div class="photo-item">
-                <img src="een-plek-onder-de-zon/Foto 5.jpg" alt="Een Plek Onder de Zon" loading="lazy">
+                <img src="een-plek-onder-de-zon/Foto 5.jpg" alt="Een Plek Onder de Zon" loading="eager">
             </div>
 
             <div class="photo-item">
@@ -87,7 +97,7 @@
                 <img src="een-plek-onder-de-zon/foto 14.jpg" alt="Een Plek Onder de Zon" loading="lazy">
             </div>
 
-            <div class="end-panel" style="flex-shrink: 0; height: 70vh; min-width: 800px; background: #1a3d1a; display: flex; flex-direction: column; justify-content: center; padding: 3rem;">
+            <div class="end-panel" style="flex-shrink: 0; background: #1a3d1a; display: flex; flex-direction: column; justify-content: center; padding: 3rem;">
                 <p style="font-family: 'Scala Sans SC', sans-serif; font-size: 1.2rem; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 3rem;">Einde van deze serie</p>
                 <p style="font-family: 'Scala Sans', sans-serif; font-size: 0.85rem; color: rgba(255,255,255,0.4); margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.05em;">Bekijk ook</p>
                 <nav style="display: flex; flex-direction: column; gap: 0.6rem;">
@@ -201,7 +211,7 @@
         // Intersection Observer for lazy fade-in
         const observerOptions = {
             root: container,
-            rootMargin: '100px',
+            rootMargin: '500px',
             threshold: 0.1
         };
 

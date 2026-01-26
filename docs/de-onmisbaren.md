@@ -12,7 +12,7 @@
 - Caption onder foto 1
 
 ## Titel met Foto-Fill
-- Font: Oswald, 12rem (responsive via clamp)
+- Font: Oswald, `clamp(6rem, 2rem + 8vw, 12rem)` - vloeiende groei van 768px tot 2000px
 - Achtergrond: `achterdetitel.jpg` + witte overlay (25%)
 - Animatie: `bgZoom` 100% → 115% over 20s
 - `-webkit-background-clip: text`
@@ -28,12 +28,16 @@
 
 ## End Panel
 - Achtergrond: `#1a1a1a`
-- 100vh
+- Hoogte: 100vh
+- Breedte: 33vw, max 600px, min 300px
+
+## Lazy Loading
+- Eerste 5 foto's: `loading="eager"`
+- Rest: `loading="lazy"` met `rootMargin: 500px`
 
 ## Responsive Breakpoints
-- **Desktop groot (> 1400px)**: titel 12rem, originele positionering
+- **Desktop (768px - 2000px+)**: titel groeit vloeiend via clamp
 - **Desktop klein (768-1400px)**:
-  - Titel: `clamp(6rem, 8vw, 9rem)`
   - Intro panel: `max-width: clamp(280px, 45vw, 500px)`
   - Intro foto: `width: clamp(280px, 45vw, 500px)`
 - **Mobiel (< 767px)**:

@@ -81,7 +81,18 @@
         }
 
         .end-panel {
-            align-self: center;
+            flex-shrink: 0 !important;
+            height: 100vh !important;
+            width: 600px !important;
+            min-width: 600px !important;
+            max-width: 600px !important;
+            margin-right: -4rem !important;
+            box-sizing: border-box !important;
+            background: #1a1a1a !important;
+            display: flex !important;
+            flex-direction: column !important;
+            justify-content: center !important;
+            padding: 3rem !important;
         }
         .photo-img-wrapper {
             overflow: hidden;
@@ -92,14 +103,11 @@
             width: auto;
         }
         .photo-title {
-            font-size: 12rem;
+            font-size: clamp(6rem, 2rem + 8vw, 12rem);
         }
 
         /* Desktop klein 768-1400px */
         @media (max-width: 1400px) and (min-width: 768px) {
-            .photo-title {
-                font-size: clamp(6rem, 8vw, 9rem);
-            }
             .intro-panel {
                 min-width: auto;
                 max-width: clamp(280px, 45vw, 500px);
@@ -367,7 +375,7 @@
 
             <div class="photo-item">
                 <div class="photo-img-wrapper">
-                    <img src="de-onmisbaren/4.jpg" alt="De Onmisbaren" loading="lazy">
+                    <img src="de-onmisbaren/4.jpg" alt="De Onmisbaren" loading="eager">
                 </div>
                 <div class="photo-caption">
                     <span class="caption-name">Laura</span>
@@ -377,7 +385,7 @@
 
             <div class="photo-item">
                 <div class="photo-img-wrapper">
-                    <img src="de-onmisbaren/5.jpg" alt="De Onmisbaren" loading="lazy">
+                    <img src="de-onmisbaren/5.jpg" alt="De Onmisbaren" loading="eager">
                 </div>
                 <div class="photo-caption">
                     <span class="caption-name">Maaike Metsje Visser</span>
@@ -425,7 +433,7 @@
                 </div>
             </div>
 
-            <div class="end-panel" style="flex-shrink: 0; height: 100vh; min-width: 800px; background: #1a1a1a; display: flex; flex-direction: column; justify-content: center; padding: 3rem;">
+            <div class="end-panel" style="width: 600px !important; min-width: 600px !important;">
                 <p style="font-family: 'Scala Sans SC', sans-serif; font-size: 1.2rem; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 3rem;">Einde van deze serie</p>
                 <p style="font-family: 'Scala Sans', sans-serif; font-size: 0.85rem; color: rgba(255,255,255,0.4); margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.05em;">Bekijk ook</p>
                 <nav style="display: flex; flex-direction: column; gap: 0.6rem;">
@@ -539,7 +547,7 @@
         // Intersection Observer for lazy fade-in
         const observerOptions = {
             root: container,
-            rootMargin: '100px',
+            rootMargin: '500px',
             threshold: 0.1
         };
 

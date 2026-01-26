@@ -28,9 +28,61 @@
         .photo-pair {
             scroll-snap-align: center;
         }
-        .photo-item:hover .photo-caption {
-            opacity: 1;
+        /* Info button */
+        .nzkg-info-btn {
+            position: absolute;
+            bottom: 1rem;
+            right: 1rem;
+            width: 28px;
+            height: 28px;
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Georgia', serif;
+            font-size: 14px;
+            font-style: italic;
+            color: #2d6a8a;
+            transition: all 0.3s ease;
+            z-index: 10;
         }
+        .nzkg-info-btn:hover {
+            background: #ffffff;
+            transform: scale(1.1);
+        }
+        .photo-item.info-active .nzkg-info-btn,
+        .photo-pair.info-active .nzkg-info-btn {
+            background: #2d6a8a;
+            color: #ffffff;
+        }
+
+        /* Caption hidden by default, shown on info-active */
+        .photo-caption {
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        .photo-item.info-active .photo-caption,
+        .photo-pair.info-active .pair-caption {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* End panel */
+        .end-panel {
+            height: 100vh !important;
+            width: 33vw !important;
+            max-width: 600px !important;
+            min-width: 300px !important;
+            margin-top: -80px !important;
+            padding-top: 80px !important;
+            box-sizing: border-box !important;
+            margin-right: -4rem !important;
+        }
+
         .caption-main {
             font-size: 0.95rem;
             color: #ffffff;
@@ -64,8 +116,9 @@
             transition: opacity 0.3s ease;
             pointer-events: none;
         }
-        .photo-pair:hover .pair-caption {
-            opacity: 1;
+        /* Pair caption position - on right photo */
+        .photo-pair {
+            position: relative;
         }
 
         /* Large title with water effect */
@@ -134,7 +187,11 @@
         /* Map insert */
         .nzkg-map-insert {
             min-width: 60vw;
-            height: 70vh;
+            height: 100vh;
+            margin-top: -80px;
+            padding: 2rem;
+            padding-top: calc(2rem + 80px);
+            padding-bottom: calc(2rem + 80px);
             background: linear-gradient(
                 180deg,
                 #1a4a6e 0%,
@@ -149,10 +206,9 @@
             animation: waterFlow 14s ease-in-out infinite;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
             position: relative;
-            padding: 2rem;
             box-sizing: border-box;
         }
         .nzkg-map-insert .nzkg-map-inner {
@@ -161,10 +217,11 @@
         .nzkg-map-header {
             width: 90%;
             text-align: left;
+            margin-bottom: 1rem;
         }
         .nzkg-map-inner {
             width: 90%;
-            height: 88%;
+            height: 70vh;
             display: flex;
             flex-direction: column;
             overflow: hidden;
@@ -306,6 +363,24 @@
 
         /* ===== MOBILE STYLES ===== */
         @media (max-width: 767px) {
+            /* Hide info button on mobile - captions show on scroll */
+            .nzkg-info-btn {
+                display: none !important;
+            }
+            .photo-caption {
+                position: relative !important;
+                opacity: 1 !important;
+                visibility: visible !important;
+                bottom: auto !important;
+                left: auto !important;
+                transform: none !important;
+                width: 100% !important;
+                max-width: none !important;
+                padding: 1rem 1.5rem !important;
+                background: transparent !important;
+                margin-top: 0.5rem;
+            }
+
             /* Navigatie */
             .horizontal-nav {
                 position: fixed;
@@ -521,6 +596,7 @@
 
             <div class="photo-item">
                 <img src="het-noordzeekanaal-gebied/1.jpg" alt="Het Noordzeekanaal Gebied" loading="eager">
+                <button class="nzkg-info-btn" aria-label="Toon informatie">i</button>
                 <div class="photo-caption">
                     <span class="caption-main">Wieslaw snijdt oude stoomleidingen door bij de sloop van de energiecentrale Hemweg 08.</span>
                     <span class="caption-detail">Sinds 2019 sloot deze centrale van Vattenfall, als onderdeel van de energietransitie. Het puin (o.a. 140.000 ton beton en 40.000 ton staal) wordt hergebruikt.</span>
@@ -534,6 +610,7 @@
                 </div>
                 <div class="photo-item">
                     <img src="het-noordzeekanaal-gebied/4.jpg" alt="Het Noordzeekanaal Gebied" loading="eager">
+                    <button class="nzkg-info-btn" aria-label="Toon informatie">i</button>
                 </div>
                 <div class="photo-caption pair-caption">
                     <span class="caption-main">Jolanda, hoofdoperator bij het afvalenergiebedrijf AEB Amsterdam.</span>
@@ -543,6 +620,7 @@
             </div>
             <div class="photo-item" style="height: 90vh;">
                 <img src="het-noordzeekanaal-gebied/5.jpg" alt="Het Noordzeekanaal Gebied" loading="eager">
+                <button class="nzkg-info-btn" aria-label="Toon informatie">i</button>
                 <div class="photo-caption">
                     <span class="caption-main">Manon, omgevingsmanager voor de Energiehaven</span>
                     <span class="caption-detail">De Energiehaven IJmond wordt een haven specifiek gericht op de bouw van windparken op zee. Deze komt op de plaats waar nu de Averijhaven ligt. De ontwikkeling van de Energiehaven is een samenwerking tussen provincie Noord-Holland, gemeente Velsen, Zeehaven IJmuiden en Port of Amsterdam. Ook het Rijk en Tata Steel zijn betrokken.</span>
@@ -555,6 +633,7 @@
                 </div>
                 <div class="photo-item">
                     <img src="het-noordzeekanaal-gebied/7.jpg" alt="Het Noordzeekanaal Gebied" loading="lazy">
+                    <button class="nzkg-info-btn" aria-label="Toon informatie">i</button>
                 </div>
                 <div class="photo-caption pair-caption">
                     <span class="caption-main">Jimmy, stuwadoor bij HES Bulk Terminal Amsterdam.</span>
@@ -564,6 +643,7 @@
             </div>
             <div class="photo-item">
                 <img src="het-noordzeekanaal-gebied/8.jpg" alt="Het Noordzeekanaal Gebied" loading="lazy">
+                <button class="nzkg-info-btn" aria-label="Toon informatie">i</button>
                 <div class="photo-caption">
                     <span class="caption-main">Lousanne, directeur van het Programmabureau Noordzeekanaalgebied (NZKG).</span>
                     <span class="caption-detail">In dit gebied moet plaats worden gemaakt voor een 380 kV transformatorstation om de regio van voldoende stroom te blijven voorzien. Tegelijk vragen natuur, water en andere toekomstige functies om plek. Het Programmabureau NZKG brengt dit samen met partijen in beeld en helpt keuzes te maken.</span>
@@ -586,6 +666,7 @@
 
             <div class="photo-item">
                 <img src="het-noordzeekanaal-gebied/9.jpg" alt="Het Noordzeekanaal Gebied" loading="lazy">
+                <button class="nzkg-info-btn" aria-label="Toon informatie">i</button>
                 <div class="photo-caption">
                     <span class="caption-main">Etteray, procesoperator bij EVOS. Hij controleert leidingen waardoor benzine of diesel naar de tanks stroomt.</span>
                     <span class="caption-detail">EVOS is actief in opslag en overslag van brandstoffen. Er is een pijpleidingverbinding naar Schiphol voor aanvoer van Jet Fuel. De tanks zijn klaar voor opslag van duurzame biobrandstoffen voor klanten en er wordt gekeken naar mogelijkheden voor waterstof.</span>
@@ -598,6 +679,7 @@
                 </div>
                 <div class="photo-item">
                     <img src="het-noordzeekanaal-gebied/11.jpg" alt="Het Noordzeekanaal Gebied" loading="lazy">
+                    <button class="nzkg-info-btn" aria-label="Toon informatie">i</button>
                 </div>
                 <div class="photo-caption pair-caption">
                     <span class="caption-main">Leon werkt als monteur bij Olam food ingredients (ofi) in Koog aan de Zaan.</span>
@@ -607,6 +689,7 @@
             </div>
             <div class="photo-item">
                 <img src="het-noordzeekanaal-gebied/12.jpg" alt="Het Noordzeekanaal Gebied" loading="lazy">
+                <button class="nzkg-info-btn" aria-label="Toon informatie">i</button>
                 <div class="photo-caption">
                     <span class="caption-main">Koen, Field Service Engineer bij Strohm.</span>
                     <span class="caption-detail">Strohm maakt sterke, lichte buizen die worden gebruikt om olie, gas, waterstof of CO₂ veilig door te voeren. Ze roesten niet, zijn makkelijk te installeren en gaan lang mee. Zo helpen ze hun klanten duurzamer te werken en dragen ze bij aan een schonere energievoorziening.</span>
@@ -615,6 +698,7 @@
             </div>
             <div class="photo-item">
                 <img src="het-noordzeekanaal-gebied/13.jpg" alt="Het Noordzeekanaal Gebied" loading="lazy">
+                <button class="nzkg-info-btn" aria-label="Toon informatie">i</button>
                 <div class="photo-caption">
                     <span class="caption-main">Jaap, projectdirecteur Hollandse Kust West van TenneT.</span>
                     <span class="caption-detail">Via het 380 kV transformatorstation Wijk aan Zee van TenneT komt energie van windmolens vanaf zee op het hoogspanningsnet. Dit bedient ruim 2 miljoen huishoudens. Nu zorgen windparken in Nederland voor 16% van de elektriciteit. Omdat de vraag naar elektriciteit enorm stijgt, moeten er meer windparken en transformatorstations bijkomen.</span>
@@ -623,6 +707,7 @@
             </div>
             <div class="photo-item">
                 <img src="het-noordzeekanaal-gebied/14.jpg" alt="Het Noordzeekanaal Gebied" loading="lazy">
+                <button class="nzkg-info-btn" aria-label="Toon informatie">i</button>
                 <div class="photo-caption">
                     <span class="caption-main">Jan werkt bij de havendienst van de Zeehaven IJmuiden waar hij onder andere schepen aansluit op walstroom.</span>
                     <span class="caption-detail">Een aansluiting op het elektriciteitsnet van de wal zorgt voor veel minder schadelijke uitstoot en geluidsoverlast dan het laten draaien van dieselmotoren. In de toekomst hopen ze meer walstroomaansluitingen te realiseren.</span>
@@ -631,6 +716,7 @@
             </div>
             <div class="photo-item" style="height: 90vh;">
                 <img src="het-noordzeekanaal-gebied/15.jpg" alt="Het Noordzeekanaal Gebied" loading="lazy">
+                <button class="nzkg-info-btn" aria-label="Toon informatie">i</button>
                 <div class="photo-caption">
                     <span class="caption-main">Angeliki leidt bij Tata Steel Nederland (TSN) de teams die de DeNOx gaan testen.</span>
                     <span class="caption-detail">Deze installatie wordt nu gebouwd en reduceert straks de uitstoot van stikstof (NOx). Samen met de grootste stofzuiger van Nederland (tegen stof, lood en andere zware metalen) en de nieuwe waterzuiveringsinstallatie maakt 'ie de industrie schoner. In 2045 wil de staalgigant zelfs volledig klimaatneutraal zijn.</span>
@@ -639,6 +725,7 @@
             </div>
             <div class="photo-item">
                 <img src="het-noordzeekanaal-gebied/16.jpg" alt="Het Noordzeekanaal Gebied" loading="lazy">
+                <button class="nzkg-info-btn" aria-label="Toon informatie">i</button>
                 <div class="photo-caption">
                     <span class="caption-main">Willem, Installatietechnicus Elektro en Instrumentatie bij het compressor- en mengstation Beverwijk van Gasunie.</span>
                     <span class="caption-detail">Gasunie test of de bestaande aardgasleiding tussen Spaarndam en Beverwijk geschikt is voor het transport van waterstof. De verwachting is dat er in het Noordzeekanaalgebied in 2030 naast aardgas ook waterstof wordt getransporteerd.</span>
@@ -647,6 +734,7 @@
             </div>
             <div class="photo-item">
                 <img src="het-noordzeekanaal-gebied/17.jpg" alt="Het Noordzeekanaal Gebied" loading="lazy">
+                <button class="nzkg-info-btn" aria-label="Toon informatie">i</button>
                 <div class="photo-caption">
                     <span class="caption-main">Anita, medewerker bij de divisie Organics van Renewi waar ze organische reststoffen verwerken en omzetten in biogas.</span>
                     <span class="caption-detail">Renewi zamelt afval in en recyclet het weer tot bruikbare materialen, zoals papier, metaal, kunststof, glas, hout, bouwstoffen, compost en energie. Daarmee draagt het concreet bij aan een circulaire en duurzame economie.</span>
@@ -655,6 +743,7 @@
             </div>
             <div class="photo-item">
                 <img src="het-noordzeekanaal-gebied/18.jpg" alt="Het Noordzeekanaal Gebied" loading="lazy">
+                <button class="nzkg-info-btn" aria-label="Toon informatie">i</button>
                 <div class="photo-caption">
                     <span class="caption-main">Guus is werkzaam bij HYCC als project development manager van waterstoffabriek H2era.</span>
                     <span class="caption-detail">Deze 500 megawatt elektrolyser is een van Europa's grootste groene waterstof initiatieven. Met deze fabriek willen we vanaf 2030 windenergie van zee optimaal omzetten naar groene waterstof voor de industrie & transport.</span>
@@ -662,7 +751,7 @@
                 </div>
             </div>
 
-            <div class="end-panel" style="flex-shrink: 0; height: 70vh; min-width: 800px; background: #1a1a1a; display: flex; flex-direction: column; justify-content: center; padding: 3rem;">
+            <div class="end-panel" style="flex-shrink: 0; background: #1a1a1a; display: flex; flex-direction: column; justify-content: center; padding: 3rem;">
                 <p style="font-family: 'Scala Sans SC', sans-serif; font-size: 1.2rem; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 3rem;">Einde van deze serie</p>
 
                 <p style="font-family: 'Scala Sans', sans-serif; font-size: 0.85rem; color: rgba(255,255,255,0.4); margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.05em;">Bekijk ook</p>
@@ -972,7 +1061,7 @@
         // Intersection Observer for lazy fade-in
         const observerOptions = {
             root: container,
-            rootMargin: '100px',
+            rootMargin: '500px',
             threshold: 0.1
         };
 
@@ -1040,6 +1129,35 @@
 
             if (title) titleObserver.observe(title);
         }
+
+        // Info button toggle (desktop)
+        const infoButtons = document.querySelectorAll('.nzkg-info-btn');
+        infoButtons.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                // Find parent photo-item or photo-pair
+                const photoItem = btn.closest('.photo-item');
+                const photoPair = btn.closest('.photo-pair');
+                const target = photoPair || photoItem;
+
+                // Close other open captions
+                document.querySelectorAll('.photo-item.info-active, .photo-pair.info-active').forEach(el => {
+                    if (el !== target) el.classList.remove('info-active');
+                });
+
+                // Toggle this one
+                target.classList.toggle('info-active');
+            });
+        });
+
+        // Close caption when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.nzkg-info-btn') && !e.target.closest('.photo-caption')) {
+                document.querySelectorAll('.photo-item.info-active, .photo-pair.info-active').forEach(el => {
+                    el.classList.remove('info-active');
+                });
+            }
+        });
     </script>
 </body>
 </html>

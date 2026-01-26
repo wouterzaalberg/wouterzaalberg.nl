@@ -22,7 +22,13 @@
 
 ## End Panel
 - Achtergrond: donkergroen `#1a3d1a`
-- 70vh hoogte
+- Hoogte: 100vh
+- Breedte: 33vw, max 600px, min 300px
+- Scroll fix: `margin-top: -80px`, `padding-top: 80px`
+
+## Lazy Loading
+- Eerste 5 foto's: `loading="eager"`
+- Rest: `loading="lazy"` met `rootMargin: 500px`
 
 ## Responsive
 - Foto's: `max-width: calc(100vw - 8rem)` via styles.css
