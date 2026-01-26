@@ -17,12 +17,14 @@
 - Foto hoogte: `clamp(58vh, 62vh, 68vh)`
 - Foto max-height: `clamp(550px, 55vh, 700px)`
 - Tekstpanel breedte: `clamp(260px, 22vw, 450px)`
-- Padding-top: `clamp(12vh, 16vh, 20vh)`
+- Verticale centering: `padding-top: calc((100vh - var(--content-height)) / 2)`
+  - `--content-height: clamp(58vh, 62vh, 68vh)`
 
 ### Tekstpanel Paginering
 - **Actief bij viewport hoogte < 1100px**
 - Splitst tekst per alinea
 - Titel (h2) en naam (h3) op elke pagina
+- **"Mijn tatoeage" sectie-titel en credit altijd op laatste pagina**
 - Knoppen (1, 2, 3...) onder het tekstpanel
 - Wrapper class: `.text-panel-wrapper`
 
@@ -38,7 +40,9 @@
 
 ## Elementen
 - Persoonsnaam: verborgen op desktop (`display: none`)
-- Scroll pijl: rechtsonder, geanimeerd (alleen vaste pijl, niet in intro)
+- Scroll pijl: alleen onder intro tekst (gecentreerd, `margin-top: 2rem`)
+- Progress indicator: `bottom: 2rem`, `right: 2rem` (horizontale scroll percentage)
+- End panel: 33vw, max 600px, min 300px
 - Logo: `mijn-tattoos/logo.png`, max 250px
 
 ## Blur Achtergronden
@@ -66,7 +70,8 @@
 
 ### Hint Tekst
 - Positie: `bottom: 2.5rem`, `left: 2.5rem`
-- "Terwijl jij de foto's bekijkt, wordt deze pagina ondergetatoeëerd"
+- "Terwijl jij de pagina bekijkt,<br>wordt deze pagina ondergetatoeëerd"
+- Kleur: goud 50% opacity `rgba(201, 162, 39, 0.5)`
 - Fade-in na 2s
 
 ## Mobiel (< 767px)

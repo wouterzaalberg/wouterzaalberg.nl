@@ -327,32 +327,6 @@
             height: 100%;
         }
 
-        .scroll-arrow {
-            position: fixed;
-            bottom: 3rem;
-            right: 3rem;
-            font-size: 2rem;
-            color: rgba(255, 255, 255, 0.6);
-            animation: arrowPulse 1.5s ease-in-out infinite;
-            cursor: pointer;
-            z-index: 100;
-            transition: opacity 0.3s ease;
-        }
-
-        .scroll-arrow:hover {
-            color: rgba(255, 255, 255, 1);
-        }
-
-        .scroll-arrow.hidden {
-            opacity: 0 !important;
-            pointer-events: none;
-        }
-
-        /* Hide individual arrows inside story panels */
-        .story-text-panel .scroll-arrow {
-            display: none;
-        }
-
         @keyframes arrowPulse {
             0%, 100% {
                 transform: translateX(0);
@@ -414,7 +388,9 @@
         }
 
         .title-intro-arrow {
-            display: none; /* Hidden on desktop, shown on mobile */
+            display: block;
+            margin-top: 2rem;
+            text-align: center;
         }
 
         .title-intro-arrow span {
@@ -422,19 +398,20 @@
             color: rgba(255, 255, 255, 0.6);
             animation: arrowPulse 1.5s ease-in-out infinite;
             cursor: pointer;
+            display: inline-block;
         }
 
         .title-intro-arrow span:hover {
             color: rgba(255, 255, 255, 1);
         }
 
-        /* Desktop: Tekst uitgelijnd aan bovenkant van foto's */
+        /* Desktop: Content verticaal gecentreerd, items onderling top-aligned */
         @media (min-width: 768px) {
             .tattoo-story {
                 --content-height: clamp(58vh, 62vh, 68vh);
                 align-items: flex-start;
                 justify-content: center;
-                padding-top: clamp(12vh, 16vh, 20vh);
+                padding-top: calc((100vh - var(--content-height)) / 2);
                 padding-left: 4rem;
                 padding-right: 4rem;
                 width: 100vw;
@@ -502,6 +479,32 @@
             }
         }
 
+        /* Progress indicator - desktop */
+        .progress-indicator {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            font-family: 'Scala Sans', sans-serif;
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.4);
+            z-index: 50;
+            pointer-events: none;
+            display: flex;
+            align-items: baseline;
+            gap: 0.1em;
+        }
+
+        .progress-indicator #progressNumber {
+            font-variant-numeric: tabular-nums;
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* Mobile photo popup - hidden on desktop */
+        .mobile-photo-popup {
+            display: none;
+        }
 
         /* Mobile */
         @media (max-width: 767px) {
@@ -753,10 +756,6 @@
                 margin-bottom: 1.5rem;
             }
 
-            .scroll-arrow {
-                display: none !important;
-            }
-
             .story-photo .person-name {
                 display: none;
             }
@@ -865,7 +864,6 @@
                         <p>Tijdens het zetten van de tatoeage was Ivy 17 en Ally pas 15 jaar oud. "Ik was er toen al van overtuigd dat ik nooit spijt zou krijgen. Ik ben een heel trotse kleindochter van een mijnwerker én ik heb me altijd met veel liefde gemengd in de bijzondere subculturen van Heerlen. Dat komt beide terug in onze tatoeage."</p>
                         <p class="credit">Tatoeage-artiest: Elke Sillen, Elke Sillen Tattoos in Stein</p>
                     </div>
-                    <span class="scroll-arrow">→</span>
                 </div>
             </div>
 
@@ -888,7 +886,6 @@
                         <p>Op Martijns arm staan de schacht van de Oranje-Nassau I, een mijnkar, een mijnlamp, de vlag van Heerlen en het symbool van de mijnbouw: de gekruiste hamer en moker. "Mijn tatoeage is meer dan een beeld, het is een symbool van identiteit, trots en geschiedenis."</p>
                         <p class="credit">Tatoeage-artiest: Paul God, Hand of God in Heerlen</p>
                     </div>
-                    <span class="scroll-arrow">→</span>
                 </div>
             </div>
 
@@ -912,7 +909,6 @@
                         <p>Zachtaardig, op zichzelf, lief - zo herinnert Nicole haar vader. Hij was vaak van huis, aan het werk op de mijn. Maar als hij thuis was, dan nam hij Nicole mee op tochtjes naar Duitsland met de auto, en 's avonds kroop ze dicht tegen hem aan als hij zijn sigaretje rolde op de bank. Ze mist hem nog iedere dag, haar vader, de mijnwerker. Zo kan ze hem niet alleen in gedachten, maar ook als tastbaar beeld bij zich houden.</p>
                         <p class="credit">Tatoeage-artiest: Wiel Handels, Tattoo You in Heerlen</p>
                     </div>
-                    <span class="scroll-arrow">→</span>
                 </div>
             </div>
 
@@ -935,7 +931,6 @@
                         <p>Toeval of niet, Boy is nog steeds verbonden met het vervoer uit de mijntijd. Hij woont nu in het deel van Schandelen waar vroeger de medewerkers van de Staatsspoorwegen een onderkomen kregen. Boy toont zijn tatoeage in één van de weinige bewaard gebleven LTM-bussen.</p>
                         <p class="credit">Tatoeage-artiest: Vincent Lancee, Onze Shop in Heerlen</p>
                     </div>
-                    <span class="scroll-arrow">→</span>
                 </div>
             </div>
 
@@ -958,7 +953,6 @@
                         <p>"Voor het ontwerp heb ik eerst met veel pijn en moeite opa's penningnummer moeten losweken bij oma. Het nummer van mijn andere opa vond ik via het Nederlands Mijnmuseum. Na het zetten van de tatoeage ben ik als eerste langs opa en oma gegaan. Opa Sjaak was echt blij verrast!"</p>
                         <p class="credit">Tatoeage-artiest: Cain Strufer, My Hood in Hoensbroek</p>
                     </div>
-                    <span class="scroll-arrow">→</span>
                 </div>
             </div>
 
@@ -981,7 +975,6 @@
                         <p>Wiels opa en meerdere ooms werkten jarenlang in de mijnen. Wiels peetoom, naar wie hij vernoemd is, overleed op jonge leeftijd aan kanker. "Hij was mijn echte steun en toeverlaat, ik keek enorm tegen hem op. Jaren na zijn overlijden besloot ik hem te eren met deze mijntatoeage, zodat ik hem voor altijd bij mij zou dragen."</p>
                         <p class="credit">Tatoeage-artiest: Gábor de Kütsán, TREES concept in Heerlen</p>
                     </div>
-                    <span class="scroll-arrow">→</span>
                 </div>
             </div>
 
@@ -1004,7 +997,6 @@
                         <p>Sharon komt uit een familie van mijnwerkers aan zowel moeders als vaders kant. Haar overgrootvader was machinist voor het kolentransport op de Miljoenenlijn en haar andere opa mijnwerker bij de Domaniale mijn én terreinknecht bij Rapid JC, voorloper van het huidige Roda JC waarvan Sharon al sinds haar negende supporter van is. De tatoeage is een eerbetoon aan haar opa's, maar sluit ook aan bij haar huidige leven. "In mijn tatoeage is alles met elkaar verweven."</p>
                         <p class="credit">Tatoeage-artiest: Manon Dam, Miss Poppy in Schinnen</p>
                     </div>
-                    <span class="scroll-arrow">→</span>
                 </div>
             </div>
 
@@ -1027,7 +1019,6 @@
                         <p>Wout is trots op zijn huis en zijn thuis, Parkstad. "Mijn tatoeage verbindt het verleden – een mijnwerker – met het heden, door een gevleugelde uitspraak die je in Parkstad veel hoort onder jongeren: Enne tuup, wat mij betreft een allesomvattende uitspraak. Het blauw in de tatoeage staat voor ruimte en tijd. Jonge mensen starten allerlei leuke initiatieven, er zijn enorm veel kansen. Ik voel me hier helemaal op mijn plek."</p>
                         <p class="credit">Tatoeage-artiest: Roy Aldenhoven, Zwart Goud Tattoo in Heerlen</p>
                     </div>
-                    <span class="scroll-arrow">→</span>
                 </div>
             </div>
 
@@ -1050,7 +1041,6 @@
                         <p>Bob staat bij het motorhome van Wingman Blackhills. De nachtvlinder in het logo is een verwijzing naar de mijnwerkers die iedere dag naar boven kwamen uit de duisternis. "De meesten van de brotherhood hebben de tijd van de mijnen en de periode erna meegemaakt. Het is iets wat we samen delen."</p>
                         <p class="credit">Tatoeage-artiest: Sil Deijs, Electric Tattooing in Nunspeet</p>
                     </div>
-                    <span class="scroll-arrow">→</span>
                 </div>
             </div>
 
@@ -1073,7 +1063,6 @@
                         <p>In de tatoeage op de rug van Marcel kon hij alles kwijt: zijn trots op de streek, zijn clubliefde, het verdriet (de schedel herinnert aan de overleden mijnwerkers), de strijd, de koempelmentaliteit en het kameraadschap. Zelfs zijn trouwe viervoeter, van wie hij na achttien jaar afscheid moest nemen, kreeg een plek.</p>
                         <p class="credit">Tatoeage-artiest: Vincent Lancee, Onze Shop in Heerlen</p>
                     </div>
-                    <span class="scroll-arrow">→</span>
                 </div>
             </div>
 
@@ -1096,7 +1085,6 @@
                         <p>Voor haar tatoeage koos Kelly voor een indringend portret van een mijnwerker waarin de vermoeidheid en de verslagenheid in de ogen is te zien. "Dat klinkt heel verdrietig, maar dat was wel de werkelijkheid voor deze sterke mensen."</p>
                         <p class="credit">Tatoeage-artiest: Nick op de Beke, Nick Grafix Tattoo in Heerlen</p>
                     </div>
-                    <span class="scroll-arrow">→</span>
                 </div>
             </div>
 
@@ -1119,7 +1107,6 @@
                         <p>Naast de Oranje Nassau I, de hamer en moker en de mijnlamp van zijn opa, draagt Ron ook altijd een fotorealistisch portret van zijn opa met zich mee. "Opa noemde me altijd 'batteroaf'. Vaak nam hij me mee naar dit bos in Heerlen waar we wandelden en fluitjes maakten van boomtakken."</p>
                         <p class="credit">Tatoeage-artiest: Vincent Lancee, Onze Shop in Heerlen</p>
                     </div>
-                    <span class="scroll-arrow">→</span>
                 </div>
             </div>
 
@@ -1140,7 +1127,6 @@
                         <p>De tatoeage van Roy ontstond 'helemaal op gevoel'. "Ik wilde een Roda-tatoeage en tekende een ontwerp met een mijnwerker." Zijn vrouw Simone, ook tatoeerder, zette 'm op de achterkant van zijn been, waar nog plek was. Het werd een stoere, sterke mijnwerker met stoppels in de traditionele tatoeagestijl waar Roy als tatoeëerder om bekendstaat. Trots toont hij zijn tatoeage midden in zijn shop.</p>
                         <p class="credit">Tatoeage-artiesten: Roy Aldenhoven en Simone Schmitz, Zwart Goud Tattoo in Heerlen</p>
                     </div>
-                    <span class="scroll-arrow">→</span>
                 </div>
             </div>
 
@@ -1161,7 +1147,6 @@
                         <p>"Mijn tatoeage loopt van schouder tot hand en is uit zes delen opgebouwd, allemaal waarheidsgetrouwe beelden uit het mijnverleden die niet vergeten mogen worden." Wim poseert bij de laatste overblijfselen – een lange muur – van de Oranje-Nassau III-mijn.</p>
                         <p class="credit">Tatoeage-artiest: Vincent Lancee, Onze Shop in Heerlen</p>
                     </div>
-                    <span class="scroll-arrow">→</span>
                 </div>
             </div>
 
@@ -1182,7 +1167,6 @@
                         <p>Zes weken voordat de mijn in Hückelhoven sloot, verbrijzelde Winy zijn linker onderbeen tijdens een ondergronds ongeluk. "Mijn been kwam terecht tussen een locomotief en een betoncontainer. Ik was 34 jaar en mijn toekomst als mijnwerker was voorbij. Ik heb er altijd een loopbeperking aan overgehouden, maar ik ben er trots op dat ik het werk heb aangedurfd. Mijn tatoeage liet ik zetten nadat in Duitsland in 2018 de allerlaatste mijn sloot: een eerbetoon aan het werk van opa, mijn vader – 40 jaren ondergronds – en mijn eigen 17 mijnwerkersjaren."</p>
                         <p class="credit">Tatoeage-artiest: Jack Versteegh, Heerlen</p>
                     </div>
-                    <span class="scroll-arrow">→</span>
                 </div>
             </div>
 
@@ -1203,7 +1187,6 @@
                         <p>Naast een portret van zijn opa, een mijnschacht en een mijngang, is René een van de weinigen die het verhaal van de paarden toont in een tatoeage. "Buiten dat ik het prachtige dieren vind, hebben ze een tijd lang ondergronds meegewerkt in de mijnen. Ze bleven altijd ondergronds en werden daar verzorgd."</p>
                         <p class="credit">Tatoeage-artiest: Laura Straat, StreetInk Tattoo Studio in Landgraaf</p>
                     </div>
-                    <span class="scroll-arrow">→</span>
                 </div>
             </div>
 
@@ -1224,7 +1207,6 @@
                         <p>"Als kinderen dragen wij de trots die onze vader voelde voor het mijnverleden nog steeds uit. Mijn tatoeage is een eerbetoon aan mijn vader, een mijnlamp omringd door de lievelingsbloemen van mijn overleden moeder. Bij het zien van de tattoo werd hij heel emotioneel. Niet alleen mijn vader, maar alle mijnwerkers hebben een zeer belangrijke rol gespeeld in onze geschiedenis en verdienen onze aandacht en respect." Op de foto wacht Wilhelmien op de bus, vlakbij waar haar vader al die jaren uitstapte voor zijn dienst in de Oranje-Nassau III.</p>
                         <p class="credit">Tatoeage-artiest: onbekend</p>
                     </div>
-                    <span class="scroll-arrow">→</span>
                 </div>
             </div>
 
@@ -1245,7 +1227,6 @@
                         <p>"Voor mijn tatoeage haalde ik inspiratie uit de familie. Mijn tante [Sharon Göbbels] heeft eenzelfde soort tatoeage. De bloemen rond de hamer en beitel heb ik zelf getekend. Ik zag vooral veel mannen met zo'n tatoeage. Ik wilde die van mij vrouwelijker maken, zodat hij beter bij mij zou passen. In deze tatoeage komt veel voor mij samen: Roda JC, mijn thuisstad Kerkrade en het mijnverleden."</p>
                         <p class="credit">Tatoeage-artiest: Bart van Wageningen, Body Corner in Heerlen</p>
                     </div>
-                    <span class="scroll-arrow">→</span>
                 </div>
             </div>
 
@@ -1266,7 +1247,6 @@
                         <p>Een plaat in een oud boek over de mijnen inspireerde Eric voor zijn tatoeage. "Er waren al veel symbolen in verwerkt, zoals de heilige Barbara en de taferelen uit het ondergrondse. Zelf heb ik onder andere de leeuw uit het wapen van Hoensbroek eraan toegevoegd. Zonder die mijnen was ook Hoensbroek een boerendorp gebleven. Het zou mooi zijn als iedereen even zou stilstaan bij onze geschiedenis, zodat het niet vergeten wordt."</p>
                         <p class="credit">Tatoeage-artiest: Paul God, Hand of God in Heerlen</p>
                     </div>
-                    <span class="scroll-arrow">→</span>
                 </div>
             </div>
 
@@ -1287,7 +1267,6 @@
                         <p>De hamer en beitel staan symbool voor Heerlen en de zwaluw is een zeemanssymbool voor 'land in zicht'. In Heerlen sloot Jeremy een lange stormachtige periode af, waarna vastigheid van een gezin in zicht kwam. In zijn laatste jaren woonde hij op Landgoed Terworm, waar hij iedere dag thuis ontvangen werd door zijn favoriete vogels, zwaluwen.</p>
                         <p class="credit">Tatoeage-artiest: Vincent Lancee, Onze Shop in Heerlen</p>
                     </div>
-                    <span class="scroll-arrow">→</span>
                 </div>
             </div>
 
@@ -1308,7 +1287,6 @@
                         <p>"Deze schets heb ik zelf gemaakt, vrij gebaseerd op het schachtgebouw. Voor mij verwijst deze tatoeage op een dubbele manier naar mijn afkomst als mijnwerkerszoon: niet alleen het mijngebouw op zich, maar de ON van Oranje Nassau vormen ook mijn eigen initialen. Voor mij is er een onlosmakelijke band tussen het mijnverleden en de muziek die ik maak en de teksten die ik daarvoor schrijf." Deze foto werd genomen op de zolder van de Oefenbunker, die niet lang erna afbrandde. Het was voor veel lokale muzikanten een geliefd thuishonk.</p>
                         <p class="credit">Tatoeage-artiest: Elke Offermans-Sillen, Athame Tattoo Studio in Heerlen</p>
                     </div>
-                    <span class="scroll-arrow">→</span>
                 </div>
             </div>
 
@@ -1329,7 +1307,6 @@
                         <p>Net als zijn 'mijncave' toont Eriks tatoeage veel symbolen uit het mijnverleden, waaronder de heilige Barbara, de rozenkrans waarmee gebeden werd voor een veilige terugkeer en twee duiven. "Duiven houden was een hobby van de mijnwerkers, maar voor mij betekenen ze vrijheid."</p>
                         <p class="credit">Tatoeage-artiest: Nick op de Beke, Nick Grafix Tattoo in Heerlen</p>
                     </div>
-                    <span class="scroll-arrow">→</span>
                 </div>
             </div>
 
@@ -1350,7 +1327,6 @@
                         <p>Op Nouds been roken de koeltorens, staat de Lange Jan nog overeind en prijkt een mijnschacht. "Ik draag het mijnverleden van de streek altijd bij me, ook als ik ver weg ben. Ik ben heel trots op de Oostelijke Mijnstreek en Heerlen in het bijzonder. Mijn volgende tatoeage wordt de tekst: 'Wenn inne get van Heele zeet'..."</p>
                         <p class="credit">Tatoeage-artiest: Cain Strufer, My Hood in Hoensbroek</p>
                     </div>
-                    <span class="scroll-arrow">→</span>
                 </div>
             </div>
 
@@ -1371,7 +1347,6 @@
                         <p>Opa en oma namen de kleinkinderen vaak mee wandelen en picknicken, op vakantie in Oostenrijk of op de Brunssummerheide. Een waarheidsgetrouwe replica van de mijnlamp van opa, voor hem het belangrijkste instrument ondergronds, wandelt voor altijd mee met Kay en Noa.</p>
                         <p class="credit">Tatoeage-artiest: Ish, SittardInk in Sittard</p>
                     </div>
-                    <span class="scroll-arrow">→</span>
                 </div>
             </div>
 
@@ -1392,7 +1367,6 @@
                         <p>In de tatoeage van Michael is D'r Joep een opvallend figuur. Dit standbeeld op de Markt van Kerkrade vormt het Nationaal Mijnwerkersmonument. "De waarde van de mijnwerkers voor Nederland wordt in mijn ogen zwaar onderschat. Het mijnverleden is een van de belangrijkste gebeurtenissen uit de Nederlandse geschiedenis na de Tweede Wereldoorlog. Het is eeuwig zonde als de verhalen uit deze tijd zouden verdwijnen."</p>
                         <p class="credit">Tatoeage-artiest: Cain Strufer, Tattooshop My Hood in Hoensbroek</p>
                     </div>
-                    <span class="scroll-arrow">→</span>
                 </div>
             </div>
 
@@ -1413,7 +1387,6 @@
                         <p>Dennis reed zijn vrachtwagen voor de grote evenknie van zijn tatoeage: de schacht van de Domaniale mijn in Kerkrade. Ook D'r Joep, het nationaal mijnwerkersmonument, staat op zijn been. "Ik heb diep respect voor de mijnwerkers en hetgeen zij ondergronds hebben moeten doorstaan. Dat mag nooit vergeten worden. Na de sluiting kregen ze nooit de waardering die ze hadden moeten krijgen. Ze werden aan hun lot overgelaten."</p>
                         <p class="credit">Tatoeage-artiest: Erik Lemeer, South Side Tattoo in Valkenburg</p>
                     </div>
-                    <span class="scroll-arrow">→</span>
                 </div>
             </div>
 
@@ -1434,7 +1407,6 @@
                         <p>De tatoeage van Rémon straalt verbroedering uit. Voetbalsupporters in de Oostelijke Mijnstreek, die hun eigen club en die van de Duitse buren omarmen. "Mijn tatoeage staat voor de pure trots op de regio en op haar verleden. Van koempelmentaliteit tot hardcore en van Roda JC tot Alemannia Aachen." Met dezelfde clubkleuren, een vergelijkbare taal en geschiedenis bestaat er een bijzondere band tussen deze twee voetbalclubs.</p>
                         <p class="credit">Tatoeage-artiest: Gábor Kütsán, TREES Concept in Heerlen</p>
                     </div>
-                    <span class="scroll-arrow">→</span>
                 </div>
             </div>
 
@@ -1454,7 +1426,6 @@
                         <p>Ook Aaron luisterde als kleine jongen naar de verhalen van opa. "Later kom je er pas achter hoe zwaar het werk in de mijnen was. Hoe hard daar is gewerkt, is bijna met geen woorden te omschrijven. De penning is voor mij ook een herinnering dat wij nu eigenlijk niks te klagen hebben."</p>
                         <p class="credit">Tatoeage-artiest: Mark Wittewel, Onze Shop in Heerlen</p>
                     </div>
-                    <span class="scroll-arrow">→</span>
                 </div>
             </div>
 
@@ -1474,7 +1445,6 @@
                         <p>Adinda komt uit Vlodrop. Niet om de hoek, maar geen wedstrijd wordt gemist. Opa was al supporter, haar vader gaat al 37 jaar naar Roda JC en zelf bracht ze haar zoontje mee naar het stadion toen hij 15 maanden was. "Mijn band met het mijnverleden voel ik door de club. Hier sta ik dankzij mijn opa en mijn vader en geef ik het gevoel en de historie weer door aan mijn zoontje."</p>
                         <p class="credit">Tatoeage-artiest Dionne: Janegie Bosch, Staal & Inkt in Heerlen<br>Tatoeage-artiest Adinda: Michael Dückers, My Hood in Hoensbroek</p>
                     </div>
-                    <span class="scroll-arrow">→</span>
                 </div>
             </div>
 
@@ -1495,7 +1465,6 @@
                         <p>Voor Bart staat de kraai symbool voor de mijnwerker: "Een kraai is slim, eigengereid en werkt samen met andere kraaien. Een stille, duistere kracht. De mijnlamp bracht licht in een donkere omgeving." Bart poseert in de buurt van het ziekenhuis in Heerlen, waar veel mijnwerkers werden opgenomen met stoflongen. Hier komen verdacht veel kraaien voor…</p>
                         <p class="credit">Tatoeage-artiest: Vincent Lancee, Onze Shop in Heerlen</p>
                     </div>
-                    <span class="scroll-arrow">→</span>
                 </div>
             </div>
 
@@ -1509,7 +1478,7 @@
                 <span id="progressNumber">0</span>%
             </div>
 
-            <div class="end-panel" style="flex-shrink: 0; height: 100vh; min-width: 800px; background: #3d2817; display: flex; flex-direction: column; justify-content: center; padding: 3rem;">
+            <div class="end-panel" style="flex-shrink: 0; height: 100vh; width: 33vw; max-width: 600px; min-width: 300px; background: #3d2817; display: flex; flex-direction: column; justify-content: center; padding: 3rem;">
                 <p style="font-family: 'Scala Sans SC', sans-serif; font-size: 1.2rem; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 3rem;">Einde van deze serie</p>
                 <p style="font-family: 'Scala Sans', sans-serif; font-size: 0.85rem; color: rgba(255,255,255,0.4); margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.05em;">Bekijk ook</p>
                 <nav style="display: flex; flex-direction: column; gap: 0.6rem;">
@@ -1537,16 +1506,13 @@
         </div>
     </div>
 
-    <!-- Global scroll arrow -->
-    <span class="scroll-arrow" id="globalScrollArrow">→</span>
-
     <!-- Tattoo line canvas -->
     <canvas id="tattooCanvas" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 5;"></canvas>
 
     <!-- Tattoo hint text -->
     <div id="tattooHint" style="position: fixed; bottom: 2.5rem; left: 2.5rem; z-index: 51; pointer-events: none; opacity: 0; transition: opacity 1.5s ease-in-out;">
-        <p style="font-family: 'Scala Sans', sans-serif; font-size: 0.95rem; color: rgba(255,255,255,0.5); font-style: italic; margin: 0; max-width: 280px; line-height: 1.6;">
-            Terwijl jij de foto's bekijkt, wordt deze pagina ondergetatoeëerd
+        <p style="font-family: 'Scala Sans', sans-serif; font-size: 0.95rem; color: rgba(201, 162, 39, 0.5); font-style: italic; margin: 0; max-width: 280px; line-height: 1.6;">
+            Terwijl jij de pagina bekijkt,<br>wordt deze pagina ondergetatoeëerd
         </p>
     </div>
 
@@ -1943,7 +1909,6 @@
         const container = document.querySelector('.tattoo-scroll-container');
         const allItems = document.querySelectorAll('.tattoo-title-intro, .tattoo-story, .end-panel');
         const titleIntro = document.querySelector('.tattoo-title-intro');
-        const globalArrow = document.getElementById('globalScrollArrow');
         let currentIndex = 0;
         let isAnimating = false;
 
@@ -1955,17 +1920,6 @@
         const DELTA_THRESHOLD = 50;  // Minimum delta to trigger scroll
         const COOLDOWN = 500;        // Ms to wait after scroll
         const MOMENTUM_THRESHOLD = 0.5; // Ignore if delta drops below this ratio
-
-        // Update arrow visibility
-        function updateArrowVisibility() {
-            if (!globalArrow) return;
-            // Hide on first page (title intro has own arrow) and last page (end panel)
-            if (currentIndex === 0 || currentIndex >= allItems.length - 1) {
-                globalArrow.classList.add('hidden');
-            } else {
-                globalArrow.classList.remove('hidden');
-            }
-        }
 
         // Scroll to target index
         function scrollToIndex(index) {
@@ -1981,7 +1935,6 @@
             }
 
             currentIndex = index;
-            updateArrowVisibility();
 
             allItems[currentIndex].scrollIntoView({
                 behavior: 'smooth',
@@ -1989,9 +1942,6 @@
                 inline: 'start'
             });
         }
-
-        // Initial arrow state
-        updateArrowVisibility();
 
         // Trigger scroll in direction
         function triggerScroll(direction) {
@@ -2052,13 +2002,13 @@
             }
         });
 
-        // Click on arrows to scroll right
-        const allArrows = document.querySelectorAll('.scroll-arrow, .title-intro-arrow span');
-        allArrows.forEach(arrow => {
-            arrow.addEventListener('click', () => {
+        // Click on intro arrow to scroll right
+        const introArrow = document.querySelector('.title-intro-arrow span');
+        if (introArrow) {
+            introArrow.addEventListener('click', () => {
                 scrollToIndex(currentIndex + 1);
             });
-        });
+        }
 
         // Desktop: Text pagination system - split by paragraph, title on each page
         // Only paginate on screens shorter than 1100px
@@ -2094,6 +2044,33 @@
 
                     if (allParagraphs.length <= 1) return;
 
+                    // Separate regular paragraphs from section-title and credit (always on last page)
+                    const sectionTitle = content.querySelector('.section-title');
+                    const credit = content.querySelector('.credit');
+                    const lastPageElements = [];
+                    if (sectionTitle) lastPageElements.push(sectionTitle);
+                    // Get paragraphs between section-title and credit
+                    const regularParagraphs = allParagraphs.filter(p =>
+                        !p.classList.contains('section-title') && !p.classList.contains('credit')
+                    );
+                    // Find paragraphs that come after section-title (part of "Mijn tatoeage" section)
+                    let afterSectionTitle = false;
+                    const lastPageParagraphs = [];
+                    allParagraphs.forEach(p => {
+                        if (p.classList.contains('section-title')) {
+                            afterSectionTitle = true;
+                            lastPageParagraphs.push(p);
+                        } else if (p.classList.contains('credit')) {
+                            lastPageParagraphs.push(p);
+                        } else if (afterSectionTitle) {
+                            lastPageParagraphs.push(p);
+                        }
+                    });
+
+                    // Paragraphs for pagination (before section-title)
+                    const paginateParagraphs = allParagraphs.filter(p => !lastPageParagraphs.includes(p));
+                    const lastPageHTML = lastPageParagraphs.map(p => p.outerHTML).join('');
+
                     const titleHTML = (h2 ? h2.outerHTML : '') + (h3 ? h3.outerHTML : '');
 
                     // Create measure container
@@ -2109,13 +2086,13 @@
                     `;
                     document.body.appendChild(measureDiv);
 
-                    // Build pages by adding whole paragraphs
+                    // Build pages by adding whole paragraphs (excluding last page elements)
                     const pages = [];
                     let currentPageParas = [];
                     let paraIndex = 0;
 
-                    while (paraIndex < allParagraphs.length) {
-                        const para = allParagraphs[paraIndex];
+                    while (paraIndex < paginateParagraphs.length) {
+                        const para = paginateParagraphs[paraIndex];
                         const testHTML = titleHTML + currentPageParas.map(p => p.outerHTML).join('') + para.outerHTML;
                         measureDiv.innerHTML = testHTML;
 
@@ -2130,9 +2107,10 @@
                         }
                     }
 
-                    // Add last page
-                    if (currentPageParas.length > 0) {
-                        pages.push(titleHTML + currentPageParas.map(p => p.outerHTML).join(''));
+                    // Add remaining paragraphs + last page elements to final page
+                    const finalPageContent = currentPageParas.map(p => p.outerHTML).join('') + lastPageHTML;
+                    if (finalPageContent) {
+                        pages.push(titleHTML + finalPageContent);
                     }
 
                     document.body.removeChild(measureDiv);
@@ -2418,6 +2396,42 @@
 
             window.addEventListener('scroll', updateProgress);
             updateProgress();
+        } else {
+            // Desktop: Progress indicator (horizontal scroll)
+            const progressNumber = document.getElementById('progressNumber');
+            let currentProgress = 0;
+            let targetProgress = 0;
+
+            function calculateProgress() {
+                const scrollLeft = container.scrollLeft;
+                const maxScroll = container.scrollWidth - container.clientWidth;
+                if (maxScroll > 0) {
+                    return Math.round((scrollLeft / maxScroll) * 100);
+                }
+                return 0;
+            }
+
+            function updateProgress() {
+                if (currentProgress !== targetProgress) {
+                    const diff = targetProgress - currentProgress;
+                    const step = diff > 0 ? Math.max(1, Math.ceil(diff / 8)) : Math.min(-1, Math.floor(diff / 8));
+                    currentProgress += step;
+
+                    if (Math.abs(targetProgress - currentProgress) <= 1) {
+                        currentProgress = targetProgress;
+                    }
+
+                    progressNumber.textContent = Math.max(0, Math.min(100, currentProgress));
+                }
+                requestAnimationFrame(updateProgress);
+            }
+
+            progressNumber.textContent = '0';
+            requestAnimationFrame(updateProgress);
+
+            container.addEventListener('scroll', () => {
+                targetProgress = calculateProgress();
+            });
         }
 
         // Match text panel width to photos (alleen < 1400px)
