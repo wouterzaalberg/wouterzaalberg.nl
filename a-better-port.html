@@ -841,7 +841,7 @@
                 </div>
             </div>
 
-            <div class="end-panel" style="flex-shrink: 0; height: 100vh; min-width: 600px; background: #1e3a4f; display: flex; flex-direction: column; justify-content: center; padding: 3rem;">
+            <div class="end-panel" style="flex-shrink: 0; height: 100vh; width: 33vw; max-width: 600px; min-width: 300px; background: #1e3a4f; display: flex; flex-direction: column; justify-content: center; padding: 3rem;">
                 <p style="font-family: 'Scala Sans SC', sans-serif; font-size: 1.2rem; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 3rem;">Einde van deze serie</p>
                 <p style="font-family: 'Scala Sans', sans-serif; font-size: 0.85rem; color: rgba(255,255,255,0.4); margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.05em;">Bekijk ook</p>
                 <nav style="display: flex; flex-direction: column; gap: 0.6rem;">
@@ -1963,9 +1963,9 @@
                     ctx.translate(point.x, point.y);
                     ctx.rotate(angle);
 
-                    // Draw ship shape - slightly brighter than other ships
-                    ctx.fillStyle = 'rgba(225, 200, 90, 0.6)';
-                    ctx.strokeStyle = 'rgba(180, 160, 70, 0.5)';
+                    // Draw ship shape - same color as other ships
+                    ctx.fillStyle = 'rgba(225, 200, 90, 0.4)';
+                    ctx.strokeStyle = 'rgba(180, 160, 70, 0.4)';
                     ctx.lineWidth = 1;
                     ctx.beginPath();
 
@@ -2104,8 +2104,8 @@
                     ctx.translate(point.x, point.y);
                     ctx.rotate(angle);
 
-                    ctx.fillStyle = 'rgba(225, 200, 90, 0.6)';
-                    ctx.strokeStyle = 'rgba(180, 160, 70, 0.5)';
+                    ctx.fillStyle = 'rgba(225, 200, 90, 0.4)';
+                    ctx.strokeStyle = 'rgba(180, 160, 70, 0.4)';
                     ctx.lineWidth = 1;
                     ctx.beginPath();
 
@@ -2319,33 +2319,34 @@
             // Calculate dynamic brightness based on photo number
             // Follows day/night cycle of photos: dark (night) -> light (day) -> dark (night)
             function getBackgroundBrightness(photoNum) {
-                // Map brightness range: 0.12 (very dark/night) to 0.55 (bright/day)
-                // Ship opacity range: 0.2 (dark) to 0.75 (bright)
+                // Map brightness range: 0.22 (dark/night) to 0.65 (bright/day)
+                // Ship opacity range: 0.3 (dark) to 0.85 (bright)
+                // Shifted up so map is always visible
 
                 let mapBrightness, shipOpacity;
 
                 if (photoNum <= 10) {
                     // Photo 1-10: dark (night photos)
-                    mapBrightness = 0.12;
-                    shipOpacity = 0.2;
+                    mapBrightness = 0.22;
+                    shipOpacity = 0.3;
                 } else if (photoNum <= 25) {
                     // Photo 10-25: gradually lighter (dawn to day)
                     const progress = (photoNum - 10) / 15;
-                    mapBrightness = 0.12 + (0.43 * progress); // 0.12 -> 0.55
-                    shipOpacity = 0.2 + (0.55 * progress);    // 0.2 -> 0.75
+                    mapBrightness = 0.22 + (0.43 * progress); // 0.22 -> 0.65
+                    shipOpacity = 0.3 + (0.55 * progress);    // 0.3 -> 0.85
                 } else if (photoNum <= 30) {
                     // Photo 25-30: peak brightness (midday)
-                    mapBrightness = 0.55;
-                    shipOpacity = 0.75;
+                    mapBrightness = 0.65;
+                    shipOpacity = 0.85;
                 } else if (photoNum <= 46) {
                     // Photo 30-46: gradually darker (dusk to night)
                     const progress = (photoNum - 30) / 16;
-                    mapBrightness = 0.55 - (0.43 * progress); // 0.55 -> 0.12
-                    shipOpacity = 0.75 - (0.55 * progress);   // 0.75 -> 0.2
+                    mapBrightness = 0.65 - (0.43 * progress); // 0.65 -> 0.22
+                    shipOpacity = 0.85 - (0.55 * progress);   // 0.85 -> 0.3
                 } else {
                     // Photo 46+: dark (night)
-                    mapBrightness = 0.12;
-                    shipOpacity = 0.2;
+                    mapBrightness = 0.22;
+                    shipOpacity = 0.3;
                 }
 
                 return { mapBrightness, shipOpacity };
@@ -2708,6 +2709,12 @@
                         interludeOverlay.classList.add('visible');
                     }
 
+                    // Hide nav during map interlude
+                    const navEl = document.querySelector('.horizontal-nav');
+                    if (navEl) {
+                        navEl.classList.add('map-active');
+                    }
+
                     // Show zoom controls
                     if (zoomControls) {
                         zoomControls.classList.add('visible');
@@ -2746,6 +2753,12 @@
                     // Hide overlay text
                     if (interludeOverlay) {
                         interludeOverlay.classList.remove('visible');
+                    }
+
+                    // Show nav again
+                    const navEl = document.querySelector('.horizontal-nav');
+                    if (navEl) {
+                        navEl.classList.remove('map-active');
                     }
 
                     // Hide zoom controls

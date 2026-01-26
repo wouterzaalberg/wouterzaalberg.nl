@@ -148,6 +148,13 @@
     left: 0;
     z-index: 100;
     padding: 1.5rem 2rem;
+    transition: opacity 0.3s ease;
+}
+
+/* Nav verbergen tijdens kaart interlude zodat markers klikbaar zijn */
+.abp-page .horizontal-nav.map-active {
+    pointer-events: none;
+    opacity: 0.3;
 }
 
 .abp-page .horizontal-nav .back-link {
@@ -2233,6 +2240,46 @@
     }
 }
 
+/* Kleine hoogte (700-750px) - grotere foto voor breder tekstvak */
+@media (min-width: 768px) and (max-height: 750px) and (min-height: 701px) {
+    /* GROTERE foto = BREDER tekstvak = minder wrap = KORTER tekstvak */
+    .abp-intro-photo-wrapper {
+        height: 78vh;
+    }
+
+    /* Foto 78vh centered = 11vh onder */
+    .abp-intro-panel {
+        padding-bottom: 11vh;
+    }
+
+    .abp-intro-section > .abp-hero-title {
+        bottom: 11vh;
+        font-size: 2.8rem;
+    }
+
+    .abp-intro-photo .abp-info-btn {
+        bottom: calc(11vh + 1rem);
+    }
+
+    .abp-intro-photo2 .abp-intro-photo-wrapper {
+        height: 88vh;
+    }
+
+    /* Tekst iets groter dan 700px breakpoint */
+    .abp-intro-text {
+        font-size: 0.82rem;
+        line-height: 1.55;
+    }
+
+    .abp-intro-text p {
+        margin-bottom: 0.5rem;
+    }
+
+    .abp-intro-content {
+        padding: 0.9rem;
+    }
+}
+
 /* Zeer kleine hoogte (< 700px) */
 @media (min-width: 768px) and (max-height: 700px) {
     /* GROTERE foto = BREDER tekstvak = minder wrap = KORTER tekstvak */
@@ -2313,8 +2360,10 @@
     .end-panel {
         min-width: 450px !important;
     }
+}
 
-    /* Map interlude overlay - links positioneren zodat markers niet overlappen */
+/* Map interlude overlay - links bij lage schermhoogte zodat markers klikbaar blijven */
+@media (min-width: 768px) and (max-height: 900px) {
     .abp-map-interlude-overlay {
         left: 3rem;
         transform: none;

@@ -42,6 +42,8 @@ CSS: `css/a-better-port.css`
 - CartoDB dark tiles, grayscale
 - Positie: `[52.410, 4.78]`, zoom 14
 - Dynamische brightness op basis van fotonummer (dag/nacht cyclus):
+  - Brightness range: `0.22` (nacht) tot `0.65` (dag)
+  - Ship opacity range: `0.3` (nacht) tot `0.85` (dag)
   - Foto 1-10: donker (nacht)
   - Foto 10-25: geleidelijk lichter (ochtend → middag)
   - Foto 25-30: maximale brightness (middag)
@@ -118,11 +120,23 @@ CSS: `css/a-better-port.css`
 - Titel: "De Haven in Beeld"
 - Subtitel: "Klik op een locatie om de foto te zien"
 - Klikbare "Scroll voor meer" knop
-- **< 1400px**: links gepositioneerd en links uitgelijnd (voorkomt marker overlap)
+- **≤ 900px hoogte**: links gepositioneerd en links uitgelijnd (voorkomt marker overlap)
+- **> 900px hoogte**: gecentreerd
+
+### Navigatie tijdens interlude
+- Nav wordt semi-transparant (`opacity: 0.3`) en `pointer-events: none`
+- Zorgt dat markers bovenaan klikbaar zijn
+
+## End Panel
+- Breedte: `33vw`, max `600px`, min `300px`
 
 ## Responsive - Small Desktop (768-1400px)
 - Sustainability chart bars: 20px hoogte
-- Map overlay: links uitgelijnd
+
+## Responsive - Kleine hoogte (700-750px)
+- Intro foto: 78vh (breder tekstvak)
+- Intro tekst: 0.82rem, line-height 1.55
+- Foto 2: 88vh
 
 ## Responsive - Kleine hoogte (max-height 1000px)
 - Sustainability chart bars: 16px hoogte
