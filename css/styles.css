@@ -1084,6 +1084,40 @@ img {
     background-color: #2a3a4a;
 }
 
+/* Social media links */
+.social-links {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.social-links a {
+    color: #1a2a3a;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.social-links a:hover {
+    color: #6a9fc7;
+    transform: scale(1.1);
+}
+
+.social-links svg {
+    display: block;
+}
+
+/* Phone and email links */
+.contact-text-overlay a.phone,
+.contact-text-overlay a.email {
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.contact-text-overlay a.phone:hover,
+.contact-text-overlay a.email:hover {
+    color: #1a2a3a;
+    text-decoration: underline;
+}
+
 /* Mobiel */
 @media (max-width: 767px) {
     .contact-section {
