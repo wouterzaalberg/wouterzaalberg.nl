@@ -70,7 +70,8 @@
         .tattoo-intro {
             display: flex;
             align-items: center;
-            justify-content: center;
+            justify-content: flex-start;
+            padding-left: 2rem;
             gap: 2rem;
             flex-shrink: 0;
             height: 100%;
@@ -143,7 +144,8 @@
         .tattoo-story {
             display: flex;
             align-items: center;
-            justify-content: center;
+            justify-content: flex-start;
+            padding-left: 2rem;
             gap: clamp(0.3rem, 0.5vw, 0.8rem);
             flex-shrink: 0;
             height: 100%;
@@ -152,7 +154,7 @@
         }
 
         .story-photo {
-            height: clamp(45vh, 35vw, 60vh);
+            height: clamp(50vh, 55vh, 65vh);
             flex-shrink: 0;
             display: flex;
             flex-direction: column;
@@ -168,10 +170,7 @@
         }
 
         .story-photo .person-name {
-            font-family: 'Scala Sans', sans-serif;
-            font-size: 0.9rem;
-            margin-top: 0.5rem;
-            font-weight: 600;
+            display: none;
         }
 
         .story-text-panel {
@@ -180,8 +179,8 @@
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
-            padding-top: clamp(18vh, 12vw, 21vh);
-            width: clamp(320px, 26vw, 480px);
+            padding-top: clamp(15vh, 18vh, 21vh);
+            width: clamp(240px, 20vw, 450px);
             height: 100vh;
             overflow: hidden;
             flex-shrink: 0;
@@ -202,25 +201,17 @@
         .story-text-content {
             position: relative;
             z-index: 1;
-            padding: 0 2rem 3rem 1.5rem;
+            padding: 0 1.5rem 1rem 1.5rem;
             color: #fff;
-            overflow-y: auto;
-            max-height: 80vh;
-            scrollbar-width: thin;
-            scrollbar-color: rgba(255,255,255,0.3) transparent;
-        }
-
-        .story-text-content::-webkit-scrollbar {
-            width: 6px;
-        }
-
-        .story-text-content::-webkit-scrollbar-track {
-            background: transparent;
-        }
-
-        .story-text-content::-webkit-scrollbar-thumb {
-            background: rgba(255,255,255,0.3);
-            border-radius: 3px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            min-width: 0;
+            max-width: 100%;
+            box-sizing: border-box;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
 
         .story-text-content h2 {
@@ -280,6 +271,60 @@
         /* Desktop read more button - hidden by default */
         .desktop-read-more {
             display: none;
+        }
+
+        /* Text pagination wrapper - contains panel + buttons */
+        .text-panel-wrapper {
+            display: flex;
+            flex-direction: column;
+            flex-shrink: 0;
+            flex-grow: 0;
+            width: clamp(260px, 22vw, 450px);
+        }
+
+        /* Text pagination - below text panel */
+        .text-pagination {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+            padding-left: 1.5rem;
+        }
+
+        .text-pagination button {
+            width: 1.8rem;
+            height: 1.8rem;
+            border: 1px solid rgba(255,255,255,0.4);
+            background: transparent;
+            color: rgba(255,255,255,0.6);
+            font-family: 'Scala Sans', sans-serif;
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .text-pagination button:hover {
+            border-color: rgba(255,255,255,0.8);
+            color: rgba(255,255,255,0.9);
+        }
+
+        .text-pagination button.active {
+            background: rgba(255,255,255,0.2);
+            border-color: #c9a227;
+            color: #fff;
+        }
+
+        .story-text-content .text-page {
+            display: none;
+            overflow: hidden;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            min-width: 0;
+            max-width: 100%;
+        }
+
+        .story-text-content .text-page.active {
+            display: block;
+            height: 100%;
         }
 
         .scroll-arrow {
@@ -369,10 +414,7 @@
         }
 
         .title-intro-arrow {
-            display: flex;
-            justify-content: flex-end;
-            width: 100%;
-            margin-top: 1rem;
+            display: none; /* Hidden on desktop, shown on mobile */
         }
 
         .title-intro-arrow span {
@@ -386,153 +428,80 @@
             color: rgba(255, 255, 255, 1);
         }
 
-        /* >= 1400px: Tekst uitgelijnd aan bovenkant van foto's */
-        @media (min-width: 1400px) {
+        /* Desktop: Tekst uitgelijnd aan bovenkant van foto's */
+        @media (min-width: 768px) {
             .tattoo-story {
+                --content-height: clamp(58vh, 62vh, 68vh);
                 align-items: flex-start;
-                padding-top: 18vh;
+                justify-content: center;
+                padding-top: clamp(12vh, 16vh, 20vh);
+                padding-left: 4rem;
+                padding-right: 4rem;
+                width: 100vw;
+                box-sizing: border-box;
+                gap: 1rem;
             }
 
             .story-photo {
-                height: auto;
+                height: var(--content-height) !important;
+                max-height: clamp(550px, 55vh, 700px);
+                padding: 0 !important;
+                margin: 0 !important;
+                display: flex;
+                align-items: flex-start;
+                flex-shrink: 0;
+                flex-grow: 0;
             }
 
             .story-photo img {
-                height: 60vh;
-            }
-
-            .story-text-panel {
-                height: auto;
-                max-height: 65vh;
-                padding-top: 0;
-                overflow-y: auto;
-            }
-
-            .tattoo-intro {
-                align-items: flex-start;
-                padding-top: 18vh;
-            }
-
-            .intro-photo-large {
-                height: auto;
-            }
-
-            .intro-photo-large img {
-                height: 60vh;
-            }
-
-            .intro-panel {
-                height: auto;
-                max-height: 65vh;
-                overflow-y: auto;
-            }
-        }
-
-        /* < 1400px: Foto's naast elkaar, tekst eronder */
-        @media (max-width: 1399px) and (min-width: 768px) {
-            .tattoo-story {
-                display: flex;
-                flex-wrap: wrap;
-                justify-content: center;
-                align-items: flex-start;
-                row-gap: 0;
-                column-gap: 1rem;
-                padding: 6rem 2rem 2rem;
-                width: 100vw;
-                height: auto !important;
-                min-height: auto !important;
-            }
-
-            /* Fotos als flex items - override base column layout */
-            .tattoo-story .story-photo {
-                flex-shrink: 0;
-                display: block !important;
-                height: auto !important;
-            }
-
-            .tattoo-story .story-photo img {
+                height: 100%;
                 width: auto;
-                height: 45vh !important;
-                display: block;
+                object-fit: contain;
             }
 
-            .tattoo-story .story-photo .person-name {
-                display: none !important;
-            }
-
-            /* Text panel: volledige breedte om naar volgende regel te gaan */
             .story-text-panel {
-                flex-basis: 100%;
-                display: flex !important;
-                flex-direction: row !important;
-                justify-content: center !important;
-                align-items: flex-start !important;
-                width: auto !important;
-                height: auto !important;
-                padding: 0 !important;
-                margin: 0.3rem 0 0 0 !important;
-                overflow: visible !important;
-            }
-
-            .story-text-bg,
-            .story-text-panel .scroll-arrow {
-                display: none !important;
-            }
-
-            .story-text-content {
-                position: relative !important;
-                column-count: 3;
-                column-gap: 2rem;
-                max-height: none !important;
+                height: var(--content-height) !important;
                 padding: 0 !important;
                 margin: 0 !important;
-                text-align: left;
-                overflow: visible !important;
-            }
-
-            .story-text-content > *:first-child,
-            .story-text-content h2 {
-                margin-top: 0 !important;
-            }
-
-            .story-text-content h2,
-            .story-text-content h3 {
-                column-span: all;
-            }
-
-            .story-text-content p:nth-of-type(n+3) {
-                display: block;
-            }
-
-            .story-text-content .desktop-read-more {
-                display: none;
-            }
-
-            /* Intro section */
-            .tattoo-intro {
+                overflow: hidden;
+                display: flex;
                 flex-direction: column;
-                align-items: center;
-                padding: 6rem 2rem 3rem;
-                gap: 2rem;
+                flex-shrink: 0;
+                flex-grow: 0;
+                width: clamp(260px, 22vw, 450px);
+            }
+
+            .story-text-panel .story-text-content {
+                padding-top: 0 !important;
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                overflow: hidden;
+            }
+
+            /* Portrait + Portrait stories: centered like all others */
+            /* No special styling needed - centering handles it */
+
+            .tattoo-intro {
+                align-items: flex-start;
+                padding-top: clamp(12vh, 16vh, 20vh);
             }
 
             .intro-photo-large {
                 height: auto;
-                max-height: 50vh;
             }
 
             .intro-photo-large img {
-                height: auto;
-                max-height: 50vh;
-                max-width: calc(100vw - 4rem);
+                height: clamp(58vh, 65vh, 73vh);
             }
 
             .intro-panel {
-                width: 100%;
-                max-width: calc(100vw - 4rem);
                 height: auto;
+                max-height: clamp(57vh, 64vh, 72vh);
+                overflow-y: auto;
             }
         }
+
 
         /* Mobile */
         @media (max-width: 767px) {
@@ -2091,26 +2060,170 @@
             });
         });
 
-        // Desktop < 1400px: Add read more buttons to text panels
-        if (window.innerWidth >= 768 && window.innerWidth <= 1400) {
-            const textContents = document.querySelectorAll('.story-text-content');
-            textContents.forEach(content => {
-                const paragraphs = content.querySelectorAll('p');
-                // Only add button if there are more than 2 paragraphs
-                if (paragraphs.length > 2) {
-                    const btn = document.createElement('button');
-                    btn.className = 'desktop-read-more';
-                    btn.textContent = 'Lees meer';
+        // Desktop: Text pagination system - split by paragraph, title on each page
+        // Only paginate on screens shorter than 1100px
+        if (window.innerWidth >= 768 && window.innerHeight < 1100) {
+            const stories = document.querySelectorAll('.tattoo-story');
 
-                    btn.addEventListener('click', () => {
-                        content.classList.toggle('expanded');
-                        btn.textContent = content.classList.contains('expanded') ? 'Verberg' : 'Lees meer';
+            function setupPagination() {
+                stories.forEach(story => {
+                    const photo = story.querySelector('.story-photo');
+                    const panel = story.querySelector('.story-text-panel');
+                    const content = panel ? panel.querySelector('.story-text-content') : null;
+                    if (!photo || !panel || !content) return;
+
+                    // Skip if already paginated
+                    if (content.querySelector('.text-page')) return;
+
+                    // Match panel height to photo
+                    const photoHeight = photo.offsetHeight;
+                    if (photoHeight > 0) {
+                        panel.style.height = photoHeight + 'px';
+                    }
+
+                    // Get available height
+                    const contentStyle = getComputedStyle(content);
+                    const availableHeight = photoHeight -
+                        parseFloat(contentStyle.paddingTop) -
+                        parseFloat(contentStyle.paddingBottom);
+
+                    // Get title elements and paragraphs
+                    const h2 = content.querySelector('h2');
+                    const h3 = content.querySelector('h3');
+                    const allParagraphs = Array.from(content.querySelectorAll('p'));
+
+                    if (allParagraphs.length <= 1) return;
+
+                    const titleHTML = (h2 ? h2.outerHTML : '') + (h3 ? h3.outerHTML : '');
+
+                    // Create measure container
+                    const measureDiv = document.createElement('div');
+                    measureDiv.style.cssText = `
+                        position: absolute;
+                        visibility: hidden;
+                        width: ${content.offsetWidth}px;
+                        padding: ${contentStyle.padding};
+                        font-family: ${contentStyle.fontFamily};
+                        font-size: ${contentStyle.fontSize};
+                        line-height: ${contentStyle.lineHeight};
+                    `;
+                    document.body.appendChild(measureDiv);
+
+                    // Build pages by adding whole paragraphs
+                    const pages = [];
+                    let currentPageParas = [];
+                    let paraIndex = 0;
+
+                    while (paraIndex < allParagraphs.length) {
+                        const para = allParagraphs[paraIndex];
+                        const testHTML = titleHTML + currentPageParas.map(p => p.outerHTML).join('') + para.outerHTML;
+                        measureDiv.innerHTML = testHTML;
+
+                        if (measureDiv.offsetHeight > availableHeight && currentPageParas.length > 0) {
+                            // Page is full, save it and start new page
+                            pages.push(titleHTML + currentPageParas.map(p => p.outerHTML).join(''));
+                            currentPageParas = [para];
+                            paraIndex++;
+                        } else {
+                            currentPageParas.push(para);
+                            paraIndex++;
+                        }
+                    }
+
+                    // Add last page
+                    if (currentPageParas.length > 0) {
+                        pages.push(titleHTML + currentPageParas.map(p => p.outerHTML).join(''));
+                    }
+
+                    document.body.removeChild(measureDiv);
+
+                    // If only 1 page, no pagination needed
+                    if (pages.length <= 1) return;
+
+                    // Build paginated HTML
+                    let pagesHTML = '';
+                    for (let i = 0; i < pages.length; i++) {
+                        pagesHTML += `<div class="text-page${i === 0 ? ' active' : ''}">${pages[i]}</div>`;
+                    }
+                    content.innerHTML = pagesHTML;
+
+                    // Create wrapper for panel + pagination
+                    const wrapper = document.createElement('div');
+                    wrapper.className = 'text-panel-wrapper';
+                    panel.parentNode.insertBefore(wrapper, panel);
+                    wrapper.appendChild(panel);
+
+                    // Create pagination buttons
+                    const pagination = document.createElement('div');
+                    pagination.className = 'text-pagination';
+                    for (let i = 0; i < pages.length; i++) {
+                        const btn = document.createElement('button');
+                        btn.textContent = (i + 1).toString();
+                        if (i === 0) btn.classList.add('active');
+                        pagination.appendChild(btn);
+                    }
+                    wrapper.appendChild(pagination);
+
+                    // Add event listeners
+                    const pageElements = content.querySelectorAll('.text-page');
+                    const buttons = pagination.querySelectorAll('button');
+
+                    buttons.forEach((btn, index) => {
+                        btn.addEventListener('click', () => {
+                            pageElements.forEach(p => p.classList.remove('active'));
+                            buttons.forEach(b => b.classList.remove('active'));
+                            pageElements[index].classList.add('active');
+                            btn.classList.add('active');
+                        });
                     });
+                });
+            }
 
-                    // Insert button after the 2nd paragraph
-                    paragraphs[1].after(btn);
+            // Run after images load
+            window.addEventListener('load', () => {
+                setTimeout(setupPagination, 100);
+            });
+
+            // Also run after short delay for eager-loaded images
+            setTimeout(setupPagination, 500);
+        }
+
+        // Large screens (>= 1100px height): no pagination, text panel can extend
+        if (window.innerWidth >= 768 && window.innerHeight >= 1100) {
+            const stories = document.querySelectorAll('.tattoo-story');
+            stories.forEach(story => {
+                const panel = story.querySelector('.story-text-panel');
+                if (panel) {
+                    panel.style.height = 'auto';
+                    panel.style.minHeight = 'auto';
+                    panel.style.maxHeight = 'none';
                 }
             });
+        }
+
+        // Desktop: Detect portrait+portrait stories and adjust alignment
+        if (window.innerWidth >= 768) {
+            function detectPortraitPairs() {
+                const stories = document.querySelectorAll('.tattoo-story');
+                stories.forEach(story => {
+                    const photos = story.querySelectorAll('.story-photo img');
+                    if (photos.length >= 2) {
+                        const img1 = photos[0];
+                        const img2 = photos[1];
+
+                        // Check if both images are portrait (taller than wide)
+                        const isPortrait1 = img1.naturalHeight > img1.naturalWidth;
+                        const isPortrait2 = img2.naturalHeight > img2.naturalWidth;
+
+                        if (isPortrait1 && isPortrait2) {
+                            story.classList.add('portrait-portrait');
+                        }
+                    }
+                });
+            }
+
+            // Run after images load
+            window.addEventListener('load', detectPortraitPairs);
         }
 
         // Mobile: Hide tattoo canvas and stop animation when scrolling past intro

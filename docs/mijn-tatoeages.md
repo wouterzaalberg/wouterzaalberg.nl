@@ -5,22 +5,40 @@
 - Story secties: Portret + Tattoo + Tekstpanel
 - Elke sectie: `min-width: 100vw`
 
-## Afmetingen (desktop) - Vloeiende schaling met clamp()
-- Foto's: `clamp(45vh, 35vw, 60vh)`
-- Intro foto: `clamp(45vh, 38vw, 70vh)`
-- Tekstpanel: `clamp(320px, 26vw, 480px)` breed, 100vh hoog
-- Intro panel: `clamp(45vh, 38vw, 70vh)` hoog, `clamp(320px, 26vw, 480px)` breed
-- Gap foto's: `clamp(0.3rem, 0.5vw, 0.8rem)` (schaalt met schermgrootte)
-- Padding-top tekstpanel: `clamp(18vh, 12vw, 21vh)`
+## Desktop Layout (≥ 768px)
 
-## Tekstpanel Uitlijning
-- `.story-text-panel`: `padding-top: clamp(18vh, 12vw, 21vh)`
-- `.story-text-content`: `padding: 0 2rem 3rem 1.5rem`
-- Centrering: `justify-content: center` op `.tattoo-story`
+### Responsive Systeem
+- Minimum ondersteunde resolutie: **1280x650**
+- Foto's + tekstpanel gecentreerd als groep (`justify-content: center`)
+- Vaste padding: 4rem links en rechts
+- Gap tussen elementen: 1rem
+
+### Afmetingen
+- Foto hoogte: `clamp(58vh, 62vh, 68vh)`
+- Foto max-height: `clamp(550px, 55vh, 700px)`
+- Tekstpanel breedte: `clamp(260px, 22vw, 450px)`
+- Padding-top: `clamp(12vh, 16vh, 20vh)`
+
+### Tekstpanel Paginering
+- **Actief bij viewport hoogte < 1100px**
+- Splitst tekst per alinea
+- Titel (h2) en naam (h3) op elke pagina
+- Knoppen (1, 2, 3...) onder het tekstpanel
+- Wrapper class: `.text-panel-wrapper`
+
+### Grote schermen (hoogte ≥ 1100px)
+- Geen paginering
+- Tekstpanel mag doorlopen naar beneden indien nodig
+- `height: auto` op tekstpanel
+
+### Portrait+Portrait Detection
+- JavaScript detecteert stories met twee staande foto's
+- Class `.portrait-portrait` toegevoegd
+- Centering handelt uitlijning automatisch af
 
 ## Elementen
-- Persoonsnaam: onder portretfoto, `font-weight: 600`, gekleurd
-- Scroll pijl: rechtsonder, geanimeerd
+- Persoonsnaam: verborgen op desktop (`display: none`)
+- Scroll pijl: rechtsonder, geanimeerd (alleen vaste pijl, niet in intro)
 - Logo: `mijn-tattoos/logo.png`, max 250px
 
 ## Blur Achtergronden
@@ -34,7 +52,8 @@
 2. Hamer en beitel (gekruist)
 3. Steenkool (hoekig brok)
 4. Schachtbok (A-frame)
-5. Penning (rond, nummer "45")
+5. Mijnkar
+6. Penning (rond)
 
 ### Technisch
 - Canvas: `position: fixed`, `pointer-events: none`, `z-index: 5`
@@ -46,35 +65,9 @@
 - Sparkle effect bij tekenpunt
 
 ### Hint Tekst
-- Positie: `bottom: 2rem`, `left: 2rem`
+- Positie: `bottom: 2.5rem`, `left: 2.5rem`
 - "Terwijl jij de foto's bekijkt, wordt deze pagina ondergetatoeëerd"
-- Fade-in na 2s, fade-out na eerste symbool
-
-## Responsive
-- **Desktop (≥ 1400px)**: Vloeiende schaling via `clamp()` - foto's naast tekstpanel
-- **768-1399px**: Aangepaste layout (zie onder)
-- **< 1200px**: Kleinere gap (`0.2rem`)
-- **< 1024px**: Kleinere fontsizes in tekstpanel
-- **< 767px**: Mobiele layout (zie onder)
-
-## Tablet/Small Desktop (768-1399px)
-
-### Story Layout
-- Foto's naast elkaar (horizontaal), tekst eronder
-- Beide foto's: `height: 45vh`
-- Tekst in 3 kolommen (`column-count: 3`)
-- Persoonsnaam verborgen
-
-### Breedte Synchronisatie (JavaScript)
-- ResizeObserver meet foto breedtes
-- Tekstpanel krijgt `width = foto1 + foto2 + gap (16px)`
-- Zorgt dat tekst exact zo breed is als de foto's samen
-
-### CSS Structuur
-- `.tattoo-story`: `display: flex`, `flex-wrap: wrap`, `justify-content: center`
-- `.story-photo`: `display: block` (geen flex-direction)
-- `.story-text-panel`: `flex-basis: 100%` (forceert wrap naar nieuwe regel)
-- `.story-text-content`: `column-count: 3`, `column-gap: 2rem`
+- Fade-in na 2s
 
 ## Mobiel (< 767px)
 
@@ -109,6 +102,9 @@ Elke story sectie heeft de volgende structuur:
 - Tik ergens om te sluiten
 - Alleen voor `.float-photo` afbeeldingen
 
-### Progress Indicator (mobiel)
-- Positie: linksonder (1.5rem)
-- Toont scroll percentage (0-100%)
+## Geteste Resoluties
+- 1280x650 (minimum) ✓
+- 1600x900 ✓
+- 1920x1080 ✓
+- 1920x1200 ✓
+- 2400x1300 ✓
