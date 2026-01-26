@@ -26,9 +26,9 @@ Font: Adobe Typekit Chloe (`https://use.typekit.net/qwc4lnx.css`)
 - Progress indicator linksonder
 
 ## Titel Instort-animatie
-- Na 5 seconden vallen letters naar beneden
+- Na 4 seconden vallen letters naar beneden
 - Staggered delays, random rotaties
-- Na ~10 seconden fade terug naar origineel
+- Na ~9 seconden fade terug naar origineel
 
 ## Progress Indicator
 - Positie: `bottom: 2rem`, `left: 2rem`
@@ -72,13 +72,14 @@ Font: Adobe Typekit Chloe (`https://use.typekit.net/qwc4lnx.css`)
 - Standaard: 70vh
 - `size-large`: 90vh
 
-## Highlighted Photos (3, 12, 23a, 28)
+## Highlighted Photos (3, 18, 12, 23a, 28, 46, 56)
 - Gekleurd tekstpaneel ernaast
-- Part-1: `rgba(197, 90, 17, 0.7)`
-- Part-2: `rgba(107, 122, 138, 0.7)`
-- Part-3: `rgba(139, 154, 107, 0.7)`
+- Part-1: `rgba(197, 90, 17, 0.7)` - foto 3, 18
+- Part-2: `rgba(107, 122, 138, 0.7)` - foto 12, 23a, 28
+- Part-3: `rgba(139, 154, 107, 0.7)` - foto 46, 56
+- Horizontale foto's (23a, 56): panel loopt achter foto door met `margin-left: -80px`
 
-## Zoom Effect (foto 3, 12, 23a, 28, 40, 56, 65)
+## Zoom Effect (foto 3, 18, 12, 23a, 28, 40, 46, 56, 65)
 - Wrapper met `overflow: hidden`
 - Class `zoom-delayed` → `zoom-active`
 - 2s delay, 14s zoom naar `scale(1.06)`
@@ -97,6 +98,17 @@ Font: Adobe Typekit Chloe (`https://use.typekit.net/qwc4lnx.css`)
 - **Highlighted panels**: zelfde hoogte als foto's (70vh), smaller width (180px)
 - **Foto's en captions**: max-width calc(100vw - 4rem)
 - **Mijnstreek insert**: 30vw grid kolommen, 50vh map hoogte
+
+## Responsive - Short Screens (max-height 950px)
+- **Info buttons**: "i" knop op foto's met captions, caption als overlay onderaan foto
+
+## Responsive - Short Screens (max-height 899px)
+- **Het grote slopen**: vereenvoudigde tijdslijn (desktop-only periodes verborgen, geen details)
+- **Mijnstreek insert**: statistieken met paginering (6+6 mijnen)
+- **Uit het dal**: foto verborgen, Bevolkingstrend verplaatst naar row-2, statistieken 4+3 kolommen
+
+## Responsive - Short Screens (max-height 750px)
+- **Als expositie insert**: foto grid 3 kolommen (i.p.v. 2), kleinere foto's (180x126px)
 
 ## Responsive - Small Height (max-height 650px)
 - **Mijnstreek insert**: 28vw grid, 45vh map, kleinere fonts en spacing
