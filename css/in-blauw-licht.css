@@ -247,7 +247,7 @@
 
 .ibl-hero-panel-text {
     font-family: 'Scala Sans', sans-serif;
-    font-size: 1rem;
+    font-size: clamp(0.9rem, 0.5rem + 0.7vw, 1.5rem);
     line-height: 2.2;
     color: var(--ibl-text);
     opacity: 0.9;
@@ -275,7 +275,7 @@
 
 .ibl-hero-subtitle {
     font-family: 'Scala Sans', sans-serif;
-    font-size: 0.85rem;
+    font-size: clamp(0.7rem, 0.5rem + 0.3vw, 0.85rem);
     letter-spacing: 0.15em;
     text-transform: uppercase;
     color: var(--ibl-text-muted);
@@ -487,7 +487,7 @@
 
 .ibl-insert .ibl-insert-caption-header {
     font-family: 'Scala Sans SC', sans-serif;
-    font-size: 1.2rem;
+    font-size: clamp(0.85rem, 0.5rem + 0.7vw, 1.2rem);
     text-transform: uppercase;
     letter-spacing: 0.1em;
     margin-bottom: 1.2rem;
@@ -496,7 +496,7 @@
 
 .ibl-insert .ibl-insert-caption-text {
     font-family: 'Scala Sans', sans-serif;
-    font-size: 1.2rem;
+    font-size: clamp(0.85rem, 0.5rem + 0.7vw, 1.2rem);
     line-height: 1.9;
     color: rgba(255, 255, 255, 0.85);
 }
@@ -539,6 +539,34 @@
 .ibl-toggle-all-btn.active {
     background: #1a1a1a;
     color: #ffffff;
+}
+
+/* Progress indicator */
+.ibl-progress {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    font-family: 'Scala Sans', sans-serif;
+    font-size: 0.85rem;
+    color: rgba(0, 0, 0, 0.3);
+    z-index: 50;
+    pointer-events: none;
+    display: flex;
+    align-items: baseline;
+    gap: 0.1em;
+}
+
+.ibl-progress-number {
+    font-variant-numeric: tabular-nums;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: rgba(0, 0, 0, 0.4);
+    transition: color 0.3s ease;
+}
+
+.ibl-progress-percent {
+    font-size: 0.75rem;
+    opacity: 0.7;
 }
 
 /* Info button */
@@ -713,11 +741,6 @@
         max-width: 550px;
     }
 
-    .ibl-hero-panel-text {
-        font-size: 1.5rem;
-        line-height: 2.2;
-    }
-
     .ibl-hero-panel-text p {
         margin-bottom: 2.5rem;
     }
@@ -808,6 +831,21 @@
         display: none !important;
     }
 
+    .ibl-progress {
+        bottom: 1rem;
+        right: 1rem;
+        color: rgba(0, 0, 0, 0.25);
+    }
+
+    .ibl-progress-number {
+        font-size: 1rem;
+        color: rgba(0, 0, 0, 0.3);
+    }
+
+    .ibl-progress-percent {
+        font-size: 0.65rem;
+    }
+
     /* Hero sectie - verticaal */
     .ibl-hero {
         min-width: 100% !important;
@@ -842,12 +880,7 @@
     }
 
     .ibl-hero-subtitle {
-        font-size: 0.7rem;
         margin-bottom: 0.25rem;
-    }
-
-    .ibl-hero-title {
-        font-size: 3.2rem;
     }
 
     .ibl-hero-panel {
@@ -862,7 +895,6 @@
     }
 
     .ibl-hero-panel-text {
-        font-size: 0.9rem;
         line-height: 1.8;
     }
 
@@ -1004,12 +1036,10 @@
     }
 
     .ibl-insert .ibl-insert-caption-header {
-        font-size: 0.9rem;
         margin-bottom: 0.75rem;
     }
 
     .ibl-insert .ibl-insert-caption-text {
-        font-size: 0.9rem;
         line-height: 1.7;
     }
 }

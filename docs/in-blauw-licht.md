@@ -30,7 +30,8 @@ Foto's: `in-blauw-licht/foto 1.jpg` t/m `foto 32.jpg`
 
 ### Introtekst
 - "Fotograaf Wouter Zaalberg" in rood (`#c83232`)
-- > 1400px: 1.5rem, meer spacing, uitgelijnd op onderkant titel
+- Font-size: `clamp(0.9rem, 0.5rem + 0.7vw, 1.5rem)`
+- Subtitle: `clamp(0.7rem, 0.5rem + 0.3vw, 0.85rem)`
 
 ## Scroll Systeem
 - `position: fixed` container
@@ -45,7 +46,8 @@ Foto's: `in-blauw-licht/foto 1.jpg` t/m `foto 32.jpg`
 ## Insert Secties (foto 10, 21, 29)
 - 100vw breed, politieblauw achtergrond (#1a3a5c)
 - Foto: 85vh met zoom effect (12s, scale 1.05)
-- Caption: 450px breed, 1.2rem, wit
+- Caption: 450px breed, wit
+- Caption font-size: `clamp(0.85rem, 0.5rem + 0.7vw, 1.2rem)`
 - Fade-in animatie bij in beeld komen
 - Achtergrond + caption faden uit bij verder scrollen
 
@@ -59,13 +61,19 @@ Foto's: `in-blauw-licht/foto 1.jpg` t/m `foto 32.jpg`
 - Alleen zichtbaar vanaf foto 2
 - Toggle tekst wisselt
 
+## Progress Indicator
+- Positie: `bottom: 2rem`, `right: 2rem`
+- Donkere kleur (past bij lichte achtergrond)
+- Berekent scroll percentage (horizontaal desktop, verticaal mobiel)
+
 ## Politiestrepen Animatie
-Trigger: bij foto 1 (begin pagina), achter de foto's
+Trigger: bij foto 1 (begin) én vanaf foto 30 tot end panel (einde)
 
 ### Strepen
 - 4 rode (bovenste 50vh)
 - 5 blauwe (onderste 50vh)
 - Diagonaal -65deg, 15% opacity
+- z-index: 1 (achter end panel)
 
 ### Beweging
 - Rood: van -60vh naar +120vh (omlaag)
@@ -73,12 +81,13 @@ Trigger: bij foto 1 (begin pagina), achter de foto's
 - Horizontaal: -15vw naar +15vw
 
 ## End Panel
-- 100vh, achtergrond `#1a2530`
+- 100vh, 33vw, max 600px, min 300px
+- Achtergrond: `#1a2530`
+- z-index: 2 (boven strepen)
 
 ## Responsive
-- **> 1400px**: Grotere introtekst (1.5rem), meer spacing
+- Tekst schaalt via clamp() functies
 - **< 1024px**: Intro gecentreerd, foto's 50vh/80vh
 - **< 767px**: Verticaal scrollen, strepen verborgen
-  - Titel: 3.2rem
   - Insert secties: foto 100%, caption eronder, 2rem blauw boven foto
   - Navigatie met gradient achtergrond

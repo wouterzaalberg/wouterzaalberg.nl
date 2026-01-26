@@ -24,6 +24,11 @@
         <span class="toggle-text">Toon alle onderschriften</span>
     </button>
 
+    <!-- Progress indicator -->
+    <div class="ibl-progress" id="progressIndicator">
+        <span class="ibl-progress-number" id="progressNumber">0</span><span class="ibl-progress-percent">%</span>
+    </div>
+
     <div class="horizontal-scroll-container" id="scrollContainer">
         <!-- Police stripes animation -->
         <div class="ibl-stripes-red" id="stripesRed"></div>
@@ -420,7 +425,7 @@
                 </div>
             </div>
 
-            <div class="end-panel" style="flex-shrink: 0; height: 100vh; min-width: 800px; background: #1a2530; display: flex; flex-direction: column; justify-content: center; padding: 3rem;">
+            <div class="end-panel" style="flex-shrink: 0; height: 100vh; width: 33vw; max-width: 600px; min-width: 300px; background: #1a2530; display: flex; flex-direction: column; justify-content: center; padding: 3rem; position: relative; z-index: 2;">
                 <p style="font-family: 'Scala Sans SC', sans-serif; font-size: 1.2rem; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 3rem;">Einde van deze serie</p>
                 <p style="font-family: 'Scala Sans', sans-serif; font-size: 0.85rem; color: rgba(255,255,255,0.4); margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.05em;">Bekijk ook</p>
                 <nav style="display: flex; flex-direction: column; gap: 0.6rem;">
@@ -589,6 +594,7 @@
         const stripesRed = document.getElementById('stripesRed');
         const stripesBlue = document.getElementById('stripesBlue');
         const photoBlocks = document.querySelectorAll('.ibl-photo-block');
+        const endPanel = document.querySelector('.end-panel');
 
         // Define which photos trigger stripes (bij begin van de pagina)
         const stripePhotoIndices = [0]; // 0-indexed (foto 1)
@@ -600,12 +606,12 @@
             let shouldShow = false;
             let animationProgress = 0;
 
+            // Check begin (foto 1)
             stripePhotoIndices.forEach(index => {
                 if (index < photoBlocks.length) {
                     const block = photoBlocks[index];
                     const blockLeft = block.offsetLeft;
                     const blockWidth = block.offsetWidth;
-                    const blockCenter = blockLeft + blockWidth / 2;
 
                     // Trigger zone: from 1 screen before to 1 screen after the photo
                     const zoneStart = blockLeft - window.innerWidth;
@@ -623,6 +629,29 @@
                     }
                 }
             });
+
+            // Check einde (vanaf foto 30 tot end panel)
+            const photo30 = photoBlocks[25]; // Photo 30 is index 25 (na 3 inserts)
+            if (photo30 && endPanel) {
+                const startLeft = photo30.offsetLeft;
+                const panelLeft = endPanel.offsetLeft;
+                const panelWidth = endPanel.offsetWidth;
+
+                // Trigger zone: from photo 30 to end of panel
+                const zoneStart = startLeft - window.innerWidth;
+                const zoneEnd = panelLeft + panelWidth;
+
+                if (scrollLeft >= zoneStart && scrollLeft <= zoneEnd) {
+                    shouldShow = true;
+
+                    // Progress: 0 when entering zone, 1 when at insert
+                    const totalZoneWidth = zoneEnd - zoneStart;
+                    const positionInZone = scrollLeft - zoneStart;
+                    const progress = positionInZone / totalZoneWidth;
+
+                    animationProgress = Math.max(animationProgress, progress);
+                }
+            }
 
             if (shouldShow) {
                 // Horizontal: start left of center (-15vw), move to right of center (+15vw)
@@ -752,6 +781,64 @@
                 });
             }
         }
+
+        // Progress indicator
+        const progressNumber = document.getElementById('progressNumber');
+        let currentProgress = 0;
+        let targetProgress = 0;
+
+        function calculateProgress() {
+            const isMobile = window.innerWidth <= 767;
+
+            if (isMobile) {
+                // Mobile: use vertical scroll
+                const scrollTop = window.scrollY || document.documentElement.scrollTop;
+                const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+                if (maxScroll > 0) {
+                    return Math.round((scrollTop / maxScroll) * 100);
+                }
+                return 0;
+            } else {
+                // Desktop: use horizontal scroll
+                const scrollLeft = container.scrollLeft;
+                const maxScroll = container.scrollWidth - container.clientWidth;
+                if (maxScroll > 0) {
+                    return Math.round((scrollLeft / maxScroll) * 100);
+                }
+                return 0;
+            }
+        }
+
+        function updateProgress() {
+            if (currentProgress !== targetProgress) {
+                const diff = targetProgress - currentProgress;
+                const step = diff > 0 ? Math.max(1, Math.ceil(diff / 8)) : Math.min(-1, Math.floor(diff / 8));
+                currentProgress += step;
+
+                if (Math.abs(targetProgress - currentProgress) <= 1) {
+                    currentProgress = targetProgress;
+                }
+
+                progressNumber.textContent = Math.max(0, Math.min(100, currentProgress));
+            }
+            requestAnimationFrame(updateProgress);
+        }
+
+        // Initialize
+        progressNumber.textContent = '0';
+        requestAnimationFrame(updateProgress);
+
+        // Update on scroll
+        container.addEventListener('scroll', () => {
+            targetProgress = calculateProgress();
+        });
+
+        // Mobile: listen to window scroll
+        window.addEventListener('scroll', () => {
+            if (window.innerWidth <= 767) {
+                targetProgress = calculateProgress();
+            }
+        }, { passive: true });
     </script>
 </body>
 </html>
