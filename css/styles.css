@@ -1559,7 +1559,7 @@ img {
     }
 
     .hero-name {
-        top: -62vh !important;
+        top: -55vh !important;
         font-size: 0.8rem;
         letter-spacing: 0.15em;
         margin-bottom: 0;
@@ -1568,7 +1568,7 @@ img {
     }
 
     .hero-tagline {
-        top: calc(-62vh + 1.6rem) !important;
+        top: calc(-55vh + 1.6rem) !important;
         font-size: 1.5rem;
         line-height: 1.15;
         margin-bottom: 0;
@@ -1578,7 +1578,7 @@ img {
     }
 
     .hero-tagline-italic {
-        top: calc(-62vh + 4rem) !important;
+        top: calc(-55vh + 4rem) !important;
         font-size: 1.3rem;
         margin-bottom: 0;
         color: #ffffff !important;
