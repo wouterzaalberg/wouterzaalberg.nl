@@ -70,6 +70,11 @@
 
 ## Mobiele Hero Rotatie (< 767px)
 
+### Titel positionering
+- Titel elementen (naam, tagline) gepositioneerd met `top: -62vh` relatief aan overlay
+- `overflow: visible` op `.hero-section` om clipping te voorkomen
+- Spacing tussen regels: 1.6rem en 4rem
+
 ### Foto rotatie
 - 5 foto's uit grote series roteren elke 5 seconden
 - Cross-fade transitie (1s)

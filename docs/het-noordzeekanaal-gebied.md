@@ -55,4 +55,6 @@ Foto 2 → Intro panel → Foto 1 → Foto paar 3+4 → Foto 5 → etc.
 - Desktop klein: `height: auto`, `min-height: 70vh`
 
 ## Scroll
-Zie `docs/horizontal-scroll.md` voor de verbeterde scroll logica.
+- Titel panel (`.nzkg-title-panel`) is geen scroll-stop
+- Scrollen gaat direct van eerste foto naar tweede foto
+- Zie `docs/horizontal-scroll.md` voor de verbeterde scroll logica
