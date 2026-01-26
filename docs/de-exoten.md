@@ -53,6 +53,8 @@
 ## Verticale Labels
 - Cursieve accent letter: `<span class="accent">t</span>`
 - Voorbeelden: Wa**t**erteunisbloem, Vlinder**s**truik
+- **Letter animatie**: letters faden in willekeurige volgorde in wanneer label in beeld scrollt
+- **Titel overlap fade**: labels faden uit wanneer ze de "De Exoten" titel kruisen
 
 ## Secties met margin-left: 12rem
 rivierkreeft, vederkruid, vlinderstruik, waterteunisbloem, watercrassula, kleine-waterteunisbloem, japanse-oester, muskusrat
@@ -75,7 +77,12 @@ rivierkreeft, vederkruid, vlinderstruik, waterteunisbloem, watercrassula, kleine
 - Border: 1px
 - Titel: 0.65rem
 - Tekst: 0.65rem, line-height 1.4
-- Classes: `.photo-caption-box`, `.caption-box`, `.foto-32-caption`, `.muskusrat-caption-box`
+- Classes: alle caption boxes uniform gestyled
+- **Responsive breedtes met clamp()**: bijv. `clamp(220px, 22vw, 320px)`
+
+### Scroll
+- Simpele horizontale scroll (geen snap)
+- `scroll-snap-type: none`
 
 ### Desktop Foto Popup
 - Klik om te vergroten, loslaten om te sluiten

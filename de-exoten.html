@@ -8,6 +8,8 @@
     <style>
         body.horizontal-scroll-page {
             background: #ffffff;
+            overflow-x: hidden; /* Body blijft hidden, container scrollt */
+            overflow-y: hidden;
         }
 
         .horizontal-nav {
@@ -19,8 +21,27 @@
             color: #1a1a1a;
         }
 
+        /* SCROLL FIX: Geen snap, normale horizontale scroll */
+        .horizontal-scroll-container {
+            scroll-snap-type: none !important;
+            overflow-x: auto !important;
+            overflow-y: hidden !important;
+            scroll-behavior: auto !important;
+        }
+
         .horizontal-scroll-content {
             gap: 10rem;
+            overflow: visible !important;
+            width: max-content;
+        }
+
+        .horizontal-scroll-content > * {
+            scroll-snap-align: none !important;
+            scroll-snap-stop: normal !important;
+        }
+
+        .photo-item {
+            scroll-snap-align: none !important;
         }
 
         .photo-item {
@@ -201,6 +222,21 @@
             font-style: italic;
         }
 
+        /* Letter animatie voor vertical labels */
+        .vertical-label .letter {
+            display: inline-block;
+            opacity: 0;
+            transition: opacity 0.4s ease-out;
+        }
+
+        .vertical-label .letter.visible {
+            opacity: 1;
+        }
+
+        .vertical-label .letter.space {
+            display: inline-block;
+        }
+
         .labeled-photo img {
             height: 70vh;
             width: auto;
@@ -313,7 +349,7 @@
         }
 
         .photo-cluster-19-20 .caption-column .photo-caption-box {
-            max-width: 280px;
+            max-width: clamp(200px, 20vw, 280px);
         }
 
         /* Aziatische hoornaar cluster: foto 21-24 */
@@ -500,7 +536,7 @@
             border: 2px solid #a8c8e8;
             padding: 1.5rem;
             box-sizing: border-box;
-            max-width: 320px;
+            max-width: clamp(220px, 22vw, 320px);
         }
 
         .foto-31-column .foto-32-caption .caption-title {
@@ -578,7 +614,7 @@
 
         .foto-35-section .section-caption {
             align-self: center;
-            max-width: 320px;
+            max-width: clamp(200px, 22vw, 320px);
         }
 
         .foto-grid-36-39 {
@@ -626,7 +662,7 @@
 
         .rivierkreeft-section .rivierkreeft-caption {
             margin-top: 17vh;
-            max-width: 320px;
+            max-width: clamp(220px, 22vw, 320px);
         }
 
         /* Kreeft grid - ronde vorm */
@@ -698,7 +734,7 @@
 
         .foto-41-wrapper .foto-41-caption {
             margin-top: 17vh;
-            max-width: 320px;
+            max-width: clamp(220px, 22vw, 320px);
         }
 
         /* Ongelijkbladig vederkruid sectie */
@@ -748,7 +784,7 @@
             background: transparent;
             border: 2px solid #a8c8e8;
             padding: 1.5rem;
-            max-width: 320px;
+            max-width: clamp(220px, 22vw, 320px);
         }
 
         .foto-49-wrapper .caption-box .caption-title {
@@ -785,7 +821,7 @@
             background: transparent;
             border: 2px solid #a8c8e8;
             padding: 1.5rem;
-            max-width: 320px;
+            max-width: clamp(220px, 22vw, 320px);
             align-self: flex-start;
             margin-top: 17.5vh;
         }
@@ -827,7 +863,7 @@
             background: transparent;
             border: 2px solid #a8c8e8;
             padding: 1.5rem;
-            max-width: 320px;
+            max-width: clamp(220px, 22vw, 320px);
             margin-left: 1.1rem;
         }
 
@@ -897,7 +933,7 @@
             border: 2px solid #a8c8e8;
             padding: 1.5rem;
             box-sizing: border-box;
-            max-width: 320px;
+            max-width: clamp(220px, 22vw, 320px);
         }
 
         .watercrassula-section .caption-box .caption-title {
@@ -1014,7 +1050,7 @@
             background: transparent;
             border: 2px solid #a8c8e8;
             padding: 1.5rem;
-            max-width: 320px;
+            max-width: clamp(220px, 22vw, 320px);
         }
 
         .foto-61-section .foto-61-caption .caption-title {
@@ -1057,7 +1093,7 @@
             background: transparent;
             border: 2px solid #a8c8e8;
             padding: 1.5rem;
-            max-width: 320px;
+            max-width: clamp(220px, 22vw, 320px);
         }
 
         .japanse-oester-section .oester-caption .caption-title {
@@ -1155,7 +1191,7 @@
             background: transparent;
             border: 2px solid #a8c8e8;
             padding: 1.5rem;
-            max-width: 400px;
+            max-width: clamp(260px, 26vw, 400px);
             flex-shrink: 0;
             height: 70vh;
             box-sizing: border-box;
@@ -1239,7 +1275,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            min-width: 400px;
+            min-width: clamp(280px, 28vw, 400px);
             height: 70vh;
             flex-shrink: 0;
             text-align: center;
@@ -1372,7 +1408,7 @@
             background: transparent;
             border: 2px solid #a8c8e8;
             padding: 1.5rem;
-            max-width: 320px;
+            max-width: clamp(220px, 22vw, 320px);
             box-sizing: border-box;
         }
 
@@ -1531,7 +1567,7 @@
         }
 
         .wolhandkrab-right .photo-caption-box {
-            max-width: 350px;
+            max-width: clamp(200px, 20vw, 350px);
         }
 
         /* Desktop foto popup */
@@ -1725,11 +1761,12 @@
            =========================================== */
         @media (min-width: 768px) and (max-width: 1400px) {
             .horizontal-scroll-container {
-                overflow-y: hidden;
+                overflow-x: auto !important;
+                overflow-y: hidden !important;
             }
 
             .horizontal-scroll-content {
-                overflow: hidden;
+                overflow: visible !important;
             }
 
             /* Progress indicator zichtbaar houden */
@@ -1799,7 +1836,13 @@
             .foto-49-wrapper .caption-box,
             .vlinderstruik-section .caption-box,
             .watercrassula-section .caption-box,
-            .muskusrat-caption-box {
+            .muskusrat-caption-box,
+            .waterteunisbloem-section .foto-51-caption,
+            .foto-61-section .foto-61-caption,
+            .japanse-oester-section .oester-caption,
+            .kwt-tekst,
+            .rivierkreeft-section .rivierkreeft-caption,
+            .foto-35-section .section-caption {
                 padding: 0.5rem !important;
                 border-width: 1px !important;
             }
@@ -1813,7 +1856,13 @@
             .foto-49-wrapper .caption-box .caption-title,
             .vlinderstruik-section .caption-box .caption-title,
             .watercrassula-section .caption-box .caption-title,
-            .muskusrat-caption-box .caption-title {
+            .muskusrat-caption-box .caption-title,
+            .waterteunisbloem-section .foto-51-caption .caption-title,
+            .foto-61-section .foto-61-caption .caption-title,
+            .japanse-oester-section .oester-caption .caption-title,
+            .kwt-tekst .caption-title,
+            .rivierkreeft-section .rivierkreeft-caption .caption-title,
+            .foto-35-section .section-caption .caption-title {
                 font-size: 0.65rem !important;
                 margin-bottom: 0.25rem !important;
                 letter-spacing: 0.1em !important;
@@ -1828,10 +1877,26 @@
             .foto-49-wrapper .caption-box .caption-text,
             .vlinderstruik-section .caption-box .caption-text,
             .watercrassula-section .caption-box .caption-text,
-            .muskusrat-caption-box .caption-text {
+            .muskusrat-caption-box .caption-text,
+            .waterteunisbloem-section .foto-51-caption .caption-text,
+            .foto-61-section .foto-61-caption .caption-text,
+            .japanse-oester-section .oester-caption .caption-text,
+            .kwt-tekst .caption-text,
+            .rivierkreeft-section .rivierkreeft-caption .caption-text,
+            .foto-35-section .section-caption .caption-text {
                 font-size: 0.65rem !important;
                 line-height: 1.4 !important;
                 margin-bottom: 0.3rem !important;
+            }
+
+            /* Muskusrat caption box - hoogte aanpassen aan content */
+            .muskusrat-caption-box {
+                height: auto !important;
+            }
+
+            /* Wolhandkrab uitlijning behouden bij smallere breedte */
+            .wolhandkrab-right {
+                justify-content: flex-end !important;
             }
 
             .hoornaar-cluster {
@@ -1856,9 +1921,8 @@
                 display: none;
             }
 
-            /* 4) Snitch tekstkader smaller */
+            /* 4) Snitch tekstkader - overflow hidden */
             .foto-35-section .section-caption {
-                max-width: 220px;
                 overflow: hidden;
             }
 
@@ -1875,7 +1939,6 @@
 
             .rivierkreeft-section .rivierkreeft-caption {
                 margin-top: 10vh;
-                max-width: 260px;
                 overflow: hidden;
             }
 
@@ -2695,7 +2758,7 @@
         </div>
     </nav>
 
-    <div class="horizontal-scroll-container" id="scrollContainer">
+    <div class="horizontal-scroll-container" id="scrollContainer" style="overflow-x: auto !important;">
         <div class="horizontal-scroll-content">
             <!-- Intro sectie: foto 1 + tekstvak gecentreerd -->
             <div class="intro-section" id="introSection">
@@ -3743,34 +3806,13 @@
             }, COOLDOWN);
         }
 
-        // Smooth scroll handling (desktop only)
+        // Simple smooth horizontal scroll - no snap
         if (window.innerWidth > 767) {
-            container.addEventListener('wheel', (e) => {
+            container.addEventListener('wheel', function(e) {
                 e.preventDefault();
-                const delta = Math.abs(e.deltaY);
-                const direction = e.deltaY > 0 ? 1 : -1;
-
-                if (isAnimating) return;
-
-                // Momentum detection: ignore decreasing deltas (trackpad coasting)
-                if (lastDelta > 0 && delta < lastDelta * MOMENTUM_THRESHOLD) {
-                    lastDelta = delta;
-                    return;
-                }
-
-                // Reset if direction changes
-                if (scrollDirection !== 0 && direction !== scrollDirection) {
-                    accumulatedDelta = 0;
-                }
-
-                scrollDirection = direction;
-                accumulatedDelta += delta;
-                lastDelta = delta;
-
-                // Trigger scroll when threshold reached
-                if (accumulatedDelta >= DELTA_THRESHOLD) {
-                    triggerScroll(direction);
-                }
+                e.stopPropagation();
+                const delta = e.deltaY || e.deltaX || 0;
+                this.scrollLeft += delta;
             }, { passive: false });
         }
 
@@ -4129,6 +4171,102 @@
                     desktopPopup.classList.remove('active');
                 }
             });
+        }
+
+        // Vertical label letter animatie (desktop)
+        if (window.innerWidth > 767) {
+            const verticalLabels = document.querySelectorAll('.vertical-label');
+
+            // Split labels into individual letters
+            verticalLabels.forEach(label => {
+                const html = label.innerHTML;
+                let newHtml = '';
+                let inTag = false;
+                let tagContent = '';
+
+                for (let i = 0; i < html.length; i++) {
+                    const char = html[i];
+                    if (char === '<') {
+                        inTag = true;
+                        tagContent = '<';
+                    } else if (char === '>') {
+                        inTag = false;
+                        tagContent += '>';
+                        newHtml += tagContent;
+                        tagContent = '';
+                    } else if (inTag) {
+                        tagContent += char;
+                    } else if (char === ' ') {
+                        newHtml += '<span class="letter space">&nbsp;</span>';
+                    } else {
+                        newHtml += `<span class="letter">${char}</span>`;
+                    }
+                }
+                label.innerHTML = newHtml;
+            });
+
+            // Animate letters when label comes into view
+            const labelObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const letters = entry.target.querySelectorAll('.letter:not(.space)');
+                        // Random order for fade-in
+                        const indices = [];
+                        for (let i = 0; i < letters.length; i++) {
+                            indices.push(i);
+                        }
+                        // Shuffle
+                        for (let i = indices.length - 1; i > 0; i--) {
+                            const j = Math.floor(Math.random() * (i + 1));
+                            [indices[i], indices[j]] = [indices[j], indices[i]];
+                        }
+                        // Fade in letters in random order
+                        let delay = 0;
+                        indices.forEach(idx => {
+                            setTimeout(() => {
+                                letters[idx].classList.add('visible');
+                            }, delay);
+                            delay += 50 + Math.random() * 30;
+                        });
+                        // Spaces immediately visible
+                        entry.target.querySelectorAll('.letter.space').forEach(space => {
+                            space.classList.add('visible');
+                        });
+                        labelObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.5 });
+
+            verticalLabels.forEach(label => labelObserver.observe(label));
+
+            // Fade labels when they overlap with the page title "De Exoten"
+            const navTitle = document.querySelector('.nav-title');
+
+            function checkLabelOverlap() {
+                if (!navTitle || verticalLabels.length === 0) return;
+
+                const titleRect = navTitle.getBoundingClientRect();
+                const titleTextWidth = 100;
+                const titleLeft = titleRect.left;
+                const titleRight = titleLeft + titleTextWidth;
+
+                verticalLabels.forEach(label => {
+                    const labelRect = label.getBoundingClientRect();
+                    const labelCenter = labelRect.left + (labelRect.width / 2);
+                    const overlaps = labelCenter > titleLeft && labelCenter < titleRight;
+
+                    if (overlaps) {
+                        label.style.opacity = '0';
+                        label.style.transition = 'opacity 0.6s ease-out';
+                    } else {
+                        label.style.opacity = '1';
+                        label.style.transition = 'opacity 0.6s ease-in';
+                    }
+                });
+            }
+
+            container.addEventListener('scroll', checkLabelOverlap);
+            checkLabelOverlap();
         }
     </script>
 </body>
