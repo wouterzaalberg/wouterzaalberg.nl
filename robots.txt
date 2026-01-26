@@ -1,0 +1,13 @@
+# Robots.txt for wouterzaalberg.nl
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://wouterzaalberg.nl/sitemap.xml
+
+# Disallow old/deprecated URLs (these no longer exist)
+Disallow: /portfolio/
+Disallow: /gallery/
+Disallow: /photos/
+Disallow: /werk/
+Disallow: /projecten/

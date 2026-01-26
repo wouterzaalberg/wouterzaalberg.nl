@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, follow">
+    <title>Pagina niet gevonden - Wouter Zaalberg</title>
+    <link rel="canonical" href="https://wouterzaalberg.nl/">
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        body {
+            background: #1a1a1a;
+            color: #f5f5f5;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Scala Sans', sans-serif;
+        }
+        .error-container {
+            text-align: center;
+            padding: 2rem;
+            max-width: 600px;
+        }
+        .error-title {
+            font-family: 'Scala Sans SC', sans-serif;
+            font-size: 3rem;
+            color: #cd9854;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+        .error-message {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            color: rgba(255,255,255,0.8);
+        }
+        .error-links {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            align-items: center;
+        }
+        .error-links a {
+            color: #f5f5f5;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: color 0.3s ease;
+        }
+        .error-links a:hover {
+            color: #cd9854;
+        }
+        .error-home {
+            margin-top: 2rem;
+            padding: 0.8rem 2rem;
+            background: #cd9854;
+            color: #1a1a1a;
+            text-decoration: none;
+            font-family: 'Scala Sans SC', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            transition: background 0.3s ease;
+        }
+        .error-home:hover {
+            background: #b8864a;
+            color: #1a1a1a;
+        }
+        .redirecting {
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.5);
+            margin-top: 1rem;
+        }
+    </style>
+    <script>
+        // Redirect map for old URLs to new locations
+        const redirects = {
+            // Common old patterns
+            '/portfolio': '/',
+            '/gallery': '/',
+            '/werk': '/',
+            '/projecten': '/',
+            '/photos': '/',
+            '/contact': '/#contact',
+            '/about': '/#about',
+            '/over': '/#about',
+            // Old project URL patterns (without .html)
+            '/de-exoten': '/de-exoten.html',
+            '/mijn-tatoeages': '/mijn-tatoeages.html',
+            '/a-better-port': '/a-better-port.html',
+            '/in-blauw-licht': '/in-blauw-licht.html',
+            '/toen-de-mijnen-verdwenen': '/toen-de-mijnen-verdwenen.html',
+            '/het-noordzeekanaal-gebied': '/het-noordzeekanaal-gebied.html',
+            '/de-onmisbaren': '/de-onmisbaren.html',
+            '/een-plek-onder-de-zon': '/een-plek-onder-de-zon.html',
+            // Alternative spellings
+            '/exoten': '/de-exoten.html',
+            '/tatoeages': '/mijn-tatoeages.html',
+            '/tattoos': '/mijn-tatoeages.html',
+            '/tatoeage': '/mijn-tatoeages.html',
+            '/port': '/a-better-port.html',
+            '/haven': '/a-better-port.html',
+            '/blauw-licht': '/in-blauw-licht.html',
+            '/politie': '/in-blauw-licht.html',
+            '/mijnen': '/toen-de-mijnen-verdwenen.html',
+            '/mijnstreek': '/toen-de-mijnen-verdwenen.html',
+            '/noordzeekanaal': '/het-noordzeekanaal-gebied.html',
+            '/onmisbaren': '/de-onmisbaren.html'
+        };
+
+        // Check if current path matches a redirect
+        const path = window.location.pathname.toLowerCase().replace(/\/$/, '');
+        if (redirects[path]) {
+            // Show redirecting message briefly, then redirect
+            document.addEventListener('DOMContentLoaded', function() {
+                const container = document.querySelector('.error-container');
+                if (container) {
+                    container.innerHTML = '<p class="redirecting">Even geduld, je wordt doorgestuurd...</p>';
+                }
+            });
+            setTimeout(function() {
+                window.location.replace(redirects[path]);
+            }, 500);
+        }
+    </script>
+</head>
+<body>
+    <div class="error-container">
+        <h1 class="error-title">Pagina niet gevonden</h1>
+        <p class="error-message">
+            Deze pagina bestaat niet meer of is verplaatst.<br>
+            Misschien zoek je een van deze projecten?
+        </p>
+        <nav class="error-links">
+            <a href="/de-exoten.html">De Exoten</a>
+            <a href="/mijn-tatoeages.html">Mijn Tatoeages</a>
+            <a href="/a-better-port.html">A Better Port</a>
+            <a href="/in-blauw-licht.html">In Blauw Licht</a>
+            <a href="/toen-de-mijnen-verdwenen.html">Toen de Mijnen verdwenen</a>
+        </nav>
+        <a href="/" class="error-home">Naar homepage</a>
+    </div>
+</body>
+</html>
