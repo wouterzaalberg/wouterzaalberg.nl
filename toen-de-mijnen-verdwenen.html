@@ -974,11 +974,11 @@
         // Improved scroll handling - works for both mouse and trackpad
         // See docs/horizontal-scroll.md for documentation
         let accumulatedDelta = 0;
-        let lastDelta = 0;
+        let lastWheelTime = 0;
         let scrollDirection = 0;
         const DELTA_THRESHOLD = 50;  // Minimum delta to trigger scroll
-        const COOLDOWN = 500;        // Ms to wait after scroll
-        const MOMENTUM_THRESHOLD = 0.5; // Ignore if delta drops below this ratio
+        const COOLDOWN = 800;        // Ms to wait after scroll
+        const MOMENTUM_RESET_TIME = 100; // Reset accumulation if gap between events
 
         // Check if current item is the intro section
         function isAtIntroSection(index) {
@@ -1069,7 +1069,6 @@
             setTimeout(() => {
                 isAnimating = false;
                 accumulatedDelta = 0;
-                lastDelta = 0;
                 scrollDirection = 0;
             }, COOLDOWN);
         }
@@ -1078,16 +1077,18 @@
         if (window.innerWidth > 767) {
             container.addEventListener('wheel', (e) => {
                 e.preventDefault();
-                const delta = Math.abs(e.deltaY);
-                const direction = e.deltaY > 0 ? 1 : -1;
 
                 if (isAnimating) return;
 
-                // Momentum detection: ignore decreasing deltas (trackpad coasting)
-                if (lastDelta > 0 && delta < lastDelta * MOMENTUM_THRESHOLD) {
-                    lastDelta = delta;
-                    return;
+                const now = Date.now();
+                const delta = Math.abs(e.deltaY);
+                const direction = e.deltaY > 0 ? 1 : -1;
+
+                // Reset accumulation if too much time passed (momentum ended)
+                if (now - lastWheelTime > MOMENTUM_RESET_TIME) {
+                    accumulatedDelta = 0;
                 }
+                lastWheelTime = now;
 
                 // Reset if direction changes
                 if (scrollDirection !== 0 && direction !== scrollDirection) {
@@ -1096,7 +1097,6 @@
 
                 scrollDirection = direction;
                 accumulatedDelta += delta;
-                lastDelta = delta;
 
                 // Trigger scroll when threshold reached
                 if (accumulatedDelta >= DELTA_THRESHOLD) {
