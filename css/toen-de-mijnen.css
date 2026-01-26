@@ -2536,6 +2536,147 @@
 }
 
 /* ========================================
+   Medium Desktop met Lage Hoogte (1100-1400px width, max 750px height)
+   Voor resoluties zoals 1280x650
+   ======================================== */
+@media (min-width: 1100px) and (max-width: 1400px) and (max-height: 750px) {
+    /* 1) Hero tekst smaller */
+    .tdmv-hero-text {
+        width: clamp(200px, 20vw, 280px);
+    }
+
+    .tdmv-hero-text p {
+        font-size: clamp(0.75rem, 1.2vw, 0.85rem);
+        line-height: 1.55;
+    }
+
+    .tdmv-title {
+        font-size: clamp(4rem, 7vw, 5.5rem);
+    }
+
+    /* 2) Oranje caption boxes smaller en gecentreerd */
+    .tdmv-caption {
+        max-width: clamp(140px, 12vw, 180px);
+        padding: clamp(0.75rem, 1vw, 1rem) clamp(0.9rem, 1.2vw, 1.2rem);
+    }
+
+    .tdmv-caption-header {
+        font-size: clamp(0.5rem, 0.7vw, 0.6rem);
+    }
+
+    .tdmv-caption-text {
+        font-size: clamp(0.65rem, 0.9vw, 0.75rem);
+        line-height: 1.5;
+    }
+
+    .tdmv-photo-block {
+        align-items: center;
+    }
+
+    /* 3) Het grote slopen insert - kaart lager, simpelere tijdlijn */
+    .tdmv-slopen-layout {
+        gap: 1rem;
+        padding: 1rem;
+        width: 85vw;
+    }
+
+    .tdmv-slopen-top {
+        gap: 1.5rem;
+        align-items: center;
+    }
+
+    .tdmv-map-compare {
+        width: clamp(35vw, 40vw, 45vw);
+        height: clamp(40vh, 50vh, 55vh);
+    }
+
+    .tdmv-slopen-title {
+        font-size: clamp(1.8rem, 3vw, 2.5rem);
+    }
+
+    /* Simpelere tijdlijn */
+    .tdmv-timeline-visual {
+        min-width: 280px;
+        padding: 1rem;
+    }
+
+    .tdmv-timeline-year {
+        font-size: 0.6rem;
+    }
+
+    .tdmv-timeline-event {
+        font-size: 0.55rem;
+    }
+
+    .tdmv-timeline-marker {
+        width: 6px;
+        height: 6px;
+    }
+
+    /* 4) Uit het dal insert - smaller */
+    .tdmv-uithetdal-content {
+        padding: 1.5rem;
+        gap: 1rem;
+        max-width: 95vw;
+    }
+
+    .tdmv-uithetdal-content .tdmv-uithetdal-title {
+        font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+    }
+
+    .tdmv-uithetdal-row.row-1 {
+        grid-template-columns: clamp(300px, 35vw, 400px) 1fr;
+        gap: 1.5rem;
+    }
+
+    .tdmv-uithetdal-row.row-2,
+    .tdmv-uithetdal-row.row-3 {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 0.75rem;
+    }
+
+    .tdmv-parkstad-stat {
+        padding: 0.5rem;
+    }
+
+    .tdmv-parkstad-label {
+        font-size: clamp(0.5rem, 0.7vw, 0.6rem);
+    }
+
+    .tdmv-parkstad-number {
+        font-size: clamp(1.2rem, 2vw, 1.6rem);
+    }
+
+    .tdmv-parkstad-context {
+        font-size: clamp(0.45rem, 0.6vw, 0.55rem);
+    }
+
+    /* Highlighted panels smaller */
+    .tdmv-highlight-panel {
+        width: clamp(160px, 15vw, 220px);
+        padding: 1rem 1.2rem;
+    }
+
+    .tdmv-highlight-text {
+        font-size: clamp(1rem, 1.5vw, 1.3rem);
+    }
+
+    .tdmv-highlight-description {
+        font-size: clamp(0.65rem, 0.9vw, 0.8rem);
+    }
+
+    /* Chapter panels */
+    .tdmv-chapter-title {
+        font-size: clamp(2rem, 3.5vw, 2.8rem);
+    }
+
+    .tdmv-chapter-intro {
+        font-size: clamp(0.75rem, 1vw, 0.9rem);
+        max-width: 450px;
+    }
+}
+
+/* ========================================
    Mobile Styles
    ======================================== */
 @media (max-width: 767px) {
