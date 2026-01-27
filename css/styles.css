@@ -678,8 +678,8 @@ img {
     position: absolute;
     bottom: 2rem;
     left: calc(5rem + 50px);
-    background: rgba(30, 40, 50, 0.85);
-    padding: 1rem 1.5rem;
+    background: none;
+    padding: 0;
     max-width: 400px;
     opacity: 0;
     visibility: hidden;
@@ -695,7 +695,7 @@ img {
 .work-info-caption p {
     font-family: 'Scala Sans', sans-serif;
     font-size: 0.95rem;
-    color: #ffffff;
+    color: #4a4a4a;
     line-height: 1.6;
     margin: 0;
 }
