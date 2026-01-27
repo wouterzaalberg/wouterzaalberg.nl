@@ -307,6 +307,28 @@ img {
     color: var(--color-gold);
 }
 
+/* Hero social links */
+.hero-social-links {
+    display: flex;
+    gap: 0.6rem;
+    margin-top: 0.4rem;
+}
+
+.hero-social-links a {
+    color: var(--color-black);
+    opacity: 0.5;
+    transition: opacity 0.3s ease, color 0.3s ease;
+}
+
+.hero-social-links a:hover {
+    opacity: 1;
+    color: var(--color-gold);
+}
+
+.hero-social-links svg {
+    display: block;
+}
+
 /* Hero tagline scaling */
 .hero-tagline,
 .hero-tagline-italic {
@@ -328,6 +350,10 @@ img {
 
     .menu-list a {
         font-size: 0.8rem;
+    }
+
+    .hero-social-links {
+        display: none;
     }
 }
 
