@@ -162,7 +162,7 @@
                 <p>Ik werk voor diverse opdrachtgevers. Samenwerken? <a href="#contact">Stuur een bericht</a> en samen maken we iets moois.</p>
             </div>
             <div class="logo-grid">
-                <div class="logo-item active" data-image="de-onmisbaren/7.jpg" data-caption="Khadija, schoonmaakster. Voor een campagne van FNV" data-caption-color="#0099d8">
+                <div class="logo-item active" data-image="de-onmisbaren/7.jpg" data-caption="Khadija, schoonmaakster. Voor een campagne van FNV" data-caption-color="#0099d8" data-text-color="#ffffff">
                     <img src="logo's/grijs/fnv.jpg" alt="FNV" class="logo-grey">
                     <img src="logo's/kleur/fnv.jpg" alt="FNV" class="logo-color">
                 </div>
@@ -404,6 +404,7 @@
         const defaultWorkCaption = 'Khadija, schoonmaakster. Voor een campagne van FNV';
         const defaultIsHorizontal = true;
         const defaultCaptionColor = '#0099d8'; // FNV blauw
+        const defaultTextColor = '#ffffff'; // FNV wit
 
         // Initialiseer eerste afbeelding als zichtbaar en gecentreerd (zonder transitie)
         workImage1.style.transition = 'none';
@@ -647,6 +648,10 @@
                 // Check of het een grid is
                 const isGrid = this.getAttribute('data-grid') === 'true';
                 const captionColor = this.getAttribute('data-caption-color');
+                const textColor = this.getAttribute('data-text-color') || '#4a4a4a';
+
+                // Pas tekstkleur toe
+                workCaptionText.style.color = textColor;
 
                 if (isGrid) {
                     const imagesStr = this.getAttribute('data-images');
@@ -683,6 +688,7 @@
                 return;
             }
             hideGrid();
+            workCaptionText.style.color = defaultTextColor;
             slideToImage(defaultWorkImage, defaultWorkCaption, defaultIsHorizontal, null, defaultCaptionColor);
             logoItems.forEach(l => l.classList.remove('active'));
         });
