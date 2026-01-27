@@ -1939,8 +1939,12 @@ img {
         opacity: 1 !important;
         transform: none !important;
         z-index: 1;
-        flex: 0 0 auto;
+        flex: 1 1 auto;
         overflow: hidden !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        align-items: stretch !important;
     }
 
     .work-text-overlay.fade-in-text,
@@ -1960,8 +1964,17 @@ img {
 
     .work-text-overlay h2 {
         display: block !important;
-        font-size: 0.75rem;
-        margin-bottom: 0.3rem;
+        font-family: 'Scala Sans SC', sans-serif;
+        font-size: 1rem;
+        font-weight: 500;
+        color: #000000;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        margin-bottom: 0.8rem;
+        width: 100%;
+        text-align: left;
+        padding-left: 7%;
+        box-sizing: border-box;
     }
 
     .work-text-overlay p {
@@ -1978,8 +1991,9 @@ img {
         gap: 0.5rem !important;
         width: 100% !important;
         max-width: 100% !important;
-        justify-content: flex-start !important;
-        margin-top: 0 !important;
+        justify-content: center !important;
+        align-content: center !important;
+        margin-top: 0.3rem !important;
     }
 
     .work-text-overlay .logo-item {
