@@ -55,6 +55,7 @@
 
 html {
     scroll-behavior: smooth;
+    overflow-x: hidden;
 }
 
 body {
@@ -1859,6 +1860,8 @@ img {
         height: 100% !important;
         object-fit: cover !important;
         object-position: center !important;
+        transform: none !important;
+        clip-path: none !important;
     }
 
     .work-grid .grid-img.active,
