@@ -75,8 +75,13 @@ Foto op kolom 5-19 (14 kolommen), onderkant rij 24:
 
 ## Pagina Structuur
 
+### Navigatie
+- `horizontal-nav` linksboven (via styles.css)
+- Terug link + paginanaam "De Exoten"
+- z-index: 200 (boven intro grid)
+
 ### Opbouw
-- **Intro**: Fullscreen grid + scroll transitie (blijft los van grid-systeem)
+- **Intro**: Fullscreen kolom-grid + scroll transitie
 - **Clusters**: Elk cluster = één 48×24 grid (100vw × 70vh)
 - **Single photos**: Losse foto's van 70vh met caption ernaast
 - **Hoofdstuk titels**: Buiten grid, tussen secties
@@ -140,32 +145,41 @@ border: 2px solid #a8c8e8;
 
 ## Intro Grid (Desktop)
 
-### Fullscreen Grid
-- 5x4 foto grid, 100vw x 100vh, fixed position
-- Witte overlay (15% opacity) over foto's
-- Geen click-to-zoom op grid foto's
-- Foto's swappen random elke 2 seconden (alleen src swap, geen beweging)
+### Kolom-gebaseerde Grid
+- 5 kolommen × 4 rijen, 100vw × 100vh, fixed position
+- Elke kolom is een flex container met 4 cellen
+- Lege cellen in rij 2, kolommen 2-4 (witte ruimte voor titel)
+- Foto's swappen random elke 2 seconden
+- Link naar `css/styles.css` voor fonts en nav styling
 
 ### Titel Animatie
-- "De Exoten" gecentreerd over grid
+- "De Exoten" gecentreerd in witte ruimte (rij 2, kolommen 2-4)
 - Elke letter heeft eigen kleur (natuur palette)
-- Letters faden random in (zoals vertical labels)
+- Letters faden random in
 - Start na 1.5 seconden, 150-250ms tussen letters
-- Transition: 0.6s ease-out
+- Titel grootte: `clamp(5rem, 12vw, 12rem)`
 
-### Scroll Transitie
-- Bij scrollen: grid fadet uit, content fadet in
-- 5 scroll-stappen voor volledige transitie
-- Terugscroll brengt grid terug
-- 600ms delay na fade voordat horizontaal scrollen mag
+### Scroll Transitie (5 stappen)
+1. **Scroll 1-5**: Kolommen scrollen weg
+   - Kolommen 1, 3, 5: omhoog (translateY negatief)
+   - Kolommen 2, 4: omlaag (translateY positief)
+2. **Na 3 scrolls (60%)**: Introtekst verschijnt onder titel
+3. **Na 3 scrolls**: Stierkikker fadet in (z-index: 150)
+4. **Na 5 scrolls**: Intro wordt scrollbaar (position: absolute)
+5. **Horizontaal scrollen**: Intro scrollt mee naar links
 
-### Intro Content (achter grid)
-- Gecentreerde wrapper met tekst + foto
-- **Tekstkader**: 25vw (min 280px), 60vh, `#e8e8e8`
-- **Koptekst**: "Er woedt een onzichtbare oorlog in Nederland" (h2, small caps)
-- **Stierkikker foto**: 60vh
-- **Bijschrift**: rechts van foto, uitgelijnd op onderkant, 180px breed
-- Gap tussen tekst en foto: 2rem
+### Introtekst Panel
+- Positie: `top: 70%` van titel wrapper
+- Breedte: `min-width: 600px`, `max-width: 32vw`
+- Transparante achtergrond
+- Font: Scala Sans (niet cursief, `font-style: normal`)
+
+### Stierkikker
+- Eerste item na intro in horizontal scroll
+- `margin-left: -20vw` (dichter bij intro)
+- `margin-right: 12rem` (afstand tot deel 1)
+- Fadet in tegelijk met introtekst
+- Wanneer visible: `z-index: 150` (boven intro grid)
 
 ## Structuur
 1. Intro grid sectie (fullscreen grid + scroll transitie)
@@ -224,16 +238,14 @@ rivierkreeft, vederkruid, vlinderstruik, waterteunisbloem, watercrassula, kleine
 
 ## Small Desktop (768-1400px)
 
-### Intro
-- Tekstkader: 22vw (min 220px), 50vh
-- Koptekst h2: 1.1rem
-- Paragrafen: 0.75rem
-- Foto: 50vh
-- Bijschrift: 150px, 0.65rem tekst
-- Gap: 1.5rem
+### Intro Responsive
+- **1600px**: Tekst panel max-width: 38vw
+- **1400px**: Titel clamp(4rem, 10vw, 10rem), tekst panel 42vw
+- **1100px**: Titel clamp(3rem, 9vw, 8rem), wrapper 70vw, tekst 50vw
+- **900px**: Titel clamp(2.5rem, 8vw, 6rem), wrapper 80vw, tekst 60vw
+- **768px**: Titel clamp(2rem, 7vw, 4rem), wrapper 90vw, tekst 75vw
 
 ### Algemeen
-- Intro titel: clamp(3rem, 8vw, 8rem)
 - Verticale labels: 1.1rem
 
 ### Bijschriften (uniforme styling)
