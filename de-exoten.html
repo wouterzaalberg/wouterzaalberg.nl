@@ -19,6 +19,8 @@
     <meta property="og:image" content="https://wouterzaalberg.nl/images/de-exoten.jpg">
     <meta property="og:locale" content="nl_NL">
 
+    <link rel="stylesheet" href="css/styles.css">
+
     <style>
         * {
             margin: 0;
@@ -32,6 +34,11 @@
             margin: 0;
             padding: 0;
             overflow: hidden;
+        }
+
+        /* Nav styling komt van styles.css */
+        .horizontal-nav {
+            z-index: 200;
         }
 
         /* Deel wrappers voor achtergrondkleuren */
@@ -1514,6 +1521,13 @@
     </style>
 </head>
 <body>
+    <nav class="horizontal-nav">
+        <div>
+            <a href="/" class="back-link">← Terug</a>
+            <span class="nav-title">De Exoten</span>
+        </div>
+    </nav>
+
     <div class="horizontal-scroll-container">
         <div class="horizontal-scroll-content">
 
