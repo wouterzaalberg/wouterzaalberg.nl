@@ -1884,7 +1884,7 @@ img {
         transform: none !important;
         z-index: 1;
         flex: 0 0 auto;
-        overflow-y: visible;
+        overflow: hidden !important;
     }
 
     .work-text-overlay.fade-in-text,
@@ -1920,8 +1920,8 @@ img {
         display: flex !important;
         flex-wrap: wrap !important;
         gap: 0.5rem !important;
-        width: 90vw !important;
-        max-width: 90vw !important;
+        width: 100% !important;
+        max-width: 100% !important;
         justify-content: flex-start !important;
         margin-top: 0 !important;
     }
