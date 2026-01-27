@@ -5,6 +5,15 @@
 - Grijze sectie: `#f0f0f0` (vanaf foto 8)
 - Intro panel: `#e8e8e8`
 - Tekst: `#1a1a1a`
+- Titel letters (natuur palette):
+  - D: bosgroen `#4a7c59`
+  - e: oker `#8b6914`
+  - E: donkergroen `#2d5a27`
+  - x: olijfgroen `#6b8e23`
+  - o: bruin `#8b4513`
+  - t: petrol `#3d7a8c`
+  - e: grasgroen `#5c8a4d`
+  - n: taupe `#7a6b4e`
 
 ## Foto Formaten
 - Groot: 70vh
@@ -12,11 +21,39 @@
 - Klein: 35vh
 - Extra-klein: 17vh
 
+## Intro Grid (Desktop)
+
+### Fullscreen Grid
+- 5x4 foto grid, 100vw x 100vh, fixed position
+- Witte overlay (15% opacity) over foto's
+- Geen click-to-zoom op grid foto's
+- Foto's swappen random elke 2 seconden (alleen src swap, geen beweging)
+
+### Titel Animatie
+- "De Exoten" gecentreerd over grid
+- Elke letter heeft eigen kleur (natuur palette)
+- Letters faden random in (zoals vertical labels)
+- Start na 1.5 seconden, 150-250ms tussen letters
+- Transition: 0.6s ease-out
+
+### Scroll Transitie
+- Bij scrollen: grid fadet uit, content fadet in
+- 5 scroll-stappen voor volledige transitie
+- Terugscroll brengt grid terug
+- 600ms delay na fade voordat horizontaal scrollen mag
+
+### Intro Content (achter grid)
+- Gecentreerde wrapper met tekst + foto
+- **Tekstkader**: 25vw (min 280px), 60vh, `#e8e8e8`
+- **Koptekst**: "Er woedt een onzichtbare oorlog in Nederland" (h2, small caps)
+- **Stierkikker foto**: 60vh
+- **Bijschrift**: rechts van foto, uitgelijnd op onderkant, 180px breed
+- Gap tussen tekst en foto: 2rem
+
 ## Structuur
-1. Intro sectie (foto 1 + titel + beverrat + tekstvak)
-2. Cluster 1 (foto's 2-7, gap 0.4rem)
-3. Hoofdstuk titel
-4. Grijze sectie:
+1. Intro grid sectie (fullscreen grid + scroll transitie)
+2. Hoofdstuk titel
+3. Grijze sectie:
    - Wasbeer (foto 8)
    - Beverrat cluster (9-15)
    - Wolhandkrab cluster (16-17)
@@ -24,15 +61,15 @@
    - Hoornaar boog (25-34)
    - Foto 35 + grid 36-39
    - Rivierkreeft (40 + grid + 41)
-5. Vederkruid sectie (42-49)
-6. Vlinderstruik (50)
-7. Grote Waterteunisbloem (51-53)
-8. Watercrassula (54-55)
-9. Kleine waterteunisbloem (56 + grid 57-61)
-10. Japanse oester (62)
-11. Muskusrat sectie (63-70)
-12. Einde deel panel
-13. End panel (donkergroen #1a3d1a)
+4. Vederkruid sectie (42-49)
+5. Vlinderstruik (50)
+6. Grote Waterteunisbloem (51-53)
+7. Watercrassula (54-55)
+8. Kleine waterteunisbloem (56 + grid 57-61)
+9. Japanse oester (62)
+10. Muskusrat sectie (63-70)
+11. Einde deel panel
+12. End panel (donkergroen #1a3d1a)
 
 ## Kreeft Grid
 - 3 rijen, gap 0.4rem, 70vh hoog
@@ -67,9 +104,16 @@ rivierkreeft, vederkruid, vlinderstruik, waterteunisbloem, watercrassula, kleine
 
 ## Small Desktop (768-1400px)
 
+### Intro
+- Tekstkader: 22vw (min 220px), 50vh
+- Koptekst h2: 1.1rem
+- Paragrafen: 0.75rem
+- Foto: 50vh
+- Bijschrift: 150px, 0.65rem tekst
+- Gap: 1.5rem
+
 ### Algemeen
-- Intro titel: 6rem
-- Intro wrapper: 80vh, justify-content: flex-start
+- Intro titel: clamp(3rem, 8vw, 8rem)
 - Verticale labels: 1.1rem
 
 ### Bijschriften (uniforme styling)
@@ -88,6 +132,7 @@ rivierkreeft, vederkruid, vlinderstruik, waterteunisbloem, watercrassula, kleine
 - Klik om te vergroten, loslaten om te sluiten
 - Alleen voor foto's kleiner dan 65vh
 - Cursor: zoom-in op klikbare foto's
+- **Uitgezonderd**: intro grid foto's
 
 ### Hoornaar Cluster
 - "Op zoek in Zeeland" tekstkader: 100% breed
@@ -104,7 +149,6 @@ rivierkreeft, vederkruid, vlinderstruik, waterteunisbloem, watercrassula, kleine
 - align-self: flex-start (voorkomt vertical shift)
 
 ## Mobiel
-
 
 ### Titel Overlay
 - 10 rijen herhaalde "De Exoten" tekst
