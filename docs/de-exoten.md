@@ -21,6 +21,123 @@
 - Klein: 35vh
 - Extra-klein: 17vh
 
+## Grid Systeem
+
+### Basis
+- Grid: **48 kolommen × 24 rijen** (dubbele precisie)
+- Afmetingen: 100vw × 70vh
+- Geen externe CSS laden (styles.css overschrijft grid)
+- Foto's gebruiken `max-width: 100%; max-height: 100%;` (niet `width/height: 100%`)
+
+### Foto Verhoudingen
+Alle foto's zijn 4:3 (liggend) of 3:4 (staand).
+
+**Berekening formules** (gebaseerd op cell aspect ratio ~1.27 op 16:9 scherm):
+- **Liggend (4:3)**: breedte = hoogte × 1.33 / 1.27 ≈ hoogte × 1.05
+- **Staand (3:4)**: breedte = hoogte × 0.75 / 1.27 ≈ hoogte × 0.59
+
+**Voorbeelden:**
+- Liggend, 12 rijen hoog → 12 × 1.05 ≈ 13 kolommen breed
+- Staand, 15 rijen hoog → 15 × 0.59 ≈ 9 kolommen breed
+
+### Werkwijze Foto's Plaatsen
+1. Toon niet-geplaatste foto's als kleine thumbnails linksboven (2×2 cellen per foto)
+2. Gebruiker geeft aan: fotonummer, kolom.rij start - kolom.rij eind, liggend/staand
+3. Claude berekent ontbrekende dimensie automatisch
+4. Verplaats foto van palet naar definitieve positie
+5. Herhaal tot alle foto's geplaatst zijn
+
+### Debug Modus
+- `debug-mode` class op grid toont coördinaten
+- `data-file` attribuut op foto's toont bestandsnamen
+- Na voltooiing: verwijder `debug-mode` class van alle grids
+
+### Uitlijning binnen cel
+Foto's kunnen binnen hun cel uitgelijnd worden:
+```css
+.foto-X {
+    display: flex;
+    justify-content: flex-end;  /* rechts */
+    align-items: center;
+}
+```
+
+### CSS Syntax
+```css
+.foto-X { grid-column: START / EIND+1; grid-row: START / EIND+1; }
+```
+Let op: CSS grid gebruikt lijnnummers, dus kolom 3-9 wordt `grid-column: 3 / 10`
+
+### Voorbeeld
+Foto op kolom 5-19 (14 kolommen), onderkant rij 24:
+- Liggend (4:3): 14 rijen → `grid-row: 11 / 25`
+- Staand (3:4): 24 rijen → `grid-row: 1 / 25`
+
+## Pagina Structuur
+
+### Opbouw
+- **Intro**: Fullscreen grid + scroll transitie (blijft los van grid-systeem)
+- **Clusters**: Elk cluster = één 48×24 grid (100vw × 70vh)
+- **Single photos**: Losse foto's van 70vh met caption ernaast
+- **Hoofdstuk titels**: Buiten grid, tussen secties
+- **Ruimte tussen secties**: gap 12rem in horizontal-scroll-content
+
+### Single Photo Section Template
+Voor losse grote foto's (70vh) met caption:
+```html
+<div class="single-photo-section">
+    <div class="labeled-photo">
+        <span class="vertical-label">Label<span class="accent">x</span>yz</span>
+        <img src="de-exoten/X.jpg" alt="..." loading="lazy">
+    </div>
+    <div class="photo-caption-box">
+        <h4 class="caption-title">Titel</h4>
+        <p class="caption-text">Tekst...</p>
+    </div>
+</div>
+```
+- Foto: 70vh hoog, breedte automatisch
+- Caption: 13vw breed (min 150px, max 280px)
+- Gap foto-caption: 0.8rem
+- Caption uitgelijnd op onderkant foto
+
+### Tekstkaders (Responsive)
+```css
+padding: clamp(1rem, 2vw, 1.5rem);
+font-size: clamp(0.7rem, 1vw, 0.85rem);
+border: 2px solid #a8c8e8;
+```
+
+### Workflow per cluster
+1. Laad alle foto's van cluster als thumbnails linksboven (2×2 cellen)
+2. Gebruiker geeft coördinaten per foto
+3. Plaats foto's één voor één
+4. Voeg bijschriften toe als grid-items
+5. Voeg verticale labels toe met animatie
+6. Test en pas aan
+7. Ga naar volgende cluster
+
+### Debug modus
+- Tijdens bouwen: debug aan (coördinaten zichtbaar)
+- Na voltooiing: debug uit (class verwijderen)
+
+### Secties
+1. Intro (bestaand, niet aanpassen)
+2. Beverrat cluster (foto 8-15 + diana airbug)
+3. Wolhandkrab cluster (16-17)
+4. Hemelboom cluster (18-24 + info)
+5. Hoornaar cluster (25-34)
+6. Foto 35 + grid 36-39
+7. Rivierkreeft cluster (40 + grid + 41)
+8. Vederkruid (42-49)
+9. Vlinderstruik (50)
+10. Grote Waterteunisbloem (51-53)
+11. Watercrassula (54-55)
+12. Kleine waterteunisbloem (56 + 57-61)
+13. Japanse oester (62)
+14. Muskusrat (63-70)
+15. End panel
+
 ## Intro Grid (Desktop)
 
 ### Fullscreen Grid
@@ -72,9 +189,11 @@
 12. End panel (donkergroen #1a3d1a)
 
 ## Kreeft Grid
-- 3 rijen, gap 0.4rem, 70vh hoog
-- Groottes: xs (12vh), sm (15vh), md (16.5vh), lg (18vh)
-- Foto's 3:4 verhouding
+- Cirkelvorm in 48×24 grid
+- Rij 1 (boven, 4 foto's): kolom 14-34, rij 4-9
+- Rij 2 (midden, 5 foto's): kolom 10-38, rij 9-14 — kreeftcentraal breder (8 kol)
+- Rij 3 (onder, 3 foto's): kolom 16-34, rij 14-19
+- Foto's sluiten verticaal aan (geen gaps)
 
 ## Beverrat Cluster
 - Kolom 2-3: foto 9+10 boven, diana airbug + foto 11 onder
@@ -89,7 +208,8 @@
 
 ## Verticale Labels
 - Cursieve accent letter: `<span class="accent">t</span>`
-- Voorbeelden: Wa**t**erteunisbloem, Vlinder**s**truik
+- **Meerdere woorden**: `<br>` na elk woord (bijv. `Chin<span class="accent">e</span>se<br>Wolhandkrab`)
+- Voorbeelden: Wa**t**erteunisbloem, Vlinder**s**truik, Amerikaanse rivier**k**reeft
 - **Letter animatie**: letters faden in willekeurige volgorde in wanneer label in beeld scrollt
 - **Titel overlap fade**: labels faden uit wanneer ze de "De Exoten" titel kruisen
 
@@ -140,8 +260,9 @@ rivierkreeft, vederkruid, vlinderstruik, waterteunisbloem, watercrassula, kleine
 - Hoornaar boog foto's verkleind (20-22vh)
 
 ### Rivierkreeft Sectie
-- Gecentreerd met margin-left: 8rem
-- Caption margin-top: 10vh
+- Foto 40: single-photo-section (70vh) met caption
+- Kreeft grid: 12 foto's in cirkelvorm
+- Foto 41: single-photo-section (70vh) zonder caption
 
 ### End Panel
 - Hoogte: 100vh
