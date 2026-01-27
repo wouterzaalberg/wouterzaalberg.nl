@@ -17,9 +17,13 @@ Portfolio website voor fotograaf Wouter Zaalberg. Fotografieprojecten over Neder
 
 ### Homepage (index.html)
 - **Sectie 1 (Hero)**: Volledig scherm, achtergrondafbeelding, menu overlay in wit tekstvak
+  - Hero name: `clamp(1rem, calc(0.5rem + 0.8vw), 1.4rem)`
+  - Tagline: `clamp(1.3rem, calc(0.8rem + 0.8vw), 2.5rem)`, bij 1800px+: `2.3rem`
+  - Social icons onder Contact (desktop only, 50% opacity, hover goud)
 - **Sectie 2 (About)**: Foto "werkterrein.jpg", zoom bij scroll
 - **Sectie 3 (Work)**: Foto carousel met logo's, zoom bij scroll
 - **Sectie 4 (Contact)**: Contactformulier, zoom bij scroll
+- Caption links in sectie 2 en 4: goudkleur (`#cd9854`)
 - Scroll per sectie (desktop only, > 767px)
 
 ### Projectpagina's
@@ -79,8 +83,10 @@ Portfolio website voor fotograaf Wouter Zaalberg. Fotografieprojecten over Neder
 ### Work Sectie (homepage sectie 3)
 - Default foto: `de-onmisbaren/7.jpg`
 - Logo's in `logo's/grijs/` en `logo's/kleur/`
+- Logo grid gap: `0.4rem`
 - Carousel: `data-image` voor enkele foto, `data-grid="true"` voor grid
 - Staande foto's: `data-horizontal="false"`
+- Info caption: geen achtergrond, tekst donkergrijs (`#4a4a4a`), wit voor FNV via `data-text-color`
 
 ### Mijn Tatoeages
 - Structuur: Portret + Tattoo + Tekstpanel per verhaal
