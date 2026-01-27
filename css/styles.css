@@ -1873,6 +1873,7 @@ img {
         right: auto !important;
         width: 100% !important;
         max-width: none !important;
+        margin: 0 !important;
         padding: 0.5rem 1rem !important;
         background-color: rgba(255, 255, 255, 0.95) !important;
         box-sizing: border-box;
@@ -1960,7 +1961,7 @@ img {
         align-items: center !important;
         justify-content: center !important;
         position: relative !important;
-        overflow: visible !important;
+        overflow: hidden !important;
     }
 
     .contact-image {
