@@ -518,9 +518,12 @@
         let accumulatedDelta = 0;
         let lastDelta = 0;
         let scrollDirection = 0;
+        let lastScrollTime = 0;
         const DELTA_THRESHOLD = 50;  // Minimum delta to trigger scroll
         const COOLDOWN = 500;        // Ms to wait after scroll
         const MOMENTUM_THRESHOLD = 0.5; // Ignore if delta drops below this ratio
+        const MOUSE_WHEEL_DELTA = 80;   // Typical mouse wheel delta
+        const SCROLL_PAUSE = 150;       // Ms pause indicates new scroll action
 
         // Scroll to target index
         function scrollToIndex(index) {
@@ -574,8 +577,25 @@
                 e.preventDefault();
                 const delta = Math.abs(e.deltaY);
                 const direction = e.deltaY > 0 ? 1 : -1;
+                const now = Date.now();
+                const timeSinceLastScroll = now - lastScrollTime;
+                lastScrollTime = now;
 
                 if (isAnimating) return;
+
+                // Detect mouse wheel: large delta after a pause
+                if (timeSinceLastScroll > SCROLL_PAUSE && delta >= MOUSE_WHEEL_DELTA) {
+                    triggerScroll(direction);
+                    accumulatedDelta = 0;
+                    lastDelta = 0;
+                    return;
+                }
+
+                // Reset after pause (new scroll action)
+                if (timeSinceLastScroll > SCROLL_PAUSE) {
+                    lastDelta = 0;
+                    accumulatedDelta = 0;
+                }
 
                 // Momentum detection: ignore decreasing deltas (trackpad coasting)
                 if (lastDelta > 0 && delta < lastDelta * MOMENTUM_THRESHOLD) {
