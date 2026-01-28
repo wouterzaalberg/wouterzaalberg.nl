@@ -3342,6 +3342,23 @@
         line-height: 1.55;
     }
 
+    /* Horizontale foto's (23a, 56) - panel direct onder foto */
+    .tdmv-photo-highlight.photo-horizontal .tdmv-highlight-img-wrapper {
+        height: auto;
+    }
+
+    .tdmv-photo-highlight.photo-horizontal img {
+        height: auto;
+        width: 100%;
+    }
+
+    .tdmv-photo-highlight.photo-horizontal .tdmv-highlight-panel {
+        margin-left: 0;
+        padding-left: 1.5rem;
+        width: 100vw;
+        box-sizing: border-box;
+    }
+
     /* ---- Quote Panels ---- */
     .tdmv-quote-panel {
         width: 100%;
