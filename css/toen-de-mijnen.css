@@ -667,8 +667,7 @@
     height: 60vh;
     overflow: hidden;
     cursor: ew-resize;
-    border-radius: 4px;
-    flex-shrink: 0;
+    border-radius: 0 0 4px 4px;
 }
 
 .tdmv-map-compare img {
@@ -748,19 +747,21 @@
     opacity: 1;
 }
 
+.tdmv-map-compare-wrapper {
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+}
+
 .map-compare-hint {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
     background: #e1c85a;
     color: #ffffff;
     font-family: 'Scala Sans', sans-serif;
     font-size: 0.8rem;
     text-align: center;
     padding: 0.5rem 1rem;
-    z-index: 3;
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    border-radius: 4px 4px 0 0;
 }
 
 .tdmv-slopen-title {
@@ -3461,11 +3462,15 @@
         gap: 2rem;
     }
 
+    .tdmv-map-compare-wrapper {
+        width: 100%;
+        order: 1;
+    }
+
     .tdmv-map-compare {
         width: 100%;
         max-width: none;
         height: 35vh;
-        order: 1;
     }
 
     .map-compare-hint {
