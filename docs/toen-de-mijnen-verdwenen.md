@@ -138,7 +138,7 @@ Font: Adobe Typekit Chloe (`https://use.typekit.net/qwc4lnx.css`)
 - **Insert panels**:
   - Kaart mijnstreek: zoom 11, statistieken 3 kolommen, titel links uitgelijnd
   - Het grote slopen: touch support voor kaart slider, gele instructiebalk boven kaart
-  - Uit het dal: foto 100% breedte, langzamere fade-out (1.5s)
+  - Uit het dal: titel links uitgelijnd, foto gecentreerd (80%, max 350px), statistieken links, gemeenten/demografie verborgen
   - Als expositie: oranje achtergrond (part 1 accent), 100% breedte
 - **Story end divider**: `* * *` gecentreerd tussen foto 65 en "Als expositie" insert
 - **Chapter panels**: 85svh min-height, tekst links uitgelijnd
