@@ -1036,9 +1036,7 @@
             }
 
             .horizontal-scroll-container {
-                overflow-y: auto !important;
-                overflow-x: hidden !important;
-                height: auto !important;
+                display: none !important;
             }
 
             /* Navigatie */
@@ -1218,196 +1216,134 @@
             /* ===========================================
                INTRO SECTIE
                =========================================== */
+            /* ===========================================
+               MOBILE INTRO GRID
+               =========================================== */
             .mobile-intro {
                 background: #fff;
                 margin-bottom: 2rem;
             }
 
-            .mobile-intro-carousel {
+            .mobile-intro-grid-container {
                 position: relative;
                 width: 100%;
-                height: 68vh;
+                height: 70vh;
                 overflow: hidden;
             }
 
-            /* Witte achtergrond na alle foto's */
-            .mobile-intro-carousel .carousel-dark {
-                position: absolute;
-                top: 0;
-                left: 0;
+            .mobile-intro-grid {
+                display: flex;
+                flex-direction: column;
                 width: 100%;
                 height: 100%;
-                background: #ffffff;
-                opacity: 0;
-                transition: opacity 1.2s ease-in-out;
-                z-index: 1;
+                gap: 3px;
+            }
+
+            /* Rijen met foto's */
+            .mobile-intro-row {
+                display: grid;
+                grid-template-columns: repeat(10, 1fr);
+                gap: 3px;
+                width: 200%;
+                flex: 1;
+                min-height: 0;
+            }
+
+            .mobile-intro-row:nth-child(1) {
+                animation: scrollLeft 35s linear infinite;
+            }
+
+            .mobile-intro-row:nth-child(2) {
+                animation: scrollRight 35s linear infinite;
+            }
+
+            .mobile-intro-row:nth-child(4) {
+                animation: scrollLeft 35s linear infinite;
+            }
+
+            .mobile-intro-row:nth-child(5) {
+                animation: scrollRight 35s linear infinite;
+            }
+
+            @keyframes scrollLeft {
+                0% { transform: translateX(0); }
+                100% { transform: translateX(-50%); }
+            }
+
+            @keyframes scrollRight {
+                0% { transform: translateX(-50%); }
+                100% { transform: translateX(0); }
+            }
+
+            /* Titel ruimte tussen rij 2 en 3 */
+            .mobile-intro-title-row {
+                flex: 0 0 auto;
+                height: 15vh;
                 display: flex;
                 align-items: center;
                 justify-content: center;
+                background: #fff;
             }
 
-            .mobile-intro-carousel .carousel-dark.active {
-                opacity: 1;
+            .mobile-intro-cell {
+                overflow: hidden;
+                min-width: 0;
+                min-height: 0;
             }
 
-            /* Letters fade out wanneer wit scherm verschijnt */
-            .mobile-title-row .letter.highlight.filled {
-                -webkit-text-stroke: 0;
-                animation: colorCycle 8s ease-in-out infinite;
-                transition: opacity 0.8s ease-out;
-            }
-
-            .mobile-title-row .letter.highlight.filled.fade-out {
-                opacity: 0 !important;
-            }
-
-            /* Gecentreerde titel op wit scherm */
-            .carousel-centered-title {
-                font-family: 'Scala Sans', sans-serif;
-                font-size: 4.5rem;
-                font-weight: 700;
-                letter-spacing: 0.02em;
-                white-space: nowrap;
-                opacity: 0;
-                transition: opacity 1s ease-out 0.5s;
-            }
-
-            .carousel-dark.active .carousel-centered-title {
-                opacity: 1;
-            }
-
-            .carousel-centered-title .letter {
-                display: inline-block;
-                animation: colorCycle 8s ease-in-out infinite;
-            }
-
-            .carousel-centered-title .letter:nth-child(1) { animation-delay: 0s; }
-            .carousel-centered-title .letter:nth-child(2) { animation-delay: 1s; }
-            .carousel-centered-title .space { display: inline-block; width: 0.5em; }
-            .carousel-centered-title .letter:nth-child(4) { animation-delay: 2s; }
-            .carousel-centered-title .letter:nth-child(5) { animation-delay: 3s; }
-            .carousel-centered-title .letter:nth-child(6) { animation-delay: 4s; }
-            .carousel-centered-title .letter:nth-child(7) { animation-delay: 5s; }
-            .carousel-centered-title .letter:nth-child(8) { animation-delay: 6s; }
-            .carousel-centered-title .letter:nth-child(9) { animation-delay: 7s; }
-
-            .mobile-intro-carousel .carousel-slide {
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                opacity: 0;
-                transition: opacity 1.2s ease-in-out;
-            }
-
-            .mobile-intro-carousel .carousel-slide.active {
-                opacity: 1;
-            }
-
-            .mobile-intro-carousel .carousel-slide img {
+            .mobile-intro-cell img {
                 width: 100%;
                 height: 100%;
                 object-fit: cover;
                 display: block;
-                transform: scale(1);
-                transition: transform 4s ease-out;
             }
 
-            .mobile-intro-carousel .carousel-slide.active img {
-                transform: scale(1.05);
+            /* Titel in de ruimte */
+            .mobile-intro-title-row .mobile-intro-title {
+                position: relative;
             }
 
-            /* Titel overlay met herhaalde tekst */
-            .mobile-title-overlay {
-                position: absolute;
-                top: 0;
-                left: 0;
-                right: 0;
-                bottom: 0;
-                display: flex;
-                flex-direction: column;
-                justify-content: space-between;
-                padding: 0;
-                z-index: 10;
-                overflow: hidden;
-            }
-
-            .mobile-title-row {
+            .mobile-intro-title {
                 font-family: 'Scala Sans', sans-serif;
-                font-size: 4.5rem;
+                font-size: clamp(3.2rem, 14vw, 5rem);
                 font-weight: 700;
+                letter-spacing: 0.02em;
                 white-space: nowrap;
-                line-height: 1;
-                letter-spacing: -0.02em;
+                margin: 0;
             }
 
-            /* Langzame beweging van rijen - afwisselend links/rechts */
-            .mobile-title-row:nth-child(odd) {
-                animation: moveRight 20s ease-in-out infinite alternate;
-            }
-
-            .mobile-title-row:nth-child(even) {
-                animation: moveLeft 20s ease-in-out infinite alternate;
-            }
-
-            @keyframes moveRight {
-                0% { transform: translateX(-5%); }
-                100% { transform: translateX(5%); }
-            }
-
-            @keyframes moveLeft {
-                0% { transform: translateX(5%); }
-                100% { transform: translateX(-5%); }
-            }
-
-            .mobile-title-row .letter {
+            .mobile-intro-title .letter {
                 display: inline-block;
-                color: rgba(255,255,255,0.15);
-                transition: color 0.8s ease-out;
+                opacity: 0;
+                transition: opacity 0.4s ease-out;
             }
 
-            .mobile-title-row .letter.highlight {
-                color: rgba(255,255,255,0.2);
+            .mobile-intro-title .letter.visible {
+                opacity: 1;
             }
 
-            .mobile-title-row .letter.highlight.filled {
-                -webkit-text-stroke: 0;
-                animation: colorCycle 8s ease-in-out infinite;
+            /* Kleuren per letter */
+            .mobile-intro-title .letter:nth-child(1) { color: #4a7c59; } /* D - bosgroen */
+            .mobile-intro-title .letter:nth-child(2) { color: #8b6914; } /* e - oker */
+            .mobile-intro-title .letter:nth-child(3) { color: transparent; } /* spatie */
+            .mobile-intro-title .letter:nth-child(4) { color: #2d5a27; } /* E - donkergroen */
+            .mobile-intro-title .letter:nth-child(5) { color: #6b8e23; } /* x - olijfgroen */
+            .mobile-intro-title .letter:nth-child(6) { color: #8b4513; } /* o - bruin */
+            .mobile-intro-title .letter.cursive {
+                font-family: 'Minion Pro', serif;
+                font-style: italic;
+                color: #3d7a8c; /* t - petrol */
+                margin-left: -0.08em;
+                margin-right: 0.1em;
             }
+            .mobile-intro-title .letter:nth-child(8) { color: #5c8a4d; } /* e - grasgroen */
+            .mobile-intro-title .letter:nth-child(9) { color: #7a6b4e; } /* n - taupe */
 
-            @keyframes colorCycle {
-                0%, 100% { color: #5a7a4a; }
-                25% { color: #6b8b5a; }
-                50% { color: #7a9db8; }
-                75% { color: #8a7a5a; }
-            }
-
-            .mobile-title-row .letter.highlight.filled[data-order="1"] { animation-delay: 0s; }
-            .mobile-title-row .letter.highlight.filled[data-order="2"] { animation-delay: 1s; }
-            .mobile-title-row .letter.highlight.filled[data-order="3"] { animation-delay: 2s; }
-            .mobile-title-row .letter.highlight.filled[data-order="4"] { animation-delay: 3s; }
-            .mobile-title-row .letter.highlight.filled[data-order="5"] { animation-delay: 4s; }
-            .mobile-title-row .letter.highlight.filled[data-order="6"] { animation-delay: 5s; }
-            .mobile-title-row .letter.highlight.filled[data-order="7"] { animation-delay: 6s; }
-            .mobile-title-row .letter.highlight.filled[data-order="8"] { animation-delay: 7s; }
-
-            .mobile-intro-image {
-                padding: 1rem 1.25rem;
-                display: flex;
-                justify-content: center;
-            }
-
-            .mobile-intro-image img {
-                height: 12vh;
-                width: auto;
-                display: block;
-            }
-
+            /* Intro tekst onder grid */
             .mobile-intro-text {
-                width: 80vw;
-                margin: 0 auto;
-                padding: 1.25rem;
+                width: 85vw;
+                margin: 2rem auto 0 auto;
+                padding: 1.5rem 1.25rem;
                 background: #e8e8e8;
                 box-sizing: border-box;
             }
@@ -2290,48 +2226,73 @@
          MOBIELE CONTENT
          =========================================== -->
     <div class="mobile-content" id="mobileContent">
-        <!-- Intro met carousel -->
-        <div class="mobile-intro" style="padding-top: 4rem;">
-            <div class="mobile-intro-carousel" id="mobileCarousel">
-                <div class="carousel-slide active" data-name="Baby muskusratten" data-color="#5a7a4a">
-                    <img src="de-exoten/carousel/cluster 1 foto 4.jpg" alt="Baby muskusratten" loading="eager">
+        <!-- Intro met grid -->
+        <div class="mobile-intro">
+            <div class="mobile-intro-grid-container">
+                <div class="mobile-intro-grid" id="mobileIntroGrid">
+                    <!-- Rij 1 (scrollt naar links) -->
+                    <div class="mobile-intro-row">
+                        <div class="mobile-intro-cell"><img src="de-exoten/1.jpg" alt="" loading="eager"></div>
+                        <div class="mobile-intro-cell"><img src="de-exoten/beverrat.jpg" alt="" loading="eager"></div>
+                        <div class="mobile-intro-cell"><img src="de-exoten/cluster 1 foto 2.jpg" alt="" loading="eager"></div>
+                        <div class="mobile-intro-cell"><img src="de-exoten/cluster 1 foto 3.jpg" alt="" loading="eager"></div>
+                        <div class="mobile-intro-cell"><img src="de-exoten/cluster 1 foto 4.jpg" alt="" loading="eager"></div>
+                        <div class="mobile-intro-cell"><img src="de-exoten/1.jpg" alt="" loading="eager"></div>
+                        <div class="mobile-intro-cell"><img src="de-exoten/beverrat.jpg" alt="" loading="eager"></div>
+                        <div class="mobile-intro-cell"><img src="de-exoten/cluster 1 foto 2.jpg" alt="" loading="eager"></div>
+                        <div class="mobile-intro-cell"><img src="de-exoten/cluster 1 foto 3.jpg" alt="" loading="eager"></div>
+                        <div class="mobile-intro-cell"><img src="de-exoten/cluster 1 foto 4.jpg" alt="" loading="eager"></div>
+                    </div>
+                    <!-- Rij 2 (scrollt naar rechts) -->
+                    <div class="mobile-intro-row">
+                        <div class="mobile-intro-cell"><img src="de-exoten/cluster 1 foto 5.jpg" alt="" loading="eager"></div>
+                        <div class="mobile-intro-cell"><img src="de-exoten/cluster 1 foto 6.jpg" alt="" loading="eager"></div>
+                        <div class="mobile-intro-cell"><img src="de-exoten/cluster 1 foto 7.jpg" alt="" loading="eager"></div>
+                        <div class="mobile-intro-cell"><img src="de-exoten/10.jpg" alt="" loading="eager"></div>
+                        <div class="mobile-intro-cell"><img src="de-exoten/9.jpg" alt="" loading="eager"></div>
+                        <div class="mobile-intro-cell"><img src="de-exoten/cluster 1 foto 5.jpg" alt="" loading="eager"></div>
+                        <div class="mobile-intro-cell"><img src="de-exoten/cluster 1 foto 6.jpg" alt="" loading="eager"></div>
+                        <div class="mobile-intro-cell"><img src="de-exoten/cluster 1 foto 7.jpg" alt="" loading="eager"></div>
+                        <div class="mobile-intro-cell"><img src="de-exoten/10.jpg" alt="" loading="eager"></div>
+                        <div class="mobile-intro-cell"><img src="de-exoten/9.jpg" alt="" loading="eager"></div>
+                    </div>
+                    <!-- Titel rij -->
+                    <div class="mobile-intro-title-row">
+                        <h1 class="mobile-intro-title" id="mobileIntroTitle">
+                            <span class="letter">D</span><span class="letter">e</span><span class="letter">&nbsp;</span><span class="letter">E</span><span class="letter">x</span><span class="letter">o</span><span class="letter cursive">t</span><span class="letter">e</span><span class="letter">n</span>
+                        </h1>
+                    </div>
+                    <!-- Rij 3 (scrollt naar links) -->
+                    <div class="mobile-intro-row">
+                        <div class="mobile-intro-cell"><img src="de-exoten/11.jpg" alt="" loading="eager"></div>
+                        <div class="mobile-intro-cell"><img src="de-exoten/12.jpg" alt="" loading="eager"></div>
+                        <div class="mobile-intro-cell"><img src="de-exoten/13.jpg" alt="" loading="eager"></div>
+                        <div class="mobile-intro-cell"><img src="de-exoten/14.jpg" alt="" loading="eager"></div>
+                        <div class="mobile-intro-cell"><img src="de-exoten/15.jpg" alt="" loading="eager"></div>
+                        <div class="mobile-intro-cell"><img src="de-exoten/11.jpg" alt="" loading="eager"></div>
+                        <div class="mobile-intro-cell"><img src="de-exoten/12.jpg" alt="" loading="eager"></div>
+                        <div class="mobile-intro-cell"><img src="de-exoten/13.jpg" alt="" loading="eager"></div>
+                        <div class="mobile-intro-cell"><img src="de-exoten/14.jpg" alt="" loading="eager"></div>
+                        <div class="mobile-intro-cell"><img src="de-exoten/15.jpg" alt="" loading="eager"></div>
+                    </div>
+                    <!-- Rij 4 (scrollt naar rechts) -->
+                    <div class="mobile-intro-row">
+                        <div class="mobile-intro-cell"><img src="de-exoten/16.jpg" alt="" loading="eager"></div>
+                        <div class="mobile-intro-cell"><img src="de-exoten/17.jpg" alt="" loading="eager"></div>
+                        <div class="mobile-intro-cell"><img src="de-exoten/18.jpg" alt="" loading="eager"></div>
+                        <div class="mobile-intro-cell"><img src="de-exoten/19.jpg" alt="" loading="eager"></div>
+                        <div class="mobile-intro-cell"><img src="de-exoten/20.jpg" alt="" loading="eager"></div>
+                        <div class="mobile-intro-cell"><img src="de-exoten/16.jpg" alt="" loading="eager"></div>
+                        <div class="mobile-intro-cell"><img src="de-exoten/17.jpg" alt="" loading="eager"></div>
+                        <div class="mobile-intro-cell"><img src="de-exoten/18.jpg" alt="" loading="eager"></div>
+                        <div class="mobile-intro-cell"><img src="de-exoten/19.jpg" alt="" loading="eager"></div>
+                        <div class="mobile-intro-cell"><img src="de-exoten/20.jpg" alt="" loading="eager"></div>
+                    </div>
                 </div>
-                <div class="carousel-slide" data-name="Amerikaanse rivierkreeft" data-color="#c45c4a">
-                    <img src="de-exoten/carousel/cluster 1 foto 7.jpg" alt="Amerikaanse rivierkreeft" loading="eager">
-                </div>
-                <div class="carousel-slide" data-name="Wasbeer gevangen" data-color="#8b7355">
-                    <img src="de-exoten/carousel/534A0049.jpg" alt="Wasbeer gevangen" loading="eager">
-                </div>
-                <div class="carousel-slide" data-name="Wasbeerhond" data-color="#7a6a5a">
-                    <img src="de-exoten/carousel/534A4628.jpg" alt="Wasbeerhond" loading="eager">
-                </div>
-
-                <!-- Witte achtergrond -->
-                <div class="carousel-dark" id="carouselDark">
-                    <div class="carousel-centered-title" id="centeredTitle"><span class="letter">D</span><span class="letter">e</span><span class="space"></span><span class="letter">E</span><span class="letter">x</span><span class="letter">o</span><span class="letter">t</span><span class="letter">e</span><span class="letter">n</span></div>
-                </div>
-
-                <!-- Titel overlay met herhaalde tekst -->
-                <div class="mobile-title-overlay" id="mobileTitleOverlay">
-                    <div class="mobile-title-row" style="margin-left: -30%;"><span class="letter">D</span><span class="letter">e</span><span class="letter">&nbsp;</span><span class="letter">E</span><span class="letter">x</span><span class="letter">o</span><span class="letter">t</span><span class="letter">e</span><span class="letter">n</span><span class="letter">&nbsp;</span><span class="letter highlight" data-order="1">D</span><span class="letter">e</span><span class="letter">&nbsp;</span><span class="letter">E</span><span class="letter">x</span><span class="letter">o</span><span class="letter">t</span><span class="letter">e</span><span class="letter">n</span><span class="letter">&nbsp;</span><span class="letter">D</span><span class="letter">e</span><span class="letter">&nbsp;</span><span class="letter">E</span><span class="letter">x</span><span class="letter">o</span><span class="letter">t</span><span class="letter">e</span><span class="letter">n</span></div>
-                    <div class="mobile-title-row" style="margin-left: -55%;"><span class="letter">D</span><span class="letter">e</span><span class="letter">&nbsp;</span><span class="letter">E</span><span class="letter">x</span><span class="letter">o</span><span class="letter">t</span><span class="letter">e</span><span class="letter">n</span><span class="letter">&nbsp;</span><span class="letter">D</span><span class="letter">e</span><span class="letter">&nbsp;</span><span class="letter">E</span><span class="letter">x</span><span class="letter">o</span><span class="letter">t</span><span class="letter highlight" data-order="2">e</span><span class="letter">n</span><span class="letter">&nbsp;</span><span class="letter">D</span><span class="letter">e</span><span class="letter">&nbsp;</span><span class="letter">E</span><span class="letter">x</span><span class="letter">o</span><span class="letter">t</span><span class="letter">e</span><span class="letter">n</span></div>
-                    <div class="mobile-title-row" style="margin-left: -15%;"><span class="letter">D</span><span class="letter">e</span><span class="letter">&nbsp;</span><span class="letter highlight" data-order="3">E</span><span class="letter">x</span><span class="letter">o</span><span class="letter">t</span><span class="letter">e</span><span class="letter">n</span><span class="letter">&nbsp;</span><span class="letter">D</span><span class="letter">e</span><span class="letter">&nbsp;</span><span class="letter">E</span><span class="letter">x</span><span class="letter">o</span><span class="letter">t</span><span class="letter">e</span><span class="letter">n</span><span class="letter">&nbsp;</span><span class="letter">D</span><span class="letter">e</span><span class="letter">&nbsp;</span><span class="letter">E</span><span class="letter">x</span><span class="letter">o</span><span class="letter">t</span><span class="letter">e</span><span class="letter">n</span></div>
-                    <div class="mobile-title-row" style="margin-left: -40%;"><span class="letter">D</span><span class="letter">e</span><span class="letter">&nbsp;</span><span class="letter">E</span><span class="letter">x</span><span class="letter">o</span><span class="letter">t</span><span class="letter">e</span><span class="letter">n</span><span class="letter">&nbsp;</span><span class="letter">D</span><span class="letter">e</span><span class="letter">&nbsp;</span><span class="letter">E</span><span class="letter highlight" data-order="4">x</span><span class="letter">o</span><span class="letter">t</span><span class="letter">e</span><span class="letter">n</span><span class="letter">&nbsp;</span><span class="letter">D</span><span class="letter">e</span><span class="letter">&nbsp;</span><span class="letter">E</span><span class="letter">x</span><span class="letter">o</span><span class="letter">t</span><span class="letter">e</span><span class="letter">n</span></div>
-                    <div class="mobile-title-row" style="margin-left: -25%;"><span class="letter">D</span><span class="letter">e</span><span class="letter">&nbsp;</span><span class="letter">E</span><span class="letter">x</span><span class="letter highlight" data-order="5">o</span><span class="letter">t</span><span class="letter">e</span><span class="letter">n</span><span class="letter">&nbsp;</span><span class="letter">D</span><span class="letter">e</span><span class="letter">&nbsp;</span><span class="letter">E</span><span class="letter">x</span><span class="letter">o</span><span class="letter">t</span><span class="letter">e</span><span class="letter">n</span><span class="letter">&nbsp;</span><span class="letter">D</span><span class="letter">e</span><span class="letter">&nbsp;</span><span class="letter">E</span><span class="letter">x</span><span class="letter">o</span><span class="letter">t</span><span class="letter">e</span><span class="letter">n</span></div>
-                    <div class="mobile-title-row" style="margin-left: -50%;"><span class="letter">D</span><span class="letter">e</span><span class="letter">&nbsp;</span><span class="letter">E</span><span class="letter">x</span><span class="letter">o</span><span class="letter highlight" data-order="6">t</span><span class="letter">e</span><span class="letter">n</span><span class="letter">&nbsp;</span><span class="letter">D</span><span class="letter">e</span><span class="letter">&nbsp;</span><span class="letter">E</span><span class="letter">x</span><span class="letter">o</span><span class="letter">t</span><span class="letter">e</span><span class="letter">n</span><span class="letter">&nbsp;</span><span class="letter">D</span><span class="letter">e</span><span class="letter">&nbsp;</span><span class="letter">E</span><span class="letter">x</span><span class="letter">o</span><span class="letter">t</span><span class="letter">e</span><span class="letter">n</span></div>
-                    <div class="mobile-title-row" style="margin-left: -10%;"><span class="letter">D</span><span class="letter">e</span><span class="letter">&nbsp;</span><span class="letter">E</span><span class="letter">x</span><span class="letter">o</span><span class="letter">t</span><span class="letter highlight" data-order="7">e</span><span class="letter">n</span><span class="letter">&nbsp;</span><span class="letter">D</span><span class="letter">e</span><span class="letter">&nbsp;</span><span class="letter">E</span><span class="letter">x</span><span class="letter">o</span><span class="letter">t</span><span class="letter">e</span><span class="letter">n</span><span class="letter">&nbsp;</span><span class="letter">D</span><span class="letter">e</span><span class="letter">&nbsp;</span><span class="letter">E</span><span class="letter">x</span><span class="letter">o</span><span class="letter">t</span><span class="letter">e</span><span class="letter">n</span></div>
-                    <div class="mobile-title-row" style="margin-left: -35%;"><span class="letter">D</span><span class="letter">e</span><span class="letter">&nbsp;</span><span class="letter">E</span><span class="letter">x</span><span class="letter">o</span><span class="letter">t</span><span class="letter">e</span><span class="letter highlight" data-order="8">n</span><span class="letter">&nbsp;</span><span class="letter">D</span><span class="letter">e</span><span class="letter">&nbsp;</span><span class="letter">E</span><span class="letter">x</span><span class="letter">o</span><span class="letter">t</span><span class="letter">e</span><span class="letter">n</span><span class="letter">&nbsp;</span><span class="letter">D</span><span class="letter">e</span><span class="letter">&nbsp;</span><span class="letter">E</span><span class="letter">x</span><span class="letter">o</span><span class="letter">t</span><span class="letter">e</span><span class="letter">n</span></div>
-                    <div class="mobile-title-row" style="margin-left: -45%;"><span class="letter">D</span><span class="letter">e</span><span class="letter">&nbsp;</span><span class="letter">E</span><span class="letter">x</span><span class="letter">o</span><span class="letter">t</span><span class="letter">e</span><span class="letter">n</span><span class="letter">&nbsp;</span><span class="letter">D</span><span class="letter">e</span><span class="letter">&nbsp;</span><span class="letter">E</span><span class="letter">x</span><span class="letter">o</span><span class="letter">t</span><span class="letter">e</span><span class="letter">n</span><span class="letter">&nbsp;</span><span class="letter">D</span><span class="letter">e</span><span class="letter">&nbsp;</span><span class="letter">E</span><span class="letter">x</span><span class="letter">o</span><span class="letter">t</span><span class="letter">e</span><span class="letter">n</span></div>
-                    <div class="mobile-title-row" style="margin-left: -20%;"><span class="letter">D</span><span class="letter">e</span><span class="letter">&nbsp;</span><span class="letter">E</span><span class="letter">x</span><span class="letter">o</span><span class="letter">t</span><span class="letter">e</span><span class="letter">n</span><span class="letter">&nbsp;</span><span class="letter">D</span><span class="letter">e</span><span class="letter">&nbsp;</span><span class="letter">E</span><span class="letter">x</span><span class="letter">o</span><span class="letter">t</span><span class="letter">e</span><span class="letter">n</span><span class="letter">&nbsp;</span><span class="letter">D</span><span class="letter">e</span><span class="letter">&nbsp;</span><span class="letter">E</span><span class="letter">x</span><span class="letter">o</span><span class="letter">t</span><span class="letter">e</span><span class="letter">n</span></div>
-                </div>
-            </div>
-            <div class="mobile-intro-image">
-                <img src="de-exoten/beverrat.jpg" alt="Beverrat illustratie">
             </div>
             <div class="mobile-intro-text">
-                <p>Er woedt een onzichtbare oorlog in Nederland. Een oorlog tussen invasieve exoten, de inheemse natuur en de mens. De slagvelden zijn de vennen en de volkstuinen, de beken en de bossen, de rivierbekken en de postzegelparkjes. Hier vestigen zich de Amerikaanse rivierkreeft en de Japanse duizendknoop, de watercrassula en de wasbeerhond, de stierkikker en de Chinese wolhandkrab.</p>
-                <p>De oorlog draait om de simpele vraag: wie domineert? Is dat de inheemse Nederlandse natuur, de door Jac. P. Thijsse zo wonderschoon gedefinieerde sloten bossen en ander groen? Is het de mens, die eeuwenlang strijd heeft geleverd tegen de natuurlijke wereld, totdat zij eindelijk, met spierkracht, kennismacht en machines, haar kon bedwingen en boetseren naar eigen inzicht? Of zijn het al die invasieve exoten, die zich maar weinig aantrekken van dit menselijk privilege en op hun eigen wijze de natuur onherkenbaar veranderen?</p>
-                <p>Deze serie gaat over deze invasieve exoten. Maar eigenlijk gaat het over de mens. De mens die planten en dieren over de aardbol versleept. De mens die soms gedreven door winst, soms vanwege onwetendheid de planten en dieren in vreemde ecosystemen introduceert. En de mens die vervolgens wanhopige pogingen doet om de exoten te vernietigen voordat ze dat met onze natuur doen.</p>
+                <p>Er woedt een onzichtbare oorlog in Nederland. Een oorlog tussen invasieve exoten, de inheemse natuur en de mens. De slagvelden zijn de vennen en de volkstuinen, de beken en de bossen, de rivierbekken en de postzegelparkjes.</p>
+                <p>Deze serie gaat over deze invasieve exoten. Maar eigenlijk gaat het over de mens. De mens die planten en dieren over de aardbol versleept, soms gedreven door winst, soms vanwege onwetendheid. En de mens die vervolgens wanhopige pogingen doet om de exoten te vernietigen voordat ze dat met onze natuur doen.</p>
             </div>
         </div>
 
@@ -3100,69 +3061,28 @@
             });
         }
 
-        // Mobiele intro carousel met fade animatie
-        const carousel = document.getElementById('mobileCarousel');
-        if (carousel) {
-            const slides = carousel.querySelectorAll('.carousel-slide');
-            const darkSlide = document.getElementById('carouselDark');
-            const highlightLettersForReset = document.querySelectorAll('#mobileTitleOverlay .letter.highlight');
-            let currentSlide = 0;
-            let isInDarkPhase = false;
+        // ========== MOBIELE INTRO TITEL ANIMATIE ==========
+        (function initMobileIntroTitle() {
+            const mobileTitle = document.getElementById('mobileIntroTitle');
+            if (!mobileTitle) return;
 
-            // Sorteer letters op volgorde
-            const sortedHighlightLetters = Array.from(highlightLettersForReset).sort((a, b) => {
-                return parseInt(a.dataset.order) - parseInt(b.dataset.order);
-            });
-
-            function fadeOutLetters() {
-                sortedHighlightLetters.forEach(letter => {
-                    letter.classList.add('fade-out');
-                });
+            const letters = mobileTitle.querySelectorAll('.letter');
+            // Shuffle letter indices (skip index 2 = spatie)
+            const letterIndices = [0, 1, 3, 4, 5, 6, 7, 8];
+            for (let i = letterIndices.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [letterIndices[i], letterIndices[j]] = [letterIndices[j], letterIndices[i]];
             }
 
-            function resetLetters() {
-                sortedHighlightLetters.forEach(letter => {
-                    letter.classList.remove('fade-out', 'filled');
-                });
-
-                // Voeg filled class weer toe met vertraging
-                let fillDelay = 800;
-                sortedHighlightLetters.forEach((letter) => {
+            // Start animatie na korte delay
+            setTimeout(() => {
+                letterIndices.forEach((idx, i) => {
                     setTimeout(() => {
-                        letter.classList.add('filled');
-                    }, fillDelay);
-                    fillDelay += 350;
+                        letters[idx].classList.add('visible');
+                    }, i * 200 + Math.random() * 100);
                 });
-            }
-
-            function nextSlide() {
-                if (isInDarkPhase) return;
-
-                slides[currentSlide].classList.remove('active');
-
-                // Check of we bij de laatste foto zijn
-                if (currentSlide === slides.length - 1) {
-                    // Toon witte achtergrond
-                    isInDarkPhase = true;
-                    fadeOutLetters();
-                    darkSlide.classList.add('active');
-
-                    // Na 10 seconden: reset en herstart
-                    setTimeout(() => {
-                        darkSlide.classList.remove('active');
-                        resetLetters();
-                        currentSlide = 0;
-                        slides[currentSlide].classList.add('active');
-                        isInDarkPhase = false;
-                    }, 10000);
-                } else {
-                    currentSlide++;
-                    slides[currentSlide].classList.add('active');
-                }
-            }
-
-            setInterval(nextSlide, 4000);
-        }
+            }, 800);
+        })();
 
         // Tekstkaders fade-in bij scrollen (mobiel)
         const mobileContent = document.getElementById('mobileContent');
