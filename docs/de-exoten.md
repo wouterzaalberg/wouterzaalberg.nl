@@ -105,6 +105,27 @@ Voor losse grote foto's (70vh) met caption:
 - Caption: 13vw breed (min 150px, max 280px)
 - Gap foto-caption: 0.8rem
 - Caption uitgelijnd op onderkant foto
+- **Zoom effect**: foto zoomt naar scale 1.05 over 8s wanneer in beeld (overflow: hidden)
+
+### Zoom Effect
+- Alle single-photo-sections zoomen automatisch bij in beeld komen
+- IntersectionObserver met threshold 0.3
+- Transition: `transform 8s ease-out`, scale 1 → 1.05
+- Grid foto's kunnen ook zoomen via `.zoomable` class:
+```html
+<div class="photo-item foto-35 zoomable">...</div>
+```
+
+### Caption Animaties
+- **Fade-in**: alle captions faden in met lichte opwaartse beweging
+- Transition: `opacity 0.6s ease-out, transform 0.6s ease-out`
+- IntersectionObserver met threshold 0.2
+- **Expand classes** voor overflow richting:
+  - `.expand-up`: breidt naar boven uit
+  - `.expand-down`: breidt naar beneden uit
+  - `.expand-left`: breidt naar links uit
+  - `.expand-right`: breidt naar rechts uit
+- **Meerdere alinea's**: `p + p` krijgt `margin-top: 0.8em`
 
 ### Tekstkaders (Responsive)
 ```css
@@ -158,6 +179,7 @@ border: 2px solid #a8c8e8;
 - Letters faden random in
 - Start na 1.5 seconden, 150-250ms tussen letters
 - Titel grootte: `clamp(5rem, 12vw, 12rem)`
+- **"t" in cursief**: Minion Pro font, italic, met aangepaste margins (`margin-left: -0.12em`, `margin-right: 0.18em`)
 
 ### Scroll Transitie (5 stappen)
 1. **Scroll 1-5**: Kolommen scrollen weg
