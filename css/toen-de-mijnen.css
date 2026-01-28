@@ -3409,7 +3409,8 @@
     }
 
     .tdmv-map-content .tdmv-insert-title {
-        text-align: center;
+        text-align: left;
+        padding-left: 1rem;
     }
 
     .tdmv-leaflet-map {
@@ -3420,7 +3421,7 @@
 
     .tdmv-mine-stats {
         width: 100%;
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(3, 1fr);
         gap: 0.4rem;
     }
 
