@@ -3409,8 +3409,9 @@
     }
 
     .tdmv-map-content .tdmv-insert-title {
-        text-align: left;
-        padding-left: 1rem;
+        text-align: left !important;
+        padding-left: 0;
+        margin-left: 0;
     }
 
     .tdmv-leaflet-map {
