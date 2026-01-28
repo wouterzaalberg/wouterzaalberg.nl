@@ -1961,6 +1961,18 @@ img {
         display: block !important;
     }
 
+    /* Size-small grid (bijv. Send) - zelfde behandeling op mobiel */
+    .work-grid.size-small {
+        aspect-ratio: 3 / 4;
+        height: auto;
+    }
+
+    .work-grid.size-small .grid-img,
+    .work-grid.size-small .grid-video {
+        max-height: none !important;
+        object-fit: cover !important;
+    }
+
     .work-text-overlay {
         position: relative !important;
         top: auto !important;
