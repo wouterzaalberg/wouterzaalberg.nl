@@ -305,35 +305,31 @@ rivierkreeft, vederkruid, vlinderstruik, waterteunisbloem, watercrassula, kleine
 
 ## Mobiel
 
-### Titel Overlay
-- 10 rijen herhaalde "De Exoten" tekst
-- Letters: doorschijnend wit (15% opacity)
-- Font: Scala Sans, 4.5rem, bold
-- Rijen met variërende margin-left (-10% tot -55%)
+### Intro Grid
+- Container: 70vh hoog
+- 4 rijen foto's + 1 titel rij (totaal 5 rijen)
+- Structuur:
+  - Rij 1: foto's scrollen naar links (35s)
+  - Rij 2: foto's scrollen naar rechts (35s)
+  - Titel rij: witte achtergrond, 15vh hoog
+  - Rij 3: foto's scrollen naar links (35s)
+  - Rij 4: foto's scrollen naar rechts (35s)
 
-### Gekleurde Letters Animatie
-- Spelt "De Exoten" met 8 gekleurde letters
-- Letters verschijnen na elkaar (350ms interval)
-- Kleurcyclus animatie (8s):
-  - Bosgroen: `#5a7a4a`
-  - Grasgroen: `#6b8b5a`
-  - Hemelsblauw: `#7a9db8`
-  - Olijf/bruin: `#8a7a5a`
-- Elke letter heeft andere animation-delay
+### Foto Rijen
+- Elke rij: 10 cellen (5 foto's + 5 duplicaten voor seamless loop)
+- CSS Grid: `grid-template-columns: repeat(10, 1fr)`
+- Rij breedte: 200% (voor scroll animatie)
+- Gap: 3px tussen cellen
 
-### Bewegende Rijen
-- Oneven rijen bewegen naar rechts
-- Even rijen bewegen naar links
-- Langzame animatie: 20s cyclus, -5% tot +5%
+### Titel
+- "De Exoten" in witte ruimte tussen foto rijen
+- Font: `clamp(3.2rem, 14vw, 5rem)`, Scala Sans, bold
+- Letters faden random in (zoals desktop)
+- "t" cursief in Minion Pro
+- Kleuren: zelfde natuur palette als desktop
 
-### Intro Carousel
-- 4 foto's uit `de-exoten/carousel/`
-- Interval: 4 seconden per foto
-- Lichte zoom op actieve foto (scale 1 → 1.05)
-- Hoogte: 68vh
-
-### Witte Tussenstand
-- Na alle foto's: witte achtergrond (10 seconden)
-- Gekleurde letters faden uit
-- "De Exoten" fadet in gecentreerd (4.5rem)
-- Daarna: carousel herstart, letter animatie reset
+### Intro Tekst
+- Onder de grid, 2rem margin-top
+- Breedte: 85vw, gecentreerd
+- Achtergrond: `#e8e8e8`
+- Verkorte tekst (2 paragrafen)
