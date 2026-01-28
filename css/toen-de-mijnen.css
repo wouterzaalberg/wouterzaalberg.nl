@@ -2599,8 +2599,8 @@
     }
 }
 
-/* Aanpassingen voor korte schermen (< 900px hoogte) */
-@media (min-width: 768px) and (max-height: 899px) {
+/* Aanpassingen voor korte schermen (< 1050px hoogte) */
+@media (min-width: 768px) and (max-height: 1049px) {
     /* Het grote slopen - tijdslijn vereenvoudigen */
     .tdmv-timeline-period.desktop-only {
         display: none;
