@@ -1329,35 +1329,6 @@
 }
 
 @media (max-width: 767px) {
-    .tdmv-uithetdal-content {
-        padding: 2rem 1.5rem;
-        align-items: center;
-    }
-
-    .tdmv-uithetdal-content .tdmv-uithetdal-title {
-        text-align: center;
-    }
-
-    .tdmv-uithetdal-row.row-1 {
-        grid-template-columns: 1fr;
-        justify-items: center;
-        text-align: center;
-    }
-
-    .tdmv-uithetdal-photo-small {
-        max-width: 180px;
-        align-items: center;
-    }
-
-    .tdmv-uithetdal-caption {
-        text-align: center;
-    }
-
-    .tdmv-parkstad-header {
-        align-items: center;
-        text-align: center;
-    }
-
     .tdmv-uithetdal-row.row-2,
     .tdmv-uithetdal-row.row-3 {
         grid-template-columns: 1fr;
@@ -3556,13 +3527,19 @@
     }
 
     /* Uit het Dal Insert */
+    .tdmv-insert:has(.tdmv-uithetdal-content) {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
     .tdmv-uithetdal-content {
-        padding: 1rem 0;
-        align-items: center;
+        padding: 1rem;
+        align-items: stretch;
+        width: 100%;
     }
 
     .tdmv-uithetdal-content .tdmv-uithetdal-title {
-        text-align: center;
+        text-align: left;
         font-size: 1.6rem;
     }
 
@@ -3572,12 +3549,18 @@
     }
 
     .tdmv-uithetdal-row.row-1 {
-        justify-items: center;
-        text-align: center;
+        text-align: left;
     }
 
     .tdmv-uithetdal-photo-small {
-        max-width: 100%;
+        width: 80%;
+        max-width: 350px;
+        margin-left: auto;
+        margin-right: auto;
+        align-items: center;
+    }
+
+    .tdmv-uithetdal-photo-small img {
         width: 100%;
     }
 
@@ -3586,8 +3569,14 @@
     }
 
     .tdmv-parkstad-header {
-        align-items: center;
-        text-align: center;
+        align-items: flex-start;
+        text-align: left;
+        padding-left: 1rem;
+    }
+
+    .tdmv-parkstad-gemeenten,
+    .tdmv-parkstad-demographics {
+        display: none;
     }
 
     .tdmv-parkstad-population {
