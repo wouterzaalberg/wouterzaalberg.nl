@@ -526,8 +526,15 @@
         // Trigger scroll in direction
         function triggerScroll(direction) {
             if (isAnimating) return;
-            isAnimating = true;
+
+            // Don't consume scroll if already at boundary
             const newIndex = currentIndex + direction;
+            if (newIndex < 0 || newIndex >= allItems.length) {
+                accumulatedDelta = 0;
+                return;
+            }
+
+            isAnimating = true;
             scrollToIndex(newIndex);
             setTimeout(() => {
                 isAnimating = false;
