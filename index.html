@@ -52,7 +52,7 @@
     <section class="hero-section">
         <div class="hero-image">
             <!-- Desktop hero images -->
-            <img id="heroImage1" class="hero-img hero-img-desktop active" src="images/de-exoten.jpg" alt="Wouter Zaalberg">
+            <img id="heroImage1" class="hero-img hero-img-desktop" src="images/de-exoten.jpg" alt="Wouter Zaalberg">
             <img id="heroImage2" class="hero-img hero-img-desktop" src="images/de-exoten.jpg" alt="Wouter Zaalberg">
             <!-- Mobile hero images (rotating) -->
             <img class="hero-img-mobile" src="toen-de-mijnen-verdwenen/Foto 1.jpg" alt="Toen de Mijnen Verdwenen" data-index="0" data-series="toen-de-mijnen-verdwenen.html" data-glow="#d4937a">
@@ -285,6 +285,17 @@
     </section>
 
     <script>
+        // Start hero zoom animatie na pagina load
+        (function initHeroZoom() {
+            const heroImage1 = document.getElementById('heroImage1');
+            // Toon image meteen (opacity 1)
+            heroImage1.style.opacity = '1';
+            // Start zoom na kleine delay zodat transitie werkt
+            setTimeout(() => {
+                heroImage1.classList.add('active');
+            }, 100);
+        })();
+
         // Hero image hover functionaliteit met cross-fade en zoom
         const heroImage1 = document.getElementById('heroImage1');
         const heroImage2 = document.getElementById('heroImage2');
