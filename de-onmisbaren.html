@@ -683,6 +683,25 @@
 
             if (title) titleObserver.observe(title);
         }
+
+        // Mobiel: nav auto-hide na 3 seconden, toon bij aanraking
+        if (window.innerWidth <= 767) {
+            const nav = document.querySelector('.horizontal-nav');
+            let hideTimeout;
+
+            function hideNav() {
+                nav.classList.add('nav-hidden');
+            }
+
+            function showNav() {
+                nav.classList.remove('nav-hidden');
+                clearTimeout(hideTimeout);
+                hideTimeout = setTimeout(hideNav, 3000);
+            }
+
+            hideTimeout = setTimeout(hideNav, 3000);
+            document.addEventListener('touchstart', showNav, { passive: true });
+        }
     </script>
 </body>
 </html>

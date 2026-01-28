@@ -1504,6 +1504,13 @@ img {
         z-index: 100;
         padding: 1rem 1.5rem !important;
         background: linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, transparent 100%);
+        transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+
+    .horizontal-nav.nav-hidden {
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(-10px);
     }
 
     .horizontal-nav .back-link {
