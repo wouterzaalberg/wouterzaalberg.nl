@@ -130,6 +130,16 @@
             opacity: 1 !important;
         }
 
+        /* Zoomable grid foto's */
+        .cluster-grid .photo-item.zoomable img {
+            transform: scale(1);
+            transition: transform 8s ease-out;
+        }
+
+        .cluster-grid .photo-item.zoomable.zooming img {
+            transform: scale(1.08);
+        }
+
         /* Bijschriften - responsive styling */
         .cluster-grid .caption {
             background: transparent;
@@ -140,6 +150,52 @@
             align-self: start;
             height: auto;
             min-height: 0;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .cluster-grid .caption.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Uitbreek richtingen voor captions - kader beweegt mee */
+        .expand-up {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: auto !important;
+        }
+        .expand-down {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: auto !important;
+        }
+        .expand-left {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            width: auto !important;
+            min-width: 100%;
+        }
+        .expand-right {
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            width: auto !important;
+            min-width: 100%;
+        }
+
+        /* Single-photo-section captions uitbreekbaar */
+        .single-photo-section .photo-caption-box.expand-up {
+            position: relative;
+            align-self: flex-end;
         }
 
         .cluster-grid .caption h4 {
@@ -158,6 +214,10 @@
             line-height: 1.6;
             color: #1a1a1a;
             margin: 0;
+        }
+
+        .cluster-grid .caption p + p {
+            margin-top: 0.8em;
         }
 
         /* Verticale labels - buiten grid, links boven */
@@ -209,12 +269,19 @@
         .single-photo-section .labeled-photo {
             position: relative;
             height: 100%;
+            overflow: hidden;
         }
 
         .single-photo-section .labeled-photo img {
             height: 100%;
             width: auto;
             display: block;
+            transform: scale(1);
+            transition: transform 8s ease-out;
+        }
+
+        .single-photo-section.zooming .labeled-photo img {
+            transform: scale(1.05);
         }
 
         .single-photo-section .vertical-label {
@@ -244,6 +311,14 @@
             align-self: flex-end;
             overflow: visible;
             height: auto;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .single-photo-section .photo-caption-box.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .single-photo-section .caption-title {
@@ -391,13 +466,14 @@
         .intro-title-text .letter {
             display: inline-block;
             opacity: 0;
-            transition: opacity 0.6s ease-out;
+            transition: opacity 0.5s ease-out;
         }
 
         .intro-title-text .letter.visible {
             opacity: 1;
         }
 
+        /* Kleuren per letter positie */
         .intro-title-text .letter:nth-child(1) { color: #4a7c59; }
         .intro-title-text .letter:nth-child(2) { color: #8b6914; }
         .intro-title-text .letter:nth-child(3) { color: transparent; }
@@ -408,8 +484,14 @@
         .intro-title-text .letter:nth-child(8) { color: #5c8a4d; }
         .intro-title-text .letter:nth-child(9) { color: #7a6b4e; }
 
-        .intro-title-text .letter.italic {
+        /* Alleen de t is cursief */
+        .intro-title-text .letter.cursive {
+            font-family: 'Minion Pro', 'Times New Roman', Georgia, serif;
             font-style: italic;
+            font-weight: 400;
+            letter-spacing: 0;
+            margin-left: -0.12em;
+            margin-right: 0.18em;
         }
 
         /* Intro tekst panel - onder de titel */
@@ -417,20 +499,56 @@
             position: absolute;
             top: 70%;
             left: 50%;
-            transform: translateX(-50%);
+            transform: translateX(-50%) translateY(20px);
             width: auto;
             min-width: 600px;
             max-width: 32vw;
             padding: 1.5rem 2rem;
             background: transparent;
             opacity: 0;
-            transition: opacity 0.6s ease-out;
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
             text-align: left;
+        }
+
+        .intro-text-panel.visible {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .intro-text-panel h2,
+        .intro-text-panel p {
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+        }
+
+        .intro-text-panel.visible h2 {
+            opacity: 1;
+            transform: translateY(0);
+            transition-delay: 0.2s;
+        }
+
+        .intro-text-panel.visible p:nth-of-type(1) {
+            opacity: 1;
+            transform: translateY(0);
+            transition-delay: 0.4s;
+        }
+
+        .intro-text-panel.visible p:nth-of-type(2) {
+            opacity: 1;
+            transform: translateY(0);
+            transition-delay: 0.6s;
+        }
+
+        .intro-text-panel.visible p:nth-of-type(3) {
+            opacity: 1;
+            transform: translateY(0);
+            transition-delay: 0.8s;
         }
 
         /* Stierkikker sectie - eerste item na intro */
         .stierkikker-section {
-            margin-left: -20vw;
+            margin-left: -5vw;
             margin-right: 12rem;
             opacity: 0;
             transition: opacity 0.8s ease-out;
@@ -441,10 +559,6 @@
         .stierkikker-section.visible {
             opacity: 1;
             z-index: 150;
-        }
-
-        .intro-text-panel.visible {
-            opacity: 1;
         }
 
         .intro-text-panel h2 {
@@ -495,7 +609,7 @@
 
         @media (max-width: 1100px) {
             .intro-title-text {
-                font-size: clamp(3rem, 9vw, 8rem);
+                font-size: clamp(2.8rem, 8vw, 6rem);
             }
             .intro-title-wrapper {
                 left: 15vw;
@@ -503,14 +617,39 @@
             }
             .intro-text-panel {
                 max-width: 50vw;
-                padding: 1rem 1.2rem;
+                padding: 0.8rem 1rem;
             }
             .intro-text-panel h2 {
-                font-size: 0.9rem;
+                font-size: 0.85rem;
+                margin-bottom: 0.5rem;
             }
             .intro-text-panel p {
-                font-size: 0.75rem;
-                line-height: 1.55;
+                font-size: 0.68rem;
+                line-height: 1.45;
+                margin-bottom: 0.4rem;
+            }
+        }
+
+        @media (max-width: 1000px) {
+            .intro-title-text {
+                font-size: clamp(2.5rem, 7vw, 5rem);
+            }
+            .intro-title-wrapper {
+                left: 12vw;
+                width: 76vw;
+            }
+            .intro-text-panel {
+                max-width: 55vw;
+                padding: 0.7rem 0.9rem;
+            }
+            .intro-text-panel h2 {
+                font-size: 0.8rem;
+                margin-bottom: 0.4rem;
+            }
+            .intro-text-panel p {
+                font-size: 0.62rem;
+                line-height: 1.4;
+                margin-bottom: 0.35rem;
             }
         }
 
@@ -1589,7 +1728,7 @@
                 <!-- Titel wrapper - over de lege cellen -->
                 <div class="intro-title-wrapper" id="introTitleWrapper">
                     <h1 class="intro-title-text" id="introTitleText">
-                        <span class="letter">D</span><span class="letter">e</span><span class="letter">&nbsp;</span><span class="letter">E</span><span class="letter">x</span><span class="letter">o</span><span class="letter italic">t</span><span class="letter">e</span><span class="letter">n</span>
+                        <span class="letter">D</span><span class="letter">e</span><span class="letter">&nbsp;</span><span class="letter">E</span><span class="letter">x</span><span class="letter">o</span><span class="letter cursive">t</span><span class="letter">e</span><span class="letter">n</span>
                     </h1>
                     <!-- Intro tekst - verschijnt na kolommen weg -->
                     <div class="intro-text-panel" id="introTextPanel">
@@ -1629,7 +1768,7 @@
                 <span class="vertical-label">Wasb<span class="accent">e</span>er</span>
                 <img src="de-exoten/8.jpg" alt="Wasbeer" loading="lazy">
             </div>
-            <div class="photo-caption-box">
+            <div class="photo-caption-box expand-up">
                 <h4 class="caption-title">Ontsnapt</h4>
                 <p class="caption-text">In het Wildpark in Gangelt, net over de grens van Zuid-Limburg, is een deel van de wasberen enkele jaren geleden ontsnapt. Sindsdien hebben ze zich razend snel genesteld en voortgeplant in de heuvels van Limburg.</p>
             </div>
@@ -1661,7 +1800,7 @@
             <div class="photo-item foto-14" data-file="14.jpg">
                 <img src="de-exoten/14.jpg" alt="Beverratjager" loading="lazy">
             </div>
-            <div class="caption caption-beverrat">
+            <div class="caption caption-beverrat expand-up">
                 <h4>Via de Roer</h4>
                 <p>De Roer, een kleine rivier die vanuit Duitsland richting Roermond stroomt, fungeert als de snelweg voor beverratten om ons land binnen te komen. In Duitsland wordt het dier niet bejaagd, waardoor iedere week tientallen exemplaren de trek westwaarts maken.</p>
             </div>
@@ -1682,7 +1821,7 @@
             <div class="photo-item foto-17" data-file="17.jpg">
                 <img src="de-exoten/17.jpg" alt="Wolhandkrab" loading="lazy">
             </div>
-            <div class="caption caption-wolhandkrab">
+            <div class="caption caption-wolhandkrab expand-down">
                 <h4>Van zout naar zoet</h4>
                 <p>Bijna een eeuw geleden brachten zeeschepen de Chinese wolhandkrab naar Oost-Groningen, en sindsdien hebben ze gestaag de Nederlandse wateren veroverd. Nog ieder jaar trekken de krabben van hun geboortegrond in zee naar het zoete water. Hier controleert aquatisch bioloog Peter of de jonge krabben al bij Nieuw Statenzijl zijn gearriveerd. Via de palingtunnel wandelen ze vervolgens het Groningse achterland binnen.</p>
             </div>
@@ -1700,7 +1839,7 @@
             <div class="photo-item foto-info2" data-file="info 2.jpg">
                 <img src="de-exoten/info 2.jpg" alt="Info hemelboom" loading="lazy">
             </div>
-            <div class="caption caption-hemelboom">
+            <div class="caption caption-hemelboom expand-right">
                 <h4>Via de snelweg</h4>
                 <p>De hemelboom is een exoot die vanuit het zuiden Nederland binnentrekt. Op vrachtwagens en auto's reizen de zaden mee, waarna ze ergens gedurende de reis weer eraf waaien. Hemelbomen vind je daarom vooral in de bermen, zoals hier op de A2 nabij Sittard.</p>
             </div>
@@ -1718,7 +1857,7 @@
             <div class="photo-item foto-20" data-file="20.jpg">
                 <img src="de-exoten/20.jpg" alt="Micro-exoten" loading="lazy">
             </div>
-            <div class="caption caption-microexoten">
+            <div class="caption caption-microexoten expand-up">
                 <h4>Reisticket eerste klas</h4>
                 <p>Het ballastwater van zeeschepen biedt micro-exoten (larven, eitjes, parasieten, etc.) een eersteklas ticket om de wereld over te reizen. Water dat aan de ene kant van de wereld wordt ingeladen, wordt aan de andere kant van de wereld geloosd, met alle organismen die de reis hebben overleefd. Sinds enkele jaren moeten zeeschepen hun ballastwater zuiveren om dit te voorkomen. Michiel controleert hier in de haven of de filters werken.</p>
             </div>
@@ -1742,7 +1881,7 @@
             <div class="photo-item foto-24" data-file="24.jpg">
                 <img src="de-exoten/24.jpg" alt="Aziatische hoornaar" loading="lazy">
             </div>
-            <div class="caption caption-hoornaar">
+            <div class="caption caption-hoornaar expand-up">
                 <h4>Op zoek in Zeeland</h4>
                 <p>Een ramp, vindt Marion de komst van Aziatische hoornaar. Veelvraten zijn het, die insecten waaronder de honingbij in grote aantallen opeten. Als vrijwilliger speurt ze de provincie af waar de beesten in 2017 voor het eerst werden waargenomen: in Zeeland. Met speciale lokpotten probeert ze de hoornaars te lokken, om ze daarna te volgen tot hun nest. De nesten zijn vaak moeilijk zichtbaar, zoals u als kijker ook niet het nest op een van de foto's heeft gespot.</p>
             </div>
@@ -1795,7 +1934,7 @@
             <div class="photo-item foto-info3" data-file="info 3.jpg">
                 <img src="de-exoten/info 3.jpg" alt="Info hoornaar" loading="lazy">
             </div>
-            <div class="caption caption-hoornaar-boog">
+            <div class="caption caption-hoornaar-boog expand-up">
                 <h4>Op de vlucht</h4>
                 <p>Honderden bijtjes verliezen Marion en Peter dagelijks aan de hoornaars, die van 's ochtends vroeg tot 's avonds laat als duikbommenwerpers genadeloos de korven aanvallen. Hun bijen wonen op een tuinpark in Terneuzen in Zeeland. Moedeloos van de situatie besluiten ze de korven te verhuizen naar hoornaarvriendelijker territorium.</p>
             </div>
@@ -1812,7 +1951,7 @@
             <div class="photo-item foto-34" data-file="34.jpg">
                 <img src="de-exoten/34.jpg" alt="Hoornaar" loading="lazy">
             </div>
-            <div class="photo-item foto-35" data-file="35.jpg">
+            <div class="photo-item foto-35 zoomable" data-file="35.jpg">
                 <img src="de-exoten/35.jpg" alt="Hoornaarbestrijding" loading="lazy">
             </div>
             <div class="photo-item foto-36" data-file="36.jpg">
@@ -1824,7 +1963,7 @@
             <div class="photo-item foto-39" data-file="39.jpg">
                 <img src="de-exoten/39.jpg" alt="Hoornaarbestrijding" loading="lazy">
             </div>
-            <div class="caption caption-snitch">
+            <div class="caption caption-snitch expand-down">
                 <h4>Snitch</h4>
                 <p>Rob Voest, een grootheid in de hoornaarbestrijding, heeft in de afgelopen jaren een vernieuwende methode ontwikkeld om snel van de hoornaar af te komen. In plaats van eindeloos speuren met verrekijkers of drones, vangt hij één exemplaar die hij een microzendertje ombindt. Deze hoornaar wordt vrijgelaten en - eenmaal bijgekomen van zijn ontregelende ervaring - vliegt hij terug naar het nest. Rob hoeft het insect alleen maar met de ontvanger te volgen. Eenmaal bij het nest klimt hij in een hoogwerker en zuigt hij het leeg.</p>
             </div>
@@ -1836,7 +1975,7 @@
                 <span class="vertical-label">Amerikaanse<br>rivier<span class="accent">k</span>reeft</span>
                 <img src="de-exoten/40.jpg" alt="Rivierkreeft" loading="lazy">
             </div>
-            <div class="photo-caption-box">
+            <div class="photo-caption-box expand-up">
                 <h4 class="caption-title">50 kilo per dag</h4>
                 <p class="caption-text">Roy en collega halen de netten binnen in de Molenpolder in Utrecht, waar de rivierkreeft welig tiert. Als experiment vangen ze iedere dag de beestjes, al maanden lang, om te kijken of de populatie daarmee ook afneemt. Ze vangen zo'n 50 kilo kreeft per dag. De kreeften worden verkocht aan restaurants en voedselfabrikanten.</p>
             </div>
@@ -1890,6 +2029,10 @@
             <div class="labeled-photo">
                 <img src="de-exoten/41.jpg" alt="Rivierkreeft" loading="lazy">
             </div>
+            <div class="photo-caption-box expand-up">
+                <h4 class="caption-title">Nog steeds 50 kilo per dag</h4>
+                <p class="caption-text">Een half jaar later halen Roy en collega visser nog steeds 50 kilo kreeft per dag uit het poldergebied. Ondanks de volle netten is er geen zichtbare afname van het aantal kreeften. Het experiment is twee jaar na de start gestopt.</p>
+            </div>
         </div>
 
         <!-- ====== VEDERKRUID (foto 42-49) ====== -->
@@ -1911,7 +2054,7 @@
                 <img src="de-exoten/47.jpg" alt="Vederkruid" loading="lazy">
             </div>
             <!-- Bijschrift -->
-            <div class="caption caption-vederkruid">
+            <div class="caption caption-vederkruid expand-up">
                 <h4>Plantensoep</h4>
                 <p>In de Wieden, een van Neerlands mooiste gebieden in Overijssel, drijft in grote delen van het gebied een dikke plantensoep. Het ongelijkbladig vederkruid is een exotische aquariumplant, vaak uitgekozen vanwege zijn decoratieve kwaliteiten, die waarschijnlijk in het gebied gedumpt is. Sindsdien woekert het in een omvang die bijna niet beheersbaar is. De strijd wordt in sommige delen aangegaan met emmer en hark.</p>
             </div>
@@ -1929,7 +2072,7 @@
             </div>
 
             <!-- Bijschrift -->
-            <div class="caption caption-vederkruid-2">
+            <div class="caption caption-vederkruid-2 expand-up">
                 <h4>Over de bodem</h4>
                 <p>Maar spierkracht alleen is niet voldoende om het vederkruid uit het gebied te halen. De gemechaniseerde tak van de onkruidbrigade bestaat uit zogenaamde 'harkboten', boten met een grote ploeg die de bodem compleet omwoelen om ieder levend organisme, waaronder de exoot, te verwijderen. Deze de facto vernietiging van het onderwaterleven moet de Wieden een 'reset' geven tegen de woekerende plantensoep.</p>
             </div>
@@ -1941,7 +2084,7 @@
                 <span class="vertical-label">Vlinder<span class="accent">s</span>truik</span>
                 <img src="de-exoten/50.jpg" alt="Vlinderstruik" loading="lazy">
             </div>
-            <div class="photo-caption-box">
+            <div class="photo-caption-box expand-up">
                 <h4 class="caption-title">Weg met de vlinderstruik</h4>
                 <p class="caption-text">De vlinderstruik heeft de voormalige ENCI-groeve, ten zuiden van Maastricht bereikt. En dat is slecht nieuws voor vlinders, want voor vlinders is deze struik junkfood: erg lekker, weinig voedingswaarde. Vrijwilligers zoals Guus trekken er in het weekend op uit om de plant uit de groeve te verwijderen.</p>
             </div>
@@ -1964,7 +2107,7 @@
             </div>
 
             <!-- Bijschrift -->
-            <div class="caption caption-waterteunisbloem">
+            <div class="caption caption-waterteunisbloem expand-up">
                 <h4>Met de hand</h4>
                 <p>Werknemers van Staatsbosbeheer kammen een gebied uit in de Biesbosch, waar de waterteunisbloem zich heeft gevestigd. Wie die plant in zijn gebied heeft, krijgt het er bijna niet meer uit. Zelfs het kleinste drijvende stukje kan zich opnieuw in de oevers vestigen en uitgroeien tot een enorme plaag. Door de aard van het gebied moet de plant met de hand worden verwijderd.</p>
             </div>
@@ -1984,7 +2127,7 @@
             </div>
 
             <!-- Bijschrift -->
-            <div class="caption caption-watercrassula">
+            <div class="caption caption-watercrassula expand-down">
                 <h4>Besmettingsgevaar</h4>
                 <p>In een natuurgebied in Brabant woekert de watercrassula, een plantje dat een bijna ondoordringbare mat vormt die al het andere groen het bestaansrecht ontneemt. De plant is zo besmettelijk dat de volle wagen iedere keer ontsmet moet worden als hij naar de afvoerberg rijdt.</p>
             </div>
@@ -2015,7 +2158,7 @@
                 <img src="de-exoten/60.jpg" alt="Kleine waterteunisbloem" loading="lazy">
             </div>
             <!-- Bijschrift -->
-            <div class="caption caption-kwt">
+            <div class="caption caption-kwt expand-up">
                 <h4>Een woekeraar op Tiengemeten</h4>
                 <p>Tiengemeten, op kleine afstand van de Biesbosch, heeft ook te maken met de waterteunisbloem (de kleine variant). Ook hier trekken wekelijks vrijwilligers eropuit om de plant te verwijderen. Ondanks de vele, vele uren van speuren, waden, scheppen en afvoeren zijn ze de strijd aan het verliezen.</p>
             </div>
@@ -2026,7 +2169,7 @@
             <div class="labeled-photo">
                 <img src="de-exoten/61.jpg" alt="Kleine waterteunisbloem" loading="lazy">
             </div>
-            <div class="photo-caption-box">
+            <div class="photo-caption-box expand-up">
                 <h4 class="caption-title">Opgegeven</h4>
                 <p class="caption-text">Het gevolg is dat hele stukken van Tiengemeten worden opgegeven. Hier is de waterteunisbloem zo dominant dat er niks meer tegen te beginnen is, zelfs als graafmachines het gebied zouden afgraven. Inmiddels denkt Natuurmonumenten erover na om de natuurbestemming van het eiland aan te passen, waarbij de eentonigheid van het gebied wordt erkend en er in het geheel niet meer tegen de exoot wordt opgetreden. Het zou een spectaculaire overwinning voor de waterteunisbloem versus de mens betekenen.</p>
             </div>
@@ -2038,7 +2181,7 @@
                 <span class="vertical-label">Japanse<br><span class="accent">O</span>ester</span>
                 <img src="de-exoten/62.jpg" alt="Japanse oester" loading="lazy">
             </div>
-            <div class="photo-caption-box">
+            <div class="photo-caption-box expand-up">
                 <h4 class="caption-title">Overgenomen</h4>
                 <p class="caption-text">De Waddenzee was ooit het domein van de inheemse oester. Een ziekte en de komst van de Japanse oester heeft dat doen veranderen. Inmiddels zijn bijna alle oesters exoten geworden. Hier inspecteert David, een professor verbonden aan het Nederlands Instituut voor Onderzoek der Zee, een oesterbank.</p>
             </div>
@@ -2079,9 +2222,11 @@
             </div>
 
             <!-- Bijschrift -->
-            <div class="caption caption-muskusrat">
+            <div class="caption caption-muskusrat expand-down">
                 <h4>Richard de Rattenjager</h4>
-                <p>Als mensen een kaartje naar hem sturen, dan volstaat straatnaam en 'Richard de rattenjager'. De postbode weet genoeg. Al meer dan 40 jaar vangt Richard muskusratten in de omgeving van Utrecht, vroeger duizenden per jaar, nu honderden. De dieren zijn invasieve exoten die dijken veranderen in gatenkaas, en mannen als Richard gaan er daarom dagelijks op uit om ze te vangen.</p>
+                <p>Als mensen een kaartje naar hem sturen, dan volstaat straatnaam en 'Richard de rattenjager'. De postbode weet genoeg. Al meer dan 40 jaar vangt Richard muskusratten in de omgeving van Utrecht, vroeger duizenden per jaar, nu honderden- een goede muskusratjager is toch een soort slachtoffer van zijn eigen succes. De dieren zijn invasieve exoten die dijken veranderen in gatenkaas, en mannen als Richard gaan er daarom dagelijks op uit om ze te vangen.</p>
+                <p>Maar hij is meer dan een jager alleen: hij is een wandelende muskusrat encyclopedie. Alles houdt hij bij in een uitgebreid archief, vol krantenknipsels, vangcijfers en onderzoeksartikelen, aangevuld met een grote collectie muskusratcuriositeiten zoals muskusratjes op sterk water. Hij ís zijn werk- een jager die buiten moet zijn, genietend van het kat en muis spel tussen, ehh, jager en rat. Maar, zegt Richard, rattenvangen komt met een prijs: je eigen gezondheid. Hij kent geen muskusratjager die geen versleten rug heeft aan het einde van zijn carrière, en ook hij zit sinds december tijdelijk thuis. Hij woont samen met zijn moeder, wie hij verzorgt- de pijn in de rug werd ondragelijk.</p>
+                <p>Wat hij gaan doen weet hij nog niet. Misschien zijn archief bijwerken. Maar echt veel zin heeft Richard er niet in. Buiten lopen de ratten, en hij zit binnen te wachten tot de rug herstelt. Een ondragelijke gedachte voor een Rattenjager.</p>
             </div>
         </div>
 
@@ -2099,7 +2244,7 @@
             </div>
 
             <!-- Bijschrift -->
-            <div class="caption caption-wasbeer2">
+            <div class="caption caption-wasbeer2 expand-right">
                 <h4>Naar het lab</h4>
                 <p>Nadat de wasbeer met een luchtdrukgeweer is doodgeschoten, controleert René het gebit om de leeftijd te bepalen (één winter oud) en knipt een stukje tong af voor DNA-onderzoek in het lab.</p>
             </div>
@@ -2590,24 +2735,20 @@
             const letters = titleText.querySelectorAll('.letter');
             const photoCells = introGrid.querySelectorAll('.intro-cell:not(.empty)');
 
-            // Letter animatie: random fade-in volgorde
+            // Letter fade animatie - letters faden random in
+            // Shuffle letter indices (skip index 2 = spatie)
+            const letterIndices = [0, 1, 3, 4, 5, 6, 7, 8];
+            for (let i = letterIndices.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [letterIndices[i], letterIndices[j]] = [letterIndices[j], letterIndices[i]];
+            }
+
+            // Start animatie na korte delay
             setTimeout(() => {
-                const letterIndices = [];
-                for (let i = 0; i < letters.length; i++) {
-                    letterIndices.push(i);
-                }
-                // Shuffle indices
-                for (let i = letterIndices.length - 1; i > 0; i--) {
-                    const j = Math.floor(Math.random() * (i + 1));
-                    [letterIndices[i], letterIndices[j]] = [letterIndices[j], letterIndices[i]];
-                }
-                // Fade in letters in random order
-                let letterDelay = 0;
-                letterIndices.forEach(idx => {
+                letterIndices.forEach((idx, i) => {
                     setTimeout(() => {
                         letters[idx].classList.add('visible');
-                    }, letterDelay);
-                    letterDelay += 150 + Math.random() * 100;
+                    }, i * 200 + Math.random() * 100);
                 });
             }, 1500);
 
@@ -2633,13 +2774,58 @@
             setInterval(swapTwoPhotos, 2000);
         })();
 
+        // ========== ZOOM EFFECT VOOR GROTE FOTO'S ==========
+        (function initPhotoZoom() {
+            const singlePhotos = document.querySelectorAll('.single-photo-section');
+            const zoomableGridPhotos = document.querySelectorAll('.cluster-grid .photo-item.zoomable');
+
+            const zoomObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('zooming');
+                    }
+                });
+            }, {
+                threshold: 0.3,
+                rootMargin: '0px'
+            });
+
+            singlePhotos.forEach(photo => {
+                zoomObserver.observe(photo);
+            });
+
+            zoomableGridPhotos.forEach(photo => {
+                zoomObserver.observe(photo);
+            });
+        })();
+
+        // ========== CAPTION FADE IN ==========
+        (function initCaptionFade() {
+            const captions = document.querySelectorAll('.cluster-grid .caption, .single-photo-section .photo-caption-box');
+
+            const captionObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, {
+                threshold: 0.2,
+                rootMargin: '0px'
+            });
+
+            captions.forEach(caption => {
+                captionObserver.observe(caption);
+            });
+        })();
+
         // ========== INTRO SCROLL TRANSITIE ==========
         // Kolommen scrollen omhoog/omlaag in 5 stappen
         // Na 3 scrolls verschijnt introtekst onder de titel
-        // Dan horizontal scroll naar stierkikker en deel 1
+        // Dan extra scroll voor leestijd, daarna horizontal scroll
         let introComplete = false;
         let introProgress = 0;
-        const INTRO_STEPS = 5; // 5 stappen totaal
+        const INTRO_STEPS = 7; // 7 stappen: 5 voor kolommen + 2 voor leestijd
 
         (function initIntroTransition() {
             if (window.innerWidth <= 767) {
@@ -2663,10 +2849,12 @@
             document.body.classList.add('scroll-locked');
 
             function updateIntroState() {
-                // Progress 0-1: kolommen scrollen weg (5 stappen)
-                // Na 3 scrolls (progress > 0.6): introtekst verschijnt
+                // Progress 0-1: kolommen scrollen weg, daarna leestijd
+                // Kolommen klaar bij 0.7, tekst verschijnt bij 0.5, daarna 2 extra scrolls
 
-                const translateAmount = introProgress * 100; // 0-100vh
+                // Kolommen bewegen tot progress 0.7, daarna stoppen ze
+                const columnProgress = Math.min(introProgress / 0.7, 1);
+                const translateAmount = columnProgress * 100; // 0-100vh
 
                 // Beweeg kolommen
                 introColumns.forEach(column => {
@@ -2678,8 +2866,8 @@
                     }
                 });
 
-                // Toon introtekst en stierkikker na 3 scrolls (60% progress)
-                if (introProgress >= 0.6) {
+                // Toon introtekst en stierkikker na ~4 scrolls (50% progress)
+                if (introProgress >= 0.5) {
                     introTextPanel.classList.add('visible');
                     if (stierkikkerSection) stierkikkerSection.classList.add('visible');
                 } else {
