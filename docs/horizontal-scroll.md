@@ -121,6 +121,42 @@ if (window.innerWidth > 767) {
 - **COOLDOWN (500)**: Wachttijd na scroll voordat nieuwe scroll mogelijk is
 - **MOMENTUM_THRESHOLD (0.5)**: Negeer deltas die minder dan 50% van vorige zijn
 
+## Keyboard Navigatie (januari 2026)
+Alle pagina's ondersteunen pijltjestoetsen:
+- **→** of **↓**: volgende item
+- **←** of **↑**: vorige item
+
+```javascript
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+        e.preventDefault();
+        triggerScroll(1);
+    } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+        e.preventDefault();
+        triggerScroll(-1);
+    }
+});
+```
+
+**Let op**: de-exoten.html gebruikt continue scroll (geen snap), dus keyboard navigatie scrollt daar met vaste afstand (300px).
+
+## Scroll Grenzen Fix (januari 2026)
+Scroll events aan het begin/einde van de pagina worden niet meer "geconsumeerd":
+
+```javascript
+function triggerScroll(direction) {
+    if (isAnimating) return;
+
+    // Don't consume scroll if already at boundary
+    const newIndex = currentIndex + direction;
+    if (newIndex < 0 || newIndex >= allItems.length) {
+        accumulatedDelta = 0;
+        return;
+    }
+    // ... rest van functie
+}
+```
+
 ## Pagina's met horizontale scroll
 - een-plek-onder-de-zon.html
 - de-onmisbaren.html

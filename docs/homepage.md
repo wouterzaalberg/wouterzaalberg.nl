@@ -7,6 +7,7 @@
 - Menu overlay in wit tekstvak
 - Default afbeelding: `de-exoten.jpg`
 - Zoom animatie: `scale(1.05)`, 8s transition
+- **Zoom start direct bij pagina load** (via JS na 100ms delay)
 - Cross-fade tussen twee img elementen bij hover
 
 ### Sectie 2 - About

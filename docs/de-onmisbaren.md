@@ -39,9 +39,17 @@
 - **Desktop (768px - 2000px+)**: titel groeit vloeiend via clamp
 - **Desktop klein (768-1400px)**:
   - Intro panel: `max-width: clamp(280px, 45vw, 500px)`
-  - Intro foto: `width: clamp(280px, 45vw, 500px)`
+  - Intro foto: `object-fit: cover; object-position: center top` (cropped, niet uitgerekt)
+- **Kleine schermhoogte (< 1000px, desktop)**:
+  - Foto's 2-9: 80vh (in plaats van 70vh)
+  - Foto's groeien naar beneden: `align-self: flex-start; padding-top: 10vh`
+  - Intro foto blijft 100vh
 - **Mobiel (< 767px)**:
   - Verticale layout, foto's 100vw
   - Navigatie met gradient achtergrond
   - Caption fade-in animatie (opacity 0→1, translateY 15px→0)
   - Titel/intro tekst fade-in animatie
+
+## Scroll Gedrag
+- Scroll aan grenzen wordt niet "geconsumeerd"
+- Keyboard navigatie: pijltjestoetsen (←→↑↓)
