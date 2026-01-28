@@ -1958,6 +1958,25 @@
         const MOUSE_WHEEL_DELTA = 80;   // Typical mouse wheel delta
         const SCROLL_PAUSE = 150;       // Ms pause indicates new scroll action
 
+        // Preload images for upcoming stories
+        const preloadedUrls = new Set();
+        function preloadAhead(fromIndex, count = 4) {
+            for (let i = 1; i <= count; i++) {
+                const targetIndex = fromIndex + i;
+                if (targetIndex < allItems.length) {
+                    const images = allItems[targetIndex].querySelectorAll('img');
+                    images.forEach(img => {
+                        const src = img.getAttribute('src');
+                        if (!src || preloadedUrls.has(src)) return;
+                        preloadedUrls.add(src);
+                        // Preload via new Image object
+                        const preloader = new Image();
+                        preloader.src = src;
+                    });
+                }
+            }
+        }
+
         // Scroll to target index
         function scrollToIndex(index) {
             if (index < 0) index = 0;
@@ -1972,6 +1991,9 @@
             }
 
             currentIndex = index;
+
+            // Preload next stories
+            preloadAhead(index);
 
             allItems[currentIndex].scrollIntoView({
                 behavior: 'smooth',
