@@ -928,7 +928,8 @@
         let scrollDirection = 0;
         let lastScrollTime = 0;
         const DELTA_THRESHOLD = 50;  // Minimum delta to trigger scroll
-        const COOLDOWN = 500;        // Ms to wait after scroll
+        const COOLDOWN = 500;        // Ms to wait after scroll (trackpad)
+        const COOLDOWN_FAST = 150;   // Ms to wait after mouse wheel scroll
         const MOMENTUM_THRESHOLD = 0.5; // Ignore if delta drops below this ratio
         const MOUSE_WHEEL_DELTA = 80;   // Typical mouse wheel delta
         const SCROLL_PAUSE = 150;       // Ms pause indicates new scroll action
@@ -1146,8 +1147,8 @@
             }
         }
 
-        // Trigger scroll in direction
-        function triggerScroll(direction) {
+        // Trigger scroll in direction (optional fast cooldown for mouse wheel)
+        function triggerScroll(direction, fast = false) {
             if (isAnimating) return;
             isAnimating = true;
             handleScroll(direction);
@@ -1156,7 +1157,7 @@
                 accumulatedDelta = 0;
                 lastDelta = 0;
                 scrollDirection = 0;
-            }, COOLDOWN);
+            }, fast ? COOLDOWN_FAST : COOLDOWN);
         }
 
         // Keyboard navigation (arrow keys)
@@ -1184,7 +1185,7 @@
 
                 // Detect mouse wheel: large delta after a pause
                 if (timeSinceLastScroll > SCROLL_PAUSE && delta >= MOUSE_WHEEL_DELTA) {
-                    triggerScroll(direction);
+                    triggerScroll(direction, true); // fast cooldown for mouse wheel
                     accumulatedDelta = 0;
                     lastDelta = 0;
                     return;
@@ -2707,7 +2708,7 @@
 
                 // Detect mouse wheel: large delta after a pause
                 if (timeSinceLastScroll > SCROLL_PAUSE && delta >= MOUSE_WHEEL_DELTA) {
-                    triggerScroll(direction);
+                    triggerScroll(direction, true); // fast cooldown for mouse wheel
                     accumulatedDelta = 0;
                     lastDelta = 0;
                     return;

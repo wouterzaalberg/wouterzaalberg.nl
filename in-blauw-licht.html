@@ -506,7 +506,8 @@
         let lastWheelTime = 0;
         let scrollDirection = 0;
         const DELTA_THRESHOLD = 50;  // Minimum delta to trigger scroll
-        const COOLDOWN = 800;        // Ms to wait after scroll
+        const COOLDOWN = 800;        // Ms to wait after scroll (trackpad)
+        const COOLDOWN_FAST = 150;   // Ms to wait after mouse wheel scroll
         const MOMENTUM_RESET_TIME = 100; // Reset accumulation if gap between events
         const MOUSE_WHEEL_DELTA = 80;   // Typical mouse wheel delta
         const SCROLL_PAUSE = 150;       // Ms pause indicates new scroll action
@@ -745,8 +746,8 @@
             });
         }
 
-        // Trigger scroll in direction
-        function triggerScroll(direction) {
+        // Trigger scroll in direction (optional fast cooldown for mouse wheel)
+        function triggerScroll(direction, fast = false) {
             if (isAnimating) return;
             isAnimating = true;
             const newIndex = currentIndex + direction;
@@ -756,7 +757,7 @@
                 accumulatedDelta = 0;
                 lastDelta = 0;
                 scrollDirection = 0;
-            }, COOLDOWN);
+            }, fast ? COOLDOWN_FAST : COOLDOWN);
         }
 
         // Keyboard navigation (arrow keys)
@@ -785,7 +786,7 @@
                 // Detect mouse wheel: large delta after a pause
                 if (timeSinceLastScroll > SCROLL_PAUSE && delta >= MOUSE_WHEEL_DELTA) {
                     lastWheelTime = now;
-                    triggerScroll(direction);
+                    triggerScroll(direction, true); // fast cooldown for mouse wheel
                     accumulatedDelta = 0;
                     return;
                 }
