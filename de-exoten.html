@@ -2929,6 +2929,19 @@
                 e.preventDefault();
                 this.scrollLeft += e.deltaY;
             }, { passive: false });
+
+            // Keyboard navigation (arrow keys)
+            document.addEventListener('keydown', (e) => {
+                if (!introComplete) return;
+                const scrollAmount = 300;
+                if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+                    e.preventDefault();
+                    container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+                } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+                    e.preventDefault();
+                    container.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+                }
+            });
         }
 
         // Genereer debug cellen met coördinaten (48×24)
