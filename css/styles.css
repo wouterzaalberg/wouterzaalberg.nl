@@ -1368,6 +1368,108 @@ img {
     color: var(--color-white);
 }
 
+/* Share Button */
+.share-button {
+    position: fixed;
+    top: 1.5rem;
+    right: 2rem;
+    z-index: 101;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+}
+
+.share-button:hover {
+    opacity: 1;
+}
+
+.share-button svg {
+    width: 20px;
+    height: 20px;
+    fill: var(--color-black);
+    transition: fill 0.3s ease;
+}
+
+.dark-bg .share-button svg {
+    fill: var(--color-white);
+}
+
+.share-button:hover svg {
+    fill: var(--color-gold);
+}
+
+/* Share Dropdown */
+.share-dropdown {
+    position: fixed;
+    top: 3.5rem;
+    right: 2rem;
+    z-index: 102;
+    background: var(--color-white);
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    padding: 0.5rem 0;
+    min-width: 180px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+}
+
+.share-dropdown.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.share-dropdown a,
+.share-dropdown button {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    width: 100%;
+    padding: 0.6rem 1rem;
+    font-family: 'Scala Sans', sans-serif;
+    font-size: 0.85rem;
+    color: var(--color-black);
+    text-decoration: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.share-dropdown a:hover,
+.share-dropdown button:hover {
+    background: rgba(0,0,0,0.05);
+}
+
+.share-dropdown svg {
+    width: 18px;
+    height: 18px;
+    fill: currentColor;
+    flex-shrink: 0;
+}
+
+.share-dropdown .copy-success {
+    color: var(--color-gold);
+}
+
+/* Mobile share button */
+@media (max-width: 767px) {
+    .share-button {
+        top: 1rem;
+        right: 1rem;
+    }
+
+    .share-dropdown {
+        top: 3rem;
+        right: 1rem;
+    }
+}
+
 .horizontal-scroll-container {
     display: flex;
     overflow-x: auto;
