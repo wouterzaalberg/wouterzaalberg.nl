@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grid Test - De Exoten</title>
+    <!-- UITGESCHAKELD - overschrijft grid styling -->
+    <!-- <link rel="stylesheet" href="css/styles.css"> -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #1a1a1a;
+            height: 100vh;
+            width: 100vw;
+            font-family: 'Scala Sans', sans-serif;
+            overflow: hidden;
+        }
+
+        /* Debug controls */
+        .debug-controls {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            z-index: 1000;
+            background: rgba(0,0,0,0.9);
+            padding: 1rem;
+            border-radius: 8px;
+            color: white;
+            font-size: 0.8rem;
+        }
+
+        .debug-controls label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+            cursor: pointer;
+        }
+
+        .debug-controls input[type="checkbox"] {
+            width: 1rem;
+            height: 1rem;
+        }
+
+        .debug-info {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #444;
+            font-family: monospace;
+        }
+
+        /* Viewport indicator */
+        .viewport-size {
+            position: fixed;
+            top: 1rem;
+            left: 1rem;
+            background: rgba(0,0,0,0.9);
+            color: #0f0;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 1rem;
+            z-index: 1000;
+        }
+
+        .viewport-size .label {
+            color: #888;
+            font-size: 0.7rem;
+            display: block;
+            margin-bottom: 0.25rem;
+        }
+
+        .viewport-size .size {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .viewport-size .details {
+            font-size: 0.7rem;
+            color: #888;
+            margin-top: 0.5rem;
+            line-height: 1.4;
+        }
+
+        /* Grid container - 48×24 grid (dubbele precisie) */
+        .photo-grid {
+            display: grid;
+            width: 100vw;
+            height: 70vh;
+            margin-top: 15vh;
+            grid-template-columns: repeat(48, 1fr);
+            grid-template-rows: repeat(24, 1fr);
+            gap: clamp(0.15rem, 0.3vw, 0.3rem);
+            background: #222;
+        }
+
+        /* Debug overlay - grid lijnen en nummers */
+        .photo-grid.debug-mode {
+            background:
+                linear-gradient(to right, rgba(255,255,255,0.1) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: calc(100% / 24) calc(100% / 12);
+        }
+
+        /* Debug cel nummers - BUITEN het grid element */
+        .grid-debug-overlay {
+            display: none;
+            position: fixed;
+            top: 15vh;  /* zelfde als grid margin-top */
+            left: 0;
+            width: 100vw;
+            height: 70vh;
+            pointer-events: none;
+            z-index: 5;  /* ONDER de foto's */
+        }
+
+        .grid-debug-overlay.debug-mode {
+            display: grid;
+            grid-template-columns: repeat(48, 1fr);
+            grid-template-rows: repeat(24, 1fr);
+            gap: clamp(0.15rem, 0.3vw, 0.3rem);
+        }
+
+        .debug-cell {
+            border: 1px dashed rgba(255, 200, 0, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.6rem;
+            color: rgba(255, 200, 0, 0.6);
+            font-family: monospace;
+        }
+
+        .debug-cell:hover {
+            background: rgba(255, 200, 0, 0.1);
+            border-color: rgba(255, 200, 0, 0.6);
+        }
+
+        /* Foto items */
+        .photo-item {
+            position: relative;
+            overflow: hidden;
+            background: #333;
+            z-index: 10;
+            min-width: 0;
+            min-height: 0;
+            border: 3px solid lime;
+        }
+
+        .photo-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;  /* Vult cel, minimale cropping */
+            object-position: center;
+            display: block;
+        }
+
+        /* Met cover vullen foto's hun cel - uitlijning niet meer nodig */
+
+        /* Bijschriften */
+        .caption {
+            padding: 0.5rem;
+            font-size: 0.8rem;
+            line-height: 1.4;
+            color: #1a1a1a;
+            background: rgba(255,255,255,0.9);
+            z-index: 20;
+        }
+
+        .caption-11 {
+            grid-column: 19 / 24;
+            grid-row: 15 / 25;
+        }
+
+        /* Debug info op foto */
+        .photo-item::after {
+            content: attr(data-debug);
+            position: absolute;
+            bottom: 0.5rem;
+            left: 0.5rem;
+            background: rgba(0,0,0,0.8);
+            color: #0f0;
+            padding: 0.25rem 0.5rem;
+            font-size: 0.65rem;
+            font-family: monospace;
+            border-radius: 3px;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        .debug-mode .photo-item::after {
+            opacity: 1;
+        }
+
+        /* Foto posities in 48×24 grid (dubbele precisie) */
+        /* GEPLAATST - posities ×2 geschaald */
+        .foto-9 { grid-column: 5 / 11; grid-row: 5 / 11; }
+        .foto-10 { grid-column: 11 / 19; grid-row: 3 / 11; }
+        .foto-11 { grid-column: 5 / 19; grid-row: 11 / 25; }
+        .foto-12 { grid-column: 19 / 31; grid-row: 3 / 15; }
+
+        /* FOTO-PALET: thumbnails linksboven (2×2 cellen) */
+        .foto-13 { grid-column: 1 / 3; grid-row: 1 / 3; }
+        .foto-14 { grid-column: 3 / 5; grid-row: 1 / 3; }
+        .foto-15 { grid-column: 1 / 3; grid-row: 3 / 5; }
+        .foto-beverrat { grid-column: 3 / 5; grid-row: 3 / 5; }
+        .foto-diana { grid-column: 1 / 3; grid-row: 5 / 7; }
+
+        /* Kleuren per foto */
+        .debug-mode .foto-9 { background: rgba(255,100,100,0.3); }
+        .debug-mode .foto-10 { background: rgba(100,255,100,0.3); }
+        .debug-mode .foto-11 { background: rgba(100,100,255,0.3); }
+        .debug-mode .foto-12 { background: rgba(255,255,100,0.3); }
+        .debug-mode .foto-13 { background: rgba(255,100,255,0.3); }
+        .debug-mode .foto-14 { background: rgba(100,255,255,0.3); }
+        .debug-mode .foto-15 { background: rgba(255,180,100,0.3); }
+        .debug-mode .foto-beverrat { background: rgba(180,100,255,0.3); }
+        .debug-mode .foto-diana { background: rgba(100,180,255,0.3); }
+
+        /* Highlight bij hover */
+        .debug-mode .photo-item:hover {
+            outline: 2px solid #ff0;
+            outline-offset: 2px;
+        }
+
+        /* Instructies */
+        .instructions {
+            position: fixed;
+            bottom: 1rem;
+            left: 1rem;
+            background: rgba(0,0,0,0.9);
+            color: #888;
+            padding: 1rem;
+            border-radius: 8px;
+            font-size: 0.75rem;
+            max-width: 300px;
+            line-height: 1.5;
+        }
+
+        .instructions code {
+            background: #333;
+            padding: 0.1rem 0.3rem;
+            border-radius: 3px;
+            color: #0f0;
+        }
+    </style>
+</head>
+<body>
+    <div class="viewport-size" id="viewportSize">
+        <span class="label">VIEWPORT</span>
+        <span class="size" id="sizeDisplay">-- × --</span>
+        <div class="details" id="sizeDetails"></div>
+    </div>
+
+    <div class="debug-controls">
+        <label>
+            <input type="checkbox" id="debugToggle" checked>
+            Debug modus
+        </label>
+        <label>
+            <input type="checkbox" id="coordToggle" checked>
+            Coördinaten tonen
+        </label>
+        <div class="debug-info">
+            <div>Grid: 48 × 24</div>
+            <div>Hover cel voor positie</div>
+        </div>
+    </div>
+
+    <!-- Debug overlay BUITEN het grid -->
+    <div class="grid-debug-overlay debug-mode" id="debugOverlay"></div>
+
+    <div class="photo-grid debug-mode" id="photoGrid">
+        <!-- BEVERRAT CLUSTER - Preview modus -->
+        <!-- Alle foto's naast elkaar om verhoudingen te zien -->
+
+        <div class="photo-item foto-9" data-debug="9.jpg">
+            <img src="de-exoten/9.jpg" alt="Foto 9">
+        </div>
+
+        <div class="photo-item foto-10" data-debug="10.jpg">
+            <img src="de-exoten/10.jpg" alt="Foto 10">
+        </div>
+
+        <div class="photo-item foto-11" data-debug="11.jpg">
+            <img src="de-exoten/11.jpg" alt="Foto 11">
+        </div>
+
+        <div class="photo-item foto-12" data-debug="12.jpg">
+            <img src="de-exoten/12.jpg" alt="Foto 12">
+        </div>
+
+        <div class="photo-item foto-13" data-debug="13.jpg">
+            <img src="de-exoten/13.jpg" alt="Foto 13">
+        </div>
+
+        <div class="photo-item foto-14" data-debug="14.jpg">
+            <img src="de-exoten/14.jpg" alt="Foto 14">
+        </div>
+
+        <div class="photo-item foto-15" data-debug="15.jpg">
+            <img src="de-exoten/15.jpg" alt="Foto 15">
+        </div>
+
+        <div class="photo-item foto-beverrat" data-debug="beverrat.jpg">
+            <img src="de-exoten/beverrat.jpg" alt="Beverrat">
+        </div>
+
+        <div class="photo-item foto-diana" data-debug="diana airbug">
+            <img src="de-exoten/diana airbug a.jpg" alt="Diana Airbug">
+        </div>
+
+        <!-- Bijschrift test -->
+        <div class="caption caption-11">
+            <strong>Beverrattenvangers</strong><br>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore.
+        </div>
+    </div>
+
+    <div class="instructions">
+        <strong>Beverrat Cluster - Preview</strong><br><br>
+        Bovenste rij: 9, 10, 11, 12, 13, 14, 15<br>
+        Onderste rij: beverrat, diana airbug<br><br>
+        Bekijk de verhoudingen en<br>
+        beschrijf hoe je ze wilt plaatsen.
+    </div>
+
+    <script>
+        // Genereer debug cellen met coördinaten (48×24)
+        const overlay = document.getElementById('debugOverlay');
+        for (let row = 1; row <= 24; row++) {
+            for (let col = 1; col <= 48; col++) {
+                const cell = document.createElement('div');
+                cell.className = 'debug-cell';
+                cell.textContent = `${col},${row}`;
+                cell.title = `Kolom ${col}, Rij ${row}`;
+                overlay.appendChild(cell);
+            }
+        }
+
+        // Toggle debug modus
+        const debugToggle = document.getElementById('debugToggle');
+        const coordToggle = document.getElementById('coordToggle');
+        const photoGrid = document.getElementById('photoGrid');
+        const debugOverlay = document.getElementById('debugOverlay');
+
+        debugToggle.addEventListener('change', (e) => {
+            photoGrid.classList.toggle('debug-mode', e.target.checked);
+            debugOverlay.classList.toggle('debug-mode', e.target.checked);
+        });
+
+        coordToggle.addEventListener('change', (e) => {
+            debugOverlay.style.display = e.target.checked ? '' : 'none';
+        });
+
+        // Viewport size indicator
+        const sizeDisplay = document.getElementById('sizeDisplay');
+        const sizeDetails = document.getElementById('sizeDetails');
+
+        function updateViewportSize() {
+            const w = window.innerWidth;
+            const h = window.innerHeight;
+            const gridW = w;              // 100vw
+            const gridH = h * 0.7;        // 70vh
+            sizeDisplay.textContent = `${w} × ${h}`;
+
+            const colWidth = Math.round(gridW / 48);
+            const rowHeight = Math.round(gridH / 24);
+
+            sizeDetails.innerHTML = `
+                Grid: 48×24<br>
+                Kolom: ~${colWidth}px<br>
+                Rij: ~${rowHeight}px
+            `;
+        }
+
+        updateViewportSize();
+        window.addEventListener('resize', updateViewportSize);
+
+        // Toon coördinaten bij hover op lege grid ruimte
+        photoGrid.addEventListener('mousemove', (e) => {
+            if (!debugToggle.checked) return;
+
+            const rect = photoGrid.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            const colWidth = rect.width / 48;
+            const rowHeight = rect.height / 24;
+
+            const col = Math.ceil(x / colWidth);
+            const row = Math.ceil(y / rowHeight);
+
+            document.querySelector('.debug-info').innerHTML = `
+                <div>Grid: 48 × 24</div>
+                <div>Muis: ${col}, ${row}</div>
+            `;
+        });
+    </script>
+</body>
+</html>

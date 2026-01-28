@@ -1,4 +1,4 @@
-# Het Noordzeekanaal Gebied
+# Het Noordzeekanaalgebied
 
 ## Basis
 - Achtergrond: `#f5f5f5`

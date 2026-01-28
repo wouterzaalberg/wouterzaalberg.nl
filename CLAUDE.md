@@ -126,7 +126,7 @@ Portfolio website voor fotograaf Wouter Zaalberg. Fotografieprojecten over Neder
 - Toggle alle onderschriften knop
 - Hero: 45vw foto + 55vw intro panel
 
-### Het Noordzeekanaal Gebied
+### Het Noordzeekanaalgebied
 - Lichte achtergrond `#f5f5f5`
 - Hover captions op foto's
 - Foto paren: 3+4, 6+7, 10+11
