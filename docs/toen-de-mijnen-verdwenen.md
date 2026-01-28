@@ -61,6 +61,11 @@ Font: Adobe Typekit Chloe (`https://use.typekit.net/qwc4lnx.css`)
 | Uit het dal | 3 | Foto Bart |
 | Als expositie en in de media | 3 | - |
 
+### Het grote slopen - Kaart vergelijker
+- Swipeable kaart (voor/na mijnsluitingen)
+- Gele instructiebalk boven kaart: "Swipe over de kaart om de verschillen voor en na de mijnsluitingen te zien"
+- Label verschijnt bij >70% of <30% swipe positie
+
 ### "Uit het dal" details
 - Foto 550px breed, bijschrift "Foto Ron Meyer"
 - Statistieken: uitkeringen, gezondheid, arbeidsparticipatie, woningwaarde
@@ -77,7 +82,7 @@ Font: Adobe Typekit Chloe (`https://use.typekit.net/qwc4lnx.css`)
 - Part-1: `rgba(197, 90, 17, 0.7)` - foto 3, 18
 - Part-2: `rgba(107, 122, 138, 0.7)` - foto 12, 23a, 28
 - Part-3: `rgba(139, 154, 107, 0.7)` - foto 46, 56
-- Horizontale foto's (23a, 56): panel loopt achter foto door met `margin-left: -80px`
+- Horizontale foto's (23a, 56): panel loopt achter foto door met `margin-left: -80px` (desktop), panel direct onder foto op mobiel
 
 ## Zoom Effect (foto 3, 18, 12, 23a, 28, 40, 46, 56, 65)
 - Wrapper met `overflow: hidden`
@@ -102,7 +107,7 @@ Font: Adobe Typekit Chloe (`https://use.typekit.net/qwc4lnx.css`)
 ## Responsive - Short Screens (max-height 950px)
 - **Info buttons**: "i" knop op foto's met captions, caption als overlay onderaan foto
 
-## Responsive - Short Screens (max-height 899px)
+## Responsive - Short Screens (max-height 1049px)
 - **Het grote slopen**: vereenvoudigde tijdslijn (desktop-only periodes verborgen, geen details)
 - **Mijnstreek insert**: statistieken met paginering (6+6 mijnen)
 - **Uit het dal**: foto verborgen, Bevolkingstrend verplaatst naar row-2, statistieken 4+3 kolommen
@@ -131,10 +136,11 @@ Font: Adobe Typekit Chloe (`https://use.typekit.net/qwc4lnx.css`)
 - **Achtergronden**: verborgen (::before/::after op intro-photo en intro-chapter)
 - **Deel 1 chapter**: 100svh, gradient achtergrond, verkort intro tekst (.desktop-only)
 - **Insert panels**:
-  - Kaart mijnstreek: zoom 11, statistieken 2 kolommen
-  - Het grote slopen: touch support voor kaart slider
+  - Kaart mijnstreek: zoom 11, statistieken 3 kolommen, titel links uitgelijnd
+  - Het grote slopen: touch support voor kaart slider, gele instructiebalk boven kaart
   - Uit het dal: foto 100% breedte, langzamere fade-out (1.5s)
   - Als expositie: oranje achtergrond (part 1 accent), 100% breedte
 - **Story end divider**: `* * *` gecentreerd tussen foto 65 en "Als expositie" insert
 - **Chapter panels**: 85svh min-height, tekst links uitgelijnd
-- **End panel**: volle breedte, sluit direct aan op laatste insert
+- **End panel**: 100vw breedte, sluit direct aan op laatste insert
+- **Navigatie**: auto-hide na 3 seconden, verschijnt bij aanraking
