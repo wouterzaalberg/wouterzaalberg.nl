@@ -50,6 +50,9 @@
             padding: 0 4rem;
             flex-shrink: 0;
             height: 100vh;
+            width: max-content;
+            position: relative;
+            z-index: 10;
         }
 
         .part2-wrapper {
@@ -60,6 +63,9 @@
             padding: 0 4rem;
             flex-shrink: 0;
             height: 100vh;
+            width: max-content;
+            position: relative;
+            z-index: 10;
         }
 
         /* Horizontale scroll - exact zoals styles.css */
@@ -82,6 +88,8 @@
             align-items: center;
             gap: 0;
             padding: 0;
+            width: max-content;
+            min-width: 100%;
         }
 
         .horizontal-scroll-content > * {
@@ -106,14 +114,20 @@
         .cluster-grid .photo-item {
             position: relative;
             overflow: hidden;
+            /* Override styles.css */
+            height: auto !important;
+            flex-shrink: unset !important;
+            scroll-snap-align: unset !important;
         }
 
         .cluster-grid .photo-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+            width: 100% !important;
+            height: 100% !important;
+            max-width: none !important;
+            object-fit: cover !important;
             object-position: center;
             display: block;
+            opacity: 1 !important;
         }
 
         /* Bijschriften - responsive styling */
@@ -307,6 +321,7 @@
         .intro-grid-container.scrollable {
             position: absolute;
             z-index: 1;
+            background: transparent;
         }
 
         .intro-grid {
@@ -2644,6 +2659,7 @@
                 return;
             }
 
+            // Start met scroll locked
             document.body.classList.add('scroll-locked');
 
             function updateIntroState() {
@@ -2673,22 +2689,20 @@
 
                 // Unlock horizontal scroll wanneer volledig klaar
                 if (introProgress >= 1) {
-                    setTimeout(() => {
-                        introComplete = true;
-                        document.body.classList.remove('scroll-locked');
-                    }, 400);
+                    introComplete = true;
+                    document.body.classList.remove('scroll-locked');
+                    introGridContainer.classList.add('scrollable');
                 } else {
                     introComplete = false;
                     document.body.classList.add('scroll-locked');
+                    introGridContainer.classList.remove('scrollable');
                 }
             }
 
             // Maak intro scrollbaar bij horizontaal scrollen (niet verbergen)
             function checkHorizontalScroll() {
-                if (introComplete && scrollContainer.scrollLeft > 10) {
+                if (introComplete) {
                     introGridContainer.classList.add('scrollable');
-                } else if (scrollContainer.scrollLeft <= 10) {
-                    introGridContainer.classList.remove('scrollable');
                 }
             }
 
@@ -2697,21 +2711,13 @@
             function handleIntroWheel(e) {
                 const delta = e.deltaY || e.deltaX;
 
-                // Bij begin van pagina en terugscroll: breng grid terug
-                if (introComplete && scrollContainer.scrollLeft <= 0 && delta < 0) {
-                    e.preventDefault();
-                    introProgress -= (1 / INTRO_STEPS);
-                    if (introProgress < 0) introProgress = 0;
-                    updateIntroState();
-                    return;
-                }
-
                 // Voorwaarts scrollen tijdens intro
                 if (!introComplete && delta > 0) {
                     e.preventDefault();
                     introProgress += (1 / INTRO_STEPS);
                     if (introProgress > 1) introProgress = 1;
                     updateIntroState();
+                    return;
                 }
 
                 // Achterwaarts scrollen tijdens intro
@@ -2720,18 +2726,20 @@
                     introProgress -= (1 / INTRO_STEPS);
                     if (introProgress < 0) introProgress = 0;
                     updateIntroState();
+                    return;
                 }
             }
 
-            scrollContainer.addEventListener('wheel', handleIntroWheel, { passive: false });
+            // Wheel handler op intro-grid-container (die is position: fixed tijdens intro)
+            introGridContainer.addEventListener('wheel', handleIntroWheel, { passive: false });
         })();
+
+        // Horizontale scroll via wheel (werkt pas als intro klaar is)
         if (window.innerWidth > 767) {
             container.addEventListener('wheel', function(e) {
-                // Alleen scrollen als intro compleet is
-                if (!introComplete) return;
+                if (!introComplete) return; // Laat intro handler het afhandelen
                 e.preventDefault();
-                const delta = e.deltaY || e.deltaX || 0;
-                this.scrollLeft += delta;
+                this.scrollLeft += e.deltaY;
             }, { passive: false });
         }
 
