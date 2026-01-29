@@ -560,6 +560,56 @@
     height: 70vh;
 }
 
+/* 2x2 Photo Grid (foto 25-28) */
+.abp-photo-grid-2x2 {
+    position: relative;
+    flex-shrink: 0;
+    scroll-snap-align: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 4px;
+    height: 70vh;
+    width: auto;
+    aspect-ratio: auto;
+    padding: 0;
+}
+
+.abp-photo-grid-2x2 .abp-photo-block {
+    position: relative;
+    padding: 0;
+    scroll-snap-align: none;
+    background: transparent;
+    overflow: hidden;
+}
+
+.abp-photo-grid-2x2 .abp-photo-block img.photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.abp-photo-grid-2x2 .abp-info-btn {
+    bottom: 0.5rem;
+    right: 0.5rem;
+    width: 22px;
+    height: 22px;
+    font-size: 0.75rem;
+}
+
+.abp-photo-grid-2x2 .abp-caption {
+    padding: 0.6rem;
+}
+
+.abp-photo-grid-2x2 .abp-caption-header {
+    font-size: 0.7rem;
+}
+
+.abp-photo-grid-2x2 .abp-caption-text {
+    font-size: 0.65rem;
+    line-height: 1.4;
+}
+
 /* Info Button - in de foto, zelfde afstand van onder en rechts */
 .abp-info-btn {
     position: absolute;
@@ -2778,6 +2828,36 @@
     .abp-diptych .abp-caption-text {
         font-size: 0.65rem !important;
         line-height: 1.4 !important;
+    }
+
+    /* ---- 2x2 GRID - behoud grid op mobiel ---- */
+    .abp-photo-grid-2x2 {
+        width: 95vw !important;
+        height: auto !important;
+        aspect-ratio: 1 / 1;
+        gap: 2px !important;
+        margin: 2rem auto !important;
+    }
+
+    .abp-photo-grid-2x2 .abp-info-btn {
+        width: 20px !important;
+        height: 20px !important;
+        font-size: 0.65rem !important;
+        bottom: 0.3rem !important;
+        right: 0.3rem !important;
+    }
+
+    .abp-photo-grid-2x2 .abp-caption {
+        padding: 0.4rem !important;
+    }
+
+    .abp-photo-grid-2x2 .abp-caption-header {
+        font-size: 0.6rem !important;
+    }
+
+    .abp-photo-grid-2x2 .abp-caption-text {
+        font-size: 0.55rem !important;
+        line-height: 1.35 !important;
     }
 
     /* ---- BENZOLWEG SPECIAL LAYOUT ---- */
