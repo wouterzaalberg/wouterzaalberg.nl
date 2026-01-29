@@ -137,6 +137,9 @@ Portfolio website voor fotograaf Wouter Zaalberg. Fotografieprojecten over Neder
 - Complexe clusters: beverrat, kreeft grid, muskusrat
 - Verticale labels met cursieve accent letter
 - Foto formaten: 70vh, 45vh, 35vh, 17vh
+- **Interactieve kaarten**:
+  - **Hemelboom kaart**: Leaflet.js kaart met geanimeerde snelwegen (A2, A4/A29, A16, A67, A73, A76) die tonen hoe de hemelboom Nederland binnenkomt. GBIF observatiepunten als groene stippen. Snelwegen: solid rood met fade aan einde, zwarte "vrachtwagen" blokjes animatie.
+  - **Hoornaar kaart**: SVG animatie met PNG mask van Nederland. Toont verspreiding Aziatische hoornaar 2021-2025 als "water dat een glas vult". Kleurbanden per jaar (donkerrood=2021/zuid tot lichtrood=2025/noord). Organische animatie met variabele snelheid (8 sec).
 
 ### De Onmisbaren
 - Donkergrijze achtergrond `#2a2a2a`

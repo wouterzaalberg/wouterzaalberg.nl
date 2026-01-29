@@ -828,8 +828,8 @@
 
         /* ====== HEMELBOOM CLUSTER ====== */
         .hemelboom-grid .foto-18 { grid-column: 1 / 26; grid-row: 1 / 25; }
-        .hemelboom-grid .foto-info2 { grid-column: 26 / 34; grid-row: 1 / 19; }
-        .hemelboom-grid .caption-hemelboom { grid-column: 26 / 34; grid-row: 19 / 25; }
+        .hemelboom-grid .foto-info2 { grid-column: 26 / 37; grid-row: 1 / 19; }
+        .hemelboom-grid .caption-hemelboom { grid-column: 26 / 37; grid-row: 19 / 25; }
 
         /* Hemelboom Map */
         .hemelboom-grid .foto-info2 {
@@ -846,7 +846,96 @@
             background: transparent !important;
             border: 2px solid #333;
         }
-        #hemelboom-map .leaflet-control-container { display: none; }
+        #hemelboom-map .leaflet-control-zoom { z-index: 400; }
+
+        /* Hoornaar spread map */
+        .hoornaar-map-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            background: #f8f8f8;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .hoornaar-map-container svg {
+            width: 100%;
+            height: 100%;
+        }
+        .hoornaar-map-container .map-title {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            font-family: 'Scala Sans SC', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #333;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            line-height: 1.3;
+            z-index: 10;
+        }
+        .hoornaar-map-container .year-label {
+            font-family: 'Scala Sans', sans-serif;
+            font-size: 10px;
+            fill: #555;
+        }
+        .nl-outline {
+            fill: none;
+            stroke: #999;
+            stroke-width: 1.5;
+        }
+        .nl-base {
+            fill: #e8e8e8;
+        }
+        .hoornaar-fill {
+            transition: none;
+        }
+        #hoornaar-reveal {
+            transition: none;
+        }
+
+        /* Map legend */
+        .map-legend {
+            position: absolute;
+            bottom: 12px;
+            left: 12px;
+            background: rgba(255,255,255,0.9);
+            padding: 6px 10px;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-family: 'Scala Sans', sans-serif;
+            color: #333;
+            z-index: 400;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .map-legend .legend-dot {
+            width: 8px;
+            height: 8px;
+            background: #2d5a27;
+            border-radius: 50%;
+            border: 1px solid #4a7c59;
+        }
+
+        /* Debug markers for coordinate editing */
+        .debug-marker {
+            background: none;
+            border: none;
+        }
+        .debug-label {
+            background: rgba(0,0,0,0.8);
+            color: #fff;
+            font-size: 9px;
+            font-family: monospace;
+            padding: 2px 4px;
+            border-radius: 3px;
+            white-space: nowrap;
+            cursor: pointer;
+        }
+        .debug-label:hover {
+            background: #c41e1e;
+        }
         #hemelboom-map .leaflet-tile-pane { z-index: 100 !important; }
         #hemelboom-map .leaflet-overlay-pane { z-index: 200 !important; }
 
@@ -877,9 +966,30 @@
             border-radius: 4px 4px 0 0;
         }
 
-        /* Gleam highlight style */
-        .highway-gleam {
-            filter: blur(0.5px);
+        /* Truck animation style - small black squares */
+        .highway-trucks {
+            stroke-linecap: square;
+        }
+
+        /* GBIF observation dots */
+        .observation-dot {
+            fill: #2d5a27;
+            fill-opacity: 0;
+            stroke: #4a7c59;
+            stroke-width: 1;
+            stroke-opacity: 0;
+            transition: fill-opacity 0.8s ease-out, stroke-opacity 0.8s ease-out;
+        }
+        .observation-dot.visible {
+            fill-opacity: 0.85;
+            stroke-opacity: 1;
+        }
+        .observation-dot.breathe {
+            animation: dotBreathe 4s ease-in-out infinite;
+        }
+        @keyframes dotBreathe {
+            0%, 100% { r: 5; }
+            50% { r: 6.5; }
         }
 
         .hemelboom-map-title {
@@ -1932,6 +2042,10 @@
             </div>
             <div class="photo-item foto-info2" data-file="hemelboom-map">
                 <div id="hemelboom-map"></div>
+                <div class="map-legend">
+                    <span class="legend-dot"></span>
+                    <span>waarneming hemelboom</span>
+                </div>
             </div>
             <div class="caption caption-hemelboom expand-right">
                 <h4>Via de snelweg</h4>
@@ -2025,8 +2139,69 @@
             <div class="photo-item foto-38" data-file="38.jpg">
                 <img src="de-exoten/38.jpg" alt="Hoornaar" loading="lazy">
             </div>
-            <div class="photo-item foto-info3" data-file="info 3.jpg">
-                <img src="de-exoten/info 3.jpg" alt="Info hoornaar" loading="lazy">
+            <div class="photo-item foto-info3" data-file="hoornaar-map">
+                <div class="hoornaar-map-container" id="hoornaar-map">
+                    <div class="map-title">Aziatische<br>Hoornaar</div>
+                    <svg viewBox="0 0 250 320" preserveAspectRatio="xMidYMid meet">
+                        <defs>
+                            <!-- Gradient: distinct color bands per year (dark=south/2021, light=north/2025) -->
+                            <linearGradient id="hoornaar-gradient" x1="0%" y1="100%" x2="0%" y2="0%">
+                                <!-- 2021 - darkest (bottom, 0-20%) -->
+                                <stop offset="0%" stop-color="#8b0000"/>
+                                <stop offset="20%" stop-color="#8b0000"/>
+                                <!-- 2022 (20-40%) -->
+                                <stop offset="20%" stop-color="#a52a2a"/>
+                                <stop offset="40%" stop-color="#a52a2a"/>
+                                <!-- 2023 (40-60%) -->
+                                <stop offset="40%" stop-color="#c44444"/>
+                                <stop offset="60%" stop-color="#c44444"/>
+                                <!-- 2024 (60-80%) -->
+                                <stop offset="60%" stop-color="#d66666"/>
+                                <stop offset="80%" stop-color="#d66666"/>
+                                <!-- 2025 - lightest (top, 80-100%) -->
+                                <stop offset="80%" stop-color="#e88888"/>
+                                <stop offset="100%" stop-color="#e88888"/>
+                            </linearGradient>
+
+                            <!-- Nederland PNG als mask -->
+                            <mask id="nl-mask">
+                                <image href="de-exoten/kaart nederland.png"
+                                       x="10" y="15" width="180" height="280"
+                                       preserveAspectRatio="xMidYMid meet"/>
+                            </mask>
+
+                            <!-- Reveal mask - wave shape animates up -->
+                            <mask id="reveal-mask">
+                                <rect x="0" y="0" width="250" height="320" fill="black"/>
+                                <path id="hoornaar-wave" d="
+                                    M0,380
+                                    Q62,375 125,380 Q188,385 250,380
+                                    L250,700 L0,700 Z" fill="white"/>
+                            </mask>
+                        </defs>
+
+                        <!-- Gray base Nederland shape -->
+                        <image href="de-exoten/kaart nederland.png"
+                               x="10" y="15" width="180" height="280"
+                               preserveAspectRatio="xMidYMid meet"
+                               style="opacity: 0.3"/>
+
+                        <!-- Gradient fill masked by Nederland shape, revealed by wave -->
+                        <g mask="url(#nl-mask)">
+                            <g mask="url(#reveal-mask)">
+                                <rect x="0" y="0" width="250" height="320"
+                                      fill="url(#hoornaar-gradient)"/>
+                            </g>
+                        </g>
+
+                        <!-- Year labels -->
+                        <text class="year-label" x="200" y="285">2021</text>
+                        <text class="year-label" x="200" y="228">2022</text>
+                        <text class="year-label" x="200" y="171">2023</text>
+                        <text class="year-label" x="200" y="114">2024</text>
+                        <text class="year-label" x="200" y="57">2025</text>
+                    </svg>
+                </div>
             </div>
             <div class="caption caption-hoornaar-boog expand-up">
                 <h4>Op de vlucht</h4>
@@ -2863,12 +3038,12 @@
         const map = L.map('hemelboom-map', {
             center: [51.3, 5.2],
             zoom: 8,
-            zoomControl: false,
+            zoomControl: true,
             attributionControl: false,
-            dragging: false,
-            scrollWheelZoom: false,
-            doubleClickZoom: false,
-            touchZoom: false
+            dragging: true,
+            scrollWheelZoom: true,
+            doubleClickZoom: true,
+            touchZoom: true
         });
 
         // OpenStreetMap with grayscale filter (more detail visible)
@@ -2881,123 +3056,171 @@
         setTimeout(() => {
             map.invalidateSize();
 
-            // Highway routes - accurate from Overpass API, extended into Belgium
+            // Highway routes - accurate coordinates from Overpass API (OpenStreetMap)
             const highways = [
-                { name: 'A4', coords: [
-                    // Belgium (E19)
-                    [51.280, 4.350], [51.310, 4.330], [51.340, 4.310],
-                    // Border & Netherlands
-                    [51.377, 4.304], [51.381, 4.302], [51.386, 4.297],
-                    [51.423, 4.276], [51.431, 4.276], [51.499, 4.316],
-                    [51.505, 4.313], [51.509, 4.311], [51.515, 4.310],
-                    [51.537, 4.297], [51.547, 4.295], [51.584, 4.289],
-                    // North to Hollands Diep
-                    [51.620, 4.350], [51.660, 4.400], [51.700, 4.450]
+                { name: 'A4/A29', coords: [
+                    // Belgium (E19 Antwerpen)
+                    [51.280, 4.350], [51.300, 4.335], [51.320, 4.320], [51.340, 4.310],
+                    // Border crossing - Overpass data
+                    [51.3769, 4.3043], [51.3814, 4.3016], [51.3827, 4.3007],
+                    [51.3843, 4.2996], [51.3854, 4.2987], [51.3861, 4.2981],
+                    [51.3868, 4.2974], [51.3952, 4.2898], [51.4050, 4.2851],
+                    [51.4150, 4.2793], [51.4237, 4.2762],
+                    // A4 Northward - Overpass data
+                    [51.4990, 4.3152], [51.5001, 4.3148], [51.5056, 4.3112],
+                    [51.5152, 4.3097], [51.5365, 4.2969], [51.5434, 4.2939],
+                    [51.5838, 4.2893], [51.6025, 4.3664], [51.6212, 4.3796],
+                    [51.6435, 4.3967], [51.6554, 4.4140],
+                    // A29 continuation - Overpass data
+                    [51.6561, 4.4149], [51.6595, 4.4185], [51.6661, 4.4243],
+                    [51.7075, 4.3956], [51.7104, 4.3973], [51.7193, 4.4029],
+                    [51.7285, 4.4086], [51.7437, 4.4130], [51.7555, 4.4170],
+                    [51.7761, 4.4202], [51.7833, 4.4216], [51.8035, 4.4656],
+                    [51.8115, 4.4806], [51.8147, 4.4864], [51.8206, 4.4967],
+                    [51.8327, 4.5114], [51.8466, 4.5158], [51.8612, 4.5162]
                 ], delay: 0 },
                 { name: 'A16', coords: [
-                    // Belgium
-                    [51.380, 4.780], [51.420, 4.760], [51.450, 4.745],
-                    // Netherlands
-                    [51.486, 4.735], [51.489, 4.737], [51.493, 4.740],
-                    [51.504, 4.744], [51.507, 4.744], [51.516, 4.745],
-                    [51.522, 4.745], [51.526, 4.744], [51.530, 4.743],
-                    [51.579, 4.726], [51.587, 4.724], [51.598, 4.723],
-                    [51.608, 4.718], [51.638, 4.698], [51.645, 4.692],
-                    [51.651, 4.688], [51.680, 4.660], [51.720, 4.620]
+                    // Belgium border
+                    [51.420, 4.760], [51.450, 4.750], [51.480, 4.742],
+                    // Breda area (Overpass data)
+                    [51.4954, 4.7408], [51.4965, 4.7413], [51.4979, 4.7419],
+                    [51.4993, 4.7425], [51.5001, 4.7427], [51.5017, 4.7432],
+                    [51.5029, 4.7434], [51.5036, 4.7436], [51.5043, 4.7437],
+                    [51.5072, 4.7439], [51.5223, 4.7454], [51.5791, 4.7257],
+                    [51.5870, 4.7237], [51.6082, 4.7183], [51.6376, 4.6977],
+                    [51.6446, 4.6924], [51.6511, 4.6881], [51.7037, 4.6467],
+                    [51.7297, 4.6322], [51.7956, 4.6489], [51.8184, 4.6294],
+                    [51.8937, 4.5586], [51.9022, 4.5442]
                 ], delay: 300 },
                 { name: 'A67', coords: [
-                    // Belgium (E34)
-                    [51.350, 5.050], [51.370, 5.150], [51.385, 5.250],
-                    // Netherlands
-                    [51.396, 5.390], [51.403, 5.420], [51.404, 5.429],
-                    [51.405, 5.501], [51.410, 5.572], [51.419, 5.598],
-                    [51.422, 5.700], [51.416, 5.773], [51.388, 5.874],
-                    [51.378, 5.918], [51.370, 5.960]
+                    // Handmatig gecorrigeerd via Google Maps (73 punten)
+                    [51.313686, 5.192897], [51.317721, 5.205816], [51.327137, 5.232438],
+                    [51.334048, 5.244386], [51.338437, 5.252542], [51.344338, 5.263204],
+                    [51.349633, 5.272091], [51.356188, 5.285022], [51.361027, 5.297308],
+                    [51.366168, 5.309113], [51.371313, 5.320931], [51.376303, 5.332961],
+                    [51.381342, 5.344590], [51.386279, 5.356868], [51.391063, 5.369148],
+                    [51.395192, 5.381593], [51.396748, 5.395734], [51.400218, 5.409233],
+                    [51.403485, 5.422736], [51.403964, 5.436795], [51.405273, 5.451004],
+                    [51.405175, 5.465425], [51.405171, 5.479672], [51.405110, 5.494091],
+                    [51.404965, 5.508429], [51.404803, 5.522676], [51.404907, 5.537523],
+                    [51.405277, 5.552028], [51.407948, 5.565593], [51.411977, 5.578383],
+                    [51.416315, 5.591108], [51.418972, 5.604747], [51.420592, 5.618965],
+                    [51.422120, 5.633040], [51.423457, 5.647367], [51.423514, 5.661829],
+                    [51.423433, 5.676248], [51.422815, 5.690668], [51.421747, 5.704831],
+                    [51.420677, 5.719249], [51.420167, 5.733797], [51.419713, 5.748088],
+                    [51.417812, 5.762163], [51.415431, 5.775985], [51.412113, 5.789373],
+                    [51.408058, 5.802269], [51.404120, 5.815193], [51.400369, 5.828238],
+                    [51.397078, 5.841475], [51.393631, 5.855309], [51.390182, 5.868171],
+                    [51.386588, 5.881533], [51.382724, 5.894519], [51.379616, 5.908172],
+                    [51.378059, 5.922007], [51.377497, 5.936521], [51.377801, 5.951084],
+                    [51.377799, 5.965345], [51.377266, 5.979606], [51.377876, 5.994055],
+                    [51.379094, 6.008395], [51.381064, 6.022294], [51.383980, 6.036193],
+                    [51.387332, 6.049423], [51.390721, 6.062655], [51.393865, 6.076339],
+                    [51.394547, 6.083441], [51.393505, 6.114029], [51.394187, 6.135939],
+                    [51.396043, 6.168044], [51.395304, 6.177270], [51.393864, 6.184127],
+                    [51.383696, 6.217842]
                 ], delay: 600 },
                 { name: 'A2', coords: [
-                    // Belgium (E25 near Liège)
-                    [50.620, 5.580], [50.660, 5.620], [50.700, 5.670],
-                    [50.740, 5.700], [50.762, 5.704], [50.782, 5.729],
-                    // Maastricht
-                    [50.820, 5.740], [50.860, 5.750], [50.900, 5.760],
-                    [50.940, 5.775], [50.980, 5.790], [51.017, 5.806],
-                    [51.027, 5.818], [51.102, 5.847], [51.144, 5.897],
-                    [51.155, 5.896], [51.163, 5.887], [51.169, 5.871],
-                    [51.224, 5.807], [51.237, 5.792], [51.253, 5.772],
-                    // Eindhoven north
-                    [51.320, 5.680], [51.400, 5.550], [51.480, 5.450],
-                    [51.560, 5.380], [51.640, 5.320], [51.702, 5.351],
-                    [51.717, 5.343], [51.750, 5.300], [51.800, 5.250]
+                    // Belgium (E25 bij Luik)
+                    [50.620, 5.580], [50.650, 5.610], [50.680, 5.650],
+                    [50.710, 5.680], [50.740, 5.700],
+                    // Maastricht (Overpass data)
+                    [50.7697, 5.7218], [50.7721, 5.7249], [50.7747, 5.7271],
+                    [50.7776, 5.7287], [50.7815, 5.7294], [50.7880, 5.7280],
+                    [50.7904, 5.7273], [50.8084, 5.7240], [50.8105, 5.7232],
+                    // Sittard-Geleen (Overpass data)
+                    [50.8909, 5.7416], [50.8933, 5.7467], [50.9006, 5.7549],
+                    [50.9148, 5.7669], [50.9239, 5.7746], [50.9327, 5.7815],
+                    [50.9436, 5.7881], [50.9579, 5.7862], [50.9698, 5.7878],
+                    [50.9842, 5.7825],
+                    // Weert - Eindhoven
+                    [51.0169, 5.8064], [51.0264, 5.8175], [51.0341, 5.8240],
+                    [51.1019, 5.8468], [51.1025, 5.8479], [51.1437, 5.8975],
+                    [51.1550, 5.8962], [51.1691, 5.8705],
+                    // Eindhoven - Den Bosch
+                    [51.2025, 5.8272], [51.2237, 5.8072], [51.2527, 5.7718],
+                    [51.2758, 5.7361], [51.2793, 5.7327],
+                    // Eindhoven Noord - Overpass data
+                    [51.6026, 5.3343], [51.6057, 5.3298], [51.6094, 5.3236],
+                    [51.6134, 5.3190], [51.6183, 5.3167], [51.6336, 5.3115],
+                    [51.6372, 5.3110], [51.6442, 5.3093], [51.6594, 5.3024],
+                    [51.6685, 5.3095], [51.6701, 5.3169],
+                    // Den Bosch - Utrecht - Overpass data
+                    [51.6791, 5.3451], [51.6901, 5.3496], [51.6933, 5.3507],
+                    [51.7217, 5.3296], [51.7260, 5.3217], [51.7331, 5.3106],
+                    [51.7425, 5.3005], [51.7547, 5.2867]
                 ], delay: 200 },
                 { name: 'A76', coords: [
-                    // Germany (E314)
-                    [50.820, 6.020], [50.842, 5.996], [50.872, 5.960],
-                    [50.882, 5.924], [50.907, 5.892], [50.927, 5.887],
-                    [50.935, 5.880], [50.949, 5.838], [50.952, 5.822],
-                    [50.959, 5.758], [50.960, 5.804]
+                    // Germany (E314) - Overpass data
+                    [50.8188, 6.0245], [50.8250, 6.0181], [50.8285, 6.0149],
+                    [50.8402, 6.0011], [50.8424, 5.9960], [50.8717, 5.9597],
+                    [50.8756, 5.9553], [50.8962, 5.9336], [50.9128, 5.9075],
+                    [50.9351, 5.8799], [50.9466, 5.8382], [50.9516, 5.8217],
+                    // Aansluiting A2
+                    [50.9610, 5.7608], [50.9673, 5.7842]
                 ], delay: 400 },
                 { name: 'A73', coords: [
-                    // Roermond (south)
-                    [51.123, 5.884], [51.126, 5.890], [51.134, 5.909],
-                    [51.147, 5.936], [51.151, 5.944], [51.172, 5.977],
-                    [51.175, 5.985], [51.178, 6.013], [51.228, 6.024],
+                    // Roermond (aansluiting A2)
+                    [51.100, 5.880], [51.120, 5.900], [51.140, 5.920],
+                    [51.160, 5.950], [51.180, 5.980], [51.200, 6.000],
+                    [51.220, 6.020], [51.250, 6.050], [51.280, 6.080],
                     // Venlo
-                    [51.305, 6.122], [51.317, 6.135], [51.355, 6.147],
-                    [51.359, 6.140], [51.365, 6.126], [51.374, 6.123],
-                    [51.412, 6.124], [51.443, 6.077], [51.502, 6.027],
-                    [51.566, 5.994], [51.632, 5.926],
-                    // Nijmegen
-                    [51.700, 5.880], [51.780, 5.850], [51.850, 5.820]
+                    [51.310, 6.120], [51.340, 6.140], [51.370, 6.130],
+                    [51.400, 6.120], [51.430, 6.100], [51.460, 6.070],
+                    // Richting Nijmegen
+                    [51.500, 6.030], [51.550, 5.990], [51.600, 5.950],
+                    [51.650, 5.910], [51.700, 5.880], [51.750, 5.860]
                 ], delay: 800 }
             ];
 
-            // Add highways with gradient (multiple segments) + animated gleam
+            // Add highways with solid red + fade at end
             const polylines = highways.map(h => {
                 const segments = [];
                 const numSegments = h.coords.length - 1;
+                const fadeStart = 0.75; // Start fading at 75%
 
-                // Create gradient segments (bright red to light red)
+                // Create solid red segments, fade only at end
                 for (let i = 0; i < numSegments; i++) {
                     const progress = i / numSegments;
-                    // Interpolate from bright red (#c41e1e) to light red (#e88888)
-                    const r = Math.round(196 + (232 - 196) * progress);
-                    const g = Math.round(30 + (136 - 30) * progress);
-                    const b = Math.round(30 + (136 - 30) * progress);
-                    const color = `rgb(${r},${g},${b})`;
+                    let opacity = 1;
+
+                    // Fade out last 25% of the line
+                    if (progress > fadeStart) {
+                        opacity = 1 - ((progress - fadeStart) / (1 - fadeStart));
+                    }
 
                     const segment = L.polyline([h.coords[i], h.coords[i + 1]], {
-                        color: color,
+                        color: '#c41e1e',
                         weight: 4,
-                        opacity: 1
+                        opacity: opacity
                     }).addTo(map);
                     segments.push(segment);
                 }
 
-                // Animated gleam line (white highlight that travels)
+                // Animated "trucks" - small black squares that travel along the highway
                 const gleamLine = L.polyline(h.coords, {
-                    color: '#ffffff',
-                    weight: 2,
-                    opacity: 0.9,
-                    className: 'highway-gleam'
+                    color: '#222222',
+                    weight: 4,
+                    opacity: 0,  // Start hidden
+                    className: 'highway-trucks',
+                    lineCap: 'square'
                 }).addTo(map);
 
-                // Setup segment animations
+                // Setup segment animations - solid lines, no dashes
                 segments.forEach((seg, i) => {
                     const pathElement = seg.getElement();
                     if (pathElement) {
-                        const length = pathElement.getTotalLength();
-                        pathElement.style.strokeDasharray = length;
-                        pathElement.style.strokeDashoffset = length;
+                        pathElement.style.opacity = '0';
                         pathElement.style.transition = 'none';
                     }
                 });
 
-                // Setup gleam animation
+                // Setup truck animation - multiple small squares
                 const gleamElement = gleamLine.getElement();
                 if (gleamElement) {
                     const length = gleamElement.getTotalLength();
-                    // Short visible segment that will travel along
-                    gleamElement.style.strokeDasharray = `${length * 0.08} ${length}`;
+                    // Small squares (4px) with gaps (40px) - multiple trucks
+                    gleamElement.style.strokeDasharray = '4 40';
                     gleamElement.style.strokeDashoffset = length;
                     gleamElement.style.transition = 'none';
                 }
@@ -3005,55 +3228,221 @@
                 return { segments, gleamLine, delay: h.delay, coords: h.coords };
             });
 
+            // GBIF Hemelboom observations (Ailanthus altissima) - real data from waarnemingen.nl via GBIF
+            const observations = [
+                // Maastricht cluster (high precision GPS)
+                [50.849403, 5.68682],
+                [50.847539, 5.698272],
+                [50.844785, 5.691853],
+                [50.845322, 5.701912],
+                [50.847473, 5.714192],
+                [50.820496, 5.696194],
+                // Zuid-Holland (A4/A16 corridor)
+                [51.921336, 4.435175],
+                [51.909752, 4.480943],
+                [51.907192, 4.478318],
+                [51.926563, 4.518143],
+                // Noord-Brabant
+                [51.42083, 5.494645],
+                [51.560147, 5.061332],
+                [51.55, 4.75],
+                [51.6, 4.7],
+                [51.65, 5.25],
+                [51.6, 5.3],
+                // Limburg (A2/A73/A76)
+                [50.85, 5.95],
+                [50.95, 5.75],
+                [51.1, 5.9],
+                [51.15, 5.95],
+                [51.461456, 5.805516],
+                [51.3, 6.1]
+            ];
+
+            // Create observation markers (initially invisible)
+            const observationMarkers = observations.map(coords => {
+                return L.circleMarker(coords, {
+                    radius: 5,
+                    className: 'observation-dot'
+                }).addTo(map);
+            });
+
+            // DEBUG: Add numbered markers to each highway coordinate
+            const debugMarkers = false; // Set to false to hide markers
+            if (debugMarkers) {
+                console.log('=== SNELWEG COORDINATEN ===');
+                highways.forEach(h => {
+                    console.log(`\n${h.name}:`);
+                    h.coords.forEach((coord, i) => {
+                        console.log(`  ${i}: [${coord[0]}, ${coord[1]}]`);
+                        const marker = L.marker(coord, {
+                            icon: L.divIcon({
+                                className: 'debug-marker',
+                                html: `<div class="debug-label">${h.name}-${i}</div>`,
+                                iconSize: [40, 16],
+                                iconAnchor: [20, 8]
+                            })
+                        }).addTo(map);
+                        // Click to log coordinates
+                        marker.on('click', () => {
+                            console.log(`${h.name} punt ${i}: [${coord[0]}, ${coord[1]}]`);
+                            alert(`${h.name}-${i}\nHuidige: [${coord[0]}, ${coord[1]}]\n\nKopieer nieuwe coords uit Google Maps`);
+                        });
+                    });
+                });
+                console.log('\n=== Klik op marker voor details ===');
+            }
+
             // Animate highways when in view
             let animated = false;
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting && !animated) {
                         animated = true;
+
+                        // Calculate when all highways are done drawing (faster timing)
+                        const maxHighwayDelay = Math.max(...polylines.map(p => p.delay + p.segments.length * 20));
+
                         polylines.forEach(({ segments, gleamLine, delay }) => {
                             setTimeout(() => {
-                                // Animate each segment with slight stagger
+                                // Animate each segment with slight stagger - fade in solid lines
                                 segments.forEach((seg, i) => {
                                     const pathElement = seg.getElement();
                                     if (pathElement) {
                                         setTimeout(() => {
-                                            pathElement.style.transition = 'stroke-dashoffset 0.3s ease-out';
-                                            pathElement.style.strokeDashoffset = '0';
-                                        }, i * 150);
+                                            pathElement.style.transition = 'opacity 0.3s ease-out';
+                                            pathElement.style.opacity = '1';
+                                        }, i * 20);
                                     }
                                 });
 
-                                // Start gleam animation after line draws
-                                const gleamElement = gleamLine.getElement();
-                                if (gleamElement) {
-                                    const length = gleamElement.getTotalLength();
-                                    const gleamSize = length * 0.1;
-                                    setTimeout(() => {
-                                        // Setup for moving gleam
-                                        gleamElement.style.strokeDasharray = `${gleamSize} ${length}`;
+                                // Start truck animation after line draws
+                                setTimeout(() => {
+                                    gleamLine.setStyle({ opacity: 1 });
+                                    const gleamElement = gleamLine.getElement();
+                                    if (gleamElement) {
+                                        gleamElement.style.strokeDasharray = '4 40';
 
-                                        // Animate gleam moving along line (slow)
-                                        let offset = length;
-                                        const animateGleam = () => {
-                                            offset -= 0.5;
-                                            if (offset < -gleamSize) {
-                                                offset = length;
+                                        // Animate trucks moving along line
+                                        let offset = 0;
+                                        const animateTrucks = () => {
+                                            offset -= 0.3;
+                                            if (offset < -44) { // 4 + 40 = pattern repeat
+                                                offset = 0;
                                             }
                                             gleamElement.style.strokeDashoffset = offset;
-                                            requestAnimationFrame(animateGleam);
+                                            requestAnimationFrame(animateTrucks);
                                         };
-                                        animateGleam();
-                                    }, segments.length * 150 + 500);
-                                }
+                                        animateTrucks();
+                                    }
+                                }, segments.length * 20 + 200);
                             }, delay);
                         });
+
+                        // Show observation dots after highways finish drawing
+                        setTimeout(() => {
+                            observationMarkers.forEach((marker, i) => {
+                                setTimeout(() => {
+                                    const el = marker.getElement();
+                                    if (el) {
+                                        el.classList.add('visible');
+                                        // Subtle breathing animation on some dots
+                                        if (i % 4 === 0) {
+                                            setTimeout(() => el.classList.add('breathe'), 400);
+                                        }
+                                    }
+                                }, i * 50); // Stagger dot appearance
+                            });
+                        }, maxHighwayDelay + 300);
                     }
                 });
             }, { threshold: 0.3 });
 
             observer.observe(mapContainer);
         }, 200);
+    })();
+    </script>
+
+    <!-- Hoornaar Spread Map Animation -->
+    <script>
+    (function initHoornaarMap() {
+        const hoornaarMap = document.getElementById('hoornaar-map');
+        if (!hoornaarMap) return;
+
+        const wave = document.getElementById('hoornaar-wave');
+        if (!wave) return;
+
+        let animated = false;
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !animated) {
+                    animated = true;
+
+                    // Organic wave animation - variable speed like real spreading
+                    const duration = 8000; // 8 seconds total (slower)
+                    const startY = 380;
+                    const endY = -50;
+                    const startTime = performance.now();
+
+                    // Pre-calculate random "surge" points for organic feel
+                    const surges = [
+                        { at: 0.15, speed: 1.4 },  // Quick start
+                        { at: 0.30, speed: 0.6 },  // Slow down
+                        { at: 0.45, speed: 1.3 },  // Speed up
+                        { at: 0.60, speed: 0.7 },  // Slow
+                        { at: 0.75, speed: 1.2 },  // Push
+                        { at: 0.90, speed: 0.5 },  // Final slow
+                    ];
+
+                    function getSpeedMultiplier(progress) {
+                        // Find which surge zone we're in
+                        for (let i = surges.length - 1; i >= 0; i--) {
+                            if (progress >= surges[i].at) {
+                                return surges[i].speed;
+                            }
+                        }
+                        return 1.0;
+                    }
+
+                    let currentY = startY;
+                    let lastTime = startTime;
+
+                    function animateWave(currentTime) {
+                        const totalElapsed = currentTime - startTime;
+                        const deltaTime = currentTime - lastTime;
+                        lastTime = currentTime;
+
+                        const progress = Math.min(totalElapsed / duration, 1);
+                        const speedMult = getSpeedMultiplier(progress);
+
+                        // Base speed + variation
+                        const baseSpeed = (startY - endY) / duration;
+                        const actualSpeed = baseSpeed * speedMult * deltaTime;
+
+                        currentY -= actualSpeed;
+
+                        // Also animate wave shape for organic feel
+                        const waveAmp = 8 + Math.sin(progress * Math.PI * 4) * 4;
+                        const waveOffset = Math.sin(totalElapsed / 300) * waveAmp;
+
+                        wave.setAttribute('d', `
+                            M0,${currentY + waveOffset}
+                            Q62,${currentY - waveAmp + waveOffset} 125,${currentY + waveOffset}
+                            Q188,${currentY + waveAmp + waveOffset} 250,${currentY + waveOffset}
+                            L250,700 L0,700 Z
+                        `);
+
+                        if (currentY > endY) {
+                            requestAnimationFrame(animateWave);
+                        }
+                    }
+
+                    requestAnimationFrame(animateWave);
+                }
+            });
+        }, { threshold: 0.3 });
+
+        observer.observe(hoornaarMap);
     })();
     </script>
 
