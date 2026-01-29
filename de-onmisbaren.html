@@ -142,14 +142,25 @@
             animation: subtleZoom 20s ease-out forwards;
         }
 
-        /* Kleinere schermhoogtes: grotere foto's, groei naar beneden */
+        /* Kleinere schermhoogtes: grotere foto's, gecentreerd, tekst in foto */
         @media (max-height: 1000px) and (min-width: 768px) {
             .photo-item {
-                align-self: flex-start;
-                padding-top: 10vh;
+                align-self: center;
+                align-items: center;
+                height: auto;
+                position: relative;
             }
             .photo-img-wrapper {
-                height: 80vh;
+                height: 90vh;
+            }
+            .photo-item img {
+                max-width: none;
+            }
+            .photo-item .photo-caption {
+                position: absolute;
+                bottom: 1.5rem;
+                left: 1.5rem;
+                margin-top: 0;
             }
         }
 
@@ -416,10 +427,6 @@
             <div class="photo-item">
                 <div class="photo-img-wrapper">
                     <img src="de-onmisbaren/4.jpg" alt="De Onmisbaren" loading="eager">
-                </div>
-                <div class="photo-caption">
-                    <span class="caption-name">Laura</span>
-                    <span class="caption-function">Brandweervrouw</span>
                 </div>
             </div>
 

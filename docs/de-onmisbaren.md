@@ -41,8 +41,8 @@
   - Intro panel: `max-width: clamp(280px, 45vw, 500px)`
   - Intro foto: `object-fit: cover; object-position: center top` (cropped, niet uitgerekt)
 - **Kleine schermhoogte (< 1000px, desktop)**:
-  - Foto's 2-9: 80vh (in plaats van 70vh)
-  - Foto's groeien naar beneden: `align-self: flex-start; padding-top: 10vh`
+  - Foto's 2-9: 90vh, gecentreerd
+  - Captions absoluut linksonder in foto (`bottom: 1.5rem`, `left: 1.5rem`)
   - Intro foto blijft 100vh
 - **Mobiel (< 767px)**:
   - Verticale layout, foto's 100vw
