@@ -1827,8 +1827,8 @@ img {
     }
 
     .hero-tagline-italic {
-        top: calc(-50vh + 2.8rem) !important;
-        top: calc(-50dvh + 2.8rem) !important;
+        top: calc(-50vh + 2.9rem) !important;
+        top: calc(-50dvh + 2.9rem) !important;
         font-size: 1.3rem;
         margin-bottom: 0;
         color: #ffffff !important;
@@ -1847,8 +1847,8 @@ img {
             top: calc(-58dvh + 1.5rem) !important;
         }
         .hero-tagline-italic {
-            top: calc(-58vh + 2.8rem) !important;
-            top: calc(-58dvh + 2.8rem) !important;
+            top: calc(-58vh + 2.9rem) !important;
+            top: calc(-58dvh + 2.9rem) !important;
         }
     }
 
