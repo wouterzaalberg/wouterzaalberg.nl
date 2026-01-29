@@ -243,6 +243,11 @@
             font-style: italic;
         }
 
+        .vertical-label .accent-letter {
+            font-family: 'Minion Pro', 'Times New Roman', serif;
+            font-style: italic;
+        }
+
         /* Letter animatie */
         .vertical-label .letter {
             display: inline-block;
@@ -2961,18 +2966,21 @@
                 const char = text[i];
                 if (char === '<') {
                     inTag = true;
-                    if (text.substr(i, 13) === '<span class="') {
+                    if (text.substr(i, 20).includes('class="accent"')) {
                         inAccent = true;
+                    }
+                    if (text.substr(i, 7) === '</span>' && inAccent) {
+                        inAccent = false;
                     }
                     html += char;
                 } else if (char === '>') {
                     inTag = false;
                     html += char;
-                    if (text.substr(i-6, 7) === '</span>') {
-                        inAccent = false;
-                    }
                 } else if (inTag) {
                     html += char;
+                } else if (inAccent) {
+                    // Binnen accent span: wrap in letter maar behoud accent styling
+                    html += `<span class="letter accent-letter">${char}</span>`;
                 } else if (char === ' ') {
                     html += '<span class="letter space"> </span>';
                 } else {
@@ -3002,7 +3010,7 @@
                     observer.unobserve(entry.target);
                 }
             });
-        }, { threshold: 0.3 });
+        }, { threshold: 0.1, rootMargin: '0px 200px 0px 0px' });
 
         document.querySelectorAll('.vertical-label').forEach(label => {
             observer.observe(label);
