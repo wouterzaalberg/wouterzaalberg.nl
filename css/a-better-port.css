@@ -577,6 +577,7 @@
 
 .abp-photo-grid-2x2 .abp-photo-block {
     position: relative;
+    height: 100%;
     padding: 0;
     scroll-snap-align: none;
     background: transparent;
