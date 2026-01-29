@@ -242,6 +242,39 @@ border: 2px solid #a8c8e8;
 - Kolom 3: foto 66 + 67 (28vh) + klem.jpg
 - Apart grid voor foto 68-70
 
+## Hemelboom Interactieve Kaart
+Vervangt statische `info 2.jpg` met een Leaflet kaart die toont hoe de hemelboom Nederland binnenkomt via snelwegen.
+
+### Technologie
+- **Leaflet.js** voor de kaart
+- **OpenStreetMap tiles** met grayscale CSS filter
+- **Coördinaten** via Overpass API (OpenStreetMap data)
+
+### Snelwegen (vanuit België/Duitsland)
+- **A2**: België (E25 bij Luik) → Maastricht → Eindhoven → richting Utrecht
+- **A4**: België (E19 bij Antwerpen) → Bergen op Zoom → noordwaarts
+- **A16**: België → Breda → richting Rotterdam
+- **A67**: België (E34) → Eindhoven → oostwaarts
+- **A73**: Roermond → Venlo → Nijmegen (aanvulling op A2)
+- **A76**: Duitsland (E314) → Zuid-Limburg (verbindt met A2)
+
+### Visuele Effecten
+- **Kleurverloop**: fel rood (België) → licht rood (Nederland)
+- **Teken-animatie**: lijnen groeien van grens richting noorden
+- **Bewegend glimmetje**: wit lichtpuntje reist continu langs elke lijn
+- **Fade-out**: gradient aan bovenkant kaart laat lijnen "verdwijnen"
+
+### CSS
+- Kaart: `grid-column: 26 / 34; grid-row: 1 / 19;`
+- Zwarte rand: `2px solid #333`
+- Leaflet tiles override: `.leaflet-tile { width: 256px !important; height: 256px !important; }`
+- Grayscale: `.grayscale-tiles { filter: grayscale(100%) contrast(1.1); }`
+
+### Animatie Timing
+- Segmenten tekenen: 0.3s per segment, 150ms stagger
+- Glim snelheid: `offset -= 0.5` per frame
+- Delays per snelweg: A4(0), A2(200ms), A16(300ms), A76(400ms), A67(600ms), A73(800ms)
+
 ## Verticale Labels
 - Cursieve accent letter: `<span class="accent">t</span>`
 - **Meerdere woorden**: `<br>` na elk woord (bijv. `Chin<span class="accent">e</span>se<br>Wolhandkrab`)

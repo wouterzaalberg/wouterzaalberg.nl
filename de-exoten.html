@@ -20,6 +20,7 @@
     <meta property="og:locale" content="nl_NL">
 
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 
     <style>
         * {
@@ -827,8 +828,92 @@
 
         /* ====== HEMELBOOM CLUSTER ====== */
         .hemelboom-grid .foto-18 { grid-column: 1 / 26; grid-row: 1 / 25; }
-        .hemelboom-grid .foto-info2 { grid-column: 26 / 34; grid-row: 6 / 19; }
+        .hemelboom-grid .foto-info2 { grid-column: 26 / 34; grid-row: 1 / 19; }
         .hemelboom-grid .caption-hemelboom { grid-column: 26 / 34; grid-row: 19 / 25; }
+
+        /* Hemelboom Map */
+        .hemelboom-grid .foto-info2 {
+            position: relative;
+            overflow: hidden;
+        }
+        #hemelboom-map {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 4px;
+            background: transparent !important;
+            border: 2px solid #333;
+        }
+        #hemelboom-map .leaflet-control-container { display: none; }
+        #hemelboom-map .leaflet-tile-pane { z-index: 100 !important; }
+        #hemelboom-map .leaflet-overlay-pane { z-index: 200 !important; }
+
+        /* Override grid img styles for Leaflet tiles */
+        #hemelboom-map .leaflet-tile {
+            width: 256px !important;
+            height: 256px !important;
+            max-width: none !important;
+            max-height: none !important;
+        }
+
+        /* Grayscale filter for OSM tiles */
+        #hemelboom-map .grayscale-tiles {
+            filter: grayscale(100%) contrast(1.1);
+        }
+
+        /* Fade gradient at top of map (where lines end) */
+        .foto-info2::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 25%;
+            background: linear-gradient(to bottom, rgba(240,240,240,0.9) 0%, transparent 100%);
+            pointer-events: none;
+            z-index: 300;
+            border-radius: 4px 4px 0 0;
+        }
+
+        /* Gleam highlight style */
+        .highway-gleam {
+            filter: blur(0.5px);
+        }
+
+        .hemelboom-map-title {
+            position: absolute;
+            top: 12px;
+            left: 16px;
+            font-family: 'Scala Sans SC', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            z-index: 1000;
+            pointer-events: none;
+        }
+
+        /* Highway animation */
+        .highway-path {
+            fill: none;
+            stroke: #c41e1e;
+            stroke-width: 3;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .highway-path.animate {
+            animation: drawHighway 2.5s ease-out forwards;
+        }
+
+        @keyframes drawHighway {
+            to {
+                stroke-dashoffset: 0;
+            }
+        }
 
         /* ====== MICRO-EXOTEN CLUSTER ====== */
         .microexoten-grid .foto-19 { grid-column: 1 / 14; grid-row: 1 / 13; }
@@ -1396,6 +1481,33 @@
                 display: block;
             }
 
+            .mobile-caption-with-image .mobile-side-image {
+                position: relative;
+            }
+
+            #hemelboom-map-mobile {
+                width: 100%;
+                height: 200px;
+                background: #f5f5f5;
+                border-radius: 4px;
+            }
+
+            #hemelboom-map-mobile .leaflet-control-container { display: none; }
+
+            .mobile-side-image .hemelboom-map-title {
+                position: absolute;
+                top: 8px;
+                left: 10px;
+                font-family: 'Scala Sans SC', sans-serif;
+                font-size: 0.75rem;
+                font-weight: 600;
+                color: #666;
+                text-transform: uppercase;
+                letter-spacing: 0.05em;
+                z-index: 1000;
+                pointer-events: none;
+            }
+
             /* Kreeft grid */
             .mobile-kreeft-grid {
                 display: grid;
@@ -1818,8 +1930,8 @@
             <div class="photo-item foto-18" data-file="18.jpg">
                 <img src="de-exoten/18.jpg" alt="Hemelboom" loading="lazy">
             </div>
-            <div class="photo-item foto-info2" data-file="info 2.jpg">
-                <img src="de-exoten/info 2.jpg" alt="Info hemelboom" loading="lazy">
+            <div class="photo-item foto-info2" data-file="hemelboom-map">
+                <div id="hemelboom-map"></div>
             </div>
             <div class="caption caption-hemelboom expand-right">
                 <h4>Via de snelweg</h4>
@@ -2737,6 +2849,213 @@
             <img src="" alt="Popup">
         </div>
     </div>
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <!-- Hemelboom Map -->
+    <script>
+    (function initHemelboomMaps() {
+        const mapContainer = document.getElementById('hemelboom-map');
+        if (!mapContainer) return;
+
+        // Initialize map
+        const map = L.map('hemelboom-map', {
+            center: [51.3, 5.2],
+            zoom: 8,
+            zoomControl: false,
+            attributionControl: false,
+            dragging: false,
+            scrollWheelZoom: false,
+            doubleClickZoom: false,
+            touchZoom: false
+        });
+
+        // OpenStreetMap with grayscale filter (more detail visible)
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            className: 'grayscale-tiles'
+        }).addTo(map);
+
+        // Force recalculate dimensions after short delay
+        setTimeout(() => {
+            map.invalidateSize();
+
+            // Highway routes - accurate from Overpass API, extended into Belgium
+            const highways = [
+                { name: 'A4', coords: [
+                    // Belgium (E19)
+                    [51.280, 4.350], [51.310, 4.330], [51.340, 4.310],
+                    // Border & Netherlands
+                    [51.377, 4.304], [51.381, 4.302], [51.386, 4.297],
+                    [51.423, 4.276], [51.431, 4.276], [51.499, 4.316],
+                    [51.505, 4.313], [51.509, 4.311], [51.515, 4.310],
+                    [51.537, 4.297], [51.547, 4.295], [51.584, 4.289],
+                    // North to Hollands Diep
+                    [51.620, 4.350], [51.660, 4.400], [51.700, 4.450]
+                ], delay: 0 },
+                { name: 'A16', coords: [
+                    // Belgium
+                    [51.380, 4.780], [51.420, 4.760], [51.450, 4.745],
+                    // Netherlands
+                    [51.486, 4.735], [51.489, 4.737], [51.493, 4.740],
+                    [51.504, 4.744], [51.507, 4.744], [51.516, 4.745],
+                    [51.522, 4.745], [51.526, 4.744], [51.530, 4.743],
+                    [51.579, 4.726], [51.587, 4.724], [51.598, 4.723],
+                    [51.608, 4.718], [51.638, 4.698], [51.645, 4.692],
+                    [51.651, 4.688], [51.680, 4.660], [51.720, 4.620]
+                ], delay: 300 },
+                { name: 'A67', coords: [
+                    // Belgium (E34)
+                    [51.350, 5.050], [51.370, 5.150], [51.385, 5.250],
+                    // Netherlands
+                    [51.396, 5.390], [51.403, 5.420], [51.404, 5.429],
+                    [51.405, 5.501], [51.410, 5.572], [51.419, 5.598],
+                    [51.422, 5.700], [51.416, 5.773], [51.388, 5.874],
+                    [51.378, 5.918], [51.370, 5.960]
+                ], delay: 600 },
+                { name: 'A2', coords: [
+                    // Belgium (E25 near Liège)
+                    [50.620, 5.580], [50.660, 5.620], [50.700, 5.670],
+                    [50.740, 5.700], [50.762, 5.704], [50.782, 5.729],
+                    // Maastricht
+                    [50.820, 5.740], [50.860, 5.750], [50.900, 5.760],
+                    [50.940, 5.775], [50.980, 5.790], [51.017, 5.806],
+                    [51.027, 5.818], [51.102, 5.847], [51.144, 5.897],
+                    [51.155, 5.896], [51.163, 5.887], [51.169, 5.871],
+                    [51.224, 5.807], [51.237, 5.792], [51.253, 5.772],
+                    // Eindhoven north
+                    [51.320, 5.680], [51.400, 5.550], [51.480, 5.450],
+                    [51.560, 5.380], [51.640, 5.320], [51.702, 5.351],
+                    [51.717, 5.343], [51.750, 5.300], [51.800, 5.250]
+                ], delay: 200 },
+                { name: 'A76', coords: [
+                    // Germany (E314)
+                    [50.820, 6.020], [50.842, 5.996], [50.872, 5.960],
+                    [50.882, 5.924], [50.907, 5.892], [50.927, 5.887],
+                    [50.935, 5.880], [50.949, 5.838], [50.952, 5.822],
+                    [50.959, 5.758], [50.960, 5.804]
+                ], delay: 400 },
+                { name: 'A73', coords: [
+                    // Roermond (south)
+                    [51.123, 5.884], [51.126, 5.890], [51.134, 5.909],
+                    [51.147, 5.936], [51.151, 5.944], [51.172, 5.977],
+                    [51.175, 5.985], [51.178, 6.013], [51.228, 6.024],
+                    // Venlo
+                    [51.305, 6.122], [51.317, 6.135], [51.355, 6.147],
+                    [51.359, 6.140], [51.365, 6.126], [51.374, 6.123],
+                    [51.412, 6.124], [51.443, 6.077], [51.502, 6.027],
+                    [51.566, 5.994], [51.632, 5.926],
+                    // Nijmegen
+                    [51.700, 5.880], [51.780, 5.850], [51.850, 5.820]
+                ], delay: 800 }
+            ];
+
+            // Add highways with gradient (multiple segments) + animated gleam
+            const polylines = highways.map(h => {
+                const segments = [];
+                const numSegments = h.coords.length - 1;
+
+                // Create gradient segments (bright red to light red)
+                for (let i = 0; i < numSegments; i++) {
+                    const progress = i / numSegments;
+                    // Interpolate from bright red (#c41e1e) to light red (#e88888)
+                    const r = Math.round(196 + (232 - 196) * progress);
+                    const g = Math.round(30 + (136 - 30) * progress);
+                    const b = Math.round(30 + (136 - 30) * progress);
+                    const color = `rgb(${r},${g},${b})`;
+
+                    const segment = L.polyline([h.coords[i], h.coords[i + 1]], {
+                        color: color,
+                        weight: 4,
+                        opacity: 1
+                    }).addTo(map);
+                    segments.push(segment);
+                }
+
+                // Animated gleam line (white highlight that travels)
+                const gleamLine = L.polyline(h.coords, {
+                    color: '#ffffff',
+                    weight: 2,
+                    opacity: 0.9,
+                    className: 'highway-gleam'
+                }).addTo(map);
+
+                // Setup segment animations
+                segments.forEach((seg, i) => {
+                    const pathElement = seg.getElement();
+                    if (pathElement) {
+                        const length = pathElement.getTotalLength();
+                        pathElement.style.strokeDasharray = length;
+                        pathElement.style.strokeDashoffset = length;
+                        pathElement.style.transition = 'none';
+                    }
+                });
+
+                // Setup gleam animation
+                const gleamElement = gleamLine.getElement();
+                if (gleamElement) {
+                    const length = gleamElement.getTotalLength();
+                    // Short visible segment that will travel along
+                    gleamElement.style.strokeDasharray = `${length * 0.08} ${length}`;
+                    gleamElement.style.strokeDashoffset = length;
+                    gleamElement.style.transition = 'none';
+                }
+
+                return { segments, gleamLine, delay: h.delay, coords: h.coords };
+            });
+
+            // Animate highways when in view
+            let animated = false;
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting && !animated) {
+                        animated = true;
+                        polylines.forEach(({ segments, gleamLine, delay }) => {
+                            setTimeout(() => {
+                                // Animate each segment with slight stagger
+                                segments.forEach((seg, i) => {
+                                    const pathElement = seg.getElement();
+                                    if (pathElement) {
+                                        setTimeout(() => {
+                                            pathElement.style.transition = 'stroke-dashoffset 0.3s ease-out';
+                                            pathElement.style.strokeDashoffset = '0';
+                                        }, i * 150);
+                                    }
+                                });
+
+                                // Start gleam animation after line draws
+                                const gleamElement = gleamLine.getElement();
+                                if (gleamElement) {
+                                    const length = gleamElement.getTotalLength();
+                                    const gleamSize = length * 0.1;
+                                    setTimeout(() => {
+                                        // Setup for moving gleam
+                                        gleamElement.style.strokeDasharray = `${gleamSize} ${length}`;
+
+                                        // Animate gleam moving along line (slow)
+                                        let offset = length;
+                                        const animateGleam = () => {
+                                            offset -= 0.5;
+                                            if (offset < -gleamSize) {
+                                                offset = length;
+                                            }
+                                            gleamElement.style.strokeDashoffset = offset;
+                                            requestAnimationFrame(animateGleam);
+                                        };
+                                        animateGleam();
+                                    }, segments.length * 150 + 500);
+                                }
+                            }, delay);
+                        });
+                    }
+                });
+            }, { threshold: 0.3 });
+
+            observer.observe(mapContainer);
+        }, 200);
+    })();
+    </script>
 
     <script>
         // Horizontale scroll via wheel event
