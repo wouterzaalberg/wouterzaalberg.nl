@@ -72,9 +72,10 @@
 ## Mobiele Hero Rotatie (< 767px)
 
 ### Titel positionering
-- Titel elementen (naam, tagline) gepositioneerd met `top: -62vh` relatief aan overlay
+- Titel elementen absoluut gepositioneerd relatief aan overlay (bottom: 1.5rem)
+- Basis: `top: -50vh/-50dvh`, bij `max-height: 950px`: `top: -58vh/-58dvh`
 - `overflow: visible` op `.hero-section` om clipping te voorkomen
-- Spacing tussen regels: 1.6rem en 4rem
+- Spacing: name→tagline 1.8rem, tagline→italic 1.4rem (top-to-top)
 
 ### Foto rotatie
 - 5 foto's uit grote series roteren elke 5 seconden

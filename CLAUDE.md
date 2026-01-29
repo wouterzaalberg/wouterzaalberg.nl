@@ -20,7 +20,7 @@ Portfolio website voor fotograaf Wouter Zaalberg. Fotografieprojecten over Neder
   - Hero name: `clamp(1rem, calc(0.5rem + 0.8vw), 1.4rem)`
   - Tagline: `clamp(1.3rem, calc(0.8rem + 0.8vw), 2.5rem)`, bij 1800px+: `2.3rem`
   - Social icons onder Contact (desktop only, 50% opacity, hover goud)
-  - **Mobiel**: safe-area-inset support, scrollbare content, extra breakpoint voor korte schermen (max-height 700px)
+  - **Mobiel**: safe-area-inset support, scrollbare content, breakpoints: 950px (titel hoger), 700px (kleinere tekst)
 - **Sectie 2 (About)**: Foto "werkterrein.jpg", zoom bij scroll
 - **Sectie 3 (Work)**: Foto carousel met logo's, zoom bij scroll
   - **Mobiel**: Send grid in 3:4 verticale container (horizontale foto's worden gecropped)
