@@ -259,21 +259,48 @@ Vervangt statische `info 2.jpg` met een Leaflet kaart die toont hoe de hemelboom
 - **A76**: Duitsland (E314) → Zuid-Limburg (verbindt met A2)
 
 ### Visuele Effecten
-- **Kleurverloop**: fel rood (België) → licht rood (Nederland)
-- **Teken-animatie**: lijnen groeien van grens richting noorden
-- **Bewegend glimmetje**: wit lichtpuntje reist continu langs elke lijn
-- **Fade-out**: gradient aan bovenkant kaart laat lijnen "verdwijnen"
+- **Solid rood**: `#c41e1e`, laatste 25% fadet uit
+- **Vrachtwagen animatie**: zwarte blokjes (4px) bewegen langs snelwegen
+- **GBIF observaties**: groene stippen op echte waarnemingslocaties
+- **Fade-out**: gradient aan bovenkant kaart
+
+### Snelweg Coördinaten
+- **A67**: 73 handmatig gecorrigeerde punten (Google Maps)
+- **A2/A4/A16/A76**: Overpass API (OpenStreetMap)
+- **A4/A29**: Gecombineerd als één route tot Rotterdam
+- **Debug modus**: `debugMarkers = true` toont genummerde markers voor editing
 
 ### CSS
-- Kaart: `grid-column: 26 / 34; grid-row: 1 / 19;`
+- Kaart: `grid-column: 26 / 37; grid-row: 1 / 19;` (11 kolommen breed)
 - Zwarte rand: `2px solid #333`
 - Leaflet tiles override: `.leaflet-tile { width: 256px !important; height: 256px !important; }`
 - Grayscale: `.grayscale-tiles { filter: grayscale(100%) contrast(1.1); }`
 
 ### Animatie Timing
-- Segmenten tekenen: 0.3s per segment, 150ms stagger
-- Glim snelheid: `offset -= 0.5` per frame
+- Segmenten fade-in: 20ms stagger
+- Vrachtwagens: verschijnen na lijn, `strokeDasharray: '4 40'`
 - Delays per snelweg: A4(0), A2(200ms), A16(300ms), A76(400ms), A67(600ms), A73(800ms)
+
+## Hoornaar Verspreidingskaart
+Toont verspreiding Aziatische hoornaar door Nederland (2021-2025).
+
+### Technologie
+- **SVG** met PNG mask (`de-exoten/kaart nederland.png`)
+- **Gradient fill** met kleurbanden per jaar
+- **Animated mask** voor "water vult glas" effect
+
+### Kleuren (van zuid naar noord)
+- **2021** (0-20%): `#8b0000` donkerst
+- **2022** (20-40%): `#a52a2a`
+- **2023** (40-60%): `#c44444`
+- **2024** (60-80%): `#d66666`
+- **2025** (80-100%): `#e88888` lichtst
+
+### Animatie
+- **Duur**: 8 seconden totaal
+- **Organisch**: variabele snelheid met "surge" momenten
+- **Golf-effect**: golvende rand tijdens stijgen
+- **Trigger**: IntersectionObserver, 30% threshold
 
 ## Verticale Labels
 - Cursieve accent letter: `<span class="accent">t</span>`
