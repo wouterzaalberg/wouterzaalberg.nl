@@ -560,7 +560,7 @@
     height: 70vh;
 }
 
-/* 2x2 Photo Grid (foto 25-28) */
+/* 2x2 Photo Grid (foto 25-28) - verticale foto's */
 .abp-photo-grid-2x2 {
     position: relative;
     flex-shrink: 0;
@@ -570,8 +570,8 @@
     grid-template-rows: 1fr 1fr;
     gap: 4px;
     height: 70vh;
-    width: auto;
-    aspect-ratio: auto;
+    /* Verticale foto's (3:4): 2 kolommen × 2 rijen, breedte = hoogte × (3/4) × 2 / 2 = hoogte × 0.75 */
+    width: calc(70vh * 0.75);
     padding: 0;
 }
 
