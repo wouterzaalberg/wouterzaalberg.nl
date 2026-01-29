@@ -572,7 +572,8 @@
     height: 70vh;
     /* Verticale foto's (3:4): 2 kolommen × 2 rijen, breedte = hoogte × (3/4) × 2 / 2 = hoogte × 0.75 */
     width: calc(70vh * 0.75);
-    padding: 0;
+    /* Zelfde padding als normale foto's */
+    margin: 0 14rem;
 }
 
 .abp-photo-grid-2x2 .abp-photo-block {
