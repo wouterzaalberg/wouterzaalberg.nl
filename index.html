@@ -106,6 +106,9 @@
                         <a href="https://www.linkedin.com/in/wouterzaalberg/" target="_blank" rel="noopener" aria-label="LinkedIn">
                             <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
                         </a>
+                        <button class="hero-share-button" aria-label="Deel deze pagina">
+                            <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92-1.31-2.92-2.92-2.92z"/></svg>
+                        </button>
                     </div>
                 </nav>
             </div>
@@ -266,12 +269,13 @@
             <p>of mailen naar <a href="mailto:wouterzaalberg@gmail.com" class="email">wouterzaalberg@gmail.com</a></p>
             <p>of stuur een bericht:</p>
 
-            <form class="contact-form" action="#" method="post">
+            <form class="contact-form" id="contactForm">
                 <input type="text" name="naam" placeholder="Naam" required>
                 <input type="email" name="email" placeholder="E-mailadres" required>
                 <textarea name="bericht" placeholder="Uw bericht" rows="4" required></textarea>
                 <button type="submit">Verstuur</button>
             </form>
+            <p class="form-success" id="formSuccess" style="display: none; color: #2d5a27; margin-top: 1rem;">Bedankt voor je bericht! Ik neem zo snel mogelijk contact op.</p>
 
             <div class="social-links">
                 <a href="https://www.instagram.com/wouterzaalberg/" target="_blank" rel="noopener" aria-label="Instagram">
@@ -888,6 +892,55 @@
             window.addEventListener('load', syncOverlayWidths);
         }
         window.addEventListener('resize', syncOverlayWidths);
+
+        // Share button functionaliteit
+        const heroShareButton = document.querySelector('.hero-share-button');
+        if (heroShareButton) {
+            heroShareButton.addEventListener('click', function() {
+                if (navigator.share) {
+                    navigator.share({
+                        title: document.title,
+                        url: window.location.href
+                    }).catch(() => {});
+                } else {
+                    navigator.clipboard.writeText(window.location.href).then(() => {
+                        alert('Link gekopieerd!');
+                    });
+                }
+            });
+        }
+
+        // Formulier AJAX verzending
+        const contactForm = document.getElementById('contactForm');
+        const formSuccess = document.getElementById('formSuccess');
+        if (contactForm) {
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const submitBtn = contactForm.querySelector('button[type="submit"]');
+                const originalText = submitBtn.textContent;
+                submitBtn.textContent = 'Verzenden...';
+                submitBtn.disabled = true;
+
+                fetch('https://formspree.io/f/xkobjojw', {
+                    method: 'POST',
+                    body: new FormData(contactForm),
+                    headers: { 'Accept': 'application/json' }
+                }).then(response => {
+                    if (response.ok) {
+                        contactForm.style.display = 'none';
+                        formSuccess.style.display = 'block';
+                    } else {
+                        submitBtn.textContent = originalText;
+                        submitBtn.disabled = false;
+                        alert('Er ging iets mis. Probeer het opnieuw of mail direct naar wouterzaalberg@gmail.com');
+                    }
+                }).catch(() => {
+                    submitBtn.textContent = originalText;
+                    submitBtn.disabled = false;
+                    alert('Er ging iets mis. Probeer het opnieuw of mail direct naar wouterzaalberg@gmail.com');
+                });
+            });
+        }
     </script>
 </body>
 </html>

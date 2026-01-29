@@ -360,13 +360,24 @@ img {
     transition: opacity 0.3s ease, color 0.3s ease;
 }
 
-.hero-social-links a:hover {
+.hero-social-links a:hover,
+.hero-social-links button:hover {
     opacity: 1;
     color: var(--color-gold);
 }
 
 .hero-social-links svg {
     display: block;
+}
+
+.hero-share-button {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    color: var(--color-black);
+    opacity: 0.5;
+    transition: opacity 0.3s ease, color 0.3s ease;
 }
 
 /* Hero tagline scaling */
@@ -1796,6 +1807,7 @@ img {
 
     .hero-name {
         top: -55vh !important;
+        top: -55dvh !important;
         font-size: 0.8rem;
         letter-spacing: 0.15em;
         margin-bottom: 0;
@@ -1805,6 +1817,7 @@ img {
 
     .hero-tagline {
         top: calc(-55vh + 1.6rem) !important;
+        top: calc(-55dvh + 1.6rem) !important;
         font-size: 1.5rem;
         line-height: 1.15;
         margin-bottom: 0;
@@ -1815,11 +1828,28 @@ img {
 
     .hero-tagline-italic {
         top: calc(-55vh + 4rem) !important;
+        top: calc(-55dvh + 4rem) !important;
         font-size: 1.3rem;
         margin-bottom: 0;
         color: #ffffff !important;
         text-shadow: 0 1px 4px rgba(0,0,0,0.25);
         white-space: normal;
+    }
+
+    /* Kortere telefoons (iPhone 13, iPhone 12, etc.) - titel hoger plaatsen */
+    @media (max-height: 850px) {
+        .hero-name {
+            top: -62vh !important;
+            top: -62dvh !important;
+        }
+        .hero-tagline {
+            top: calc(-62vh + 1.6rem) !important;
+            top: calc(-62dvh + 1.6rem) !important;
+        }
+        .hero-tagline-italic {
+            top: calc(-62vh + 4rem) !important;
+            top: calc(-62dvh + 4rem) !important;
+        }
     }
 
     .menu-section {
