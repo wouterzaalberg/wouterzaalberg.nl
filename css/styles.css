@@ -1816,8 +1816,8 @@ img {
     }
 
     .hero-tagline {
-        top: calc(-50vh + 1.5rem) !important;
-        top: calc(-50dvh + 1.5rem) !important;
+        top: calc(-50vh + 1.8rem) !important;
+        top: calc(-50dvh + 1.8rem) !important;
         font-size: 1.5rem;
         line-height: 1.15;
         margin-bottom: 0;
@@ -1827,8 +1827,8 @@ img {
     }
 
     .hero-tagline-italic {
-        top: calc(-50vh + 2.9rem) !important;
-        top: calc(-50dvh + 2.9rem) !important;
+        top: calc(-50vh + 3.2rem) !important;
+        top: calc(-50dvh + 3.2rem) !important;
         font-size: 1.3rem;
         margin-bottom: 0;
         color: #ffffff !important;
@@ -1836,19 +1836,19 @@ img {
         white-space: normal;
     }
 
-    /* Kortere telefoons (iPhone 13, iPhone 12, etc.) - titel hoger plaatsen */
-    @media (max-height: 850px) {
+    /* Telefoons met normale/korte hoogte - titel hoger plaatsen */
+    @media (max-height: 950px) {
         .hero-name {
             top: -58vh !important;
             top: -58dvh !important;
         }
         .hero-tagline {
-            top: calc(-58vh + 1.5rem) !important;
-            top: calc(-58dvh + 1.5rem) !important;
+            top: calc(-58vh + 1.8rem) !important;
+            top: calc(-58dvh + 1.8rem) !important;
         }
         .hero-tagline-italic {
-            top: calc(-58vh + 2.9rem) !important;
-            top: calc(-58dvh + 2.9rem) !important;
+            top: calc(-58vh + 3.2rem) !important;
+            top: calc(-58dvh + 3.2rem) !important;
         }
     }
 
