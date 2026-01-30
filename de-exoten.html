@@ -848,20 +848,34 @@
         }
         #hemelboom-map .leaflet-control-zoom { z-index: 400; }
 
-        /* Hoornaar spread map */
-        .hoornaar-map-container {
-            position: relative;
+        /* Hoornaar Leaflet map */
+        #hoornaar-map {
             width: 100%;
             height: 100%;
-            background: #f8f8f8;
+            background: #f5f5f5;
             border-radius: 4px;
-            overflow: hidden;
         }
-        .hoornaar-map-container svg {
-            width: 100%;
-            height: 100%;
+        /* Zone overlays moeten kunnen faden - override de cluster-grid !important */
+        #hoornaar-map .hoornaar-zone-overlay {
+            opacity: 0 !important;
+            transition: opacity 0.8s ease-out !important;
         }
-        .hoornaar-map-container .map-title {
+        #hoornaar-map .hoornaar-zone-overlay.visible {
+            opacity: 0.8 !important;
+        }
+        #hoornaar-map .leaflet-control-zoom { z-index: 400; }
+        #hoornaar-map .leaflet-tile-pane { z-index: 100 !important; }
+        #hoornaar-map .leaflet-overlay-pane { z-index: 200 !important; }
+        #hoornaar-map .leaflet-tile {
+            width: 256px !important;
+            height: 256px !important;
+            object-fit: none !important;
+            border-radius: 0 !important;
+        }
+        #hoornaar-map .grayscale-tiles {
+            filter: grayscale(100%) brightness(1.1) contrast(0.9);
+        }
+        .hoornaar-map-title {
             position: absolute;
             top: 12px;
             left: 12px;
@@ -872,26 +886,46 @@
             text-transform: uppercase;
             letter-spacing: 0.05em;
             line-height: 1.3;
-            z-index: 10;
+            z-index: 1000;
+            background: rgba(255,255,255,0.85);
+            padding: 0.4rem 0.6rem;
+            border-radius: 3px;
         }
-        .hoornaar-map-container .year-label {
+        .hoornaar-legend {
+            position: absolute;
+            bottom: 12px;
+            right: 12px;
+            background: rgba(255,255,255,0.92);
+            padding: 0.6rem 0.8rem;
+            border-radius: 4px;
+            z-index: 1000;
             font-family: 'Scala Sans', sans-serif;
-            font-size: 10px;
-            fill: #555;
+            font-size: 0.75rem;
         }
-        .nl-outline {
-            fill: none;
-            stroke: #999;
-            stroke-width: 1.5;
+        .hoornaar-legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.25rem;
         }
-        .nl-base {
-            fill: #e8e8e8;
+        .hoornaar-legend-item:last-child {
+            margin-bottom: 0;
         }
-        .hoornaar-fill {
-            transition: none;
+        .hoornaar-legend-color {
+            width: 16px;
+            height: 12px;
+            border-radius: 2px;
+            flex-shrink: 0;
         }
-        #hoornaar-reveal {
-            transition: none;
+        .hoornaar-legend-year {
+            color: #333;
+        }
+        .hoornaar-zone {
+            opacity: 0;
+            transition: opacity 1.5s ease-out;
+        }
+        .hoornaar-zone.visible {
+            opacity: 0.7;
         }
 
         /* Map legend */
@@ -1081,6 +1115,66 @@
         .kreeft-grid .kreeft-10 { grid-column: 17 / 23; grid-row: 18 / 24; }
         .kreeft-grid .kreeft-3 { grid-column: 14 / 17; grid-row: 18 / 23; }
 
+        /* Kreeft kilo teller - slot machine style */
+        .kreeft-grid .kreeft-teller {
+            grid-column: 17 / 23;
+            grid-row: 1 / 8;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: center;
+            padding-bottom: 1.5rem;
+        }
+        .kreeft-teller-inner {
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            gap: 2.5rem;
+        }
+        .kreeft-teller .dag-col,
+        .kreeft-teller .kilo-col {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .kreeft-teller .dag-label,
+        .kreeft-teller .kilo-label {
+            font-family: 'Scala Sans SC', 'Scala Sans', sans-serif;
+            font-size: 0.85rem;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.3rem;
+        }
+        .kreeft-teller .slot-window {
+            overflow: hidden;
+            height: 2.8rem;
+            position: relative;
+        }
+        .kreeft-teller .slot-reel {
+            display: flex;
+            flex-direction: column;
+        }
+        .kreeft-teller .slot-number {
+            font-family: 'Scala Sans', sans-serif;
+            font-size: 2.4rem;
+            font-weight: bold;
+            color: #c41e3a;
+            height: 2.8rem;
+            line-height: 2.8rem;
+            text-align: center;
+        }
+        .kreeft-teller .kilo-col .slot-number {
+            min-width: 6ch;
+        }
+        .kreeft-teller .dag-col .slot-number {
+            min-width: 3ch;
+        }
+        /* Kilo reel spin animation - realistic deceleration */
+        .kreeft-teller .kilo-col .slot-reel {
+            /* No CSS transition - handled by JavaScript for realistic physics */
+        }
+
         /* ====== WOLHANDKRAB CLUSTER ====== */
         /* FOTO-PALET: thumbnails linksboven (2×2 cellen) */
         .wolhandkrab-grid .foto-16 { grid-column: 1 / 27; grid-row: 1 / 25; }
@@ -1148,8 +1242,144 @@
 
         /* ====== WASBEER 2 CLUSTER (foto 71-72) ====== */
         .wasbeer2-grid .foto-71 { grid-column: 1 / 15; grid-row: 1 / 25; }
+        .wasbeer2-grid .wasbeer-map-container { grid-column: 15 / 27; grid-row: 1 / 14; position: relative; }
         .wasbeer2-grid .foto-72 { grid-column: 15 / 27; grid-row: 14 / 25; }
-        .wasbeer2-grid .caption-wasbeer2 { grid-column: 15 / 21; grid-row: 8 / 14; }
+        .wasbeer2-grid .caption-wasbeer2 { grid-column: 27 / 35; grid-row: 19 / 25; align-self: end; }
+
+        /* Wasbeer kaart styling */
+        #wasbeer-map {
+            width: 100%;
+            height: 100%;
+            background: #f5f5f5;
+            border-radius: 4px;
+        }
+        #wasbeer-map .leaflet-tile-pane { z-index: 100 !important; }
+        #wasbeer-map .leaflet-overlay-pane { z-index: 200 !important; }
+        #wasbeer-map .leaflet-tile {
+            width: 256px !important;
+            height: 256px !important;
+            object-fit: none !important;
+            border-radius: 0 !important;
+        }
+        #wasbeer-map .grayscale-tiles {
+            filter: grayscale(100%) brightness(1.1) contrast(0.9);
+        }
+        .wasbeer-map-title {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-family: 'Scala Sans SC', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #333;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            z-index: 1000;
+            background: rgba(255,255,255,0.9);
+            padding: 0.3rem 0.5rem;
+            border-radius: 3px;
+        }
+        .wasbeer-chart {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            right: 10px;
+            background: rgba(255,255,255,0.95);
+            padding: 0.6rem 0.8rem;
+            border-radius: 4px;
+            z-index: 1000;
+            font-family: 'Scala Sans', sans-serif;
+        }
+        .wasbeer-chart-title {
+            font-size: 0.65rem;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.4rem;
+        }
+        .wasbeer-chart-bars {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: 0.25rem;
+            height: 70px;
+            padding-top: 0.5rem;
+            border-bottom: 1px solid #ddd;
+        }
+        .wasbeer-bar {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .wasbeer-bar-inner {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .wasbeer-bar-fill {
+            width: 70%;
+            background: #c41e3a;
+            min-height: 2px;
+        }
+        .wasbeer-bar-fill.no-policy {
+            background: #aaa;
+        }
+        .wasbeer-bar-value {
+            font-size: 0.55rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 0.15rem;
+        }
+        .wasbeer-bar-label {
+            margin-top: 0.3rem;
+            text-align: center;
+        }
+        .wasbeer-bar-year {
+            font-size: 0.5rem;
+            color: #333;
+            display: block;
+        }
+        .wasbeer-bar-note {
+            font-size: 0.4rem;
+            color: #888;
+            font-style: italic;
+            display: block;
+        }
+        /* Bar animation */
+        .wasbeer-bar-fill {
+            height: 0;
+            transition: height 0.6s ease-out;
+        }
+        .wasbeer-bar-fill.animated {
+            /* Height set by JS */
+        }
+        .wasbeer-bar-value {
+            opacity: 0;
+            transition: opacity 0.3s ease-out;
+        }
+        .wasbeer-bar-value.visible {
+            opacity: 1;
+        }
+        /* Pulsating circle */
+        @keyframes wasbeerPulse {
+            0% {
+                stroke-opacity: 0.8;
+                fill-opacity: 0.25;
+            }
+            50% {
+                stroke-opacity: 0.4;
+                fill-opacity: 0.15;
+            }
+            100% {
+                stroke-opacity: 0.8;
+                fill-opacity: 0.25;
+            }
+        }
+        .wasbeer-circle {
+            animation: wasbeerPulse 2s ease-in-out infinite;
+        }
 
         /* ====== MUSKUSRAT CLUSTER (foto 63-70 + klem) ====== */
         /* FOTO-PALET: thumbnails linksboven (2×2 cellen) */
@@ -1801,6 +2031,116 @@
                 grid-row: 8 / 11;
             }
 
+            /* Hoornaar kaart mobiel */
+            .mobile-hoornaar-map-container {
+                position: relative;
+                width: calc(100% - 2.5rem);
+                height: 280px;
+                margin: 1rem 1.25rem;
+                border-radius: 4px;
+                overflow: hidden;
+            }
+
+            #hoornaar-map-mobile {
+                width: 100%;
+                height: 100%;
+                background: #f5f5f5;
+            }
+
+            #hoornaar-map-mobile .grayscale-tiles {
+                filter: grayscale(100%) brightness(1.1) contrast(0.9);
+            }
+
+            .hoornaar-map-title-mobile {
+                position: absolute;
+                top: 8px;
+                left: 10px;
+                font-family: 'Scala Sans SC', sans-serif;
+                font-size: 0.7rem;
+                text-transform: uppercase;
+                letter-spacing: 0.05em;
+                color: #333;
+                z-index: 500;
+            }
+
+            .hoornaar-legend-mobile {
+                position: absolute;
+                bottom: 8px;
+                right: 8px;
+                background: rgba(255,255,255,0.9);
+                padding: 6px 8px;
+                border-radius: 3px;
+                font-size: 0.6rem;
+                z-index: 500;
+            }
+
+            .hoornaar-legend-mobile .legend-item {
+                display: flex;
+                align-items: center;
+                gap: 4px;
+                margin-bottom: 2px;
+            }
+
+            .hoornaar-legend-mobile .legend-item:last-child {
+                margin-bottom: 0;
+            }
+
+            .hoornaar-legend-mobile .legend-color {
+                width: 12px;
+                height: 8px;
+                display: inline-block;
+            }
+
+            /* Override cluster-grid img opacity for mobile hoornaar overlays */
+            #hoornaar-map-mobile .hoornaar-zone-overlay {
+                opacity: 0 !important;
+                transition: opacity 0.8s ease-out !important;
+            }
+
+            #hoornaar-map-mobile .hoornaar-zone-overlay.visible {
+                opacity: 0.8 !important;
+            }
+
+            /* Kreeftenteller mobiel */
+            .mobile-kreeft-teller {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                padding: 1.5rem 1.25rem;
+                margin: 0 1.25rem 1rem;
+                background: rgba(0,0,0,0.03);
+                border-radius: 4px;
+            }
+
+            .mobile-kreeft-teller .teller-label {
+                font-family: 'Scala Sans SC', sans-serif;
+                font-size: 0.75rem;
+                text-transform: uppercase;
+                letter-spacing: 0.05em;
+                color: #666;
+                margin-bottom: 0.5rem;
+            }
+
+            .mobile-kreeft-teller .teller-display {
+                display: flex;
+                align-items: baseline;
+                gap: 0.3rem;
+            }
+
+            .mobile-kreeft-teller .teller-number {
+                font-family: 'Scala Sans', sans-serif;
+                font-size: 2.5rem;
+                font-weight: bold;
+                color: #333;
+            }
+
+            .mobile-kreeft-teller .teller-unit {
+                font-family: 'Scala Sans', sans-serif;
+                font-size: 1rem;
+                color: #666;
+            }
+
             /* Einde deel 1 */
             .mobile-einde-deel {
                 padding: 3rem 1.5rem;
@@ -1842,6 +2182,7 @@
     </style>
 </head>
 <body>
+
     <nav class="horizontal-nav">
         <div>
             <a href="/" class="back-link">← Terug</a>
@@ -1891,38 +2232,38 @@
                 <div class="intro-grid" id="introGrid">
                     <!-- Kolom 1 (scrollt omhoog) -->
                     <div class="intro-column" data-direction="up">
-                        <div class="intro-cell"><img src="de-exoten/1.jpg" alt="" loading="eager"></div>
-                        <div class="intro-cell"><img src="de-exoten/cluster 1 foto 5.jpg" alt="" loading="eager"></div>
-                        <div class="intro-cell"><img src="de-exoten/11.jpg" alt="" loading="eager"></div>
-                        <div class="intro-cell"><img src="de-exoten/16.jpg" alt="" loading="eager"></div>
+                        <div class="intro-cell"><img src="de-exoten/introgrid/beverrat.jpg" alt="" loading="eager"></div>
+                        <div class="intro-cell"><img src="de-exoten/introgrid/534A0270.jpg" alt="" loading="eager"></div>
+                        <div class="intro-cell"><img src="de-exoten/introgrid/534A1750.jpg" alt="" loading="eager"></div>
+                        <div class="intro-cell"><img src="de-exoten/introgrid/534A2740.jpg" alt="" loading="eager"></div>
                     </div>
                     <!-- Kolom 2 (scrollt omlaag) -->
                     <div class="intro-column" data-direction="down">
-                        <div class="intro-cell"><img src="de-exoten/beverrat.jpg" alt="" loading="eager"></div>
+                        <div class="intro-cell"><img src="de-exoten/introgrid/534A3375.jpg" alt="" loading="eager"></div>
                         <div class="intro-cell empty"></div>
-                        <div class="intro-cell"><img src="de-exoten/12.jpg" alt="" loading="eager"></div>
-                        <div class="intro-cell"><img src="de-exoten/17.jpg" alt="" loading="eager"></div>
+                        <div class="intro-cell"><img src="de-exoten/introgrid/534A4203.jpg" alt="" loading="eager"></div>
+                        <div class="intro-cell"><img src="de-exoten/introgrid/534A9320.jpg" alt="" loading="eager"></div>
                     </div>
                     <!-- Kolom 3 (scrollt omhoog) -->
                     <div class="intro-column" data-direction="up">
-                        <div class="intro-cell"><img src="de-exoten/cluster 1 foto 2.jpg" alt="" loading="eager"></div>
+                        <div class="intro-cell"><img src="de-exoten/introgrid/534A4619.jpg" alt="" loading="eager"></div>
                         <div class="intro-cell empty"></div>
-                        <div class="intro-cell"><img src="de-exoten/13.jpg" alt="" loading="eager"></div>
-                        <div class="intro-cell"><img src="de-exoten/18.jpg" alt="" loading="eager"></div>
+                        <div class="intro-cell"><img src="de-exoten/introgrid/534A6718.jpg" alt="" loading="eager"></div>
+                        <div class="intro-cell"><img src="de-exoten/introgrid/wasbeerhond.jpg" alt="" loading="eager"></div>
                     </div>
                     <!-- Kolom 4 (scrollt omlaag) -->
                     <div class="intro-column" data-direction="down">
-                        <div class="intro-cell"><img src="de-exoten/cluster 1 foto 3.jpg" alt="" loading="eager"></div>
+                        <div class="intro-cell"><img src="de-exoten/introgrid/534A8519.jpg" alt="" loading="eager"></div>
                         <div class="intro-cell empty"></div>
-                        <div class="intro-cell"><img src="de-exoten/14.jpg" alt="" loading="eager"></div>
-                        <div class="intro-cell"><img src="de-exoten/19.jpg" alt="" loading="eager"></div>
+                        <div class="intro-cell"><img src="de-exoten/introgrid/534A8622.jpg" alt="" loading="eager"></div>
+                        <div class="intro-cell"><img src="de-exoten/introgrid/534A8686.jpg" alt="" loading="eager"></div>
                     </div>
                     <!-- Kolom 5 (scrollt omhoog) -->
                     <div class="intro-column" data-direction="up">
-                        <div class="intro-cell"><img src="de-exoten/cluster 1 foto 4.jpg" alt="" loading="eager"></div>
-                        <div class="intro-cell"><img src="de-exoten/10.jpg" alt="" loading="eager"></div>
-                        <div class="intro-cell"><img src="de-exoten/15.jpg" alt="" loading="eager"></div>
-                        <div class="intro-cell"><img src="de-exoten/20.jpg" alt="" loading="eager"></div>
+                        <div class="intro-cell"><img src="de-exoten/introgrid/534A8907.jpg" alt="" loading="eager"></div>
+                        <div class="intro-cell"><img src="de-exoten/introgrid/534A9293.jpg" alt="" loading="eager"></div>
+                        <div class="intro-cell"><img src="de-exoten/introgrid/hoornaar.jpg" alt="" loading="eager"></div>
+                        <div class="intro-cell"><img src="de-exoten/introgrid/534A9409.jpg" alt="" loading="eager"></div>
                     </div>
                 </div>
                 <!-- Titel wrapper - over de lege cellen -->
@@ -2139,68 +2480,30 @@
             <div class="photo-item foto-38" data-file="38.jpg">
                 <img src="de-exoten/38.jpg" alt="Hoornaar" loading="lazy">
             </div>
-            <div class="photo-item foto-info3" data-file="hoornaar-map">
-                <div class="hoornaar-map-container" id="hoornaar-map">
-                    <div class="map-title">Aziatische<br>Hoornaar</div>
-                    <svg viewBox="0 0 250 320" preserveAspectRatio="xMidYMid meet">
-                        <defs>
-                            <!-- Gradient: distinct color bands per year (dark=south/2021, light=north/2025) -->
-                            <linearGradient id="hoornaar-gradient" x1="0%" y1="100%" x2="0%" y2="0%">
-                                <!-- 2021 - darkest (bottom, 0-20%) -->
-                                <stop offset="0%" stop-color="#8b0000"/>
-                                <stop offset="20%" stop-color="#8b0000"/>
-                                <!-- 2022 (20-40%) -->
-                                <stop offset="20%" stop-color="#a52a2a"/>
-                                <stop offset="40%" stop-color="#a52a2a"/>
-                                <!-- 2023 (40-60%) -->
-                                <stop offset="40%" stop-color="#c44444"/>
-                                <stop offset="60%" stop-color="#c44444"/>
-                                <!-- 2024 (60-80%) -->
-                                <stop offset="60%" stop-color="#d66666"/>
-                                <stop offset="80%" stop-color="#d66666"/>
-                                <!-- 2025 - lightest (top, 80-100%) -->
-                                <stop offset="80%" stop-color="#e88888"/>
-                                <stop offset="100%" stop-color="#e88888"/>
-                            </linearGradient>
-
-                            <!-- Nederland PNG als mask -->
-                            <mask id="nl-mask">
-                                <image href="de-exoten/kaart nederland.png"
-                                       x="10" y="15" width="180" height="280"
-                                       preserveAspectRatio="xMidYMid meet"/>
-                            </mask>
-
-                            <!-- Reveal mask - wave shape animates up -->
-                            <mask id="reveal-mask">
-                                <rect x="0" y="0" width="250" height="320" fill="black"/>
-                                <path id="hoornaar-wave" d="
-                                    M0,380
-                                    Q62,375 125,380 Q188,385 250,380
-                                    L250,700 L0,700 Z" fill="white"/>
-                            </mask>
-                        </defs>
-
-                        <!-- Gray base Nederland shape -->
-                        <image href="de-exoten/kaart nederland.png"
-                               x="10" y="15" width="180" height="280"
-                               preserveAspectRatio="xMidYMid meet"
-                               style="opacity: 0.3"/>
-
-                        <!-- Gradient fill masked by Nederland shape, revealed by wave -->
-                        <g mask="url(#nl-mask)">
-                            <g mask="url(#reveal-mask)">
-                                <rect x="0" y="0" width="250" height="320"
-                                      fill="url(#hoornaar-gradient)"/>
-                            </g>
-                        </g>
-
-                        <!-- Year labels -->
-                        <text class="year-label" x="200" y="285">2021</text>
-                        <text class="year-label" x="200" y="228">2022</text>
-                        <text class="year-label" x="200" y="171">2023</text>
-                        <text class="year-label" x="200" y="114">2024</text>
-                        <text class="year-label" x="200" y="57">2025</text>
-                    </svg>
+            <div class="photo-item foto-info3" data-file="hoornaar-map" style="position: relative;">
+                <div id="hoornaar-map"></div>
+                <div class="hoornaar-map-title">Aziatische<br>Hoornaar</div>
+                <div class="hoornaar-legend">
+                    <div class="hoornaar-legend-item">
+                        <div class="hoornaar-legend-color" style="background: #8b0000;"></div>
+                        <span class="hoornaar-legend-year">2025</span>
+                    </div>
+                    <div class="hoornaar-legend-item">
+                        <div class="hoornaar-legend-color" style="background: #b83232;"></div>
+                        <span class="hoornaar-legend-year">2024</span>
+                    </div>
+                    <div class="hoornaar-legend-item">
+                        <div class="hoornaar-legend-color" style="background: #d35050;"></div>
+                        <span class="hoornaar-legend-year">2023</span>
+                    </div>
+                    <div class="hoornaar-legend-item">
+                        <div class="hoornaar-legend-color" style="background: #e87070;"></div>
+                        <span class="hoornaar-legend-year">2022</span>
+                    </div>
+                    <div class="hoornaar-legend-item">
+                        <div class="hoornaar-legend-color" style="background: #f5a0a0;"></div>
+                        <span class="hoornaar-legend-year">2021</span>
+                    </div>
                 </div>
             </div>
             <div class="caption caption-hoornaar-boog expand-up">
@@ -2255,6 +2558,28 @@
         <!-- Kreeft Grid -->
         <div class="cluster-grid kreeft-grid part2">
             <div class="grid-debug-overlay"></div>
+
+            <!-- Kreeft kilo teller - slot machine -->
+            <div class="kreeft-teller">
+                <div class="kreeft-teller-inner">
+                    <div class="dag-col">
+                        <span class="dag-label">Dag</span>
+                        <div class="slot-window">
+                            <div class="slot-reel" id="kreeft-dag-reel">
+                                <span class="slot-number">1</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="kilo-col">
+                        <span class="kilo-label">Kilo</span>
+                        <div class="slot-window">
+                            <div class="slot-reel" id="kreeft-kilo-reel">
+                                <span class="slot-number">50</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <!-- FOTO-PALET: thumbnails linksboven -->
             <div class="photo-item kreeft-1" data-file="kreeft1.jpg">
@@ -2518,11 +2843,70 @@
             <div class="photo-item foto-71" data-file="71.jpg">
                 <img src="de-exoten/71.jpg" alt="Wasbeer" loading="lazy">
             </div>
+
+            <!-- Wasbeer kaart met grafiek -->
+            <div class="wasbeer-map-container">
+                <div id="wasbeer-map"></div>
+                <div class="wasbeer-map-title">Verspreidingsgebied<br>wasberen</div>
+                <div class="wasbeer-chart" id="wasbeer-chart">
+                    <div class="wasbeer-chart-title">Gevangen wasberen per jaar</div>
+                    <div class="wasbeer-chart-bars">
+                        <div class="wasbeer-bar">
+                            <div class="wasbeer-bar-inner">
+                                <span class="wasbeer-bar-value">95</span>
+                                <div class="wasbeer-bar-fill" data-height="36"></div>
+                            </div>
+                            <div class="wasbeer-bar-label">
+                                <span class="wasbeer-bar-year">2019-2022</span>
+                            </div>
+                        </div>
+                        <div class="wasbeer-bar">
+                            <div class="wasbeer-bar-inner">
+                                <span class="wasbeer-bar-value">3</span>
+                                <div class="wasbeer-bar-fill no-policy" data-height="2"></div>
+                            </div>
+                            <div class="wasbeer-bar-label">
+                                <span class="wasbeer-bar-year">2022</span>
+                                <span class="wasbeer-bar-note">stop</span>
+                            </div>
+                        </div>
+                        <div class="wasbeer-bar">
+                            <div class="wasbeer-bar-inner">
+                                <span class="wasbeer-bar-value">26</span>
+                                <div class="wasbeer-bar-fill no-policy" data-height="10"></div>
+                            </div>
+                            <div class="wasbeer-bar-label">
+                                <span class="wasbeer-bar-year">2023</span>
+                                <span class="wasbeer-bar-note">stop</span>
+                            </div>
+                        </div>
+                        <div class="wasbeer-bar">
+                            <div class="wasbeer-bar-inner">
+                                <span class="wasbeer-bar-value">133</span>
+                                <div class="wasbeer-bar-fill" data-height="50"></div>
+                            </div>
+                            <div class="wasbeer-bar-label">
+                                <span class="wasbeer-bar-year">2024</span>
+                            </div>
+                        </div>
+                        <div class="wasbeer-bar">
+                            <div class="wasbeer-bar-inner">
+                                <span class="wasbeer-bar-value">117</span>
+                                <div class="wasbeer-bar-fill" data-height="44"></div>
+                            </div>
+                            <div class="wasbeer-bar-label">
+                                <span class="wasbeer-bar-year">2025</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="photo-item foto-72" data-file="72.jpg">
                 <img src="de-exoten/72.jpg" alt="Wasbeer" loading="lazy">
             </div>
 
-            <!-- Bijschrift -->
+            <!-- Bijschrift rechts van foto 72 -->
             <div class="caption caption-wasbeer2 expand-right">
                 <h4>Naar het lab</h4>
                 <p>Nadat de wasbeer met een luchtdrukgeweer is doodgeschoten, controleert René het gebit om de leeftijd te bepalen (één winter oud) en knipt een stukje tong af voor DNA-onderzoek in het lab.</p>
@@ -2757,6 +3141,18 @@
                 <h4 class="caption-title">Op zoek in Zeeland</h4>
                 <p class="caption-text">Een ramp, vindt Marion de komst van Aziatische hoornaar. Veelvraten zijn het, die insecten waaronder de honingbij in grote aantallen opeten. Als vrijwilliger speurt ze de provincie af waar de beesten in 2017 voor het eerst werden waargenomen: in Zeeland.</p>
             </div>
+            <!-- Hoornaar kaart mobiel -->
+            <div class="mobile-hoornaar-map-container">
+                <div id="hoornaar-map-mobile"></div>
+                <div class="hoornaar-map-title-mobile">Aziatische<br>Hoornaar</div>
+                <div class="hoornaar-legend-mobile">
+                    <div class="legend-item"><span class="legend-color" style="background:#8b0000;"></span>2025</div>
+                    <div class="legend-item"><span class="legend-color" style="background:#b83232;"></span>2024</div>
+                    <div class="legend-item"><span class="legend-color" style="background:#d35050;"></span>2023</div>
+                    <div class="legend-item"><span class="legend-color" style="background:#e87070;"></span>2022</div>
+                    <div class="legend-item"><span class="legend-color" style="background:#f5a0a0;"></span>2021</div>
+                </div>
+            </div>
             <div class="mobile-photo-row">
                 <div class="mobile-photo">
                     <img src="de-exoten/26.jpg" alt="Hoornaar" loading="lazy">
@@ -2816,6 +3212,14 @@
             <div class="mobile-caption-box">
                 <h4 class="caption-title">50 kilo per dag</h4>
                 <p class="caption-text">Roy en collega halen de netten binnen in de Molenpolder in Utrecht, waar de rivierkreeft welig tiert. Als experiment vangen ze iedere dag de beestjes, al maanden lang, om te kijken of de populatie daarmee ook afneemt. Ze vangen zo'n 50 kilo kreeft per dag.</p>
+            </div>
+            <!-- Kreeftenteller mobiel -->
+            <div class="mobile-kreeft-teller">
+                <div class="teller-label">Jaarlijkse vangst:</div>
+                <div class="teller-display">
+                    <span class="teller-number" id="kreeft-teller-mobile">0</span>
+                    <span class="teller-unit">kilo</span>
+                </div>
             </div>
             <div class="mobile-kreeft-grid">
                 <img src="de-exoten/kreeft1.jpg" alt="Kreeft" loading="lazy">
@@ -3034,16 +3438,16 @@
         const mapContainer = document.getElementById('hemelboom-map');
         if (!mapContainer) return;
 
-        // Initialize map
+        // Initialize map - focus on Zuid-Nederland where highways enter
         const map = L.map('hemelboom-map', {
-            center: [51.3, 5.2],
-            zoom: 8,
-            zoomControl: true,
+            center: [51.4, 5.2],
+            zoom: 7.5,
+            zoomControl: false,
             attributionControl: false,
-            dragging: true,
-            scrollWheelZoom: true,
-            doubleClickZoom: true,
-            touchZoom: true
+            dragging: false,
+            scrollWheelZoom: false,
+            doubleClickZoom: false,
+            touchZoom: false
         });
 
         // OpenStreetMap with grayscale filter (more detail visible)
@@ -3059,38 +3463,42 @@
             // Highway routes - accurate coordinates from Overpass API (OpenStreetMap)
             const highways = [
                 { name: 'A4/A29', coords: [
-                    // Belgium (E19 Antwerpen)
-                    [51.280, 4.350], [51.300, 4.335], [51.320, 4.320], [51.340, 4.310],
-                    // Border crossing - Overpass data
-                    [51.3769, 4.3043], [51.3814, 4.3016], [51.3827, 4.3007],
-                    [51.3843, 4.2996], [51.3854, 4.2987], [51.3861, 4.2981],
-                    [51.3868, 4.2974], [51.3952, 4.2898], [51.4050, 4.2851],
-                    [51.4150, 4.2793], [51.4237, 4.2762],
-                    // A4 Northward - Overpass data
-                    [51.4990, 4.3152], [51.5001, 4.3148], [51.5056, 4.3112],
-                    [51.5152, 4.3097], [51.5365, 4.2969], [51.5434, 4.2939],
-                    [51.5838, 4.2893], [51.6025, 4.3664], [51.6212, 4.3796],
-                    [51.6435, 4.3967], [51.6554, 4.4140],
-                    // A29 continuation - Overpass data
-                    [51.6561, 4.4149], [51.6595, 4.4185], [51.6661, 4.4243],
-                    [51.7075, 4.3956], [51.7104, 4.3973], [51.7193, 4.4029],
-                    [51.7285, 4.4086], [51.7437, 4.4130], [51.7555, 4.4170],
-                    [51.7761, 4.4202], [51.7833, 4.4216], [51.8035, 4.4656],
-                    [51.8115, 4.4806], [51.8147, 4.4864], [51.8206, 4.4967],
-                    [51.8327, 4.5114], [51.8466, 4.5158], [51.8612, 4.5162]
+                    // Antwerpen - Rotterdam (49 punten via geojson.io)
+                    [51.2641, 4.4246], [51.2673, 4.4092], [51.2759, 4.4040], [51.2869, 4.4103],
+                    [51.2958, 4.4018], [51.3047, 4.3790], [51.3097, 4.3613], [51.3186, 4.3505],
+                    [51.3496, 4.3442], [51.3610, 4.3323], [51.3669, 4.3175], [51.3744, 4.3050],
+                    [51.3964, 4.2908], [51.4160, 4.2794], [51.4302, 4.2777], [51.4348, 4.2891],
+                    [51.4408, 4.3136], [51.4500, 4.3158], [51.4618, 4.3107], [51.4860, 4.3169],
+                    [51.5041, 4.3129], [51.5119, 4.3101], [51.5246, 4.3106], [51.5345, 4.3015],
+                    [51.5409, 4.2919], [51.5498, 4.2964], [51.5585, 4.2947], [51.5678, 4.2856],
+                    [51.5819, 4.2879], [51.5925, 4.2970], [51.5986, 4.3112], [51.5989, 4.3363],
+                    [51.5971, 4.3551], [51.6032, 4.3697], [51.6371, 4.3902], [51.6491, 4.4050],
+                    [51.6654, 4.4249], [51.6749, 4.4266], [51.6855, 4.4118], [51.7004, 4.3976],
+                    [51.7159, 4.3993], [51.7311, 4.4112], [51.7740, 4.4212], [51.7842, 4.4207],
+                    [51.7976, 4.4480], [51.8131, 4.4828], [51.8257, 4.5067], [51.8451, 4.5169],
+                    [51.8630, 4.5158]
                 ], delay: 0 },
                 { name: 'A16', coords: [
-                    // Belgium border
-                    [51.420, 4.760], [51.450, 4.750], [51.480, 4.742],
-                    // Breda area (Overpass data)
-                    [51.4954, 4.7408], [51.4965, 4.7413], [51.4979, 4.7419],
-                    [51.4993, 4.7425], [51.5001, 4.7427], [51.5017, 4.7432],
-                    [51.5029, 4.7434], [51.5036, 4.7436], [51.5043, 4.7437],
-                    [51.5072, 4.7439], [51.5223, 4.7454], [51.5791, 4.7257],
-                    [51.5870, 4.7237], [51.6082, 4.7183], [51.6376, 4.6977],
-                    [51.6446, 4.6924], [51.6511, 4.6881], [51.7037, 4.6467],
-                    [51.7297, 4.6322], [51.7956, 4.6489], [51.8184, 4.6294],
-                    [51.8937, 4.5586], [51.9022, 4.5442]
+                    // Belgian border - Breda (48 punten totaal)
+                    [51.420, 4.760], [51.428, 4.758], [51.436, 4.756], [51.444, 4.754],
+                    [51.452, 4.752], [51.460, 4.750], [51.468, 4.748], [51.476, 4.746],
+                    [51.484, 4.744], [51.492, 4.742],
+                    // Breda area
+                    [51.495, 4.741], [51.505, 4.738], [51.515, 4.735], [51.525, 4.732],
+                    [51.535, 4.730], [51.545, 4.728], [51.555, 4.726], [51.567, 4.726],
+                    [51.579, 4.726],
+                    // Breda - Dordrecht
+                    [51.590, 4.722], [51.600, 4.716], [51.610, 4.710], [51.620, 4.704],
+                    [51.630, 4.698], [51.638, 4.698],
+                    // Dordrecht area
+                    [51.648, 4.692], [51.658, 4.682], [51.668, 4.670], [51.678, 4.658],
+                    [51.688, 4.652], [51.698, 4.648], [51.704, 4.647], [51.712, 4.642],
+                    [51.720, 4.637], [51.730, 4.632],
+                    // Ridderkerk - Rotterdam
+                    [51.745, 4.635], [51.758, 4.640], [51.770, 4.645], [51.782, 4.648],
+                    [51.796, 4.649], [51.804, 4.645], [51.812, 4.638], [51.818, 4.629],
+                    [51.830, 4.612], [51.845, 4.590], [51.860, 4.572], [51.875, 4.558],
+                    [51.890, 4.550], [51.902, 4.544]
                 ], delay: 300 },
                 { name: 'A67', coords: [
                     // Handmatig gecorrigeerd via Google Maps (73 punten)
@@ -3121,56 +3529,85 @@
                     [51.383696, 6.217842]
                 ], delay: 600 },
                 { name: 'A2', coords: [
-                    // Belgium (E25 bij Luik)
-                    [50.620, 5.580], [50.650, 5.610], [50.680, 5.650],
-                    [50.710, 5.680], [50.740, 5.700],
-                    // Maastricht (Overpass data)
-                    [50.7697, 5.7218], [50.7721, 5.7249], [50.7747, 5.7271],
-                    [50.7776, 5.7287], [50.7815, 5.7294], [50.7880, 5.7280],
-                    [50.7904, 5.7273], [50.8084, 5.7240], [50.8105, 5.7232],
-                    // Sittard-Geleen (Overpass data)
-                    [50.8909, 5.7416], [50.8933, 5.7467], [50.9006, 5.7549],
-                    [50.9148, 5.7669], [50.9239, 5.7746], [50.9327, 5.7815],
-                    [50.9436, 5.7881], [50.9579, 5.7862], [50.9698, 5.7878],
-                    [50.9842, 5.7825],
-                    // Weert - Eindhoven
-                    [51.0169, 5.8064], [51.0264, 5.8175], [51.0341, 5.8240],
-                    [51.1019, 5.8468], [51.1025, 5.8479], [51.1437, 5.8975],
-                    [51.1550, 5.8962], [51.1691, 5.8705],
-                    // Eindhoven - Den Bosch
-                    [51.2025, 5.8272], [51.2237, 5.8072], [51.2527, 5.7718],
-                    [51.2758, 5.7361], [51.2793, 5.7327],
-                    // Eindhoven Noord - Overpass data
-                    [51.6026, 5.3343], [51.6057, 5.3298], [51.6094, 5.3236],
-                    [51.6134, 5.3190], [51.6183, 5.3167], [51.6336, 5.3115],
-                    [51.6372, 5.3110], [51.6442, 5.3093], [51.6594, 5.3024],
-                    [51.6685, 5.3095], [51.6701, 5.3169],
-                    // Den Bosch - Utrecht - Overpass data
-                    [51.6791, 5.3451], [51.6901, 5.3496], [51.6933, 5.3507],
-                    [51.7217, 5.3296], [51.7260, 5.3217], [51.7331, 5.3106],
-                    [51.7425, 5.3005], [51.7547, 5.2867]
+                    // Belgium (E25 bij Luik) - 68 punten totaal
+                    [50.6486, 5.6053], [50.645, 5.605], [50.6509, 5.6280], [50.6520, 5.6412],
+                    [50.6591, 5.6477], [50.6660, 5.6461],
+                    // Maastricht
+                    [50.6746, 5.6493], [50.6843, 5.6639], [50.6872, 5.6706], [50.6986, 5.6777],
+                    [50.7136, 5.6862], [50.7193, 5.6911], [50.7329, 5.6934], [50.7408, 5.6919],
+                    [50.7551, 5.6965],
+                    // Maastricht Noord - Sittard - Weert - Eindhoven (markers 15-43)
+                    [50.7610, 5.7024], [50.7682, 5.7193], [50.7788, 5.7290], [50.7943, 5.7256],
+                    [50.8123, 5.7228], [50.8248, 5.7185], [50.8417, 5.7168], [50.8449, 5.7154],
+                    [50.8478, 5.7117], [50.8556, 5.7109], [50.8705, 5.7303], [50.8793, 5.7355],
+                    [50.8927, 5.7429], [50.8998, 5.7530], [50.9134, 5.7651], [50.9197, 5.7718],
+                    [50.9395, 5.7864], [50.9486, 5.7887], [50.9614, 5.7864], [50.9735, 5.7874],
+                    [50.9842, 5.7826], [51.0045, 5.7920], [51.0318, 5.8229], [51.0377, 5.8244],
+                    [51.0517, 5.8272], [51.0688, 5.8238], [51.0769, 5.8258], [51.0840, 5.8304],
+                    [51.1015, 5.8463],
+                    // Eindhoven ring oost - Best - Den Bosch - Utrecht (markers 44-101)
+                    [51.1143, 5.8668], [51.1247, 5.8870], [51.1379, 5.8973], [51.1530, 5.8972],
+                    [51.1638, 5.8854], [51.1667, 5.8800], [51.1743, 5.8536], [51.2276, 5.8033],
+                    [51.2389, 5.7893], [51.2498, 5.7782], [51.2628, 5.7468], [51.2800, 5.7317],
+                    [51.2833, 5.7151], [51.2824, 5.6956], [51.2772, 5.6755], [51.2769, 5.6622],
+                    [51.2810, 5.6536], [51.2851, 5.6481], [51.2904, 5.6422], [51.3050, 5.6138],
+                    [51.3333, 5.5809], [51.3475, 5.5450], [51.3833, 5.5119], [51.4014, 5.5033],
+                    [51.4054, 5.4922], [51.4054, 5.4368], [51.4099, 5.4304], [51.4382, 5.4261],
+                    [51.4504, 5.4256], [51.4531, 5.4194], [51.4688, 5.4049], [51.4811, 5.4030],
+                    [51.4841, 5.4089], [51.4904, 5.4297], [51.4961, 5.4267], [51.5103, 5.4073],
+                    [51.5582, 5.3587], [51.5638, 5.3563], [51.5811, 5.3557], [51.5862, 5.3539],
+                    [51.6044, 5.3313], [51.6136, 5.3185], [51.6397, 5.3107], [51.6552, 5.3033],
+                    [51.6684, 5.3088], [51.6774, 5.3423], [51.6813, 5.3467], [51.6986, 5.3517],
+                    [51.7059, 5.3489], [51.7149, 5.3395], [51.7260, 5.3212], [51.7328, 5.3112],
+                    [51.7630, 5.2774], [51.7699, 5.2639], [51.7747, 5.2595], [51.8089, 5.2590],
+                    [51.8163, 5.2603], [51.8248, 5.2588]
                 ], delay: 200 },
                 { name: 'A76', coords: [
-                    // Germany (E314) - Overpass data
-                    [50.8188, 6.0245], [50.8250, 6.0181], [50.8285, 6.0149],
-                    [50.8402, 6.0011], [50.8424, 5.9960], [50.8717, 5.9597],
-                    [50.8756, 5.9553], [50.8962, 5.9336], [50.9128, 5.9075],
-                    [50.9351, 5.8799], [50.9466, 5.8382], [50.9516, 5.8217],
-                    // Aansluiting A2
-                    [50.9610, 5.7608], [50.9673, 5.7842]
+                    // Duitsland grens bij Heerlen - richting A2 (15 punten)
+                    [50.8088, 6.0405], [50.8193, 6.0236], [50.8371, 6.0060], [50.8454, 5.9889],
+                    [50.8497, 5.9798], [50.8670, 5.9648], [50.8941, 5.9360], [50.9083, 5.9213],
+                    [50.9172, 5.8941], [50.9345, 5.8808], [50.9399, 5.8678], [50.9466, 5.8401],
+                    [50.9482, 5.8309], [50.9654, 5.7952], [50.9734, 5.7872]
                 ], delay: 400 },
                 { name: 'A73', coords: [
-                    // Roermond (aansluiting A2)
-                    [51.100, 5.880], [51.120, 5.900], [51.140, 5.920],
-                    [51.160, 5.950], [51.180, 5.980], [51.200, 6.000],
-                    [51.220, 6.020], [51.250, 6.050], [51.280, 6.080],
-                    // Venlo
-                    [51.310, 6.120], [51.340, 6.140], [51.370, 6.130],
-                    [51.400, 6.120], [51.430, 6.100], [51.460, 6.070],
-                    // Richting Nijmegen
-                    [51.500, 6.030], [51.550, 5.990], [51.600, 5.950],
-                    [51.650, 5.910], [51.700, 5.880], [51.750, 5.860]
-                ], delay: 800 }
+                    // Roermond - Venlo - Nijmegen (98 punten via geojson.io)
+                    [51.1246, 5.8877], [51.1285, 5.9001], [51.1341, 5.9106], [51.1382, 5.9176],
+                    [51.1442, 5.9291], [51.1483, 5.9396], [51.1688, 5.9729], [51.1736, 5.9808],
+                    [51.1752, 5.9858], [51.1756, 5.9912], [51.1750, 5.9978], [51.1748, 6.0066],
+                    [51.1787, 6.0144], [51.1820, 6.0190], [51.1848, 6.0249], [51.1891, 6.0298],
+                    [51.1951, 6.0311], [51.2027, 6.0279], [51.2147, 6.0195], [51.2205, 6.0195],
+                    [51.2266, 6.0228], [51.2327, 6.0279], [51.2393, 6.0393], [51.2437, 6.0473],
+                    [51.2563, 6.0583], [51.2609, 6.0633], [51.2646, 6.0715], [51.2721, 6.0955],
+                    [51.2775, 6.1007], [51.2826, 6.1017], [51.2876, 6.1008], [51.2936, 6.1034],
+                    [51.2975, 6.1093], [51.3075, 6.1259], [51.3142, 6.1324], [51.3247, 6.1414],
+                    [51.3323, 6.1466], [51.3377, 6.1515], [51.3435, 6.1571], [51.3475, 6.1574],
+                    [51.3515, 6.1544], [51.3554, 6.1469], [51.3585, 6.1411], [51.3628, 6.1290],
+                    [51.3660, 6.1243], [51.3704, 6.1227], [51.3743, 6.1230], [51.3825, 6.1224],
+                    [51.3913, 6.1281], [51.3977, 6.1283], [51.4053, 6.1258], [51.4117, 6.1240],
+                    [51.4184, 6.1191], [51.4298, 6.1056], [51.4345, 6.0986], [51.4457, 6.0728],
+                    [51.4488, 6.0691], [51.4676, 6.0556], [51.4911, 6.0392], [51.4963, 6.0333],
+                    [51.5059, 6.0213], [51.5132, 6.0096], [51.5177, 6.0050], [51.5252, 6.0003],
+                    [51.5347, 5.9995], [51.5429, 5.9975], [51.5500, 5.9927], [51.5556, 5.9914],
+                    [51.5662, 5.9942], [51.5777, 5.9877], [51.5861, 5.9790], [51.5948, 5.9740],
+                    [51.6010, 5.9661], [51.6078, 5.9514], [51.6120, 5.9414], [51.6171, 5.9344],
+                    [51.6392, 5.9223], [51.6722, 5.8985], [51.6821, 5.8933], [51.6921, 5.8881],
+                    [51.6982, 5.8840], [51.7046, 5.8762], [51.7154, 5.8703], [51.7209, 5.8660],
+                    [51.7271, 5.8559], [51.7349, 5.8458], [51.7435, 5.8422], [51.7556, 5.8392],
+                    [51.7676, 5.8368], [51.7766, 5.8369], [51.7823, 5.8306], [51.7958, 5.8003],
+                    [51.8025, 5.7911], [51.8106, 5.7817], [51.8200, 5.7760], [51.8276, 5.7725],
+                    [51.8343, 5.7732], [51.8412, 5.7790]
+                ], delay: 800 },
+                { name: 'A58', coords: [
+                    // Breda - Tilburg - Eindhoven (29 punten via geojson.io)
+                    [51.4346, 4.7140], [51.4647, 4.7259], [51.4890, 4.7372], [51.5030, 4.7431],
+                    [51.5170, 4.7438], [51.5265, 4.7444], [51.5277, 4.7696], [51.5335, 4.7894],
+                    [51.5508, 4.8304], [51.5586, 4.8701], [51.5570, 4.8999], [51.5528, 4.9303],
+                    [51.5496, 4.9659], [51.5430, 4.9825], [51.5376, 5.0036], [51.5405, 5.0407],
+                    [51.5368, 5.0771], [51.5364, 5.1035], [51.5434, 5.1174], [51.5623, 5.1359],
+                    [51.5734, 5.1439], [51.5915, 5.1704], [51.6088, 5.1975], [51.6318, 5.2385],
+                    [51.6437, 5.2544], [51.6511, 5.2809], [51.6622, 5.2915], [51.6679, 5.3093],
+                    [51.6724, 5.3246]
+                ], delay: 1000 }
             ];
 
             // Add highways with solid red + fade at end
@@ -3228,34 +3665,25 @@
                 return { segments, gleamLine, delay: h.delay, coords: h.coords };
             });
 
-            // GBIF Hemelboom observations (Ailanthus altissima) - real data from waarnemingen.nl via GBIF
+            // GBIF Hemelboom observations (Ailanthus altissima) - random langs snelwegen
             const observations = [
-                // Maastricht cluster (high precision GPS)
-                [50.849403, 5.68682],
-                [50.847539, 5.698272],
-                [50.844785, 5.691853],
-                [50.845322, 5.701912],
-                [50.847473, 5.714192],
-                [50.820496, 5.696194],
-                // Zuid-Holland (A4/A16 corridor)
-                [51.921336, 4.435175],
-                [51.909752, 4.480943],
-                [51.907192, 4.478318],
-                [51.926563, 4.518143],
-                // Noord-Brabant
-                [51.42083, 5.494645],
-                [51.560147, 5.061332],
-                [51.55, 4.75],
-                [51.6, 4.7],
-                [51.65, 5.25],
-                [51.6, 5.3],
-                // Limburg (A2/A73/A76)
-                [50.85, 5.95],
-                [50.95, 5.75],
-                [51.1, 5.9],
-                [51.15, 5.95],
-                [51.461456, 5.805516],
-                [51.3, 6.1]
+                // A2 - Maastricht naar Utrecht (sparse, random)
+                [50.78, 5.68], [50.87, 5.74], [50.95, 5.81], [51.08, 5.83],
+                [51.19, 5.86], [51.27, 5.71], [51.36, 5.56], [51.48, 5.41],
+                [51.59, 5.33], [51.68, 5.29], [51.74, 5.31],
+                // A4/A29 - België naar Dordrecht (sparse, random)
+                [51.38, 4.25], [51.47, 4.30], [51.55, 4.32], [51.65, 4.39],
+                [51.73, 4.42],
+                // A16 - Breda naar Dordrecht (sparse, random)
+                [51.46, 4.71], [51.57, 4.73], [51.69, 4.65],
+                // A67 - België naar Eindhoven (sparse, random)
+                [51.32, 5.22], [51.37, 5.36], [51.41, 5.54], [51.43, 5.71],
+                [51.40, 5.89], [51.38, 6.08], [51.39, 6.21],
+                // A73 - Roermond naar Nijmegen (sparse, random)
+                [51.15, 5.94], [51.24, 6.01], [51.35, 6.11], [51.47, 6.13],
+                [51.59, 6.02], [51.71, 5.88], [51.80, 5.82],
+                // A76 - Duitsland naar A2 (sparse, random)
+                [50.83, 6.01], [50.89, 5.89], [50.94, 5.76]
             ];
 
             // Create observation markers (initially invisible)
@@ -3267,7 +3695,7 @@
             });
 
             // DEBUG: Add numbered markers to each highway coordinate
-            const debugMarkers = false; // Set to false to hide markers
+            const debugMarkers = false; // Set to true to show markers for editing
             if (debugMarkers) {
                 console.log('=== SNELWEG COORDINATEN ===');
                 highways.forEach(h => {
@@ -3294,24 +3722,51 @@
 
             // Animate highways when in view
             let animated = false;
+            const dotsRevealed = new Set();
+            const segmentDelay = 60; // ms per segment (was 20, nu langzamer)
+
+            // Helper: check if dot is near a coordinate
+            function isNearby(dotCoords, segCoords, threshold = 0.15) {
+                const latDiff = Math.abs(dotCoords[0] - segCoords[0]);
+                const lonDiff = Math.abs(dotCoords[1] - segCoords[1]);
+                return latDiff < threshold && lonDiff < threshold;
+            }
+
+            // Helper: reveal dots near a segment
+            function revealNearbyDots(segCoords) {
+                observations.forEach((obsCoords, i) => {
+                    if (dotsRevealed.has(i)) return;
+                    if (isNearby(obsCoords, segCoords)) {
+                        dotsRevealed.add(i);
+                        const marker = observationMarkers[i];
+                        const el = marker.getElement();
+                        if (el) {
+                            setTimeout(() => {
+                                el.classList.add('visible');
+                            }, Math.random() * 300);
+                        }
+                    }
+                });
+            }
+
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting && !animated) {
                         animated = true;
 
-                        // Calculate when all highways are done drawing (faster timing)
-                        const maxHighwayDelay = Math.max(...polylines.map(p => p.delay + p.segments.length * 20));
-
-                        polylines.forEach(({ segments, gleamLine, delay }) => {
+                        polylines.forEach(({ segments, gleamLine, delay, coords }) => {
                             setTimeout(() => {
-                                // Animate each segment with slight stagger - fade in solid lines
+                                // Animate each segment with stagger - fade in solid lines
                                 segments.forEach((seg, i) => {
                                     const pathElement = seg.getElement();
                                     if (pathElement) {
                                         setTimeout(() => {
-                                            pathElement.style.transition = 'opacity 0.3s ease-out';
+                                            pathElement.style.transition = 'opacity 0.4s ease-out';
                                             pathElement.style.opacity = '1';
-                                        }, i * 20);
+                                            // Reveal nearby observation dots when segment appears
+                                            if (coords[i]) revealNearbyDots(coords[i]);
+                                            if (coords[i + 1]) revealNearbyDots(coords[i + 1]);
+                                        }, i * segmentDelay);
                                     }
                                 });
 
@@ -3334,25 +3789,21 @@
                                         };
                                         animateTrucks();
                                     }
-                                }, segments.length * 20 + 200);
+                                }, segments.length * segmentDelay + 300);
                             }, delay);
                         });
 
-                        // Show observation dots after highways finish drawing
+                        // Reveal any remaining dots that weren't near highways (fallback)
+                        const totalAnimTime = Math.max(...polylines.map(p => p.delay + p.segments.length * segmentDelay)) + 500;
                         setTimeout(() => {
                             observationMarkers.forEach((marker, i) => {
-                                setTimeout(() => {
-                                    const el = marker.getElement();
-                                    if (el) {
-                                        el.classList.add('visible');
-                                        // Subtle breathing animation on some dots
-                                        if (i % 4 === 0) {
-                                            setTimeout(() => el.classList.add('breathe'), 400);
-                                        }
-                                    }
-                                }, i * 50); // Stagger dot appearance
+                                if (dotsRevealed.has(i)) return;
+                                const el = marker.getElement();
+                                if (el) {
+                                    el.classList.add('visible');
+                                }
                             });
-                        }, maxHighwayDelay + 300);
+                        }, totalAnimTime);
                     }
                 });
             }, { threshold: 0.3 });
@@ -3362,87 +3813,445 @@
     })();
     </script>
 
-    <!-- Hoornaar Spread Map Animation -->
+    <!-- Hoornaar Leaflet Map -->
     <script>
     (function initHoornaarMap() {
-        const hoornaarMap = document.getElementById('hoornaar-map');
-        if (!hoornaarMap) return;
+        const mapContainer = document.getElementById('hoornaar-map');
+        if (!mapContainer) {
+            console.log('Hoornaar map container not found');
+            return;
+        }
 
-        const wave = document.getElementById('hoornaar-wave');
-        if (!wave) return;
+        let map;
+        try {
+            // Initialize map - centered on Netherlands
+            map = L.map('hoornaar-map', {
+                center: [52.0, 5.3],
+                zoom: 7,
+                zoomControl: false,
+                attributionControl: false,
+                dragging: false,
+                scrollWheelZoom: false,
+                doubleClickZoom: false,
+                touchZoom: false
+            });
+        } catch(e) {
+            console.log('Hoornaar map init error:', e);
+            return;
+        }
+
+        // Grayscale tiles
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            className: 'grayscale-tiles'
+        }).addTo(map);
+
+        // Row system: row 0 = 50.75° (south), row 20 = 53.50° (north)
+        const southLat = 50.75;
+        const northLat = 53.50;
+        const rowHeight = (northLat - southLat) / 20;
+
+        function rowToLat(row) {
+            return southLat + (row * rowHeight);
+        }
+
+        // Netherlands border from geojson.io (83 punten)
+        const nlBorder = [
+            // Kloksgewijs vanaf oost-Limburg
+            [51.6139, 6.1052], [51.5144, 6.2013], [51.3605, 6.2241], [51.1975, 6.0732],
+            [51.1660, 6.1691], [51.0511, 5.9680], [51.0396, 5.8857], [50.9763, 5.8948],
+            [50.9648, 6.0182], [50.8900, 6.1004], [50.7601, 6.0272], [50.7630, 5.7849],
+            [50.7600, 5.6706], [50.8783, 5.6432], [50.9590, 5.7484], [51.0511, 5.7622],
+            [51.1257, 5.8354], [51.1601, 5.8217], [51.1860, 5.7073], [51.2232, 5.5656],
+            [51.2919, 5.4970], [51.2604, 5.2271], [51.3148, 5.2180], [51.3176, 5.1311],
+            [51.4603, 5.0671], [51.3976, 4.8979], [51.4375, 4.8018], [51.5030, 4.7973],
+            [51.4233, 4.6418], [51.4232, 4.5320], [51.4774, 4.5366], [51.4461, 4.3948],
+            [51.3548, 4.4314], [51.3633, 4.2301], [51.2002, 3.8688], [51.2203, 3.7682],
+            [51.2661, 3.7728], [51.2919, 3.5990], [51.2461, 3.4938], [51.2661, 3.3886],
+            [51.3490, 3.3566], [51.4945, 3.3383], [51.8264, 3.6447], [52.1318, 3.9479],
+            [52.7830, 4.4721], [53.1221, 4.5864], [53.3274, 4.8471], [53.5127, 5.2725],
+            [53.5590, 5.6475], [53.5915, 6.0545], [53.5970, 6.3244], [53.5590, 6.4982],
+            [53.5019, 6.7542], [53.4747, 6.9143], [53.3356, 7.0012], [53.3220, 7.1979],
+            [53.1221, 7.1796], [52.9984, 7.2070], [52.8053, 7.0744], [52.6336, 7.0469],
+            [52.6391, 6.7542], [52.5669, 6.7634], [52.4779, 6.6810], [52.4333, 6.9325],
+            [52.4667, 6.9966], [52.3942, 7.0698], [52.2349, 7.0560], [52.1620, 6.9097],
+            [52.1143, 6.7542], [52.0412, 6.6856], [51.9709, 6.8273], [51.8919, 6.7405],
+            [51.8495, 6.4707], [51.8382, 6.3838], [51.8975, 6.1643], [51.8919, 6.0911],
+            [51.8354, 6.1826], [51.8439, 6.0362], [51.8241, 5.9448], [51.7364, 5.9631],
+            [51.6967, 6.0408], [51.6088, 6.0911]
+        ];
+
+        // Zone boundaries: left (west), mid (center), right (east) row values
+        // Each zone is a BAND between its boundary and the previous year's boundary
+        const zoneDefs = [
+            { year: 2021, color: '#8b0000', left: 5, mid: 6, right: 4 },
+            { year: 2022, color: '#b83232', left: 8, mid: 7, right: 6 },
+            { year: 2023, color: '#d35050', left: 9, mid: 11, right: 8 },
+            { year: 2024, color: '#e87070', left: 14, mid: 13, right: 12 },
+            { year: 2025, color: '#f5a0a0', left: 16, mid: 18, right: 16 }
+        ];
+
+        // Get west coast points from border (lon < 5.2)
+        const westCoast = nlBorder.filter(p => p[1] < 5.2).sort((a, b) => a[0] - b[0]);
+        // Get east border points (lon > 5.8)
+        const eastBorder = nlBorder.filter(p => p[1] > 5.8).sort((a, b) => a[0] - b[0]);
+        // Get south border points (lat < 51.3) sorted west to east
+        const southBorder = nlBorder.filter(p => p[0] < 51.3).sort((a, b) => a[1] - b[1]);
+
+        // Create curved boundary line from rows (west to east)
+        function createBoundaryLine(leftRow, midRow, rightRow) {
+            const leftLat = rowToLat(leftRow);
+            const midLat = rowToLat(midRow);
+            const rightLat = rowToLat(rightRow);
+
+            return [
+                [leftLat, 3.40],
+                [leftLat + (midLat - leftLat) * 0.3, 4.10],
+                [leftLat + (midLat - leftLat) * 0.6, 4.70],
+                [midLat, 5.30],
+                [midLat + (rightLat - midLat) * 0.4, 5.70],
+                [rightLat, 6.20]
+            ];
+        }
+
+        // Get border points within latitude range
+        function getWestCoastBetween(fromLat, toLat) {
+            return westCoast
+                .filter(p => p[0] >= Math.min(fromLat, toLat) && p[0] <= Math.max(fromLat, toLat))
+                .sort((a, b) => fromLat < toLat ? a[0] - b[0] : b[0] - a[0]);
+        }
+
+        function getEastBorderBetween(fromLat, toLat) {
+            return eastBorder
+                .filter(p => p[0] >= Math.min(fromLat, toLat) && p[0] <= Math.max(fromLat, toLat))
+                .sort((a, b) => fromLat < toLat ? a[0] - b[0] : b[0] - a[0]);
+        }
+
+        // Create zone polygon clipped to NL border
+        function createZoneCoords(def, prevDef) {
+            const topLine = createBoundaryLine(def.left, def.mid, def.right);
+
+            // For first zone, use actual south border instead of straight line
+            const bottomLine = prevDef
+                ? createBoundaryLine(prevDef.left, prevDef.mid, prevDef.right)
+                : southBorder; // Use actual NL south border
+
+            const topLeftLat = rowToLat(def.left);
+            const topRightLat = rowToLat(def.right);
+            const bottomLeftLat = prevDef ? rowToLat(prevDef.left) : Math.min(...southBorder.map(p => p[0]));
+            const bottomRightLat = prevDef ? rowToLat(prevDef.right) : Math.min(...southBorder.map(p => p[0]));
+
+            // Build polygon following NL border
+            const coords = [];
+
+            // Top boundary (west to east)
+            coords.push(...topLine);
+
+            // East side down (following border where possible)
+            const eastDown = getEastBorderBetween(topRightLat, bottomRightLat);
+            if (eastDown.length > 0) {
+                coords.push(...eastDown);
+            }
+
+            // Bottom boundary reversed (east to west)
+            coords.push(...bottomLine.slice().reverse());
+
+            // West side up (following coast where possible)
+            const westUp = getWestCoastBetween(bottomLeftLat, topLeftLat);
+            if (westUp.length > 0) {
+                coords.push(...westUp);
+            }
+
+            return coords;
+        }
+
+        // PNG zone overlays - als HTML elementen over de kaart
+        const years = [2021, 2022, 2023, 2024, 2025];
+        const zoneLayers = [];
+
+        // Voeg PNG's toe als absolute positioned elementen (start onzichtbaar)
+        years.forEach(year => {
+            const img = document.createElement('img');
+            img.src = `de-exoten/hoornaarkaart/${year}.png`;
+            img.style.cssText = `
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                pointer-events: none;
+                opacity: 0;
+                z-index: 500;
+                transition: opacity 0.8s ease-out;
+            `;
+            img.className = 'hoornaar-zone-overlay';
+            mapContainer.appendChild(img);
+            zoneLayers.push({ year: year, element: img });
+        });
+
+        let hoornaarAnimated = false;
+
+        // Animate zones - fade in PNG overlays één voor één
+        function animateHoornaarZones() {
+            if (hoornaarAnimated || zoneLayers.length === 0) return;
+            hoornaarAnimated = true;
+            console.log('Hoornaar animatie start!');
+
+            zoneLayers.forEach((zone, i) => {
+                setTimeout(() => {
+                    zone.element.classList.add('visible');
+                    console.log(`Zone ${zone.year} fade in`);
+                }, i * 800);
+            });
+        }
+
+        // Start animation when map is ready
+        setTimeout(() => {
+            map.invalidateSize();
+        }, 300);
+
+        // Scroll detection
+        function checkHoornaarVisibility() {
+            if (hoornaarAnimated) return;
+            const rect = mapContainer.getBoundingClientRect();
+            // Start als linkerrand van kaart in viewport komt
+            if (rect.left >= 0 && rect.left < window.innerWidth) {
+                animateHoornaarZones();
+            }
+        }
+
+        // Luister naar scroll events
+        const scrollContainer = document.querySelector('.horizontal-scroll-container');
+        if (scrollContainer) {
+            scrollContainer.addEventListener('scroll', checkHoornaarVisibility);
+        }
+        // Ook bij wheel events
+        document.addEventListener('wheel', () => setTimeout(checkHoornaarVisibility, 50));
+    })();
+    </script>
+
+    <!-- Hoornaar Map Mobiel -->
+    <script>
+    (function initHoornaarMapMobile() {
+        const mapContainer = document.getElementById('hoornaar-map-mobile');
+        if (!mapContainer) return;
+
+        // Initialize map - use fitBounds to match desktop view
+        const map = L.map('hoornaar-map-mobile', {
+            zoomControl: false,
+            attributionControl: false,
+            dragging: false,
+            scrollWheelZoom: false,
+            doubleClickZoom: false,
+            touchZoom: false
+        });
+
+        // Match the bounds of the desktop map
+        map.fitBounds([[50.3, 3.2], [53.7, 7.4]]);
+
+        // Grayscale tiles
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            className: 'grayscale-tiles'
+        }).addTo(map);
+
+        // PNG zone overlays
+        const years = [2021, 2022, 2023, 2024, 2025];
+        const zoneLayers = [];
+
+        years.forEach(year => {
+            const img = document.createElement('img');
+            img.src = `de-exoten/hoornaarkaart/${year}.png`;
+            img.style.cssText = `
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                pointer-events: none;
+                z-index: 500;
+            `;
+            img.className = 'hoornaar-zone-overlay';
+            mapContainer.appendChild(img);
+            zoneLayers.push({ year: year, element: img });
+        });
 
         let animated = false;
 
+        function animateZones() {
+            if (animated || zoneLayers.length === 0) return;
+            animated = true;
+
+            zoneLayers.forEach((zone, i) => {
+                setTimeout(() => {
+                    zone.element.classList.add('visible');
+                }, i * 800);
+            });
+        }
+
+        // Trigger animation when scrolled into view
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
-                if (entry.isIntersecting && !animated) {
-                    animated = true;
-
-                    // Organic wave animation - variable speed like real spreading
-                    const duration = 8000; // 8 seconds total (slower)
-                    const startY = 380;
-                    const endY = -50;
-                    const startTime = performance.now();
-
-                    // Pre-calculate random "surge" points for organic feel
-                    const surges = [
-                        { at: 0.15, speed: 1.4 },  // Quick start
-                        { at: 0.30, speed: 0.6 },  // Slow down
-                        { at: 0.45, speed: 1.3 },  // Speed up
-                        { at: 0.60, speed: 0.7 },  // Slow
-                        { at: 0.75, speed: 1.2 },  // Push
-                        { at: 0.90, speed: 0.5 },  // Final slow
-                    ];
-
-                    function getSpeedMultiplier(progress) {
-                        // Find which surge zone we're in
-                        for (let i = surges.length - 1; i >= 0; i--) {
-                            if (progress >= surges[i].at) {
-                                return surges[i].speed;
-                            }
-                        }
-                        return 1.0;
-                    }
-
-                    let currentY = startY;
-                    let lastTime = startTime;
-
-                    function animateWave(currentTime) {
-                        const totalElapsed = currentTime - startTime;
-                        const deltaTime = currentTime - lastTime;
-                        lastTime = currentTime;
-
-                        const progress = Math.min(totalElapsed / duration, 1);
-                        const speedMult = getSpeedMultiplier(progress);
-
-                        // Base speed + variation
-                        const baseSpeed = (startY - endY) / duration;
-                        const actualSpeed = baseSpeed * speedMult * deltaTime;
-
-                        currentY -= actualSpeed;
-
-                        // Also animate wave shape for organic feel
-                        const waveAmp = 8 + Math.sin(progress * Math.PI * 4) * 4;
-                        const waveOffset = Math.sin(totalElapsed / 300) * waveAmp;
-
-                        wave.setAttribute('d', `
-                            M0,${currentY + waveOffset}
-                            Q62,${currentY - waveAmp + waveOffset} 125,${currentY + waveOffset}
-                            Q188,${currentY + waveAmp + waveOffset} 250,${currentY + waveOffset}
-                            L250,700 L0,700 Z
-                        `);
-
-                        if (currentY > endY) {
-                            requestAnimationFrame(animateWave);
-                        }
-                    }
-
-                    requestAnimationFrame(animateWave);
+                if (entry.isIntersecting) {
+                    animateZones();
                 }
             });
         }, { threshold: 0.3 });
 
-        observer.observe(hoornaarMap);
+        observer.observe(mapContainer);
+    })();
+    </script>
+
+    <!-- Kreeftenteller Mobiel -->
+    <script>
+    (function initKreeftTellerMobile() {
+        const tellerElement = document.getElementById('kreeft-teller-mobile');
+        if (!tellerElement) return;
+
+        const targetNumber = 18250;
+        let animated = false;
+
+        function easeOutWithBounce(t) {
+            if (t < 0.3) {
+                const mainT = t / 0.3;
+                return 1.12 * mainT * (2 - mainT);
+            } else {
+                const oscillateT = (t - 0.3) / 0.7;
+                const amplitude = 0.12;
+                const decay = 2.0;
+                const frequency = 3.5;
+                const dampedWave = amplitude * Math.exp(-decay * oscillateT) *
+                                  Math.cos(frequency * Math.PI * oscillateT);
+                return 1 + dampedWave;
+            }
+        }
+
+        function animateTeller() {
+            if (animated) return;
+            animated = true;
+
+            const duration = 4000;
+            const startTime = performance.now();
+
+            function update(currentTime) {
+                const elapsed = currentTime - startTime;
+                const t = Math.min(elapsed / duration, 1);
+                const easedT = easeOutWithBounce(t);
+                const currentValue = Math.round(targetNumber * Math.min(easedT, 1));
+
+                tellerElement.textContent = currentValue.toLocaleString('nl-NL');
+
+                if (t < 1) {
+                    requestAnimationFrame(update);
+                } else {
+                    tellerElement.textContent = targetNumber.toLocaleString('nl-NL');
+                }
+            }
+
+            requestAnimationFrame(update);
+        }
+
+        // Trigger animation when scrolled into view
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateTeller();
+                }
+            });
+        }, { threshold: 0.5 });
+
+        observer.observe(tellerElement.parentElement);
+    })();
+    </script>
+
+    <!-- Wasbeer Map -->
+    <script>
+    (function initWasbeerMap() {
+        const mapContainer = document.getElementById('wasbeer-map');
+        if (!mapContainer) return;
+
+        // Initialize map - centered on Valkenburg area, zoomed out a bit
+        const map = L.map('wasbeer-map', {
+            center: [50.87, 5.83],
+            zoom: 9,
+            zoomControl: false,
+            attributionControl: false,
+            dragging: false,
+            scrollWheelZoom: false,
+            doubleClickZoom: false,
+            touchZoom: false
+        });
+
+        // Grayscale tiles
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            className: 'grayscale-tiles'
+        }).addTo(map);
+
+        setTimeout(() => {
+            map.invalidateSize();
+
+            // Pulsating circle centered on Valkenburg area, 15km radius (30km diameter)
+            // Moved 5km east
+            const valkenburg = [50.8658, 5.91];
+            const radius = 15000; // 15km in meters
+
+            L.circle(valkenburg, {
+                radius: radius,
+                color: '#c41e3a',
+                fillColor: '#c41e3a',
+                fillOpacity: 0.25,
+                weight: 3,
+                className: 'wasbeer-circle'
+            }).addTo(map);
+        }, 300);
+
+        // Animate chart bars when visible
+        const chart = document.getElementById('wasbeer-chart');
+        if (chart) {
+            const bars = chart.querySelectorAll('.wasbeer-bar-fill');
+            const values = chart.querySelectorAll('.wasbeer-bar-value');
+            let chartAnimated = false;
+
+            function animateChart() {
+                if (chartAnimated) return;
+                chartAnimated = true;
+
+                bars.forEach((bar, i) => {
+                    const targetHeight = bar.getAttribute('data-height');
+                    setTimeout(() => {
+                        bar.style.height = targetHeight + 'px';
+                        bar.classList.add('animated');
+                    }, i * 200);
+                });
+
+                values.forEach((val, i) => {
+                    setTimeout(() => {
+                        val.classList.add('visible');
+                    }, i * 200 + 300);
+                });
+            }
+
+            // Use scroll listener for horizontal scroll
+            const scrollContainer = document.querySelector('.horizontal-scroll-container');
+            if (scrollContainer) {
+                function checkChartVisibility() {
+                    const rect = chart.getBoundingClientRect();
+                    const inView = rect.left < window.innerWidth && rect.right > 0;
+                    if (inView) animateChart();
+                }
+                scrollContainer.addEventListener('scroll', checkChartVisibility);
+                setTimeout(checkChartVisibility, 500);
+            }
+
+            // Fallback observer
+            const chartObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) animateChart();
+                });
+            }, { threshold: 0.1 });
+            chartObserver.observe(chart);
+        }
     })();
     </script>
 
@@ -3542,6 +4351,171 @@
             captions.forEach(caption => {
                 captionObserver.observe(caption);
             });
+        })();
+
+        // ========== KREEFT KILO TELLER - SLOT MACHINE ==========
+        (function initKreeftTeller() {
+            const tellerEl = document.querySelector('.kreeft-teller');
+            if (!tellerEl) return;
+
+            const dagReel = document.getElementById('kreeft-dag-reel');
+            const kiloReel = document.getElementById('kreeft-kilo-reel');
+            if (!dagReel || !kiloReel) return;
+
+            let tellerInterval = null;
+            let currentDag = 1;
+            let spinAnimation = null;
+            const kiloPerDag = 50;
+            const totalDays = 365;
+            const itemHeight = 44.8; // 2.8rem in pixels
+
+            function formatNumber(num) {
+                return num.toLocaleString('nl-NL');
+            }
+
+            // Simple day update (no animation)
+            function updateDag(dag) {
+                dagReel.innerHTML = `<span class="slot-number">${formatNumber(dag)}</span>`;
+            }
+
+            // Realistic slot machine spin with subtle bounce at end
+            function spinKilo(targetKilo) {
+                if (spinAnimation) cancelAnimationFrame(spinAnimation);
+
+                // Create reel with numbers to spin through
+                const spinCount = 6; // Numbers to spin past
+                const numbers = [];
+
+                // Generate spin-through numbers (decreasing speed feel)
+                for (let i = spinCount; i > 0; i--) {
+                    const offset = Math.floor(i * i * 3);
+                    numbers.push(Math.max(0, targetKilo - offset));
+                }
+                numbers.push(targetKilo); // Final target
+
+                // Build reel HTML
+                let html = '';
+                numbers.forEach(num => {
+                    html += `<span class="slot-number">${formatNumber(num)}</span>`;
+                });
+                kiloReel.innerHTML = html;
+
+                // Animation parameters
+                const finalIndex = numbers.length - 1;
+                const totalDistance = finalIndex * itemHeight;
+                const duration = 500; // ms
+                const startTime = performance.now();
+
+                // Easing with subtle bounce at end
+                // Goes slightly past (1.08) then settles back to 1.0
+                function easeOutBack(t) {
+                    const c1 = 1.70158;
+                    const c3 = c1 + 1;
+                    return 1 + c3 * Math.pow(t - 1, 3) + c1 * Math.pow(t - 1, 2);
+                }
+
+                // Gentler version - less overshoot
+                function easeWithSubtleBounce(t) {
+                    if (t < 0.7) {
+                        // Fast deceleration phase
+                        return easeOutBack(t / 0.7) * 0.7 * 1.06; // Slight overshoot
+                    } else {
+                        // Settle back phase
+                        const settleT = (t - 0.7) / 0.3;
+                        const overshoot = 1.06;
+                        const settle = overshoot - (overshoot - 1) * settleT;
+                        return 0.7 * overshoot + (1 - 0.7 * overshoot) * (1 - Math.pow(1 - settleT, 2)) * (1 / settle);
+                    }
+                }
+
+                // Super elastic spring animation
+                // Like a wobbly jelly or loose spring that keeps bouncing
+                function easeOutWithBounce(t) {
+                    if (t < 0.3) {
+                        // Phase 1: Quick arrival at target
+                        const mainT = t / 0.3;
+                        // Slightly overshoot immediately
+                        return 1.12 * mainT * (2 - mainT);
+                    } else {
+                        // Phase 2: Long elastic wobble
+                        const oscillateT = (t - 0.3) / 0.7;
+
+                        // Very elastic: big amplitude, slow decay, multiple bounces
+                        const amplitude = 0.12; // 12% - big visible bounce
+                        const decay = 2.0; // Slow decay = long wobble
+                        const frequency = 3.5; // More oscillations
+
+                        // Damped harmonic oscillation
+                        const dampedWave = amplitude * Math.exp(-decay * oscillateT) *
+                                          Math.cos(frequency * Math.PI * oscillateT);
+
+                        return 1 + dampedWave;
+                    }
+                }
+
+                function animate(currentTime) {
+                    const elapsed = currentTime - startTime;
+                    const progress = Math.min(elapsed / duration, 1);
+                    const easedProgress = easeOutWithBounce(progress);
+
+                    const currentPos = easedProgress * totalDistance;
+                    kiloReel.style.transform = `translateY(-${currentPos}px)`;
+
+                    if (progress < 1) {
+                        spinAnimation = requestAnimationFrame(animate);
+                    } else {
+                        kiloReel.style.transform = `translateY(-${totalDistance}px)`;
+                        spinAnimation = null;
+                    }
+                }
+
+                // Start from top
+                kiloReel.style.transform = 'translateY(0)';
+                spinAnimation = requestAnimationFrame(animate);
+            }
+
+            function startTeller() {
+                if (tellerInterval) return;
+                currentDag = 1;
+                updateDag(1);
+                kiloReel.innerHTML = `<span class="slot-number">${formatNumber(50)}</span>`;
+
+                tellerInterval = setInterval(() => {
+                    currentDag++;
+                    updateDag(currentDag);
+                    spinKilo(currentDag * kiloPerDag);
+
+                    if (currentDag >= totalDays) {
+                        clearInterval(tellerInterval);
+                        tellerInterval = null;
+                    }
+                }, 1000); // 1 seconde per dag
+            }
+
+            function stopTeller() {
+                if (tellerInterval) {
+                    clearInterval(tellerInterval);
+                    tellerInterval = null;
+                }
+                if (spinAnimation) {
+                    cancelAnimationFrame(spinAnimation);
+                    spinAnimation = null;
+                }
+            }
+
+            const tellerObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        startTeller();
+                    } else {
+                        stopTeller();
+                    }
+                });
+            }, {
+                threshold: 0.3
+            });
+
+            tellerObserver.observe(tellerEl);
         })();
 
         // ========== INTRO SCROLL TRANSITIE ==========
@@ -4066,5 +5040,6 @@
             });
         })();
     </script>
+
 </body>
 </html>
