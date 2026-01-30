@@ -774,7 +774,7 @@ img {
     left: calc(5rem + 50px);
     background: none;
     padding: 0;
-    max-width: 400px;
+    max-width: 550px;
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.4s ease, visibility 0.4s ease;
