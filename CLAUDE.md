@@ -35,6 +35,14 @@ Portfolio website voor fotograaf Wouter Zaalberg. Fotografieprojecten over Neder
 **Kleine series**:
 - de-buik-van-de-stad.html, het-noordzeekanaal-gebied.html, de-onmisbaren.html, een-plek-onder-de-zon.html
 
+**Serie datums** (in intro teksten):
+- Mijn Tatoeages: 2024-2025
+- In Blauw Licht: 2022-2024
+- De Exoten: 2023-heden (nog niet klaar)
+- Toen de Mijnen Verdwenen: 2020-2022
+- Het Noordzeekanaalgebied: 2025
+- De Onmisbaren: 2022
+
 ## Layout Conventies
 
 ### Homepage tekstvakken (secties 1-4)
@@ -90,6 +98,9 @@ Portfolio website voor fotograaf Wouter Zaalberg. Fotografieprojecten over Neder
 - Carousel: `data-image` voor enkele foto, `data-grid="true"` voor grid
 - Staande foto's: `data-horizontal="false"`
 - Info caption: geen achtergrond, tekst donkergrijs (`#4a4a4a`), wit voor FNV via `data-text-color`
+- Caption max-width: `550px`
+- Elke caption bevat "Opdrachtgever: [naam]"
+- Opdrachtgever uitzonderingen: gemalmere → Gemeente Almere, gemamsterdam → Gemeente Amsterdam, IG → Insinger Gilissen, pnh → Provincie Noord-Holland, DGZ → DeGoedeZaak, send → S&D, nzkg → Programmabureau Noordzeekanaalgebied, pggm → Pggm&Co
 
 ### Mijn Tatoeages
 - Structuur: Portret + Tattoo + Tekstpanel per verhaal
@@ -137,6 +148,7 @@ Portfolio website voor fotograaf Wouter Zaalberg. Fotografieprojecten over Neder
 - Complexe clusters: beverrat, kreeft grid, muskusrat
 - Verticale labels met cursieve accent letter
 - Foto formaten: 70vh, 45vh, 35vh, 17vh
+- Intro grid foto's in `de-exoten/introgrid/` (19 foto's)
 - **Interactieve kaarten**:
   - **Hemelboom kaart**: Leaflet.js kaart met geanimeerde snelwegen (A2, A4/A29, A16, A67, A73, A76) die tonen hoe de hemelboom Nederland binnenkomt. GBIF observatiepunten als groene stippen. Snelwegen: solid rood met fade aan einde, zwarte "vrachtwagen" blokjes animatie.
   - **Hoornaar kaart**: SVG animatie met PNG mask van Nederland. Toont verspreiding Aziatische hoornaar 2021-2025 als "water dat een glas vult". Kleurbanden per jaar (donkerrood=2021/zuid tot lichtrood=2025/noord). Organische animatie met variabele snelheid (8 sec).
