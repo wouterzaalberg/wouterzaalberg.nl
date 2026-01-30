@@ -172,6 +172,7 @@ border: 2px solid #a8c8e8;
 - Lege cellen in rij 2, kolommen 2-4 (witte ruimte voor titel)
 - Foto's swappen random elke 2 seconden
 - Link naar `css/styles.css` voor fonts en nav styling
+- **Hoornaar positie**: kolom 5, rij 3 (niet in zelfde kolom als beverrat)
 
 ### Titel Animatie
 - "De Exoten" gecentreerd in witte ruimte (rij 2, kolommen 2-4)
@@ -252,8 +253,9 @@ Vervangt statische `info 2.jpg` met een Leaflet kaart die toont hoe de hemelboom
 
 ### Snelwegen (vanuit België/Duitsland)
 - **A2**: België (E25 bij Luik) → Maastricht → Eindhoven → richting Utrecht
-- **A4**: België (E19 bij Antwerpen) → Bergen op Zoom → noordwaarts
+- **A4/A29**: België (E19 bij Antwerpen) → Bergen op Zoom → Rotterdam (49 punten)
 - **A16**: België → Breda → richting Rotterdam
+- **A58**: Vlissingen → Bergen op Zoom → Tilburg (29 punten, nieuw)
 - **A67**: België (E34) → Eindhoven → oostwaarts
 - **A73**: Roermond → Venlo → Nijmegen (aanvulling op A2)
 - **A76**: Duitsland (E314) → Zuid-Limburg (verbindt met A2)
@@ -266,9 +268,14 @@ Vervangt statische `info 2.jpg` met een Leaflet kaart die toont hoe de hemelboom
 
 ### Snelweg Coördinaten
 - **A67**: 73 handmatig gecorrigeerde punten (Google Maps)
-- **A2/A4/A16/A76**: Overpass API (OpenStreetMap)
-- **A4/A29**: Gecombineerd als één route tot Rotterdam
-- **Debug modus**: `debugMarkers = true` toont genummerde markers voor editing
+- **A2/A16/A76**: Overpass API (OpenStreetMap)
+- **A4/A29**: 49 punten via geojson.io (gecombineerd als één route tot Rotterdam)
+- **A58**: 29 punten via geojson.io (Vlissingen → Tilburg)
+- **Debug modus**: `debugMarkers = false` (aan voor editing)
+
+### Kaart Instellingen
+- **Zoom/drag disabled**: `zoomControl: false, dragging: false, scrollWheelZoom: false`
+- Voorkomt per ongeluk navigeren tijdens horizontaal scrollen
 
 ### CSS
 - Kaart: `grid-column: 26 / 37; grid-row: 1 / 19;` (11 kolommen breed)
@@ -285,22 +292,41 @@ Vervangt statische `info 2.jpg` met een Leaflet kaart die toont hoe de hemelboom
 Toont verspreiding Aziatische hoornaar door Nederland (2021-2025).
 
 ### Technologie
-- **SVG** met PNG mask (`de-exoten/kaart nederland.png`)
-- **Gradient fill** met kleurbanden per jaar
-- **Animated mask** voor "water vult glas" effect
+- **Leaflet.js** kaart met grayscale tiles
+- **PNG overlays** voor verspreidingszones (`de-exoten/hoornaarkaart/2021-2025.png`)
+- **CSS animatie** voor fade-in effect
 
-### Kleuren (van zuid naar noord)
-- **2021** (0-20%): `#8b0000` donkerst
-- **2022** (20-40%): `#a52a2a`
-- **2023** (40-60%): `#c44444`
-- **2024** (60-80%): `#d66666`
-- **2025** (80-100%): `#e88888` lichtst
+### PNG Bestanden
+- `de-exoten/hoornaarkaart/2021.png` - Zuidelijkste zone
+- `de-exoten/hoornaarkaart/2022.png`
+- `de-exoten/hoornaarkaart/2023.png`
+- `de-exoten/hoornaarkaart/2024.png`
+- `de-exoten/hoornaarkaart/2025.png` - Noordelijkste zone
+
+### Kleuren Legenda (licht → donker)
+- **2021**: `#f5a0a0` (licht, zuidelijkste)
+- **2022**: `#e07070`
+- **2023**: `#c44444`
+- **2024**: `#a82020`
+- **2025**: `#8b0000` (donker, noordelijkste)
+
+### CSS Override voor Cluster-Grid
+Omdat de kaart in een cluster-grid staat, is een CSS override nodig:
+```css
+#hoornaar-map .hoornaar-zone-overlay {
+    opacity: 0 !important;
+    transition: opacity 0.8s ease-out !important;
+}
+#hoornaar-map .hoornaar-zone-overlay.visible {
+    opacity: 0.8 !important;
+}
+```
 
 ### Animatie
-- **Duur**: 8 seconden totaal
-- **Organisch**: variabele snelheid met "surge" momenten
-- **Golf-effect**: golvende rand tijdens stijgen
-- **Trigger**: IntersectionObserver, 30% threshold
+- **Implementatie**: `classList.add('visible')` per overlay
+- **Timing**: 800ms delay tussen elke zone
+- **Trigger**: `checkHoornaarVisibility()` controleert of kaart in viewport is
+- **Opacity**: 80% wanneer visible
 
 ## Verticale Labels
 - Cursieve accent letter: `<span class="accent">t</span>`
@@ -393,3 +419,18 @@ rivierkreeft, vederkruid, vlinderstruik, waterteunisbloem, watercrassula, kleine
 - Breedte: 85vw, gecentreerd
 - Achtergrond: `#e8e8e8`
 - Verkorte tekst (2 paragrafen)
+
+### Mobiele Hoornaar Kaart
+- Container: `#hoornaar-map-mobile` in `.mobile-hoornaar-container`
+- Leaflet kaart met `map.fitBounds([[50.3, 3.2], [53.7, 7.4]])` voor correcte verhoudingen
+- PNG overlays met IntersectionObserver trigger
+- Legenda onder de kaart
+- Animatie: zones faden één voor één in (800ms interval)
+
+### Mobiele Kreeftenteller
+- Container: `.mobile-kreeftenteller` na rivierkreeft foto's
+- **Slot machine animatie**: damped harmonic oscillation (`Math.sin()` met decay)
+- Telt van 1 tot 12 met overshoots (bijv. 12 → 13 → 12 → 11 → 12)
+- Trigger: IntersectionObserver met threshold 0.3
+- Tekst: "12 Soorten rivierkreeft"
+- Styling: grote cijfers, centered
