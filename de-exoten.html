@@ -1080,20 +1080,22 @@
         .hoornaar-boog-grid .foto-29 { grid-column: 15 / 23; grid-row: 1 / 9; }
         .hoornaar-boog-grid .foto-30 { grid-column: 23 / 28; grid-row: 5 / 14; }
         .hoornaar-boog-grid .foto-31 { grid-column: 28 / 40; grid-row: 14 / 25; }
-        .hoornaar-boog-grid .foto-32 { grid-column: 37 / 43; grid-row: 4 / 14; }
-        .hoornaar-boog-grid .foto-38 { grid-column: 43 / 49; grid-row: 4 / 14; }
         .hoornaar-boog-grid .foto-info3 { grid-column: 14 / 23; grid-row: 9 / 23; }
         .hoornaar-boog-grid .caption-hoornaar-boog { grid-column: 28 / 35; grid-row: 8 / 14; }
 
+        /* ====== SNITCH GRID (foto 32, 33, 34, 37, 38) ====== */
+        .snitch-grid .foto-38 { grid-column: 1 / 12; grid-row: 1 / 19; }
+        .snitch-grid .caption-snitch { grid-column: 1 / 12; grid-row: 19 / 25; }
+        .snitch-grid .foto-34 { grid-column: 12 / 19; grid-row: 1 / 8; }
+        .snitch-grid .foto-32 { grid-column: 12 / 19; grid-row: 8 / 20; }
+        .snitch-grid .foto-33 { grid-column: 19 / 30; grid-row: 1 / 12; }
+        .snitch-grid .foto-37 { grid-column: 19 / 30; grid-row: 12 / 23; }
+
         /* ====== FOTO 35 + GRID 36-39 ====== */
-        /* FOTO-PALET: thumbnails linksboven */
-        .foto35-grid .foto-33 { grid-column: 1 / 7; grid-row: 10 / 16; }
-        .foto35-grid .foto-34 { grid-column: 1 / 7; grid-row: 4 / 10; }
         .foto35-grid .foto-35 { grid-column: 9 / 34; grid-row: 1 / 25; }
         .foto35-grid .foto-36 { grid-column: 34 / 43; grid-row: 8 / 17; }
-        .foto35-grid .foto-37 { grid-column: 1 / 7; grid-row: 16 / 22; }
         .foto35-grid .foto-39 { grid-column: 43 / 49; grid-row: 15 / 25; }
-        .foto35-grid .caption-snitch { grid-column: 34 / 43; grid-row: 17 / 25; }
+        .foto35-grid .caption-opgezogen { grid-column: 34 / 43; grid-row: 17 / 25; }
 
         /* ====== KREEFT GRID ====== */
         /* Cirkelvorm rond kreeftcentraal - 11 kolommen naar links geschoven */
@@ -2474,12 +2476,6 @@
             <div class="photo-item foto-31" data-file="31.jpg">
                 <img src="de-exoten/31.jpg" alt="Hoornaar" loading="lazy">
             </div>
-            <div class="photo-item foto-32" data-file="32.jpg">
-                <img src="de-exoten/32.jpg" alt="Hoornaar" loading="lazy">
-            </div>
-            <div class="photo-item foto-38" data-file="38.jpg">
-                <img src="de-exoten/38.jpg" alt="Hoornaar" loading="lazy">
-            </div>
             <div class="photo-item foto-info3" data-file="hoornaar-map" style="position: relative;">
                 <div id="hoornaar-map"></div>
                 <div class="hoornaar-map-title">Aziatische<br>Hoornaar</div>
@@ -2512,32 +2508,47 @@
             </div>
         </div>
 
-        <!-- Foto 35 + Grid 36-39 -->
-        <div class="cluster-grid foto35-grid part2">
+        <!-- Snitch Grid (foto 32, 33, 34, 37, 38) -->
+        <div class="cluster-grid snitch-grid part2">
             <div class="grid-debug-overlay"></div>
 
-            <!-- FOTO-PALET: thumbnails linksboven -->
+            <div class="photo-item foto-32" data-file="32.jpg">
+                <img src="de-exoten/32.jpg" alt="Hoornaar" loading="lazy">
+            </div>
             <div class="photo-item foto-33" data-file="33.jpg">
                 <img src="de-exoten/33.jpg" alt="Hoornaar" loading="lazy">
             </div>
             <div class="photo-item foto-34" data-file="34.jpg">
                 <img src="de-exoten/34.jpg" alt="Hoornaar" loading="lazy">
             </div>
+            <div class="photo-item foto-37" data-file="37.jpg">
+                <img src="de-exoten/37.jpg" alt="Hoornaarbestrijding" loading="lazy">
+            </div>
+            <div class="photo-item foto-38" data-file="38.jpg">
+                <img src="de-exoten/38.jpg" alt="Hoornaar" loading="lazy">
+            </div>
+            <div class="caption caption-snitch expand-down">
+                <h4>Snitch</h4>
+                <p>Rob Voest, een grootheid in de hoornaarbestrijding, heeft in de afgelopen jaren een vernieuwende methode ontwikkeld om snel van de hoornaar af te komen. In plaats van eindeloos speuren met verrekijkers of drones, vangt hij één exemplaar die hij een microzendertje ombindt. Deze hoornaar wordt vrijgelaten en - eenmaal bijgekomen van zijn ontregelende ervaring - vliegt hij terug naar het nest.</p>
+            </div>
+        </div>
+
+        <!-- Foto 35 + Grid 36-39 -->
+        <div class="cluster-grid foto35-grid part2">
+            <div class="grid-debug-overlay"></div>
+
             <div class="photo-item foto-35 zoomable" data-file="35.jpg">
                 <img src="de-exoten/35.jpg" alt="Hoornaarbestrijding" loading="lazy">
             </div>
             <div class="photo-item foto-36" data-file="36.jpg">
                 <img src="de-exoten/36.jpg" alt="Hoornaarbestrijding" loading="lazy">
             </div>
-            <div class="photo-item foto-37" data-file="37.jpg">
-                <img src="de-exoten/37.jpg" alt="Hoornaarbestrijding" loading="lazy">
-            </div>
             <div class="photo-item foto-39" data-file="39.jpg">
                 <img src="de-exoten/39.jpg" alt="Hoornaarbestrijding" loading="lazy">
             </div>
-            <div class="caption caption-snitch expand-down">
-                <h4>Snitch</h4>
-                <p>Rob Voest, een grootheid in de hoornaarbestrijding, heeft in de afgelopen jaren een vernieuwende methode ontwikkeld om snel van de hoornaar af te komen. In plaats van eindeloos speuren met verrekijkers of drones, vangt hij één exemplaar die hij een microzendertje ombindt. Deze hoornaar wordt vrijgelaten en - eenmaal bijgekomen van zijn ontregelende ervaring - vliegt hij terug naar het nest. Rob hoeft het insect alleen maar met de ontvanger te volgen. Eenmaal bij het nest klimt hij in een hoogwerker en zuigt hij het leeg.</p>
+            <div class="caption caption-opgezogen expand-down">
+                <h4>Opgezogen</h4>
+                <p>Rob hoeft het insect alleen maar met de ontvanger te volgen. Eenmaal bij het nest klimt hij in een hoogwerker en zuigt hij het leeg.</p>
             </div>
         </div>
 
