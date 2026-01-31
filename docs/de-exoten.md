@@ -264,8 +264,17 @@ Vervangt statische `info 2.jpg` met een Leaflet kaart die toont hoe de hemelboom
 ### Visuele Effecten
 - **Solid rood**: `#c41e1e`, laatste 25% fadet uit
 - **Vrachtwagen animatie**: zwarte blokjes (4px) bewegen langs snelwegen
-- **GBIF observaties**: groene stippen op echte waarnemingslocaties
+- **GBIF observaties**: gele stippen (#c9a020) op waarnemingslocaties
 - **Fade-out**: gradient aan bovenkant kaart
+
+### GBIF Waarnemingen
+- **Bron**: waarnemingen.nl via GBIF API
+- **Periode**: 2014-2025
+- **Filter**: snelwegcorridors Zuid-Nederland (~20-25km radius)
+- **Uitgesloten**: grote steden (Den Haag, Rotterdam, Utrecht, Arnhem)
+- **Aantal**: ~50 punten
+- **Styling**: radius 3, geel (#c9a020), breathing animatie
+- **Legenda**: "waarneming hemelboom" + bronvermelding
 
 ### Snelweg Coördinaten
 - **A67**: 73 handmatig gecorrigeerde punten (Google Maps)
