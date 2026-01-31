@@ -152,17 +152,18 @@ border: 2px solid #a8c8e8;
 2. Beverrat cluster (foto 8-15 + diana airbug)
 3. Wolhandkrab cluster (16-17)
 4. Hemelboom cluster (18-24 + info)
-5. Hoornaar cluster (25-34)
-6. Foto 35 + grid 36-39
-7. Rivierkreeft cluster (40 + grid + 41)
-8. Vederkruid (42-49)
-9. Vlinderstruik (50)
-10. Grote Waterteunisbloem (51-53)
-11. Watercrassula (54-55)
-12. Kleine waterteunisbloem (56 + 57-61)
-13. Japanse oester (62)
-14. Muskusrat (63-70)
-15. End panel
+5. Hoornaar boog cluster (25-31)
+6. Snitch grid (32-34, 37-38) - caption "Snitch"
+7. Foto 35 grid (35, 36, 39) - caption "Opgezogen"
+8. Rivierkreeft cluster (40 + grid + 41)
+9. Vederkruid (42-49)
+10. Vlinderstruik (50)
+11. Grote Waterteunisbloem (51-53)
+12. Watercrassula (54-55)
+13. Kleine waterteunisbloem (56 + 57-61)
+14. Japanse oester (62)
+15. Muskusrat (63-70)
+16. End panel
 
 ## Intro Grid (Desktop)
 
@@ -378,6 +379,21 @@ rivierkreeft, vederkruid, vlinderstruik, waterteunisbloem, watercrassula, kleine
 - "Op zoek in Zeeland" tekstkader: 100% breed
 - Foto 23 verborgen
 - Hoornaar boog foto's verkleind (20-22vh)
+
+### Snitch Grid
+- Foto's 32, 33, 34, 37, 38 in eigen cluster-grid
+- Layout:
+  - Foto 38 (verticaal): kolom 1-11, rij 1-18
+  - Caption "Snitch": kolom 1-11, rij 19-24
+  - Foto 34 (horizontaal): kolom 12-18, rij 1-7
+  - Foto 32 (verticaal): kolom 12-18, rij 8-19
+  - Foto 33 (horizontaal): kolom 19-29, rij 1-11
+  - Foto 37 (horizontaal): kolom 19-29, rij 12-22
+- Caption tekst over Rob Voest's tracking methode met microzendertje
+
+### Foto 35 Grid
+- Foto's 35, 36, 39
+- Caption "Opgezogen" over het leegzuigen van het nest
 
 ### Rivierkreeft Sectie
 - Foto 40: single-photo-section (70vh) met caption
