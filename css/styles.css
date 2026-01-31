@@ -1927,6 +1927,24 @@ img {
         100% { transform: scale(1.05); }
     }
 
+    /* Mijnenfoto horizontaal spiegelen (terug naar origineel) */
+    .hero-image .hero-img-mobile[data-series="toen-de-mijnen-verdwenen.html"] {
+        transform: scaleX(-1);
+    }
+
+    .hero-image .hero-img-mobile[data-series="toen-de-mijnen-verdwenen.html"].active {
+        animation: mobileHeroZoomFlipped 5s ease-out forwards;
+    }
+
+    .hero-image .hero-img-mobile[data-series="toen-de-mijnen-verdwenen.html"].zoomed {
+        transform: scaleX(-1) scale(1.05);
+    }
+
+    @keyframes mobileHeroZoomFlipped {
+        0% { transform: scaleX(-1) scale(1); }
+        100% { transform: scaleX(-1) scale(1.05); }
+    }
+
     .hero-caption {
         display: none; /* Verberg caption op mobiel */
     }
