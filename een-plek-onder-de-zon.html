@@ -35,6 +35,23 @@
             box-sizing: border-box !important;
             margin-right: -4rem !important;
         }
+
+        /* Ultrawide Support (2650px+) */
+        @media (min-width: 2650px) {
+            html {
+                background-color: #2d5a27;
+            }
+
+            body.horizontal-scroll-page {
+                max-width: 2650px;
+                margin: 0 auto;
+                overflow: visible !important;
+            }
+
+            .horizontal-scroll-container {
+                max-width: 2650px;
+            }
+        }
     </style>
 </head>
 <body class="horizontal-scroll-page" style="background: #2d5a27;">

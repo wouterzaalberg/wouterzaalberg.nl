@@ -1053,3 +1053,22 @@
         line-height: 1.7;
     }
 }
+
+/* ========================================
+   Ultrawide Support (2650px+)
+   ======================================== */
+@media (min-width: 2650px) {
+    html {
+        background-color: #1a1a1a;
+    }
+
+    .ibl-page {
+        max-width: 2650px;
+        margin: 0 auto;
+        overflow-x: auto;
+    }
+
+    .ibl-scroll-container {
+        max-width: 2650px;
+    }
+}

@@ -287,6 +287,22 @@
     overflow: hidden;
 }
 
+/* Achtergrond afbeelding achter titel */
+.tdmv-hero-panel::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-image: url('../toen-de-mijnen-verdwenen/achtergrond1.jpg');
+    background-size: cover;
+    background-position: center bottom;
+    opacity: 0.5;
+    pointer-events: none;
+    z-index: 0;
+}
+
 /* Dust particles container */
 .tdmv-dust-container {
     position: absolute;
@@ -421,12 +437,12 @@
     height: 80vh;
     width: auto;
     object-fit: contain;
-    transform: scale(1);
+    transform: scaleX(-1) scale(1);
     transition: transform 8s ease-out;
 }
 
 .tdmv-intro-section.descended .tdmv-intro-photo img {
-    transform: scale(1.05);
+    transform: scaleX(-1) scale(1.05);
 }
 
 /* Caption positioned absolutely to the right of centered photo */
@@ -3725,5 +3741,24 @@
 
     .tdmv-dust-particle {
         animation: none;
+    }
+}
+
+/* ========================================
+   Ultrawide Support (2650px+)
+   ======================================== */
+@media (min-width: 2650px) {
+    html {
+        background-color: #1a1a1a;
+    }
+
+    .tdmv-page {
+        max-width: 2650px;
+        margin: 0 auto;
+        overflow-x: auto;
+    }
+
+    .tdmv-scroll-container {
+        max-width: 2650px;
     }
 }

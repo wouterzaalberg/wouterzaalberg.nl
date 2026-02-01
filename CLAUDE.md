@@ -12,6 +12,7 @@ Portfolio website voor fotograaf Wouter Zaalberg. Fotografieprojecten over Neder
 > - `docs/het-noordzeekanaal-gebied.md` - Foto paren, hover captions
 > - `docs/de-onmisbaren.md` - Titel foto-fill effect
 > - `docs/een-plek-onder-de-zon.md` - Basis layout
+> - `docs/wat-kost-een-stad.md` - **[IN ONTWIKKELING]** Nog niet gekoppeld
 
 ## Sitestructuur
 
@@ -174,9 +175,41 @@ Alle projectpagina's eindigen met end panel:
 ## Responsive Breakpoints
 
 ### Breedte
+- **2650px+**: Ultrawide support (zie hieronder)
 - **1100-1400px**: Kleinere tekst, hogere tekstvakken
 - **768-1100px**: Breder tekstvak (25%)
 - **< 767px**: Verticaal, volledige breedte
+
+### Ultrawide Support (2650px+)
+Standaard voor alle pagina's bij ultrawide monitoren:
+
+```css
+@media (min-width: 2650px) {
+    html {
+        background-color: [pagina-achtergrondkleur];
+    }
+
+    body, .page-container {
+        max-width: 2650px;
+        margin: 0 auto;
+        overflow-x: auto;
+    }
+}
+```
+
+**Achtergrondkleuren per pagina:**
+- Homepage: `#1a1a1a`
+- Mijn Tatoeages: `#1a1a1a`
+- A Better Port: `#1a1a1a`
+- In Blauw Licht: `#1a1a1a`
+- Toen de Mijnen Verdwenen: `#1a1a1a`
+- De Onmisbaren: `#2a2a2a`
+- Een Plek Onder de Zon: `#2d5a27`
+- Het Noordzeekanaalgebied: `#e8e4df`
+
+**Let op bij horizontale scroll pagina's:**
+- Secties met `width: 100vw` moeten overschreven worden naar `width: 2650px !important`
+- Test altijd of scroll blijft werken na aanpassingen
 
 ### Hoogte (A Better Port)
 - **> 900px**: Standaard formaten

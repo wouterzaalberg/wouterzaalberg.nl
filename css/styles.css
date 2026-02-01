@@ -2337,3 +2337,22 @@ img {
         color: rgba(255,255,255,0.6);
     }
 }
+
+/* ========================================
+   Ultrawide Support (2560px+)
+   TEST - verwijder of pas aan na review
+   ======================================== */
+@media (min-width: 2650px) {
+    body {
+        max-width: 2650px;
+        margin: 0 auto;
+        background-color: #1a1a1a; /* Donkere balken aan zijkanten */
+    }
+
+    .hero-section,
+    .about-section,
+    .work-section,
+    .contact-section {
+        position: relative;
+    }
+}

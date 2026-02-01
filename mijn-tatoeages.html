@@ -844,6 +844,39 @@
                 z-index: 50;
             }
         }
+
+        /* Ultrawide Support (2650px+) */
+        @media (min-width: 2650px) {
+            html {
+                background-color: #1a1a1a;
+            }
+
+            .tattoo-page {
+                max-width: 2650px;
+                margin: 0 auto;
+                overflow-x: auto;
+            }
+
+            .tattoo-title-intro {
+                min-width: 2650px;
+            }
+
+            .tattoo-intro {
+                min-width: 2650px;
+                width: 2650px !important;
+                padding-left: 0;
+                padding-right: 0;
+                justify-content: center;
+            }
+
+            .tattoo-story {
+                min-width: 2650px;
+                width: 2650px !important;
+                padding-left: 0 !important;
+                padding-right: 0 !important;
+                justify-content: center;
+            }
+        }
     </style>
 </head>
 <body class="tattoo-page">

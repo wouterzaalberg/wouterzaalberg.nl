@@ -3189,3 +3189,31 @@
         transition: none;
     }
 }
+
+/* ========================================
+   Ultrawide Support (2650px+)
+   ======================================== */
+@media (min-width: 2650px) {
+    html {
+        background-color: #1a1a1a;
+    }
+
+    .abp-page {
+        max-width: 2650px;
+        margin: 0 auto;
+        overflow-x: auto;
+    }
+
+    .abp-scroll-container {
+        max-width: 2650px;
+    }
+
+    .abp-intro-section {
+        width: 2650px !important;
+    }
+
+    .abp-scroll-content .photo-item,
+    .abp-scroll-content .abp-intro {
+        justify-content: center;
+    }
+}

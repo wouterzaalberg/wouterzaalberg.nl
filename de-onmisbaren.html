@@ -358,6 +358,23 @@
             display: block;
             color: rgba(255, 255, 255, 0.7);
         }
+
+        /* Ultrawide Support (2650px+) */
+        @media (min-width: 2650px) {
+            html {
+                background-color: #2a2a2a;
+            }
+
+            body.horizontal-scroll-page {
+                max-width: 2650px;
+                margin: 0 auto;
+                overflow: visible !important;
+            }
+
+            .horizontal-scroll-container {
+                max-width: 2650px;
+            }
+        }
     </style>
 </head>
 <body class="horizontal-scroll-page" style="background: #2a2a2a;">
