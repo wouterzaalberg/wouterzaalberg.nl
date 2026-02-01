@@ -41,7 +41,8 @@ Font: Adobe Typekit Chloe (`https://use.typekit.net/qwc4lnx.css`)
 - Verticale slide (1.2s) simuleert afdaling
 
 ## Achtergronden
-- Foto 1: achtergrond uitgeschakeld (`display: none`)
+- **Hero panel (titel)**: `achtergrond1.jpg` (50% opacity), `background-position: center bottom`
+- **Foto 1**: horizontaal gespiegeld via `scaleX(-1)` (origineel is gespiegeld voor homepage)
 - Deel 1 chapter: `achtergrond.jpg` (10% opacity), zoom effect (scale 1.03 → 1.18 bij descent)
 - Faden uit via `.bg-hidden` class
 - Dust particles: z-index 1 (boven dark overlay)

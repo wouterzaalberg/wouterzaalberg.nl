@@ -10,6 +10,9 @@
 - **Zoom start direct bij pagina load** (via JS na 100ms delay)
 - Cross-fade tussen twee img elementen bij hover
 
+**Hero hover afbeeldingen per serie:**
+- Toen de Mijnen: `images/toendemijnenverdwenenhome.jpg` (hogere resolutie, al gespiegeld)
+
 ### Sectie 2 - About
 - Foto: `werkterrein.jpg`
 - Kop: "Nederland als werkterrein" (groen #2d5a27, Scala Sans SC)
@@ -83,6 +86,7 @@
 - Foto's: de-exoten, mijn-tattoos, a-better-port, in-blauw-licht, toen-de-mijnen-verdwenen
 - Zoom animatie: `scale(1.05)` gedurende 5s
 - `.zoomed` class behoudt zoom tijdens fade-out
+- **Toen de Mijnen**: gespiegeld via `scaleX(-1)` + aangepaste keyframes
 
 ### Serie highlight
 - Bij rotatie licht de bijbehorende serie naam op in het menu
