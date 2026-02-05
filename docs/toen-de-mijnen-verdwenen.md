@@ -53,6 +53,8 @@ Font: Adobe Typekit Chloe (`https://use.typekit.net/qwc4lnx.css`)
 - Oranje markers met foto popups
 - 12 mijnen met productie + arbeiders data
 - Klikbare mijnnamen in statistieken
+- **Statistieken styling**: mijnnaam 0.8rem, locatie+diepte 0.7rem wit (#fff), data 0.8rem
+- **Bars**: productie 16px, arbeiders 10px
 
 ## Insert Panels
 | Insert | Deel | Fade-out trigger |
@@ -145,3 +147,9 @@ Font: Adobe Typekit Chloe (`https://use.typekit.net/qwc4lnx.css`)
 - **Chapter panels**: 85svh min-height, tekst links uitgelijnd
 - **End panel**: 100vw breedte, sluit direct aan op laatste insert
 - **Navigatie**: auto-hide na 3 seconden, verschijnt bij aanraking
+
+## Responsive - Extra Small Mobile (< 380px)
+- **Hero panel**: padding `4rem 0.8rem 2.5rem`
+- **Hero content**: gap `1rem`
+- **Hero tekst**: `4vw`, line-height `1.6`
+- **Titel**: `10.5vw`
