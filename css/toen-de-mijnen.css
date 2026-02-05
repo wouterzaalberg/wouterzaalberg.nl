@@ -3718,6 +3718,28 @@
 }
 
 /* ========================================
+   Extra Small Mobile (< 380px)
+   ======================================== */
+@media (max-width: 380px) {
+    .tdmv-hero-panel {
+        padding: 4rem 0.8rem 2.5rem;
+    }
+
+    .tdmv-hero-content {
+        gap: 1rem;
+    }
+
+    .tdmv-hero-text p {
+        font-size: 4vw;
+        line-height: 1.6;
+    }
+
+    .tdmv-title {
+        font-size: 10.5vw;
+    }
+}
+
+/* ========================================
    Reduced Motion
    ======================================== */
 @media (prefers-reduced-motion: reduce) {
