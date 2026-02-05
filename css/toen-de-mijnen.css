@@ -1625,7 +1625,7 @@
 
 .tdmv-mine-stat-name {
     font-family: 'Scala Sans SC', sans-serif;
-    font-size: 0.65rem;
+    font-size: 0.8rem;
     text-transform: uppercase;
     letter-spacing: 0.03em;
     color: #1a1a1a;
@@ -1641,8 +1641,8 @@
 
 .tdmv-mine-stat-location {
     font-family: 'Scala Sans', sans-serif;
-    font-size: 0.55rem;
-    color: #555;
+    font-size: 0.7rem;
+    color: #fff;
     margin-bottom: 0.3rem;
     margin-top: -0.2rem;
 }
@@ -1655,7 +1655,7 @@
 }
 
 .tdmv-mine-stat-bar {
-    height: 14px;
+    height: 16px;
     background: rgba(0, 0, 0, 0.15);
     border-radius: 2px;
     overflow: hidden;
@@ -1670,7 +1670,7 @@
 
 /* Worker bar */
 .tdmv-worker-bar {
-    height: 8px;
+    height: 10px;
     margin-top: 2px;
     background: rgba(26, 58, 82, 0.25);
 }
@@ -1682,7 +1682,7 @@
 
 .tdmv-mine-stat-data {
     font-family: 'Scala Sans', sans-serif;
-    font-size: 0.65rem;
+    font-size: 0.8rem;
     color: #1a1a1a;
     line-height: 1.4;
 }
