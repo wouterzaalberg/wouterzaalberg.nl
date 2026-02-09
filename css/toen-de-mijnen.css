@@ -414,9 +414,16 @@
     z-index: 0;
 }
 
-/* Mijngang achtergrond achter foto 1 - uitgeschakeld */
+/* Aardlaag achtergrond achter foto 1 */
 .tdmv-intro-photo::before {
-    display: none;
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('../toen-de-mijnen-verdwenen/aardlaag.jpg') center center / cover no-repeat;
+    z-index: -1;
 }
 
 /* Dust particles achter foto 1 - boven donkere achtergrond */
