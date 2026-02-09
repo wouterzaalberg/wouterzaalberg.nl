@@ -402,7 +402,7 @@
     overflow: hidden;
 }
 
-/* Donkere achtergrond laag */
+/* Donkere achtergrond laag - semi-transparant zodat aardlaag doorschijnt */
 .tdmv-intro-photo::after {
     content: '';
     position: absolute;
@@ -410,7 +410,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: var(--tdmv-bg);
+    background: rgba(26, 24, 22, 0.82);
     z-index: 0;
 }
 
@@ -479,7 +479,7 @@
     transition: background 1s ease;
 }
 
-/* Achtergrond gradient als aparte laag die altijd 100vh vult */
+/* Donkere achtergrond laag - semi-transparant zodat aardlaag doorschijnt */
 .tdmv-intro-chapter::after {
     content: '';
     position: absolute;
@@ -487,8 +487,8 @@
     left: 0;
     width: 100%;
     height: 100vh;
-    background: linear-gradient(135deg, var(--tdmv-part1-bg) 0%, var(--tdmv-bg) 100%);
-    z-index: -1;
+    background: rgba(26, 24, 22, 0.82);
+    z-index: 0;
     transition: opacity 1s ease;
 }
 
@@ -547,6 +547,7 @@
     z-index: 1;
 }
 
+/* Aardlaag achtergrond achter deel 1 - verticaal gespiegeld */
 .tdmv-intro-chapter::before {
     content: '';
     position: absolute;
@@ -554,20 +555,9 @@
     left: 0;
     width: 100%;
     height: 100vh;
-    background-image: url('../toen-de-mijnen-verdwenen/achtergrond.jpg');
-    background-size: cover;
-    background-position: center top;
-    opacity: 0.1;
-    pointer-events: none;
-    z-index: 0;
-    transform: scale(1.03);
-    transform-origin: center top;
-    transition: transform 14s ease-out, opacity 1s ease;
-}
-
-/* Zoom achtergrond na descent animatie */
-.tdmv-intro-section.descended .tdmv-intro-chapter::before {
-    transform: scale(1.18);
+    background: url('../toen-de-mijnen-verdwenen/aardlaag.jpg') center center / cover no-repeat;
+    z-index: -1;
+    transform: scaleY(-1);
 }
 
 .tdmv-intro-chapter .tdmv-chapter-arrow {
@@ -1930,6 +1920,84 @@
     font-size: 0.8rem;
     color: var(--tdmv-text);
     line-height: 1.65;
+}
+
+/* Spiegel foto toggle knop - desktop only */
+.tdmv-spiegel-btn {
+    display: none;
+}
+
+/* Caption wrapper voor knop onder bijschrift */
+.tdmv-caption-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+/* Spiegel foto's - vaste dimensies (4:3 aspect ratio) */
+.spiegel-photo {
+    transition: opacity 0.5s ease;
+    height: 70vh !important;
+    width: calc(70vh * 4 / 3) !important;
+    object-fit: cover;
+}
+
+.spiegel-photo.fading {
+    opacity: 0 !important;
+}
+
+/* Container voor spiegel foto met caption overlay */
+.tdmv-spiegel-container {
+    position: relative;
+    width: calc(70vh * 4 / 3);
+    height: 70vh;
+}
+
+/* Caption overlay voor spiegel foto's */
+.tdmv-spiegel-caption {
+    display: none;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 1rem 1.2rem;
+    background: rgba(0, 0, 0, 0.7);
+    font-family: 'Scala Sans', sans-serif;
+    font-size: 0.7rem;
+    line-height: 1.5;
+    color: var(--tdmv-text-muted);
+}
+
+.tdmv-spiegel-caption.visible {
+    display: block;
+}
+
+@media (min-width: 768px) {
+    .tdmv-spiegel-btn {
+        display: block;
+        background: rgba(15, 14, 13, 0.9);
+        border: none;
+        border-left: 2px solid #6b8e23;
+        padding: 0.8rem 1.2rem;
+        font-family: 'Scala Sans SC', sans-serif;
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        color: #6b8e23;
+        cursor: pointer;
+        transition: background 0.3s ease, color 0.3s ease;
+        margin-top: 0.5rem;
+    }
+
+    .tdmv-spiegel-btn:hover {
+        background: rgba(107, 142, 35, 0.2);
+    }
+
+    .tdmv-spiegel-btn.active {
+        background: rgba(107, 142, 35, 0.3);
+        color: #8fb32d;
+    }
 }
 
 /* ========================================

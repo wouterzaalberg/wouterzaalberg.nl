@@ -43,9 +43,27 @@ Font: Adobe Typekit Chloe (`https://use.typekit.net/qwc4lnx.css`)
 ## Achtergronden
 - **Hero panel (titel)**: `achtergrond1.jpg` (50% opacity), `background-position: center bottom`
 - **Foto 1**: horizontaal gespiegeld via `scaleX(-1)` (origineel is gespiegeld voor homepage)
-- Deel 1 chapter: `achtergrond.jpg` (10% opacity), zoom effect (scale 1.03 → 1.18 bij descent)
+- **Foto 1 achtergrond**: `aardlaag.jpg` via `::before` (z-index -1), donker vlak `::after` 82% opacity (z-index 0)
+- **Deel 1 chapter**: `aardlaag.jpg` via `::before` (z-index -1, verticaal gespiegeld `scaleY(-1)`), donker vlak `::after` 82% opacity (z-index 0)
 - Faden uit via `.bg-hidden` class
 - Dust particles: z-index 1 (boven dark overlay)
+
+## Spiegel Foto's (Desktop Only)
+Toggle knoppen onder bijschriften om historische foto's te tonen:
+
+| Foto | Knoptekst | Spiegel tekst | Caption overlay |
+|------|-----------|---------------|-----------------|
+| 4 | "Bekijk de OVS" | "Bekijk de oefenmijn" | Ja - OVS leermijn beschrijving |
+| 10 | "Bekijk de houtproductie" | "Bekijk de productiebossen" | Nee |
+| 11 | "Bekijk de Wilhelmina in 1970" | "Bekijk de Wilhelminaberg" | Nee |
+
+### Technisch
+- Foto's: `.spiegel-photo` class met vaste 4:3 dimensies (`70vh × calc(70vh * 4/3)`)
+- Fade transitie: 0.5s bij wisselen
+- Knop styling: zelfde als caption maar met groene kleur (`#6b8e23`)
+- Caption wrapper: `.tdmv-caption-wrapper` (flex column)
+- Spiegel container: `.tdmv-spiegel-container` voor foto's met caption overlay
+- Caption overlay: `.tdmv-spiegel-caption` (verschijnt bij spiegel foto)
 
 ## Interactieve Kaart (Leaflet)
 - Insert panel na foto 5: "De mijnstreek"
