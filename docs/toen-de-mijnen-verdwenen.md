@@ -30,6 +30,15 @@ Font: Adobe Typekit Chloe (`https://use.typekit.net/qwc4lnx.css`)
 - Staggered delays, random rotaties
 - Na ~9 seconden fade terug naar origineel
 
+## Chapter 1 Titel Verdwijn-animatie
+- "De wereld die verdween" — letters verdwijnen na enkele seconden
+- Letters gesplitst in `<span class="vanish-letter">` via JS
+- Verdwijnen in willekeurige groepjes van 1-3 letters, 400ms tussen groepen
+- Fade out + translateY(8px) per groep
+- Na 2 seconden pauze: alle letters tegelijk rustig terug (2s fade-in)
+- Triggert via IntersectionObserver (50% threshold) op chapter panel
+- Herhaalbaar bij opnieuw in beeld scrollen
+
 ## Progress Indicator
 - Positie: `bottom: 2rem`, `left: 2rem`
 - 0% bij titel, intro states = 0%, 1%, 2%
@@ -56,13 +65,15 @@ Toggle knoppen onder bijschriften om historische foto's te tonen:
 | 4 | "Bekijk de OVS" | "Bekijk de oefenmijn" | Ja - OVS leermijn beschrijving |
 | 10 | "Bekijk de houtproductie" | "Bekijk de productiebossen" | Nee |
 | 11 | "Bekijk de Wilhelmina in 1970" | "Bekijk de Wilhelminaberg" | Nee |
+| 22 | "Bekijk Staatsmijn Hendrik" | "Bekijk de laatste gebouwen" | Nee |
 
 ### Technisch
-- Foto's: `.spiegel-photo` class met vaste 4:3 dimensies (`70vh × calc(70vh * 4/3)`)
+- Alle spiegel foto's in `.tdmv-spiegel-container` wrapper
+- Spiegel foto neemt exacte afmetingen van originele foto over (JS legt originele breedte vast, CSS `object-fit: cover`)
+- Class `spiegel-active` wordt toegevoegd bij toggle naar spiegel foto
 - Fade transitie: 0.5s bij wisselen
 - Knop styling: zelfde als caption maar met groene kleur (`#6b8e23`)
 - Caption wrapper: `.tdmv-caption-wrapper` (flex column)
-- Spiegel container: `.tdmv-spiegel-container` voor foto's met caption overlay
 - Caption overlay: `.tdmv-spiegel-caption` (verschijnt bij spiegel foto)
 
 ## Interactieve Kaart (Leaflet)
@@ -86,6 +97,10 @@ Toggle knoppen onder bijschriften om historische foto's te tonen:
 - Swipeable kaart (voor/na mijnsluitingen)
 - Gele instructiebalk boven kaart: "Swipe over de kaart om de verschillen voor en na de mijnsluitingen te zien"
 - Label verschijnt bij >70% of <30% swipe positie
+- Layout links uitgelijnd met titel
+- Statistieken (4 getallen): count-up animatie van 0 naar eindwaarde (1.5s, ease-out cubic)
+  - 75.000 banen verloren (rood), 14.000 nieuwe banen (groen), 762 hectare, 535 miljoen gulden
+  - Triggert via IntersectionObserver (30% threshold)
 
 ### "Uit het dal" details
 - Foto 550px breed, bijschrift "Foto Ron Meyer"

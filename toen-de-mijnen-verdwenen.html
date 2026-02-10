@@ -134,7 +134,7 @@
                         <div class="tdmv-dust-container dust-chapter1"></div>
                         <div class="tdmv-chapter-content">
                             <div class="tdmv-chapter-number">Deel 1</div>
-                            <h2 class="tdmv-chapter-title">De wereld die verdween</h2>
+                            <h2 class="tdmv-chapter-title chapter-title-vanish" id="chapter1-title">De wereld die verdween</h2>
                             <div class="tdmv-chapter-period">1965 — 1974</div>
                             <p class="tdmv-chapter-intro">Wie vóór 1974 door de Oostelijke Mijnstreek reisde, zou een wereld ervaren waar alles draaide om een ding: steenkool. Overal zag je schachten, schoorstenen en koeltorens. Je hoorde het geluid van schachtwielen en het lossen van kolenwagens. Je zou struikelen over de vele spoorlijnen en je vergapen aan de steenbergen die iedere dag een beetje hoger werden.</p>
                             <p class="tdmv-chapter-intro desktop-only">Er zat een grote vanzelfsprekendheid in de manier waarop de mijnbouw hier—samen met de kerk—de dienst uitmaakte en vorm gaf aan de samenleving. Het was de mijnbouw die zorgde voor scholing in de vorm van Ondergrondse Vakscholen en andere technische opleidingen. De mijn maakte van mannen koempels, zonder dat ze daar lang over nadachten. 'Dat deed je gewoon', zeggen oud-mijnwerkers als ze terugblikken op hun leven ondergronds.</p>
@@ -253,7 +253,9 @@
 
             <!-- Photo 10 - Productiebossen -->
             <div class="tdmv-photo-block part-1" data-parallax="1.3" data-section="photo" id="photo10-block">
-                <img src="toen-de-mijnen-verdwenen/foto 10.jpg" alt="Productiebossen" loading="lazy" id="photo10-img" class="spiegel-photo" data-original="toen-de-mijnen-verdwenen/foto 10.jpg" data-spiegel="toen-de-mijnen-verdwenen/spiegel foto 10.jpg">
+                <div class="tdmv-spiegel-container">
+                    <img src="toen-de-mijnen-verdwenen/foto 10.jpg" alt="Productiebossen" loading="lazy" id="photo10-img" class="spiegel-photo" data-original="toen-de-mijnen-verdwenen/foto 10.jpg" data-spiegel="toen-de-mijnen-verdwenen/spiegel foto 10.jpg">
+                </div>
                 <div class="tdmv-caption-wrapper">
                     <div class="tdmv-caption">
                         <div class="tdmv-caption-header">Productiebossen van de Brunssummerheide</div>
@@ -265,7 +267,9 @@
 
             <!-- Photo 11 - Wilhelminaberg -->
             <div class="tdmv-photo-block part-1" data-parallax="0.6" data-section="photo" id="photo11-block">
-                <img src="toen-de-mijnen-verdwenen/foto 11.jpg" alt="Wilhelminaberg" loading="lazy" id="photo11-img" class="spiegel-photo" data-original="toen-de-mijnen-verdwenen/foto 11.jpg" data-spiegel="toen-de-mijnen-verdwenen/spiegel foto 11.webp">
+                <div class="tdmv-spiegel-container">
+                    <img src="toen-de-mijnen-verdwenen/foto 11.jpg" alt="Wilhelminaberg" loading="lazy" id="photo11-img" class="spiegel-photo" data-original="toen-de-mijnen-verdwenen/foto 11.jpg" data-spiegel="toen-de-mijnen-verdwenen/spiegel foto 11.webp">
+                </div>
                 <div class="tdmv-caption-wrapper">
                     <div class="tdmv-caption">
                         <div class="tdmv-caption-header">Wilhelminaberg</div>
@@ -367,11 +371,16 @@
             </div>
 
             <!-- Photo 22 - Laatste gebouwen Hendrik -->
-            <div class="tdmv-photo-block part-2 " data-parallax="0.5" data-section="photo">
-                <img src="toen-de-mijnen-verdwenen/Foto 22.jpg" alt="Staatsmijn Hendrik" loading="lazy">
-                <div class="tdmv-caption">
-                    <div class="tdmv-caption-header">De laatste gebouwen van Staatsmijn Hendrik</div>
-                    <div class="tdmv-caption-text">Met veel energie en één miljard gulden ging de overheid aan de slag om de mijnterreinen te saneren, de operatie 'Van zwart naar groen'.</div>
+            <div class="tdmv-photo-block part-2 " data-parallax="0.5" data-section="photo" id="photo22-block">
+                <div class="tdmv-spiegel-container">
+                    <img src="toen-de-mijnen-verdwenen/Foto 22.jpg" alt="Staatsmijn Hendrik" loading="lazy" id="photo22-img" class="spiegel-photo" data-original="toen-de-mijnen-verdwenen/Foto 22.jpg" data-spiegel="toen-de-mijnen-verdwenen/spiegel foto 22.jpg">
+                </div>
+                <div class="tdmv-caption-wrapper">
+                    <div class="tdmv-caption">
+                        <div class="tdmv-caption-header">De laatste gebouwen van Staatsmijn Hendrik</div>
+                        <div class="tdmv-caption-text">Met veel energie en één miljard gulden ging de overheid aan de slag om de mijnterreinen te saneren, de operatie 'Van zwart naar groen'.</div>
+                    </div>
+                    <button class="tdmv-spiegel-btn" id="photo22-toggle">Bekijk Staatsmijn Hendrik</button>
                 </div>
             </div>
 
@@ -546,21 +555,21 @@
                     </div>
 
                     <!-- Bottom row: Statistics -->
-                    <div class="tdmv-slopen-stats">
+                    <div class="tdmv-slopen-stats" id="slopenStats">
                         <div class="tdmv-stat-item">
-                            <div class="tdmv-stat-number negative">75.000</div>
+                            <div class="tdmv-stat-number negative slopen-count" data-value="75000" data-format="thousands">0</div>
                             <div class="tdmv-stat-label">banen verloren</div>
                         </div>
                         <div class="tdmv-stat-item">
-                            <div class="tdmv-stat-number positive">14.000</div>
+                            <div class="tdmv-stat-number positive slopen-count" data-value="14000" data-format="thousands">0</div>
                             <div class="tdmv-stat-label">nieuwe banen gecreëerd</div>
                         </div>
                         <div class="tdmv-stat-item">
-                            <div class="tdmv-stat-number">762</div>
+                            <div class="tdmv-stat-number slopen-count" data-value="762">0</div>
                             <div class="tdmv-stat-label">hectare gesaneerd</div>
                         </div>
                         <div class="tdmv-stat-item">
-                            <div class="tdmv-stat-number">535</div>
+                            <div class="tdmv-stat-number slopen-count" data-value="535">0</div>
                             <div class="tdmv-stat-label">miljoen gulden steun</div>
                         </div>
                     </div>
@@ -840,12 +849,12 @@
                 </div>
             </div>
 
-            <!-- Photo 50 - Bart tattoo -->
+            <!-- Photo 50 - Nicole -->
             <div class="tdmv-photo-block part-3" data-parallax="0.7" data-section="photo" id="photoBart">
-                <img src="toen-de-mijnen-verdwenen/Foto 50.jpg" alt="Bart en zijn tattoo" loading="lazy">
+                <img src="toen-de-mijnen-verdwenen/Foto 50.jpg" alt="Nicole, dochter van een mijnwerker" loading="lazy">
                 <div class="tdmv-caption">
-                    <div class="tdmv-caption-header">Bart en zijn tattoo</div>
-                    <div class="tdmv-caption-text">"Wanneer je nu ziet hoe Heerlen weer aan het bloeien is, nadat het ooit een troosteloze stad was waar drugsproblematiek hoogtij vierde, dan kun je daar met recht trots op zijn."</div>
+                    <div class="tdmv-caption-header">Nicole, dochter van een mijnwerker</div>
+                    <div class="tdmv-caption-text">Soms kijkt Nicole in de spiegel en dan ziet ze de ogen van haar vader, de mijnwerker die doordeweeks in de Duitse mijnen doorbracht en niet thuis was. Ze lijkt op hem, vooral qua karakter. Hij was een einzelgänger, net zoals zij, maar zorgzaam en liefdevol richting familie. Ze erfde zijn vechtlust om tegenslagen, waar Nicole er de nodige van heeft gekend, te boven te komen. Ze is trots op wie ze is en waar ze staat en gelukkig met haar huidige man, Wiel, met wie ze samen woont in de buurt waar ze is opgegroeid (Vrieheide).</div>
                 </div>
             </div>
 
@@ -1325,6 +1334,49 @@
                 });
             }, { threshold: 0.1 });
             mapFadeObserver.observe(photo6);
+        }
+
+        // Het grote slopen - count-up animation
+        const slopenStats = document.getElementById('slopenStats');
+        if (slopenStats) {
+            const slopenCountEls = slopenStats.querySelectorAll('.slopen-count');
+            let slopenCountStarted = false;
+
+            const slopenCountObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting && !slopenCountStarted) {
+                        slopenCountStarted = true;
+
+                        slopenCountEls.forEach(el => {
+                            const targetValue = parseFloat(el.dataset.value);
+                            const format = el.dataset.format;
+                            const duration = 1500;
+                            const startTime = performance.now();
+
+                            function animate(currentTime) {
+                                const elapsed = currentTime - startTime;
+                                const progress = Math.min(elapsed / duration, 1);
+                                const easeProgress = 1 - Math.pow(1 - progress, 3);
+                                const currentValue = targetValue * easeProgress;
+
+                                if (format === 'thousands') {
+                                    el.textContent = Math.round(currentValue).toLocaleString('nl-NL');
+                                } else {
+                                    el.textContent = Math.round(currentValue).toLocaleString('nl-NL');
+                                }
+
+                                if (progress < 1) {
+                                    requestAnimationFrame(animate);
+                                }
+                            }
+
+                            requestAnimationFrame(animate);
+                        });
+                    }
+                });
+            }, { threshold: 0.3 });
+
+            slopenCountObserver.observe(slopenStats);
         }
 
         // Fade out "Het grote slopen" insert when scrolling to Zakia
@@ -2155,6 +2207,13 @@
                     captionId: null,
                     originalText: 'Bekijk de Wilhelmina in 1970',
                     spiegelText: 'Bekijk de Wilhelminaberg'
+                },
+                {
+                    btnId: 'photo22-toggle',
+                    imgId: 'photo22-img',
+                    captionId: null,
+                    originalText: 'Bekijk Staatsmijn Hendrik',
+                    spiegelText: 'Bekijk de laatste gebouwen'
                 }
             ];
 
@@ -2167,15 +2226,33 @@
                     const originalSrc = img.dataset.original;
                     const spiegelSrc = img.dataset.spiegel;
                     let isShowingSpiegel = false;
+                    let originalWidth = null;
+
+                    // Capture original image width once loaded
+                    const captureWidth = () => {
+                        if (!originalWidth && img.offsetWidth > 0) {
+                            originalWidth = img.offsetWidth;
+                        }
+                    };
+                    img.addEventListener('load', captureWidth);
+                    captureWidth();
 
                     btn.addEventListener('click', () => {
                         isShowingSpiegel = !isShowingSpiegel;
+                        captureWidth();
+
+                        // Lock container width to original photo width
+                        const container = img.closest('.tdmv-spiegel-container');
+                        if (container && originalWidth) {
+                            container.style.width = originalWidth + 'px';
+                        }
 
                         // Fade out
                         img.classList.add('fading');
 
                         setTimeout(() => {
                             img.src = isShowingSpiegel ? spiegelSrc : originalSrc;
+                            img.classList.toggle('spiegel-active', isShowingSpiegel);
                             btn.classList.toggle('active', isShowingSpiegel);
                             btn.textContent = isShowingSpiegel ? config.spiegelText : config.originalText;
 
@@ -2191,6 +2268,73 @@
                 }
             });
         }
+
+        // Chapter 1 title vanish animation
+        (function() {
+            const title = document.getElementById('chapter1-title');
+            if (!title) return;
+
+            const text = title.textContent;
+            let hasAnimated = false;
+
+            // Split into individual letter spans
+            title.innerHTML = '';
+            for (let i = 0; i < text.length; i++) {
+                const span = document.createElement('span');
+                span.className = 'vanish-letter';
+                span.textContent = text[i] === ' ' ? '\u00A0' : text[i];
+                title.appendChild(span);
+            }
+
+            const letters = title.querySelectorAll('.vanish-letter');
+
+            function runVanishAnimation() {
+                if (hasAnimated) return;
+                hasAnimated = true;
+
+                // Create random groups of 1-3 letters
+                const indices = Array.from({length: letters.length}, (_, i) => i);
+                const groups = [];
+                let idx = 0;
+                while (idx < indices.length) {
+                    const groupSize = Math.min(1 + Math.floor(Math.random() * 3), indices.length - idx);
+                    groups.push(indices.slice(idx, idx + groupSize));
+                    idx += groupSize;
+                }
+
+                // Vanish: each group disappears with staggered delay
+                groups.forEach((group, gi) => {
+                    const delay = 3000 + gi * 400;
+                    group.forEach(i => {
+                        setTimeout(() => {
+                            letters[i].classList.add('vanished');
+                        }, delay);
+                    });
+                });
+
+                // Reappear: all letters fade back at once, 2s after last group vanished
+                const totalVanishTime = 3000 + groups.length * 400 + 2000;
+                setTimeout(() => {
+                    letters.forEach(l => l.classList.add('fade-return'));
+                    letters.forEach(l => l.classList.remove('vanished'));
+                    // Clean up fade-return class after transition
+                    setTimeout(() => {
+                        letters.forEach(l => l.classList.remove('fade-return'));
+                        hasAnimated = false;
+                    }, 2000);
+                }, totalVanishTime);
+            }
+
+            // Trigger when chapter panel scrolls into view
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        runVanishAnimation();
+                    }
+                });
+            }, { threshold: 0.5 });
+            observer.observe(title.closest('.tdmv-intro-chapter') || title);
+        })();
     </script>
 
     <!-- Leaflet Map -->

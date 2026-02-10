@@ -201,6 +201,23 @@
     color: var(--tdmv-text);
 }
 
+/* Chapter title vanish animation */
+.vanish-letter {
+    display: inline-block;
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.vanish-letter.vanished {
+    opacity: 0;
+    transform: translateY(8px);
+}
+
+.vanish-letter.fade-return {
+    transition: opacity 2s ease-in-out, transform 2s ease-in-out;
+}
+
 .tdmv-chapter-period {
     font-family: 'Scala Sans SC', sans-serif;
     font-size: 0.85rem;
@@ -667,7 +684,7 @@
 .tdmv-slopen-top {
     display: flex;
     align-items: stretch;
-    justify-content: center;
+    justify-content: flex-start;
     gap: 3rem;
     width: 100%;
 }
@@ -958,7 +975,7 @@
 /* Statistics row */
 .tdmv-slopen-stats {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     gap: 4rem;
     padding-top: 1.5rem;
     border-top: 1px solid rgba(255, 255, 255, 0.15);
@@ -966,7 +983,7 @@
 }
 
 .tdmv-stat-item {
-    text-align: center;
+    text-align: left;
 }
 
 .tdmv-stat-number {
@@ -1934,11 +1951,14 @@
     align-items: flex-start;
 }
 
-/* Spiegel foto's - vaste dimensies (4:3 aspect ratio) */
+/* Spiegel foto's - zelfde grootte als originele foto */
 .spiegel-photo {
     transition: opacity 0.5s ease;
+}
+
+.spiegel-photo.spiegel-active {
+    width: 100% !important;
     height: 70vh !important;
-    width: calc(70vh * 4 / 3) !important;
     object-fit: cover;
 }
 
@@ -1949,8 +1969,8 @@
 /* Container voor spiegel foto met caption overlay */
 .tdmv-spiegel-container {
     position: relative;
-    width: calc(70vh * 4 / 3);
     height: 70vh;
+    overflow: hidden;
 }
 
 /* Caption overlay voor spiegel foto's */
