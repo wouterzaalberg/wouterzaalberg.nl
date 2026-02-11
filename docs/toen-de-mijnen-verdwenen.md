@@ -66,6 +66,9 @@ Toggle knoppen onder bijschriften om historische foto's te tonen:
 | 10 | "Bekijk de houtproductie" | "Bekijk de productiebossen" | Nee |
 | 11 | "Bekijk de Wilhelmina in 1970" | "Bekijk de Wilhelminaberg" | Nee |
 | 22 | "Bekijk Staatsmijn Hendrik" | "Bekijk de laatste gebouwen" | Nee |
+| 27 | "Kijk hier naar de kerk ondergronds" | "Bekijk het verdwijnen van de kerk" | Ja - Barbara-beeldje 660m verdieping Staatsmijn Maurits |
+| 31 | "Bekijk het hoofdkantoor" | "Bekijk het winkelcentrum" | Nee |
+| 57 | "Bekijk een muzikant in 1954" | "Bekijk Emeli" | Ja - Muzikant J. Prinkaerts Harmonie-orkest ON Mijnen |
 
 ### Technisch
 - Alle spiegel foto's in `.tdmv-spiegel-container` wrapper
@@ -84,6 +87,8 @@ Toggle knoppen onder bijschriften om historische foto's te tonen:
 - Klikbare mijnnamen in statistieken
 - **Statistieken styling**: mijnnaam 0.8rem, locatie+diepte 0.7rem wit (#fff), data 0.8rem
 - **Bars**: productie 16px, arbeiders 10px
+- **Popup foto's**: responsive sizing met `clamp(150px, 25vw, 300px)`, desktop minWidth 300, mobiel minWidth 150
+- **Marker → stat highlight**: bij popupopen wordt corresponderende mijnnaam wit met text-shadow glow, bij popupclose reset
 
 ## Insert Panels
 | Insert | Deel | Fade-out trigger |
@@ -98,7 +103,7 @@ Toggle knoppen onder bijschriften om historische foto's te tonen:
 - Gele instructiebalk boven kaart: "Swipe over de kaart om de verschillen voor en na de mijnsluitingen te zien"
 - Label verschijnt bij >70% of <30% swipe positie
 - Layout links uitgelijnd met titel
-- Statistieken (4 getallen): count-up animatie van 0 naar eindwaarde (1.5s, ease-out cubic)
+- Statistieken (4 getallen): count-up animatie van 0 naar eindwaarde (2.5s, ease-out quadratic)
   - 75.000 banen verloren (rood), 14.000 nieuwe banen (groen), 762 hectare, 535 miljoen gulden
   - Triggert via IntersectionObserver (30% threshold)
 
@@ -106,8 +111,9 @@ Toggle knoppen onder bijschriften om historische foto's te tonen:
 - Foto 550px breed, bijschrift "Foto Ron Meyer"
 - Statistieken: uitkeringen, gezondheid, arbeidsparticipatie, woningwaarde
 - Demografische data: leeftijdsgroepen, migratieachtergrond
-- Count-up animatie met data-prefix support (voor € teken)
+- Count-up animatie (2.5s, ease-out quadratic) met data-prefix support (voor € teken)
 - Bar charts
+- **Grotere statistieken**: bevolking 4.5rem, intro 0.9rem, sublabel 1.05rem, gemeenten/demografie 0.85rem
 
 ## Foto Groottes
 - Standaard: 70vh
