@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- SEO Meta Tags -->
-    <title>Wouter Zaalberg - Documentaire Fotograaf | Nederland in Verhalen</title>
-    <meta name="description" content="Wouter Zaalberg is een documentaire fotograaf uit Amsterdam die Nederland fotografeert in grote en kleine verhalen. Bekijk projecten over de mijnstreek, invasieve exoten, de Amsterdamse haven en meer.">
+    <title>Wouter Zaalberg - Documentairefotograaf</title>
+    <meta name="description" content="Wouter Zaalberg is een documentairefotograaf uit Amsterdam die Nederland fotografeert in grote en kleine verhalen. Bekijk projecten over de mijnstreek, invasieve exoten, de Amsterdamse haven en meer.">
     <meta name="keywords" content="Wouter Zaalberg, fotograaf, documentaire fotografie, Nederland, Amsterdam, fotojournalistiek, mijnstreek, exoten, haven">
     <meta name="author" content="Wouter Zaalberg">
     <link rel="canonical" href="https://wouterzaalberg.nl/">
@@ -14,15 +14,15 @@
     <!-- Open Graph / Social Media -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://wouterzaalberg.nl/">
-    <meta property="og:title" content="Wouter Zaalberg - Documentaire Fotograaf">
-    <meta property="og:description" content="Documentaire fotograaf uit Amsterdam die Nederland fotografeert in grote en kleine verhalen.">
+    <meta property="og:title" content="Wouter Zaalberg - Documentairefotograaf">
+    <meta property="og:description" content="Documentairefotograaf uit Amsterdam die Nederland fotografeert in grote en kleine verhalen.">
     <meta property="og:image" content="https://wouterzaalberg.nl/images/de-exoten.jpg">
     <meta property="og:locale" content="nl_NL">
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Wouter Zaalberg - Documentaire Fotograaf">
-    <meta name="twitter:description" content="Documentaire fotograaf uit Amsterdam die Nederland fotografeert in grote en kleine verhalen.">
+    <meta name="twitter:title" content="Wouter Zaalberg - Documentairefotograaf">
+    <meta name="twitter:description" content="Documentairefotograaf uit Amsterdam die Nederland fotografeert in grote en kleine verhalen.">
     <meta name="twitter:image" content="https://wouterzaalberg.nl/images/de-exoten.jpg">
 
     <!-- Structured Data -->
@@ -52,14 +52,35 @@
     <section class="hero-section">
         <div class="hero-image">
             <!-- Desktop hero images -->
-            <img id="heroImage1" class="hero-img hero-img-desktop" src="images/de-exoten.jpg" alt="Wouter Zaalberg">
-            <img id="heroImage2" class="hero-img hero-img-desktop" src="images/de-exoten.jpg" alt="Wouter Zaalberg">
+            <picture>
+                <source srcset="images/de-exoten.webp" type="image/webp">
+                <img id="heroImage1" class="hero-img hero-img-desktop" src="images/de-exoten.jpg" alt="Wouter Zaalberg">
+            </picture>
+            <picture>
+                <source srcset="images/de-exoten.webp" type="image/webp">
+                <img id="heroImage2" class="hero-img hero-img-desktop" src="images/de-exoten.jpg" alt="Wouter Zaalberg">
+            </picture>
             <!-- Mobile hero images (rotating) -->
-            <img class="hero-img-mobile" src="toen-de-mijnen-verdwenen/Foto 1.jpg" alt="Toen de Mijnen Verdwenen" data-index="0" data-series="toen-de-mijnen-verdwenen.html" data-glow="#d4937a">
-            <img class="hero-img-mobile" src="de-exoten/1.jpg" alt="De Exoten" data-index="1" data-series="de-exoten.html" data-glow="#8aab7a">
-            <img class="hero-img-mobile" src="mijn-tattoos/4a.jpg" alt="Mijn Tatoeages" data-index="2" data-series="mijn-tatoeages.html" data-glow="#d4b89a">
-            <img class="hero-img-mobile" src="a-better-port/1.jpg" alt="A Better Port" data-index="3" data-series="a-better-port.html" data-glow="#e8d89a">
-            <img class="hero-img-mobile" src="in-blauw-licht/foto 1.jpg" alt="In Blauw Licht" data-index="4" data-series="in-blauw-licht.html" data-glow="#8ab4cc">
+            <picture>
+                <source srcset="toen-de-mijnen-verdwenen/Foto 1.webp" type="image/webp">
+                <img class="hero-img-mobile" src="toen-de-mijnen-verdwenen/Foto 1.jpg" alt="Toen de Mijnen Verdwenen" data-index="0" data-series="toen-de-mijnen-verdwenen.html" data-glow="#d4937a">
+            </picture>
+            <picture>
+                <source srcset="de-exoten/1.webp" type="image/webp">
+                <img class="hero-img-mobile" src="de-exoten/1.jpg" alt="De Exoten" data-index="1" data-series="de-exoten.html" data-glow="#8aab7a">
+            </picture>
+            <picture>
+                <source srcset="mijn-tattoos/4a.webp" type="image/webp">
+                <img class="hero-img-mobile" src="mijn-tattoos/4a.jpg" alt="Mijn Tatoeages" data-index="2" data-series="mijn-tatoeages.html" data-glow="#d4b89a">
+            </picture>
+            <picture>
+                <source srcset="a-better-port/1.webp" type="image/webp">
+                <img class="hero-img-mobile" src="a-better-port/1.jpg" alt="A Better Port" data-index="3" data-series="a-better-port.html" data-glow="#e8d89a">
+            </picture>
+            <picture>
+                <source srcset="in-blauw-licht/foto 1.webp" type="image/webp">
+                <img class="hero-img-mobile" src="in-blauw-licht/foto 1.jpg" alt="In Blauw Licht" data-index="4" data-series="in-blauw-licht.html" data-glow="#8ab4cc">
+            </picture>
             <p class="hero-caption" id="heroCaption"></p>
 
             <!-- All content overlay on right side -->
@@ -118,8 +139,14 @@
     <!-- About Section: Full Width Image with Text Overlay -->
     <section class="about-section">
         <div class="about-image">
-            <img src="images/werkterrein.jpg" alt="Dit land is mijn werkterrein" class="about-img-desktop">
-                <img src="de-exoten/53.jpg" alt="Dit land is mijn werkterrein" class="about-img-mobile">
+            <picture>
+                <source srcset="images/werkterrein.webp" type="image/webp">
+                <img src="images/werkterrein.jpg" alt="Dit land is mijn werkterrein" class="about-img-desktop">
+            </picture>
+                <picture>
+                    <source srcset="de-exoten/53.webp" type="image/webp">
+                    <img src="de-exoten/53.jpg" alt="Dit land is mijn werkterrein" class="about-img-mobile">
+                </picture>
             <div class="about-text-overlay">
                 <h2 class="about-heading">Nederland als werkterrein</h2>
                 <div class="about-text-desktop">
@@ -139,8 +166,14 @@
     <section class="work-section" id="work">
         <div class="work-image">
             <!-- Carousel met meerdere achtergrondafbeeldingen -->
-            <img id="workImage1" class="work-img active" src="de-onmisbaren/7.jpg" alt="Werk in opdracht">
-            <img id="workImage2" class="work-img" src="de-onmisbaren/7.jpg" alt="Werk in opdracht">
+            <picture>
+                <source srcset="de-onmisbaren/7.webp" type="image/webp">
+                <img id="workImage1" class="work-img active" src="de-onmisbaren/7.jpg" alt="Werk in opdracht">
+            </picture>
+            <picture>
+                <source srcset="de-onmisbaren/7.webp" type="image/webp">
+                <img id="workImage2" class="work-img" src="de-onmisbaren/7.jpg" alt="Werk in opdracht">
+            </picture>
             <!-- Grid voor meerdere foto's/video's -->
             <div id="workGrid" class="work-grid">
                 <img class="grid-img" src="" alt="">
@@ -174,84 +207,204 @@
             </div>
             <div class="logo-grid">
                 <div class="logo-item active" data-image="de-onmisbaren/7.jpg" data-caption="Khadija, schoonmaakster. Voor een campagne van FNV. Opdrachtgever: FNV" data-caption-color="#0099d8" data-text-color="#ffffff">
-                    <img src="logo's/grijs/fnv.jpg" alt="FNV" class="logo-grey">
-                    <img src="logo's/kleur/fnv.jpg" alt="FNV" class="logo-color">
+                    <picture>
+                        <source srcset="logo's/grijs/fnv.webp" type="image/webp">
+                        <img src="logo's/grijs/fnv.jpg" alt="FNV" class="logo-grey">
+                    </picture>
+                    <picture>
+                        <source srcset="logo's/kleur/fnv.webp" type="image/webp">
+                        <img src="logo's/kleur/fnv.jpg" alt="FNV" class="logo-color">
+                    </picture>
                 </div>
                 <div class="logo-item" data-grid="true" data-images="het-noordzeekanaal-gebied/6.jpg,het-noordzeekanaal-gebied/5.jpg,het-noordzeekanaal-gebied/8.jpg,het-noordzeekanaal-gebied/10.jpg" data-caption="Portretten van werknemers in het Noordzeekanaalgebied. Opdrachtgever: Programmabureau Noordzeekanaalgebied" data-caption-color="#7b68a6" data-grid-cols="2">
-                    <img src="logo's/grijs/nzkg.jpg" alt="NZKG" class="logo-grey">
-                    <img src="logo's/kleur/nzkg.jpg" alt="NZKG" class="logo-color">
+                    <picture>
+                        <source srcset="logo's/grijs/nzkg.webp" type="image/webp">
+                        <img src="logo's/grijs/nzkg.jpg" alt="NZKG" class="logo-grey">
+                    </picture>
+                    <picture>
+                        <source srcset="logo's/kleur/nzkg.webp" type="image/webp">
+                        <img src="logo's/kleur/nzkg.jpg" alt="NZKG" class="logo-color">
+                    </picture>
                 </div>
                 <div class="logo-item" data-grid="true" data-images="werk-in-opdracht/cordaan 1.jpg,werk-in-opdracht/cordaan 2.jpg,werk-in-opdracht/cordaan 3.jpg,werk-in-opdracht/cordaan4.jpg" data-caption="Foto's voor de website van Cordaan. Opdrachtgever: Cordaan" data-caption-color="#3b7ab8" data-grid-cols="2">
-                    <img src="logo's/grijs/cordaan.jpg" alt="Cordaan" class="logo-grey">
-                    <img src="logo's/kleur/cordaan.jpg" alt="Cordaan" class="logo-color">
+                    <picture>
+                        <source srcset="logo's/grijs/cordaan.webp" type="image/webp">
+                        <img src="logo's/grijs/cordaan.jpg" alt="Cordaan" class="logo-grey">
+                    </picture>
+                    <picture>
+                        <source srcset="logo's/kleur/cordaan.webp" type="image/webp">
+                        <img src="logo's/kleur/cordaan.jpg" alt="Cordaan" class="logo-color">
+                    </picture>
                 </div>
                 <div class="logo-item" data-grid="true" data-images="werk-in-opdracht/politie 1.jpg,werk-in-opdracht/politie 2.jpg,werk-in-opdracht/politie 3.jpg,werk-in-opdracht/politie 4.jpg" data-caption="Portretten en actiefoto's voor de politie (voor allerlei interne media). Opdrachtgever: Politie" data-caption-color="#1e3a6e" data-grid-cols="2">
-                    <img src="logo's/grijs/politie.jpg" alt="Politie" class="logo-grey">
-                    <img src="logo's/kleur/politie.jpg" alt="Politie" class="logo-color">
+                    <picture>
+                        <source srcset="logo's/grijs/politie.webp" type="image/webp">
+                        <img src="logo's/grijs/politie.jpg" alt="Politie" class="logo-grey">
+                    </picture>
+                    <picture>
+                        <source srcset="logo's/kleur/politie.webp" type="image/webp">
+                        <img src="logo's/kleur/politie.jpg" alt="Politie" class="logo-color">
+                    </picture>
                 </div>
                 <div class="logo-item" data-grid="true" data-images="werk-in-opdracht/groenlinkspvda.jpg,werk-in-opdracht/groenlinkspvda2.jpg,werk-in-opdracht/groenlinkspvda3.jpg,werk-in-opdracht/groenlinkspvda4.jpg" data-caption="Posters, portretten en documentaire fotografie voor de linkse beweging. Opdrachtgever: GroenLinks-PvdA" data-caption-color="#e30613" data-grid-cols="2">
-                    <img src="logo's/grijs/glpvda.jpg" alt="GroenLinks-PvdA" class="logo-grey">
-                    <img src="logo's/kleur/glpvda.jpg" alt="GroenLinks-PvdA" class="logo-color">
+                    <picture>
+                        <source srcset="logo's/grijs/glpvda.webp" type="image/webp">
+                        <img src="logo's/grijs/glpvda.jpg" alt="GroenLinks-PvdA" class="logo-grey">
+                    </picture>
+                    <picture>
+                        <source srcset="logo's/kleur/glpvda.webp" type="image/webp">
+                        <img src="logo's/kleur/glpvda.jpg" alt="GroenLinks-PvdA" class="logo-color">
+                    </picture>
                 </div>
                 <div class="logo-item" data-grid="true" data-images="werk-in-opdracht/pggm1.jpg,werk-in-opdracht/pggm3.jpg,werk-in-opdracht/pggm2.jpg,werk-in-opdracht/pggm4.jpg" data-caption="Documentairefotografie voor de beeldbank van Pggm&Co. Opdrachtgever: Pggm&Co" data-caption-color="#5c2d91" data-grid-cols="2">
-                    <img src="logo's/grijs/pggm.jpg" alt="PGGM" class="logo-grey">
-                    <img src="logo's/kleur/PGGM.jpg" alt="PGGM" class="logo-color">
+                    <picture>
+                        <source srcset="logo's/grijs/pggm.webp" type="image/webp">
+                        <img src="logo's/grijs/pggm.jpg" alt="PGGM" class="logo-grey">
+                    </picture>
+                    <picture>
+                        <source srcset="logo's/kleur/PGGM.webp" type="image/webp">
+                        <img src="logo's/kleur/PGGM.jpg" alt="PGGM" class="logo-color">
+                    </picture>
                 </div>
                 <div class="logo-item" data-grid="true" data-images="werk-in-opdracht/welwonen 1.jpg,werk-in-opdracht/welwonen 2.jpg,werk-in-opdracht/welwonen 3.jpg,werk-in-opdracht/welwonen 4.jpg" data-caption="Portretten, series, documentairefotografie voor Welwonen. Opdrachtgever: Welwonen" data-caption-color="#0099cc" data-grid-cols="2">
-                    <img src="logo's/grijs/welwonen.jpg" alt="Welwonen" class="logo-grey">
-                    <img src="logo's/kleur/welwonen.jpg" alt="Welwonen" class="logo-color">
+                    <picture>
+                        <source srcset="logo's/grijs/welwonen.webp" type="image/webp">
+                        <img src="logo's/grijs/welwonen.jpg" alt="Welwonen" class="logo-grey">
+                    </picture>
+                    <picture>
+                        <source srcset="logo's/kleur/welwonen.webp" type="image/webp">
+                        <img src="logo's/kleur/welwonen.jpg" alt="Welwonen" class="logo-color">
+                    </picture>
                 </div>
                 <div class="logo-item" data-grid="true" data-images="werk-in-opdracht/send.jpg,werk-in-opdracht/send2.jpg,werk-in-opdracht/send3.jpg,werk-in-opdracht/send 4.jpg" data-caption="Een serie over MEP Mohammed Chahim en zijn poging belangrijke wetgeving door het EP te krijgen. Opdrachtgever: S&D" data-caption-color="#e30613" data-grid-cols="2" data-grid-size="small">
-                    <img src="logo's/grijs/send.jpg" alt="Send" class="logo-grey">
-                    <img src="logo's/kleur/send.jpg" alt="Send" class="logo-color">
+                    <picture>
+                        <source srcset="logo's/grijs/send.webp" type="image/webp">
+                        <img src="logo's/grijs/send.jpg" alt="Send" class="logo-grey">
+                    </picture>
+                    <picture>
+                        <source srcset="logo's/kleur/send.webp" type="image/webp">
+                        <img src="logo's/kleur/send.jpg" alt="Send" class="logo-color">
+                    </picture>
                 </div>
                 <div class="logo-item" data-grid="true" data-images="werk-in-opdracht/aeb 1.jpg,werk-in-opdracht/aeb2.jpg,werk-in-opdracht/aeb3.jpg,werk-in-opdracht/aeb4.jpg" data-caption="Portretten van de directie. Opdrachtgever: AEB" data-caption-color="#e30613" data-grid-cols="2">
-                    <img src="logo's/grijs/aeb.jpg" alt="AEB" class="logo-grey">
-                    <img src="logo's/kleur/aeb.jpg" alt="AEB" class="logo-color">
+                    <picture>
+                        <source srcset="logo's/grijs/aeb.webp" type="image/webp">
+                        <img src="logo's/grijs/aeb.jpg" alt="AEB" class="logo-grey">
+                    </picture>
+                    <picture>
+                        <source srcset="logo's/kleur/aeb.webp" type="image/webp">
+                        <img src="logo's/kleur/aeb.jpg" alt="AEB" class="logo-color">
+                    </picture>
                 </div>
                 <div class="logo-item" data-grid="true" data-images="werk-in-opdracht/nh1.jpg,werk-in-opdracht/nh2.jpg,werk-in-opdracht/nh3.jpg,werk-in-opdracht/nh4.jpg" data-caption="Foto's en video voor diverse onderwerpen. Opdrachtgever: ANP" data-caption-color="#f9b000" data-grid-cols="2">
-                    <img src="logo's/grijs/anp.jpg" alt="ANP" class="logo-grey">
-                    <img src="logo's/kleur/anp.jpg" alt="ANP" class="logo-color">
+                    <picture>
+                        <source srcset="logo's/grijs/anp.webp" type="image/webp">
+                        <img src="logo's/grijs/anp.jpg" alt="ANP" class="logo-grey">
+                    </picture>
+                    <picture>
+                        <source srcset="logo's/kleur/anp.webp" type="image/webp">
+                        <img src="logo's/kleur/anp.jpg" alt="ANP" class="logo-color">
+                    </picture>
                 </div>
                 <div class="logo-item" data-grid="true" data-images="werk-in-opdracht/benvalor 1.jpg,werk-in-opdracht/benvalor 2.jpg,werk-in-opdracht/benvalor 3.jpg,werk-in-opdracht/benvalor 4.jpg" data-caption="Portretten van werknemers voor de site. Opdrachtgever: Benvalor" data-caption-color="#2d5a7b" data-grid-cols="2">
-                    <img src="logo's/grijs/benvalor.jpg" alt="Benvalor" class="logo-grey">
-                    <img src="logo's/kleur/benvalor.jpg" alt="Benvalor" class="logo-color">
+                    <picture>
+                        <source srcset="logo's/grijs/benvalor.webp" type="image/webp">
+                        <img src="logo's/grijs/benvalor.jpg" alt="Benvalor" class="logo-grey">
+                    </picture>
+                    <picture>
+                        <source srcset="logo's/kleur/benvalor.webp" type="image/webp">
+                        <img src="logo's/kleur/benvalor.jpg" alt="Benvalor" class="logo-color">
+                    </picture>
                 </div>
                 <div class="logo-item" data-grid="true" data-images="werk-in-opdracht/gemamsterdam1.jpg,werk-in-opdracht/gemamsterdam2.jpg,werk-in-opdracht/gemamsteradam3.jpg" data-caption="Allerlei opdrachten, bijvoorbeeld portretten van stadsdeelbestuur Amsterdam Oost. Opdrachtgever: Gemeente Amsterdam" data-caption-color="#e30613" data-grid-cols="2">
-                    <img src="logo's/grijs/gemamsterdam.jpg" alt="Gemeente Amsterdam" class="logo-grey">
-                    <img src="logo's/kleur/gemamsterdam.jpg" alt="Gemeente Amsterdam" class="logo-color">
+                    <picture>
+                        <source srcset="logo's/grijs/gemamsterdam.webp" type="image/webp">
+                        <img src="logo's/grijs/gemamsterdam.jpg" alt="Gemeente Amsterdam" class="logo-grey">
+                    </picture>
+                    <picture>
+                        <source srcset="logo's/kleur/gemamsterdam.webp" type="image/webp">
+                        <img src="logo's/kleur/gemamsterdam.jpg" alt="Gemeente Amsterdam" class="logo-color">
+                    </picture>
                 </div>
                 <div class="logo-item" data-grid="true" data-images="werk-in-opdracht/ig1.jpg,werk-in-opdracht/ig2.jpg,werk-in-opdracht/ig 3.jpg,werk-in-opdracht/ig4.jpg" data-caption="Allerlei soorten fotografie, waaronder portretten van de directie. Opdrachtgever: Insinger Gilissen" data-caption-color="#1a9a9a" data-grid-cols="2">
-                    <img src="logo's/grijs/ig.jpg" alt="IG" class="logo-grey">
-                    <img src="logo's/kleur/ig.jpg" alt="IG" class="logo-color">
+                    <picture>
+                        <source srcset="logo's/grijs/ig.webp" type="image/webp">
+                        <img src="logo's/grijs/ig.jpg" alt="IG" class="logo-grey">
+                    </picture>
+                    <picture>
+                        <source srcset="logo's/kleur/ig.webp" type="image/webp">
+                        <img src="logo's/kleur/ig.jpg" alt="IG" class="logo-color">
+                    </picture>
                 </div>
                 <div class="logo-item" data-grid="true" data-images="werk-in-opdracht/meerwaarde.jpg,werk-in-opdracht/meerwaarde 2.jpg,werk-in-opdracht/meerwaarde 3.jpg,werk-in-opdracht/meerwaarde 4.jpg" data-caption="Documentairefotografie voor website, flyers en andere media. Opdrachtgever: Meerwaarde" data-caption-color="#00a651" data-grid-cols="2">
-                    <img src="logo's/grijs/meerwaarde.jpg" alt="Meerwaarde" class="logo-grey">
-                    <img src="logo's/kleur/meerwaarde.jpg" alt="Meerwaarde" class="logo-color">
+                    <picture>
+                        <source srcset="logo's/grijs/meerwaarde.webp" type="image/webp">
+                        <img src="logo's/grijs/meerwaarde.jpg" alt="Meerwaarde" class="logo-grey">
+                    </picture>
+                    <picture>
+                        <source srcset="logo's/kleur/meerwaarde.webp" type="image/webp">
+                        <img src="logo's/kleur/meerwaarde.jpg" alt="Meerwaarde" class="logo-color">
+                    </picture>
                 </div>
                 <div class="logo-item" data-grid="true" data-images="werk-in-opdracht/pnh.mp4,werk-in-opdracht/pnh3.mp4,werk-in-opdracht/pnh2.mp4,werk-in-opdracht/pnh4.mp4" data-grid-zoom="true" data-caption="Film en fotografie over Krachtig Noord Holland Noord. Opdrachtgever: Provincie Noord-Holland" data-caption-color="#f9b000" data-grid-cols="2">
-                    <img src="logo's/grijs/pnh.jpg" alt="Provincie Noord-Holland" class="logo-grey">
-                    <img src="logo's/kleur/pnh.jpg" alt="Provincie Noord-Holland" class="logo-color">
+                    <picture>
+                        <source srcset="logo's/grijs/pnh.webp" type="image/webp">
+                        <img src="logo's/grijs/pnh.jpg" alt="Provincie Noord-Holland" class="logo-grey">
+                    </picture>
+                    <picture>
+                        <source srcset="logo's/kleur/pnh.webp" type="image/webp">
+                        <img src="logo's/kleur/pnh.jpg" alt="Provincie Noord-Holland" class="logo-color">
+                    </picture>
                 </div>
                 <div class="logo-item" data-grid="true" data-images="werk-in-opdracht/wkpa1.jpg,werk-in-opdracht/wkpa3.jpg,werk-in-opdracht/wkpa2.jpg,werk-in-opdracht/wkpa4.jpg" data-caption="Documentairefotografie en film voor website en andere media. Opdrachtgever: WKPA" data-caption-color="#d4a528" data-grid-cols="2">
-                    <img src="logo's/grijs/wkpa.jpg" alt="WKPA" class="logo-grey">
-                    <img src="logo's/kleur/wkpa.jpg" alt="WKPA" class="logo-color">
+                    <picture>
+                        <source srcset="logo's/grijs/wkpa.webp" type="image/webp">
+                        <img src="logo's/grijs/wkpa.jpg" alt="WKPA" class="logo-grey">
+                    </picture>
+                    <picture>
+                        <source srcset="logo's/kleur/wkpa.webp" type="image/webp">
+                        <img src="logo's/kleur/wkpa.jpg" alt="WKPA" class="logo-color">
+                    </picture>
                 </div>
                 <div class="logo-item" data-grid="true" data-images="werk-in-opdracht/tertium1.mp4,werk-in-opdracht/tertium3.mp4,werk-in-opdracht/tertium2.mp4,werk-in-opdracht/tertium4.mp4" data-grid-zooms="1,1.02,1,1" data-caption="Videoproductie voor Tertium. Opdrachtgever: Tertium" data-caption-color="#2d2d2d" data-grid-cols="2">
-                    <img src="logo's/grijs/tertium.jpg" alt="Tertium" class="logo-grey">
-                    <img src="logo's/kleur/tertium.jpg" alt="Tertium" class="logo-color">
+                    <picture>
+                        <source srcset="logo's/grijs/tertium.webp" type="image/webp">
+                        <img src="logo's/grijs/tertium.jpg" alt="Tertium" class="logo-grey">
+                    </picture>
+                    <picture>
+                        <source srcset="logo's/kleur/tertium.webp" type="image/webp">
+                        <img src="logo's/kleur/tertium.jpg" alt="Tertium" class="logo-color">
+                    </picture>
                 </div>
                 <div class="logo-item" data-grid="true" data-images="werk-in-opdracht/dgz1.jpg,werk-in-opdracht/dgz2.jpg,werk-in-opdracht/dgz3.jpg,werk-in-opdracht/dgz4.jpg" data-caption="Een serie portretten over ex-gedetineerden, voor een campagne over detentie. Opdrachtgever: DeGoedeZaak" data-caption-color="#2d4a8a" data-grid-cols="2">
-                    <img src="logo's/grijs/dgz.jpg" alt="DGZ" class="logo-grey">
-                    <img src="logo's/kleur/dgz.jpg" alt="DGZ" class="logo-color">
+                    <picture>
+                        <source srcset="logo's/grijs/dgz.webp" type="image/webp">
+                        <img src="logo's/grijs/dgz.jpg" alt="DGZ" class="logo-grey">
+                    </picture>
+                    <picture>
+                        <source srcset="logo's/kleur/dgz.webp" type="image/webp">
+                        <img src="logo's/kleur/dgz.jpg" alt="DGZ" class="logo-color">
+                    </picture>
                 </div>
                 <div class="logo-item" data-grid="true" data-images="werk-in-opdracht/taqt1.mp4,werk-in-opdracht/taqt2.mp4,werk-in-opdracht/taqt3.mp4,werk-in-opdracht/taqt4.mp4" data-caption="Film over nieuwbouw in Almere. Opdrachtgever: Gemeente Almere" data-caption-color="#00a0c6" data-grid-cols="2">
-                    <img src="logo's/grijs/gemalmere.jpg" alt="Gemeente Almere" class="logo-grey">
-                    <img src="logo's/kleur/gemalmere.jpg" alt="Gemeente Almere" class="logo-color">
+                    <picture>
+                        <source srcset="logo's/grijs/gemalmere.webp" type="image/webp">
+                        <img src="logo's/grijs/gemalmere.jpg" alt="Gemeente Almere" class="logo-grey">
+                    </picture>
+                    <picture>
+                        <source srcset="logo's/kleur/gemalmere.webp" type="image/webp">
+                        <img src="logo's/kleur/gemalmere.jpg" alt="Gemeente Almere" class="logo-color">
+                    </picture>
                 </div>
                 <div class="logo-item" data-grid="true" data-images="werk-in-opdracht/wormer.jpg,werk-in-opdracht/wormer 2.jpg,werk-in-opdracht/wormer 3.jpg,werk-in-opdracht/wormer 4.jpg" data-caption="Serie portretten over bewoners. Opdrachtgever: Wormer" data-caption-color="#0072bc" data-grid-cols="2">
-                    <img src="logo's/grijs/wormer.jpg" alt="Wormer" class="logo-grey">
-                    <img src="logo's/kleur/wormer.jpg" alt="Wormer" class="logo-color">
+                    <picture>
+                        <source srcset="logo's/grijs/wormer.webp" type="image/webp">
+                        <img src="logo's/grijs/wormer.jpg" alt="Wormer" class="logo-grey">
+                    </picture>
+                    <picture>
+                        <source srcset="logo's/kleur/wormer.webp" type="image/webp">
+                        <img src="logo's/kleur/wormer.jpg" alt="Wormer" class="logo-color">
+                    </picture>
                 </div>
             </div>
         </div>
@@ -260,7 +413,10 @@
     <!-- Contact Section: Background Image -->
     <section id="contact" class="contact-section">
         <div class="contact-image">
-            <img src="images/contact.jpg" alt="Contact">
+            <picture>
+                <source srcset="images/contact.webp" type="image/webp">
+                <img src="images/contact.jpg" alt="Contact">
+            </picture>
             <p class="contact-caption">De Wilhelminaberg, de oude steenberg van de Wilhelmina-mijn. Uit de serie <a href="toen-de-mijnen-verdwenen.html">Toen de Mijnen verdwenen</a></p>
         </div>
         <div class="contact-text-overlay">
@@ -289,6 +445,18 @@
     </section>
 
     <script>
+        // Helper: update img src + picture source srcset voor WebP
+        function updatePictureSource(img, src) {
+            img.src = src;
+            const picture = img.closest('picture');
+            if (picture) {
+                const source = picture.querySelector('source[type="image/webp"]');
+                if (source) {
+                    source.srcset = src ? src.replace(/\.(jpg|jpeg|png)$/i, '.webp') : '';
+                }
+            }
+        }
+
         // Start hero zoom animatie na pagina load
         (function initHeroZoom() {
             const heroImage1 = document.getElementById('heroImage1');
@@ -328,7 +496,7 @@
                     outgoingImage.style.transform = currentTransform;
 
                     // Laad nieuwe afbeelding in inactieve layer en reset zijn transform
-                    inactiveImage.src = newImageSrc;
+                    updatePictureSource(inactiveImage, newImageSrc);
                     inactiveImage.style.transform = '';
 
                     // Cross-fade: verberg actieve, toon inactieve
@@ -497,7 +665,7 @@
                 // Reset alle grid items (images en videos)
                 gridImages.forEach(img => {
                     img.classList.remove('active');
-                    img.src = '';
+                    updatePictureSource(img, '');
                     img.style.transform = '';
                     img.style.objectFit = '';
                     img.style.clipPath = '';
@@ -536,7 +704,7 @@
                     } else {
                         // Afbeelding bestand
                         if (gridImages[index]) {
-                            gridImages[index].src = src;
+                            updatePictureSource(gridImages[index], src);
                             gridImages[index].classList.add('active');
                             if (hasAnyZoom) {
                                 gridImages[index].style.objectFit = 'cover';
@@ -621,7 +789,7 @@
             inactiveImage.offsetHeight; // Force reflow na classes
 
             // Laad nieuwe afbeelding
-            inactiveImage.src = newImageSrc;
+            updatePictureSource(inactiveImage, newImageSrc);
 
             const startSlide = () => {
                 // Zet transitie terug aan

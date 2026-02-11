@@ -3,21 +3,277 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Wat kost een stad - Wouter Zaalberg">
-    <title>Wat kost een stad - Wouter Zaalberg</title>
+    <meta name="robots" content="noindex, nofollow">
+    <title>Wat kost een stad? - Wouter Zaalberg</title>
+    <meta name="description" content="De dagelijkse behoefte van Amsterdam aan grondstoffen in beeld.">
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/wat-kost-een-stad.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Limelight&display=swap" rel="stylesheet">
 </head>
 <body>
-    <section class="project-page">
-        <div class="project-header">
-            <div>
-                <a href="/" class="back-link">← Terug naar home</a>
-                <h1>Wat kost een stad</h1>
+    <!-- Navigatie -->
+    <nav class="horizontal-nav">
+        <a href="index.html" class="back-link">← Terug</a>
+    </nav>
+
+    <!-- Intro Gordijn -->
+    <div class="intro-curtain" id="introCurtain">
+        <div class="curtain-left"></div>
+        <div class="curtain-right"></div>
+        <div class="curtain-title">
+            <h1>Wat kost<br>een stad?</h1>
+            <p>De dagelijkse behoefte van Amsterdam</p>
+            <div class="amsterdam-kruisen">
+                <div class="kruisen-left">
+                    <span class="kruis">×</span>
+                    <span class="kruis">×</span>
+                    <span class="kruis">×</span>
+                </div>
+                <div class="kruisen-right">
+                    <span class="kruis">×</span>
+                    <span class="kruis">×</span>
+                    <span class="kruis">×</span>
+                </div>
             </div>
         </div>
-        <div class="project-content">
-            <p>Content voor Wat kost een stad komt hier...</p>
+        <span class="scroll-hint">Scroll om te beginnen ↓</span>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="grondstof-slide" id="currentSlide">
+            <h2 class="grondstof-vraag">Wat kost een stad?</h2>
+            <div class="grondstof-content">
+                <div class="grondstof-foto">
+                    <!-- Placeholder -->
+                    [Foto placeholder]
+                </div>
+                <div class="grondstof-antwoord">
+                    <span class="antwoord-getal" id="animatedNumber">0</span>
+                    <span class="antwoord-eenheid">koeien</span>
+                    <span class="berekening-link" id="berekeningLink">klik hier voor berekening</span>
+                    <div class="berekening-panel" id="berekeningPanel">
+                        <p>Amsterdam heeft 920.000 inwoners. Per persoon wordt gemiddeld 0,5 kg rundvlees per week gegeten. Eén koe levert ongeveer 300 kg vlees.</p>
+                        <p><strong>Berekening:</strong> (920.000 × 0,5 ÷ 7) ÷ 300 = 219 koeien per dag</p>
+                        <div class="berekening-bronnen">
+                            <strong>Bronnen:</strong><br>
+                            <a href="#">CBS Bevolkingsstatistieken</a><br>
+                            <a href="#">Voedingscentrum</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </section>
+    </div>
+
+    <!-- Icon Navigatie -->
+    <nav class="icon-nav" id="iconNav">
+        <!-- 25 placeholder icons -->
+        <div class="icon-item active" data-index="0">1</div>
+        <div class="icon-item" data-index="1">2</div>
+        <div class="icon-item" data-index="2">3</div>
+        <div class="icon-item" data-index="3">4</div>
+        <div class="icon-item" data-index="4">5</div>
+        <div class="icon-item" data-index="5">6</div>
+        <div class="icon-item" data-index="6">7</div>
+        <div class="icon-item" data-index="7">8</div>
+        <div class="icon-item" data-index="8">9</div>
+        <div class="icon-item" data-index="9">10</div>
+        <div class="icon-item" data-index="10">11</div>
+        <div class="icon-item" data-index="11">12</div>
+        <div class="icon-item" data-index="12">13</div>
+        <div class="icon-item" data-index="13">14</div>
+        <div class="icon-item" data-index="14">15</div>
+        <div class="icon-item" data-index="15">16</div>
+        <div class="icon-item" data-index="16">17</div>
+        <div class="icon-item" data-index="17">18</div>
+        <div class="icon-item" data-index="18">19</div>
+        <div class="icon-item" data-index="19">20</div>
+        <div class="icon-item" data-index="20">21</div>
+        <div class="icon-item" data-index="21">22</div>
+        <div class="icon-item" data-index="22">23</div>
+        <div class="icon-item" data-index="23">24</div>
+        <div class="icon-item" data-index="24">25</div>
+    </nav>
+
+    <script>
+        // ========== DATA (placeholder) ==========
+        const grondstoffen = [
+            { vraag: "Hoeveel koeien heeft Amsterdam dagelijks nodig?", getal: 1234, eenheid: "koeien" },
+            { vraag: "Hoeveel liter water verbruikt Amsterdam per dag?", getal: 89000000, eenheid: "liter water" },
+            { vraag: "Hoeveel broden eet Amsterdam per dag?", getal: 456000, eenheid: "broden" },
+            // ... meer grondstoffen toevoegen
+        ];
+
+        // ========== GORDIJN ANIMATIE ==========
+        const curtain = document.getElementById('introCurtain');
+        let curtainOpened = false;
+
+        function openCurtain() {
+            if (!curtainOpened) {
+                curtain.classList.add('open');
+                curtainOpened = true;
+                // Start getal animatie na gordijn open
+                setTimeout(() => {
+                    animateNumber(grondstoffen[0].getal);
+                }, 800);
+            }
+        }
+
+        // Open gordijn bij scroll of klik
+        window.addEventListener('wheel', openCurtain, { once: true });
+        window.addEventListener('touchstart', openCurtain, { once: true });
+        curtain.addEventListener('click', openCurtain);
+
+        // ========== GETAL ANIMATIE ==========
+        // Elastische easing functie (overshoot en terugveren)
+        function elasticOut(t) {
+            const p = 0.4;
+            return Math.pow(2, -10 * t) * Math.sin((t - p / 4) * (2 * Math.PI) / p) + 1;
+        }
+
+        // Smooth easing met lichte overshoot
+        function smoothOvershoot(t) {
+            const c1 = 1.70158;
+            const c3 = c1 + 1;
+            return 1 + c3 * Math.pow(t - 1, 3) + c1 * Math.pow(t - 1, 2);
+        }
+
+        function animateNumber(target) {
+            const el = document.getElementById('animatedNumber');
+            const duration = 2500;
+            const start = performance.now();
+
+            // Bereken breedte vooraf om layout shift te voorkomen
+            const finalText = target.toLocaleString('nl-NL');
+            el.style.minWidth = (finalText.length * 0.6) + 'em';
+
+            function update(currentTime) {
+                const elapsed = currentTime - start;
+                const progress = Math.min(elapsed / duration, 1);
+
+                // Combineer smooth start met elastisch einde
+                let eased;
+                if (progress < 0.7) {
+                    // Eerste 70%: smooth ease-out
+                    const localProgress = progress / 0.7;
+                    eased = 1 - Math.pow(1 - localProgress, 4);
+                    eased *= 0.95; // Stop op 95% van target
+                } else {
+                    // Laatste 30%: elastisch naar 100%
+                    const localProgress = (progress - 0.7) / 0.3;
+                    const elasticValue = elasticOut(localProgress);
+                    eased = 0.95 + (elasticValue * 0.05);
+                }
+
+                const current = Math.round(eased * target);
+                el.textContent = current.toLocaleString('nl-NL');
+
+                if (progress < 1) {
+                    requestAnimationFrame(update);
+                } else {
+                    // Zorg dat eindwaarde exact klopt
+                    el.textContent = finalText;
+                }
+            }
+
+            requestAnimationFrame(update);
+        }
+
+        // ========== BEREKENING TOGGLE ==========
+        const berekeningLink = document.getElementById('berekeningLink');
+        const berekeningPanel = document.getElementById('berekeningPanel');
+
+        berekeningLink.addEventListener('click', () => {
+            berekeningPanel.classList.toggle('visible');
+            if (berekeningPanel.classList.contains('visible')) {
+                berekeningLink.textContent = 'verberg berekening';
+            } else {
+                berekeningLink.textContent = 'klik hier voor berekening';
+            }
+        });
+
+        // ========== ICON NAVIGATIE ==========
+        const iconItems = document.querySelectorAll('.icon-item');
+        let currentIndex = 0;
+        let scrollTimeout = null;
+        let isScrolling = false;
+
+        function goToSlide(index) {
+            // Begrens index
+            if (index < 0) index = 0;
+            if (index >= iconItems.length) index = iconItems.length - 1;
+
+            currentIndex = index;
+
+            // Update active state
+            iconItems.forEach(i => i.classList.remove('active'));
+            iconItems[currentIndex].classList.add('active');
+
+            // Sluit berekening panel
+            berekeningPanel.classList.remove('visible');
+            berekeningLink.textContent = 'klik hier voor berekening';
+
+            // Update content
+            const data = grondstoffen[currentIndex] || grondstoffen[0];
+            document.querySelector('.antwoord-eenheid').textContent = data.eenheid;
+
+            // Animate number
+            animateNumber(data.getal);
+        }
+
+        // Scroll navigatie
+        window.addEventListener('wheel', (e) => {
+            if (!curtainOpened) return;
+
+            e.preventDefault();
+
+            if (isScrolling) return;
+            isScrolling = true;
+
+            if (e.deltaY > 0) {
+                // Scroll down = volgende
+                goToSlide(currentIndex + 1);
+            } else {
+                // Scroll up = vorige
+                goToSlide(currentIndex - 1);
+            }
+
+            // Debounce
+            setTimeout(() => {
+                isScrolling = false;
+            }, 400);
+        }, { passive: false });
+
+        // Touch swipe support
+        let touchStartY = 0;
+        window.addEventListener('touchstart', (e) => {
+            touchStartY = e.touches[0].clientY;
+        });
+
+        window.addEventListener('touchend', (e) => {
+            if (!curtainOpened) return;
+
+            const touchEndY = e.changedTouches[0].clientY;
+            const diff = touchStartY - touchEndY;
+
+            if (Math.abs(diff) > 50) {
+                if (diff > 0) {
+                    goToSlide(currentIndex + 1);
+                } else {
+                    goToSlide(currentIndex - 1);
+                }
+            }
+        });
+
+        // Klik op icoon
+        iconItems.forEach((item, index) => {
+            item.addEventListener('click', () => {
+                goToSlide(index);
+            });
+        });
+    </script>
 </body>
 </html>
