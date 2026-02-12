@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Haweya Abdillahi — #3 PvdA Amsterdam</title>
+    <meta name="description" content="Haweya Abdillahi, kandidaat #3 PvdA Amsterdam. Gemeenteraadsverkiezingen 18 maart 2026. Stem voor veiligheid, innovatie en een eerlijk Amsterdam.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --red: #e12b1a;
+            --red-dark: #b82215;
+            --red-deeper: #8a1910;
+            --cream: #faf5f0;
+            --near-black: #0d0d0d;
+            --warm-grey: #3a3632;
+            --light-grey: #e8e4df;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        body {
+            font-family: 'Crimson Pro', Georgia, serif;
+            color: var(--near-black);
+            background: var(--cream);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* =========================================
+           GRAIN OVERLAY
+        ========================================= */
+        body::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.025;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+        }
+
+        /* =========================================
+           UTILITY
+        ========================================= */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                        transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .mono {
+            font-family: 'Space Mono', monospace;
+        }
+
+        /* =========================================
+           HERO
+        ========================================= */
+        .hero {
+            min-height: 100vh;
+            min-height: 100svh;
+            background: var(--red);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 3rem 4rem;
+            overflow: hidden;
+        }
+
+        .hero-bg-number {
+            position: absolute;
+            top: -8vw;
+            right: -4vw;
+            font-family: 'Archivo Black', sans-serif;
+            font-size: clamp(40rem, 55vw, 70rem);
+            line-height: 0.75;
+            color: rgba(0, 0, 0, 0.08);
+            pointer-events: none;
+            user-select: none;
+            z-index: 0;
+        }
+
+        .hero-top-bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 2rem 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 2;
+        }
+
+        .hero-pvda {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.75rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .hero-date {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.75rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-list-number {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: clamp(1rem, 1.5vw, 1.4rem);
+            color: rgba(255, 255, 255, 0.6);
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .hero-list-number::before {
+            content: '';
+            display: block;
+            width: 3rem;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.4);
+        }
+
+        .hero-name {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: clamp(3.5rem, 10vw, 9rem);
+            line-height: 0.9;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: -0.02em;
+            margin-bottom: 2rem;
+        }
+
+        .hero-name span {
+            display: block;
+        }
+
+        .hero-name .last-name {
+            color: rgba(255, 255, 255, 0.25);
+            -webkit-text-stroke: 2px rgba(255, 255, 255, 0.9);
+        }
+
+        .hero-tagline {
+            font-family: 'Crimson Pro', serif;
+            font-size: clamp(1.3rem, 2.2vw, 2rem);
+            font-weight: 300;
+            font-style: italic;
+            color: rgba(255, 255, 255, 0.85);
+            max-width: 600px;
+            line-height: 1.4;
+        }
+
+        .hero-scroll-hint {
+            position: absolute;
+            bottom: 3rem;
+            right: 4rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.75rem;
+            color: rgba(255, 255, 255, 0.5);
+            z-index: 2;
+        }
+
+        .hero-scroll-hint span {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.65rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            writing-mode: vertical-rl;
+        }
+
+        .scroll-line {
+            width: 1px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .scroll-line::after {
+            content: '';
+            position: absolute;
+            top: -100%;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #fff;
+            animation: scrollPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes scrollPulse {
+            0% { top: -100%; }
+            50% { top: 100%; }
+            100% { top: 100%; }
+        }
+
+        /* =========================================
+           INTRO / ABOUT
+        ========================================= */
+        .intro {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            min-height: 100vh;
+        }
+
+        .intro-left {
+            background: var(--near-black);
+            padding: 6rem 4rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .intro-left::before {
+            content: '03';
+            position: absolute;
+            bottom: -2rem;
+            left: -1rem;
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 18rem;
+            color: rgba(255, 255, 255, 0.03);
+            line-height: 1;
+            pointer-events: none;
+        }
+
+        .intro-label {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.7rem;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--red);
+            margin-bottom: 2.5rem;
+        }
+
+        .intro-heading {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: clamp(2rem, 3.5vw, 3.5rem);
+            color: #fff;
+            text-transform: uppercase;
+            line-height: 1;
+            margin-bottom: 2rem;
+        }
+
+        .intro-text {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.7);
+            font-weight: 300;
+            max-width: 480px;
+        }
+
+        .intro-text strong {
+            color: #fff;
+            font-weight: 600;
+        }
+
+        .intro-right {
+            background: var(--cream);
+            padding: 6rem 4rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .stat-block {
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+            padding: 2rem 0;
+        }
+
+        .stat-label {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.65rem;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--warm-grey);
+            opacity: 0.6;
+            margin-bottom: 0.75rem;
+        }
+
+        .stat-value {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 1.3rem;
+            text-transform: uppercase;
+            color: var(--near-black);
+        }
+
+        .stat-value.red {
+            color: var(--red);
+        }
+
+        .stat-desc {
+            font-size: 1rem;
+            color: var(--warm-grey);
+            margin-top: 0.5rem;
+            line-height: 1.5;
+            font-weight: 300;
+        }
+
+        /* =========================================
+           THEMES / STANDPUNTEN
+        ========================================= */
+        .themes {
+            padding: 8rem 4rem;
+            background: #fff;
+            position: relative;
+        }
+
+        .themes::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 1px;
+            height: 6rem;
+            background: var(--light-grey);
+        }
+
+        .themes-header {
+            text-align: center;
+            margin-bottom: 6rem;
+        }
+
+        .themes-label {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.7rem;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--red);
+            margin-bottom: 1.5rem;
+        }
+
+        .themes-title {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            text-transform: uppercase;
+            line-height: 1;
+        }
+
+        .themes-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .theme-card {
+            padding: 3rem;
+            border: 1px solid var(--light-grey);
+            position: relative;
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            cursor: default;
+        }
+
+        .theme-card:hover {
+            background: var(--near-black);
+            border-color: var(--near-black);
+        }
+
+        .theme-card:hover .theme-number,
+        .theme-card:hover .theme-name,
+        .theme-card:hover .theme-desc {
+            color: #fff;
+        }
+
+        .theme-card:hover .theme-number {
+            color: var(--red);
+        }
+
+        .theme-number {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 4rem;
+            color: var(--light-grey);
+            line-height: 1;
+            margin-bottom: 2rem;
+            transition: color 0.5s ease;
+        }
+
+        .theme-name {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 1.3rem;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            transition: color 0.5s ease;
+        }
+
+        .theme-desc {
+            font-size: 1.05rem;
+            line-height: 1.7;
+            color: var(--warm-grey);
+            font-weight: 300;
+            transition: color 0.5s ease;
+        }
+
+        /* =========================================
+           QUOTE SECTION
+        ========================================= */
+        .quote-section {
+            background: var(--near-black);
+            padding: 8rem 4rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .quote-section::before {
+            content: '\201C';
+            position: absolute;
+            top: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: 'Crimson Pro', serif;
+            font-size: 15rem;
+            color: rgba(225, 43, 26, 0.15);
+            line-height: 1;
+            pointer-events: none;
+        }
+
+        .quote-text {
+            font-family: 'Crimson Pro', serif;
+            font-size: clamp(1.5rem, 3vw, 2.5rem);
+            font-weight: 300;
+            font-style: italic;
+            color: #fff;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            line-height: 1.5;
+            position: relative;
+            z-index: 1;
+        }
+
+        .quote-attr {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.7rem;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--red);
+        }
+
+        /* =========================================
+           CTA
+        ========================================= */
+        .cta-section {
+            background: var(--red);
+            padding: 8rem 4rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: 'STEM';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: 'Archivo Black', sans-serif;
+            font-size: clamp(10rem, 25vw, 25rem);
+            color: rgba(0, 0, 0, 0.06);
+            white-space: nowrap;
+            pointer-events: none;
+        }
+
+        .cta-content {
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-date {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.75rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 2rem;
+        }
+
+        .cta-heading {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: clamp(3rem, 8vw, 7rem);
+            color: #fff;
+            text-transform: uppercase;
+            line-height: 0.9;
+            margin-bottom: 1rem;
+        }
+
+        .cta-heading .outline {
+            -webkit-text-stroke: 2px #fff;
+            color: transparent;
+        }
+
+        .cta-sub {
+            font-family: 'Crimson Pro', serif;
+            font-size: 1.3rem;
+            font-weight: 300;
+            font-style: italic;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 3rem;
+        }
+
+        .cta-button {
+            display: inline-block;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.8rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--red);
+            background: #fff;
+            padding: 1.2rem 3.5rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .cta-button:hover {
+            background: var(--near-black);
+            color: #fff;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        /* =========================================
+           FOOTER
+        ========================================= */
+        .footer {
+            background: var(--near-black);
+            padding: 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .footer-left {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .footer-name {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 1rem;
+            text-transform: uppercase;
+            color: #fff;
+        }
+
+        .footer-party {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.65rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--red);
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .footer-social a {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.7rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.4);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-social a:hover {
+            color: #fff;
+        }
+
+        .footer-right {
+            text-align: right;
+        }
+
+        .footer-election {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.65rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.3);
+        }
+
+        /* =========================================
+           RESPONSIVE
+        ========================================= */
+        @media (max-width: 1024px) {
+            .themes-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .theme-card {
+                border-bottom: none;
+            }
+
+            .theme-card:last-child {
+                border-bottom: 1px solid var(--light-grey);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                padding: 2rem;
+                justify-content: flex-end;
+                padding-bottom: 4rem;
+            }
+
+            .hero-top-bar {
+                padding: 1.5rem 2rem;
+            }
+
+            .hero-bg-number {
+                font-size: 50rem;
+                right: -8vw;
+            }
+
+            .hero-name .last-name {
+                -webkit-text-stroke: 1px rgba(255, 255, 255, 0.9);
+            }
+
+            .hero-scroll-hint {
+                display: none;
+            }
+
+            .intro {
+                grid-template-columns: 1fr;
+            }
+
+            .intro-left,
+            .intro-right {
+                padding: 4rem 2rem;
+            }
+
+            .themes {
+                padding: 5rem 2rem;
+            }
+
+            .theme-card {
+                padding: 2rem;
+            }
+
+            .quote-section {
+                padding: 5rem 2rem;
+            }
+
+            .cta-section {
+                padding: 6rem 2rem;
+            }
+
+            .footer {
+                flex-direction: column;
+                gap: 2rem;
+                padding: 3rem 2rem;
+                align-items: flex-start;
+            }
+
+            .footer-right {
+                text-align: left;
+            }
+        }
+
+        /* =========================================
+           LOAD ANIMATION
+        ========================================= */
+        .hero-content > * {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .hero-list-number { animation-delay: 0.2s; }
+        .hero-name { animation-delay: 0.4s; }
+        .hero-tagline { animation-delay: 0.7s; }
+
+        @keyframes fadeUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-top-bar {
+            opacity: 0;
+            animation: fadeIn 1s ease 1s forwards;
+        }
+
+        .hero-scroll-hint {
+            opacity: 0;
+            animation: fadeIn 1s ease 1.5s forwards;
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ================================ HERO ================================ -->
+    <section class="hero">
+        <div class="hero-bg-number" aria-hidden="true">3</div>
+
+        <div class="hero-top-bar">
+            <span class="hero-pvda">PvdA Amsterdam</span>
+            <span class="hero-date">18 Maart 2026</span>
+        </div>
+
+        <div class="hero-content">
+            <div class="hero-list-number">Lijst 3</div>
+            <h1 class="hero-name">
+                <span>Haweya</span>
+                <span class="last-name">Abdillahi</span>
+            </h1>
+            <p class="hero-tagline">Drie culturen, één stad, één missie.<br>Kandidaat gemeenteraad Amsterdam.</p>
+        </div>
+
+        <div class="hero-scroll-hint">
+            <span>Scroll</span>
+            <div class="scroll-line"></div>
+        </div>
+    </section>
+
+    <!-- ================================ INTRO ================================ -->
+    <section class="intro">
+        <div class="intro-left">
+            <div class="reveal">
+                <div class="intro-label">Over Haweya</div>
+                <h2 class="intro-heading">Geboren in Utrecht,<br>Amsterdammer geworden</h2>
+                <p class="intro-text">
+                    Als kind las mijn Somalische vader mij de Koran voor als ik ging slapen, en mijn Surinaamse oma de Bijbel. Overdag ging ik naar mijn Nederlandse school. <strong>Drie culturen, talen en tradities</strong> — en samen vormden ze mijn thuis.
+                </p>
+                <br>
+                <p class="intro-text">
+                    Die veelkleurigheid wordt te vaak als zwakte gezien. Maar het is precies wat Amsterdam zo bijzonder maakt. <strong>De belofte van deze stad</strong> — dat je hier kunt zijn wie je bent — is het waard om voor te vechten.
+                </p>
+            </div>
+        </div>
+
+        <div class="intro-right">
+            <div class="reveal">
+                <div class="stat-block">
+                    <div class="stat-label">Positie</div>
+                    <div class="stat-value red">#3 op de lijst</div>
+                    <div class="stat-desc">Hoogste nieuwe binnenkomer PvdA Amsterdam</div>
+                </div>
+                <div class="stat-block">
+                    <div class="stat-label">Huidige functie</div>
+                    <div class="stat-value">Nationale Politie</div>
+                    <div class="stat-desc">Digitalisering en digitale transformatie</div>
+                </div>
+                <div class="stat-block">
+                    <div class="stat-label">Expertise</div>
+                    <div class="stat-value">Digitalisering &middot; AI &middot; Ethiek</div>
+                    <div class="stat-desc">De kansen en gevaren van technologie voor inwoners, kinderen en wijken</div>
+                </div>
+                <div class="stat-block">
+                    <div class="stat-label">Verkiezing</div>
+                    <div class="stat-value red">18 Maart 2026</div>
+                    <div class="stat-desc">Gemeenteraadsverkiezingen Amsterdam</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================ THEMES ================================ -->
+    <section class="themes">
+        <div class="themes-header reveal">
+            <div class="themes-label">Waar ik voor sta</div>
+            <h2 class="themes-title">Drie thema's<br>voor Amsterdam</h2>
+        </div>
+
+        <div class="themes-grid">
+            <div class="theme-card reveal">
+                <div class="theme-number">01</div>
+                <h3 class="theme-name">Een betaalbaar<br>Amsterdam</h3>
+                <p class="theme-desc">
+                    Ik kon op mijn 28ste nog een klein huisje kopen. Dat is nu ondenkbaar. Vrienden van mij — een lerares en iemand uit de jeugdzorg — kunnen geen betaalbare woning vinden. Hun huur is hoger dan mijn hypotheek. Dat is absurd, en niet goed voor Amsterdam. De stad moet betaalbaar blijven voor de mensen die haar draaiende houden.
+                </p>
+            </div>
+
+            <div class="theme-card reveal">
+                <div class="theme-number">02</div>
+                <h3 class="theme-name">Digitalisering<br>&amp; AI</h3>
+                <p class="theme-desc">
+                    Iedereen heeft de wereld in z'n zak — ook onze kinderen. Twaalfjarigen worden online geronseld voor criminaliteit. De overheid loopt mijlenver achter. Tegelijk dreigt AI de ongelijkheid te vergroten in plaats van te verkleinen. We moeten sturen en beschermen, niet pas reageren als het te laat is. En we moeten ons afvragen: als we het kunnen, moeten we het dan ook willen?
+                </p>
+            </div>
+
+            <div class="theme-card reveal">
+                <div class="theme-number">03</div>
+                <h3 class="theme-name">Een stad die<br>verbindt</h3>
+                <p class="theme-desc">
+                    Er waait een extreemrechtse wind door Nederland. Amsterdam biedt daar moedig weerstand tegen. Mensen zoals ik, met een bi-culturele achtergrond, vormen hier de meerderheid. Diversiteit is geen bedreiging maar een kracht. Ik wil laten zien dat wij er zijn, dat wij Amsterdam zijn, dat wij Nederland zijn. En dat is precies wat populisten bedreigend vinden.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================ QUOTE ================================ -->
+    <section class="quote-section">
+        <div class="reveal">
+            <p class="quote-text">
+                Amsterdam gaf mij de ruimte om mezelf te ontdekken. Als Nederlander met Somalische en Surinaamse wortels, als politiemedewerker die moslim is, als vrouw die haar plek vond in een stad die groter is dan één cultuur, één verhaal, één kleur.
+            </p>
+            <div class="quote-attr">Haweya Abdillahi</div>
+        </div>
+    </section>
+
+    <!-- ================================ CTA ================================ -->
+    <section class="cta-section">
+        <div class="cta-content reveal">
+            <div class="cta-date">Gemeenteraadsverkiezingen &middot; 18 maart 2026</div>
+            <h2 class="cta-heading">
+                Stem<br><span class="outline">Haweya</span>
+            </h2>
+            <p class="cta-sub">Voor een stad die verbindt, beschermt en niemand laat vallen.</p>
+            <a href="https://amsterdam.pvda.nl" target="_blank" rel="noopener" class="cta-button">Meer over PvdA Amsterdam</a>
+        </div>
+    </section>
+
+    <!-- ================================ FOOTER ================================ -->
+    <footer class="footer">
+        <div class="footer-left">
+            <div class="footer-name">Haweya Abdillahi</div>
+            <div class="footer-party">PvdA Amsterdam &mdash; #3</div>
+            <div class="footer-social">
+                <a href="https://www.linkedin.com/in/haweya-abdillahi-4650a511/" target="_blank" rel="noopener">LinkedIn</a>
+                <a href="https://amsterdam.pvda.nl" target="_blank" rel="noopener">PvdA</a>
+            </div>
+        </div>
+        <div class="footer-right">
+            <div class="footer-election">GR2026 &middot; Amsterdam</div>
+        </div>
+    </footer>
+
+    <script>
+        // Scroll reveal
+        const reveals = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, i) => {
+                if (entry.isIntersecting) {
+                    // Stagger children reveals
+                    const delay = entry.target.closest('.themes-grid')
+                        ? Array.from(entry.target.parentNode.children).indexOf(entry.target) * 150
+                        : 0;
+                    setTimeout(() => {
+                        entry.target.classList.add('visible');
+                    }, delay);
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.15 });
+
+        reveals.forEach(el => observer.observe(el));
+    </script>
+
+</body>
+</html>
