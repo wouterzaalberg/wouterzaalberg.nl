@@ -313,6 +313,44 @@
     display: block;
 }
 
+/* Sound toggle button - rechtsonder in intro */
+.abp-sound-btn {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 36px;
+    height: 36px;
+    background: var(--abp-yellow-solid);
+    border: none;
+    border-radius: 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    transition: all 0.3s ease;
+    z-index: 20;
+}
+
+.abp-sound-btn:hover {
+    background: #d4be5a;
+    transform: scale(1.1);
+}
+
+.abp-sound-btn.sound-enabled {
+    color: #fff;
+    background: var(--abp-yellow-solid);
+}
+
+.abp-sound-btn.sound-enabled .sound-off-line {
+    display: none;
+}
+
+.abp-sound-btn.sound-enabled .sound-on-waves {
+    opacity: 1 !important;
+}
+
+
 /* Info button on intro photo - rechtsonder IN de foto */
 .abp-intro-photo .abp-info-btn {
     position: absolute;
