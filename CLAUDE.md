@@ -13,6 +13,7 @@ Portfolio website voor fotograaf Wouter Zaalberg. Fotografieprojecten over Neder
 > - `docs/de-onmisbaren.md` - Titel foto-fill effect
 > - `docs/een-plek-onder-de-zon.md` - Basis layout
 > - `docs/wat-kost-een-stad.md` - **[IN ONTWIKKELING]** Nog niet gekoppeld
+> - `docs/skoll-wint-de-varsity.md` - Hero states, namen, uren-afteller, finale-video
 
 ## Sitestructuur
 
@@ -34,7 +35,7 @@ Portfolio website voor fotograaf Wouter Zaalberg. Fotografieprojecten over Neder
 - wat-kost-een-stad.html, de-exoten.html, mijn-tatoeages.html, a-better-port.html, in-blauw-licht.html, toen-de-mijnen-verdwenen.html
 
 **Kleine series**:
-- de-buik-van-de-stad.html, het-noordzeekanaal-gebied.html, de-onmisbaren.html, een-plek-onder-de-zon.html
+- de-buik-van-de-stad.html, het-noordzeekanaal-gebied.html, de-onmisbaren.html, een-plek-onder-de-zon.html, skoll-wint-de-varsity.html
 
 **Serie datums** (in intro teksten):
 - Mijn Tatoeages: 2024-2025
@@ -43,6 +44,7 @@ Portfolio website voor fotograaf Wouter Zaalberg. Fotografieprojecten over Neder
 - Toen de Mijnen Verdwenen: 2020-2022
 - Het Noordzeekanaalgebied: 2025
 - De Onmisbaren: 2022
+- Sk&#248;ll wint de Varsity: 2026
 
 ## Layout Conventies
 
@@ -77,6 +79,7 @@ Portfolio website voor fotograaf Wouter Zaalberg. Fotografieprojecten over Neder
 - A Better Port: `#1e4a6d`
 - In Blauw Licht: `#1a3f5c`
 - Toen de Mijnen verdwenen: `#8b2500`
+- Sk&#248;ll wint de Varsity: `#ed1c24`
 
 ## Interactie
 
@@ -163,6 +166,27 @@ Portfolio website voor fotograaf Wouter Zaalberg. Fotografieprojecten over Neder
 - Groene achtergrond `#2d5a27`
 - 24 foto's, gap 8rem
 
+### Sk&#248;ll wint de Varsity
+- Gekoppeld aan homepage (kleine series)
+- Witte achtergrond, Sk&#248;ll-rood accent `#ed1c24`
+- Foto's in `skoll/` map
+- Hero met 3 states: onscherpe foto + titel → intro tekst → scherpe foto + namen
+  - **Titel**: Vlag-animatie (flagWave) — letters golven als vlag in de wind
+  - **Titel dissolve**: Bij scroll naar state 1 lossen titelletters op (flagDissolve) — wind blaast ze weg
+  - **Intro tekst**: Wit, geen achtergrond, `1.05rem`, letter-spacing `0.04em`, text-shadow
+  - **Intro dissolve**: Bij scroll naar state 2 lossen introletters individueel op met random wind-verplaatsing
+  - Letters gesplitst in spans via JS, met random `--tx`, `--ty`, `--r`, `--d` custom properties
+  - Woorden gegroepeerd in `.intro-word` spans voor correcte woordafbreking
+- Namen gepositioneerd via genormaliseerde coordinaten (`data-x`, `data-y`) met object-fit: cover correctie (stekelbaars-methode)
+- 5 personen met hover info-kaarten: Olav, Nicolaas, Raphael, Joost, Lotte
+- Afteller midden onderin, generieke teller via `data-days` (dagen tot de Varsity) of `data-num` + `data-label` (uren/minuten op de Varsity-dag, vóór én ná de finale)
+- Foto's op **aflopende dagvolgorde** (18 dagen → Varsity → na de finale)
+- Finale = YouTube-video (ID `v-1Ht-3S-sk`) als klik-om-af-te-spelen facade tussen foto 32 en 33
+- Lichte zoom (`scale(1.05)`, 7s) op foto's, getriggerd in centrale strook (`rootMargin: 0 -45%`); hero uitgesloten
+- WebP via `<picture>` (srcset met `%20` voor spaties in bestandsnamen)
+- Nav wisselt wit (hero) → donker (witte achtergrond)
+- End panel: Sk&#248;ll-rood achtergrond, `margin-top: 0` (deze pagina zet `padding-top: 0`)
+
 ## End Panels
 
 Alle projectpagina's eindigen met end panel:
@@ -206,12 +230,19 @@ Standaard voor alle pagina's bij ultrawide monitoren:
 - De Onmisbaren: `#2a2a2a`
 - Een Plek Onder de Zon: `#2d5a27`
 - Het Noordzeekanaalgebied: `#e8e4df`
+- Sk&#248;ll wint de Varsity: `#ffffff`
 
 **Let op bij horizontale scroll pagina's:**
 - Secties met `width: 100vw` moeten overschreven worden naar `width: 2650px !important`
 - Test altijd of scroll blijft werken na aanpassingen
 
-### Hoogte (A Better Port)
+### Hoogte — Homepage (alle 4 secties)
+- **> 900px**: Standaard formaten
+- **≤ 900px**: Compactere spacing, overlays 350px breed, `top: 8vh` (hero + about/work/contact)
+- **≤ 700px**: Minimale marges, overlays 380px breed, `top: 5vh`, kleinere fonts
+- **Let op**: Hero hoogte-breakpoints staan bij hero sectie in CSS. About/work/contact hoogte-breakpoints staan apart, **na** alle sectie-styles (cascade volgorde is belangrijk)
+
+### Hoogte — A Better Port
 - **> 900px**: Standaard formaten
 - **≤ 900px**: Compactere intro, foto paren 55vh
 - **≤ 700px**: Minimale intro (2 paragrafen verborgen), foto paren 50vh

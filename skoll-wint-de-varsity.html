@@ -1,0 +1,1583 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- SEO Meta Tags -->
+    <title>Sk&#248;ll wint de Varsity | Wouter Zaalberg</title>
+    <meta name="description" content="Fotoserie Sk&#248;ll wint de Varsity — Drie weken met de Oude Vier van studentenroeivereniging Skøll op weg naar de Varsity. Door Wouter Zaalberg.">
+    <meta name="keywords" content="fotografie, roeien, Varsity, Skøll, Amsterdam, documentaire fotografie, Wouter Zaalberg">
+    <meta name="author" content="Wouter Zaalberg">
+    <link rel="canonical" href="https://wouterzaalberg.nl/skoll-wint-de-varsity.html">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://wouterzaalberg.nl/skoll-wint-de-varsity.html">
+    <meta property="og:title" content="Sk&#248;ll wint de Varsity">
+    <meta property="og:description" content="Fotoserie door Wouter Zaalberg.">
+    <meta property="og:locale" content="nl_NL">
+
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        /* ========================================
+           HERO SECTION
+           ======================================== */
+        .horizontal-scroll-content {
+            padding-top: 0 !important;
+        }
+
+        .hero-item {
+            position: relative;
+            width: 100vw !important;
+            height: 100vh !important;
+            flex-shrink: 0;
+            overflow: hidden;
+        }
+
+        .hero-photo-label {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: 'Scala Sans', sans-serif;
+            font-size: 4rem;
+            color: rgba(255,255,255,0.15);
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: -40px;
+            background: #1a2a3a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            filter: blur(20px) brightness(0.7);
+            transition: filter 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .hero-bg img {
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+            max-width: none;
+        }
+
+        .hero-bg-placeholder {
+            font-family: 'Scala Sans', sans-serif;
+            font-size: 1.5rem;
+            color: rgba(255,255,255,0.2);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        /* Hero Title */
+        .hero-title {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            z-index: 2;
+            transition: opacity 0.9s cubic-bezier(0.4, 0, 0.2, 1),
+                        transform 0.9s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .hero-title h1 {
+            font-family: 'Scala Sans SC', sans-serif;
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            font-weight: 600;
+            color: #ffffff;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            line-height: 1.2;
+            margin: 0;
+            white-space: nowrap;
+        }
+
+        .hero-title h1 .accent {
+            color: #ed1c24;
+        }
+
+        .hero-title .hero-subtitle {
+            font-family: 'Scala Sans', sans-serif;
+            font-size: clamp(0.8rem, 1.1vw, 1rem);
+            color: rgba(255,255,255,0.5);
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-top: 1.2rem;
+        }
+
+        /* Flag Animation */
+        @keyframes flagWave {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            40% { transform: translateY(-5px) rotate(-0.5deg); }
+            60% { transform: translateY(1px) rotate(0.2deg); }
+        }
+
+        .flag-letter {
+            display: inline-block;
+            animation: flagWave 3s ease-in-out infinite;
+            animation-delay: calc(var(--i) * 0.08s);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .flag-letter,
+            .hero-item.state-1 .flag-letter { animation: none; }
+            .hero-item.state-1 .flag-letter { opacity: 0; }
+            .intro-letter { transition: none; }
+            .photo-item img {
+                transition: opacity 0.5s ease;
+                transform: none !important;
+            }
+        }
+
+        @keyframes flagDissolve {
+            from {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            to {
+                opacity: 0;
+                transform: translate(var(--tx), var(--ty)) rotate(var(--r));
+            }
+        }
+
+        /* Hero Intro Text */
+        .hero-intro {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) translateY(40px);
+            max-width: 560px;
+            width: 85%;
+            padding: 2.5rem;
+            z-index: 2;
+            opacity: 0;
+            transition: opacity 0.9s cubic-bezier(0.4, 0, 0.2, 1),
+                        transform 0.9s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .hero-intro p {
+            font-family: 'Scala Sans', sans-serif;
+            font-size: 0.95rem;
+            line-height: 1.9;
+            color: #ffffff;
+            letter-spacing: 0.04em;
+            font-size: 1.05rem;
+            margin: 0;
+            text-shadow: 0 2px 12px rgba(0,0,0,0.4);
+        }
+
+        /* Dissolve Animation */
+        .intro-word {
+            display: inline-block;
+            white-space: nowrap;
+        }
+
+        .intro-letter {
+            display: inline-block;
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+            transition-delay: calc(var(--d) * 1s);
+        }
+
+        /* Hero Names */
+        .hero-names {
+            position: absolute;
+            inset: 0;
+            z-index: 2;
+            opacity: 0;
+            transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            pointer-events: none;
+        }
+
+        .person {
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            pointer-events: auto;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.5s, transform 0.5s;
+            padding-bottom: 30vh;
+        }
+
+        .person-name {
+            font-family: 'Scala Sans SC', sans-serif;
+            font-size: 0.8rem;
+            color: #ffffff;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            padding: 0.3rem 0.8rem;
+            background: rgba(237, 28, 36, 0.85);
+            white-space: nowrap;
+            transition: background 0.3s;
+        }
+
+        .person-line {
+            width: 1px;
+            height: 50px;
+            background: rgba(255,255,255,0.4);
+            margin-top: 0.3rem;
+        }
+
+        .person-info {
+            position: absolute;
+            top: calc(100% - 30vh);
+            left: 50%;
+            transform: translateX(-50%) translateY(10px);
+            width: 230px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            padding: 1.4rem;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s, transform 0.3s;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.15);
+            border-left: 3px solid #ed1c24;
+        }
+
+        .person:hover .person-info {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+            pointer-events: auto;
+        }
+
+        .person:hover .person-name {
+            background: #ed1c24;
+        }
+
+        .person-info h4 {
+            font-family: 'Scala Sans SC', sans-serif;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: #1a1a1a;
+            margin: 0 0 0.5rem 0;
+        }
+
+        .person-info p {
+            font-family: 'Scala Sans', sans-serif;
+            font-size: 0.82rem;
+            line-height: 1.7;
+            color: #4a4a4a;
+            margin: 0;
+        }
+
+        /* Staggered name reveal */
+        .hero-item.state-2 .person:nth-child(1) { transition-delay: 0.2s; }
+        .hero-item.state-2 .person:nth-child(2) { transition-delay: 0.35s; }
+        .hero-item.state-2 .person:nth-child(3) { transition-delay: 0.5s; }
+        .hero-item.state-2 .person:nth-child(4) { transition-delay: 0.65s; }
+        .hero-item.state-2 .person:nth-child(5) { transition-delay: 0.8s; }
+
+        /* ========================================
+           HERO STATES
+           ======================================== */
+
+        /* State 1: Title dissolves, intro slides in */
+        .hero-item.state-1 .hero-title {
+            pointer-events: none;
+        }
+
+        .hero-item.state-1 .flag-letter {
+            animation: flagDissolve 0.8s ease-out forwards;
+            animation-delay: calc(var(--d) * 1s);
+        }
+
+        .hero-item.state-1 .hero-intro {
+            opacity: 1;
+            transform: translate(-50%, -50%);
+        }
+
+        .hero-item.state-1 .hero-bg {
+            filter: blur(16px) brightness(0.6);
+        }
+
+        .hero-item.state-1 .scroll-hint {
+            opacity: 0;
+        }
+
+        /* State 2: Intro fades, photo sharpens, names appear */
+        .hero-item.state-2 .hero-title {
+            opacity: 0;
+            transform: translate(-50%, calc(-50% - 80px));
+        }
+
+        .hero-item.state-2 .flag-letter {
+            animation: none;
+            opacity: 0;
+        }
+
+        .hero-item.state-2 .hero-intro {
+            opacity: 1;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+        }
+
+        .hero-item.state-2 .intro-letter {
+            opacity: 0;
+            transform: translate(var(--tx), var(--ty)) rotate(var(--r));
+        }
+
+        .hero-item.state-2 .hero-bg {
+            filter: blur(0) brightness(1);
+        }
+
+        .hero-item.state-2 .hero-names {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .hero-item.state-2 .person {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .hero-item.state-2 .scroll-hint {
+            opacity: 0.5;
+            animation: scrollHintPulseRight 2.5s ease-in-out infinite;
+        }
+
+        .hero-item.state-2 .scroll-hint .hint-down {
+            display: none;
+        }
+
+        .hero-item.state-2 .scroll-hint .hint-right {
+            display: block;
+        }
+
+        /* ========================================
+           SCROLL HINT
+           ======================================== */
+        .scroll-hint {
+            position: absolute;
+            bottom: 3rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 3;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.4rem;
+            opacity: 0.5;
+            animation: scrollHintPulse 2.5s ease-in-out infinite;
+            transition: opacity 0.6s;
+        }
+
+        .scroll-hint span {
+            font-family: 'Scala Sans', sans-serif;
+            font-size: 0.7rem;
+            color: #ffffff;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+        }
+
+        .scroll-hint svg {
+            width: 18px;
+            height: 18px;
+            fill: #ffffff;
+        }
+
+        .scroll-hint .hint-right {
+            display: none;
+        }
+
+        @keyframes scrollHintPulse {
+            0%, 100% { opacity: 0.5; transform: translateX(-50%) translateY(0); }
+            50% { opacity: 0.25; transform: translateX(-50%) translateY(6px); }
+        }
+
+        @keyframes scrollHintPulseRight {
+            0%, 100% { opacity: 0.5; transform: translateX(-50%) translateX(0); }
+            50% { opacity: 0.25; transform: translateX(-50%) translateX(6px); }
+        }
+
+        /* ========================================
+           PHOTO PLACEHOLDERS
+           ======================================== */
+        .photo-placeholder {
+            height: 80vh;
+            aspect-ratio: 3 / 2;
+            background: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .photo-placeholder span {
+            font-family: 'Scala Sans', sans-serif;
+            font-size: 3rem;
+            color: #c8c8c8;
+            font-weight: 300;
+        }
+
+        .photo-item {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        /* Lichte zoom bij in beeld komen (niet op de hero-achtergrond) */
+        .photo-item:not(.hero-item) {
+            overflow: hidden;
+            position: relative;
+        }
+
+        .photo-item:not(.hero-item) img {
+            transition: opacity 0.5s ease, transform 7s ease-out;
+            transform: scale(1);
+            will-change: transform;
+        }
+
+        .photo-item:not(.hero-item) img.zoom {
+            transform: scale(1.05);
+        }
+
+        /* ========================================
+           FOTO CAPTIONS (info-knop, zoals NZKG)
+           ======================================== */
+        .skoll-info-btn {
+            position: absolute;
+            bottom: 1rem;
+            right: 1rem;
+            width: 28px;
+            height: 28px;
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Georgia', serif;
+            font-size: 14px;
+            font-style: italic;
+            color: #ed1c24;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        .skoll-info-btn:hover {
+            background: #ffffff;
+            transform: scale(1.1);
+        }
+
+        .photo-item.info-active .skoll-info-btn {
+            background: #ed1c24;
+            color: #ffffff;
+        }
+
+        .photo-caption {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: 'Scala Sans', sans-serif;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            pointer-events: none;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 1rem 1.5rem;
+            width: 80%;
+            max-width: 600px;
+            text-align: left;
+            z-index: 9;
+        }
+
+        .photo-item.info-active .photo-caption {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .caption-main {
+            font-size: 0.95rem;
+            color: #ffffff;
+            display: block;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+        }
+
+        .caption-detail {
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.85);
+            display: block;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+            line-height: 1.5;
+            margin-top: 0.5rem;
+        }
+
+        .caption-location {
+            font-size: 0.75rem;
+            color: rgba(255,255,255,0.7);
+            display: block;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+            font-style: italic;
+            margin-top: 0.5rem;
+        }
+
+        /* ========================================
+           VIDEO ITEM (de finale)
+           ======================================== */
+        .video-item {
+            flex-shrink: 0;
+            height: 70vh;
+            aspect-ratio: 16 / 9;
+            max-width: calc(100vw - 8rem);
+            background: #000;
+            scroll-snap-align: center;
+            align-self: center;
+        }
+
+        .video-item iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+            display: block;
+        }
+
+        .video-facade {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+            border: 0;
+            background: #000;
+            cursor: pointer;
+            display: block;
+        }
+
+        .video-facade img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            opacity: 0.9;
+            transition: opacity 0.3s ease;
+        }
+
+        .video-facade:hover img,
+        .video-facade:focus-visible img {
+            opacity: 1;
+        }
+
+        .video-play {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 76px;
+            height: 76px;
+            border-radius: 50%;
+            background: #ed1c24;
+            box-shadow: 0 6px 24px rgba(0, 0, 0, 0.45);
+            transition: transform 0.3s ease, background 0.3s ease;
+        }
+
+        .video-play::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-42%, -50%);
+            border-style: solid;
+            border-width: 13px 0 13px 22px;
+            border-color: transparent transparent transparent #ffffff;
+        }
+
+        .video-facade:hover .video-play,
+        .video-facade:focus-visible .video-play {
+            transform: translate(-50%, -50%) scale(1.08);
+        }
+
+        /* ========================================
+           DAYS COUNTER
+           ======================================== */
+        .days-counter {
+            position: fixed;
+            bottom: 2.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.5s;
+            pointer-events: none;
+        }
+
+        .days-counter.visible {
+            opacity: 1;
+        }
+
+        .days-number {
+            font-family: 'Scala Sans SC', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 600;
+            color: #ed1c24;
+            line-height: 1;
+            transition: opacity 0.25s, transform 0.25s;
+        }
+
+        .days-label {
+            font-family: 'Scala Sans', sans-serif;
+            font-size: 0.7rem;
+            color: #999;
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            margin-top: 0.25rem;
+        }
+
+        /* ========================================
+           END PANEL
+           ======================================== */
+        .end-panel {
+            height: 100vh !important;
+            width: 33vw !important;
+            max-width: 600px !important;
+            min-width: 300px !important;
+            margin-top: 0 !important;
+            padding-top: 80px !important;
+            box-sizing: border-box !important;
+            margin-right: -4rem !important;
+        }
+
+        /* ========================================
+           NAV COLOR TRANSITION
+           ======================================== */
+        .horizontal-nav.nav-dark .back-link,
+        .horizontal-nav.nav-dark .nav-title {
+            color: #1a1a1a !important;
+        }
+
+        /* ========================================
+           ULTRAWIDE SUPPORT (2650px+)
+           ======================================== */
+        @media (min-width: 2650px) {
+            html {
+                background-color: #ffffff;
+            }
+
+            body.horizontal-scroll-page {
+                max-width: 2650px;
+                margin: 0 auto;
+                overflow: visible !important;
+            }
+
+            .horizontal-scroll-container {
+                max-width: 2650px;
+            }
+
+            .hero-item {
+                width: 2650px !important;
+            }
+        }
+
+        /* ========================================
+           MOBILE
+           ======================================== */
+        @media (max-width: 767px) {
+            .hero-title h1 {
+                font-size: 1.8rem;
+                white-space: normal;
+                padding: 0 1.5rem;
+            }
+
+            .hero-title .hero-subtitle {
+                font-size: 0.75rem;
+            }
+
+            .hero-intro {
+                bottom: 6vh;
+                padding: 1.5rem;
+                width: 90%;
+            }
+
+            .hero-intro p {
+                font-size: 0.88rem;
+            }
+
+            .hero-names {
+                bottom: 18%;
+            }
+
+            .person-name {
+                font-size: 0.65rem;
+                padding: 0.25rem 0.5rem;
+            }
+
+            .person-line {
+                height: 30px;
+            }
+
+            .person-info {
+                width: 170px;
+                padding: 1rem;
+            }
+
+            .person-info h4 {
+                font-size: 0.8rem;
+            }
+
+            .person-info p {
+                font-size: 0.78rem;
+            }
+
+            .photo-placeholder {
+                height: auto;
+                width: 100%;
+                aspect-ratio: 3 / 2;
+            }
+
+            .video-item {
+                height: auto;
+                width: 94vw;
+                max-width: none;
+                margin: 0 auto;
+            }
+
+            .days-counter {
+                bottom: 1.5rem;
+            }
+
+            .days-number {
+                font-size: 1.6rem;
+            }
+
+            .days-label {
+                font-size: 0.6rem;
+            }
+
+            .scroll-hint {
+                bottom: 2rem;
+            }
+        }
+    </style>
+</head>
+<body class="horizontal-scroll-page" style="background: #ffffff;">
+    <nav class="horizontal-nav" style="padding-left: 4rem;">
+        <div>
+            <a href="/" class="back-link" style="color: #ffffff;">&#8592; Terug</a>
+            <span class="nav-title" style="color: #ffffff;">Sk&#248;ll wint de Varsity</span>
+        </div>
+    </nav>
+
+    <!-- Share Button -->
+    <button class="share-button" id="shareButton" aria-label="Deel deze pagina">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92-1.31-2.92-2.92-2.92z"/></svg>
+    </button>
+    <div class="share-dropdown" id="shareDropdown">
+        <a href="#" id="shareWhatsApp" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>WhatsApp</a>
+        <a href="#" id="shareFacebook" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>Facebook</a>
+        <a href="#" id="shareTwitter" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>X</a>
+        <a href="#" id="shareLinkedIn" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>LinkedIn</a>
+        <a href="#" id="shareEmail"><svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>Email</a>
+        <button id="copyLink"><svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg><span>Kopieer link</span></button>
+    </div>
+
+    <div class="horizontal-scroll-container" id="scrollContainer">
+        <div class="horizontal-scroll-content" style="gap: 8rem;">
+
+            <!-- ============ HERO (Foto 1) ============ -->
+            <div class="photo-item hero-item" id="heroSection">
+                <div class="hero-bg">
+                    <picture><source srcset="skoll/intro.webp" type="image/webp"><img src="skoll/intro.jpg" alt="Sk&#248;ll wint de Varsity"></picture>
+                </div>
+
+                <div class="hero-title">
+                    <h1><span class="accent">Sk&#248;ll</span> wint de Varsity</h1>
+                </div>
+
+                <div class="hero-intro">
+                    <p>Het is de belangrijkste wedstrijd van het studentenroeien; de Varsity. Een wedstrijd die je niet wint voor jezelf, maar voor de vereniging. En dus is de wedstrijd omgeven met tradities en rituelen die de roeigoden gunstig moeten stemmen. Ik volgde de vier roeiers (De Oude Vier) van de Amsterdamse vereniging Sk&#248;ll op weg naar de Varsity.</p>
+                </div>
+
+                <div class="hero-names" id="heroNames">
+                    <div class="person" data-x="0.24" data-y="0.27">
+                        <span class="person-name">Olav</span>
+                        <span class="person-line"></span>
+                        <div class="person-info">
+                            <h4>Olav Molenaar</h4>
+                            <p>Olympisch roeier en slag van de Oude Vier.</p>
+                        </div>
+                    </div>
+                    <div class="person" data-x="0.36" data-y="0.26">
+                        <span class="person-name">Nicolaas</span>
+                        <span class="person-line"></span>
+                        <div class="person-info">
+                            <h4>Nicolaas Dirkzwager</h4>
+                            <p>Talent in het opleidingsteam van de Nederlandse roeibond.</p>
+                        </div>
+                    </div>
+                    <div class="person" data-x="0.49" data-y="0.24">
+                        <span class="person-name">Raphael</span>
+                        <span class="person-line"></span>
+                        <div class="person-info">
+                            <h4>Rapha&#235;l Fromont</h4>
+                            <p>Begon zonder ervaring bij Sk&#248;ll en zat binnen twee jaar in de Oude Vier.</p>
+                        </div>
+                    </div>
+                    <div class="person" data-x="0.63" data-y="0.21">
+                        <span class="person-name">Joost</span>
+                        <span class="person-line"></span>
+                        <div class="person-info">
+                            <h4>Joost van der Sluis</h4>
+                            <p>&#8216;Lichte pik&#8217; die voor de Varsity nog wat extra kilo&#8217;s heeft gekweekt.</p>
+                        </div>
+                    </div>
+                    <div class="person" data-x="0.74" data-y="0.37">
+                        <span class="person-name">Lotte</span>
+                        <span class="person-line"></span>
+                        <div class="person-info">
+                            <h4>Lotte Vedel</h4>
+                            <p>Ervaren stuur van de Oude Vier.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="scroll-hint" id="scrollHint">
+                    <span>Scroll</span>
+                    <svg class="hint-down" viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6z"/></svg>
+                    <svg class="hint-right" viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg>
+                </div>
+            </div>
+
+            <!-- ============ Foto's (nieuwe selectie) — op volgorde van dagen ============ -->
+            <div class="photo-item" data-days="18">
+                <picture><source srcset="skoll/foto%201.webp" type="image/webp"><img src="skoll/foto 1.jpg" alt="Sk&#248;ll wint de Varsity" loading="eager"></picture>
+                <button class="skoll-info-btn" aria-label="Toon informatie">i</button>
+                <div class="photo-caption"><span class="caption-main">Eerste bijeenkomst van de roeiers en coaches. Een Oude Vier traint alleen voor de Varsity met elkaar; de rest van het seizoen hebben ze hun eigen boten, trainingen en plannen.</span></div>
+            </div>
+
+            <div class="photo-item" data-days="17">
+                <picture><source srcset="skoll/foto%203b.webp" type="image/webp"><img src="skoll/foto 3b.jpg" alt="Sk&#248;ll wint de Varsity" loading="eager"></picture>
+                <button class="skoll-info-btn" aria-label="Toon informatie">i</button>
+                <div class="photo-caption"><span class="caption-main">Op de Amstel.</span></div>
+            </div>
+
+            <div class="photo-item" data-days="17">
+                <picture><source srcset="skoll/foto%204.webp" type="image/webp"><img src="skoll/foto 4.jpg" alt="Sk&#248;ll wint de Varsity" loading="eager"></picture>
+                <button class="skoll-info-btn" aria-label="Toon informatie">i</button>
+                <div class="photo-caption"><span class="caption-main">Hans is een ervaren trainer die al jaren roeiers coacht en begeleidt.</span></div>
+            </div>
+
+            <div class="photo-item" data-days="16">
+                <picture><source srcset="skoll/foto%202.webp" type="image/webp"><img src="skoll/foto 2.jpg" alt="Sk&#248;ll wint de Varsity" loading="lazy"></picture>
+                <button class="skoll-info-btn" aria-label="Toon informatie">i</button>
+                <div class="photo-caption"><span class="caption-main">Op de Amstel.</span></div>
+            </div>
+
+            <div class="photo-item" data-days="16">
+                <picture><source srcset="skoll/foto%203.webp" type="image/webp"><img src="skoll/foto 3.jpg" alt="Sk&#248;ll wint de Varsity" loading="lazy"></picture>
+                <button class="skoll-info-btn" aria-label="Toon informatie">i</button>
+                <div class="photo-caption"><span class="caption-main">Op snelheid.</span></div>
+            </div>
+
+            <div class="photo-item" data-days="16">
+                <picture><source srcset="skoll/foto%202a.webp" type="image/webp"><img src="skoll/foto 2a.jpg" alt="Sk&#248;ll wint de Varsity" loading="lazy"></picture>
+                <button class="skoll-info-btn" aria-label="Toon informatie">i</button>
+                <div class="photo-caption"><span class="caption-main">In de kleedkamer van Sk&#248;ll hebben de leden van de Oude Vier hun eigen, exclusieve kledinghaakjes.</span></div>
+            </div>
+
+            <div class="photo-item" data-days="15">
+                <picture><source srcset="skoll/foto%205.webp" type="image/webp"><img src="skoll/foto 5.jpg" alt="Sk&#248;ll wint de Varsity" loading="lazy"></picture>
+                <button class="skoll-info-btn" aria-label="Toon informatie">i</button>
+                <div class="photo-caption"><span class="caption-main">In de zogenaamde bak kunnen roeiers via spiegels nauwkeurig op houding en gelijkheid trainen.</span></div>
+            </div>
+
+            <div class="photo-item" data-days="9">
+                <picture><source srcset="skoll/foto%2011.webp" type="image/webp"><img src="skoll/foto 11.jpg" alt="Sk&#248;ll wint de Varsity" loading="lazy"></picture>
+                <button class="skoll-info-btn" aria-label="Toon informatie">i</button>
+                <div class="photo-caption"><span class="caption-main">In de Weespertrekvaart, na de 'golfjestraining'. De Varsity wordt gevaren in heftig golvend water, wat de meeste roeiers niet gewend zijn.</span></div>
+            </div>
+
+            <div class="photo-item" data-days="7">
+                <picture><source srcset="skoll/foto%206.webp" type="image/webp"><img src="skoll/foto 6.jpg" alt="Sk&#248;ll wint de Varsity" loading="lazy"></picture>
+                <button class="skoll-info-btn" aria-label="Toon informatie">i</button>
+                <div class="photo-caption"><span class="caption-main">Nicolaas bereidt zich voor op het Varsitydiner en de fotoshoot op Sk&#248;ll.</span></div>
+            </div>
+
+            <div class="photo-item" data-days="7">
+                <picture><source srcset="skoll/foto%207.webp" type="image/webp"><img src="skoll/foto 7.jpg" alt="Sk&#248;ll wint de Varsity" loading="lazy"></picture>
+                <button class="skoll-info-btn" aria-label="Toon informatie">i</button>
+                <div class="photo-caption"><span class="caption-main">Alleen roeiers met meer dan vijf overwinningen mogen deze das dragen.</span></div>
+            </div>
+
+            <div class="photo-item" data-days="7">
+                <picture><source srcset="skoll/foto%208.webp" type="image/webp"><img src="skoll/foto 8.jpg" alt="Sk&#248;ll wint de Varsity" loading="lazy"></picture>
+                <button class="skoll-info-btn" aria-label="Toon informatie">i</button>
+                <div class="photo-caption"><span class="caption-main">Uitgeschreven ambities.</span></div>
+            </div>
+
+            <div class="photo-item" data-days="7">
+                <picture><source srcset="skoll/foto%209.webp" type="image/webp"><img src="skoll/foto 9.jpg" alt="Sk&#248;ll wint de Varsity" loading="lazy"></picture>
+                <button class="skoll-info-btn" aria-label="Toon informatie">i</button>
+                <div class="photo-caption"><span class="caption-main">De das wordt goed gedaan voor de traditionele groepsfoto.</span></div>
+            </div>
+
+            <div class="photo-item" data-days="7">
+                <picture><source srcset="skoll/foto%2010a.webp" type="image/webp"><img src="skoll/foto 10a.jpg" alt="Sk&#248;ll wint de Varsity" loading="lazy"></picture>
+                <button class="skoll-info-btn" aria-label="Toon informatie">i</button>
+                <div class="photo-caption"><span class="caption-main">De voorzitter van Sk&#248;ll spreekt de vrouwen- en mannen-Oude Vier toe.</span></div>
+            </div>
+
+            <div class="photo-item" data-days="7">
+                <picture><source srcset="skoll/foto%2010b.webp" type="image/webp"><img src="skoll/foto 10b.jpg" alt="Sk&#248;ll wint de Varsity" loading="lazy"></picture>
+                <button class="skoll-info-btn" aria-label="Toon informatie">i</button>
+                <div class="photo-caption"><span class="caption-main">Het Varsitydiner.</span></div>
+            </div>
+
+            <div class="photo-item" data-days="7">
+                <picture><source srcset="skoll/foto%2012a.webp" type="image/webp"><img src="skoll/foto 12a.jpg" alt="Sk&#248;ll wint de Varsity" loading="lazy"></picture>
+                <button class="skoll-info-btn" aria-label="Toon informatie">i</button>
+                <div class="photo-caption"><span class="caption-main">Rapha&#235;l na een doorregende training.</span></div>
+            </div>
+
+            <div class="photo-item" data-days="7">
+                <picture><source srcset="skoll/foto%2012.webp" type="image/webp"><img src="skoll/foto 12.jpg" alt="Sk&#248;ll wint de Varsity" loading="lazy"></picture>
+                <button class="skoll-info-btn" aria-label="Toon informatie">i</button>
+                <div class="photo-caption"><span class="caption-main">Joost, uitgeput na een training.</span></div>
+            </div>
+
+            <div class="photo-item" data-days="6">
+                <picture><source srcset="skoll/foto%2013.webp" type="image/webp"><img src="skoll/foto 13.jpg" alt="Sk&#248;ll wint de Varsity" loading="lazy"></picture>
+                <button class="skoll-info-btn" aria-label="Toon informatie">i</button>
+                <div class="photo-caption"><span class="caption-main">De boot op snelheid. In anderhalve week tijd zijn de roeiers aan elkaar gewend geraakt en bereiken ze zienderogen hogere snelheden.</span></div>
+            </div>
+
+            <div class="photo-item" data-days="6">
+                <picture><source srcset="skoll/foto%2014.webp" type="image/webp"><img src="skoll/foto 14.jpg" alt="Sk&#248;ll wint de Varsity" loading="lazy"></picture>
+                <button class="skoll-info-btn" aria-label="Toon informatie">i</button>
+                <div class="photo-caption"><span class="caption-main">Nicolaas roeit normaal gesproken met twee riemen. Met &#233;&#233;n riem (het zogenaamde boordroeien) krijgt hij blaren.</span></div>
+            </div>
+
+            <div class="photo-item" data-days="5">
+                <picture><source srcset="skoll/foto%2015.webp" type="image/webp"><img src="skoll/foto 15.jpg" alt="Sk&#248;ll wint de Varsity" loading="lazy"></picture>
+                <button class="skoll-info-btn" aria-label="Toon informatie">i</button>
+                <div class="photo-caption"><span class="caption-main">De Varsity is onderdeel van het studentenroeien; de roeiers studeren nog, op Olav na. Nicolaas studeert aan de HvA.</span></div>
+            </div>
+
+            <div class="photo-item" data-days="5">
+                <picture><source srcset="skoll/foto%2016.webp" type="image/webp"><img src="skoll/foto 16.jpg" alt="Sk&#248;ll wint de Varsity" loading="lazy"></picture>
+                <button class="skoll-info-btn" aria-label="Toon informatie">i</button>
+                <div class="photo-caption"><span class="caption-main">Joost heeft in zijn kelder een sauna gebouwd en brengt er bijna iedere dag een half uur door. Volgens hem is het goed voor herstel en de opbouw van rode bloedlichaampjes.</span></div>
+            </div>
+
+            <div class="photo-item" data-days="3">
+                <picture><source srcset="skoll/foto%2017.webp" type="image/webp"><img src="skoll/foto 17.jpg" alt="Sk&#248;ll wint de Varsity" loading="lazy"></picture>
+                <button class="skoll-info-btn" aria-label="Toon informatie">i</button>
+                <div class="photo-caption"><span class="caption-main">Rapha&#235;l op de ergometer, een roeisimulatie waarop je precies kunt zien hoeveel vermogen je levert.</span></div>
+            </div>
+
+            <div class="photo-item" data-days="2">
+                <picture><source srcset="skoll/foto%2018.webp" type="image/webp"><img src="skoll/foto 18.jpg" alt="Sk&#248;ll wint de Varsity" loading="lazy"></picture>
+                <button class="skoll-info-btn" aria-label="Toon informatie">i</button>
+                <div class="photo-caption"><span class="caption-main">Laatste diner met coaches en roeiers, en kilo's pasta.</span></div>
+            </div>
+
+            <div class="photo-item" data-days="1">
+                <picture><source srcset="skoll/foto%2020.webp" type="image/webp"><img src="skoll/foto 20.jpg" alt="Sk&#248;ll wint de Varsity" loading="lazy"></picture>
+                <button class="skoll-info-btn" aria-label="Toon informatie">i</button>
+                <div class="photo-caption"><span class="caption-main">Voordat de boot op transport gaat, krijgt hij een poetsbeurt van Hans.</span></div>
+            </div>
+
+            <div class="photo-item" data-days="1">
+                <picture><source srcset="skoll/foto%2021.webp" type="image/webp"><img src="skoll/foto 21.jpg" alt="Sk&#248;ll wint de Varsity" loading="lazy"></picture>
+                <button class="skoll-info-btn" aria-label="Toon informatie">i</button>
+                <div class="photo-caption"><span class="caption-main">Nicolaas krijgt een massage.</span></div>
+            </div>
+
+            <!-- Varsity-dag: aftellen in uren/minuten tot de finale -->
+            <div class="photo-item" data-num="8" data-label="uur tot de finale">
+                <picture><source srcset="skoll/foto%2022.webp" type="image/webp"><img src="skoll/foto 22.jpg" alt="Sk&#248;ll wint de Varsity" loading="lazy"></picture>
+                <button class="skoll-info-btn" aria-label="Toon informatie">i</button>
+                <div class="photo-caption"><span class="caption-main">De dag van de waarheid begint op Sk&#248;ll, met kwaliteitskoffie en een laatste voorbeschouwing.</span></div>
+            </div>
+
+            <div class="photo-item" data-num="7" data-label="uur tot de finale">
+                <picture><source srcset="skoll/foto%2023.webp" type="image/webp"><img src="skoll/foto 23.jpg" alt="Sk&#248;ll wint de Varsity" loading="lazy"></picture>
+                <button class="skoll-info-btn" aria-label="Toon informatie">i</button>
+                <div class="photo-caption"><span class="caption-main">Het terrein van de roeiers op de Varsity, in Houten.</span></div>
+            </div>
+
+            <div class="photo-item" data-num="6" data-label="uur tot de finale">
+                <picture><source srcset="skoll/foto%2024.webp" type="image/webp"><img src="skoll/foto 24.jpg" alt="Sk&#248;ll wint de Varsity" loading="lazy"></picture>
+                <button class="skoll-info-btn" aria-label="Toon informatie">i</button>
+                <div class="photo-caption"><span class="caption-main">Joost doet zijn voorbereidingen.</span></div>
+            </div>
+
+            <div class="photo-item" data-num="6" data-label="uur tot de finale">
+                <picture><source srcset="skoll/foto%2025.webp" type="image/webp"><img src="skoll/foto 25.jpg" alt="Sk&#248;ll wint de Varsity" loading="lazy"></picture>
+                <button class="skoll-info-btn" aria-label="Toon informatie">i</button>
+                <div class="photo-caption"><span class="caption-main">Laatste aanwijzingen van Hans voor de perfecte haal.</span></div>
+            </div>
+
+            <div class="photo-item" data-num="5" data-label="uur tot de finale">
+                <picture><source srcset="skoll/foto%2026.webp" type="image/webp"><img src="skoll/foto 26.jpg" alt="Sk&#248;ll wint de Varsity" loading="lazy"></picture>
+                <button class="skoll-info-btn" aria-label="Toon informatie">i</button>
+                <div class="photo-caption"><span class="caption-main">Start van de voorwedstrijd. De Sk&#248;ll-mannen starten in de achterste baan (en ik, de fotograaf, stond aan de verkeerde kant van het kanaal).</span></div>
+            </div>
+
+            <div class="photo-item" data-num="5" data-label="uur tot de finale">
+                <picture><source srcset="skoll/foto%2027.webp" type="image/webp"><img src="skoll/foto 27.jpg" alt="Sk&#248;ll wint de Varsity" loading="lazy"></picture>
+                <button class="skoll-info-btn" aria-label="Toon informatie">i</button>
+                <div class="photo-caption"><span class="caption-main">Ze winnen de voorwedstrijd en plaatsen zich voor de finale, maar het gaat moeizamer dan verwacht.</span></div>
+            </div>
+
+            <div class="photo-item" data-num="5" data-label="uur tot de finale">
+                <picture><source srcset="skoll/foto%2028.webp" type="image/webp"><img src="skoll/foto 28.jpg" alt="Sk&#248;ll wint de Varsity" loading="lazy"></picture>
+                <button class="skoll-info-btn" aria-label="Toon informatie">i</button>
+                <div class="photo-caption"><span class="caption-main">Nicolaas komt bij van de voorwedstrijd. Het heeft behoorlijk veel kracht gekost.</span></div>
+            </div>
+
+            <div class="photo-item" data-num="2" data-label="uur tot de finale">
+                <picture><source srcset="skoll/foto%2029.webp" type="image/webp"><img src="skoll/foto 29.jpg" alt="Sk&#248;ll wint de Varsity" loading="lazy"></picture>
+                <button class="skoll-info-btn" aria-label="Toon informatie">i</button>
+                <div class="photo-caption"><span class="caption-main">Het traditionele 'zooien', waarbij leden elkaars dassen proberen te ontfutselen.</span></div>
+            </div>
+
+            <div class="photo-item" data-num="1" data-label="uur tot de finale">
+                <picture><source srcset="skoll/foto%2030.webp" type="image/webp"><img src="skoll/foto 30.jpg" alt="Sk&#248;ll wint de Varsity" loading="lazy"></picture>
+                <button class="skoll-info-btn" aria-label="Toon informatie">i</button>
+                <div class="photo-caption"><span class="caption-main">Wedstrijdspanning bij Joost.</span></div>
+            </div>
+
+            <div class="photo-item" data-num="30" data-label="minuten tot de finale">
+                <picture><source srcset="skoll/foto%2031.webp" type="image/webp"><img src="skoll/foto 31.jpg" alt="Sk&#248;ll wint de Varsity" loading="lazy"></picture>
+                <button class="skoll-info-btn" aria-label="Toon informatie">i</button>
+                <div class="photo-caption"><span class="caption-main">Oproeien naar de finale.</span></div>
+            </div>
+
+            <div class="photo-item" data-num="5" data-label="minuten tot de finale">
+                <picture><source srcset="skoll/foto%2032.webp" type="image/webp"><img src="skoll/foto 32.jpg" alt="Sk&#248;ll wint de Varsity" loading="lazy"></picture>
+                <button class="skoll-info-btn" aria-label="Toon informatie">i</button>
+                <div class="photo-caption"><span class="caption-main">Aanmoedigingen vanaf de kant.</span></div>
+            </div>
+
+            <!-- De finale zelf: YouTube-video (klik om af te spelen, geen teller) -->
+            <div class="video-item" id="finaleVideo">
+                <button class="video-facade" type="button" aria-label="Speel de finale af">
+                    <img src="https://i.ytimg.com/vi/v-1Ht-3S-sk/maxresdefault.jpg" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/v-1Ht-3S-sk/hqdefault.jpg';" alt="Sk&#248;ll wint de Varsity — de finale" loading="lazy">
+                    <span class="video-play" aria-hidden="true"></span>
+                </button>
+            </div>
+
+            <div class="photo-item" data-num="1" data-label="minuut na de finale">
+                <picture><source srcset="skoll/foto%2033.webp" type="image/webp"><img src="skoll/foto 33.jpg" alt="Sk&#248;ll wint de Varsity" loading="lazy"></picture>
+                <button class="skoll-info-btn" aria-label="Toon informatie">i</button>
+                <div class="photo-caption"><span class="caption-main">De boot loopt niet; Sk&#248;ll komt niet verder dan een vierde plek. Op de achtergrond de winnende boot van Laga.</span></div>
+            </div>
+
+            <div class="photo-item" data-num="1" data-label="uur na de finale">
+                <picture><source srcset="skoll/foto%2034.webp" type="image/webp"><img src="skoll/foto 34.jpg" alt="Sk&#248;ll wint de Varsity" loading="lazy"></picture>
+                <button class="skoll-info-btn" aria-label="Toon informatie">i</button>
+                <div class="photo-caption"><span class="caption-main">Nicolaas na de wedstrijd, op het Varsityterrein.</span></div>
+            </div>
+
+            <!-- ============ END PANEL ============ -->
+            <div class="end-panel" style="flex-shrink: 0; background: #ed1c24; display: flex; flex-direction: column; justify-content: center; padding: 3rem;">
+                <p style="font-family: 'Scala Sans SC', sans-serif; font-size: 1.2rem; color: rgba(255,255,255,0.6); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 3rem;">Einde van deze serie</p>
+                <p style="font-family: 'Scala Sans', sans-serif; font-size: 0.85rem; color: rgba(255,255,255,0.5); margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.05em;">Bekijk ook</p>
+                <nav style="display: flex; flex-direction: column; gap: 0.6rem;">
+                    <a href="/" style="font-family: 'Scala Sans', sans-serif; font-size: 0.95rem; color: #ffffff; text-decoration: none; transition: opacity 0.3s;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">Home</a>
+                    <a href="de-exoten.html" style="font-family: 'Scala Sans', sans-serif; font-size: 0.95rem; color: #ffffff; text-decoration: none; transition: opacity 0.3s;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">De Exoten</a>
+                    <a href="mijn-tatoeages.html" style="font-family: 'Scala Sans', sans-serif; font-size: 0.95rem; color: #ffffff; text-decoration: none; transition: opacity 0.3s;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">Mijn Tatoeages</a>
+                    <a href="a-better-port.html" style="font-family: 'Scala Sans', sans-serif; font-size: 0.95rem; color: #ffffff; text-decoration: none; transition: opacity 0.3s;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">A Better Port</a>
+                    <a href="in-blauw-licht.html" style="font-family: 'Scala Sans', sans-serif; font-size: 0.95rem; color: #ffffff; text-decoration: none; transition: opacity 0.3s;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">In Blauw Licht</a>
+                    <a href="toen-de-mijnen-verdwenen.html" style="font-family: 'Scala Sans', sans-serif; font-size: 0.95rem; color: #ffffff; text-decoration: none; transition: opacity 0.3s;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">Toen de Mijnen Verdwenen</a>
+                    <a href="het-noordzeekanaal-gebied.html" style="font-family: 'Scala Sans', sans-serif; font-size: 0.95rem; color: #ffffff; text-decoration: none; transition: opacity 0.3s;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">Het Noordzeekanaalgebied</a>
+                    <a href="de-onmisbaren.html" style="font-family: 'Scala Sans', sans-serif; font-size: 0.95rem; color: #ffffff; text-decoration: none; transition: opacity 0.3s;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">De Onmisbaren</a>
+                    <a href="een-plek-onder-de-zon.html" style="font-family: 'Scala Sans', sans-serif; font-size: 0.95rem; color: #ffffff; text-decoration: none; transition: opacity 0.3s;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">Een Plek Onder de Zon</a>
+                </nav>
+                <div style="margin-top: 3rem;">
+                    <p style="font-family: 'Scala Sans', sans-serif; font-size: 0.85rem; color: rgba(255,255,255,0.5); margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.05em;">Contact</p>
+                    <p style="font-family: 'Scala Sans', sans-serif; font-size: 0.95rem; color: #ffffff; margin-bottom: 0.3rem;">wouterzaalberg@gmail.com</p>
+                    <p style="font-family: 'Scala Sans', sans-serif; font-size: 0.95rem; color: #ffffff; margin-bottom: 1.5rem;">06 45 788 180</p>
+                    <a href="https://instagram.com/wouterzaalberg" target="_blank" style="display: inline-block; color: #ffffff; transition: opacity 0.3s;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Days Counter (fixed, bottom center) -->
+    <div class="days-counter" id="daysCounter">
+        <span class="days-number" id="daysNumber"></span>
+        <span class="days-label" id="daysLabel">dagen tot de Varsity</span>
+    </div>
+
+    <!-- ============ SCROLL + HERO STATE MACHINE ============ -->
+    <script>
+        const container = document.getElementById('scrollContainer');
+        const allItems = document.querySelectorAll('.horizontal-scroll-content > .photo-item, .horizontal-scroll-content > .photo-pair, .horizontal-scroll-content > .video-item, .end-panel');
+        const hero = document.getElementById('heroSection');
+        const nav = document.querySelector('.horizontal-nav');
+        const daysCounter = document.getElementById('daysCounter');
+        const daysNumber = document.getElementById('daysNumber');
+        const daysLabel = document.getElementById('daysLabel');
+
+        let currentIndex = 0;
+        let heroState = 0; // 0 = title, 1 = intro, 2 = sharp + names
+        let isAnimating = false;
+
+        // Prevent middle-click autoscroll
+        container.addEventListener('mousedown', (e) => {
+            if (e.button === 1) e.preventDefault();
+        });
+
+        // Update hero CSS state
+        function setHeroState(state) {
+            heroState = state;
+            hero.classList.remove('state-1', 'state-2');
+            if (state >= 1) hero.classList.add('state-1');
+            if (state >= 2) {
+                hero.classList.remove('state-1');
+                hero.classList.add('state-2');
+            }
+        }
+
+        // Update nav color based on position
+        function updateNav() {
+            if (currentIndex === 0) {
+                nav.classList.remove('nav-dark');
+            } else {
+                nav.classList.add('nav-dark');
+            }
+        }
+
+        // Update days/hours counter
+        function updateCounter() {
+            var item = allItems[currentIndex];
+            var label = item ? item.getAttribute('data-label') : null;
+            var days = item ? item.getAttribute('data-days') : null;
+
+            if (label !== null || days !== null) {
+                daysNumber.style.opacity = '0';
+                daysNumber.style.transform = 'translateY(-8px)';
+
+                setTimeout(function() {
+                    if (label !== null) {
+                        // Varsity-dag: vrije teller (uren/minuten, vóór of ná de finale)
+                        daysNumber.textContent = item.getAttribute('data-num') || '';
+                        daysLabel.textContent = label;
+                    } else {
+                        daysNumber.textContent = days;
+                        if (days === '0') {
+                            daysLabel.textContent = 'De Varsity';
+                        } else if (days === '1') {
+                            daysLabel.textContent = 'dag tot de Varsity';
+                        } else {
+                            daysLabel.textContent = 'dagen tot de Varsity';
+                        }
+                    }
+                    daysNumber.style.transform = 'translateY(8px)';
+                    requestAnimationFrame(function() {
+                        daysNumber.style.opacity = '1';
+                        daysNumber.style.transform = 'translateY(0)';
+                    });
+                }, 200);
+
+                daysCounter.classList.add('visible');
+            } else {
+                daysCounter.classList.remove('visible');
+            }
+        }
+
+        // Scroll to target index
+        function scrollToIndex(index) {
+            if (index < 0) index = 0;
+            if (index >= allItems.length) index = allItems.length - 1;
+            currentIndex = index;
+
+            allItems[currentIndex].scrollIntoView({
+                behavior: 'smooth',
+                block: 'nearest',
+                inline: 'center'
+            });
+
+            updateNav();
+            updateCounter();
+        }
+
+        // Handle scroll direction with hero state machine
+        function handleScroll(direction) {
+            if (isAnimating) return;
+
+            // Forward scroll
+            if (direction === 1) {
+                if (currentIndex === 0 && heroState < 2) {
+                    // Advance hero state
+                    isAnimating = true;
+                    setHeroState(heroState + 1);
+                    setTimeout(function() { isAnimating = false; }, 800);
+                    return;
+                }
+                // Normal forward scroll
+                isAnimating = true;
+                scrollToIndex(currentIndex + 1);
+                setTimeout(function() { isAnimating = false; }, 500);
+                return;
+            }
+
+            // Backward scroll
+            if (direction === -1) {
+                if (currentIndex === 0 && heroState > 0) {
+                    // Reverse hero state
+                    isAnimating = true;
+                    setHeroState(heroState - 1);
+                    setTimeout(function() { isAnimating = false; }, 800);
+                    return;
+                }
+                if (currentIndex === 1) {
+                    // Going back to hero: show state 2
+                    isAnimating = true;
+                    scrollToIndex(0);
+                    setHeroState(2);
+                    setTimeout(function() { isAnimating = false; }, 500);
+                    return;
+                }
+                // Normal backward scroll
+                isAnimating = true;
+                scrollToIndex(currentIndex - 1);
+                setTimeout(function() { isAnimating = false; }, 500);
+                return;
+            }
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+                e.preventDefault();
+                handleScroll(1);
+            } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+                e.preventDefault();
+                handleScroll(-1);
+            }
+        });
+
+        // Wheel / trackpad (desktop only)
+        if (window.innerWidth > 767) {
+            var accumulatedDelta = 0;
+            var lastDelta = 0;
+            var scrollDirection = 0;
+            var lastScrollTime = 0;
+            var DELTA_THRESHOLD = 50;
+            var SCROLL_PAUSE = 150;
+            var MOUSE_WHEEL_DELTA = 80;
+            var MOMENTUM_THRESHOLD = 0.5;
+
+            container.addEventListener('wheel', function(e) {
+                e.preventDefault();
+                var delta = Math.abs(e.deltaY);
+                var direction = e.deltaY > 0 ? 1 : -1;
+                var now = Date.now();
+                var timeSinceLastScroll = now - lastScrollTime;
+                lastScrollTime = now;
+
+                if (isAnimating) return;
+
+                // Mouse wheel: large delta after pause
+                if (timeSinceLastScroll > SCROLL_PAUSE && delta >= MOUSE_WHEEL_DELTA) {
+                    handleScroll(direction);
+                    accumulatedDelta = 0;
+                    lastDelta = 0;
+                    return;
+                }
+
+                // New scroll action after pause
+                if (timeSinceLastScroll > SCROLL_PAUSE) {
+                    lastDelta = 0;
+                    accumulatedDelta = 0;
+                }
+
+                // Momentum detection
+                if (lastDelta > 0 && delta < lastDelta * MOMENTUM_THRESHOLD) {
+                    lastDelta = delta;
+                    return;
+                }
+
+                // Direction change reset
+                if (scrollDirection !== 0 && direction !== scrollDirection) {
+                    accumulatedDelta = 0;
+                }
+
+                scrollDirection = direction;
+                accumulatedDelta += delta;
+                lastDelta = delta;
+
+                if (accumulatedDelta >= DELTA_THRESHOLD) {
+                    handleScroll(direction);
+                    accumulatedDelta = 0;
+                    lastDelta = 0;
+                }
+            }, { passive: false });
+        }
+
+        // Image fade-in (for when real photos are added)
+        var images = document.querySelectorAll('.photo-item img');
+        var observerOptions = {
+            root: container,
+            rootMargin: '500px',
+            threshold: 0.1
+        };
+
+        var imageObserver = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting) {
+                    var img = entry.target;
+                    if (img.complete) {
+                        img.classList.add('loaded');
+                    } else {
+                        img.addEventListener('load', function() {
+                            img.classList.add('loaded');
+                        });
+                    }
+                }
+            });
+        }, observerOptions);
+
+        images.forEach(function(img) { imageObserver.observe(img); });
+
+        // Lichte zoom zodra een foto recht in het midden van het scherm staat.
+        // rootMargin knijpt de root tot een smalle centrale strook (links/rechts -45%),
+        // dus een foto telt pas als 'in beeld' wanneer hij het midden bedekt.
+        var zoomObserver = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('zoom');
+                    zoomObserver.unobserve(entry.target);
+                }
+            });
+        }, { root: container, rootMargin: '0px -45% 0px -45%', threshold: 0 });
+
+        document.querySelectorAll('.photo-item:not(.hero-item) img').forEach(function(img) {
+            zoomObserver.observe(img);
+        });
+
+        // Mobile: nav auto-hide
+        if (window.innerWidth <= 767) {
+            var navEl = document.querySelector('.horizontal-nav');
+            var hideTimeout;
+
+            function hideNav() { navEl.classList.add('nav-hidden'); }
+            function showNav() {
+                navEl.classList.remove('nav-hidden');
+                clearTimeout(hideTimeout);
+                hideTimeout = setTimeout(hideNav, 3000);
+            }
+
+            hideTimeout = setTimeout(hideNav, 3000);
+            document.addEventListener('touchstart', showNav, { passive: true });
+        }
+
+        // Position names over faces, accounting for object-fit: cover
+        var persons = document.querySelectorAll('.person');
+        var heroImg = hero.querySelector('.hero-bg img');
+
+        function positionNames() {
+            if (!heroImg || !heroImg.naturalWidth) return;
+
+            var cw = hero.offsetWidth;
+            var ch = hero.offsetHeight;
+            var nw = heroImg.naturalWidth;
+            var nh = heroImg.naturalHeight;
+
+            var containerRatio = cw / ch;
+            var imageRatio = nw / nh;
+
+            var displayW, displayH, offsetX, offsetY;
+
+            if (containerRatio > imageRatio) {
+                displayW = cw;
+                displayH = cw / imageRatio;
+                offsetX = 0;
+                offsetY = (ch - displayH) / 2;
+            } else {
+                displayH = ch;
+                displayW = ch * imageRatio;
+                offsetX = (cw - displayW) / 2;
+                offsetY = 0;
+            }
+
+            persons.forEach(function(p) {
+                var px = offsetX + parseFloat(p.dataset.x) * displayW;
+                var py = offsetY + parseFloat(p.dataset.y) * displayH;
+
+                var nameEl = p.querySelector('.person-name');
+                var nameW = nameEl ? nameEl.offsetWidth : 0;
+
+                p.style.left = (px - nameW / 2) + 'px';
+                p.style.top = py + 'px';
+            });
+        }
+
+        if (heroImg.complete) {
+            positionNames();
+        } else {
+            heroImg.addEventListener('load', positionNames);
+        }
+        window.addEventListener('resize', positionNames);
+
+        // Dissolve animation — split intro into letter spans grouped by words
+        (function() {
+            var p = document.querySelector('.hero-intro p');
+            if (!p) return;
+            var text = p.textContent;
+            var words = text.split(' ');
+            var html = '';
+            words.forEach(function(word, wi) {
+                if (wi > 0) html += ' ';
+                html += '<span class="intro-word">';
+                for (var c = 0; c < word.length; c++) {
+                    var ch = word[c];
+                    var tx = (Math.random() * 80 + 20) + 'px';
+                    var ty = (Math.random() * 60 - 30) + 'px';
+                    var r = (Math.random() * 40 - 20) + 'deg';
+                    var d = (Math.random() * 0.6).toFixed(3);
+                    html += '<span class="intro-letter" style="--tx:' + tx + ';--ty:' + ty + ';--r:' + r + ';--d:' + d + '">' + ch + '</span>';
+                }
+                html += '</span>';
+            });
+            p.innerHTML = html;
+        })();
+
+        // Flag animation — split title into letter spans (with dissolve values)
+        (function() {
+            var h1 = document.querySelector('.hero-title h1');
+            if (!h1) return;
+            var html = '';
+            var i = 0;
+            Array.from(h1.childNodes).forEach(function(node) {
+                var text = node.textContent;
+                var isAccent = node.nodeType === 1 && node.classList.contains('accent');
+                for (var c = 0; c < text.length; c++) {
+                    var ch = text[c];
+                    var cls = isAccent ? 'flag-letter accent' : 'flag-letter';
+                    var tx = (Math.random() * 100 + 30) + 'px';
+                    var ty = (Math.random() * 80 - 40) + 'px';
+                    var r = (Math.random() * 50 - 25) + 'deg';
+                    var d = (Math.random() * 0.5).toFixed(3);
+                    html += '<span class="' + cls + '" style="--i:' + i + ';--tx:' + tx + ';--ty:' + ty + ';--r:' + r + ';--d:' + d + '">' + (ch === ' ' ? '&nbsp;' : ch) + '</span>';
+                    i++;
+                }
+            });
+            h1.innerHTML = html;
+        })();
+
+        // Finale-video: klik om af te spelen (zo blijf je gewoon doorscrollen tot je 'm start)
+        (function() {
+            var wrap = document.getElementById('finaleVideo');
+            if (!wrap) return;
+            var facade = wrap.querySelector('.video-facade');
+            if (!facade) return;
+            facade.addEventListener('click', function() {
+                var iframe = document.createElement('iframe');
+                iframe.src = 'https://www.youtube-nocookie.com/embed/v-1Ht-3S-sk?rel=0&modestbranding=1&autoplay=1';
+                iframe.title = 'Skøll wint de Varsity — de finale';
+                iframe.setAttribute('frameborder', '0');
+                iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
+                iframe.setAttribute('allowfullscreen', '');
+                wrap.innerHTML = '';
+                wrap.appendChild(iframe);
+            });
+        })();
+
+        // Caption info-knoppen: klik toont/verbergt het onderschrift
+        document.querySelectorAll('.skoll-info-btn').forEach(function(btn) {
+            btn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                var target = btn.closest('.photo-item');
+                document.querySelectorAll('.photo-item.info-active').forEach(function(el) {
+                    if (el !== target) el.classList.remove('info-active');
+                });
+                target.classList.toggle('info-active');
+            });
+        });
+
+        // Klik buiten een caption sluit 'm
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.skoll-info-btn') && !e.target.closest('.photo-caption')) {
+                document.querySelectorAll('.photo-item.info-active').forEach(function(el) {
+                    el.classList.remove('info-active');
+                });
+            }
+        });
+
+        // Initialize
+        updateNav();
+        updateCounter();
+    </script>
+
+    <!-- Share Functionality -->
+    <script>
+        (function() {
+            var shareButton = document.getElementById('shareButton');
+            var shareDropdown = document.getElementById('shareDropdown');
+            if (!shareButton || !shareDropdown) return;
+
+            var pageUrl = encodeURIComponent(window.location.href);
+            var pageTitle = encodeURIComponent(document.title);
+
+            shareButton.addEventListener('click', function(e) {
+                e.stopPropagation();
+                if (navigator.share) {
+                    navigator.share({ title: document.title, url: window.location.href }).catch(function() {});
+                    return;
+                }
+                shareDropdown.classList.toggle('active');
+            });
+
+            document.addEventListener('click', function() { shareDropdown.classList.remove('active'); });
+            shareDropdown.addEventListener('click', function(e) { e.stopPropagation(); });
+
+            document.getElementById('shareWhatsApp').href = 'https://wa.me/?text=' + pageTitle + '%20' + pageUrl;
+            document.getElementById('shareFacebook').href = 'https://www.facebook.com/sharer/sharer.php?u=' + pageUrl;
+            document.getElementById('shareTwitter').href = 'https://twitter.com/intent/tweet?url=' + pageUrl + '&text=' + pageTitle;
+            document.getElementById('shareLinkedIn').href = 'https://www.linkedin.com/sharing/share-offsite/?url=' + pageUrl;
+            document.getElementById('shareEmail').href = 'mailto:?subject=' + pageTitle + '&body=' + pageUrl;
+
+            document.getElementById('copyLink').addEventListener('click', function() {
+                var btn = this;
+                navigator.clipboard.writeText(window.location.href).then(function() {
+                    var span = btn.querySelector('span');
+                    span.textContent = 'Gekopieerd!';
+                    btn.classList.add('copy-success');
+                    setTimeout(function() {
+                        span.textContent = 'Kopieer link';
+                        btn.classList.remove('copy-success');
+                    }, 2000);
+                });
+            });
+        })();
+    </script>
+
+    <!-- Preload lazy images -->
+    <script>
+        (function() {
+            var observer = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.loading = 'eager';
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { rootMargin: '2000px 4000px 2000px 4000px' });
+            document.querySelectorAll('img[loading="lazy"]').forEach(function(img) {
+                observer.observe(img);
+            });
+        })();
+    </script>
+</body>
+</html>
