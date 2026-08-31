@@ -39,7 +39,7 @@ CSS: `css/a-better-port.css`
 ## Achtergrond Systeem
 
 ### Leaflet kaart (door hele pagina)
-- CartoDB dark tiles, grayscale
+- Esri Dark Gray Canvas tiles, grayscale (CartoDB vereist sinds 2025 een API key, vervangen)
 - Positie: `[52.410, 4.78]`, zoom 14
 - Dynamische brightness op basis van fotonummer (dag/nacht cyclus):
   - Brightness range: `0.22` (nacht) tot `0.65` (dag)
@@ -126,6 +126,14 @@ CSS: `css/a-better-port.css`
 ### Navigatie tijdens interlude
 - Nav wordt semi-transparant (`opacity: 0.3`) en `pointer-events: none`
 - Zorgt dat markers bovenaan klikbaar zijn
+
+## Geluid
+- Sound toggle knop: fixed rechtsonder (`bottom: 2rem`, `right: 2rem`), vierkant, geel (`--abp-yellow-solid`)
+- Geluid standaard uit, klik op knopje om in te schakelen
+- Speelt `a-better-port/sound1.mp3` af bij transitie van introtekst naar foto 1 (state 0 → 1)
+- Klik op knopje ontgrendelt audio (browser autoplay policy vereist user gesture)
+- SVG speaker icoon, kruisje bij uit, geluidsgolf bij aan
+- Blijft de hele serie zichtbaar
 
 ## End Panel
 - Breedte: `33vw`, max `600px`, min `300px`

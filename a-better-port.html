@@ -1703,10 +1703,9 @@
             keyboard: false
         }).setView([window.innerWidth <= 767 ? 52.39 : 52.410, window.innerWidth <= 767 ? 4.80 : 4.78], window.innerWidth <= 767 ? 12.5 : 14); // Port of Amsterdam - shifted south+west on mobile, slightly zoomed out
 
-        // CartoDB dark tiles (made darker via CSS filter)
-        L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-            maxZoom: 19,
-            subdomains: 'abcd'
+        // Esri Dark Gray Canvas tiles (made darker via CSS filter) — CartoDB vereist nu een API key
+        L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
+            maxZoom: 19
         }).addTo(harborMap);
 
         // Ensure map renders correctly
